@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
   belongs_to :render, class_name: "User", foreign_key: "user_id"
   has_one :category
   has_one :subcategory
-  has_many :questions
+  has_many :questions, -> { order("created_at DESC") }
 
   enum period: [ :時, :日, :月, :年 ]
 

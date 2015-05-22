@@ -5,10 +5,9 @@ class QuestionsController < ApplicationController
   def create
     @question = @item.questions.build(question_params)
     @question.asker = current_user
+    @question.save
 
-    if @question.save
-      redirect_to item_path(@item)
-    end
+    redirect_to item_path(@item)
   end
 
   def update
