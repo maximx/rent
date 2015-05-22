@@ -1,0 +1,20 @@
+<div>
+  <%= link_to("新增出租物", new_item_path) %>
+</div>
+
+<table>
+  <thead>
+    <td>名稱</td>
+    <td>#</td>
+    <td>#</td>
+  </thead>
+  <tbody>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= link_to("修改", edit_item_path(item)) %></td>
+      <td><%= link_to("刪除", item_path(item), method: :delete, data: { confirm: "確定要刪除嗎？" }) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :login_require, except: [ :index, :show ]
+  before_action :login_required, except: [ :index, :show ]
   before_action :find_item, only: [ :edit, :update, :destroy ]
 
   def index
