@@ -9,7 +9,7 @@
   <div>
     <h2><%= @item.name %></h2>
     <div>
-      <div><%= @item.lender.email %></div>
+      <div><%= link_to(@item.lender.email, user_path(@item.lender)) %></div>
       <div>$<%= @item.price %>/<%= @item.period %></div>
       <div><%= @item.deposit %></div>
       <div><%= @item.address %></div>

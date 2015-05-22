@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522063616) do
+ActiveRecord::Schema.define(version: 20150522154951) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20150522063616) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer  "follower_id", limit: 4
+    t.integer  "followed_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "follows", ["follower_id", "followed_id"], name: "index_follows_on_follower_id_and_followed_id", unique: true, using: :btree
 
   create_table "items", force: :cascade do |t|
     t.string   "name",           limit: 255
