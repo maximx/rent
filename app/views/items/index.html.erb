@@ -5,15 +5,11 @@
 <table>
   <thead>
     <td>名稱</td>
-    <td>#</td>
-    <td>#</td>
   </thead>
   <tbody>
   <% @items.each do |item| %>
     <tr>
-      <td><%= item.name %></td>
-      <td><%= link_to("修改", edit_item_path(item)) %></td>
-      <td><%= link_to("刪除", item_path(item), method: :delete, data: { confirm: "確定要刪除嗎？" }) %></td>
+      <td><%= link_to(item.name, item_path(item)) %></td>
     </tr>
   <% end %>
   </tbody>

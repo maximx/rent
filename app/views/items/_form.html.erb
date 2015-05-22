@@ -2,7 +2,7 @@
 <%= simple_form_for(@item) do |f| %>
   <%= f.input :name %>
   <%= f.input :price %>
-  <%= f.input :period %>
+  <%= f.input :period, as: :select, collection: Item.periods.keys %>
   <%= f.input :deposit %>
   <%= f.input :address %>
   <%= f.input :description %>
