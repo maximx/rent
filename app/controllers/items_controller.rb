@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @question = @item.questions.build
   end
 
   def new
@@ -43,7 +44,10 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :period, :address, :deposit, :description)
+    params.require(:item).permit(
+      :name, :price, :period, :address,
+      :deposit, :description, :category_id, :subcategory_id
+    )
   end
 
   def find_item

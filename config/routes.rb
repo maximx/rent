@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   root to: "pages#index"
 
-  resources :items
+  resources :items do
+    resources :questions, only: [ :create, :update, :destroy ]
+  end
 end

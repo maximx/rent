@@ -1,0 +1,6 @@
+<section>
+  <div><%= question.asker.email %> ∶ <%= question.content %></div>
+  <% if question.reply? %>
+    <div><%= question.reply %></div>
+  <% end %>
+</section>
