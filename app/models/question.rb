@@ -3,4 +3,8 @@ class Question < ActiveRecord::Base
 
   belongs_to :item
   belongs_to :asker, class_name: "User", foreign_key: "user_id"
+
+  def replied_by?(user)
+    user && user == self.item.render
+  end
 end

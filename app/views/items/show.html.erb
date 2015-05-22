@@ -18,12 +18,7 @@
 
   <section>
     <div>問與答</div>
-
-    <%= render partial: "question", collection: @item.questions.preload(:asker) %>
-
-    <%= simple_form_for [@item, @question] do |f| %>
-      <div><%= f.input :content %></div>
-      <%= f.submit "發問" %>
-    <% end %>
+    <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
+    <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
   </section>
 </section>
