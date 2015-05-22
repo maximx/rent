@@ -7,5 +7,9 @@ Rails.application.routes.draw do
     resources :questions, only: [ :create, :update, :destroy ]
   end
 
-  resources :users, only: [ :show ]
+  resources :users, only: [ :show ] do
+    member do
+      post :follow, :unfollow
+    end
+  end
 end

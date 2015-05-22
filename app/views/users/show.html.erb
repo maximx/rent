@@ -1,6 +1,18 @@
 <div>
-<% @user.items.each do |item| %>
-  <%= link_to(item.name, item_path(item)) %>
-  <%= item.price %> / <%= item.period %>
-<% end %>
+  <% if current_user != @user %>
+    <div>
+      <% if current_user.is_following?(@user) %>
+        <%= link_to("取消追蹤", unfollow_user_path(@user), method: :post) %>
+      <% else %>
+        <%= link_to("追蹤", follow_user_path(@user), method: :post) %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+  <% @user.items.each do |item| %>
+    <%= link_to(item.name, item_path(item)) %>
+    <%= item.price %> / <%= item.period %>
+  <% end %>
+  </div>
 </div>
