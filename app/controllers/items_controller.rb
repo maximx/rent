@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :login_require, except: [ :index, :show ]
+  before_action :find_item, only: [ :edit, :update, :destroy ]
+
   def index
     @items = Item.all
   end
@@ -12,7 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.build(item_params)
 
     if @item.save
       redirect_to item_path(@item)
@@ -22,12 +25,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
-
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
@@ -36,7 +36,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find(params[:id])
     @item.destroy
     redirect_to items_path
   end
@@ -45,5 +44,9 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :price, :period, :address, :deposit, :description)
+  end
+
+  def find_item
+    @item = current_user.items.find(params[:id])
   end
 end
