@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
   validates_presence_of :name, :price, :period, :category_id, :subcategory_id
 
-  belongs_to :render, class_name: "User", foreign_key: "user_id"
+  belongs_to :lender, class_name: "User", foreign_key: "user_id"
   has_one :category
   has_one :subcategory
   has_many :questions, -> { order("created_at DESC") }
@@ -9,6 +9,6 @@ class Item < ActiveRecord::Base
   enum period: [ :時, :日, :月, :年 ]
 
   def editable_by?(user)
-    user && user == render
+    user && user == lender
   end
 end

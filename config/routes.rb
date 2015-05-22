@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "pages#index"
+  root to: "items#index"
 
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
