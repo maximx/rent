@@ -1,0 +1,12 @@
+<div>
+<%= simple_form_for(@item) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :price %>
+  <%= f.input :period %>
+  <%= f.input :deposit %>
+  <%= f.input :address %>
+  <%= f.input :description %>
+
+  <%= f.submit "新增" %>
+<% end %>
+</div>
