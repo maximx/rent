@@ -1,0 +1,6 @@
+<div>
+<% @user.items.each do |item| %>
+  <%= link_to(item.name, item_path(item)) %>
+  <%= item.price %> / <%= item.period %>
+<% end %>
+</div>

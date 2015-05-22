@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
   end
+
+  resources :users, only: [ :show ]
 end
