@@ -8,6 +8,9 @@ class Item < ActiveRecord::Base
 
   enum period: [ :時, :日, :月, :年 ]
 
+  geocoded_by :address
+  after_validation :geocode
+
   def editable_by?(user)
     user && user == lender
   end

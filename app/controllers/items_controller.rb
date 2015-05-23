@@ -9,6 +9,13 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @question = @item.questions.build
+    @maps = Gmaps4rails.build_markers(@item) do |item, marker|
+      url = view_context.link_to(item.name, item_url(item))
+      marker.lat item.latitude
+      marker.lng item.longitude
+      marker.infowindow("<h4>#{url}</h4><br />#{item.address}")
+      marker.json({ title: item.name })
+    end
   end
 
   def new

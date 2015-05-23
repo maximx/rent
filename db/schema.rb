@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522154951) do
+ActiveRecord::Schema.define(version: 20150523052742) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20150522154951) do
     t.integer  "user_id",        limit: 4
     t.integer  "subcategory_id", limit: 4
     t.integer  "category_id",    limit: 4
+    t.float    "latitude",       limit: 24
+    t.float    "longitude",      limit: 24
   end
 
   create_table "questions", force: :cascade do |t|

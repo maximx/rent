@@ -45,3 +45,5 @@ end
 
 gem 'devise'
 gem 'simple_form'
+gem 'geocoder'
+gem 'gmaps4rails'
