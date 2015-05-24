@@ -1,12 +1,7 @@
 <div>
+  <h4><%= @user.email %></h4>
   <% if current_user != @user %>
-    <div>
-      <% if current_user && current_user.is_following?(@user) %>
-        <%= link_to("取消追蹤", unfollow_user_path(@user), method: :delete) %>
-      <% else %>
-        <%= link_to("追蹤", follow_user_path(@user), method: :post) %>
-      <% end %>
-    </div>
+    <div><%= render_follow_link(@user) %></div>
   <% end %>
 
   <div>
