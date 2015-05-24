@@ -1,4 +1,6 @@
+<h4><%= link_to(@item.name, item_path(@item)) %></h4>
+
 <div>
-  <h4>申請租借<%= @item.name %></h4>
+  <h4>申請租借</h4>
   <%= render partial: "form", locals: { item: @item, rent_record: @rent_record } %>
 </div>
