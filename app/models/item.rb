@@ -6,7 +6,8 @@ class Item < ActiveRecord::Base
   has_one :subcategory
   has_many :questions, -> { order("created_at DESC") }
 
-  has_many :rent_records, class_name: "RentRecord", foreign_key: "item_id"
+  has_many :rent_records, -> { where("ended_at > ?", Time.now).order("started_at") },
+    class_name: "RentRecord", foreign_key: "item_id"
   has_many :borrowers, through: :rent_records, source: :user
 
   enum period: [ :時, :日, :月, :年 ]

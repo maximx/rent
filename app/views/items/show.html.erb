@@ -18,6 +18,7 @@
       <div><%= @item.address %></div>
       <div><%= @item.description %></div>
     </div>
+    <%= link_to("租下來", new_item_rent_record_path(@item)) %>
   </div>
 
   <div style='width: 800px;'>

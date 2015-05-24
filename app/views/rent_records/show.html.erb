@@ -4,6 +4,8 @@
     會員帳號∶
     <%= link_to(@rent_record.borrower.email, user_path(@rent_record.borrower)) %>
   </div>
+  <% #TODO: 顯示評價 %>
+  <div>承租人評價</div>
   <div><%= @rent_record.name %></div>
   <div><%= @rent_record.phone %></div>
   <div><%= @rent_record.started_at %></div>

@@ -25,11 +25,4 @@ class User < ActiveRecord::Base
   def is_following?(user)
     following.include?(user)
   end
-
-  def borrow!(item)
-  end
-
-  def unborrow!(item)
-    borrows.destroy(item)
-  end
 end

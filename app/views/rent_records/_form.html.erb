@@ -1,0 +1,9 @@
+<%= simple_form_for [item, rent_record] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :phone %>
+  <%= f.input :started_at, as: :datetime %>
+  <%= f.input :ended_at, as: :datetime %>
+
+  <%= f.submit "承租" %>
+<% end %>
