@@ -18,6 +18,11 @@
       <div><%= @item.address %></div>
       <div><%= @item.description %></div>
     </div>
+    <% if current_user && current_user.is_collected?(@item) %>
+      <%= link_to("取消收藏", uncollect_item_path(@item), method: :delete) %>
+    <% else %>
+      <%= link_to("收藏", collect_item_path(@item), method: :post) %>
+    <% end %>
     <%= link_to("租下來", new_item_rent_record_path(@item)) %>
   </div>
 

@@ -10,6 +10,9 @@ class Item < ActiveRecord::Base
     class_name: "RentRecord", foreign_key: "item_id"
   has_many :borrowers, through: :rent_records, source: :user
 
+  has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id"
+  has_many :collector, through: :collect_relationships, source: :user
+
   enum period: [ :時, :日, :月, :年 ]
 
   geocoded_by :address

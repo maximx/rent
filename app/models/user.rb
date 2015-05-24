@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :rent_records, class_name: "RentRecord", foreign_key: "user_id"
   has_many :borrows, through: :rent_records, source: :item
 
+  has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
+  has_many :collections, through: :collect_relationships, source: :item
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -24,5 +27,17 @@ class User < ActiveRecord::Base
 
   def is_following?(user)
     following.include?(user)
+  end
+
+  def collect!(item)
+    collections << item
+  end
+
+  def uncollect!(item)
+    collections.destroy(item)
+  end
+
+  def is_collected?(item)
+    collections.include?(item)
   end
 end

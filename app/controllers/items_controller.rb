@@ -1,13 +1,13 @@
 class ItemsController < ApplicationController
   before_action :login_required, except: [ :index, :show ]
-  before_action :find_item, only: [ :edit, :update, :destroy ]
+  before_action :find_lender_item, only: [ :edit, :update, :destroy ]
+  before_action :find_item, only: [ :show, :collect, :uncollect ]
 
   def index
     @items = Item.all
   end
 
   def show
-    @item = Item.find(params[:id])
     @question = @item.questions.build
     @maps = Gmaps4rails.build_markers(@item) do |item, marker|
       url = view_context.link_to(item.name, item_url(item))
@@ -48,6 +48,22 @@ class ItemsController < ApplicationController
     redirect_to items_path
   end
 
+  def collect
+    unless current_user.is_collected?(@item)
+      current_user.collect!(@item)
+    end
+
+    redirect_to item_path(@item)
+  end
+
+  def uncollect
+    if current_user.is_collected?(@item)
+      current_user.uncollect!(@item)
+    end
+
+    redirect_to item_path(@item)
+  end
+
   private
 
   def item_params
@@ -57,7 +73,11 @@ class ItemsController < ApplicationController
     )
   end
 
-  def find_item
+  def find_lender_item
     @item = current_user.items.find(params[:id])
+  end
+
+  def find_item
+    @item = Item.find(params[:id])
   end
 end
