@@ -7,7 +7,7 @@ class RentRecordsController < ApplicationController
   end
 
   def show
-    @rent_record = @item.rent_records.find(params[:id])
+    @rent_record = current_user.rent_records.find(params[:id])
   end
 
   def new

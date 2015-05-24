@@ -1,8 +1,6 @@
 <div>
   <h4><%= @user.email %></h4>
-  <% if current_user != @user %>
-    <div><%= render_follow_link(@user) %></div>
-  <% end %>
+  <div><%= render_follow_link(@user) if current_user != @user %></div>
 
   <div>
   <% @user.items.each do |item| %>
