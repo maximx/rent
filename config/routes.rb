@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
+    resources :rent_records
   end
 
   resources :users, only: [ :show ] do

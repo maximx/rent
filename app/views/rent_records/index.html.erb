@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <td>承租人</td>
+      <td>預借時間</td>
+      <td>歸還時間</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @item.rent_records.each do |rent_record| %>
+    <tr>
+      <td><%= link_to(rent_record.name, item_rent_record_path(@item, rent_record)) %></td>
+      <td><%= rent_record.started_at %></td>
+      <td><%= rent_record.ended_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

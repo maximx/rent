@@ -1,0 +1,2 @@
+module RentRecordsHelper
+end
