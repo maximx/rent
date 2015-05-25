@@ -2,8 +2,8 @@ class Item < ActiveRecord::Base
   validates_presence_of :name, :price, :period, :category_id, :subcategory_id
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
-  has_one :category
-  has_one :subcategory
+  belongs_to :category
+  belongs_to :subcategory
   has_many :questions, -> { order("created_at DESC") }
 
   has_many :rent_records, -> { where("ended_at > ?", Time.now).order("started_at") },
@@ -18,7 +18,15 @@ class Item < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
+  before_validation :set_category_id
+
   def editable_by?(user)
     user && user == lender
+  end
+
+  protected
+
+  def set_category_id
+    self.category_id = Subcategory.find(subcategory_id).category_id
   end
 end

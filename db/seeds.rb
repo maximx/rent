@@ -19,6 +19,7 @@ category_list.each_with_index do |name, serial|
 end
 
 subcategory_list = [
+  [],
   [ "攝影用具", "電腦及周邊", "其他家電" ],
   [ "遊戲主機", "遊戲光碟", "桌上遊戲" ],
   [ "休旅車", "小客車", "貨車" ],

@@ -1,8 +1,7 @@
 <div>
 <%= simple_form_for(@item) do |f| %>
   <%= f.input :name %>
-  <%= f.input :category_id, as: :select, collection: Category.all %>
-  <%= f.input :subcategory_id, as: :select, collection: Subcategory.all %>
+  <%= f.input :subcategory_id, as: :grouped_select, collection: Category.includes(:subcategories).all, group_method: :subcategories %>
   <%= f.input :price %>
   <%= f.input :period, as: :select, collection: Item.periods.keys %>
   <%= f.input :deposit %>
