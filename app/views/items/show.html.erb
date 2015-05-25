@@ -24,15 +24,24 @@
     <%= link_to("租下來", new_item_rent_record_path(@item)) %>
   </div>
 
-  <div style='width: 800px;'>
-    <div id="map" style='width: 800px; height: 400px;'></div>
-  </div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#maps" aria-controls="home" role="tab" data-toggle="tab">位置</a></li>
+    <li role="presentation"><a href="#questions" aria-controls="profile" role="tab" data-toggle="tab">問與答</a></li>
+    <li role="presentation"><a href="#calendar" aria-controls="messages" role="tab" data-toggle="tab">出租日曆</a></li>
+  </ul>
 
-  <section>
-    <div>問與答</div>
-    <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
-    <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
-  </section>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="maps" style="width:800px;">
+        <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="questions">
+      <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
+      <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="calendar">待補</div>
+  </div>
 </section>
 
 <script type="text/javascript">
