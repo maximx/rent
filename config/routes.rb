@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       delete :unfollow
     end
   end
+
+  resources :pages, only:[ :index ]
 end
