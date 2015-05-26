@@ -1,0 +1,30 @@
+<%= simple_form_for requirement do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :phone %>
+  <%= f.input :address %>
+  <%= f.input :price %>
+  <%= f.input :started_at, as: :date_time_picker %>
+  <%= f.input :ended_at, as: :date_time_picker %>
+  <%= f.input :content %>
+
+  <%= f.submit "求租" %>
+<% end %>
+
+<script type="text/javascript">
+  $(function() {
+    $('.form_datetime').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm::ss'
+    });
+
+    var $start_picker_obj = $('#requirement_started_at').closest('.form_datetime');
+    var $end_picker_obj = $('#requirement_ended_at').closest('.form_datetime');
+
+    $start_picker_obj.on('dp.change', function (e) {
+      $end_picker_obj.data('DateTimePicker').minDate(e.date);
+    });
+    $end_picker_obj.on('dp.change', function (e) {
+      $start_picker_obj.data('DateTimePicker').maxDate(e.date);
+    });
+  });
+</script>

@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   end
 
   resources :pages, only:[ :index ]
+  resources :requirements
 end

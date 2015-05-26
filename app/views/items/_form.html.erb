@@ -1,5 +1,4 @@
-<div>
-<%= simple_form_for(@item) do |f| %>
+<%= simple_form_for(item) do |f| %>
   <%= f.input :name %>
   <%= f.input :subcategory_id, as: :grouped_select, collection: Category.includes(:subcategories).all, group_method: :subcategories %>
   <%= f.input :price %>
@@ -10,4 +9,3 @@
 
   <%= f.submit "新增" %>
 <% end %>
-</div>
