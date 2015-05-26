@@ -21,7 +21,7 @@
       <div><%= @item.description %></div>
     </div>
     <%= render_collect_link(@item) %>
-    <%= link_to("租下來", new_item_rent_record_path(@item)) %>
+    <%= link_to("租下來", new_item_rent_record_path(@item)) unless current_user == @item.lender %>
   </div>
 
   <!-- Nav tabs -->
