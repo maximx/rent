@@ -1,13 +1,11 @@
-<section>
-  <div><%= question.asker.email %> ∶ <%= question.content %></div>
-  <% if question.reply? %>
-    <div><%= question.reply %></div>
-  <% elsif question.replied_by?(current_user) %>
-    <div>
-      <%= simple_form_for [question.item, question] do |f| %>
-        <%= f.input :reply %>
-        <%= f.submit "回覆" %>
-      <% end %>
-    </div>
-  <% end %>
-</section>
+<div><%= question.asker.email %> ∶ <%= question.content %></div>
+<% if question.reply? %>
+  <div><%= question.reply %></div>
+<% elsif question.replied_by?(current_user) %>
+  <div>
+    <%= simple_form_for [question.item, question] do |f| %>
+      <%= f.input :reply %>
+      <%= f.submit "回覆" %>
+    <% end %>
+  </div>
+<% end %>
