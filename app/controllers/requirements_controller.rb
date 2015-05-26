@@ -3,7 +3,7 @@ class RequirementsController < ApplicationController
   before_action :find_requirement, only: [ :edit, :update, :destroy ]
 
   def index
-    @requirements = Requirement.all
+    @requirements = Requirement.includes(:demander).all
   end
 
   def show
