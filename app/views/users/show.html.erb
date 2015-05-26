@@ -2,10 +2,20 @@
   <h4><%= @user.email %></h4>
   <div><%= render_follow_link(@user) if current_user != @user %></div>
 
-  <div>
-  <% @user.items.each do |item| %>
-    <%= link_to(item.name, item_path(item)) %>
-    <%= item.price %> / <%= item.period %>
-  <% end %>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#items" aria-controls="items" role="tab" data-toggle="tab">出租物</a></li>
+    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">評價</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="items">
+      <% @user.items.each do |item| %>
+        <%= link_to(item.name, item_path(item)) %>
+        <%= item.price %> / <%= item.period %>
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="reviews"></div>
   </div>
 </div>
