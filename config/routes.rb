@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-
   root to: "items#index"
+  get "/search", to: "items#search"
+
+  devise_for :users
 
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]

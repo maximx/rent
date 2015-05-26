@@ -24,9 +24,31 @@ class Item < ActiveRecord::Base
     user && user == lender
   end
 
+  def self.search_by(query)
+    where(search_criteria(query))
+  end
+
   protected
 
   def set_category_id
     self.category_id = Subcategory.find(subcategory_id).category_id
+  end
+
+  def self.search_criteria(query)
+    criteria = [ search_str(query) ]
+    keywords(query).each { |keyword| criteria << "%#{keyword}%" }
+    criteria
+  end
+
+  def self.keywords(query)
+    query.split
+  end
+
+  def self.search_str(query)
+    Array.new( keywords(query).size, basic_search_str ).join(" and ")
+  end
+
+  def self.basic_search_str
+    "concat(name, description) like ?"
   end
 end

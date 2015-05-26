@@ -64,6 +64,11 @@ class ItemsController < ApplicationController
     redirect_to item_path(@item)
   end
 
+  def search
+    @items = Item.search_by(params[:query])
+    render :index
+  end
+
   private
 
   def item_params
