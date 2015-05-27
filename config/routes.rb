@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :items, only: [ :index, :new, :show, :create ] do
+  resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
     resources :rent_records
 
@@ -23,4 +23,8 @@ Rails.application.routes.draw do
 
   resources :pages, only:[ :index ]
   resources :requirements
+
+  namespace :settings do
+    resources :items, only: [ :index ]
+  end
 end

@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :login_required, except: [ :index, :show ]
+  before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect ]
 
   def index
@@ -9,10 +10,9 @@ class ItemsController < ApplicationController
   def show
     @question = @item.questions.build
     @maps = Gmaps4rails.build_markers(@item) do |item, marker|
-      url = view_context.link_to(item.name, item_url(item))
       marker.lat item.latitude
       marker.lng item.longitude
-      marker.infowindow("<h4>#{url}</h4><br />#{item.address}")
+      marker.infowindow("<h4>#{url_of(item)}</h4><br />#{item.address}")
       marker.json({ title: item.name })
     end
   end
@@ -31,19 +31,29 @@ class ItemsController < ApplicationController
     end
   end
 
-  def collect
-    unless current_user.is_collected?(@item)
-      current_user.collect!(@item)
-    end
+  def edit
+  end
 
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to settings_items_path
+  end
+
+  def collect
+    current_user.collect!(@item) unless current_user.is_collected?(@item)
     redirect_to item_path(@item)
   end
 
   def uncollect
-    if current_user.is_collected?(@item)
-      current_user.uncollect!(@item)
-    end
-
+    current_user.uncollect!(@item) if current_user.is_collected?(@item)
     redirect_to item_path(@item)
   end
 
@@ -61,7 +71,15 @@ class ItemsController < ApplicationController
     )
   end
 
+  def find_lender_item
+    @item = current_user.items.find(params[:id])
+  end
+
   def find_item
     @item = Item.find(params[:id])
+  end
+
+  def url_of(item)
+    view_context.link_to( item.name, item_url(item) )
   end
 end
