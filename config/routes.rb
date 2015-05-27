@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resources :items, only: [ :index ]
+    resources :requirements, only: [ :index ]
   end
 end

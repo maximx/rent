@@ -36,7 +36,7 @@ class RequirementsController < ApplicationController
 
   def destroy
     @requirement.destroy
-    redirect_to requirements_path
+    redirect_to settings_requirements_path
   end
 
   private
