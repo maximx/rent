@@ -5,13 +5,6 @@
 
 <section>
   <div>
-  <% if current_user && @item.editable_by?(current_user) %>
-    <%= link_to("修改", edit_item_path(@item)) %>
-    <%= link_to("刪除", item_path(@item), method: :delete, data: { confirm: "確定要刪除嗎？" }) %>
-  <% end %>
-  </div>
-
-  <div>
     <h2><%= @item.name %></h2>
     <div>
       <div><%= link_to(@item.lender.email, user_path(@item.lender)) %></div>

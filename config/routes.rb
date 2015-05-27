@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :items do
+  resources :items, only: [ :index, :new, :show, :create ] do
     resources :questions, only: [ :create, :update, :destroy ]
     resources :rent_records
 

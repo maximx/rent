@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :login_required, except: [ :index, :show ]
-  before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect ]
 
   def index
@@ -32,22 +31,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @item.update(item_params)
-      redirect_to item_path(@item)
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @item.destroy
-    redirect_to items_path
-  end
-
   def collect
     unless current_user.is_collected?(@item)
       current_user.collect!(@item)
@@ -76,10 +59,6 @@ class ItemsController < ApplicationController
       :name, :price, :period, :address,
       :deposit, :description, :category_id, :subcategory_id
     )
-  end
-
-  def find_lender_item
-    @item = current_user.items.find(params[:id])
   end
 
   def find_item
