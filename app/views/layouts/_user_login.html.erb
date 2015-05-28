@@ -1,9 +1,18 @@
-<div>
+<div class="dropdown">
   <% if current_user.blank? %>
     <%= link_to("註冊", new_user_registration_path) %>
     <%= link_to("登入", new_user_session_path) %>
   <% else %>
-    <span><%= current_user.email %></span>
-    <%= link_to("登出", destroy_user_session_path, method: :delete) %>
+    <div class="dropdown">
+      <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+        <span><%= current_user.email %></span>
+        <span class="caret"></span>
+      </a>
+
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+        <li><%= link_to("設定", settings_path) %></li>
+        <li><%= link_to("登出", destroy_user_session_path, method: :delete) %></li>
+      </ul>
+    </div>
   <% end %>
 </div>
