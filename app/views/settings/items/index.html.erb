@@ -13,6 +13,7 @@
         <td><%= link_to(item.name, item_path(item)) %></td>
         <td><%= "#{item.price}/#{item.period}" %></td>
         <td>
+          <%= link_to("租借紀錄", item_rent_records_path(item) ) %>
           <%= link_to("修改", edit_item_path(item)) %>
           <%= link_to("刪除", item_path(item), method: :delete, data: { confirm: "確定要刪除#{item.name}嗎？"}) %>
         </td>
