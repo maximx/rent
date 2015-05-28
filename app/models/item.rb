@@ -35,17 +35,15 @@ class Item < ActiveRecord::Base
   end
 
   def self.search_criteria(query)
-    criteria = [ search_str(query) ]
-    keywords(query).each { |keyword| criteria << "%#{keyword}%" }
-    criteria
+    search_arr(query).push( keywords(query) ).flatten
   end
 
   def self.keywords(query)
-    query.split
+    query.split.collect { |keyword| "%#{keyword}%" }
   end
 
-  def self.search_str(query)
-    Array.new( keywords(query).size, basic_search_str ).join(" and ")
+  def self.search_arr(query)
+    [ Array.new( keywords(query).size, basic_search_str ).join(" and ") ]
   end
 
   def self.basic_search_str
