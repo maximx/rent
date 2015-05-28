@@ -5,6 +5,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#items" aria-controls="items" role="tab" data-toggle="tab">出租物</a></li>
+    <li role="presentation"><a href="#requirements" aria-controls="requirements" role="tab" data-toggle="tab">求租物</a></li>
     <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">評價</a></li>
   </ul>
 
@@ -14,6 +15,12 @@
       <% @user.items.each do |item| %>
         <%= link_to(item.name, item_path(item)) %>
         <%= item.price %> / <%= item.period %>
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane active" id="requirements">
+      <% @user.requirements.each do |requirement| %>
+        <%= link_to(requirement.name, requirement_path(requirement)) %>
+        <%= requirement.price %>
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane" id="reviews"></div>
