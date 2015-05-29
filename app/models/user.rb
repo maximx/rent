@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   has_many :collections, through: :collect_relationships, source: :item
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
 
   def follow!(user)
     following << user
