@@ -13,8 +13,8 @@
 <%= render partial: "layouts/search" %>
 <%= render partial: "layouts/user_login" %>
 <%= render_categories_aside %>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<%= render_notice(notice) %>
+<%= render_alert(alert) %>
 <%= yield %>
 
 <script type="text/javascript">
