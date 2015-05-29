@@ -1,0 +1,21 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<% @categories.each_with_index do |category, index| %>
+  <% id = "#{category.class.name}#{index}" %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="<%= "heading#{id}" %>">
+      <%= content_tag(:h4, link_to(category.name, "#category_path"), class: "panel-title",
+                      aria: { expanded: :false, controls: "collapse#{id}" },
+                      data: { toggle: :collapse, parent: "#accordion", target: "#collapse#{id}" }
+      ) %>
+    </div>
+
+    <div id="<%= "collapse#{id}" %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<%= "heading#{id}" %>">
+      <div class="panel-body">
+      <% category.subcategories.each do |subcategory| %>
+        <%= link_to(subcategory.name, "/") %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

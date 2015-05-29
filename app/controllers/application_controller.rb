@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def find_categories
+    @categories = Category.includes(:subcategories).all
+  end
 end
