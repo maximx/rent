@@ -12,4 +12,5 @@
   <div><%= @rent_record.started_at %></div>
   <div><%= @rent_record.ended_at %></div>
   <%= link_to("修改資訊", edit_item_rent_record_path(@item, @rent_record)) %>
+  <%= link_to("下載契約檔案", item_rent_record_path(@item, @rent_record, format: :pdf)) %>
 </div>

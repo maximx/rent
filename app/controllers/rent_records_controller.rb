@@ -8,6 +8,16 @@ class RentRecordsController < ApplicationController
 
   def show
     @rent_record = current_user.rent_records.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = RentRecordPdf.new(@rent_record)
+        send_data pdf.render, filename: "test.pdf",
+                              type: "application/pdf",
+                              disposition: :inline
+      end
+    end
   end
 
   def new
