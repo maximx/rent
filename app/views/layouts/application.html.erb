@@ -17,5 +17,13 @@
 <p class="alert"><%= alert %></p>
 <%= yield %>
 
+<script type="text/javascript">
+  $(function(){
+    $('.stop-bubble').click(function(e) {
+      e.stopPropagation();
+    });
+  });
+</script>
+
 </body>
 </html>
