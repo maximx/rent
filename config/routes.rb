@@ -29,4 +29,7 @@ Rails.application.routes.draw do
     resources :items, only: [ :index ]
     resources :requirements, only: [ :index ]
   end
+
+  resources :categories, only: [ :show ]
+  resources :subcategories, only: [ :show ]
 end
