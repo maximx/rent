@@ -1,0 +1,11 @@
+<section>
+  <div>
+    <h2><%= @requirement.name %></h2>
+    <div>
+      <div><%= link_to(@requirement.demander.email, user_path(@requirement.demander)) %></div>
+      <div>$<%= @requirement.price %></div>
+      <div><%= @requirement.address %></div>
+      <div><%= @requirement.description %></div>
+    </div>
+  </div>
+</section>

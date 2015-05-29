@@ -1,12 +1,11 @@
 <%= simple_form_for requirement do |f| %>
   <%= f.input :name %>
-  <%= f.input :email %>
   <%= f.input :phone %>
   <%= f.input :address %>
   <%= f.input :price %>
   <%= f.input :started_at, as: :date_time_picker %>
   <%= f.input :ended_at, as: :date_time_picker %>
-  <%= f.input :content %>
+  <%= f.input :description %>
 
   <%= f.submit "求租" %>
 <% end %>
