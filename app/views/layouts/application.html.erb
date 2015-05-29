@@ -20,7 +20,10 @@
 <script type="text/javascript">
   $(function(){
     $('.stop-bubble').click(function(e) {
-      e.stopPropagation();
+      if (e.stopPropagation)
+        e.stopPropagation();
+      else
+        e.cancelBubble = true;
     });
   });
 </script>
