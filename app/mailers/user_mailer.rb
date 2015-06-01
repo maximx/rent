@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
     @item = @question.item
     @asker = @question.asker
 
-    mail to: user.email, subject: "出租物#{@item.name}有人提出新問題，請您回覆"
+    mail to: lender.email, subject: "出租物#{@item.name}有人提出新問題，請您回覆"
   end
 
   def notify_question_reply(asker, question)
