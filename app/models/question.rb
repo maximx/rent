@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   belongs_to :asker, class_name: "User", foreign_key: "user_id"
 
   after_create :send_new_question_message
+  after_update :send_reply_question_message
 
   def replied_by?(user)
     user && user == self.item.lender
@@ -12,5 +13,9 @@ class Question < ActiveRecord::Base
 
   def send_new_question_message
     UserMailer.notify_question(self.item.lender, self).deliver
+  end
+
+  def send_reply_question_message
+    UserMailer.notify_question_reply(self.asker, self).deliver
   end
 end
