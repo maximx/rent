@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
+gem 'fullcalendar-rails'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -51,7 +52,8 @@ end
 
 gem 'devise'
 gem 'simple_form'
+
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'prawn'
-gem 'fullcalendar-rails'
+gem 'aasm'

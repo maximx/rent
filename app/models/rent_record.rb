@@ -1,6 +1,27 @@
 class RentRecord < ActiveRecord::Base
+  include AASM
+
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
+
+  aasm no_direct_assignment: true do
+    state :booking, initial: true
+    state :renting
+    state :withdrawed
+    state :returned
+
+    event :rent do
+      transitions from: :booking, to: :renting
+    end
+
+    event :withdraw do
+      transitions from: :booking, to: :withdrawed
+    end
+
+    event :return do
+      transitions from: :renting, to: :returned
+    end
+  end
 
   def as_json(options={})
     {

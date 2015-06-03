@@ -4,7 +4,10 @@
       <tr>
         <th>名稱</th>
         <th>價格</th>
-        <th></th>
+        <th>預訂中</th>
+        <th>成功出租</th>
+        <th>退租</th>
+        <th>#</th>
       </tr>
     </thead>
     <tbody>
@@ -12,8 +15,11 @@
       <tr>
         <td><%= link_to(item.name, item_path(item)) %></td>
         <td><%= "#{item.price}/#{item.period}" %></td>
+        <td><%= @rent_records_count[[item.id,"booking"]] %></td>
+        <td><%= @rent_records_count[[item.id,"returned"]] %></td>
+        <td><%= @rent_records_count[[item.id,"withdrawed"]] %></td>
         <td>
-          <%= link_to("租借紀錄", item_rent_records_path(item) ) %>
+          <%= link_to("出租紀錄", item_rent_records_path(item) ) %>
           <%= link_to("修改", edit_item_path(item)) %>
           <%= link_to("刪除", item_path(item), method: :delete, data: { confirm: "確定要刪除#{item.name}嗎？"}) %>
         </td>
