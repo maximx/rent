@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :items
   has_many :questions
   has_many :requirements
@@ -15,10 +13,14 @@ class User < ActiveRecord::Base
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
   has_many :collections, through: :collect_relationships, source: :item
 
+  has_many :reviewed, class_name: "Review", foreign_key: "judger_id"
+  has_many :reviews, class_name: "Review", foreign_key: "user_id"
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+  # user follow
   def follow!(user)
     following << user
   end
@@ -31,6 +33,7 @@ class User < ActiveRecord::Base
     following.include?(user)
   end
 
+  # item collect
   def collect!(item)
     collections << item
   end
@@ -41,5 +44,14 @@ class User < ActiveRecord::Base
 
   def is_collected?(item)
     collections.include?(item)
+  end
+
+  # rent record review
+  def lender_reviews
+    reviews.where(user_role: "lender")
+  end
+
+  def borrower_reviews
+    reviews.where(user_role: "borrower")
   end
 end

@@ -20,12 +20,10 @@ class Item < ActiveRecord::Base
 
   before_validation :set_category_id
 
+  scope :search_by, -> (query) { where(search_criteria(query)) }
+
   def editable_by?(user)
     user && user == lender
-  end
-
-  def self.search_by(query)
-    where(search_criteria(query))
   end
 
   protected

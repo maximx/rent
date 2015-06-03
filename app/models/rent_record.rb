@@ -3,6 +3,7 @@ class RentRecord < ActiveRecord::Base
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
+  has_one :review
 
   aasm no_direct_assignment: true do
     state :booking, initial: true
