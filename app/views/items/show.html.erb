@@ -19,29 +19,61 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#maps" aria-controls="maps" role="tab" data-toggle="tab">位置</a></li>
+    <li role="presentation" class="active"><a href="#rent-calendar" aria-controls="rent-calendar" role="tab" data-toggle="tab">出租日曆</a></li>
+    <li role="presentation"><a href="#maps" aria-controls="maps" role="tab" data-toggle="tab">位置</a></li>
     <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">問與答</a></li>
-    <li role="presentation"><a href="#calendar" aria-controls="calendar" role="tab" data-toggle="tab">出租日曆</a></li>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="maps" style="width:800px;">
+    <div role="tabpanel" class="tab-pane active" id="rent-calendar">
+      <div id="calendar"></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="maps">
         <div id="map" style='width: 800px; height: 400px;'></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="questions">
       <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
       <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
     </div>
-    <div role="tabpanel" class="tab-pane" id="calendar">待補</div>
   </div>
 </section>
 
 <script type="text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%= raw @maps.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
+  $(document).ready(function() {
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%= raw @maps.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+
+    $('#calendar').fullCalendar({
+      height: 600,
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      selectable: true,
+      selectHelper: true,
+      select: function(start, end) {
+        var title = prompt('Event Title:');
+        var eventData;
+        if (title) {
+          eventData = {
+            title: title,
+            start: start,
+            end: end
+          };
+          $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+        }
+        $('#calendar').fullCalendar('unselect');
+      },
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events:  <%= raw @rent_records_json %>
+    });
   });
 </script>
+
