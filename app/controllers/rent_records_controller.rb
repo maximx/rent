@@ -7,16 +7,20 @@ class RentRecordsController < ApplicationController
   end
 
   def show
-    @rent_record = current_user.rent_records.find(params[:id])
+    @rent_record = @item.rent_records.find(params[:id])
 
-    respond_to do |format|
-      format.html
-      format.pdf do
-        pdf = RentRecordPdf.new(@rent_record)
-        send_data pdf.render, filename: "test.pdf",
-                              type: "application/pdf",
-                              disposition: :inline
+    if @rent_record.viewable_by?(current_user)
+      respond_to do |format|
+        format.html
+        format.pdf do
+          pdf = RentRecordPdf.new(@rent_record)
+
+          send_data pdf.render, RentRecordPdf.pdf_config(@item.id, @rent_record.id)
+        end
       end
+    else
+      flash[:alert] = "您沒有權限"
+      redirect_to item_path(@item)
     end
   end
 

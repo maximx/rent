@@ -11,4 +11,8 @@ class RentRecord < ActiveRecord::Base
       url: Rails.application.routes.url_helpers.item_rent_record_path(item, id)
     }
   end
+
+  def viewable_by?(user)
+    user && [item.lender, borrower].include?(user)
+  end
 end
