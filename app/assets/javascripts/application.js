@@ -20,4 +20,5 @@
 //= require underscore
 //= require gmaps/google
 //= require fullcalendar
+//= require fullcalendar/lang-all
 //= require_tree .
