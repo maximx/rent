@@ -37,4 +37,8 @@ class RentRecord < ActiveRecord::Base
   def viewable_by?(user)
     user && [item.lender, borrower].include?(user)
   end
+
+  def editable_by?(user)
+    user && borrower == user
+  end
 end

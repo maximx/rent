@@ -1,14 +1,13 @@
 class RentRecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
   before_action :find_item
-  before_action :find_rent_record, only: [ :edit, :update, :destroy ]
+  before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
+  before_action :find_item_rent_record, only: [ :show, :review ]
 
   def index
   end
 
   def show
-    @rent_record = @item.rent_records.find(params[:id])
-
     if @rent_record.viewable_by?(current_user)
       respond_to do |format|
         format.html
@@ -59,6 +58,11 @@ class RentRecordsController < ApplicationController
     redirect_to  item_path(@item)
   end
 
+  def review
+    @review = @rent_record.build_review
+    render "reviews/new"
+  end
+
   private
 
   def rent_record_params
@@ -72,7 +76,11 @@ class RentRecordsController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def find_rent_record
+  def find_user_rent_record
     @rent_record = current_user.rent_records.find(params[:id])
+  end
+
+  def find_item_rent_record
+    @rent_record = @item.rent_records.find(params[:id])
   end
 end

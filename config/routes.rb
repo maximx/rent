@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
-    resources :rent_records
+
+    resources :rent_records do
+      get :review, on: :member
+    end
 
     member do
       post :collect
