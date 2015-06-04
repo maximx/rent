@@ -10,7 +10,12 @@ Rails.application.routes.draw do
 
     resources :rent_records do
       resources :reviews, only: [ :create ]
-      get :review, on: :member
+
+      member do
+        get :review
+        put :renting
+        put :returning
+      end
     end
 
     member do

@@ -3,7 +3,7 @@ class RentRecord < ActiveRecord::Base
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
-  has_one :review
+  has_many :reviews
 
   aasm no_direct_assignment: true do
     state :booking, initial: true
@@ -34,11 +34,29 @@ class RentRecord < ActiveRecord::Base
     }
   end
 
+  #可查閱
   def viewable_by?(user)
     user && [item.lender, borrower].include?(user)
   end
 
+  #可修改
   def editable_by?(user)
-    user && borrower == user
+    user && borrower == user && booking?
   end
+
+  #可評價
+  def can_review_by?(user)
+    (withdrawed? || returned?) && !reviews.pluck(:judger_id).include?(user.id)
+  end
+
+  #可確認出租
+  def can_rent_by?(user)
+    booking? && viewable_by?(user)
+  end
+
+  #可確認歸還
+  def can_return_by?(user)
+    renting? && viewable_by?(user)
+  end
+
 end

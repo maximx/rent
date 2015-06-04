@@ -2,7 +2,7 @@ class RentRecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
   before_action :find_item
   before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
-  before_action :find_item_rent_record, only: [ :show, :review ]
+  before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning ]
 
   def index
   end
@@ -61,6 +61,16 @@ class RentRecordsController < ApplicationController
   def review
     @review = @rent_record.build_review
     render "reviews/new"
+  end
+
+  def renting
+    @rent_record.rent! if @rent_record.can_rent_by?(current_user)
+    redirect_to item_rent_records_path(@item)
+  end
+
+  def returning
+    @rent_record.return! if @rent_record.can_return_by?(current_user)
+    redirect_to item_rent_records_path(@item)
   end
 
   private
