@@ -1,0 +1,8 @@
+<% rates_radio = Review.rates_radio_collections %>
+
+<%= simple_form_for [ @item, @rent_record, @review ] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rate, as: :radio_buttons, collection: rates_radio, checked: rates_radio.first %>
+
+  <%= f.submit "送出評價" %>
+<% end %>

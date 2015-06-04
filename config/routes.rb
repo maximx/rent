@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :questions, only: [ :create, :update, :destroy ]
 
     resources :rent_records do
+      resources :reviews, only: [ :create ]
       get :review, on: :member
     end
 

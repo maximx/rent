@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
   has_many :collections, through: :collect_relationships, source: :item
 
-  has_many :reviewed, class_name: "Review", foreign_key: "judger_id"
+  has_many :revieweds, class_name: "Review", foreign_key: "judger_id"
   has_many :reviews, class_name: "Review", foreign_key: "user_id"
 
   devise :database_authenticatable, :registerable,
@@ -56,4 +56,13 @@ class User < ActiveRecord::Base
     user_role = Review.user_roles["borrower"]
     reviews.where(user_role: user_role).order("created_at DESC")
   end
+
+  def role_of(rent_record)
+    if self == rent_record.item.lender
+      return "lender"
+    elsif self == rent_record.borrower
+      return "borrower"
+    end
+  end
+
 end
