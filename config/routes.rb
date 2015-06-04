@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :requirements
 
   namespace :settings do
+    resources :account, only: [ :index ]
     resources :items, only: [ :index ]
     resources :requirements, only: [ :index ]
   end

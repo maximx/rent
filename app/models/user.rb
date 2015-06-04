@@ -48,10 +48,12 @@ class User < ActiveRecord::Base
 
   # rent record review
   def lender_reviews
-    reviews.where(user_role: "lender")
+    user_role = Review.user_roles["lender"]
+    reviews.where(user_role: user_role).order("created_at DESC")
   end
 
   def borrower_reviews
-    reviews.where(user_role: "borrower")
+    user_role = Review.user_roles["borrower"]
+    reviews.where(user_role: user_role).order("created_at DESC")
   end
 end

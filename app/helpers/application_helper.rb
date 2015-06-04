@@ -1,7 +1,9 @@
 module ApplicationHelper
-  def render_categories_aside
+  def render_aside
     if ["items", "categories", "subcategories"].include?(params[:controller])
       render partial: "layouts/category"
+    elsif params[:controller].start_with? "settings"
+      render partial: "layouts/settings"
     end
   end
 
