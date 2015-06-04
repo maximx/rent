@@ -1,6 +1,8 @@
-<%= current_user.email %>
-<h5>租賃評價</h5>
-<%= render partial: "review", collection: current_user.lender_reviews %>
+<div>
+  <%= current_user.email %>
+  <h5>租賃評價</h5>
+  <%= render partial: "review", collection: current_user.lender_reviews %>
 
-<h5>承租評價</h5>
-<%= render partial: "review", collection: current_user.borrower_reviews %>
+  <h5>承租評價</h5>
+  <%= render partial: "review", collection: current_user.borrower_reviews %>
+</div>
