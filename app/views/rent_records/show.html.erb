@@ -9,8 +9,9 @@
   <div><%= @rent_record.name %></div>
   <div><%= @rent_record.borrower.email %></div>
   <div><%= @rent_record.phone %></div>
+  <div><%= @rent_record.aasm_state %></div>
   <div><%= @rent_record.started_at %></div>
   <div><%= @rent_record.ended_at %></div>
-  <%= link_to("修改資訊", edit_item_rent_record_path(@item, @rent_record)) %>
+  <%= render_edit_item_rent_record_link(@item, @rent_record) %>
   <%= link_to("下載契約檔案", item_rent_record_path(@item, @rent_record, format: :pdf)) %>
 </div>
