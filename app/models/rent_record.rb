@@ -1,9 +1,13 @@
 class RentRecord < ActiveRecord::Base
   include AASM
 
+  validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :name
+
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
   has_many :reviews
+
+  before_validation :set_price
 
   aasm no_direct_assignment: true do
     state :booking, initial: true
@@ -57,6 +61,20 @@ class RentRecord < ActiveRecord::Base
   #可確認歸還
   def can_return_by?(user)
     renting? && viewable_by?(user)
+  end
+
+  protected
+
+  def set_price
+      self.price = seconds_to_dhms.at(0) * item.price
+  end
+
+  def seconds_to_dhms
+    duration = ended_at - started_at
+
+    #分, 時, 日
+    [60, 60, 24].map { |mhd| duration, ss = duration.divmod(mhd); ss }
+      .reverse.unshift(duration)
   end
 
 end
