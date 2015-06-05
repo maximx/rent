@@ -7,7 +7,7 @@ class RentRecord < ActiveRecord::Base
   belongs_to :item
   has_many :reviews
 
-  before_validation :set_price
+  before_save :set_price
 
   aasm no_direct_assignment: true do
     state :booking, initial: true
@@ -66,15 +66,11 @@ class RentRecord < ActiveRecord::Base
   protected
 
   def set_price
-      self.price = seconds_to_dhms.at(0) * item.price
+    self.price =  rent_days * item.price
   end
 
-  def seconds_to_dhms
-    duration = ended_at - started_at
-
-    #分, 時, 日
-    [60, 60, 24].map { |mhd| duration, ss = duration.divmod(mhd); ss }
-      .reverse.unshift(duration)
+  def rent_days
+    (ended_at - started_at).to_f / (24 * 60 * 60)
   end
 
 end
