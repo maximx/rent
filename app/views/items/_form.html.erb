@@ -2,7 +2,7 @@
   <%= f.input :name %>
   <%= f.input :subcategory_id, as: :grouped_select, collection: Category.includes(:subcategories).all, group_method: :subcategories %>
   <%= f.input :price %>
-  <%= f.input :period, as: :select, collection: Item.periods.keys %>
+  <%= f.input :minimum_period %> / 日
   <%= f.input :deposit %>
   <%= f.input :address %>
   <%= f.input :description %>

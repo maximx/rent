@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :login_required, except: [ :index, :show, :search ]
-  before_action :find_categories, only: [ :index, :new, :show, :edit, :search ]
+  before_action :find_categories, except: [ :collect, :uncollect ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect ]
 
@@ -69,8 +69,8 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(
-      :name, :price, :period, :address,
-      :deposit, :description, :category_id, :subcategory_id
+      :name, :price, :minimum_period, :address,
+      :deposit, :description, :subcategory_id
     )
   end
 

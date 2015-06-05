@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  validates_presence_of :name, :price, :period, :category_id, :subcategory_id
+  validates_presence_of :name, :price, :minimum_period, :subcategory_id
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
@@ -18,7 +18,7 @@ class Item < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
-  before_validation :set_category_id
+  before_save :set_category_id
 
   scope :search_by, -> (query) { where(search_criteria(query)) }
 
