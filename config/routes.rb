@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: "items#index"
   get "/search", to: "items#search"
-  get "/settings", to: "settings/items#index"
+  get "/settings", to: "settings/account#index"
 
   devise_for :users
 
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resources :account, only: [ :index ]
     resources :items, only: [ :index ]
     resources :requirements, only: [ :index ]
+    resources :rent_records, only: [ :index ]
   end
 
   resources :categories, only: [ :show ]

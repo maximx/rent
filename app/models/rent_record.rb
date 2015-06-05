@@ -63,6 +63,10 @@ class RentRecord < ActiveRecord::Base
     renting? && viewable_by?(user)
   end
 
+  def review_of(user)
+    reviews.where(user_id: user.id).first
+  end
+
   protected
 
   def set_price
