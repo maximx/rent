@@ -22,3 +22,8 @@
 //= require fullcalendar
 //= require fullcalendar/lang-all
 //= require_tree .
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+})

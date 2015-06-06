@@ -21,9 +21,9 @@
 //header
 .site-header {
   h1 { margin-bottom: 0px; }
-  .header-container { padding-right: 20px; padding-left: 20px; }
+  .header-container { padding: 0px 30px; }
 }
-.user-navbar {
+.site-navbar {
   margin-top: 8px;
   margin-left: 5px;
 }
@@ -35,4 +35,20 @@
 
 a {
   &:hover { text-decoration: none; }
+}
+
+.user-navbar {
+  list-style: none;
+  margin-top: 10px;
+  padding: 0px;
+
+  .nav-item { float: left; }
+}
+
+.nav-link {
+  color: #000000;
+  display: block;
+  padding: 4px 8px;
+  line-height: 20px;
+  font-weight: bold;
 }

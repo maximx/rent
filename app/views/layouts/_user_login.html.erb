@@ -1,19 +1,27 @@
-<div class="user-navbar pull-right">
-  <% if current_user.blank? %>
-    <%= link_to("註冊", new_user_registration_path, class: "btn btn-default") %>
-    /
-    <%= link_to("登入", new_user_session_path, class: "btn btn-default") %>
+<ul class="user-navbar pull-right clearfix">
+  <% if user_signed_in? %>
+    <li class="nav-item">
+      <%= link_to(current_user.email, user_path(current_user), class: "nav-link") %>
+    </li>
+    <li class="nav-item">
+      <%= link_to(content_tag(:span,"", class: "glyphicon glyphicon-cog").html_safe,
+                  settings_path,
+                  class: "nav-link",
+                  title: "管理與設定",
+                  data: { toggle: "tooltip", placement: "bottom" }) %>
+    </li>
+    <li class="nav-item">
+      <%= link_to(content_tag(:span, "", class: "glyphicon glyphicon-log-out").html_safe,
+                  destroy_user_session_path,
+                  method: :delete,
+                  class: "nav-link",
+                  title: "登出",
+                  data: { toggle: "tooltip", placement: "bottom" }) %>
+    </li>
   <% else %>
-    <div class="dropdown">
-      <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-        <span><%= current_user.email %></span>
-        <span class="caret"></span>
-      </a>
-
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <li><%= link_to("設定", settings_path) %></li>
-        <li><%= link_to("登出", destroy_user_session_path, method: :delete) %></li>
-      </ul>
-    </div>
+    <li class="nav-item">
+      <%= link_to("註冊", new_user_registration_path, class: "btn btn-default") %>
+      <%= link_to("登入", new_user_session_path, class: "btn btn-default") %>
+    </li>
   <% end %>
-</div>
+</ul>
