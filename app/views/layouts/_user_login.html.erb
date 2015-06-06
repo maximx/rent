@@ -1,7 +1,8 @@
-<div class="dropdown">
+<div class="user-navbar pull-right">
   <% if current_user.blank? %>
-    <%= link_to("註冊", new_user_registration_path) %>
-    <%= link_to("登入", new_user_session_path) %>
+    <%= link_to("註冊", new_user_registration_path, class: "btn btn-default") %>
+    /
+    <%= link_to("登入", new_user_session_path, class: "btn btn-default") %>
   <% else %>
     <div class="dropdown">
       <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">

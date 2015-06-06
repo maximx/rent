@@ -17,3 +17,20 @@
 @import "bootstrap";
 @import "bootstrap-datetimepicker";
 @import "fullcalendar";
+
+//header
+.site-header {
+  h1 { margin-bottom: 0px; }
+}
+.user-navbar {
+  margin-top: 8px;
+  margin-left: 5px;
+}
+
+// main content
+.sidebar { width: 17%; }
+.main-content { width: 80.5%; margin-left: 2.5% }
+
+a {
+  &:hover { text-decoration: none; }
+}

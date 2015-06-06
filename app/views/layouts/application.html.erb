@@ -6,27 +6,43 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= yield :javascript %>
+
+  <script type="text/javascript">
+    $(function(){
+      $('.stop-bubble').click(function(e) {
+        if (e.stopPropagation)
+          e.stopPropagation();
+        else
+          e.cancelBubble = true;
+      });
+    });
+  </script>
+
 </head>
 <body>
 
-<h2><%= link_to("Logo", root_path) %></h2>
-<%= render partial: "layouts/search" %>
-<%= render partial: "layouts/user_login" %>
-<%= render_aside %>
-<%= render_notice(notice) %>
-<%= render_alert(alert) %>
-<%= yield %>
+<header class="site-header">
+  <div class="container clearfix">
+    <h1><%= link_to("MaxRent", root_path, class: "maxrent-logo pull-left") %></h1>
 
-<script type="text/javascript">
-  $(function(){
-    $('.stop-bubble').click(function(e) {
-      if (e.stopPropagation)
-        e.stopPropagation();
-      else
-        e.cancelBubble = true;
-    });
-  });
-</script>
+    <div class="user-navbar">
+      <%= render partial: "layouts/user_login" %>
+      <%= render partial: "layouts/search" %>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid clearfix">
+  <div class="sidebar pull-left">
+    <%= render_aside %>
+  </div>
+
+  <div class="main-content pull-left">
+    <%= render_notice(notice) %>
+    <%= render_alert(alert) %>
+    <%= yield %>
+  </div>
+</div>
 
 </body>
 </html>
