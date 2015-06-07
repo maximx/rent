@@ -13,6 +13,9 @@ class Item < ActiveRecord::Base
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id"
   has_many :collector, through: :collect_relationships, source: :user
 
+  has_many :pictures, as: :imageable
+  accepts_nested_attributes_for :pictures
+
   enum period: [ :時, :日, :月, :年 ]
 
   geocoded_by :address

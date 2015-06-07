@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605013955) do
+ActiveRecord::Schema.define(version: 20150607115840) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 20150605013955) do
     t.integer  "category_id",    limit: 4
     t.integer  "minimum_period", limit: 4,     default: 1
   end
+
+  create_table "pictures", force: :cascade do |t|
+    t.integer  "imageable_id",   limit: 4
+    t.string   "imageable_type", limit: 255
+    t.string   "public_id",      limit: 255
+    t.string   "name",           limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.integer  "item_id",    limit: 4

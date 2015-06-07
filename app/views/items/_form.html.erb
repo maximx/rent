@@ -1,11 +1,18 @@
 <%= simple_form_for(item) do |f| %>
   <%= f.input :name %>
-  <%= f.input :subcategory_id, as: :grouped_select, collection: Category.includes(:subcategories).all, group_method: :subcategories %>
+  <%= f.input :subcategory_id,
+              as: :grouped_select,
+              collection: Category.includes(:subcategories).all,
+              group_method: :subcategories %>
   <%= f.input :price %>
   <%= f.input :minimum_period %> / 日
   <%= f.input :deposit %>
   <%= f.input :address %>
   <%= f.input :description %>
+
+  <%= f.simple_fields_for :pictures do |p| %>
+    <%= p.input :public_id, as: :file, input_html: { multiple: true } %>
+  <% end %>
 
   <%= f.submit "新增" %>
 <% end %>

@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :login_required, except: [ :index, :show, :search ]
+  before_action :set_public_id, only: [ :create, :update ]
   before_action :find_categories, except: [ :collect, :uncollect ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect ]
@@ -15,13 +16,14 @@ class ItemsController < ApplicationController
     @maps = Gmaps4rails.build_markers(@item) do |item, marker|
       marker.lat item.latitude
       marker.lng item.longitude
-      marker.infowindow("<h4>#{url_of(item)}</h4><br />#{item.address}")
+      marker.infowindow("<h4>#{link_of(item)}</h4><br />#{item.address}")
       marker.json({ title: item.name })
     end
   end
 
   def new
     @item = Item.new
+    @item.pictures.build
   end
 
   def create
@@ -35,6 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item.pictures.build unless @item.pictures.exists?
   end
 
   def update
@@ -70,7 +73,8 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(
       :name, :price, :minimum_period, :address,
-      :deposit, :description, :subcategory_id
+      :deposit, :description, :subcategory_id,
+      pictures_attributes: [ :public_id ]
     )
   end
 
@@ -82,7 +86,22 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def url_of(item)
+  def link_of(item)
     view_context.link_to( item.name, item_url(item) )
   end
+
+  def set_public_id
+    if params[:item].has_key?(:pictures_attributes)
+      pictures_attributes = params[:item][:pictures_attributes]
+
+      pictures_attributes["0"][:public_id].each_with_index do |picture, index|
+        pictures_attributes["#{index}"] = { public_id: upload_to_cloudinary(picture) }
+      end
+    end
+  end
+
+  def upload_to_cloudinary(pic)
+    Cloudinary::Uploader.upload(pic)["public_id"]
+  end
+
 end
