@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: maxrent
+  api_key: '412935558853276'
+  api_secret: 5nFgvimuItF0MZvOdGOfHjzurLw
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: maxrent
+  api_key: '412935558853276'
+  api_secret: 5nFgvimuItF0MZvOdGOfHjzurLw
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: maxrent
+  api_key: '412935558853276'
+  api_secret: 5nFgvimuItF0MZvOdGOfHjzurLw
+  enhance_image_tag: true
+  static_image_support: false
