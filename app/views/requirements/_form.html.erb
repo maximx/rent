@@ -7,6 +7,10 @@
   <%= f.input :ended_at, as: :date_time_picker %>
   <%= f.input :description %>
 
+  <%= f.simple_fields_for :pictures do |p| %>
+    <%= p.input :public_id, as: :file, input_html: { multiple: true } %>
+  <% end %>
+
   <%= f.submit "求租" %>
 <% end %>
 

@@ -6,6 +6,12 @@
       <div>$<%= @requirement.price %></div>
       <div><%= @requirement.address %></div>
       <div><%= @requirement.description %></div>
+
+      <div>
+        <% @requirement.pictures.each do |picture| %>
+          <%= cl_image_tag(picture.public_id, width: 450, height: 250) %>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>

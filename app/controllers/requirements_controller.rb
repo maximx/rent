@@ -1,5 +1,6 @@
 class RequirementsController < ApplicationController
   before_action :login_required, except: [ :index, :show ]
+  before_action :set_public_id, only: [ :create, :update ]
   before_action :find_requirement, only: [ :edit, :update, :destroy ]
 
   def index
@@ -12,6 +13,7 @@ class RequirementsController < ApplicationController
 
   def new
     @requirement = current_user.requirements.build
+    @requirement.pictures.build
   end
 
   def create
@@ -24,6 +26,7 @@ class RequirementsController < ApplicationController
   end
 
   def edit
+    @requirement.pictures.build unless @requirement.pictures.exists?
   end
 
   def update
@@ -43,12 +46,27 @@ class RequirementsController < ApplicationController
 
   def requirement_params
     params.require(:requirement).permit(
-      :name, :content, :email, :phone, :address,
-      :price, :started_at, :ended_at
+      :name, :description, :email, :phone, :address,
+      :price, :started_at, :ended_at,
+      pictures_attributes: [ :public_id ]
     )
   end
 
   def find_requirement
     @requirement = current_user.requirements.find(params[:id])
+  end
+
+  def set_public_id
+    if params[:requirement].has_key?(:pictures_attributes)
+      pictures_attributes = params[:requirement][:pictures_attributes]
+
+      pictures_attributes["0"][:public_id].each_with_index do |picture, index|
+        pictures_attributes["#{index}"] = { public_id: upload_to_cloudinary(picture) }
+      end
+    end
+  end
+
+  def upload_to_cloudinary(pic)
+    Cloudinary::Uploader.upload(pic)["public_id"]
   end
 end
