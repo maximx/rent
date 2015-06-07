@@ -1,7 +1,9 @@
 class RequirementsController < ApplicationController
+  include RentCloudinary
+
   before_action :login_required, except: [ :index, :show ]
-  before_action :set_public_id, only: [ :create, :update ]
   before_action :find_requirement, only: [ :edit, :update, :destroy ]
+  before_action :set_public_id, only: [ :create, :update ]
 
   def index
     @requirements = Requirement.includes(:demander).all
@@ -56,17 +58,4 @@ class RequirementsController < ApplicationController
     @requirement = current_user.requirements.find(params[:id])
   end
 
-  def set_public_id
-    if params[:requirement].has_key?(:pictures_attributes)
-      pictures_attributes = params[:requirement][:pictures_attributes]
-
-      pictures_attributes["0"][:public_id].each_with_index do |picture, index|
-        pictures_attributes["#{index}"] = { public_id: upload_to_cloudinary(picture) }
-      end
-    end
-  end
-
-  def upload_to_cloudinary(pic)
-    Cloudinary::Uploader.upload(pic)["public_id"]
-  end
 end

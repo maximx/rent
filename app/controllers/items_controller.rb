@@ -1,9 +1,11 @@
 class ItemsController < ApplicationController
+  include RentCloudinary
+
   before_action :login_required, except: [ :index, :show, :search ]
-  before_action :set_public_id, only: [ :create, :update ]
   before_action :find_categories, except: [ :collect, :uncollect ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect ]
+  before_action :set_public_id, only: [ :create, :update ]
 
   def index
     @items = Item.all
@@ -88,20 +90,6 @@ class ItemsController < ApplicationController
 
   def link_of(item)
     view_context.link_to( item.name, item_url(item) )
-  end
-
-  def set_public_id
-    if params[:item].has_key?(:pictures_attributes)
-      pictures_attributes = params[:item][:pictures_attributes]
-
-      pictures_attributes["0"][:public_id].each_with_index do |picture, index|
-        pictures_attributes["#{index}"] = { public_id: upload_to_cloudinary(picture) }
-      end
-    end
-  end
-
-  def upload_to_cloudinary(pic)
-    Cloudinary::Uploader.upload(pic)["public_id"]
   end
 
 end
