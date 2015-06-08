@@ -17,6 +17,14 @@ module ApplicationHelper
     alert_notice_tag("warning") if msg.present?
   end
 
+  def render_cl_image_small(public_id)
+    cl_image_tag(public_id, width: 200, height: 150, cop: :fill)
+  end
+
+  def render_cl_image_mid(public_id)
+    cl_image_tag(public_id, width: 350, height: 250, cop: :fill)
+  end
+
   private
 
   def alert_notice_tag(type)

@@ -1,3 +1,25 @@
+@import "bootstrap/mixins/border-radius";
+
+/*index*/
+.item-box {
+  float: left;
+  width: 202px;
+  height: 200px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+
+  border-color: #BBBBBB;
+  border-width: 1px;
+  border-style: solid;
+  @include border-bottom-radius(10px);
+
+  .item-info {
+    padding: 5px;
+  }
+}
+
+
+/*show*/
 .nav-tabs {
   a {
     color: #000000;

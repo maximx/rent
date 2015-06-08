@@ -29,6 +29,14 @@ class Item < ActiveRecord::Base
     user && user == lender
   end
 
+  def city
+    address[0..2]
+  end
+
+  def price_period
+    "$#{price}/#{period}"
+  end
+
   protected
 
   def set_category_id

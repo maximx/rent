@@ -2,15 +2,19 @@
   <%= link_to("新增出租物", new_item_path, class: "pull-right btn btn-danger") %>
 </div>
 
-<table>
-  <thead>
-    <td>名稱</td>
-  </thead>
-  <tbody>
-  <% @items.each do |item| %>
-    <tr>
-      <td><%= link_to(item.name, item_path(item)) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="clearfix">
+<% @items.each do |item| %>
+  <div class="item-box">
+    <%= link_to item_path(item) do %>
+      <div>
+        <%= render_cl_image_small(item.pictures.first.public_id) if item.pictures.exists? %>
+      </div>
+      <div class="item-info clearfix">
+        <div><%= link_to(item.name, item_path(item)) %></div>
+        <div class="pull-left"><%= item.price_period %></div>
+        <div class="pull-right"><%= item.city %></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+</div>
