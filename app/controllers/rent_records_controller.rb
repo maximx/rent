@@ -12,7 +12,7 @@ class RentRecordsController < ApplicationController
       respond_to do |format|
         format.html
         format.pdf do
-          pdf = RentRecordPdf.new(@rent_record)
+          pdf = RentRecordPdf.new(@item, @rent_record)
 
           send_data pdf.render, RentRecordPdf.pdf_config(@item.id, @rent_record.id)
         end

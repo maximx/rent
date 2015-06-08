@@ -67,14 +67,14 @@ class RentRecord < ActiveRecord::Base
     reviews.where(user_id: user.id).first
   end
 
+  def rent_days
+    ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
+  end
+
   protected
 
   def set_price
     self.price =  rent_days * item.price
-  end
-
-  def rent_days
-    (ended_at - started_at).to_f / (24 * 60 * 60)
   end
 
 end
