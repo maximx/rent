@@ -20,8 +20,10 @@
         <% end %>
       </div>
     </div>
-    <%= render_collect_link(@item) %>
-    <%= link_to("租下來", new_item_rent_record_path(@item), class: "btn btn-warning") if current_user != @item.lender %>
+    <div class="item-action">
+      <%= render_collect_link(@item) %>
+      <%= link_to("租下來", new_item_rent_record_path(@item), class: "btn btn-warning") if current_user != @item.lender %>
+    </div>
   </div>
 
   <!-- Nav tabs -->
