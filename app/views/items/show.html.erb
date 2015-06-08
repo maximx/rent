@@ -28,6 +28,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#rent-calendar" aria-controls="rent-calendar" role="tab" data-toggle="tab">出租日曆</a></li>
     <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">問與答</a></li>
+    <li role="presentation"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">出租紀錄</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -35,10 +36,26 @@
     <div role="tabpanel" class="tab-pane active" id="rent-calendar">
       <div id="calendar"></div>
     </div>
+
     <div role="tabpanel" class="tab-pane" id="questions">
       <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
       <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
     </div>
+
+    <div role="tabpanel" class="tab-pane" id="records">
+      <table class="table">
+        <thead>
+          <th>承租人</th>
+          <th>金額</th>
+          <th>期間</th>
+          <th>#</th>
+        </thead>
+        <tbody>
+          <%= render partial: "rent_records/record", collection: @item.rent_records.reverse_order, as: :rent_record %>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </section>
 
