@@ -5,27 +5,28 @@
 
 <section>
   <div>
-    <h2><%= @item.name %></h2>
+    <h2><%= link_to(@item.name, item_path(@item)) %></h2>
     <div>
-      <div><%= link_to(@item.lender.email, user_path(@item.lender)) %></div>
-      <div>$<%= @item.price %>/<%= @item.period %></div>
-      <div><%= @item.deposit %></div>
-      <div><%= @item.address %></div>
+      <div>出租者∶<%= link_to(@item.lender.email, user_path(@item.lender)) %></div>
+      <div>租金∶$<%= @item.price %>/<%= @item.period %></div>
+      <div>最少租期∶<%= "#{@item.minimum_period}#{@item.period}" %></div>
+      <div>押金∶<%= @item.deposit %></div>
+      <div>出租物地址∶<%= @item.address %></div>
+      <div id="map" style='width: 350px; height: 200px;'></div>
       <div><%= @item.description %></div>
       <div>
         <% @item.pictures.each do |picture| %>
-          <%= cl_image_tag(picture.public_id, width: 450, height: 250) %>
+          <%= cl_image_tag(picture.public_id, width: 450, height: 250, crop: :fill) %>
         <% end %>
       </div>
     </div>
     <%= render_collect_link(@item) %>
-    <%= link_to("租下來", new_item_rent_record_path(@item)) unless current_user == @item.lender %>
+    <%= link_to("租下來", new_item_rent_record_path(@item), class: "btn btn-warning") if current_user != @item.lender %>
   </div>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#rent-calendar" aria-controls="rent-calendar" role="tab" data-toggle="tab">出租日曆</a></li>
-    <li role="presentation"><a href="#maps" aria-controls="maps" role="tab" data-toggle="tab">位置</a></li>
     <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">問與答</a></li>
   </ul>
 
@@ -33,9 +34,6 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="rent-calendar">
       <div id="calendar"></div>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="maps">
-        <div id="map" style='width: 800px; height: 400px;'></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="questions">
       <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
@@ -62,7 +60,7 @@
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      events:  <%= raw @rent_records_json %>
+      events: <%= raw @rent_records_json %>
       //TODO:editable, selectable
     });
 

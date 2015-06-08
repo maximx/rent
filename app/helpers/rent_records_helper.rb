@@ -20,7 +20,7 @@ module RentRecordsHelper
 
   def render_edit_item_rent_record_link(item, rent_record)
     if rent_record.editable_by?(current_user)
-      link_to("修改",edit_item_rent_record_path(item, rent_record))
+      link_to("修改", edit_item_rent_record_path(item, rent_record), class: "btn btn-default")
     end
   end
 end

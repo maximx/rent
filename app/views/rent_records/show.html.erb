@@ -1,17 +1,17 @@
 <div>
-  <div><%= link_to(@item.name, item_path(@item)) %></div>
+  <div>承租物∶<%= link_to(@item.name, item_path(@item)) %></div>
   <div>
     會員帳號∶
     <%= link_to(@rent_record.borrower.email, user_path(@rent_record.borrower)) %>
   </div>
+  <div>承租人∶<%= @rent_record.name %></div>
+  <div>電話∶<%= @rent_record.phone %></div>
+  <div>交易狀態∶<%= @rent_record.aasm_state %></div>
+  <div>起租日期∶<%= @rent_record.started_at %></div>
+  <div>迄租日期∶<%= @rent_record.ended_at %></div>
   <% #TODO: 顯示評價 %>
   <div>承租人評價</div>
-  <div><%= @rent_record.name %></div>
-  <div><%= @rent_record.borrower.email %></div>
-  <div><%= @rent_record.phone %></div>
-  <div><%= @rent_record.aasm_state %></div>
-  <div><%= @rent_record.started_at %></div>
-  <div><%= @rent_record.ended_at %></div>
+
   <%= render_edit_item_rent_record_link(@item, @rent_record) %>
-  <%= link_to("下載契約檔案", item_rent_record_path(@item, @rent_record, format: :pdf), target: :_blank) %>
+  <%= link_to("簡易契約檔案", item_rent_record_path(@item, @rent_record, format: :pdf), target: :_blank, class: "btn btn-warning") %>
 </div>

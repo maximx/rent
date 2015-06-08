@@ -1,3 +1,7 @@
-// Place all the styles related to the items controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.nav-tabs {
+  a {
+    color: #000000;
+    &:hover { color: #FFFFFF; }
+  }
+}
+.tab-content { height: 700px; }
