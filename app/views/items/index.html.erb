@@ -3,18 +3,5 @@
 </div>
 
 <div class="clearfix">
-<% @items.each do |item| %>
-  <div class="item-box">
-    <%= link_to item_path(item) do %>
-      <div>
-        <%= render_cl_image_small(item.pictures.first.public_id) if item.pictures.exists? %>
-      </div>
-      <div class="item-info clearfix">
-        <div><%= item.name %></div>
-        <div class="pull-left"><%= item.price_period %></div>
-        <div class="pull-right"><%= item.city %></div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+  <%= render partial: "items/item", collection: @items, as: :item %>
 </div>
