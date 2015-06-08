@@ -27,6 +27,7 @@ class RentRecordPdf < Prawn::Document
     tenth_code
     eleventh_code
     twelfth_code
+    sign_table
   end
 
   def declare_code
@@ -137,10 +138,12 @@ class RentRecordPdf < Prawn::Document
       第十二條∶合約押金 #{@item.deposit} 元整。
     CODE
     next_line
+    start_new_page
   end
 
   #TODO:簽名欄位
-  def signing_table
+  def sign_table
+    table sign_content, width: bounds.width, cell_style: { border_width: 0 }
   end
 
   private
@@ -152,4 +155,15 @@ class RentRecordPdf < Prawn::Document
     def next_line
       move_down 10
     end
+
+    def sign_content
+      [
+        ["甲方", "", "乙方", ""],
+        ["姓名∶", "@rent_record.borrower.name", "姓名∶", "@item.lender.email"],
+        ["身份證字號∶", "@rent_record.borrower.real_id", "身份證字號∶", "@item.lender.real_id"],
+        ["地址∶", "@rent_record.address", "地址∶", "@item.address"],
+        ["電話∶", "@rent_record.phone", "電話∶", "@item.phone"]
+      ]
+    end
+
 end
