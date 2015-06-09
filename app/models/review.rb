@@ -10,18 +10,20 @@ class Review < ActiveRecord::Base
 
   before_validation :set_user_and_role
 
-  def set_user_and_role
-    if "lender" == judger.role_of(rent_record)
-      self.user_role = "borrower"
-      self.user = rent_record.borrower
-    elsif "borrower" == judger.role_of(rent_record)
-      self.user_role = "lender"
-      self.user = rent_record.item.lender
-    end
-  end
-
   def self.rates_radio_collections
     rates.sort.reverse.to_h.keys
   end
+
+  private
+
+    def set_user_and_role
+      if "lender" == judger.role_of(rent_record)
+        self.user_role = "borrower"
+        self.user = rent_record.borrower
+      elsif "borrower" == judger.role_of(rent_record)
+        self.user_role = "lender"
+        self.user = rent_record.item.lender
+      end
+    end
 
 end

@@ -6,7 +6,23 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#items" aria-controls="items" role="tab" data-toggle="tab">出租物</a></li>
     <li role="presentation"><a href="#requirements" aria-controls="requirements" role="tab" data-toggle="tab">求租物</a></li>
-    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">評價</a></li>
+    <li role="presentation" class="dropdown">
+      <%= link_to("#", class: "dropdown-toggle",
+                       id: "reviews-dropdown",
+                       data: { toggle: :dropdown },
+                       aria: { controls: "reviews-tabs" }) do %>
+        評價
+        <span class="caret"></span>
+      <% end %>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="reviews-dropdown" id="reviews-content">
+        <li>
+          <%= link_to("承租評價", "#borrower-reviews", id: "borrower-dropdown", tabindex: "-1", role: "tab", data: { toggle: "tab" }, aria: { controls: "borrower-reviews"}) %>
+        </li>
+        <li>
+          <%= link_to("出租評價", "#lender-reviews", id: "lender-dropdown", tabindex: "-1", role: "tab", data: { toggle: "tab" }, aria: { controls: "lender-reviews"}) %>
+        </li>
+      </ul>
+    </li>
   </ul>
 
   <div class="tab-content">
@@ -21,6 +37,17 @@
       <% end %>
     </div>
 
-    <div role="tabpanel" class="tab-pane" id="reviews"></div>
+    <div role="tabpanel" class="tab-pane" id="borrower-reviews">
+      <% @user.borrower_reviews.each do |review| %>
+        <%= review.rate %>
+      <% end %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="lender-reviews">
+      <% @user.lender_reviews.each do |review| %>
+        <%= review.rate %>
+      <% end %>
+    </div>
   </div>
+
 </div>
