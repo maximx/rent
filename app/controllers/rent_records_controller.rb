@@ -59,7 +59,7 @@ class RentRecordsController < ApplicationController
   end
 
   def review
-    @review = @rent_record.build_review
+    @review = @rent_record.reviews.build
     render "reviews/new"
   end
 

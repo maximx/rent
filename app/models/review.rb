@@ -5,13 +5,15 @@ class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :rent_record
 
-  enum rate: [ :bad, :good ]
+  # 負評、好評、未評
+  enum rate: [ :bad, :good, :notyet ]
   enum user_role: [ :lender, :borrower ]
 
   before_validation :set_user_and_role
 
+  # notyet is default
   def self.rates_radio_collections
-    rates.sort.reverse.to_h.keys
+    rates.slice(:bad, :good).sort.reverse.to_h.keys
   end
 
   private

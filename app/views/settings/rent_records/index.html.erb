@@ -3,6 +3,7 @@
     <th>出租物</th>
     <th>租用金額</th>
     <th>期間</th>
+    <th>狀態</th>
     <th>評價</th>
     <th>#</th>
   </thead>
@@ -12,12 +13,14 @@
       <td><%= link_to(rent_record.item.name, item_path(rent_record.item)) %></td>
       <td>$<%= rent_record.price %></td>
       <td><%= "#{rent_record.started_at} ~ #{rent_record.ended_at}" %></td>
+      <td><%= rent_record.aasm_state %></td>
       <td>
         <%= link_to(rent_record.item.lender.email, user_path(rent_record.item.lender)) %>
         :
         <%= rent_record.review_of(current_user).rate %>
       </td>
       <td>
+        <%= link_to("評價", review_item_rent_record_path(rent_record.item, rent_record), class: "btn btn-info") if rent_record.can_review_by?(current_user)  %>
         <%= link_to("查閱", item_rent_record_path(rent_record.item, rent_record), class: "btn btn-default") %>
       </td>
     </tr>

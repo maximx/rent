@@ -20,7 +20,7 @@
       <td><%= rent_record.ended_at %></td>
       <td>
         <%= render_item_rent_record_link_by_state(@item, rent_record) %>
-        <%= link_to("查看詳細資訊", item_rent_record_path(@item, rent_record)) if rent_record.viewable_by?(current_user) %>
+        <%= link_to("查閱", item_rent_record_path(@item, rent_record), class: "btn btn-warning") if rent_record.viewable_by?(current_user) %>
       </td>
     </tr>
     <% end %>

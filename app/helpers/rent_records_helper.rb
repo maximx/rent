@@ -7,14 +7,16 @@ module RentRecordsHelper
       link_to("確認出租",
               renting_item_rent_record_path(item, rent_record),
               method: :put,
+              class: "btn btn-primary",
               data: { confirm: "確認已交付出租物嗎？" })
     elsif rent_record.can_return_by?(current_user)
       link_to("確認歸還",
               returning_item_rent_record_path(item, rent_record),
               method: :put,
+              class: "btn btn-danger",
               data: { confirm: "確認已歸還出租物嗎？" })
     elsif rent_record.can_review_by?(current_user)
-      link_to("評價", review_item_rent_record_path(item, rent_record))
+      link_to("評價", review_item_rent_record_path(item, rent_record), class: "btn btn-info")
     end
   end
 

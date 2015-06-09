@@ -64,7 +64,8 @@ class RentRecord < ActiveRecord::Base
   end
 
   def review_of(user)
-    reviews.where(user_id: user.id).first
+    rv = reviews.where(user_id: user.id).first
+    rv ||= user.reviews.build
   end
 
   def rent_days
