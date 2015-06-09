@@ -2,7 +2,7 @@ module RentRecordsHelper
 
   def render_edit_item_rent_record_link(rent_record)
     if rent_record.editable_by?(current_user)
-      link_to("修改", edit_item_rent_record_path(rent_record.item, rent_record), class: "btn btn-default")
+      link_to("修改", edit_item_rent_record_path(rent_record.item, rent_record), class: "btn btn-info")
     end
   end
 
@@ -34,7 +34,17 @@ module RentRecordsHelper
 
   def render_show_item_rent_record_link(rent_record)
     if rent_record.viewable_by?(current_user)
-      link_to("查閱", item_rent_record_path(rent_record.item, rent_record), class: "btn btn-warning")
+      link_to("查閱", item_rent_record_path(rent_record.item, rent_record), class: "btn btn-default")
+    end
+  end
+
+  def render_ask_for_review_item_rent_record_link(rent_record)
+    if rent_record.can_ask_review_by?(current_user)
+      link_to("邀請評價",
+              ask_for_review_item_rent_record_path(rent_record.item, rent_record),
+              method: :post,
+              class: "btn btn-success",
+              data: { confirm: "將寄出信件邀請對方評價，確認要繼續嗎？"})
     end
   end
 
