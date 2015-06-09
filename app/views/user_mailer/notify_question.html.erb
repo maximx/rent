@@ -1,7 +1,7 @@
-<h4>Hi, <%= @lender.email %></h4>
+<h4>您好, <%= @lender.email %></h4>
 
 <p>
-<%= @asker.email %>對您的出租物<%= link_to(@item.name, item_path(@item)) %>提出一個新疑問，
+<%= @asker.email %>對您的出租物<%= link_to(@item.name, item_url(@item)) %>提出一個新疑問，
 <%= "#{@asker.email}∶#{@question.content}" %>
 
 請您回覆，謝謝

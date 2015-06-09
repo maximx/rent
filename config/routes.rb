@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         get :review
         put :renting
         put :returning
+        post :ask_for_review
       end
     end
 

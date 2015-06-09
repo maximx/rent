@@ -22,4 +22,19 @@ class UserMailer < ApplicationMailer
 
     mail to: asker.email, subject: "#{@lender.email}已回覆您對出租物#{@item.name}所提出的疑問"
   end
+
+  def ask_for_review(judger, review, user)
+    @judger = judger
+    @review = review
+    @user = user
+    @item = review.rent_record.item
+
+    mail to: user.email, subject: ask_for_review_subject
+  end
+
+  private
+    def ask_for_review_subject
+      "#{@judger.email}對#{@item.name}的承租交易評價為#{@review.rate}，並請您對他評價"
+    end
+
 end

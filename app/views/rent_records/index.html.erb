@@ -19,6 +19,7 @@
       <td><%= rent_record.started_at %></td>
       <td><%= rent_record.ended_at %></td>
       <td>
+        <%= link_to("邀請評價", ask_for_review_item_rent_record_path(rent_record.item, rent_record), method: :post) if rent_record.can_ask_review_by?(current_user) %>
         <%= render_edit_item_rent_record_link(rent_record) %>
         <%= render_renting_item_rent_record_link(rent_record) %>
         <%= render_returning_item_rent_record_link(rent_record) %>

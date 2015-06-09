@@ -2,7 +2,7 @@ class RentRecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
   before_action :find_item
   before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
-  before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning ]
+  before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :ask_for_review ]
 
   def index
   end
@@ -59,8 +59,24 @@ class RentRecordsController < ApplicationController
   end
 
   def review
-    @review = @rent_record.reviews.build
-    render "reviews/new"
+    if @rent_record.can_review_by?(current_user)
+      @review = @rent_record.reviews.build
+      render "reviews/new"
+    else
+      flash[:alert] = "您沒有權限"
+      redirect_to item_path(@item)
+    end
+  end
+
+  def ask_for_review
+    if @rent_record.is_reviewed_by_judger?(current_user)
+      review = @rent_record.review_of_judger(current_user)
+      UserMailer.ask_for_review(current_user, review, review.user).deliver
+      redirect_to settings_rent_records_path
+    else
+      flash[:notice] = "請您先行評價"
+      redirect_to review_item_rent_record_path(@item, @rent_record)
+    end
   end
 
   def renting
