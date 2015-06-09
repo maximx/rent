@@ -1,7 +1,7 @@
 <table class="table">
   <thead>
     <th>出租物</th>
-    <th>金額</th>
+    <th>租用金額</th>
     <th>期間</th>
     <th>評價</th>
     <th>#</th>
@@ -10,7 +10,7 @@
   <% @rent_records.each do |rent_record| %>
     <tr>
       <td><%= link_to(rent_record.item.name, item_path(rent_record.item)) %></td>
-      <td><%= rent_record.price %></td>
+      <td>$<%= rent_record.price %></td>
       <td><%= "#{rent_record.started_at} ~ #{rent_record.ended_at}" %></td>
       <td>
         <%= link_to(rent_record.item.lender.email, user_path(rent_record.item.lender)) %>
@@ -18,7 +18,7 @@
         <%= rent_record.review_of(current_user).rate %>
       </td>
       <td>
-        <%= link_to("查閱", item_rent_record_path(rent_record.item, rent_record)) %>
+        <%= link_to("查閱", item_rent_record_path(rent_record.item, rent_record), class: "btn btn-default") %>
       </td>
     </tr>
   <% end %>

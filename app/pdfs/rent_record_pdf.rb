@@ -45,7 +45,7 @@ class RentRecordPdf < Prawn::Document
     CODE
 
     text "自 #{date_format(@rent_record.started_at)} 起，"\
-         "至 #{date_format(@rent_record.ended_at)} 止，共 #{@rent_record.rent_days} 天。"
+         "至 #{date_format(@rent_record.ended_at)} 止，共計 #{@rent_record.rent_days} 天。"
     next_line
   end
 
@@ -149,7 +149,7 @@ class RentRecordPdf < Prawn::Document
   private
 
     def date_format(datetime)
-      datetime.strftime("西元 %Y 年 %m 月 %d 日")
+      datetime.strftime("西元 %Y 年 %m 月 %d 日 %H 時 %M 分")
     end
 
     def next_line
