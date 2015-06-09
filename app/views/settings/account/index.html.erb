@@ -1,8 +1,4 @@
 <div>
   <%= current_user.email %>
-  <h5>租賃評價</h5>
-  <%= render partial: "review", collection: current_user.lender_reviews %>
-
-  <h5>承租評價</h5>
-  <%= render partial: "review", collection: current_user.borrower_reviews %>
+  <% #TODO: 個人資訊 %>
 </div>
