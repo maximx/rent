@@ -39,7 +39,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item.pictures.build unless @item.pictures.exists?
   end
 
   def update

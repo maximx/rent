@@ -17,12 +17,20 @@ module ApplicationHelper
     alert_notice_tag("warning") if msg.present?
   end
 
-  def render_cl_image_small(public_id)
-    cl_image_tag(public_id, width: 200, height: 150, cop: :fill)
+  def render_cl_image_small(public_id, options = {})
+    default_options = {
+      width: 200, height: 150, crop: :fill
+    }
+    options = options.merge(default_options)
+    cl_image_tag(public_id, options)
   end
 
-  def render_cl_image_mid(public_id)
-    cl_image_tag(public_id, width: 350, height: 250, cop: :fill)
+  def render_cl_image_mid(public_id, options = {})
+    default_options = {
+      width: 350, height: 250, crop: :fill
+    }
+    options = options.merge(default_options)
+    cl_image_tag(public_id, options)
   end
 
   private

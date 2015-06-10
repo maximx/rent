@@ -1,5 +1,12 @@
 <div>
   <h2>修改出租物</h2>
+
+  <div class="item-pictures">
+    <% @item.pictures.each do |picture| %>
+      <%= render_cl_image_small picture.public_id, data: { id: picture.id } %>
+    <% end %>
+  </div>
+
   <%= render partial: "form", locals: { item: @item } %>
-  <%= link_to("取消", settings_items_path(@item)) %>
+  <%= link_to("取消", settings_items_path(@item), class: "btn btn-default") %>
 </div>

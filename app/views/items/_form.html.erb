@@ -10,7 +10,7 @@
   <%= f.input :address %>
   <%= f.input :description %>
 
-  <%= f.simple_fields_for :pictures do |p| %>
+  <%= f.simple_fields_for :pictures, item.pictures.build do |p| %>
     <%= p.input :public_id, as: :file, input_html: { multiple: true } %>
   <% end %>
 
