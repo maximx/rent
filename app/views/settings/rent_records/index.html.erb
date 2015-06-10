@@ -20,9 +20,10 @@
         <%= rent_record.review_of_user(current_user).rate %>
       </td>
       <td>
-        <%= render_ask_for_review_item_rent_record_link(rent_record) %>
-        <%= render_review_item_rent_record_link(rent_record) %>
-        <%= render_show_item_rent_record_link(rent_record) %>
+        <%= render_edit_rent_record_link(rent_record) %>
+        <%= render_ask_for_review_rent_record_link(rent_record) %>
+        <%= render_review_rent_record_link(rent_record) %>
+        <%= render_show_rent_record_link(rent_record) %>
       </td>
     </tr>
   <% end %>

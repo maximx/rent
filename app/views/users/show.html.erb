@@ -23,6 +23,24 @@
         </li>
       </ul>
     </li>
+
+    <li role="presentation" class="dropdown">
+      <%= link_to("#", class: "dropdown-toggle",
+                       id: "like-dropdown",
+                       data: { toggle: :dropdown },
+                       aria: { controls: "like-tabs" }) do %>
+        喜愛
+        <span class="caret"></span>
+      <% end %>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="like-dropdown" id="like-content">
+        <li>
+          <%= link_to("追蹤", "#user-follow", id: "following-dropdown", tabindex: "-1", role: "tab", data: { toggle: "tab" }, aria: { controls: "user-follow"}) %>
+        </li>
+        <li>
+          <%= link_to("收藏", "#item-collect", id: "collecting-dropdown", tabindex: "-1", role: "tab", data: { toggle: "tab" }, aria: { controls: "item-collect"}) %>
+        </li>
+      </ul>
+    </li>
   </ul>
 
   <div class="tab-content">
@@ -47,6 +65,14 @@
       <% @user.lender_reviews.each do |review| %>
         <%= review.rate %>
       <% end %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="user-follow">
+      user.follow
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="item-collect">
+      item.collect
     </div>
   </div>
 
