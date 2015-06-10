@@ -1,56 +1,54 @@
 <section>
-  <div>
-    <h2><%= link_to(@item.name, item_path(@item)) %></h2>
-    <div>
+  <h2><%= link_to(@item.name, item_path(@item)) %></h2>
+
+  <div class="item-info-container clearfix">
+    <div class="pull-left">
+      <%= render partial: "pictures/picture_carousel", locals: { pictures: @item.pictures } %>
+      <div class="item-action">
+        <%= render_collect_item_link(@item) %>
+        <%= link_to("預約承租", new_item_rent_record_path(@item), class: "btn btn-success") if current_user != @item.lender %>
+      </div>
+    </div>
+
+    <div class="item-info-detail pull-left">
       <div>出租者∶<%= link_to(@item.lender.email, user_path(@item.lender)) %></div>
       <div>租金∶$<%= @item.price %>/<%= @item.period %></div>
       <div>最少租期∶<%= "#{@item.minimum_period}#{@item.period}" %></div>
       <div>押金∶<%= @item.deposit %></div>
       <div>出租物地址∶<%= @item.address %></div>
       <div id="map" style='width: 350px; height: 200px;'></div>
-      <div><%= @item.description %></div>
-      <div>
-        <% @item.pictures.each do |picture| %>
-          <%= cl_image_tag(picture.public_id, width: 450, height: 250, crop: :fill) %>
-        <% end %>
-      </div>
-    </div>
-    <div class="item-action">
-      <%= render_collect_item_link(@item) %>
-      <%= link_to("租下來", new_item_rent_record_path(@item), class: "btn btn-warning") if current_user != @item.lender %>
     </div>
   </div>
 
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#rent-calendar" aria-controls="rent-calendar" role="tab" data-toggle="tab">出租日曆</a></li>
-    <li role="presentation"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">出租紀錄</a></li>
-    <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">問與答</a></li>
-  </ul>
+  <div class="item-nav-tab-container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation">
+        <a href="#description" id="nav-tab-description" aria-controls="description" role="tab" data-toggle="tab">介紹</a>
+      </li>
+      <li role="presentation" class="active"><a href="#rent-calendar" aria-controls="rent-calendar" role="tab" data-toggle="tab">出租日曆</a></li>
+      <li role="presentation"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">出租紀錄</a></li>
+      <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">問與答</a></li>
+    </ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="rent-calendar">
-      <div id="calendar"></div>
-    </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane" id="description">
+        <%= raw @item.description %>
+      </div>
 
-    <div role="tabpanel" class="tab-pane" id="questions">
-      <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
-      <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
-    </div>
+      <div role="tabpanel" class="tab-pane active" id="rent-calendar">
+        <div id="calendar"></div>
+      </div>
 
-    <div role="tabpanel" class="tab-pane" id="records">
-      <table class="table">
-        <thead>
-          <th>承租人</th>
-          <th>金額</th>
-          <th>期間</th>
-          <th>#</th>
-        </thead>
-        <tbody>
-          <%= render partial: "rent_records/record", collection: @item.rent_records.reverse_order, as: :rent_record %>
-        </tbody>
-      </table>
+      <div role="tabpanel" class="tab-pane" id="questions">
+        <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
+        <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="records">
+        rent record list "rent_record#index"
+      </div>
     </div>
 
   </div>
@@ -78,5 +76,6 @@
       //TODO:editable, selectable
     });
 
+    $('#nav-tab-description').click();
   });
 </script>

@@ -13,7 +13,7 @@
   border-style: solid;
   @include border-bottom-radius(10px);
 
-  .item-info {
+  .item-info-short {
     padding: 5px;
   }
   a { color: #000000; }
@@ -51,9 +51,14 @@
 
   &:hover {
     opacity: 0.5;
-    .close {
-      display: block;
-    }
+    .close { display: block; }
   }
 
+}
+
+#picture-carousel {
+  width: 450px;
+  height: 250px;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }

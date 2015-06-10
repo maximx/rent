@@ -3,7 +3,7 @@
     <div>
       <%= render_cl_image_small(item.pictures.first.public_id) if item.pictures.exists? %>
     </div>
-    <div class="item-info clearfix">
+    <div class="item-info-short clearfix">
       <div><%= item.name %></div>
       <div class="pull-left"><%= item.price_period %></div>
       <div class="pull-right"><%= item.city %></div>
