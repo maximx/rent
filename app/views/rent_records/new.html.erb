@@ -1,6 +1,12 @@
 <h4><%= link_to(@item.name, item_path(@item)) %></h4>
 
 <div>
+<% @item.pictures.each do |picture| %>
+  <%= render_cl_image_small picture.public_id %>
+<% end %>
+</div>
+
+<div>
   <h4>申請租借</h4>
   <%= render partial: "form", locals: { item: @item, rent_record: @rent_record } %>
 </div>
