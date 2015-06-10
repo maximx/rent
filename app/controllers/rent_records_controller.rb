@@ -2,7 +2,7 @@ class RentRecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
   before_action :find_item
   before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
-  before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :ask_for_review ]
+  before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :withdrawing, :ask_for_review ]
 
   def index
   end
@@ -86,6 +86,11 @@ class RentRecordsController < ApplicationController
 
   def returning
     @rent_record.return! if @rent_record.can_return_by?(current_user)
+    redirect_to item_rent_records_path(@item)
+  end
+
+  def withdrawing
+    @rent_record.withdraw! if @rent_record.can_withdraw_by?(current_user)
     redirect_to item_rent_records_path(@item)
   end
 

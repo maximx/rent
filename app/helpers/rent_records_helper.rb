@@ -28,6 +28,16 @@ module RentRecordsHelper
     end
   end
 
+  def render_withdrawing_rent_record_link(rent_record)
+    if rent_record.can_withdraw_by?(current_user)
+      link_to("取消預訂",
+              withdrawing_item_rent_record_path(rent_record.item, rent_record),
+              method: :delete,
+              class: "btn btn-danger",
+              data: { confirm: "確定要取消預約#{rent_record.item.name}嗎？"})
+    end
+  end
+
   def render_review_rent_record_link(rent_record)
     if rent_record.can_review_by?(current_user)
       link_to("評價",
@@ -50,6 +60,16 @@ module RentRecordsHelper
               class: "btn btn-success",
               data: { confirm: "將寄出信件邀請對方評價，確認要繼續嗎？"})
     end
+  end
+
+  def render_operate_rent_record_links(rent_record)
+    [
+      render_withdrawing_rent_record_link(rent_record),
+      render_edit_rent_record_link(rent_record),
+      render_ask_for_review_rent_record_link(rent_record),
+      render_review_rent_record_link(rent_record),
+      render_show_rent_record_link(rent_record)
+    ].join(" ").html_safe
   end
 
 end
