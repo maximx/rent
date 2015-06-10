@@ -12,6 +12,6 @@
   <% #TODO: 顯示評價 %>
   <div>承租人評價</div>
 
-  <%= render_edit_item_rent_record_link(@rent_record) %>
+  <%= render_edit_rent_record_link(@rent_record) %>
   <%= link_to("簡易契約檔案", item_rent_record_path(@item, @rent_record, format: :pdf), target: :_blank, class: "btn btn-warning") %>
 </div>
