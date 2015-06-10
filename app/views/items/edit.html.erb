@@ -1,12 +1,18 @@
 <div>
   <h2>修改出租物</h2>
 
-  <div class="item-pictures">
-    <% @item.pictures.each do |picture| %>
+  <div class="item-pictures clearfix">
+  <% @item.pictures.each do |picture| %>
+    <div class="picture">
+      <%= link_to("x", item_picture_path(@item, picture),
+                  class: "close remove-picture",
+                  method: :delete, remote: true,
+                  data: { confirm: "確定要刪除嗎？" }) %>
       <%= render_cl_image_small picture.public_id, data: { id: picture.id } %>
-    <% end %>
+    </div>
+  <% end %>
   </div>
 
   <%= render partial: "form", locals: { item: @item } %>
-  <%= link_to("取消", settings_items_path(@item), class: "btn btn-default") %>
+  <%= link_to("取消", settings_items_path, class: "btn btn-default") %>
 </div>

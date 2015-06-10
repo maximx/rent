@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
+    resources :pictures, only: [ :destroy ]
 
     resources :rent_records do
       resources :reviews, only: [ :create ]
