@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 20150609014822) do
     t.datetime "updated_at",                               null: false
     t.integer  "user_id",        limit: 4
     t.integer  "subcategory_id", limit: 4
+    t.integer  "category_id",    limit: 4
     t.float    "latitude",       limit: 24
     t.float    "longitude",      limit: 24
-    t.integer  "category_id",    limit: 4
     t.integer  "minimum_period", limit: 4,     default: 1
   end
 
