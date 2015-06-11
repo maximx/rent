@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   before_action :set_picture_public_id, only: [ :create, :update ]
 
   before_action do
-    set_category_id(@item.category_id)
+    set_category_id(@item.category_id) if @item
   end
 
   def index
