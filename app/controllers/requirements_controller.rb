@@ -3,7 +3,7 @@ class RequirementsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show ]
   before_action :find_requirement, only: [ :edit, :update, :destroy ]
-  before_action :set_public_id, only: [ :create, :update ]
+  before_action :set_picture_public_id, only: [ :create, :update ]
 
   def index
     @requirements = Requirement.includes(:demander).all

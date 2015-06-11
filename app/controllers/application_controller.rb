@@ -14,7 +14,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def find_categories
+  def find_aside_categories
     @categories = Category.includes(:subcategories).all
   end
+
+  def set_category_id(id)
+    @category_id = id
+  end
+
 end

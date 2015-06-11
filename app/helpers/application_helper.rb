@@ -7,6 +7,10 @@ module ApplicationHelper
     end
   end
 
+  def render_aside_category_in_class(index)
+    " in" if @category_id == (index + 1)
+  end
+
   def render_alert(msg)
     @msg = msg
     alert_notice_tag("danger") if msg.present?

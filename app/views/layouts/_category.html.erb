@@ -10,7 +10,7 @@
                       data: { toggle: :collapse, parent: "#accordion", target: "#collapse#{id}" }) %>
     </div>
 
-    <div id="<%= "collapse#{id}" %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<%= "heading#{id}" %>">
+    <div id="<%= "collapse#{id}" %>" class="panel-collapse collapse<%= render_aside_category_in_class(index) %>" role="tabpanel" aria-labelledby="<%= "heading#{id}" %>">
       <ul class="list-group">
       <% category.subcategories.each do |subcategory| %>
         <li class="list-group-item">

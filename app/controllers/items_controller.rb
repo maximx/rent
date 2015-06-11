@@ -2,10 +2,14 @@ class ItemsController < ApplicationController
   include RentCloudinary
 
   before_action :login_required, except: [ :index, :show, :search ]
-  before_action :find_categories, except: [ :collect, :uncollect ]
+  before_action :find_aside_categories, except: [ :collect, :uncollect ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect ]
-  before_action :set_public_id, only: [ :create, :update ]
+  before_action :set_picture_public_id, only: [ :create, :update ]
+
+  before_action do
+    set_category_id(@item.category_id)
+  end
 
   def index
     @items = Item.all
