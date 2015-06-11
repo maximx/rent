@@ -141,7 +141,6 @@ class RentRecordPdf < Prawn::Document
     start_new_page
   end
 
-  #TODO:簽名欄位
   def sign_table
     table sign_content, width: bounds.width, cell_style: { border_width: 0 }
   end
@@ -159,10 +158,10 @@ class RentRecordPdf < Prawn::Document
     def sign_content
       [
         ["甲方", "", "乙方", ""],
-        ["姓名∶", "@rent_record.borrower.name", "姓名∶", "@item.lender.email"],
-        ["身份證字號∶", "@rent_record.borrower.real_id", "身份證字號∶", "@item.lender.real_id"],
-        ["地址∶", "@rent_record.address", "地址∶", "@item.address"],
-        ["電話∶", "@rent_record.phone", "電話∶", "@item.phone"]
+        ["姓名∶", "", "姓名∶", ""],
+        ["身份證字號∶", "", "身份證字號∶", ""],
+        ["地址∶", "", "地址∶", ""],
+        ["電話∶", "", "電話∶", ""]
       ]
     end
 
