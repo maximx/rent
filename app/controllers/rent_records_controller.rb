@@ -36,7 +36,7 @@ class RentRecordsController < ApplicationController
     @rent_record.borrower = current_user
 
     if @rent_record.save
-      redirect_to item_rent_records_path
+      redirect_to item_rent_records_path(@item)
     else
       render :new
     end
@@ -91,7 +91,7 @@ class RentRecordsController < ApplicationController
 
   def withdrawing
     @rent_record.withdraw! if @rent_record.can_withdraw_by?(current_user)
-    redirect_to item_rent_records_path(@item)
+    redirect_to item_path(@item)
   end
 
   private

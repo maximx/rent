@@ -1,27 +1,3 @@
 <h4><%= link_to(@item.name, item_path(@item)) %></h4>
-<table class="table">
-  <thead>
-    <tr>
-      <th>承租人</th>
-      <th>Email</th>
-      <th>狀態</th>
-      <th>預借時間</th>
-      <th>歸還時間</th>
-      <th>#</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @item.rent_records.each do |rent_record| %>
-    <tr>
-      <td><%= rent_record.name %></td>
-      <td><%= link_to(rent_record.borrower.email, user_path(rent_record.borrower)) %></td>
-      <td><%= rent_record.aasm_state %>
-      <td><%= rent_record.started_at %></td>
-      <td><%= rent_record.ended_at %></td>
-      <td>
-        <%= render_operate_rent_record_links(rent_record) %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<%= render partial: "rent_record_list", locals: { rent_records: @item.rent_records } %>

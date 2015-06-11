@@ -47,7 +47,7 @@
       </div>
 
       <div role="tabpanel" class="tab-pane" id="records">
-        rent record list "rent_record#index"
+        <%= render partial: "rent_records/rent_record_list", locals: { rent_records: @item.rent_records } %>
       </div>
     </div>
 
