@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+  include CurrencyPrice
+
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"

@@ -17,7 +17,7 @@
       <td><%= rent_record.started_at %></td>
       <td><%= rent_record.ended_at %></td>
       <td><%= rent_record.rent_days %></td>
-      <td>$<%= rent_record.price %></td>
+      <td><%= rent_record.currency_price %></td>
       <td><%= rent_record.aasm_state %>
       <td>
         <%= render_operate_rent_record_links(rent_record) %>

@@ -9,7 +9,7 @@
 
   <div class="item-detail-info pull-left">
     <div>出租者∶<%= link_to(item.lender.email, user_path(item.lender)) %></div>
-    <div>租金∶$<%= item.price %>/<%= item.period %></div>
+    <div>租金∶<%= item.price_period %></div>
     <div>最少租期∶<%= "#{item.minimum_period}#{item.period}" %></div>
     <div>押金∶$<%= item.deposit %></div>
     <div>出租物地址∶<%= item.address %></div>

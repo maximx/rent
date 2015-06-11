@@ -12,7 +12,7 @@
     <% @requirements.each do |requirement| %>
       <tr>
         <td><%= link_to(requirement.name, requirement_path(requirement)) %></td>
-        <td>$<%= requirement.price %></td>
+        <td><%= requirement.currency_price %></td>
         <td><%= "#{requirement.started_at} ~ #{requirement.ended_at}" %></td>
         <td>
           <%= link_to("修改", edit_requirement_path(requirement), class: "btn btn-info") %>

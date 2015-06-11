@@ -1,5 +1,6 @@
 class RentRecord < ActiveRecord::Base
   include AASM
+  include CurrencyPrice
 
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :name
 
