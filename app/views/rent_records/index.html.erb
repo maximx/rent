@@ -1,3 +1,4 @@
 <h4><%= link_to(@item.name, item_path(@item)) %></h4>
 
+<%= render partial: "items/item_info_container.html.erb", locals: { item: @item } %>
 <%= render partial: "rent_record_list", locals: { rent_records: @item.rent_records } %>
