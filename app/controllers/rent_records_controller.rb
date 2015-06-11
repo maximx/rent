@@ -26,6 +26,8 @@ class RentRecordsController < ApplicationController
   def new
     if current_user != @item.lender
       @rent_record = @item.rent_records.build
+      @rent_record["started_at"] = params[:start]
+      @rent_record["ended_at"] = params[:end]
     else
       redirect_to item_path(@item)
     end

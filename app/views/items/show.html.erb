@@ -54,6 +54,13 @@
   </div>
 </section>
 
+<div class="hide">
+  <%= form_for @item, url: new_item_rent_record_path(@item), method: :get, html: { id: "new_rent_record_form" } do %>
+    <%= hidden_field_tag :start %>
+    <%= hidden_field_tag :end %>
+  <% end %>
+</div>
+
 <script type="text/javascript">
   $(document).ready(function() {
 
@@ -72,8 +79,13 @@
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      events: <%= raw @rent_records_json %>
-      //TODO:editable, selectable
+      events: <%= raw @rent_records_json %>,
+      selectable: true,
+      select: function(start, end) {
+        $('#start').val(start.format('YYYY-MM-DD'));
+        $('#end').val(end.format('YYYY-MM-DD'));
+        $('#new_rent_record_form').submit();
+      }
     });
 
     $('#nav-tab-description').click();
