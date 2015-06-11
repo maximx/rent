@@ -72,7 +72,7 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="item-collect">
-      item.collect
+      <%= render partial: "items/item", collection: @user.collections, as: :item %>
     </div>
   </div>
 

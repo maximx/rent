@@ -2,21 +2,23 @@
   <thead>
     <tr>
       <th>承租人</th>
-      <th>Email</th>
+      <th>起租日期</th>
+      <th>歸還日期</th>
+      <th>總天數</th>
+      <th>租金</th>
       <th>狀態</th>
-      <th>承租時間</th>
-      <th>歸還時間</th>
       <th>#</th>
     </tr>
   </thead>
   <tbody>
     <% rent_records.each do |rent_record| %>
     <tr>
-      <td><%= rent_record.name %></td>
       <td><%= link_to(rent_record.borrower.email, user_path(rent_record.borrower)) %></td>
-      <td><%= rent_record.aasm_state %>
       <td><%= rent_record.started_at %></td>
       <td><%= rent_record.ended_at %></td>
+      <td><%= rent_record.rent_days %></td>
+      <td>$<%= rent_record.price %></td>
+      <td><%= rent_record.aasm_state %>
       <td>
         <%= render_operate_rent_record_links(rent_record) %>
       </td>
