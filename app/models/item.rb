@@ -1,18 +1,18 @@
 class Item < ActiveRecord::Base
-  validates_presence_of :name, :price, :minimum_period, :subcategory_id
+  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
   belongs_to :subcategory
-  has_many :questions, -> { order("created_at DESC") }
+  has_many :questions, -> { order("created_at DESC") }, dependent: :destroy
 
   has_many :rent_records, class_name: "RentRecord", foreign_key: "item_id"
   has_many :borrowers, through: :rent_records, source: :user
 
-  has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id"
+  has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
   has_many :collector, through: :collect_relationships, source: :user
 
-  has_many :pictures, as: :imageable
+  has_many :pictures, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :pictures
 
   enum period: [ :時, :日, :月, :年 ]
