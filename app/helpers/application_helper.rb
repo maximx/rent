@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def render_aside_category_in_class(index)
-    " in" if @category_id == (index + 1)
+    " in" if @category_id.to_i == (index + 1)
   end
 
   def render_alert(msg)
