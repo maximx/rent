@@ -1,0 +1,28 @@
+<div id="calendar"></div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+      height: 600,
+      lang: 'zh-tw',
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      events: <%= raw rent_records_json %>,
+      selectable: true,
+      selectOverlap: false,
+      select: function(start, end) {
+        var calendar_format = 'YYYY-MM-DD HH:mm:ss';
+        $('#rent_record_started_at').val(start.format(calendar_format));
+        $('#rent_record_ended_at').val(end.format(calendar_format));
+
+        if($('#new_rent_record_form').size() > 0)
+          $('#new_rent_record_form').submit();
+      }
+    });
+
+  });
+</script>

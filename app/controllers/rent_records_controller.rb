@@ -3,6 +3,7 @@ class RentRecordsController < ApplicationController
   before_action :find_item
   before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
   before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :withdrawing, :ask_for_review ]
+  before_action :find_rent_records_json, only: [ :new, :create, :edit, :update ]
 
   def index
   end
@@ -26,8 +27,8 @@ class RentRecordsController < ApplicationController
   def new
     if current_user != @item.lender
       @rent_record = @item.rent_records.build
-      @rent_record["started_at"] = params[:start]
-      @rent_record["ended_at"] = params[:end]
+      @rent_record["started_at"] = params[:rent_record_started_at]
+      @rent_record["ended_at"] = params[:rent_record_ended_at]
     else
       flash[:notice] = "您沒有權限"
       redirect_to item_path(@item)
@@ -116,5 +117,9 @@ class RentRecordsController < ApplicationController
 
   def find_item_rent_record
     @rent_record = @item.rent_records.find(params[:id])
+  end
+
+  def find_rent_records_json
+    @rent_records_json = @item.rent_records.includes(:borrower).to_json
   end
 end

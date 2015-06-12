@@ -22,7 +22,7 @@
       </div>
 
       <div role="tabpanel" class="tab-pane active" id="rent-calendar">
-        <div id="calendar"></div>
+        <%= render partial: "rent_records/calendar", locals: { rent_records_json: @rent_records_json } %>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="questions">
@@ -40,8 +40,8 @@
 
 <div class="hide">
   <%= form_for @item, url: new_item_rent_record_path(@item), method: :get, html: { id: "new_rent_record_form" } do %>
-    <%= hidden_field_tag :start %>
-    <%= hidden_field_tag :end %>
+    <%= hidden_field_tag :rent_record_started_at %>
+    <%= hidden_field_tag :rent_record_ended_at %>
   <% end %>
 </div>
 
@@ -55,24 +55,6 @@
       handler.fitMapToBounds();
     });
 
-    $('#calendar').fullCalendar({
-      height: 600,
-      lang: 'zh-tw',
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      events: <%= raw @rent_records_json %>,
-      selectable: true,
-      select: function(start, end) {
-        $('#start').val(start.format('YYYY-MM-DD'));
-        $('#end').val(end.format('YYYY-MM-DD'));
-        $('#new_rent_record_form').submit();
-      }
-    });
-
     $('#nav-tab-description').tab('show');
-
   });
 </script>
