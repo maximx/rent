@@ -65,6 +65,8 @@ module RentRecordsHelper
   def render_operate_rent_record_links(rent_record)
     [
       render_withdrawing_rent_record_link(rent_record),
+      render_renting_rent_record_link(rent_record),
+      render_returning_rent_record_link(rent_record),
       render_edit_rent_record_link(rent_record),
       render_ask_for_review_rent_record_link(rent_record),
       render_review_rent_record_link(rent_record),

@@ -12,8 +12,8 @@ class RentRecord < ActiveRecord::Base
 
   before_save :set_price
 
-  scope :overlaps, ->(started_at, ended_at) do
-    where("(DATEDIFF(started_at, ?) * DATEDIFF(?, ended_at)) >= 0", ended_at, started_at)
+  scope :overlaps, ->(started_at, ended_at, id) do
+    where("(DATEDIFF(started_at, ?) * DATEDIFF(?, ended_at)) >= 0", ended_at, started_at).where.not(id: id)
   end
 
   aasm no_direct_assignment: true do
@@ -56,7 +56,7 @@ class RentRecord < ActiveRecord::Base
   end
 
   def overlaps
-    item.rent_records.overlaps(started_at, ended_at)
+    item.rent_records.overlaps(started_at, ended_at, id)
   end
 
   #gmaps4rails
@@ -91,12 +91,12 @@ class RentRecord < ActiveRecord::Base
 
   #可確認出租
   def can_rent_by?(user)
-    booking? && viewable_by?(user)
+    booking? && item.lender == user
   end
 
   #可確認歸還
   def can_return_by?(user)
-    renting? && viewable_by?(user)
+    renting? && item.lender == user
   end
 
   #可取消預訂
