@@ -13,7 +13,7 @@ class RentRecord < ActiveRecord::Base
   before_save :set_price
 
   scope :overlaps, ->(started_at, ended_at, id) do
-    where("(DATEDIFF(started_at, ?) * DATEDIFF(?, ended_at)) >= 0", ended_at, started_at).where.not(id: id)
+    where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at).where.not(id: id)
   end
 
   aasm no_direct_assignment: true do
