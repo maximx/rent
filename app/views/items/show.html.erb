@@ -9,6 +9,7 @@
       <li role="presentation">
         <a href="#description" id="nav-tab-description" aria-controls="description" role="tab" data-toggle="tab">介紹</a>
       </li>
+      <!-- load calendar first -->
       <li role="presentation" class="active"><a href="#rent-calendar" aria-controls="rent-calendar" role="tab" data-toggle="tab">出租日曆</a></li>
       <li role="presentation"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">出租紀錄</a></li>
       <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">問與答</a></li>
@@ -71,6 +72,11 @@
       }
     });
 
-    $('#nav-tab-description').click();
+    $('#nav-tab-description').tab('show');
+
+    if (location.hash != "") {
+      $active_tab = $('a[href='+ location.hash + ']');
+      $active_tab && $active_tab.click();
+    }
   });
 </script>
