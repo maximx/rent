@@ -3,6 +3,7 @@ class RentRecord < ActiveRecord::Base
   include CurrencyPrice
 
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :name
+  validate :end_date
   validate :not_overlap
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
@@ -31,6 +32,12 @@ class RentRecord < ActiveRecord::Base
 
     event :return do
       transitions from: :renting, to: :returned
+    end
+  end
+
+  def end_date
+    if ended_at && started_at && ended_at < started_at
+      errors.add(:ended_at, "迄租日應大於起租日")
     end
   end
 
