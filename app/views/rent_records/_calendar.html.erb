@@ -15,6 +15,10 @@
       selectable: true,
       selectOverlap: false,
       select: function(start, end) {
+        if (start < moment()) {
+          alert("不能選擇過去");
+          return;
+        }
         var calendar_format = 'YYYY-MM-DD HH:mm:ss';
         $('#rent_record_started_at').val(start.format(calendar_format));
         $('#rent_record_ended_at').val(end.format(calendar_format));

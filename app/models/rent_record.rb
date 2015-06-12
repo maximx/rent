@@ -36,8 +36,9 @@ class RentRecord < ActiveRecord::Base
   end
 
   def end_date
-    if ended_at && started_at && ended_at < started_at
-      errors.add(:ended_at, "迄租日應大於起租日")
+    if ended_at && started_at
+      errors.add(:ended_at, "迄租日應大於起租日") if ended_at < started_at
+      errors.add(:ended_at, "起租日應大於現在") if started_at < Time.now
     end
   end
 
