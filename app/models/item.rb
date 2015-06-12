@@ -6,9 +6,9 @@ class Item < ActiveRecord::Base
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
   belongs_to :subcategory
-  has_many :questions, -> { order("created_at DESC") }, dependent: :destroy
+  has_many :questions, -> { order("created_at").reverse_order }, dependent: :destroy
 
-  has_many :rent_records, class_name: "RentRecord", foreign_key: "item_id"
+  has_many :rent_records, -> { order("started_at").reverse_order }, class_name: "RentRecord", foreign_key: "item_id"
   has_many :borrowers, through: :rent_records, source: :user
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
