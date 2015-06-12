@@ -3,12 +3,17 @@ class RentRecord < ActiveRecord::Base
   include CurrencyPrice
 
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :name
+  validate :not_overlap
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
   has_many :reviews
 
   before_save :set_price
+
+  scope :overlaps, ->(started_at, ended_at) do
+    where("(DATEDIFF(started_at, ?) * DATEDIFF(?, ended_at)) >= 0", ended_at, started_at)
+  end
 
   aasm no_direct_assignment: true do
     state :booking, initial: true
@@ -29,6 +34,19 @@ class RentRecord < ActiveRecord::Base
     end
   end
 
+  def not_overlap
+    errors.add(:ended_at, '承租期間重疊') if overlaps?
+  end
+
+  def overlaps?
+    overlaps.exists?
+  end
+
+  def overlaps
+    item.rent_records.overlaps(started_at, ended_at)
+  end
+
+  #gmaps4rails
   def as_json(options={})
     {
       id: id,
@@ -93,8 +111,8 @@ class RentRecord < ActiveRecord::Base
 
   protected
 
-  def set_price
-    self.price =  rent_days * item.price
-  end
+    def set_price
+      self.price =  rent_days * item.price
+    end
 
 end
