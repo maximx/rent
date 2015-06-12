@@ -7,6 +7,12 @@
   <%= f.submit "承租" %>
 <% end %>
 
+<div class="item-price-days">
+  承租天數∶<span id="rent_days"></span>
+  總金額∶<span id="total_price"></span>
+</div>
+
 <%= hidden_field_tag :minimun_period, item.minimum_period %>
+<%= hidden_field_tag :item_price, item.price %>
 
 <%= render partial: "rent_records/calendar", locals: { rent_records_json: @rent_records_json } %>
