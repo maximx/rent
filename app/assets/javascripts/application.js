@@ -27,12 +27,4 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
-  $('.nav-tabs a[data-toggle=tab]').click(function() {
-    window.location.hash = this.hash;
-  });
-
-  if (location.hash != "") {
-    $active_tab = $('a[href='+ location.hash + ']');
-    $active_tab && $active_tab.click();
-  }
-})
+});
