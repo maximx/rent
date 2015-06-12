@@ -29,6 +29,7 @@ class RentRecordsController < ApplicationController
       @rent_record["started_at"] = params[:start]
       @rent_record["ended_at"] = params[:end]
     else
+      flash[:notice] = "您沒有權限"
       redirect_to item_path(@item)
     end
   end
