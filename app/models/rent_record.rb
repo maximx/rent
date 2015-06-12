@@ -3,7 +3,7 @@ class RentRecord < ActiveRecord::Base
   include CurrencyPrice
 
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :name
-  validate :end_date
+  validate :start_end_date
   validate :not_overlap
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
@@ -35,10 +35,15 @@ class RentRecord < ActiveRecord::Base
     end
   end
 
-  def end_date
+  def start_end_date
     if ended_at && started_at
-      errors.add(:ended_at, "迄租日應大於起租日") if ended_at < started_at
-      errors.add(:ended_at, "起租日應大於現在") if started_at < Time.now
+      if ended_at < started_at
+        errors.add(:ended_at, "迄租日應大於起租日")
+      elsif started_at < Time.now
+        errors.add(:ended_at, "起租日應大於現在")
+      elsif (ended_at - started_at) < item.minimum_period.days
+        errors.add(:ended_at, "租期應大於#{item.minimum_period}")
+      end
     end
   end
 
