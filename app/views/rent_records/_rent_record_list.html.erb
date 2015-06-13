@@ -14,8 +14,8 @@
     <% rent_records.each do |rent_record| %>
     <tr>
       <td><%= link_to(rent_record.borrower.email, user_path(rent_record.borrower)) %></td>
-      <td><%= rent_record.started_at %></td>
-      <td><%= rent_record.ended_at %></td>
+      <td><%= render_datetime(rent_record.started_at) %></td>
+      <td><%= render_datetime(rent_record.ended_at) %></td>
       <td><%= rent_record.rent_days %></td>
       <td><%= rent_record.currency_price %></td>
       <td><%= rent_record.aasm_state %>

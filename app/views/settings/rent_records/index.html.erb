@@ -12,7 +12,7 @@
     <tr>
       <td><%= link_to(rent_record.item.name, item_path(rent_record.item)) %></td>
       <td><%= rent_record.currency_price %></td>
-      <td><%= "#{rent_record.started_at} ~ #{rent_record.ended_at}" %></td>
+      <td><%= "#{render_datetime(rent_record.started_at)} ~ #{render_datetime(rent_record.ended_at)}" %></td>
       <td><%= rent_record.aasm_state %></td>
       <td>
         <%= link_to(rent_record.item.lender.email, user_path(rent_record.item.lender)) %>

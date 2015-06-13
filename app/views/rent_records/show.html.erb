@@ -7,8 +7,8 @@
   <div>承租人∶<%= @rent_record.name %></div>
   <div>電話∶<%= @rent_record.phone %></div>
   <div>交易狀態∶<%= @rent_record.aasm_state %></div>
-  <div>起租日期∶<%= @rent_record.started_at %></div>
-  <div>迄租日期∶<%= @rent_record.ended_at %></div>
+  <div>起租日期∶<%= render_datetime(@rent_record.started_at) %></div>
+  <div>迄租日期∶<%= render_datetime(@rent_record.ended_at) %></div>
   <% #TODO: 顯示評價 %>
   <div>承租人評價</div>
 

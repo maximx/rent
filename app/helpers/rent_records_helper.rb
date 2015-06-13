@@ -74,4 +74,8 @@ module RentRecordsHelper
     ].join(" ").html_safe
   end
 
+  def render_datetime(datetime)
+    datetime.to_s(:db)
+  end
+
 end
