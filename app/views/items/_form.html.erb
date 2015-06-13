@@ -12,6 +12,7 @@
 
   <%= f.simple_fields_for :pictures, item.pictures.build do |p| %>
     <%= p.input :public_id, as: :file, input_html: { multiple: true } %>
+    <%= item.errors[:pictures].first %>
   <% end %>
 
   <%= f.submit "新增" %>

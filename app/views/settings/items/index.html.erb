@@ -19,7 +19,7 @@
         <td><%= @rent_records_count[[item.id,"returned"]] %></td>
         <td><%= @rent_records_count[[item.id,"withdrawed"]] %></td>
         <td>
-          <%= link_to("出租紀錄", item_rent_records_path(item), class: "btn btn-default") %>
+          <%= link_to("紀錄", item_rent_records_path(item), class: "btn btn-default") %>
           <%= link_to("修改", edit_item_path(item), class: "btn btn-info") %>
           <%= link_to("刪除", item_path(item), method: :delete, data: { confirm: "確定要刪除#{item.name}嗎？"}, class: "btn btn-danger") %>
         </td>
