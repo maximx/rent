@@ -74,6 +74,10 @@ module RentRecordsHelper
     ].join(" ").html_safe
   end
 
+  def render_datetime_period(obj)
+    "#{render_datetime(obj.started_at)} ~ #{render_datetime(obj.ended_at)}"
+  end
+
   def render_datetime(datetime)
     datetime.to_s(:db)
   end

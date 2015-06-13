@@ -13,7 +13,7 @@
       <tr>
         <td><%= link_to(requirement.name, requirement_path(requirement)) %></td>
         <td><%= requirement.currency_price %></td>
-        <td><%= "#{render_datetime(requirement.started_at)} ~ #{render_datetime(requirement.ended_at)}" %></td>
+        <td><%= render_datetime_period(requirement) %></td>
         <td>
           <%= link_to("修改", edit_requirement_path(requirement), class: "btn btn-info") %>
           <%= link_to("刪除", requirement_path(requirement), method: :delete, data: { confirm: "確定要刪除#{requirement.name}嗎？"}, class: "btn btn-danger") %>
