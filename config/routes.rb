@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :profiles, only: [ :create, :update ]
+
   resources :pages, only:[ :index ]
   resources :requirements
 

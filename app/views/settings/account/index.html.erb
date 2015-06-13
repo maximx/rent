@@ -1,4 +1,10 @@
-<div>
-  <%= current_user.email %>
-  <% #TODO: 個人資訊 %>
-</div>
+<h3><%= link_to(current_user.email, user_path(current_user)) %></h3>
+
+<%= simple_form_for current_user.profile do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :phone %>
+  <%= f.input :description %>
+
+  <%= f.submit "編輯" %>
+<% end %>
