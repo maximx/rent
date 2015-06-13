@@ -7,6 +7,7 @@
         <th>預訂中</th>
         <th>成功出租</th>
         <th>退租</th>
+        <th>出租中</th>
         <th>#</th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
         <td><%= @rent_records_count[[item.id,"booking"]] %></td>
         <td><%= @rent_records_count[[item.id,"returned"]] %></td>
         <td><%= @rent_records_count[[item.id,"withdrawed"]] %></td>
+        <td><%= content_tag(:span, "", class: "glyphicon glyphicon-ok") if @rent_records_count[[item.id,"renting"]] == 1 %></td>
         <td>
           <%= link_to("紀錄", item_rent_records_path(item), class: "btn btn-default") %>
           <%= link_to("修改", edit_item_path(item), class: "btn btn-info") %>
