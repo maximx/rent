@@ -5,7 +5,7 @@ module RentCloudinary
     def set_picture_public_id
       if params[model_name].has_key?(:pictures_attributes)
         pictures_attributes["0"][:public_id].each_with_index do |picture, index|
-          pictures_attributes["#{index}"] = { public_id: upload_to_cloudinary(picture, index) }
+          pictures_attributes["#{index}"] = { public_id: upload_to_cloudinary(picture) }
         end
       elsif params[model_name].has_key?(:picture_attributes)
         picture_attributes[:public_id] = upload_to_cloudinary picture_attributes[:public_id]
@@ -13,7 +13,6 @@ module RentCloudinary
     end
 
     def upload_to_cloudinary(pic)
-      logger.info pic
       Cloudinary::Uploader.upload(pic, use_filename: true)["public_id"]
     end
 
