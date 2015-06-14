@@ -1,5 +1,8 @@
 class ProfilesController < ApplicationController
+  include RentCloudinary
+
   before_action :login_required
+  before_action :set_picture_public_id, only: [ :create, :update ]
 
   def create
     @profile = current_user.build_profile(profile_params)
@@ -14,7 +17,7 @@ class ProfilesController < ApplicationController
   private
 
     def profile_params
-      params.require(:profile).permit(:name, :address, :phone, :description)
+      params.require(:profile).permit(:name, :address, :phone, :description, picture_attributes: [ :public_id ])
     end
 
     def save_profile(is_success)

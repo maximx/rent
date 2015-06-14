@@ -2,6 +2,10 @@ class Settings::AccountController < ApplicationController
   before_action :login_required
 
   def index
-    current_user.build_profile unless current_user.profile
+    @profile = if current_user.profile
+                 current_user.profile
+               else
+                 current_user.build_profile
+               end
   end
 end

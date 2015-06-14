@@ -1,6 +1,12 @@
 <h3><%= link_to(current_user.email, user_path(current_user)) %></h3>
+<%= render_cl_image_small @profile.picture.public_id %>
 
-<%= simple_form_for current_user.profile do |f| %>
+<%= simple_form_for @profile do |f| %>
+  <%= f.simple_fields_for :picture, @profile do |p| %>
+    <%= p.input :public_id, as: :file %>
+    <%= current_user.profile.errors[:pictures].first %>
+  <% end %>
+
   <%= f.input :name %>
   <%= f.input :address %>
   <%= f.input :phone %>
