@@ -13,7 +13,9 @@ class Review < ActiveRecord::Base
 
   # notyet is default
   def self.rates_radio_collections
-    rates.slice(:bad, :good).sort.reverse.to_h.keys
+    rates.slice(:good, :bad).keys.map do |v|
+      [ Review.human_attribute_name("rate.#{v}"), v ]
+    end
   end
 
   private

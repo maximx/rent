@@ -15,6 +15,10 @@ zh-TW:
             renting: '出租中'
             withdrawed: '已取消'
             returned: '已歸還'
+      review/rate:
+          bad: '負評'
+          good: '好評'
+          notyet: '尚未評價'
   review:
     rates:
       bad: '負評'
