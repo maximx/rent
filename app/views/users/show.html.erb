@@ -69,7 +69,10 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="user-follow">
-      user.follow
+    <% @user.following.each do |follow| %>
+      <div><%= link_to(follow.email, user_path(follow)) %></div>
+      <div><%= render_follow_link(follow) if current_user != follow %></div>
+    <% end %>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="item-collect">
