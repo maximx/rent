@@ -37,6 +37,22 @@ module ApplicationHelper
     cl_image_tag(public_id, options)
   end
 
+  def render_cl_avatar_small(public_id, options = {})
+    default_options = {
+      width: 75, height: 75, crop: :fill
+    }
+    options = options.merge(default_options)
+    cl_image_tag(public_id, options)
+  end
+
+  def render_cl_avatar_medium(public_id, options = {})
+    default_options = {
+      width: 150, height: 150, crop: :fill
+    }
+    options = options.merge(default_options)
+    cl_image_tag(public_id, options)
+  end
+
   private
 
   def alert_notice_tag(type)
