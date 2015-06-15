@@ -1,0 +1,9 @@
+zh-TW:
+  devise:
+    sign_up: '註冊'
+    minimum_password_length: '最少要有 %{length} 個字元'
+    sign_in: '登入'
+    forgot_password: '忘記密碼？'
+    not_received_confirmation: '沒收到電子郵件確認信？'
+    resend_confirmation: '重新發送電子郵件確認信'
+    reset_password: '寄送密碼重設信件'
