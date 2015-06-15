@@ -7,3 +7,11 @@ zh-TW:
     not_received_confirmation: '沒收到電子郵件確認信？'
     resend_confirmation: '重新發送電子郵件確認信'
     reset_password: '寄送密碼重設信件'
+  activerecord:
+    attributes:
+      rent_record:
+        aasm_state:
+            booking: '預訂'
+            renting: '出租中'
+            withdrawed: '已取消'
+            returned: '已歸還'
