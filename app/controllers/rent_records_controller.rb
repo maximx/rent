@@ -33,8 +33,8 @@ class RentRecordsController < ApplicationController
   def new
     if current_user != @item.lender
       @rent_record = @item.rent_records.build
-      @rent_record["started_at"] = params[:rent_record_started_at]
-      @rent_record["ended_at"] = params[:rent_record_ended_at]
+      set_start_and_end_params
+      set_name_and_phone_from_profile
     else
       flash[:notice] = "您沒有權限"
       redirect_to item_path(@item)
@@ -128,4 +128,17 @@ class RentRecordsController < ApplicationController
   def find_rent_records_json
     @rent_records_json = @item.rent_records.includes(:borrower).to_json
   end
+
+  def set_start_and_end_params
+    @rent_record["started_at"] = params[:rent_record_started_at]
+    @rent_record["ended_at"] = params[:rent_record_ended_at]
+  end
+
+  def set_name_and_phone_from_profile
+    if current_user.profile
+      @rent_record.name = current_user.profile.name
+      @rent_record.phone = current_user.profile.phone
+    end
+  end
+
 end
