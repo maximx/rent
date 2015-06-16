@@ -1,4 +1,4 @@
-<h2><%= t("devise.resend_confirmation") %></h2>
+<h2><%= t("devise.views.resend_confirmation") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
@@ -9,7 +9,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, t("devise.resend_confirmation") %>
+    <%= f.button :submit, t("devise.views.resend_confirmation") %>
   </div>
 <% end %>
 
