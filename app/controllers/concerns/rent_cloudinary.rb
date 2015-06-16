@@ -8,7 +8,12 @@ module RentCloudinary
           pictures_attributes["#{index}"] = { public_id: upload_to_cloudinary(picture) }
         end
       elsif params[model_name].has_key?(:picture_attributes)
-        picture_attributes[:public_id] = upload_to_cloudinary picture_attributes[:public_id]
+        if picture_attributes.has_key?(:public_id)
+          picture_attributes[:public_id] = upload_to_cloudinary picture_attributes[:public_id]
+        else
+          # avoid picture delete
+          params[model_name].delete(:picture_attributes)
+        end
       end
     end
 
