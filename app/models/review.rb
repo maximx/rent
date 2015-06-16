@@ -14,8 +14,12 @@ class Review < ActiveRecord::Base
   # notyet is default
   def self.rates_radio_collections
     rates.slice(:good, :bad).keys.map do |v|
-      [ Review.human_attribute_name("rate.#{v}"), v ]
+      [ human_attribute_name("rate.#{v}"), v ]
     end
+  end
+
+  def human_rate
+    Review.human_attribute_name("rate.#{rate}")
   end
 
   private

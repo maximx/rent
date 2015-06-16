@@ -17,7 +17,7 @@
       <td>
         <%= link_to(rent_record.item.lender.email, user_path(rent_record.item.lender)) %>
         :
-        <%= t("review.rates.#{rent_record.review_of_user(current_user).rate}") %>
+        <%= rent_record.review_of_user(current_user).human_rate %>
       </td>
       <td>
         <%= render_operate_rent_record_links(rent_record) %>
