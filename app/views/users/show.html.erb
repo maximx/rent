@@ -57,15 +57,11 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="borrower-reviews">
-      <% @user.borrower_reviews.each do |review| %>
-        <%= review.human_rate %>
-      <% end %>
+      <%= render partial: "reviews/review", collection: @user.borrower_reviews, as: :review %>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="lender-reviews">
-      <% @user.lender_reviews.each do |review| %>
-        <%= review.human_rate %>
-      <% end %>
+      <%= render partial: "reviews/review", collection: @user.lender_reviews, as: :review %>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="user-follow">
