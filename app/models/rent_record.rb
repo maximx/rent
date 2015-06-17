@@ -83,16 +83,16 @@ class RentRecord < ActiveRecord::Base
 
   #可評價
   def can_review_by?(user)
-    viewable_by?(user) && returned? && !reviews.pluck(:judger_id).include?(user.id)
+    user && viewable_by?(user) && returned? && !reviews.pluck(:judger_id).include?(user.id)
   end
 
   def can_ask_review_by?(user)
-    is_reviewed_by_judger?(user) && can_review_by?(review_of_judger(user).user)
+    user && is_reviewed_by_judger?(user) && can_review_by?(review_of_judger(user).user)
   end
 
   #可確認出租
   def can_rent_by?(user)
-    booking? && item.lender == user
+    user && booking? && item.lender == user
   end
 
   #可確認歸還
