@@ -70,6 +70,7 @@
 
     <div role="tabpanel" class="tab-pane" id="user-follow">
     <% @user.following.each do |follow| %>
+      <div><%= render_cl_avatar_small(follow) %></div>
       <div><%= link_to(follow.email, user_path(follow)) %></div>
       <div><%= render_follow_link(follow) if current_user != follow %></div>
     <% end %>
