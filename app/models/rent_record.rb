@@ -37,18 +37,18 @@ class RentRecord < ActiveRecord::Base
 
   def start_end_date
     if booking? && ended_at && started_at
-      if ended_at < started_at
-        errors.add(:ended_at, "迄租日應大於起租日")
-      elsif started_at < Time.now
-        errors.add(:ended_at, "起租日應大於現在")
-      elsif (ended_at - started_at) < item.minimum_period.days
-        errors.add(:ended_at, "租期應大於#{item.minimum_period}")
+      if ended_at < started_at || started_at < Time.now
+        errors[:started_at] << i18n_message("started_at.bad_started_at")
+      end
+
+      if (ended_at - started_at) < item.minimum_period.days
+        errors[:ended_at] << i18n_message("started_at.bad_period", period: "#{item.minimum_period} #{item.period}")
       end
     end
   end
 
   def not_overlap
-    errors.add(:ended_at, '承租期間重疊') if overlaps? && booking?
+    errors[:ended_at] << i18n_message("ended_at.overlap") if overlaps? && booking?
   end
 
   def overlaps?
@@ -127,5 +127,12 @@ class RentRecord < ActiveRecord::Base
     def set_price
       self.price =  rent_days * item.price
     end
+
+  private
+
+  def i18n_message(message, options = {})
+    translation = "activerecord.errors.models.#{self.class.name.underscore}.attributes.#{message}"
+    I18n.t(translation, options)
+  end
 
 end

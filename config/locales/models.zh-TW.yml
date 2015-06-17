@@ -11,3 +11,43 @@ zh-TW:
           bad: '負評'
           good: '好評'
           notyet: '尚未評價'
+    errors:
+      models:
+        item:
+          attributes:
+            name:
+              blank: '名稱為必填'
+            subcategory_id:
+              blank: '分類為必填'
+            price:
+              blank: '每日租金為必填'
+            minimum_period:
+              blank: '最短租期為必填'
+            pictures:
+              blank: '至少上傳一張圖片'
+        profile:
+          attributes:
+            name:
+              blank: '姓名為必墳'
+            picture:
+              blank: '請上傳圖片'
+        rent_record:
+          attributes:
+            name:
+              blank: '承租人姓名為必填'
+            started_at:
+              blank: '起租日期為必填'
+            ended_at:
+              blank: '迄租日期為必填'
+              overlap: '承租期間重疊'
+            started_at:
+              bad_started_at: '起租日應大於現在並小於迄租日'
+              bad_period: '租期應大於 %{period}'
+        requirement:
+          attributes:
+            name:
+              blank: '名稱為必填'
+            description:
+              blank: '敘述為必填'
+            pictures:
+              blank: '至少上傳一張圖片'

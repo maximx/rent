@@ -1,7 +1,7 @@
 class Requirement < ActiveRecord::Base
   include CurrencyPrice
 
-  validates_presence_of :name, :description
+  validates_presence_of :name, :description, :pictures
 
   belongs_to :demander, class_name: "User", foreign_key: "user_id"
 

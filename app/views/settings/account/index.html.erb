@@ -5,6 +5,8 @@
   <%= f.simple_fields_for :picture, @profile do |p| %>
     <%= p.input :public_id, as: :file %>
     <%= current_user.profile.errors[:pictures].first %>
+
+    <%= @profile.errors[:picture].first %>
   <% end %>
 
   <%= f.input :name %>
