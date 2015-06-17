@@ -1,0 +1,13 @@
+<% #TODO: Description %>
+<div class="user-info-container clearfix">
+  <div class="pull-left"><%= render_cl_avatar_medium user %></div>
+
+  <div class="user-info pull-left">
+    <h4><%= link_to(user.email, user_path(user)) %></h4>
+    <div>姓名∶<%= profile.name %></div>
+    <div>地址∶<%= profile.address %></div>
+    <div>電話∶<%= profile.phone %></div>
+
+    <div class="user-operate"><%= render_follow_link(@user) if current_user != @user %></div>
+  </div>
+</div>

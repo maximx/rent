@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.includes(:items).find(params[:id])
+    @profile = @user.profile || @user.build_profile
   end
 
   def follow
