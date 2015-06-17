@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+  after_create :create_profile
+
   # user follow
   def follow!(user)
     following << user
@@ -65,5 +67,13 @@ class User < ActiveRecord::Base
       return "borrower"
     end
   end
+
+  private
+
+    def create_profile
+      profile = build_profile
+      profile.name = email
+      profile.save
+    end
 
 end
