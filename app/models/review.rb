@@ -22,6 +22,10 @@ class Review < ActiveRecord::Base
     Review.human_attribute_name("rate.#{rate}")
   end
 
+  def item
+    self.rent_record.item
+  end
+
   private
 
     def set_user_and_role
