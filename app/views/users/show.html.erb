@@ -3,7 +3,10 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#items" aria-controls="items" role="tab" data-toggle="tab">出租物</a></li>
+    <li role="presentation" class="active">
+      <a href="#description" aria-controls="description" role="tab" data-toggle="tab">敘述</a>
+    </li>
+    <li role="presentation"><a href="#items" aria-controls="items" role="tab" data-toggle="tab">出租物</a></li>
     <li role="presentation"><a href="#requirements" aria-controls="requirements" role="tab" data-toggle="tab">求租物</a></li>
     <li role="presentation" class="dropdown">
       <%= link_to("#", class: "dropdown-toggle",
@@ -43,7 +46,11 @@
   </ul>
 
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="items">
+    <div role="tabpanel" class="tab-pane active" id="description">
+      <%= simple_format @profile.description %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="items">
       <%= render partial: "items/item", collection: @user.items, as: :item %>
     </div>
 
