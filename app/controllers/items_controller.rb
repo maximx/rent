@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
 
   def show
     @question = @item.questions.build
-    @rent_records_json = @item.rent_records.includes(:borrower).to_json
+    @rent_records_json = @item.active_records.includes(:borrower).to_json
 
     @maps = Gmaps4rails.build_markers(@item) do |item, marker|
       marker.lat item.latitude

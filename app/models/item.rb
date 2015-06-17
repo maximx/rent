@@ -8,7 +8,7 @@ class Item < ActiveRecord::Base
   belongs_to :subcategory
   has_many :questions, -> { order("created_at").reverse_order }, dependent: :destroy
 
-  has_many :rent_records, -> { order("started_at").reverse_order }, class_name: "RentRecord", foreign_key: "item_id"
+  has_many :rent_records, -> { order(started_at: :desc) }, class_name: "RentRecord", foreign_key: "item_id"
   has_many :borrowers, through: :rent_records, source: :user
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
@@ -36,6 +36,10 @@ class Item < ActiveRecord::Base
 
   def price_period
     "$#{price}/#{period}"
+  end
+
+  def active_records
+    rent_records.where.not(aasm_state: "withdrawed").order(started_at: :desc)
   end
 
   protected
