@@ -3,14 +3,15 @@ class ProfilesController < ApplicationController
 
   before_action :login_required
   before_action :set_picture_public_id, only: [ :create, :update ]
+  before_action :set_user, only: [ :create, :update ]
 
   def create
-    @profile = current_user.build_profile(profile_params)
+    @profile = @user.build_profile(profile_params)
     save_profile @profile.save
   end
 
   def update
-    @profile = current_user.profile
+    @profile = @user.profile
     save_profile @profile.update(profile_params)
   end
 
@@ -27,5 +28,9 @@ class ProfilesController < ApplicationController
       else
         render "settings/account/index"
       end
+    end
+
+    def set_user
+      @user = current_user
     end
 end
