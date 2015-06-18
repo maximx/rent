@@ -37,7 +37,6 @@ Rails.application.routes.draw do
   resources :profiles, only: [ :create, :update ]
 
   resources :pages, only:[ :index ]
-  resources :requirements
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]
