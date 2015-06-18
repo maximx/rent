@@ -5,7 +5,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @items = Item.where(category_id: params[:id])
+    @category = Category.find(params[:id])
+    @items = @category.items
     render "items/index"
   end
 end

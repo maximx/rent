@@ -6,7 +6,7 @@ class SubcategoriesController < ApplicationController
   end
 
   def show
-    @items = Item.where(subcategory_id: params[:id])
+    @items = @subcategory.items
     render "items/index"
   end
 

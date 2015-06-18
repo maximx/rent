@@ -83,6 +83,8 @@ GEM
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
+    gretel (3.0.8)
+      rails (>= 3.2.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -205,6 +207,7 @@ DEPENDENCIES
   fullcalendar-rails
   geocoder
   gmaps4rails
+  gretel
   jbuilder (~> 2.0)
   jquery-rails
   momentjs-rails
