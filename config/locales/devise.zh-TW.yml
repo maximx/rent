@@ -55,6 +55,7 @@ zh-TW:
       not_received_confirmation: '沒收到電子郵件確認信？'
       resend_confirmation: '重新發送電子郵件確認信'
       reset_password: '寄送密碼重設信件'
+      edit_password_hint: '密碼不變更可不填寫'
   errors:
     messages:
       already_confirmed: "已經驗證，請直接登入。"

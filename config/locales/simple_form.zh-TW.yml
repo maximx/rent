@@ -13,6 +13,7 @@ zh-TW:
         password: '密碼'
         password_confirmation: '再輸入一次'
         remember_me: '記住我'
+        current_password: '原密碼'
       profile:
         name: '名字'
         address: '地址'

@@ -51,3 +51,8 @@ zh-TW:
               blank: '敘述為必填'
             pictures:
               blank: '至少上傳一張圖片'
+        user:
+          attributes:
+            current_password:
+              blank: '現今密碼為必填'
+              invalid: '密碼有誤'
