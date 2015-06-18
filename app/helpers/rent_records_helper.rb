@@ -82,4 +82,8 @@ module RentRecordsHelper
     datetime.to_s(:db)
   end
 
+  def render_date(datetime)
+    datetime.strftime "%Y-%m-%d"
+  end
+
 end

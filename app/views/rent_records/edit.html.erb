@@ -1,3 +1,5 @@
+<% breadcrumb :edit_rent_record, @item, @rent_record %>
+
 <div>
   <h4>修改租借<%= @item.name %>資訊</h4>
   <%= render partial: "form", locals: { item: @item, rent_record: @rent_record } %>
