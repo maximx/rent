@@ -1,7 +1,7 @@
-class Settings::AccountController < ApplicationController
+class Settings::AccountsController < ApplicationController
   before_action :login_required
 
-  def index
+  def show
     @user = current_user
     @profile = @user.profile || @user.build_profile
   end

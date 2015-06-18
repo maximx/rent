@@ -1,8 +1,16 @@
 <div class="panel-collapse">
   <ul class="list-group">
-    <li class="list-group-item"><%= link_to("帳戶管理", settings_account_index_path) %></li>
-    <li class="list-group-item"><%= link_to("承租紀錄", settings_rent_records_path) %></li>
-    <li class="list-group-item"><%= link_to("出租物管理", settings_items_path) %></li>
-    <li class="list-group-item"><%= link_to("求租物管理", settings_requirements_path) %></li>
+    <li class="list-group-item">
+      <%= link_to("基本資料", settings_account_path) %>
+    </li>
+    <li class="list-group-item">
+      <%= link_to("承租紀錄", settings_rent_records_path) %>
+    </li>
+    <li class="list-group-item">
+      <%= link_to("出租物管理", settings_items_path) %>
+    </li>
+    <li class="list-group-item">
+      <%= link_to("求租物管理", settings_requirements_path) %>
+    </li>
   </ul>
 </div>

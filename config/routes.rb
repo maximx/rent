@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resources :requirements
 
   namespace :settings do
-    resources :account, only: [ :index ]
+    resource :account, only: [ :show, :edit, :update ]
     resources :items, only: [ :index ]
     resources :requirements, only: [ :index ]
     resources :rent_records, only: [ :index ]
