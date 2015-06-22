@@ -26,4 +26,8 @@
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
+
+  $('.form_date').datetimepicker({
+    format: 'YYYY-MM-DD'
+  });
 });
