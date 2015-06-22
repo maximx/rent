@@ -69,7 +69,8 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.search_by(params[:query])
+    @items = Item.record_not_overlaps(params[:started_at], params[:ended_at]).search_by(params[:query])
+
     render :index
   end
 

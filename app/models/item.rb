@@ -26,6 +26,13 @@ class Item < ActiveRecord::Base
 
   scope :search_by, -> (query) { where(search_criteria(query)) }
 
+  scope :record_overlaps, ->(started_at, ended_at) do
+    where(id: RentRecord.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
+  end
+  scope :record_not_overlaps, ->(started_at, ended_at) do
+    where.not(id: record_overlaps(started_at, ended_at))
+  end
+
   def editable_by?(user)
     user && user == lender
   end

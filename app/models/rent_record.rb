@@ -13,9 +13,9 @@ class RentRecord < ActiveRecord::Base
 
   before_save :set_price
 
-  scope :overlaps, ->(started_at, ended_at, id) do
+  scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
-      .where.not(id: id, aasm_state: "withdrawed")
+      .where.not(aasm_state: "withdrawed")
   end
 
   aasm no_direct_assignment: true do
@@ -58,7 +58,7 @@ class RentRecord < ActiveRecord::Base
   end
 
   def overlaps
-    item.rent_records.overlaps(started_at, ended_at, id)
+    item.rent_records.where.not(id: id || -1).overlaps(started_at, ended_at)
   end
 
   #gmaps4rails
