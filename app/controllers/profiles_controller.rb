@@ -24,9 +24,9 @@ class ProfilesController < ApplicationController
     def save_profile(is_success)
       if is_success
         flash[:notice] = "修改成功"
-        redirect_to settings_account_index_path
+        redirect_to settings_account_path
       else
-        render "settings/account/index"
+        render "settings/accounts/show"
       end
     end
 
