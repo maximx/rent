@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :find_aside_categories, only: [ :show ]
   before_action only: [ :show ] do
-    set_category_id(params[:id])
+    set_category_and_subcategory(params[:id])
   end
 
   def show

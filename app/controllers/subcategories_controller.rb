@@ -1,8 +1,9 @@
 class SubcategoriesController < ApplicationController
-  before_action :find_aside_categories, only: [ :show ]
   before_action :find_subcategory, only: [ :show ]
+
+  before_action :find_aside_categories, only: [ :show ]
   before_action only: [ :show ] do
-    set_category_id(@subcategory.category_id)
+    set_category_and_subcategory([@subcategory.category_id, @subcategory.id])
   end
 
   def show

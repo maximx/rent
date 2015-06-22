@@ -7,7 +7,7 @@ class RentRecordsController < ApplicationController
 
   before_action :find_aside_categories
   before_action do
-    set_category_id(@item.category_id) if @item
+    set_category_and_subcategory([@item.category_id, @item.subcategory_id]) if @item
   end
 
   def index

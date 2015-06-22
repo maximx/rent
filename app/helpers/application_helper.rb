@@ -7,8 +7,8 @@ module ApplicationHelper
     end
   end
 
-  def render_aside_category_in_class(index)
-    " in" if @category_id.to_i == (index + 1)
+  def render_css_class(obj_id, target_id, css)
+    " #{css.to_s}" if obj_id.to_i == target_id.to_i
   end
 
   def render_alert(msg)
