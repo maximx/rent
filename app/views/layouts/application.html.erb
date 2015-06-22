@@ -40,9 +40,9 @@
   </div>
 
   <div class="main-content pull-left">
-    <%= breadcrumbs style: :bootstrap %>
     <%= render_notice(notice) %>
     <%= render_alert(alert) %>
+    <%= breadcrumbs style: :bootstrap %>
     <%= yield %>
   </div>
 </div>

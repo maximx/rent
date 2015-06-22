@@ -1,6 +1,7 @@
 class RentRecord < ActiveRecord::Base
   include AASM
   include CurrencyPrice
+  include I18nMessage
 
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :name
   validate :start_end_date
@@ -128,12 +129,5 @@ class RentRecord < ActiveRecord::Base
     def set_price
       self.price =  rent_days * item.price
     end
-
-  private
-
-  def i18n_message(message, options = {})
-    translation = "activerecord.errors.models.#{self.class.name.underscore}.attributes.#{message}"
-    I18n.t(translation, options)
-  end
 
 end
