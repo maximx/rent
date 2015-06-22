@@ -33,6 +33,7 @@
 
 .sidebar {
   width: 17%;
+  margin-right: 2.5%;
 
   .list-group {
     .list-group-item.active {
@@ -44,7 +45,7 @@
   }
 }
 
-.main-content { width: 80.5%; margin-left: 2.5% }
+.main-content { width: 80.5%; }
 
 a {
   &:hover { text-decoration: none; }
