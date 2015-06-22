@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = Item.includes(:pictures).all
   end
 
   def show
@@ -69,7 +69,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.record_not_overlaps(params[:started_at], params[:ended_at]).search_by(params[:query])
+    @items = Item.includes(:pictures).record_not_overlaps(params[:started_at], params[:ended_at]).search_by(params[:query])
 
     render :index
   end
