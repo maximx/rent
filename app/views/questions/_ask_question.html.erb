@@ -1,6 +1,11 @@
 <% unless item.editable_by?(current_user) %>
   <%= simple_form_for [item, question] do |f| %>
-    <div><%= f.input :content %></div>
-    <%= f.submit "發問" %>
+    <%= f.input :content %>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.button :submit, "發問" %>
+      </div>
+    </div>
   <% end %>
 <% end %>

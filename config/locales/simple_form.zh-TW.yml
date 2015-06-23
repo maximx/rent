@@ -40,3 +40,5 @@ zh-TW:
         phone: '電話'
         started_at: '起租日期'
         ended_at: '迄租日期'
+      question:
+        content: '問題內容'
