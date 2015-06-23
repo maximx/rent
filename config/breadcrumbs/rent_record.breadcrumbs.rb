@@ -1,5 +1,5 @@
 crumb :new_rent_record do |item|
-  link "申請承租", new_item_rent_record_path(item)
+  link "預約承租", new_item_rent_record_path(item)
   parent :item, item
 end
 

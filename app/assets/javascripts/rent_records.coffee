@@ -26,6 +26,7 @@ $(document).ready ->
 
     diff = Math.abs(ended_date - started_date)
     days = Math.ceil( diff / (24 * 60 * 60 * 1000))
+    days = 0 if isNaN(days)
 
-    $('#rent_days').text(days + '天')
-    $('#total_price').text('$' + days * $('#item_price').val())
+    $('#rent_days').text(days + ' 天')
+    $('#total_price').text('$' + days * $('#item_price').val() + ' 元')
