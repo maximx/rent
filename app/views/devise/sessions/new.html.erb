@@ -12,12 +12,14 @@
               label_html: { class: "col-sm-2 control-label" },
               wrapper_html: { class: "form-group" },
               input_html: { class: "form-control", placeholder: t("simple_form.labels.user.email") } %>
+
   <%= f.input :password,
               as: :user_password_login,
               required: false,
               label_html: { class: "col-sm-2 control-label" },
               wrapper_html: { class: "form-group" },
               input_html: { class: "form-control", placeholder: t("simple_form.labels.user.password") } %>
+
   <div class="form-group">
     <%= f.input :remember_me,
                 as: :boolean,
@@ -35,5 +37,6 @@
       <%= render "devise/shared/links" %>
     </div>
   </div>
+
 <% end %>
 
