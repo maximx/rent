@@ -1,19 +1,23 @@
-<%= simple_form_for(item) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :subcategory_id,
-              as: :grouped_select,
-              collection: Category.includes(:subcategories).all,
-              group_method: :subcategories %>
-  <%= f.input :price %>
-  <%= f.input :minimum_period %> / 日
-  <%= f.input :deposit %>
-  <%= f.input :address %>
-  <%= f.input :description %>
-
+<%= simple_form_for item, html: { class: "form-horizontal" } do |f| %>
   <%= f.simple_fields_for :pictures, item.pictures.build do |p| %>
     <%= p.input :public_id, as: :file, input_html: { multiple: true } %>
     <%= item.errors[:pictures].first %>
   <% end %>
 
-  <%= f.submit "新增" %>
+  <%= f.input :name %>
+  <%= f.input :subcategory_id,
+              as: :grouped_select,
+              collection: Category.includes(:subcategories).all,
+              group_method: :subcategories %>
+  <%= f.input :price, direction: "元 / 每#{item.period}" %>
+  <%= f.input :minimum_period, direction: item.period %>
+  <%= f.input :deposit %>
+  <%= f.input :address %>
+  <%= f.input :description %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.button :submit, "新增" %>
+    </div>
+  </div>
 <% end %>

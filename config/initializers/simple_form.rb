@@ -168,10 +168,14 @@ SimpleForm.setup do |config|
     b.use :html5
     b.use :label, wrap_with: { class: "col-sm-2 control-label" }
 
-    b.wrapper tag: :div, class: 'col-sm-10' do |ba|
+    b.wrapper tag: :div, class: 'col-sm-7' do |ba|
       ba.use :input, class: "form-control"
-      ba.use :hint, wrap_with: { tag: :u }
-      ba.use :error, wrap_with: { tag: :code }
+      ba.use :direction, wrap_with: { tag: :span, class: 'direction' }
+    end
+
+    b.wrapper tag: :div, class: 'col-sm-3 clearfix' do |ba|
+      ba.use :hint, wrap_with: { tag: :u, class: 'hint' }
+      ba.use :error, wrap_with: { tag: :code, class: 'error' }
     end
   end
 end
