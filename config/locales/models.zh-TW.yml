@@ -56,10 +56,11 @@ zh-TW:
           attributes:
             email:
               invalid: '不合法的電子郵件'
+              blank: '電子郵件為必填'
               taken: '此電子郵件已在使用'
             password:
               too_short: '密碼長度太短'
-              blank: '請輸入密碼'
+              blank: '密碼為必填'
             current_password:
               blank: '現今密碼為必填'
               invalid: '密碼有誤'

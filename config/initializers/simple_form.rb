@@ -169,9 +169,9 @@ SimpleForm.setup do |config|
     b.use :label, wrap_with: { class: "col-sm-2 control-label" }
 
     b.wrapper tag: :div, class: 'col-sm-10' do |ba|
-      ba.use :input
-      ba.use :hint,  wrap_with: { tag: :span, class: :hint }
-      ba.use :error, wrap_with: { tag: :span, class: 'label label-danger' }
+      ba.use :input, class: "form-control"
+      ba.use :hint, wrap_with: { tag: :u }
+      ba.use :error, wrap_with: { tag: :code }
     end
   end
 end
