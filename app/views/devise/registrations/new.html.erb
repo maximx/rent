@@ -3,30 +3,27 @@
     <h2 class="col-sm-offset-2 col-sm-10">
       <%= t("devise.views.sign_up") %>
     </h2>
+    <div class="col-sm-offset-2">
+      <%= f.error_notification %>
+    </div>
   </div>
-  <%= f.error_notification %>
+
 
   <%= f.input :email,
-              as: :user_email_login,
               required: true,
-              autofocus: true,
-              label_html: { class: "col-sm-2 control-label" },
-              wrapper_html: { class: "form-group" },
-              input_html: { class: "form-control", placeholder: t("simple_form.labels.user.email") } %>
+              wrapper: :bootstarp_horizontal,
+              input_html: { class: "form-control", placeholder: t("simple_form.labels.user.email") },
+              autofocus: true %>
 
   <%= f.input :password,
-              as: :user_password_login,
+              wrapper: :bootstarp_horizontal,
               required: true,
-              label_html: { class: "col-sm-2 control-label" },
-              wrapper_html: { class: "form-group" },
               input_html: { class: "form-control", placeholder: t("simple_form.labels.user.email") },
               hint: (t("devise.views.minimum_password_length", length: @minimum_password_length) if @validatable) %>
 
   <%= f.input :password_confirmation,
-              as: :user_password_login,
+              wrapper: :bootstarp_horizontal,
               required: true,
-              label_html: { class: "col-sm-2 control-label" },
-              wrapper_html: { class: "form-group" },
               input_html: { class: "form-control", placeholder: t("simple_form.labels.user.password") } %>
 
   <div class="form-group">
