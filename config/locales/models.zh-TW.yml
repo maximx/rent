@@ -54,6 +54,10 @@ zh-TW:
               blank: '至少上傳一張圖片'
         user:
           attributes:
+            email:
+              invalid: '不合法的電子郵件'
+            password:
+              blank: '請輸入密碼'
             current_password:
               blank: '現今密碼為必填'
               invalid: '密碼有誤'
