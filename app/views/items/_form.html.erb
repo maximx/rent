@@ -1,4 +1,4 @@
-<%= simple_form_for item, html: { class: "form-horizontal" } do |f| %>
+<%= simple_form_for item do |f| %>
   <%= f.simple_fields_for :pictures, item.pictures.build do |p| %>
     <%= p.input :public_id, as: :file, input_html: { multiple: true } %>
     <%= item.errors[:pictures].first %>
