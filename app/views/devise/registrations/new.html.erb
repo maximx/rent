@@ -11,18 +11,18 @@
 
   <%= f.input :email,
               required: true,
-              wrapper: :bootstarp_horizontal,
+              wrapper: :bootstrap_horizontal,
               input_html: { placeholder: t("simple_form.labels.user.email") },
               autofocus: true %>
 
   <%= f.input :password,
-              wrapper: :bootstarp_horizontal,
+              wrapper: :bootstrap_horizontal,
               required: true,
               input_html: { placeholder: t("simple_form.labels.user.password") },
               hint: t("devise.views.minimum_password_length", length: @minimum_password_length) %>
 
   <%= f.input :password_confirmation,
-              wrapper: :bootstarp_horizontal,
+              wrapper: :bootstrap_horizontal,
               required: true,
               input_html: { placeholder: t("simple_form.labels.user.password_confirmation") } %>
 

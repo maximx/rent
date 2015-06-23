@@ -164,7 +164,7 @@ SimpleForm.setup do |config|
   # Defines which i18n scope will be used in Simple Form.
   # config.i18n_scope = 'simple_form'
 
-  config.wrappers :bootstarp_horizontal, tag: :div, class: 'form-group' do |b|
+  config.wrappers :bootstrap_horizontal, tag: :div, class: 'form-group' do |b|
     b.use :html5
     b.use :label, wrap_with: { class: "col-sm-2 control-label" }
 
