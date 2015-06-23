@@ -1,7 +1,7 @@
 <% breadcrumb :item_edit, @item %>
 
 <div>
-  <h2>修改出租物</h2>
+  <h2 class="text-center">修改<%= @item.name %></h2>
 
   <div class="item-pictures clearfix">
   <% @item.pictures.each do |picture| %>
@@ -16,5 +16,4 @@
   </div>
 
   <%= render partial: "form", locals: { item: @item } %>
-  <%= link_to("取消", settings_items_path, class: "btn btn-default") %>
 </div>
