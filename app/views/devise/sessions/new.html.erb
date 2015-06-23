@@ -6,19 +6,18 @@
   </div>
 
   <%= f.input :email,
-              wrapper: :bootstrap_horizontal,
               required: false,
               autofocus: true,
               input_html: { placeholder: t("simple_form.labels.user.email") } %>
 
   <%= f.input :password,
-              wrapper: :bootstrap_horizontal,
               required: false,
               input_html: { placeholder: t("simple_form.labels.user.password") } %>
 
   <div class="form-group">
     <%= f.input :remember_me,
                 as: :boolean,
+                wrapper: :default,
                 wrapper_html: { class: "col-sm-offset-2 col-sm-10 checkbox" } %>
   </div>
 
