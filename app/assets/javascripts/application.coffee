@@ -25,17 +25,21 @@
 
 
 $(document).ready ->
+  # stop bubble javascript
   $('.stop-bubble').click (e)->
     if e.stopPropagation
       e.stopPropagation()
     else
       e.cancelBubble = true
 
+  # display tooltip
   $('[data-toggle="tooltip"]').tooltip()
 
+  #active date time picker
   $('.form_date').datetimepicker
     format: 'YYYY-MM-DD'
 
+  # date time picker logic
   $search_form_date = $('.form_date')
   $start_picker_obj = $('#started_at')
   $end_picker_obj = $('#ended_at')
@@ -49,6 +53,7 @@ $(document).ready ->
     $search_form_date.prop('required', true)
   )
 
+  # search form validation
   $search_form_date.blur ->
     empty_flag = true
     $search_form_date.each ->
@@ -56,3 +61,22 @@ $(document).ready ->
         empty_flag = false
     if empty_flag == true
       $search_form_date.removeProp('required')
+
+  # custom bootstrap shape file select button
+  $('.btn-file :file').on('fileselect', (event, numFiles, label)->
+    $input = $('#file-name')
+    text = if numFiles > 1 then '已選擇 ' + numFiles + ' 個檔案' else label
+
+    if $input.length
+      $input.val(text)
+    else
+      alert text if text
+  )
+
+  $('.btn-file :file').on('change', ()->
+    $input = $(this)
+    numFiles = if $input.get(0).files then $input.get(0).files.length else 1
+    label = $input.val().replace(/\\/g, '/').replace(/.*\//, '')
+
+    $input.trigger('fileselect', [numFiles, label])
+  )

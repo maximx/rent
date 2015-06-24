@@ -18,6 +18,7 @@
 @import "bootstrap-datetimepicker";
 @import "fullcalendar";
 
+
 //header
 .site-header {
 
@@ -72,6 +73,33 @@ a {
   .direction, .hint-error {
     padding-top: 7px;
     padding-left: 5px;
+  }
+
+  //btn-file
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+
+    input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: #FF0000;
+      cursor: inherit;
+      display: block;
+    }
+  }
+
+  #file-name {
+    background-color: white !important;
+    cursor: text !important;
   }
 
 }
