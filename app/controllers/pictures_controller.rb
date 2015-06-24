@@ -4,11 +4,15 @@ class PicturesController < ApplicationController
   before_action :find_picture, only: [ :destroy ]
 
   def destroy
-    @cloudinary_info = Cloudinary::Uploader.destroy(@picture.public_id)
-    @picture.destroy
+    unless @picture.only_one?
+      result = Cloudinary::Uploader.destroy(@picture.public_id)
+      @picture.destroy
+    else
+      result = { result: "false" }
+    end
 
     respond_to do |format|
-      format.json { render json: @cloudinary_info }
+      format.json { render json: result }
     end
   end
 

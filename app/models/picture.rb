@@ -3,6 +3,10 @@ class Picture < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
   before_destroy :delete_cloudinary
 
+  def only_one?
+    imageable.pictures.size == 1
+  end
+
   private
 
     def delete_cloudinary
