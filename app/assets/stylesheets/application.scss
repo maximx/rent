@@ -20,12 +20,14 @@
 
 //header
 .site-header {
-  h1 { margin-bottom: 0px; }
-  .header-container { padding: 0px 30px; }
-}
-.site-navbar {
-  margin-top: 8px;
-  margin-left: 5px;
+
+  .navbar { padding: 0 10px; }
+
+  .navbar-brand {
+    margin: 0;
+    font-size: 35px;
+    a { color: #FF0000; }
+  }
 }
 
 // site container
@@ -52,15 +54,13 @@ a {
 }
 
 #search-form {
-  margin-top: 5px;
+  margin-top: 10px;
+  border-top: 0;
 
   [class^='col-'] { padding: 0; }
 
   input {
-    width: 95%;
-
     &.keyword {
-      width: 80%;
       float: left;
       margin-right: 5px;
     }
@@ -83,11 +83,18 @@ a {
 
 .user-navbar {
   list-style: none;
-  margin-top: 5px;
-  margin-left: 10px;
+  margin-top: 15px;
   padding: 0;
+  float: right;
 
-  .nav-item { float: left; }
+  .nav-item {
+    float: left;
+
+    &.login {
+      margin-top: -5px;
+      margin-left: 10px;
+    }
+  }
 }
 
 .nav-link {

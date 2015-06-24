@@ -12,14 +12,24 @@
 <body>
 
 <header class="site-header">
-  <div class="header-container clearfix">
-    <h1><%= link_to("MaxRent", root_path, class: "maxrent-logo pull-left") %></h1>
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed"
+              data-toggle="collapse" data-target="#user-navagation"
+              aria-expanded="false" type="button" >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <h1 class="navbar-brand"><%= link_to("MaxRent", root_path) %></h1>
+    </div>
 
-    <div class="site-navbar">
+    <div class="collapse navbar-collapse" id="user-navagation">
       <%= render partial: "layouts/user_login" %>
       <%= render partial: "layouts/search" %>
     </div>
-  </div>
+  </nav>
 </header>
 
 <div id="site-content" class="container-fluid clearfix">
