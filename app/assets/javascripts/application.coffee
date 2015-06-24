@@ -25,6 +25,12 @@
 
 
 $(document).ready ->
+  $('.stop-bubble').click (e)->
+    if e.stopPropagation
+      e.stopPropagation()
+    else
+      e.cancelBubble = true
+
   $('[data-toggle="tooltip"]').tooltip()
 
   $('.form_date').datetimepicker

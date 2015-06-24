@@ -8,18 +8,6 @@
   <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
   <%= csrf_meta_tags %>
   <%= yield :javascript %>
-
-  <script type="text/javascript">
-    $(function(){
-      $('.stop-bubble').click(function(e) {
-        if (e.stopPropagation)
-          e.stopPropagation();
-        else
-          e.cancelBubble = true;
-      });
-    });
-  </script>
-
 </head>
 <body>
 
