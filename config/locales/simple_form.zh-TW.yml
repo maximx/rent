@@ -42,3 +42,5 @@ zh-TW:
         ended_at: '迄租日期'
       question:
         content: '問題內容'
+      review:
+        content: '評語'

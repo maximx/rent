@@ -102,6 +102,13 @@ a {
     cursor: text !important;
   }
 
+  .radio {
+    &.inline {
+      margin-right: 10px;
+      margin-bottom: 10px;
+      float: left;
+    }
+  }
 }
 
 .user-navbar {
