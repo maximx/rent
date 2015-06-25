@@ -1,3 +1,7 @@
+<% breadcrumb :review_rent_record, @item, @rent_record %>
+
+<%= render partial: "items/item_info_container", locals: { item: @item } %>
+
 <% rates_radio = Review.rates_radio_collections %>
 
 <%= simple_form_for [ @item, @rent_record, @review ] do |f| %>

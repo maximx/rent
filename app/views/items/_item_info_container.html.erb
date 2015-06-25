@@ -3,7 +3,7 @@
     <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
     <div class="item-action">
       <%= render_collect_item_link(item) %>
-      <%= link_to("預約承租", new_item_rent_record_path(item), class: "btn btn-success") if current_user != item.lender %>
+      <%= link_to("預約承租", new_item_rent_record_path(item), class: "btn btn-success") if rent_record_button_display?(item) %>
     </div>
   </div>
 
