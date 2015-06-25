@@ -8,6 +8,7 @@
   </div>
 
   <div class="item-detail-info pull-left">
+    <h3><%= link_to(@item.name, item_path(@item)) %></h3>
     <div>出租者∶<%= link_to(item.lender.email, user_path(item.lender)) %></div>
     <div>租金∶<%= item.price_period %></div>
     <div>最少租期∶<%= "#{item.minimum_period}#{item.period}" %></div>

@@ -1,7 +1,6 @@
 <% breadcrumb :item, @item %>
 
 <section>
-  <h2><%= link_to(@item.name, item_path(@item)) %></h2>
 
   <%= render partial: "item_info_container.html.erb", locals: { item: @item } %>
 
