@@ -1,9 +1,11 @@
 module ApplicationHelper
-  def render_aside
-    if ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
-      render partial: "layouts/category"
-    elsif ["profiles"].include?(params[:controller]) || params[:controller].start_with?("settings")
-      render partial: "layouts/settings"
+  def render_aside(con)
+    if ["items", "categories", "subcategories", "rent_records"].include?(con)
+      render partial: "common/category"
+    elsif ["profiles"].include?(con) || con.start_with?("settings")
+      render partial: "common/settings"
+    elsif con == "users"
+      render partial: "common/user_navigation"
     end
   end
 

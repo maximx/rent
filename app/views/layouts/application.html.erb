@@ -26,15 +26,15 @@
     </div>
 
     <div class="collapse navbar-collapse" id="user-navagation">
-      <%= render partial: "layouts/user_login" %>
-      <%= render partial: "layouts/search" %>
+      <%= render partial: "common/user_login" %>
+      <%= render partial: "common/search" %>
     </div>
   </nav>
 </header>
 
 <div id="site-content" class="container-fluid clearfix">
   <div class="sidebar pull-left">
-    <%= render_aside %>
+    <%= render_aside(params[:controller]) %>
   </div>
 
   <div class="main-content pull-left">
