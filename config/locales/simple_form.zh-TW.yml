@@ -19,6 +19,8 @@ zh-TW:
         address: '地址'
         phone: '電話'
         description: '介紹'
+        picture:
+          public_id: '圖片'
       item:
         name: '名稱'
         subcategory_id: '分類'
@@ -27,6 +29,8 @@ zh-TW:
         deposit: '押金'
         address: '物品所在地'
         description: '介紹'
+        pictures:
+          public_id: '圖片'
       requirement:
         name: '名稱'
         phone: '電話'

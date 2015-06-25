@@ -20,7 +20,7 @@ class FileSelectInput < SimpleForm::Inputs::Base
   def file_select_input
     template.content_tag(:span, class: 'input-group-btn') do
       template.content_tag(:span, class: 'btn btn-primary btn-file') do
-        template.concat "Browse"
+        template.concat "選擇圖片"
         template.concat @builder.file_field(attribute_name, input_html_options)
       end
     end

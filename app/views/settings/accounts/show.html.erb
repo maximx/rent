@@ -1,4 +1,5 @@
-<h3><%= link_to(current_user.email, user_path(current_user)) %></h3>
+<h2 class="col-sm-offset-2"><%= link_to(current_user.email, user_path(current_user)) %></h2>
+
 <%= render_cl_image_small @profile.picture.public_id if @profile.picture %>
 
 <%= simple_form_for @profile do |f| %>
