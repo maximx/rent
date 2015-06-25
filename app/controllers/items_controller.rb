@@ -18,13 +18,7 @@ class ItemsController < ApplicationController
   def show
     @question = @item.questions.build
     @rent_records_json = @item.active_records.includes(:borrower).to_json
-
-    @maps = Gmaps4rails.build_markers(@item) do |item, marker|
-      marker.lat item.latitude
-      marker.lng item.longitude
-      marker.infowindow("<h4>#{link_of(item)}</h4><br />#{item.address}")
-      marker.json({ title: item.name })
-    end
+    set_item_maps_marker
   end
 
   def new
@@ -90,10 +84,6 @@ class ItemsController < ApplicationController
 
   def find_item
     @item = Item.find(params[:id])
-  end
-
-  def link_of(item)
-    view_context.link_to( item.name, item_url(item) )
   end
 
 end

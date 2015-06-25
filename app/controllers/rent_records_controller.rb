@@ -12,6 +12,7 @@ class RentRecordsController < ApplicationController
 
   def index
     @rent_records = @item.rent_records
+    set_item_maps_marker
   end
 
   def show
@@ -71,6 +72,7 @@ class RentRecordsController < ApplicationController
   def review
     if @rent_record.can_review_by?(current_user)
       @review = @rent_record.reviews.build
+      set_item_maps_marker
       render "reviews/new"
     else
       flash[:alert] = "您沒有權限"

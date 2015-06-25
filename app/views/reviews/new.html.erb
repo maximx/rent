@@ -20,3 +20,11 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    buildGoogleMap(<%= raw @maps.to_json %>);
+
+  });
+</script>

@@ -4,3 +4,11 @@
 
 <%= render partial: "items/item_info_container", locals: { item: @item } %>
 <%= render partial: "rent_record_list", locals: { rent_records: @rent_records.reverse } %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    buildGoogleMap(<%= raw @maps.to_json %>);
+
+  });
+</script>

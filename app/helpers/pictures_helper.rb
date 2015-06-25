@@ -7,7 +7,12 @@ module PicturesHelper
 
   def render_cl_image_mid(public_id, options = {})
     default_options = { width: 350, height: 250, crop: :fill }
-    cl_image_tag(public_id, default_options, options)
+    render_cl_image(public_id, default_options, options)
+  end
+
+  def render_cl_image_lg(public_id, options = {})
+    default_options = { width: 450, height: 350, crop: :fill }
+    render_cl_image(public_id, default_options, options)
   end
 
   def render_cl_avatar_small(user, options = {})

@@ -23,4 +23,17 @@ class ApplicationController < ActionController::Base
     @subcategory_id = id[1] if id[1]
   end
 
+  def set_item_maps_marker
+    @maps = Gmaps4rails.build_markers(@item) do |item, marker|
+      marker.lat item.latitude
+      marker.lng item.longitude
+      marker.infowindow("<h4>#{link_of(item)}</h4><br />#{item.address}")
+      marker.json({ title: item.name })
+    end
+  end
+
+  def link_of(item)
+    view_context.link_to( item.name, item_url(item) )
+  end
+
 end

@@ -49,13 +49,9 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
-    handler = Gmaps.build('Google');
-    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-      markers = handler.addMarkers(<%= raw @maps.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-    });
+    buildGoogleMap(<%= raw @maps.to_json %>);
 
     $('#nav-tab-description').tab('show');
+
   });
 </script>

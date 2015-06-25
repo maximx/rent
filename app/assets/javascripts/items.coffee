@@ -5,3 +5,11 @@ $(document).ready ->
     else if data.result == "false"
       alert('只有一張圖片，不得刪除')
   )
+
+@buildGoogleMap = (markers)->
+  handler = Gmaps.build('Google')
+  handler.buildMap({ provider: {}, internal: { id: 'map' } }, ->
+    google_markers = handler.addMarkers(markers)
+    handler.bounds.extendWith(google_markers)
+    handler.fitMapToBounds();
+  )

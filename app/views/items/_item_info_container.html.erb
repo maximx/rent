@@ -1,19 +1,22 @@
 <div class="item-info-container clearfix">
+  <h3 class="item-title"><%= link_to(@item.name, item_path(@item)) %></h3>
+
   <div class="pull-left">
     <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
-    <div class="item-action">
-      <%= render_collect_item_link(item) %>
-      <%= link_to("預約承租", new_item_rent_record_path(item), class: "btn btn-success") if rent_record_button_display?(item) %>
-    </div>
   </div>
 
   <div class="item-detail-info pull-left">
-    <h3><%= link_to(@item.name, item_path(@item)) %></h3>
+    <div id="map"></div>
+
     <div>出租者∶<%= link_to(item.lender.email, user_path(item.lender)) %></div>
     <div>租金∶<%= item.price_period %></div>
     <div>最少租期∶<%= "#{item.minimum_period}#{item.period}" %></div>
     <div>押金∶$<%= item.deposit %></div>
     <div>出租物地址∶<%= item.address %></div>
-    <div id="map" style='width: 350px; height: 200px;'></div>
+
+    <div class="item-action">
+      <%= render_collect_item_link(item) %>
+      <%= link_to("預約承租", new_item_rent_record_path(item), class: "btn btn-success") if rent_record_button_display?(item) %>
+    </div>
   </div>
 </div>

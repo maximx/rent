@@ -10,7 +10,7 @@
   <div class="carousel-inner" role="listbox">
   <% pictures.each_with_index do |picture, index| %>
     <div class="item<%= " active" if index == 0 %>">
-      <%= cl_image_tag(picture.public_id, width: 450, height: 250, crop: :fill) %>
+      <%= render_cl_image_lg(picture.public_id) %>
     </div>
   <% end %>
   </div>
