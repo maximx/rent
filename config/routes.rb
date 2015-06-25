@@ -29,6 +29,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [ :show ] do
     member do
+      get :items
+      get :lender_reviews
+      get :borrower_reviews
+      get :following
+      get :items_collect
+
       post :follow
       delete :unfollow
     end
