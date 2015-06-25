@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613092932) do
+ActiveRecord::Schema.define(version: 20150625050917) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -84,16 +84,17 @@ ActiveRecord::Schema.define(version: 20150613092932) do
   end
 
   create_table "rent_records", force: :cascade do |t|
-    t.integer  "item_id",    limit: 4
-    t.integer  "user_id",    limit: 4
-    t.string   "name",       limit: 255
-    t.string   "phone",      limit: 255
+    t.integer  "item_id",     limit: 4
+    t.integer  "user_id",     limit: 4
+    t.string   "name",        limit: 255
+    t.string   "phone",       limit: 255
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "aasm_state", limit: 255
-    t.float    "price",      limit: 24
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "aasm_state",  limit: 255
+    t.float    "price",       limit: 24
+    t.boolean  "hidden_flag", limit: 1,   default: false
   end
 
   create_table "requirements", force: :cascade do |t|

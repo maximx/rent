@@ -5,13 +5,20 @@
   <%= f.input :ended_at, as: :date_time_picker %>
 
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.button :submit, "預約" %>
+    <%= f.input :hidden_flag,
+                inline_label: "交易不公開",
+                wrapper: :default,
+                wrapper_html: { class: "col-sm-offset-2 col-sm-10 checkbox" } %>
+  </div>
 
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
       <div class="item-price-days">
         承租天數∶<span id="rent_days"></span>
         總金額∶<span id="total_price"></span>
       </div>
+
+      <%= f.button :submit, "預約" %>
     </div>
   </div>
 
