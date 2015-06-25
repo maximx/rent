@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root to: "items#index"
   get "/search", to: "items#search"
-  get "/settings", to: "settings/accounts#show"
 
   devise_for :users
 

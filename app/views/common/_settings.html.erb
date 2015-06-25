@@ -1,16 +1,6 @@
-<div class="panel-collapse">
-  <ul class="list-group">
-    <li class="list-group-item">
-      <%= link_to("基本資料", settings_account_path) %>
-    </li>
-    <li class="list-group-item">
-      <%= link_to("帳戶設定", edit_settings_account_path) %>
-    </li>
-    <li class="list-group-item">
-      <%= link_to("承租紀錄", settings_rent_records_path) %>
-    </li>
-    <li class="list-group-item">
-      <%= link_to("出租物管理", settings_items_path) %>
-    </li>
-  </ul>
-</div>
+<%= render_link_li class: "list-group" do |li|
+      li << ["基本資料", settings_account_path]
+      li << ["帳戶設定", edit_settings_account_path]
+      li << ["承租紀錄", settings_rent_records_path]
+      li << ["出租物管理", settings_items_path]
+    end %>

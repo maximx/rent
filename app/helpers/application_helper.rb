@@ -1,10 +1,11 @@
 module ApplicationHelper
-  def render_aside(con)
-    if ["items", "categories", "subcategories", "rent_records"].include?(con)
+
+  def render_aside
+    if ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
       render partial: "common/category"
-    elsif ["profiles"].include?(con) || con.start_with?("settings")
+    elsif "profiles" == params[:controller] || params[:controller].start_with?("settings")
       render partial: "common/settings"
-    elsif con == "users"
+    elsif "users" == params[:controller]
       render partial: "common/user_navigation"
     end
   end
@@ -21,6 +22,28 @@ module ApplicationHelper
   def render_notice(msg)
     @msg = msg
     alert_notice_tag("warning") if msg.present?
+  end
+
+  def render_link_li(list=[], options={})
+    if list.is_a? Hash
+      options = list
+      list = []
+    end
+    yield(list) if block_given?
+
+    li_link = []
+
+    list.each_with_index do |li, index|
+      active_class = if current_page? li[1]
+                       " active"
+                     else
+                       ""
+                     end
+      css_class = "list-group-item#{active_class}"
+      li_link << content_tag(:li, link_to(li[0], li[1]), class: css_class)
+    end
+
+    content_tag(:ul, li_link.join.to_s.html_safe, options)
   end
 
   private
