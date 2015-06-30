@@ -1,4 +1,4 @@
-$(document).ready ->
+$(document).on 'page:load', ->
     $('.form_datetime').datetimepicker
       format: 'YYYY-MM-DD HH:mm:ss'
 

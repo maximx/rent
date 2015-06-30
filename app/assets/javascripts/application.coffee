@@ -22,8 +22,7 @@
 #= require fullcalendar/lang-all
 #= require_tree .
 
-
-$(document).ready ->
+index_ready  =->
   # stop bubble javascript
   $('.stop-bubble').click (e)->
     if e.stopPropagation
@@ -79,3 +78,7 @@ $(document).ready ->
 
     $input.trigger('fileselect', [numFiles, label])
   )
+
+
+$(document).ready(index_ready)
+$(document).on('page:load', index_ready)
