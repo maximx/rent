@@ -60,3 +60,9 @@ gem 'prawn-table'
 gem 'aasm'
 gem 'cloudinary'
 gem 'gretel'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+end
