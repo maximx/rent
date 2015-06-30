@@ -1,4 +1,4 @@
-$(document).on 'page:load', ->
+$(document).ready ->
   $('.remove-picture').on('ajax:success', (e, data, status, xhr) ->
     if data.result == 'ok'
       $(this).closest('.picture').remove()
@@ -11,5 +11,5 @@ $(document).on 'page:load', ->
   handler.buildMap({ provider: {}, internal: { id: 'map' } }, ->
     google_markers = handler.addMarkers(markers)
     handler.bounds.extendWith(google_markers)
-    handler.fitMapToBounds();
+    handler.fitMapToBounds()
   )
