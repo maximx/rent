@@ -20,9 +20,10 @@
 #= require gmaps/google
 #= require fullcalendar
 #= require fullcalendar/lang-all
+#= require tinymce/tinymce.min
 #= require_tree .
 
-index_ready  =->
+index_ready  = ->
   # stop bubble javascript
   $('.stop-bubble').click (e)->
     if e.stopPropagation
@@ -82,3 +83,11 @@ index_ready  =->
 
 $(document).ready(index_ready)
 $(document).on('page:load', index_ready)
+
+
+@init_tinymce = (target_obj)->
+  tinymce.init
+    selector: target_obj
+    language: 'zh_TW'
+    height: 400
+    plugins: 'image'

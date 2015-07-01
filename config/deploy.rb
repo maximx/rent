@@ -50,6 +50,6 @@ namespace :deploy do
     end
   end
 
-  after 'deploy:publishing', 'deploy:restart'
+  after :publishing, :restart
 
 end

@@ -1,3 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+settings_account_ready = ->
+  init_tinymce('#profile_description')
+
+$(document).on('page:load', settings_account_ready)
+$(document).ready(settings_account_ready)
