@@ -20,7 +20,7 @@
 #= require gmaps/google
 #= require fullcalendar
 #= require fullcalendar/lang-all
-#= require tinymce/tinymce.min
+#= require tinymce
 #= require_tree .
 
 index_ready  = ->

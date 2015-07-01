@@ -13,11 +13,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 
-gem 'bootstrap-sass'
-gem 'momentjs-rails'
-gem 'bootstrap3-datetimepicker-rails'
-gem 'fullcalendar-rails'
-
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -60,6 +55,12 @@ gem 'prawn-table'
 gem 'aasm'
 gem 'cloudinary'
 gem 'gretel'
+
+gem 'bootstrap-sass'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'fullcalendar-rails'
+gem 'tinymce-rails'
 
 group :development do
   gem 'capistrano'
