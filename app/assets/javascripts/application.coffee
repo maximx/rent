@@ -47,11 +47,19 @@ $ ->
   $end_picker_obj = $('#ended_at')
 
   $start_picker_obj.on('dp.change', (e)->
-    $end_picker_obj.data('DateTimePicker').minDate(e.date)
+    if e.date
+      $end_picker_obj.data('DateTimePicker').minDate(e.date)
+    else
+      $end_picker_obj.data('DateTimePicker').minDate(false)
+
     $search_form_date.prop('required', true)
   )
   $end_picker_obj.on('dp.change', (e)->
-    $start_picker_obj.data('DateTimePicker').maxDate(e.date)
+    if e.date
+      $start_picker_obj.data('DateTimePicker').maxDate(e.date)
+    else
+      $start_picker_obj.data('DateTimePicker').maxDate(false)
+
     $search_form_date.prop('required', true)
   )
 
