@@ -1,4 +1,4 @@
-item_ready = ->
+$ ->
   $('.remove-picture').on('ajax:success', (e, data, status, xhr) ->
     if data.result == 'ok'
       $(this).closest('.picture').remove()
@@ -7,6 +7,3 @@ item_ready = ->
   )
 
   init_tinymce('#item_description')
-
-$(document).on('page:load', item_ready)
-$(document).ready(item_ready)

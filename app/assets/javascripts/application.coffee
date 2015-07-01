@@ -11,8 +11,8 @@
 # about supported directives.
 #
 #= require jquery
+#= require jquery.turbolinks
 #= require jquery_ujs
-#= require turbolinks
 #= require bootstrap-sprockets
 #= require moment
 #= require bootstrap-datetimepicker
@@ -23,9 +23,10 @@
 #= require fullcalendar/lang-all
 #= require tinymce
 #= require init_tinymce
+#= require turbolinks
 #= require_tree .
 
-index_ready  = ->
+$ ->
   # stop bubble javascript
   $('.stop-bubble').click (e)->
     if e.stopPropagation
@@ -82,6 +83,5 @@ index_ready  = ->
     $input.trigger('fileselect', [numFiles, label])
   )
 
-
-$(document).ready(index_ready)
-$(document).on('page:load', index_ready)
+  $(document).on 'page:receive', ->
+    tinymce.remove()
