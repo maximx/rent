@@ -18,9 +18,11 @@
 #= require bootstrap-datetimepicker
 #= require underscore
 #= require gmaps/google
+#= require build_google_map
 #= require fullcalendar
 #= require fullcalendar/lang-all
 #= require tinymce
+#= require init_tinymce
 #= require_tree .
 
 index_ready  = ->
@@ -83,11 +85,3 @@ index_ready  = ->
 
 $(document).ready(index_ready)
 $(document).on('page:load', index_ready)
-
-
-@init_tinymce = (target_obj)->
-  tinymce.init
-    selector: target_obj
-    language: 'zh_TW'
-    height: 400
-    plugins: 'image'
