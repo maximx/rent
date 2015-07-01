@@ -61,6 +61,7 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'fullcalendar-rails'
 gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
 
 group :development do
   gem 'capistrano'
