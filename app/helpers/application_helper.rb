@@ -7,6 +7,8 @@ module ApplicationHelper
       render partial: "common/settings"
     elsif "users" == params[:controller]
       render partial: "common/user_navigation"
+    else
+      content_tag(:p, "")
     end
   end
 
