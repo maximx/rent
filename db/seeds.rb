@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # init user
-#user = User.new(email: "maxim7667@outlook.com", password: "julius23")
-#user.save
+user = User.new(email: "maxim7667@outlook.com", password: "julius23")
+user.save
 
 
 # init category
@@ -36,4 +36,12 @@ subcategory_list.each_with_index do |sub_list, category_id|
     subcategory = Subcategory.new(name: sub_name, serial: serial, category_id: category_id)
     subcategory.save
   end
+end
+
+
+# init city
+city_list = %w(基隆市 台北市 新北市 桃園縣 新竹市 新竹縣 苗栗縣 台中市 彰化縣 南投縣 雲林縣 嘉義市 嘉義縣 台南市 高雄市 屏東縣 台東縣 花蓮縣 宜蘭縣 澎湖縣 金門縣 連江縣)
+city_list.each do |city|
+  city = City.new(name: city)
+  city.save
 end
