@@ -10,6 +10,11 @@ class Settings::ItemsController < ApplicationController
   private
 
     def find_items
-      @items = current_user.items.record_not_overlaps(params[:started_at], params[:ended_at]).search_by(params[:query])
+      @items = current_user.items.send(overlap_method, params[:started_at], params[:ended_at]).search_by(params[:query])
     end
+
+    def overlap_method
+      params[:overlaps] ||= Item.overlaps_types.first.second
+    end
+
 end
