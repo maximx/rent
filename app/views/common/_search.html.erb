@@ -3,7 +3,7 @@
   <div class="form-group">
     <%= select_tag :city,
                    options_for_select(City.options_collection, params[:city]),
-                   include_blank: true,
+                   include_blank: "請選擇縣市",
                    class: "form-control" %>
   </div>
 
