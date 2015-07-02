@@ -1,10 +1,15 @@
 class Settings::ItemsController < ApplicationController
   before_action :login_required
+  before_action :find_items
 
   def index
-    @items = current_user.items
-
     @rent_records_count = @items.joins(:rent_records).group(:item_id, :aasm_state).count
     @rent_records_count.default = 0
   end
+
+  private
+
+    def find_items
+      @items = current_user.items.record_not_overlaps(params[:started_at], params[:ended_at]).search_by(params[:query])
+    end
 end

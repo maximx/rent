@@ -56,7 +56,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.search_criteria(query)
-    search_arr(query).push( keywords(query) ).flatten
+    search_arr(query).push( keywords(query) ).flatten if query
   end
 
   def self.keywords(query)
@@ -68,6 +68,6 @@ class Item < ActiveRecord::Base
   end
 
   def self.basic_search_str
-    "concat(name, description) like ?"
+    "concat(items.name, items.description) like ?"
   end
 end

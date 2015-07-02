@@ -3,13 +3,17 @@ module ApplicationHelper
   def render_aside
     if ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
       render partial: "common/category"
-    elsif "profiles" == params[:controller] || params[:controller].start_with?("settings")
+    elsif settings_page?
       render partial: "common/settings"
     elsif "users" == params[:controller]
       render partial: "common/user_navigation"
     else
       content_tag(:p, "")
     end
+  end
+
+  def settings_page?
+    "profiles" == params[:controller] || params[:controller].start_with?("settings")
   end
 
   def render_css_class(obj_id, target_id, css)
@@ -50,22 +54,23 @@ module ApplicationHelper
 
   private
 
-  def alert_notice_tag(type)
-    content_tag(:p, notice_content_with_close,
-      class: "alert alert-#{type} alert-dismissible",
-      role: :alert
-    )
-  end
+    def alert_notice_tag(type)
+      content_tag(:p, notice_content_with_close,
+        class: "alert alert-#{type} alert-dismissible",
+        role: :alert
+      )
+    end
 
-  def notice_content_with_close
-    content_tag(:button, span_close,
-      type: :button, class: :close,
-      data: { dismiss: :alert }, aria: { label: :Close }
-    ) +
-    content_tag(:strong, @msg)
-  end
+    def notice_content_with_close
+      content_tag(:button, span_close,
+        type: :button, class: :close,
+        data: { dismiss: :alert }, aria: { label: :Close }
+      ) +
+      content_tag(:strong, @msg)
+    end
 
-  def span_close
-    content_tag(:span, "x", aria: { hidden: true })
-  end
+    def span_close
+      content_tag(:span, "x", aria: { hidden: true })
+    end
+
 end
