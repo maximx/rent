@@ -9,6 +9,8 @@ set :stage, %w(staging production)
 set :deploy_to, "/home/apps/#{fetch(:application)}"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 
+set :pty, true
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -42,13 +44,11 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 namespace :deploy do
 
   desc 'Restart Application'
-  task :app_restart do
+  task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
     end
   end
-
-  after :restart, :app_restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
@@ -56,6 +56,16 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+      within release_path do
+        execute :rake, 'cache:clear'
+      end
+    end
+  end
+
+  desc 'Restart Server'
+  task :nginx_restart do
+    on roles(:web), in: :sequence, wait: 1 do
+      sudo "/etc/init.d/nginx restart"
     end
   end
 
