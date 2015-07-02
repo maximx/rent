@@ -25,6 +25,7 @@ class Item < ActiveRecord::Base
   before_save :set_category_id
 
   scope :search_by, -> (query) { where(search_criteria(query)) }
+  scope :search_city, -> (query) { where("items.address like ?", "%#{query}%")}
 
   scope :record_overlaps, ->(started_at, ended_at) do
     where(id: RentRecord.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
