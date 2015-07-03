@@ -45,7 +45,7 @@ namespace :deploy do
 
   desc 'Restart Application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:app), in: :sequence, wait: 2 do
       execute :touch, release_path.join('tmp/restart.txt')
     end
   end
@@ -63,6 +63,16 @@ namespace :deploy do
   task :nginx_restart do
     on roles(:web), in: :sequence, wait: 1 do
       sudo "/etc/init.d/nginx restart"
+    end
+  end
+
+  task :runrake do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, ENV['task']
+        end
+      end
     end
   end
 
