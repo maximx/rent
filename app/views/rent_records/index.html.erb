@@ -1,7 +1,5 @@
 <% breadcrumb :rent_records, @item %>
 
-<h4><%= link_to(@item.name, item_path(@item)) %></h4>
-
 <%= render partial: "items/item_info_container", locals: { item: @item } %>
 <%= render partial: "rent_record_list", locals: { rent_records: @rent_records.reverse } %>
 
