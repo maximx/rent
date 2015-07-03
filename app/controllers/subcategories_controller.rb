@@ -7,7 +7,7 @@ class SubcategoriesController < ApplicationController
   end
 
   def show
-    @items = @subcategory.items
+    @items = @subcategory.items.page(params[:page])
     render "items/index"
   end
 
