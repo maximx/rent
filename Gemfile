@@ -68,6 +68,8 @@ gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
 
 group :development do
+  gem 'ffaker'
+
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
