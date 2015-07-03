@@ -66,7 +66,7 @@ class ItemsController < ApplicationController
     @items = Item.includes(:pictures)
                  .record_not_overlaps(params[:started_at], params[:ended_at])
                  .search_city(params[:city])
-                 .search_by(params[:query])
+                 .search_by(params[:query]).page(params[:page])
 
     render :index
   end
