@@ -33,11 +33,9 @@ body { padding-top: 70px; }
 }
 
 // site container
-#site-content { padding-right: 20px; padding-left: 20px; }
+#site-content { padding: 0 20px; }
 
 .sidebar {
-  width: 17%;
-  margin-right: 2.5%;
 
   .list-group {
     .list-group-item.active {
@@ -48,8 +46,6 @@ body { padding-top: 70px; }
     }
   }
 }
-
-.main-content { width: 80.5%; }
 
 a {
   &:hover { text-decoration: none; }
