@@ -22,6 +22,8 @@ class Item < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
+  self.per_page = 20
+
   before_save :set_category_id
 
   scope :search_by, -> (query) { where(search_criteria(query)) }

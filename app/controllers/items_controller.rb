@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.includes(:pictures).all
+    @items = Item.includes(:pictures).page(params[:page])
   end
 
   def show

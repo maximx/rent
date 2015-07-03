@@ -141,3 +141,10 @@ a {
 .tab-content {
   padding-top: 15px;
 }
+
+/*pagination*/
+.pagination {
+  margin: 10px 0;
+
+  &.top { margin-top: 0; }
+}

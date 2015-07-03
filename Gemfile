@@ -59,6 +59,7 @@ gem 'prawn-table'
 gem 'aasm'
 gem 'cloudinary'
 gem 'gretel'
+gem 'will_paginate'
 
 gem 'bootstrap-sass'
 gem 'momentjs-rails'

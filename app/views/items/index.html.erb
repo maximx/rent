@@ -1,5 +1,9 @@
 <% render_item_index_breadcrumbs %>
 
 <div class="clearfix">
+  <%= will_paginate @items, class: "top" %>
+
   <%= render partial: "items/item", collection: @items, as: :item %>
+
+  <%= will_paginate @items %>
 </div>
