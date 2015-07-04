@@ -41,9 +41,10 @@ namespace :fake do
   end
 
   task :regeocode => :environment do
-    items = Item.where(latitude: nil)
-    items.each do |item|
-      item.save
+    while Item.where(latitude: nil).size > 0
+      Item.where(latitude: nil).each do |item|
+        item.save
+      end
     end
   end
 
