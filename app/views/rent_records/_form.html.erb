@@ -1,4 +1,14 @@
 <%= simple_form_for [item, rent_record] do |f| %>
+  <div class="form-group">
+    <div class="col-sm-2 control-label">
+      <label>承租物</label>
+    </div>
+
+    <div class="col-sm-7">
+      <%= text_field_tag nil, item.name, class: "form-control", disabled: true %>
+    </div>
+  </div>
+
   <%= f.input :name %>
   <%= f.input :phone %>
   <%= f.input :started_at, as: :date_time_picker %>

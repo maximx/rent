@@ -1,7 +1,7 @@
 <% breadcrumb :new_rent_record, @item %>
 
 <div>
-  <h4 class="col-sm-offset-1">預約<%= @item.name %></h4>
+  <h3 class="col-sm-offset-2">預約承租</h3>
 
   <%= render partial: "form", locals: { item: @item, rent_record: @rent_record } %>
 </div>
