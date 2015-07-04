@@ -12,6 +12,8 @@ namespace :fake do
   end
 
   task :items => :environment do
+    require 'city_area_tw'
+
     user_count = User.count
     subcategory_count = Subcategory.count
 
@@ -29,11 +31,18 @@ namespace :fake do
         price: rand(1..20),
         minimum_period: rand(1..7),
         deposit: rand(100..1000),
-        address: FFaker::AddressAU.full_address,
+        address: CityAreaTW.rand_full_cityarea,
         description: FFaker::LoremCN.paragraphs.join(","),
         pictures_attributes: picutres_arr
       )
 
+      item.save
+    end
+  end
+
+  task :regeocode => :environment do
+    items = Item.where(latitude: nil)
+    items.each do |item|
       item.save
     end
   end
@@ -51,6 +60,7 @@ namespace :fake do
       profile.save
     end
   end
+
 end
 
-task fake: [ "fake:users", "fake:profiles", "fake:items" ]
+task fake: [ "fake:users", "fake:profiles", "fake:items", "fake:regeocode" ]
