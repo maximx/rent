@@ -11,6 +11,8 @@ class RentRecord < ActiveRecord::Base
   belongs_to :item
   has_many :reviews
 
+  self.per_page = 10
+
   before_save :set_price
 
   scope :overlaps, ->(started_at, ended_at) do

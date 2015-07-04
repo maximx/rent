@@ -29,7 +29,7 @@ namespace :fake do
         name: FFaker::LoremCN.words.join(" "),
         subcategory_id: rand(1..subcategory_count),
         price: rand(1..20),
-        minimum_period: rand(1..7),
+        minimum_period: rand(1..3),
         deposit: rand(100..1000),
         address: CityAreaTW.rand_full_cityarea,
         description: FFaker::LoremCN.paragraphs.join(","),
@@ -62,6 +62,33 @@ namespace :fake do
     end
   end
 
+  task :rent_records => :environment do
+    Item.all.each do |item|
+      50.times do
+        users = User.where.not(id: item.lender)
+        user = users[ rand(0..(users.length - 1))]
+        started_at = time_rand
+        ended_at = time_rand(started_at + 1.day, started_at + rand(3..5).day)
+
+        rent_record = item.rent_records.build(
+          user_id: user.id,
+          phone: user.profile.phone,
+          name: user.profile.name,
+          started_at: started_at,
+          ended_at: ended_at
+        )
+
+        rent_record.save
+      end
+    end
+  end
+
+  def time_rand( from = Time.now, to = Time.local(2015, 10, 30) )
+    from = from.to_time if from.is_a? Date
+    to = to.to_time if to.is_a? Date
+    Time.at(from + rand * (to.to_f - from.to_f)).to_date
+  end
+
 end
 
-task fake: [ "fake:users", "fake:profiles", "fake:items", "fake:regeocode" ]
+task fake: [ "fake:users", "fake:profiles", "fake:items", "fake:regeocode", "fake:rent_records" ]

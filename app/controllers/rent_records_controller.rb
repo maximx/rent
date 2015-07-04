@@ -11,7 +11,7 @@ class RentRecordsController < ApplicationController
   end
 
   def index
-    @rent_records = @item.rent_records
+    @rent_records = @item.rent_records.includes(:borrower).page(params[:page])
     set_item_maps_marker
   end
 
@@ -110,7 +110,7 @@ class RentRecordsController < ApplicationController
 
   def rent_record_params
     params.require(:rent_record).permit(
-      :name, :email, :phone,
+      :name, :phone,
       :started_at, :ended_at
     )
   end
