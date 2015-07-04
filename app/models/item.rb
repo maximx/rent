@@ -27,7 +27,7 @@ class Item < ActiveRecord::Base
   before_save :set_category_id
 
   scope :search_by, -> (query) { where(search_criteria(query)) }
-  scope :search_city, -> (query) { where("items.address like ?", "%#{query}%")}
+  scope :search_city, -> (query) { where("items.address regexp ?", tai_word(query))}
 
   scope :record_overlaps, ->(started_at, ended_at) do
     where(id: RentRecord.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
@@ -76,5 +76,11 @@ class Item < ActiveRecord::Base
 
   def self.basic_search_str
     "concat(items.name, items.description) like ?"
+  end
+
+  def self.tai_word(str)
+    arr = [str]
+    arr << str.sub("臺", "台")
+    arr.uniq.join("|")
   end
 end
