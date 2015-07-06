@@ -27,8 +27,11 @@ body { padding-top: 70px; }
 
   .navbar-brand {
     margin: 0;
-    font-size: 35px;
-    a { color: #FF0000; }
+    padding: 1px 15px;
+
+    a {
+      .badge { font-size: 30px; }
+    }
   }
 }
 

@@ -7,14 +7,6 @@
                    class: "form-control" %>
   </div>
 
-  <div class="form-group hidden-sm">
-    <%= text_field_tag :started_at, nil, class: "form-control form_date", placeholder: "起租日期", value: params[:started_at] %>
-  </div>
-
-  <div class="form-group hidden-sm">
-    <%= text_field_tag :ended_at, nil, class: "form-control form_date", placeholder: "迄租日期", value: params[:ended_at] %>
-  </div>
-
   <div class="form-group">
     <%= text_field_tag :query, nil, class: "form-control keyword", placeholder: "關鍵字", value: params[:query] %>
     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
