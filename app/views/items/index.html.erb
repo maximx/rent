@@ -1,8 +1,5 @@
 <% render_item_index_breadcrumbs %>
 
-<%= will_paginate @items, class: "top hidden-sm hidden-xs" %>
-<%= will_paginate @items, class: "top hidden-lg hidden-md", page_links: false %>
-
 <div class="clearfix">
   <%= render partial: "items/item", collection: @items, as: :item %>
 </div>
