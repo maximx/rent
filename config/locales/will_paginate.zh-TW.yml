@@ -1,7 +1,7 @@
 zh-TW:
   will_paginate:
-    previous_label: "&#8592; 上一頁"
-    next_label: "下一頁 &#8594;"
+    previous_label: "&laquo;"
+    next_label: "&raquo;"
     page_gap: "&hellip;"
 
     page_entries_info:

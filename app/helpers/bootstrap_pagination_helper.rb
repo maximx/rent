@@ -7,6 +7,8 @@ module BootstrapPaginationHelper
     unless options[:renderer]
       default_options = {
         class: "pagination",
+        inner_window: 3,
+        outer_window: 0,
         previous_label: t("will_paginate.previous_label"),
         next_label: t("will_paginate.next_label"),
         renderer: BootstrapPaginationHelper::LinkRenderer
