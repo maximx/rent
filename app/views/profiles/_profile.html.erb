@@ -17,8 +17,8 @@
         <th>負評</th>
       </tr>
       <tr>
-        <td><%= @total_reviews[Review.rates[:good]] %></td>
-        <td><%= @total_reviews[Review.rates[:bad]] %></td>
+        <td><%= @total_reviews[Review.rates[:good]] || 0 %></td>
+        <td><%= @total_reviews[Review.rates[:bad]] || 0 %></td>
       </tr>
     </table>
   </div>
