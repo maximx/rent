@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user
+  before_action :find_total_reviews
   before_action :find_profile
 
   def show
@@ -50,6 +51,10 @@ class UsersController < ApplicationController
 
     def find_user
       @user = User.find(params[:id])
+    end
+
+    def find_total_reviews
+      @total_reviews = @user.reviews.group(:rate).count
     end
 
     def find_profile
