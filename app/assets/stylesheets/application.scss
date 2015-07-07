@@ -143,8 +143,13 @@ a {
 }
 
 /*pagination*/
-.pagination {
-  margin: 10px 0;
+.pagination-wrapper {
+  margin: 0 auto;
+  max-width: 500px;
 
-  &.top { margin-top: 0; }
+  .pagination {
+    margin: 10px 0;
+
+    &.top { margin-top: 0; }
+  }
 }

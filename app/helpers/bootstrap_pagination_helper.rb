@@ -47,7 +47,7 @@ module BootstrapPaginationHelper
       end
 
       def html_container(html)
-        tag(:div, tag(:ul, html, container_attributes))
+        tag(:div, tag(:ul, html, container_attributes), class: "pagination-wrapper")
       end
 
     private
