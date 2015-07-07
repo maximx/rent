@@ -1,4 +1,5 @@
 @import "bootstrap/mixins/border-radius";
+@import "bootstrap/variables";
 
 /*index*/
 #item-container {
@@ -15,9 +16,10 @@
     border-style: solid;
 
     .item-info-short {
+      border-top: solid 1px $gray-lighter;
       padding: 5px;
     }
-    a { color: #000000; }
+    a.item-link { color: #000000; }
   }
 }
 

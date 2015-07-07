@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   include RentCloudinary
+  include UsersReviewsCount
 
   before_action :login_required, except: [ :index, :show, :search ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
@@ -13,6 +14,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:pictures).page(params[:page])
+    find_users_reviews_count
   end
 
   def show

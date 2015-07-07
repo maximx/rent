@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersReviewsCount
+
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user
   before_action :find_total_reviews
@@ -10,6 +12,7 @@ class UsersController < ApplicationController
   def items
     @items = @user.items
     find_profile
+    find_users_reviews_count
   end
 
   def lender_reviews

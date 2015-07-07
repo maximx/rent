@@ -1,4 +1,6 @@
 class SubcategoriesController < ApplicationController
+  include UsersReviewsCount
+
   before_action :find_subcategory, only: [ :show ]
 
   before_action :find_aside_categories, only: [ :show ]
@@ -8,6 +10,7 @@ class SubcategoriesController < ApplicationController
 
   def show
     @items = @subcategory.items.page(params[:page])
+    find_users_reviews_count
     render "items/index"
   end
 

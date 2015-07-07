@@ -1,3 +1,5 @@
 <%= render partial: "profiles/profile", locals: { user: @user, profile: @profile } %>
 
-<%= render partial: "items/item", collection: @items, as: :item %>
+<div id="item-container">
+  <%= render partial: "items/item", collection: @items, as: :item %>
+</div>

@@ -25,4 +25,8 @@ module ItemsHelper
     !["review", "index"].include?(params[:action])
   end
 
+  def render_users_reviews(user, good_or_bad, total_count)
+    total_count[ [user.id, Review.rates[good_or_bad] ] ] || 0
+  end
+
 end
