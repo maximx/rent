@@ -67,6 +67,7 @@ class ItemsController < ApplicationController
   def search
     @items = Item.includes(:pictures) .search_city(params[:city])
                  .search_by(params[:query]).page(params[:page])
+    find_users_reviews_count
 
     render :index
   end
