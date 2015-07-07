@@ -27,10 +27,13 @@ body { padding-top: 70px; }
 
   .navbar-brand {
     margin: 0;
-    padding: 1px 15px;
+    padding-top: 7px;
 
-    a {
-      .badge { font-size: 30px; }
+    .badge {
+      font-size: 30px;
+      background-color: $brand-danger;
+      @include border-top-radius(10px);
+      @include border-bottom-radius(10px);
     }
   }
 }
@@ -57,6 +60,7 @@ a {
 
 #search-form {
   margin-top: 10px;
+  margin-bottom: 5px;
   border-top: 0;
 
   .form-group {
@@ -117,6 +121,7 @@ a {
 .user-navbar {
   list-style: none;
   margin-top: 15px;
+  margin-bottom: 5px;
   padding: 0;
   float: right;
 
