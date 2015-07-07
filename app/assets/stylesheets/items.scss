@@ -1,22 +1,26 @@
 @import "bootstrap/mixins/border-radius";
 
 /*index*/
-.item-box {
-  float: left;
-  width: 202px;
-  height: 200px;
-  margin-right: 10px;
-  margin-bottom: 5px;
+#item-container {
+  display: relative;
 
-  border-color: #BBBBBB;
-  border-width: 1px;
-  border-style: solid;
-  @include border-bottom-radius(10px);
+  .item-box {
+    float: left;
+    width: 202px;
+    height: 200px;
+    margin-right: 10px;
+    margin-bottom: 5px;
 
-  .item-info-short {
-    padding: 5px;
+    border-color: #BBBBBB;
+    border-width: 1px;
+    border-style: solid;
+    @include border-bottom-radius(10px);
+
+    .item-info-short {
+      padding: 5px;
+    }
+    a { color: #000000; }
   }
-  a { color: #000000; }
 }
 
 /*show*/

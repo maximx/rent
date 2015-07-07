@@ -24,6 +24,7 @@
 #= require tinymce
 #= require init_tinymce
 #= require turbolinks
+#= require wookmark.min
 #= require_tree .
 
 $ ->
@@ -90,6 +91,10 @@ $ ->
 
     $input.trigger('fileselect', [numFiles, label])
   )
+
+  $('#item-container').wookmark
+    autoResize: true
+    container: $('.main-content')
 
   $(document).on 'page:receive', ->
     tinymce.remove()
