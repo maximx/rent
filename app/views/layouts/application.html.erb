@@ -14,11 +14,7 @@
 <%= render partial: "common/header" %>
 
 <div id="site-content" class="container-fluid">
-  <div class="sidebar col-md-2" role="complementary">
-    <%= render_aside %>
-  </div>
-
-  <div class="main-content col-md-10" role="main">
+  <div class="main-content col-md-12" role="main">
     <%= render_notice(notice) %>
     <%= render_alert(alert) %>
     <%= breadcrumbs style: :bootstrap %>

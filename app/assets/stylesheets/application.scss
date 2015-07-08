@@ -23,18 +23,26 @@ body { padding-top: 70px; }
 //header
 .site-header {
 
-  .navbar { padding: 0 10px; }
+  .navbar {
+    padding: 0 10px;
 
-  .navbar-brand {
-    margin: 0;
-    padding-top: 0;
+    .navbar-brand {
+      margin: 0;
+      padding-top: 0;
 
-    #site-logo {
-      text-indent: -119988px;
-      background-image: url("logo.gif");
-      height: 50px;
-      width: 50px;
-      display: block;
+      #site-logo {
+        text-indent: -119988px;
+        background-image: url("logo.gif");
+        height: 50px;
+        width: 50px;
+        display: block;
+      }
+    }
+
+    .scrollable-menu {
+      height: auto;
+      max-height: 300px;
+      overflow-x: hidden;
     }
   }
 }

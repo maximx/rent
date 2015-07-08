@@ -4,11 +4,7 @@ class RentRecordsController < ApplicationController
   before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
   before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :withdrawing, :ask_for_review ]
   before_action :find_rent_records_json, only: [ :new, :create, :edit, :update ]
-
   before_action :find_aside_categories
-  before_action do
-    set_category_and_subcategory([@item.category_id, @item.subcategory_id]) if @item
-  end
 
   def index
     @rent_records = @item.rent_records.includes(:borrower).page(params[:page])

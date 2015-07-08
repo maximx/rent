@@ -4,20 +4,16 @@ module ApplicationHelper
     if ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
       render partial: "common/category"
     elsif settings_page?
-      render partial: "common/settings"
+      #render partial: "common/settings"
     elsif "users" == params[:controller]
-      render partial: "common/user_navigation"
+      #render partial: "common/user_navigation"
     else
-      content_tag(:p, "")
+      #content_tag(:p, "")
     end
   end
 
   def settings_page?
     "profiles" == params[:controller] || params[:controller].start_with?("settings")
-  end
-
-  def render_css_class(obj_id, target_id, css)
-    " #{css.to_s}" if obj_id.to_i == target_id.to_i
   end
 
   def render_alert(msg)

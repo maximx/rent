@@ -18,11 +18,6 @@ class ApplicationController < ActionController::Base
     @categories = Category.includes(:subcategories).all
   end
 
-  def set_category_and_subcategory(id = [])
-    @category_id = id[0]
-    @subcategory_id = id[1] if id[1]
-  end
-
   def set_item_maps_marker
     @maps = Gmaps4rails.build_markers(@item) do |item, marker|
       marker.lat item.latitude

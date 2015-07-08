@@ -13,6 +13,7 @@
     </div>
 
     <div class="collapse navbar-collapse" id="user-navagation">
+      <%= render_aside %>
       <%= render partial: "common/user_login" %>
       <%= render partial: "common/search" unless settings_page? %>
     </div>
