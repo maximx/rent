@@ -27,13 +27,14 @@ body { padding-top: 70px; }
 
   .navbar-brand {
     margin: 0;
-    padding-top: 7px;
+    padding-top: 0;
 
-    .badge {
-      font-size: 30px;
-      background-color: $brand-danger;
-      @include border-top-radius(10px);
-      @include border-bottom-radius(10px);
+    #site-logo {
+      text-indent: -119988px;
+      background-image: url("logo.gif");
+      height: 50px;
+      width: 50px;
+      display: block;
     }
   }
 }
