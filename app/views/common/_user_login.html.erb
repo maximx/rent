@@ -1,8 +1,9 @@
 <ul class="user-navbar">
   <% if user_signed_in? %>
     <li class="nav-item">
-      <%= link_to(current_user.email, user_path(current_user),
-                  class: "nav-link",
+      <%= link_to(render_cl_avatar_thumbnail(current_user),
+                  user_path(current_user),
+                  class: "nav-link profile",
                   title: "個人頁面",
                   data: { toggle: "tooltip", placement: "bottom" }) %>
     </li>

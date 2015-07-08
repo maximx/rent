@@ -141,6 +141,8 @@ a {
   padding: 4px 8px;
   line-height: 20px;
   font-weight: bold;
+
+  &.profile { padding-top: 0; margin-top: -3px; }
 }
 
 .tab-content {
