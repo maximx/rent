@@ -26,8 +26,8 @@ class Item < ActiveRecord::Base
 
   before_save :set_category_id
 
-  scope :search_by, -> (query) { where(search_criteria(query)) }
-  scope :search_city, -> (query) { where("items.address regexp ?", tai_word(query))}
+  scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
+  scope :search_city, -> (query) { where("items.address regexp ?", tai_word(query)) if query.present? }
 
   scope :record_overlaps, ->(started_at, ended_at) do
     where(id: RentRecord.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
@@ -63,7 +63,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.search_criteria(query)
-    search_arr(query).push( keywords(query) ).flatten if query
+    search_arr(query).push( keywords(query) ).flatten
   end
 
   def self.keywords(query)
