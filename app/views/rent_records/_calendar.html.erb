@@ -18,6 +18,8 @@
       default_date = moment().format(calendar_format);
     }
 
+    $('#calendar').fullCalendar('destroy');
+
     $('#calendar').fullCalendar({
       height: 600,
       lang: 'zh-tw',

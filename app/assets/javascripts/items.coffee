@@ -7,3 +7,7 @@ $ ->
   )
 
   init_tinymce('#item_description')
+
+  $('#item-calendar').click ()->
+    $(this).tab('show')
+    $('#calendar').fullCalendar('render')
