@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
   include RentCloudinary
 
+  layout "application_aside"
+
   before_action :login_required
   before_action :set_picture_public_id, only: [ :create, :update ]
   before_action :set_user, only: [ :create, :update ]

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   include UsersReviewsCount
 
+  layout "application_aside"
+
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user
   before_action :find_total_reviews
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def items_collect
-    @items = @user.collections
+    @items = @user.collections.page(params[:page])
     render :items
   end
 

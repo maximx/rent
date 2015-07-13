@@ -1,4 +1,6 @@
 class Settings::AccountsController < ApplicationController
+  layout "application_aside"
+
   before_action :login_required
 
   def show

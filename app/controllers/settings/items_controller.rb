@@ -1,4 +1,6 @@
 class Settings::ItemsController < ApplicationController
+  layout "application_aside"
+
   before_action :login_required
   before_action :find_items
 

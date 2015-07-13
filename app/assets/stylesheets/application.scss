@@ -44,7 +44,7 @@ body { padding-top: 70px; }
 // site container
 #site-content { padding: 0 20px; }
 
-.sidebar {
+aside {
   padding-left: 0;
 
   .list-group {
@@ -57,9 +57,7 @@ body { padding-top: 70px; }
   }
 }
 
-a {
-  &:hover { text-decoration: none; }
-}
+a:hover { text-decoration: none; }
 
 #search-form {
   margin-top: 10px;

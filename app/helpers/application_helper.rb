@@ -6,6 +6,14 @@ module ApplicationHelper
     end
   end
 
+  def render_aside_navigation
+    if settings_page?
+      render partial: "common/settings_navigation"
+    elsif "users" == params[:controller]
+      render partial: "common/users_navigation"
+    end
+  end
+
   def settings_page?
     "profiles" == params[:controller] || params[:controller].start_with?("settings")
   end
