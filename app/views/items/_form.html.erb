@@ -5,12 +5,11 @@
   <% end %>
 
   <%= f.input :name %>
-  <%= f.input :subcategory_id,
-              as: :grouped_select,
+  <%= f.input :subcategory_id, as: :grouped_select,
               collection: Category.includes(:subcategories).all,
               group_method: :subcategories %>
-  <%= f.input :price, direction: "元 / 每#{item.period}" %>
-  <%= f.input :minimum_period, direction: item.period %>
+  <%= f.input :price, as: :numeric_addon, direction: "元 / 每#{item.period} %>
+  <%= f.input :minimum_period, as: :numeric_addon, direction: item.period %>
   <%= f.input :deposit %>
   <%= f.input :address %>
   <%= f.input :description %>

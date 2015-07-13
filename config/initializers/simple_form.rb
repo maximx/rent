@@ -170,7 +170,6 @@ SimpleForm.setup do |config|
 
     b.wrapper tag: :div, class: 'col-sm-7' do |ba|
       ba.use :input, class: "form-control"
-      ba.use :direction, wrap_with: { tag: :span, class: 'direction' }
     end
 
     b.wrapper tag: :div, class: 'col-sm-3 hint-error' do |ba|
