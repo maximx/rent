@@ -1,14 +1,8 @@
 module ApplicationHelper
 
-  def render_aside
+  def render_category_navbar
     if ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
-      render partial: "common/category"
-    elsif settings_page?
-      #render partial: "common/settings"
-    elsif "users" == params[:controller]
-      #render partial: "common/user_navigation"
-    else
-      #content_tag(:p, "")
+      render partial: "common/category_navbar"
     end
   end
 
