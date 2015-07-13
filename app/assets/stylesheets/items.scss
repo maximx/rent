@@ -18,8 +18,13 @@
     .item-info-short {
       border-top: solid 1px $gray-lighter;
       padding: 5px;
+      color: $gray-light;
+
+      .item-title {
+        color: $gray-base;
+        margin-bottom: 5px;
+      }
     }
-    a.item-link { color: #000000; }
   }
 }
 
@@ -30,19 +35,21 @@
   margin-bottom: 10px;
 }
 
-.item-title {
-  text-align: center;
-  margin-top: 0;
-}
-
-.nav-tabs {
-  a {
-    color: #000000;
+.item-info-container {
+  .item-title {
+    text-align: center;
+    margin-top: 0;
   }
-}
 
-.tab-content { height: 700px; }
+  .nav-tabs {
+    a {
+      color: #000000;
+    }
+  }
 
-.item-action {
-  margin: 10px 0px;
+  .tab-content { height: 700px; }
+
+  .item-action {
+    margin: 10px 0px;
+  }
 }

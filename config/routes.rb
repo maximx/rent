@@ -41,8 +41,6 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [ :create, :update ]
 
-  resources :pages, only:[ :index ]
-
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]
     resources :rent_records, only: [ :index ]
@@ -52,4 +50,7 @@ Rails.application.routes.draw do
 
   resources :categories, only: [ :show ]
   resources :subcategories, only: [ :show ]
+
+  resources :pages, only:[ :index ] if Rails.env.development?
+
 end
