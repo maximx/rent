@@ -1,11 +1,11 @@
 <div class="item-info-container clearfix">
   <h3 class="item-title"><%= link_to(@item.name, item_path(@item)) %></h3>
 
-  <div class="pull-left">
+  <div class="col-md-6">
     <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
   </div>
 
-  <div class="item-detail-info pull-left">
+  <div class="col-md-6">
     <div id="map"></div>
 
     <div>出租者∶<%= link_to(item.lender.email, user_path(item.lender)) %></div>
