@@ -4,6 +4,6 @@ class Settings::RentRecordsController < ApplicationController
   before_action :login_required
 
   def index
-    @rent_records = current_user.rent_records.reverse_order
+    @rent_records = current_user.rent_records.reverse_order.page(params[:page])
   end
 end

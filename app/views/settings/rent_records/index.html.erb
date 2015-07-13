@@ -26,3 +26,6 @@
   <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @rent_records, class: "hidden-sm hidden-xs" %>
+<%= will_paginate @rent_records, class: "hidden-lg hidden-md", page_links: false %>

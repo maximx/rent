@@ -11,7 +11,7 @@ class RentRecord < ActiveRecord::Base
   belongs_to :item
   has_many :reviews
 
-  self.per_page = 10
+  self.per_page = 20
 
   before_save :set_price
 
