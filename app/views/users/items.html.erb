@@ -3,3 +3,6 @@
 <div id="item-container">
   <%= render partial: "items/item", collection: @items, as: :item %>
 </div>
+
+<%= will_paginate @items, class: "hidden-sm hidden-xs" %>
+<%= will_paginate @items, class: "hidden-lg hidden-md", page_links: false %>

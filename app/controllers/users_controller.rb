@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def items
-    @items = @user.items
+    @items = @user.items.page(params[:page])
     find_profile
     find_users_reviews_count
   end
