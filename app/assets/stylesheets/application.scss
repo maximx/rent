@@ -38,12 +38,6 @@ body { padding-top: 70px; }
         display: block;
       }
     }
-
-    .scrollable-menu {
-      height: auto;
-      max-height: 300px;
-      overflow-x: hidden;
-    }
   }
 }
 
@@ -166,5 +160,38 @@ a {
     margin: 10px 0;
 
     &.top { margin-top: 0; }
+  }
+}
+
+/*bootstrap popover*/
+.nav .popover {
+  max-width: 430px;
+  width: 430px;
+
+  .category-list {
+    @extend .pull-left;
+    width: 130px;
+
+    .panel-heading {
+      @extend strong;
+      a {
+        color: $gray-darker;
+        &:hover { color: $gray; }
+      }
+    }
+
+    .list-group {
+      margin-bottom: 0;
+
+      .list-group-item {
+        list-style: none;
+        border: none;
+
+        a {
+          color: $gray-dark;
+          &:hover { color: $gray-light; }
+        }
+      }
+    }
   }
 }

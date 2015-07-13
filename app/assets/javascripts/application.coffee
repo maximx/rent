@@ -35,8 +35,13 @@ $ ->
     else
       e.cancelBubble = true
 
-  # display tooltip
+  # bootstrap tooltip, popover
   $('[data-toggle="tooltip"]').tooltip()
+
+  $('[data-toggle="popover"]').popover
+    html: true
+  .click (e)->
+    e.preventDefault()
 
   #active date time picker
   $('.form_date').datetimepicker
