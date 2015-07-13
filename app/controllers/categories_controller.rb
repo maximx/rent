@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   include UsersReviewsCount
 
-  before_action :find_aside_categories, only: [ :show ]
+  before_action :find_navbar_categories, only: [ :show ]
 
   def show
     @category = Category.find(params[:id])

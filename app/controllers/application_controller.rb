@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def find_aside_categories
+  def find_navbar_categories
     @categories = Category.includes(:subcategories).all
   end
 

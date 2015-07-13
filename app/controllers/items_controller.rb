@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect ]
   before_action :set_picture_public_id, only: [ :create, :update ]
-  before_action :find_aside_categories, except: [ :collect, :uncollect ]
+  before_action :find_navbar_categories, except: [ :collect, :uncollect ]
 
   def index
     @items = Item.includes(:pictures).page(params[:page])
