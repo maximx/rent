@@ -7,17 +7,17 @@
   <%= csrf_meta_tags %>
   <%= yield :javascript %>
 </head>
-<body class="body-aside">
+<body>
 
 <%= render partial: "common/header" %>
 
-<div class="container-fluid" role="main">
+<div class="container-fluid">
   <div class="row">
     <aside class="col-md-2 sidebar">
       <%= render_aside_navigation %>
     </aside>
 
-    <section class="col-md-10 col-md-offset-2">
+    <section id="site-content" class="col-md-10 col-md-offset-2 main">
       <%= render_notice(notice) %>
       <%= render_alert(alert) %>
       <%= yield %>

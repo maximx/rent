@@ -18,10 +18,7 @@
 @import "bootstrap-datetimepicker";
 @import "fullcalendar";
 
-body {
-  padding-top: 70px;
-  &.body-aside { padding-top: 51px; }
-}
+body { padding-top: 51px; }
 
 a:hover { text-decoration: none; }
 .anchor { padding-top: 55px; margin-top: -55px; }
@@ -48,7 +45,7 @@ a:hover { text-decoration: none; }
 }
 
 // site container
-#site-content { padding: 0 20px; }
+#site-content { padding: 10px 20px; }
 
 /* Sidebar navigation */
 .sidebar {
@@ -69,19 +66,24 @@ a:hover { text-decoration: none; }
     margin-bottom: 20px;
     margin-left: -20px;
 
-    > li > a {
-      color: $gray-darker;
-      padding-right: 20px;
-      padding-left: 20px;
-    }
+    > li {
+      > a {
+        color: $gray-darker;
+        padding-right: 20px;
+        padding-left: 20px;
 
-    > .active {
-      > a, > a:hover, > a:focus {
-        color: $body-bg;
-        background-color: #428bca;
+        > span { margin-right: 5px; }
+      }
+
+      &.active {
+        > a, > a:hover, > a:focus {
+          color: $body-bg;
+          background-color: #428bca;
+        }
       }
     }
   }
+
 }
 
 #search-form {
