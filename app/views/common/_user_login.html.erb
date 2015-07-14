@@ -1,7 +1,7 @@
 <ul class="user-navbar">
   <% if user_signed_in? %>
     <li class="nav-item">
-      <%= link_to(render_cl_avatar_thumbnail(current_user),
+      <%= link_to(render_cl_avatar_circle(current_user),
                   user_path(current_user),
                   class: "nav-link profile",
                   title: "個人頁面",

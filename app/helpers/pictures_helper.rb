@@ -15,9 +15,9 @@ module PicturesHelper
     render_cl_image(public_id, default_options, options)
   end
 
-  def render_cl_avatar_thumbnail(user, options = {})
+  def render_cl_avatar_circle(user, options = {})
     public_id = public_id_of(user)
-    default_options = { width: 30, height: 30, crop: :fill, gravity: :face, radius: :max, class: "img-circle" }
+    default_options = { width: 30, height: 30, crop: :fill, gravity: :face, radius: :max, class: "img-circle img-thumbnail" }
 
     render_cl_image(public_id, default_options, options)
   end
