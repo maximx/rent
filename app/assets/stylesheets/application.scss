@@ -18,7 +18,11 @@
 @import "bootstrap-datetimepicker";
 @import "fullcalendar";
 
-body { padding-top: 70px; }
+body {
+  padding-top: 70px;
+  &.body-aside { padding-top: 51px; }
+}
+
 a:hover { text-decoration: none; }
 .anchor { padding-top: 55px; margin-top: -55px; }
 
@@ -67,7 +71,7 @@ aside {
   left: 0;
   z-index: 1000;
   display: block;
-  padding: 20px;
+  padding: 10px 20px;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   background-color: $body-bg;
