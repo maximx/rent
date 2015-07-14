@@ -11,3 +11,8 @@ $ ->
   $('#item-calendar').click ()->
     $(this).tab('show')
     $('#calendar').fullCalendar('render')
+
+  $('#item-container').wookmark
+    autoResize: true
+    container: $('.main-content')
+    offset: 10

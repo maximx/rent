@@ -97,10 +97,5 @@ $ ->
     $input.trigger('fileselect', [numFiles, label])
   )
 
-  $('#item-container').wookmark
-    autoResize: true
-    container: $('.main-content')
-    offset: 10
-
   $(document).on 'page:receive', ->
     tinymce.remove()
