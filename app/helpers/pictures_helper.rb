@@ -44,7 +44,7 @@ module PicturesHelper
   private
 
     def public_id_of(user)
-      if user.profile
+      if user.profile && user.profile.picture
         user.profile.picture.public_id
       else
         DEFAULT_AVATAR
