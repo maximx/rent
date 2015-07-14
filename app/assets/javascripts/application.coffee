@@ -36,7 +36,8 @@ $ ->
       e.cancelBubble = true
 
   # bootstrap tooltip, popover
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip
+    container: 'body'
 
   $('[data-toggle="popover"]').popover
     html: true
