@@ -26,7 +26,11 @@ module ItemsHelper
   end
 
   def render_users_reviews(user, good_or_bad, total_count)
-    total_count[ [user.id, Review.rates[good_or_bad] ] ] || 0
+    if total_count
+      total_count[ [user.id, Review.rates[good_or_bad] ] ]
+    else
+      0
+    end
   end
 
 end
