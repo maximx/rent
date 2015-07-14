@@ -50,19 +50,6 @@ a:hover { text-decoration: none; }
 // site container
 #site-content { padding: 0 20px; }
 
-aside {
-  padding-left: 0;
-
-  .list-group {
-    .list-group-item.active {
-      a {
-        color: #FFFFFF;
-        &:hover { color: #BBBBBB; }
-      }
-    }
-  }
-}
-
 /* Sidebar navigation */
 .sidebar {
   position: fixed;
