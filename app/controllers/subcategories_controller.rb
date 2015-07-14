@@ -6,6 +6,7 @@ class SubcategoriesController < ApplicationController
 
   def show
     @items = @subcategory.items.page(params[:page])
+    @obj = @subcategory
     find_users_reviews_count
     render "items/index"
   end

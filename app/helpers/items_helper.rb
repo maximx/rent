@@ -8,12 +8,12 @@ module ItemsHelper
     end
   end
 
-  def render_item_index_breadcrumbs
+  def render_item_index_breadcrumbs(obj = {})
     case params[:controller]
     when "categories"
-      breadcrumb :category, @category
+      breadcrumb :category, obj
     when "subcategories"
-      breadcrumb :subcategory, @subcategory
+      breadcrumb :subcategory, obj
     end
   end
 

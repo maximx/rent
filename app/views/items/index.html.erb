@@ -1,4 +1,4 @@
-<% render_item_index_breadcrumbs %>
+<% render_item_index_breadcrumbs(@obj) %>
 
 <div id="item-container">
   <%= render partial: "items/item", collection: @items, as: :item %>
