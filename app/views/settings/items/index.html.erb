@@ -1,7 +1,7 @@
 <%= render partial: "settings/items/search" %>
 
 <div class="span12">
-  <table class="table table-borded">
+  <table class="table table-borded table-hover">
     <thead>
       <tr>
         <th>名稱</th>
@@ -22,10 +22,11 @@
         <td><%= @rent_records_count[[item.id,"returned"]] %></td>
         <td><%= @rent_records_count[[item.id,"withdrawed"]] %></td>
         <td><%= render_renting_checkbox(@rent_records_count[[item.id,"renting"]]) %>
-        <td>
-          <%= link_to("紀錄", item_rent_records_path(item), class: "btn btn-default") %>
-          <%= link_to("修改", edit_item_path(item), class: "btn btn-info") %>
-          <%= link_to("刪除", item_path(item), method: :delete, data: { confirm: "確定要刪除#{item.name}嗎？"}, class: "btn btn-danger") %>
+        <td class="btn-group">
+          <%= link_to(render_icon("list-alt", class: "text-primary"), item_rent_records_path(item), class: "btn btn-default") %>
+          <%= link_to(render_icon("edit", class: "text-success"), edit_item_path(item), class: "btn btn-default") %>
+          <%= link_to(render_icon("trash", class: "text-danger"), item_path(item),
+                      class: "btn btn-default", method: :delete, data: { confirm: "確定要刪除#{item.name}嗎？"}) %>
         </td>
       </tr>
     <% end %>
