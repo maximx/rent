@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   include RentCloudinary
   include UsersReviewsCount
 
-  before_action :login_required, except: [ :index, :show, :search ]
+  before_action :login_required, except: [ :index, :show, :search, :questions, :calendar ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :set_item_maps_marker, only: [ :show, :calendar, :questions ]
