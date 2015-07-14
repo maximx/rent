@@ -1,6 +1,6 @@
-<%= render_link_li class: "list-group" do |li|
-      li << ["基本資料", settings_account_path, { li_html: { class: "list-group-item" } } ]
-      li << ["帳戶設定", edit_settings_account_path, { li_html: { class: "list-group-item" } } ]
-      li << ["出租物管理", settings_items_path, { li_html: { class: "list-group-item" } } ]
-      li << ["承租紀錄", settings_rent_records_path, { li_html: { class: "list-group-item" } } ]
+<%= render_link_li class: "nav nav-sidebar" do |li|
+      li << ["基本資料", settings_account_path]
+      li << ["帳戶設定", edit_settings_account_path]
+      li << ["出租物管理", settings_items_path]
+      li << ["承租紀錄", settings_rent_records_path]
     end %>

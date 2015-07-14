@@ -11,16 +11,18 @@
 
 <%= render partial: "common/header" %>
 
-<div id="site-content" class="container-fluid" role="main">
-  <aside class="col-md-2">
-    <%= render_aside_navigation %>
-  </aside>
+<div class="container-fluid" role="main">
+  <div class="row">
+    <aside class="col-md-2 sidebar">
+      <%= render_aside_navigation %>
+    </aside>
 
-  <section class="col-md-10">
-    <%= render_notice(notice) %>
-    <%= render_alert(alert) %>
-    <%= yield %>
-  </section>
+    <section class="col-md-10 col-md-offset-2">
+      <%= render_notice(notice) %>
+      <%= render_alert(alert) %>
+      <%= yield %>
+    </section>
+  </div>
 </div>
 
 </body>
