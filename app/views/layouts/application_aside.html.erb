@@ -12,7 +12,9 @@
 <%= render partial: "common/header" %>
 
 <div id="site-content" class="container-fluid" role="main">
-  <aside class="col-md-2"><%= render_aside_navigation %></aside>
+  <aside class="col-md-2">
+    <%= render_aside_navigation %>
+  </aside>
 
   <section class="col-md-10">
     <%= render_notice(notice) %>
@@ -20,19 +22,6 @@
     <%= yield %>
   </section>
 </div>
-
-<script type="text/javascript">
-  $(function() {
-      $('.nav-tabs a[data-toggle=tab]').click(function() {
-        window.location.hash = this.hash;
-      });
-
-      if (location.hash != "") {
-        $active_tab = $('a[href='+ location.hash + ']');
-        $active_tab && $active_tab.click();
-      }
-  });
-</script>
 
 </body>
 </html>
