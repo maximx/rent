@@ -19,6 +19,7 @@
 @import "fullcalendar";
 
 body { padding-top: 70px; }
+.anchor { padding-top: 55px; margin-top: -55px; }
 
 //header
 .site-header {
@@ -146,10 +147,6 @@ a:hover { text-decoration: none; }
   font-weight: bold;
 
   &.profile { padding-top: 0; margin-top: -3px; }
-}
-
-.tab-content {
-  padding-top: 15px;
 }
 
 /*pagination*/

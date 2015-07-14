@@ -38,19 +38,25 @@ module ApplicationHelper
     li_link = []
 
     list.each_with_index do |li, index|
-      li_options = li[2] || {}
-      css_class = []
-      css_class << li_options[:class] if li_options[:class]
-
-      active_class = if current_page? li[1]
-                       "active"
+      link_options = if li[2] && li[2][:link_html]
+                       li[2][:link_html]
                      else
-                       ""
+                       {}
                      end
-      css_class << active_class
-      li_options[:class] = css_class.join(" ")
+      li_options = if li[2] && li[2][:li_html]
+                     li[2][:li_html]
+                   else
+                     {}
+                   end
 
-      li_link << content_tag(:li, link_to(li[0], li[1]), li_options)
+      li_css_class = []
+      li_css_class << li_options[:class] if li_options[:class]
+
+      active_class = (current_page? li[1].gsub(/#.*/, '') ) ? "active" : ""
+      li_css_class << active_class
+
+      li_options[:class] = li_css_class.join(" ")
+      li_link << content_tag(:li, link_to(li[0], li[1], link_options), li_options)
     end
 
     content_tag(:ul, li_link.join.to_s.html_safe, options)
