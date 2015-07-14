@@ -62,6 +62,14 @@ module ApplicationHelper
     content_tag(:ul, li_link.join.to_s.html_safe, options)
   end
 
+  def render_icon_with_text(icon, text)
+    "#{render_icon(icon)}#{text}"
+  end
+
+  def render_icon(icon)
+    content_tag(:span, nil, class: "glyphicon glyphicon-#{icon}")
+  end
+
   private
 
     def alert_notice_tag(type)

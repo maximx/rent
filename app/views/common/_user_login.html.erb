@@ -8,21 +8,21 @@
                   data: { toggle: "tooltip", placement: "bottom" }) %>
     </li>
     <li class="nav-item">
-      <%= link_to(content_tag(:span,"", class: "glyphicon glyphicon-plus").html_safe,
+      <%= link_to(render_icon("plus").html_safe,
                   new_item_path,
                   class: "nav-link",
                   title: "新增出租物",
                   data: { toggle: "tooltip", placement: "bottom" }) %>
     </li>
     <li class="nav-item">
-      <%= link_to(content_tag(:span,"", class: "glyphicon glyphicon-cog").html_safe,
+      <%= link_to(render_icon("cog").html_safe,
                   settings_account_path,
                   class: "nav-link",
                   title: "管理與設定",
                   data: { toggle: "tooltip", placement: "bottom" }) %>
     </li>
     <li class="nav-item">
-      <%= link_to(content_tag(:span, "", class: "glyphicon glyphicon-log-out").html_safe,
+      <%= link_to(render_icon("log-out").html_safe,
                   destroy_user_session_path,
                   method: :delete,
                   class: "nav-link",

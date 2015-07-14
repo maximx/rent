@@ -2,9 +2,9 @@ module Settings::ItemsHelper
 
   def render_renting_checkbox(count)
     if count == 1
-      content_tag(:span, "", class: "glyphicon glyphicon-ok")
+      render_icon("ok")
     else
-      content_tag(:span, "", class: "glyphicon glyphicon-unchecked")
+      render_icon("unchecked")
     end
   end
 
