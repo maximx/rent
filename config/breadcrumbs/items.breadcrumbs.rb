@@ -23,6 +23,16 @@ crumb :item do |item|
 end
 
 crumb :item_edit do |item|
-  link "修改", item_path(item)
+  link "修改", edit_item_path(item)
+  parent :item, item
+end
+
+crumb :item_calendar do |item|
+  link "出租日曆", calendar_item_path(item)
+  parent :item, item
+end
+
+crumb :item_questions do |item|
+  link "問與答", questions_item_path(item)
   parent :item, item
 end
