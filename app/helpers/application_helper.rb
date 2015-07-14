@@ -38,13 +38,19 @@ module ApplicationHelper
     li_link = []
 
     list.each_with_index do |li, index|
+      li_options = li[2] || {}
+      css_class = []
+      css_class << li_options[:class] if li_options[:class]
+
       active_class = if current_page? li[1]
-                       " active"
+                       "active"
                      else
                        ""
                      end
-      css_class = "list-group-item#{active_class}"
-      li_link << content_tag(:li, link_to(li[0], li[1]), class: css_class)
+      css_class << active_class
+      li_options[:class] = css_class.join(" ")
+
+      li_link << content_tag(:li, link_to(li[0], li[1]), li_options)
     end
 
     content_tag(:ul, li_link.join.to_s.html_safe, options)
