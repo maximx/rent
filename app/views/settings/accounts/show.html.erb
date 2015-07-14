@@ -1,7 +1,7 @@
 <h2 class="col-sm-offset-2"><%= link_to(current_user.email, user_path(current_user)) %></h2>
 
 <div class="col-sm-offset-2 profile-picture">
-  <%= render_cl_image_small @profile.picture.public_id if @profile.picture %>
+  <%= render_cl_avatar_md current_user %>
 </div>
 
 <%= simple_form_for @profile do |f| %>

@@ -1,12 +1,12 @@
 module PicturesHelper
 
-  def render_cl_image_small(public_id, options = {})
+  def render_cl_image_sm(public_id, options = {})
     default_options = { width: 200, height: 150, crop: :fill }
     render_cl_image(public_id, default_options, options)
   end
 
-  def render_cl_image_mid(public_id, options = {})
-    default_options = { width: 350, height: 250, crop: :fill }
+  def render_cl_image_md(public_id, options = {})
+    default_options = { width: 250, height: 180, crop: :fill }
     render_cl_image(public_id, default_options, options)
   end
 
@@ -22,14 +22,14 @@ module PicturesHelper
     render_cl_image(public_id, default_options, options)
   end
 
-  def render_cl_avatar_small(user, options = {})
+  def render_cl_avatar_sm(user, options = {})
     public_id = public_id_of(user)
     default_options = { width: 75, height: 75, crop: :fill }
 
     render_cl_image(public_id, default_options, options)
   end
 
-  def render_cl_avatar_medium(user, options = {})
+  def render_cl_avatar_md(user, options = {})
     public_id = public_id_of(user)
     default_options = { width: 150, height: 150, crop: :fill }
 

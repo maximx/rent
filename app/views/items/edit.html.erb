@@ -10,7 +10,7 @@
                   class: "close remove-picture",
                   method: :delete, remote: true,
                   data: { confirm: "確定要刪除嗎？" }) %>
-      <%= render_cl_image_small picture.public_id, data: { id: picture.id } %>
+      <%= render_cl_image_sm picture.public_id, data: { id: picture.id } %>
     </div>
   <% end %>
   </div>
