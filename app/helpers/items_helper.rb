@@ -25,8 +25,8 @@ module ItemsHelper
     !["review"].include?(params[:action])
   end
 
-  def render_users_reviews(user, good_or_bad, total_count)
-    if total_count
+  def render_user_reviews(user, good_or_bad, total_count)
+    if total_count && !total_count.empty?
       total_count[ [user.id, Review.rates[good_or_bad] ] ]
     else
       0

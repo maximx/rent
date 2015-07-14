@@ -14,8 +14,8 @@
   <div class="item-info-short">
     <%= link_to(item.lender.email, user_path(item.lender)) %>
     <div>
-      正評∶<%= render_users_reviews(item.lender, :good, @users_reviews_count) %>
-      負評∶<%= render_users_reviews(item.lender, :bad, @users_reviews_count) %>
+      正評∶<%= render_user_reviews(item.lender, :good, @users_reviews_count) %>
+      負評∶<%= render_user_reviews(item.lender, :bad, @users_reviews_count) %>
     </div>
   </div>
 </div>
