@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     resources :questions, only: [ :create, :update, :destroy ]
     resources :pictures, only: [ :destroy ]
 
+    member do
+      get :calendar
+      get :questions
+    end
+
     resources :rent_records do
       resources :reviews, only: [ :create ]
 

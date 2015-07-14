@@ -1,55 +1,5 @@
 <% breadcrumb :item, @item %>
 
-<section>
-
-  <%= render partial: "items/item_info_container", locals: { item: @item } %>
-
-  <div class="item-nav-tab-container">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active">
-        <a href="#description" id="nav-tab-description" aria-controls="description" role="tab" data-toggle="tab">介紹</a>
-      </li>
-      <!-- load calendar first -->
-      <li role="presentation"><a href="#rent-calendar" id="item-calendar" aria-controls="rent-calendar" role="tab" data-toggle="tab">出租日曆</a></li>
-      <li role="presentation"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">出租紀錄</a></li>
-      <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">問與答</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="description">
-        <%= simple_format @item.description %>
-      </div>
-
-      <div role="tabpanel" class="tab-pane" id="rent-calendar">
-        <%= render partial: "rent_records/calendar", locals: { rent_records_json: @rent_records_json } %>
-      </div>
-
-      <div role="tabpanel" class="tab-pane" id="questions">
-        <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
-        <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
-      </div>
-
-      <div role="tabpanel" class="tab-pane" id="records">
-        <%= render partial: "rent_records/rent_record_list", locals: { rent_records: @item.rent_records.reverse } %>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="hide">
-  <%= form_for @item, url: new_item_rent_record_path(@item), method: :get, html: { id: "new_rent_record_form" } do %>
-    <%= hidden_field_tag :rent_record_started_at %>
-    <%= hidden_field_tag :rent_record_ended_at %>
-  <% end %>
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    buildGoogleMap(<%= raw @maps.to_json %>);
-
-  });
-</script>
+<%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
+  <%= simple_format @item.description %>
+<% end %>

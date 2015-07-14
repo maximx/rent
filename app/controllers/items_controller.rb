@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show, :search ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
-  before_action :find_item, only: [ :show, :collect, :uncollect ]
+  before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
+  before_action :set_item_maps_marker, only: [ :show, :calendar, :questions ]
   before_action :set_picture_public_id, only: [ :create, :update ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect ]
 
@@ -14,9 +15,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @question = @item.questions.build
-    @rent_records_json = @item.active_records.includes(:borrower).to_json
-    set_item_maps_marker
   end
 
   def new
@@ -68,22 +66,30 @@ class ItemsController < ApplicationController
     render :index
   end
 
+  def calendar
+    @rent_records_json = @item.active_records.includes(:borrower).to_json
+  end
+
+  def questions
+    @question = @item.questions.build
+  end
+
   private
 
-  def item_params
-    params.require(:item).permit(
-      :name, :price, :minimum_period, :address,
-      :deposit, :description, :subcategory_id,
-      pictures_attributes: [ :public_id ]
-    )
-  end
+    def item_params
+      params.require(:item).permit(
+        :name, :price, :minimum_period, :address,
+        :deposit, :description, :subcategory_id,
+        pictures_attributes: [ :public_id ]
+      )
+    end
 
-  def find_lender_item
-    @item = current_user.items.find(params[:id])
-  end
+    def find_lender_item
+      @item = current_user.items.find(params[:id])
+    end
 
-  def find_item
-    @item = Item.find(params[:id])
-  end
+    def find_item
+      @item = Item.find(params[:id])
+    end
 
 end

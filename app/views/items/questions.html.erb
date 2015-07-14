@@ -1,0 +1,4 @@
+<%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
+  <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
+  <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
+<% end %>

@@ -1,0 +1,3 @@
+<%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
+  <%= render partial: "rent_records/calendar", locals: { rent_records_json: @rent_records_json } %>
+<% end %>

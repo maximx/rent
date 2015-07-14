@@ -22,7 +22,7 @@ module ItemsHelper
   end
 
   def collect_rent_display?
-    !["review", "index"].include?(params[:action])
+    !["review"].include?(params[:action])
   end
 
   def render_users_reviews(user, good_or_bad, total_count)

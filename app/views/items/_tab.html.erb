@@ -1,0 +1,38 @@
+<section>
+
+  <%= render partial: "items/item_info_container", locals: { item: item } %>
+
+  <div class="item-nav-tab-container">
+    <%= render_link_li class: "nav nav-tabs", role: "tablist" do |li|
+          li << ["介紹", item_path(item)]
+          li << ["出租日曆", calendar_item_path(item)]
+          li << ["出租紀錄", item_rent_records_path(item)]
+          li << ["問與答", questions_item_path(item)]
+        end %>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active">
+        <%= yield %>
+      </div>
+
+      <div role="tabpanel" class="tab-pane">
+        <%# render partial: "rent_records/rent_record_list", locals: { rent_records: item.rent_records.reverse } %>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="hide">
+  <%= form_for item, url: new_item_rent_record_path(item), method: :get, html: { id: "new_rent_record_form" } do %>
+    <%= hidden_field_tag :rent_record_started_at %>
+    <%= hidden_field_tag :rent_record_ended_at %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    buildGoogleMap(<%= raw maps.to_json %>);
+  });
+</script>
