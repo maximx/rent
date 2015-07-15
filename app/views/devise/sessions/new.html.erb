@@ -1,6 +1,6 @@
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group">
-    <h2 class="col-sm-offset-2 col-sm-10">
+    <h2 class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9">
       <%= t("devise.views.sign_in") %>
     </h2>
   </div>
@@ -18,17 +18,17 @@
     <%= f.input :remember_me,
                 as: :boolean,
                 wrapper: :default,
-                wrapper_html: { class: "col-sm-offset-2 col-sm-10 checkbox" } %>
+                wrapper_html: { class: "col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 checkbox" } %>
   </div>
 
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9">
       <%= f.button :submit, t("devise.views.sign_in") %>
     </div>
   </div>
 
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9">
       <%= render "devise/shared/links" %>
     </div>
   </div>
