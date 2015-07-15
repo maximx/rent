@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   end
 
   def role_of(rent_record)
-    if self == rent_record.item.lender
+    if self == rent_record.lender
       return "lender"
     elsif self == rent_record.borrower
       return "borrower"

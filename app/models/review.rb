@@ -34,7 +34,7 @@ class Review < ActiveRecord::Base
         self.user = rent_record.borrower
       elsif "borrower" == judger.role_of(rent_record)
         self.user_role = "lender"
-        self.user = rent_record.item.lender
+        self.user = rent_record.lender
       end
     end
 

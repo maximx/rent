@@ -126,6 +126,10 @@ class RentRecord < ActiveRecord::Base
     ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
   end
 
+  def lender
+    self.item.lender
+  end
+
   protected
 
     def set_price

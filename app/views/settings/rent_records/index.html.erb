@@ -15,7 +15,7 @@
       <td><%= render_datetime_period(rent_record) %></td>
       <td><%= rent_record.aasm.human_state %></td>
       <td>
-        <%= link_to(rent_record.item.lender.email, user_path(rent_record.item.lender)) %>
+        <%= link_to(rent_record.lender.email, user_path(rent_record.lender)) %>
         :
         <%= rent_record.review_of_user(current_user).human_rate %>
       </td>
