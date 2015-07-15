@@ -1,10 +1,19 @@
-<h2 class="col-xs-offset-4 col-sm-offset-3"><%= link_to(current_user.email, user_path(current_user)) %></h2>
 
 <div class="col-xs-offset-4 col-sm-offset-3 profile-picture">
   <%= render_cl_avatar_md current_user %>
 </div>
 
 <%= simple_form_for @profile do |f| %>
+  <div class="form-group">
+    <div class="col-xs-4 col-sm-3 control-label">
+      <label>電子郵件</label>
+    </div>
+
+    <div class="col-xs-6 col-sm-6">
+      <%= text_field_tag nil, @profile.user.email, class: "form-control", disabled: true %>
+    </div>
+  </div>
+
   <%= f.simple_fields_for :picture, @profile do |p| %>
     <%= p.input :public_id, as: :file_select %>
     <%= current_user.profile.errors[:pictures].first %>
