@@ -1,3 +1,4 @@
-<%= render partial: "profiles/profile", locals: { user: @user, profile: @profile } %>
+<%= render partial: "profiles/profile", locals: { user: @user, profile: @profile,
+           default_content: { obj: @profile.description, text: "這個人很懒什麼都沒填 (´ﾟдﾟ`)"} } %>
 
 <%= simple_format @profile.description %>

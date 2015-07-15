@@ -75,6 +75,18 @@ module ApplicationHelper
     content_tag(:span, nil, options)
   end
 
+  def render_default_content(obj, text)
+    if obj.nil?
+      render_mute text
+    elsif obj.empty?
+      render_mute text
+    end
+  end
+
+  def render_mute(text)
+    content_tag(:h3, text, class: "text-muted text-center")
+  end
+
   private
 
     def alert_notice_tag(type)

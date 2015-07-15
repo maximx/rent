@@ -1,4 +1,5 @@
-<%= render partial: "profiles/profile", locals: { user: @user, profile: @profile } %>
+<%= render partial: "profiles/profile", locals: { user: @user, profile: @profile,
+           default_content: { obj: @followings, text: "不尾行人的 ヽ(✿ﾟ▽ﾟ)ノ"} } %>
 
 <% @followings.each do |follow| %>
   <div><%= render_cl_avatar_sm(follow) %></div>

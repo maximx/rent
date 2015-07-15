@@ -1,4 +1,5 @@
-<%= render partial: "profiles/profile", locals: { user: @user, profile: @profile } %>
+<%= render partial: "profiles/profile", locals: { user: @user, profile: @profile,
+           default_content: { obj: @items, text: "沒東西 (́◉◞౪◟◉‵)"} } %>
 
 <div id="item-container">
   <%= render partial: "items/item", collection: @items, as: :item %>
