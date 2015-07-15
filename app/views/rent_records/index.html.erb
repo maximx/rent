@@ -3,5 +3,7 @@
 <%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
   <%= render partial: "rent_records/rent_record_list", locals: { rent_records: @rent_records.reverse } %>
   <%= will_paginate @items %>
+
+  <%= render_default_content(@rent_records, "無承租紀錄") %>
 <% end %>
 

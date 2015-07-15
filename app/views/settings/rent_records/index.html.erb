@@ -32,3 +32,10 @@
 
 <%= will_paginate @rent_records, class: "hidden-sm hidden-xs" %>
 <%= will_paginate @rent_records, class: "hidden-lg hidden-md", page_links: false %>
+
+<%= render_default_content(@rent_records) do %>
+  沒租過
+  <mark>
+    <%= link_to("來去租", root_path, class: "text-danger") %>
+  </mark>
+<% end %>

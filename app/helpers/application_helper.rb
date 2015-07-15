@@ -75,7 +75,9 @@ module ApplicationHelper
     content_tag(:span, nil, options)
   end
 
-  def render_default_content(obj, text)
+  def render_default_content(obj, text = nil, &block)
+    text = capture(&block) if block_given?
+
     if obj.nil?
       render_mute text
     elsif obj.empty?
