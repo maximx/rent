@@ -14,5 +14,4 @@ $ ->
 
   $('#item-container').wookmark
     autoResize: true
-    container: $('.main-content')
-    offset: 10
+    offset: 15
