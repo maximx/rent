@@ -15,25 +15,29 @@ module PicturesHelper
     render_cl_image(public_id, default_options, options)
   end
 
-  def render_cl_avatar_circle(user, options = {})
+  def render_cl_avatar_xs(user, options = {})
+    size_options = { width: 30, height: 30 }
+    size_options.reverse_merge! avatar_default_options
     public_id = public_id_of(user)
-    default_options = { width: 30, height: 30, crop: :fill, gravity: :face, radius: :max, class: "img-circle img-thumbnail" }
 
-    render_cl_image(public_id, default_options, options)
+    render_cl_image(public_id, size_options, options)
   end
 
   def render_cl_avatar_sm(user, options = {})
+    size_options = { width: 50, height: 50 }
+    size_options.reverse_merge! avatar_default_options
     public_id = public_id_of(user)
-    default_options = { width: 75, height: 75, crop: :fill }
 
-    render_cl_image(public_id, default_options, options)
+    render_cl_image(public_id, size_options, options)
   end
 
   def render_cl_avatar_md(user, options = {})
-    public_id = public_id_of(user)
-    default_options = { width: 150, height: 150, crop: :fill }
+    size_options = { width: 150, height: 150 }
+    size_options.reverse_merge! avatar_default_options
 
-    render_cl_image(public_id, default_options, options)
+    public_id = public_id_of(user)
+
+    render_cl_image(public_id, size_options, options)
   end
 
   def render_cl_image(public_id, default_options, options = {})
@@ -49,6 +53,10 @@ module PicturesHelper
       else
         DEFAULT_AVATAR
       end
+    end
+
+    def avatar_default_options
+      { crop: :fill, gravity: :face, radius: :max, class: "img-circle img-thumbnail" }
     end
 
 end

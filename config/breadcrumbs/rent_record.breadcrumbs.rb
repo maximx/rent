@@ -9,7 +9,7 @@ crumb :rent_records do |item|
 end
 
 crumb :rent_record do |item, rent_record|
-  link render_date(rent_record.started_at), item_rent_record_path(item, rent_record)
+  link rent_record.started_at.to_s(:date_only), item_rent_record_path(item, rent_record)
   parent :rent_records, item
 end
 

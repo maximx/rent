@@ -1,24 +1,27 @@
-<table class="table">
+<table class="table table-hover">
   <thead>
     <th>承租物</th>
-    <th>租用金額</th>
+    <th>評價</th>
+    <th>租金</th>
     <th>期間</th>
     <th>狀態</th>
-    <th>評價</th>
-    <th>#</th>
+    <th></th>
   </thead>
   <tbody>
   <% @rent_records.each do |rent_record| %>
     <tr>
       <td><%= link_to(rent_record.item.name, item_path(rent_record.item)) %></td>
-      <td><%= rent_record.currency_price %></td>
-      <td><%= render_datetime_period(rent_record) %></td>
-      <td><%= rent_record.aasm.human_state %></td>
       <td>
-        <%= link_to(rent_record.lender.email, user_path(rent_record.lender)) %>
-        :
-        <%= rent_record.review_of_user(current_user).human_rate %>
+        <%= link_to user_path(rent_record.lender), class: "img-circle img-thumbnail",
+                    data: { toggle: "tooltip" }, title: rent_record.lender.email do %>
+          <%= render_cl_avatar_sm(rent_record.lender) %>
+        <% end %>
+
+        <span><%= rent_record.review_of_user(current_user).human_rate %></span>
       </td>
+      <td><%= rent_record.currency_price %></td>
+      <td><%= render_datetime_period(rent_record, :date_only) %></td>
+      <td><%= rent_record.aasm.human_state %></td>
       <td class="btn-group">
         <%= render_operate_rent_record_links(rent_record) %>
       </td>

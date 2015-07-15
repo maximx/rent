@@ -10,7 +10,7 @@ zh-TW:
       review/rate:
           bad: '負評'
           good: '好評'
-          notyet: '尚未評價'
+          notyet: '未評價'
     errors:
       models:
         item:
