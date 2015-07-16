@@ -49,13 +49,37 @@ class ItemsController < ApplicationController
   end
 
   def collect
-    current_user.collect!(@item) unless current_user.is_collected?(@item)
-    redirect_to item_path(@item)
+    unless current_user.is_collected?(@item)
+      current_user.collect!(@item)
+      result = {
+        status: "ok",
+        href: uncollect_item_path(@item, format: :json),
+        method: "delete",
+        class: "btn-danger"
+      }
+    end
+
+    respond_to do |format|
+      format.html { redirect_to item_path(@item) }
+      format.json { render json: result }
+    end
   end
 
   def uncollect
-    current_user.uncollect!(@item) if current_user.is_collected?(@item)
-    redirect_to item_path(@item)
+    if current_user.is_collected?(@item)
+      current_user.uncollect!(@item)
+      result = {
+        status: "ok",
+        href: collect_item_path(@item, format: :json),
+        method: "post",
+        class: "btn-default"
+      }
+    end
+
+    respond_to do |format|
+      format.html { redirect_to item_path(@item) }
+      format.json { render json: result }
+    end
   end
 
   def search

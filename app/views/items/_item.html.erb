@@ -1,4 +1,5 @@
 <div class="item-box">
+
   <%= link_to item_path(item), class: "item-link" do %>
     <div>
       <%= render_cl_image_md(item.pictures.first.public_id) if item.pictures.exists? %>
@@ -18,4 +19,6 @@
       負評∶<%= render_user_reviews(item.lender, :bad, @users_reviews_count) %>
     </div>
   </div>
+
+  <%= render_collect_item_links(item, :remote) %>
 </div>

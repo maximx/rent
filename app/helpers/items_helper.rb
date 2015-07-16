@@ -1,10 +1,28 @@
 module ItemsHelper
 
-  def render_collect_item_link(item)
-    if current_user && current_user.is_collected?(item) && collect_rent_display?
-       link_to("取消收藏", uncollect_item_path(item), method: :delete, class: "btn btn-default")
+  def render_collect_item_links(item, type = "")
+    if uncollect_link_display?(item)
+      render_uncollect_item_link(item, type)
     elsif collect_rent_display?
-       link_to("收藏", collect_item_path(item), method: :post, class: "btn btn-info")
+      render_collect_item_link(item, type)
+    end
+  end
+
+  def render_uncollect_item_link(item, type = "")
+    if is_remote?(type)
+      link_to(render_icon("bookmark"), uncollect_item_path(item, format: :json),
+              remote: is_remote?(type), method: :delete, class: "btn btn-danger item-bookmark")
+    else
+      link_to("取消收藏", uncollect_item_path(item), method: :delete, class: "btn btn-default")
+    end
+  end
+
+  def render_collect_item_link(item, type = "")
+    if is_remote?(type)
+      link_to(render_icon("bookmark"), collect_item_path(item, format: :json),
+              remote: is_remote?(type), method: :post, class: "btn btn-default item-bookmark")
+    else
+      link_to("收藏", collect_item_path(item), method: :post, class: "btn btn-primary item-bookmark")
     end
   end
 
@@ -32,5 +50,11 @@ module ItemsHelper
       0
     end
   end
+
+  private
+
+    def uncollect_link_display?(item)
+     ( current_user && current_user.is_collected?(item) && collect_rent_display? )
+    end
 
 end

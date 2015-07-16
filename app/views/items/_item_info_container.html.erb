@@ -15,7 +15,7 @@
     <div>出租物地址∶<%= item.address %></div>
 
     <div class="item-action">
-      <%= render_collect_item_link(item) %>
+      <%= render_collect_item_links(item) %>
       <%= link_to("預約承租", new_item_rent_record_path(item), class: "btn btn-success") if rent_record_button_display?(item) %>
     </div>
   </div>

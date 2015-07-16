@@ -89,6 +89,10 @@ module ApplicationHelper
     content_tag(:h3, text, class: "text-muted text-center")
   end
 
+  def is_remote?(type)
+    type.to_sym == :remote
+  end
+
   private
 
     def alert_notice_tag(type)
