@@ -6,3 +6,5 @@
 
 <%= will_paginate @items, class: "hidden-sm hidden-xs" %>
 <%= will_paginate @items, class: "hidden-lg hidden-md", page_links: false %>
+
+<%= render_default_content(@items, "沒東西...") %>
