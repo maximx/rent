@@ -49,11 +49,15 @@ class Item < ActiveRecord::Base
   end
 
   def active_records
-    rent_records.where.not(aasm_state: "withdrawed").order(started_at: :desc)
+    rent_records.actived.order(started_at: :desc)
   end
 
   def self.overlaps_types
     [["尚未出租", "record_not_overlaps"], ["已出租", "record_overlaps"]]
+  end
+
+  def self.overlaps_values
+    self.overlaps_types.to_h.values
   end
 
   protected

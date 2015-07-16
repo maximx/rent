@@ -20,6 +20,8 @@ class RentRecord < ActiveRecord::Base
       .where.not(aasm_state: "withdrawed")
   end
 
+  scope :actived, -> { where.not(aasm_state: "withdrawed") }
+
   aasm no_direct_assignment: true do
     state :booking, initial: true
     state :renting

@@ -9,14 +9,27 @@ class Settings::ItemsController < ApplicationController
     @rent_records_count.default = 0
   end
 
+  def calendar
+    @rent_records_json = if params[:role] == "borrower"
+                           current_user.rent_records.includes(:borrower).actived.to_json
+                         else
+                           RentRecord.includes(:borrower).actived.where(item_id: current_user.items).to_json
+                         end
+  end
+
   private
 
     def find_items
-      @items = current_user.items.send(overlap_method, params[:started_at], params[:ended_at]).search_by(params[:query])
+      @items = current_user.items.send(overlap_method, params[:started_at], params[:ended_at])
+                .search_by(params[:query])
     end
 
     def overlap_method
-      params[:overlaps] ||= Item.overlaps_types.first.second
+      if Item.overlaps_values.include?(params[:overlaps])
+        params[:overlaps]
+      else
+        Item.overlaps_types.first.second
+      end
     end
 
 end

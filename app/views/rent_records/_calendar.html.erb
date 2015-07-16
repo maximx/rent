@@ -11,9 +11,10 @@
   $(document).ready(function() {
     var calendar_format = 'YYYY-MM-DD HH:mm:ss';
     var default_date;
+    var $started_obj = $('#rent_record_started_at')
 
-    if ( $('#rent_record_started_at').val() != "" ) {
-      default_date = moment($('#rent_record_started_at').val(), calendar_format);
+    if ( $started_obj.size() > 0 && $started_obj.val() != "" ) {
+      default_date = moment($started_obj.val(), calendar_format);
     } else {
       default_date = moment().format(calendar_format);
     }
@@ -37,7 +38,7 @@
           alert("不能選擇過去");
           return;
         }
-        $('#rent_record_started_at').val(start.format(calendar_format));
+        $started_obj.val(start.format(calendar_format));
         $('#rent_record_ended_at').val(end.format(calendar_format));
 
         //for item show

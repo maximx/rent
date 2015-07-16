@@ -2,6 +2,7 @@
       li << [ render_icon_with_text("user", "基本資料").html_safe, settings_account_path ]
       li << [ render_icon_with_text("lock", "帳戶設定").html_safe, edit_settings_account_path ]
       li << [ render_icon_with_text("list", "出租物管理").html_safe, settings_items_path ]
-      li << [ render_icon_with_text("calendar", "日曆").html_safe, calendar_settings_items_path ]
       li << [ render_icon_with_text("record", "承租紀錄").html_safe, settings_rent_records_path ]
+      li << [ render_icon_with_text("calendar", "出租日曆").html_safe, calendar_settings_items_path(role: "lender") ]
+      li << [ render_icon_with_text("calendar", "承租日曆").html_safe, calendar_settings_items_path(role: "borrower") ]
     end %>
