@@ -9,7 +9,11 @@
     <% end %>
     <div class="follow-info">
       <div><%= link_to(follow.email, user_path(follow)) %></div>
-      <span><%= render_follow_link(follow) if current_user != follow %></span>
+      <span>
+        <%= link_to("取消追蹤", unfollow_user_path(follow, format: :json),
+                    method: :delete, remote: true,
+                    class: "btn btn-default unfollow-user") %>
+      </span>
     </div>
   </li>
 <% end %>
