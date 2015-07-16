@@ -1,8 +1,16 @@
 <%= render partial: "profiles/profile", locals: { user: @user, profile: @profile,
            default_content: { obj: @followings, text: "不尾行人的 ヽ(✿ﾟ▽ﾟ)ノ"} } %>
 
+<ol class="users-list">
 <% @followings.each do |follow| %>
-  <div><%= render_cl_avatar_sm(follow) %></div>
-  <div><%= link_to(follow.email, user_path(follow)) %></div>
-  <div><%= render_follow_link(follow) if current_user != follow %></div>
+  <li class="follow-container clearfix">
+    <%= link_to user_path(follow), class: "follow-avatar img-circle img-thumbnail" do %>
+      <%= render_cl_avatar_sm(follow) %>
+    <% end %>
+    <div class="follow-info">
+      <div><%= link_to(follow.email, user_path(follow)) %></div>
+      <span><%= render_follow_link(follow) if current_user != follow %></span>
+    </div>
+  </li>
 <% end %>
+</ol>
