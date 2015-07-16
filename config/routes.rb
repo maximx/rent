@@ -50,7 +50,9 @@ Rails.application.routes.draw do
     resource :account, only: [ :show, :edit, :update ]
     resources :rent_records, only: [ :index ]
 
-    resources :items, only: [ :index ]
+    resource :items, only: [ :show ] do
+      get :calendar, on: :member
+    end
   end
 
   resources :categories, only: [ :show ]
