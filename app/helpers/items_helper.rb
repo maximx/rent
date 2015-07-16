@@ -27,7 +27,7 @@ module ItemsHelper
 
   def render_user_reviews(user, good_or_bad, total_count)
     if total_count && !total_count.empty?
-      total_count[ [user.id, Review.rates[good_or_bad] ] ]
+      total_count[ [user.id, Review.rates[good_or_bad] ] ] || 0
     else
       0
     end
