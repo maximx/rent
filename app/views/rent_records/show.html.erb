@@ -1,19 +1,74 @@
 <% breadcrumb :rent_record, @item, @rent_record %>
 
-<div>
-  <div>承租物∶<%= link_to(@item.name, item_path(@item)) %></div>
-  <div>
-    會員帳號∶
-    <%= link_to(@rent_record.borrower.email, user_path(@rent_record.borrower)) %>
-  </div>
-  <div>承租人∶<%= @rent_record.name %></div>
-  <div>電話∶<%= @rent_record.phone %></div>
-  <div>交易狀態∶<%= @rent_record.aasm.human_state %></div>
-  <div>起租日期∶<%= render_datetime(@rent_record.started_at) %></div>
-  <div>迄租日期∶<%= render_datetime(@rent_record.ended_at) %></div>
-  <% #TODO: 顯示評價 %>
-  <div>承租人評價</div>
-
+<div class="btn-group pull-right">
   <%= render_edit_rent_record_link(@rent_record) %>
-  <%= link_to("簡易契約檔案", item_rent_record_path(@item, @rent_record, format: :pdf), target: :_blank, class: "btn btn-warning") %>
+  <%= link_to(render_icon("download-alt", class: "text-warning"), item_rent_record_path(@item, @rent_record, format: :pdf),
+              target: :_blank, class: "btn btn-default", title: "下載契約", data: { toggle: "tooltip" }) %>
 </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td></td>
+      <td>
+        <span>出租者</span>
+        <%= render_cl_avatar_sm(@item.lender) %>
+      </td>
+      <td>
+        <span>承租者</span>
+        <%= render_cl_avatar_sm(@rent_record.borrower) %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>電子郵件</td>
+      <td><%= link_to(@item.lender.email, user_path(@item.lender)) %></td>
+      <td><%= link_to(@rent_record.borrower.email, user_path(@rent_record.borrower)) %></td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>姓名</td>
+      <td><%= @item.lender.profile.name %></td>
+      <td><%= @rent_record.borrower.profile.name %></td>
+    </tr>
+
+    <tr>
+      <td>電話</td>
+      <td><%= @item.lender.profile.phone %></td>
+      <td><%= @rent_record.borrower.profile.phone %></td>
+    </tr>
+
+    <tr>
+      <td>評價</td>
+      <td><%= @rent_record.review_of_judger(@item.lender).human_rate %></td>
+      <td><%= @rent_record.review_of_judger(@rent_record.borrower).human_rate %></td>
+    </tr>
+
+    <tr>
+      <td>承租物</td>
+      <td colspan="2"><%= link_to(@item.name, item_path(@item)) %></td>
+    </tr>
+
+    <tr>
+      <td>狀態</td>
+      <td colspan="2"><%= @rent_record.aasm.human_state %></td>
+    </tr>
+
+    <tr>
+      <td>租金</td>
+      <td colspan="2">$<%= @rent_record.price %></td>
+    </tr>
+
+    <tr>
+      <td>承租物</td>
+      <td colspan="2"><%= @item.name %></td>
+    </tr>
+
+    <tr>
+      <td>租期</td>
+      <td colspan="2"><%= render_datetime_period(@rent_record, :tw) %></td>
+    </tr>
+  </tbody>
+</table>
