@@ -1,6 +1,10 @@
-.review-info {
-  float: left;
-  margin-left: 10px;
+@import "bootstrap/variables";
 
-  p { margin: 0px; }
+.reviews-container {
+  border-bottom: solid 1px $gray-lighter;
+  padding-bottom: 5px;
+
+  .review-info {
+    p { margin: 0px; }
+  }
 }

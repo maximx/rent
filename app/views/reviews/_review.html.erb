@@ -1,22 +1,24 @@
-<div class="review-container clearfix">
-  <div class="pull-left">
+<div class="reviews-container col-xs-12 col-sm-12">
+  <div class="col-xs-offset-3 col-xs-2 col-sm-offset-2 col-sm-1">
     <%= render_cl_avatar_sm review.judger %>
   </div>
 
-  <table class="review-info">
-    <tr>
-      <td class="text-right">交易人員∶</td>
-      <td>
-        <%= link_to(review.judger.email, user_path(review.judger)) %>(<%= review.human_rate %>)
-      </td>
-    </tr>
-    <tr>
-      <td class="text-right">承租物∶</td>
-      <td><%= link_to(review.item.name, item_path(review.item)) %></td>
-    </tr>
-    <tr>
-      <td class="text-right">意見∶</td>
-      <td><%= simple_format review.content %></div>
-    </tr>
-  </table>
+  <div class="col-xs-7 col-sm-9">
+    <table class="review-info">
+      <tr>
+        <td class="text-right">交易人員∶</td>
+        <td>
+          <%= link_to(review.judger.email, user_path(review.judger)) %>(<%= review.human_rate %>)
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right">承租物∶</td>
+        <td><%= link_to(review.item.name, item_path(review.item)) %></td>
+      </tr>
+      <tr>
+        <td class="text-right">意見∶</td>
+        <td><%= simple_format review.content %></div>
+      </tr>
+    </table>
+  </div>
 </div>
