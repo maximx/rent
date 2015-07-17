@@ -92,12 +92,12 @@ class ItemsController < ApplicationController
 
   def calendar
     @event_sources_path = calendar_item_path(@item, format: :json)
-    @rent_records_json = @item.rent_records.includes(:borrower)
+    rent_records_json = @item.rent_records.includes(:borrower)
       .overlaps(params[:start], params[:end]).to_json
 
     respond_to do |format|
       format.html { render :calendar }
-      format.json { render json: @rent_records_json }
+      format.json { render json: rent_records_json }
     end
   end
 

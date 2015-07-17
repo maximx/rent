@@ -10,11 +10,19 @@ class Settings::ItemsController < ApplicationController
   end
 
   def calendar
-    @rent_records_json = if params[:role] == "borrower"
-                           current_user.rent_records.includes(:borrower).actived.to_json
+    @event_sources_path = calendar_settings_items_path(format: :json, role: params[:role])
+    rent_records_json = if params[:role] == "borrower"
+                           current_user.rent_records.includes(:borrower)
+                             .overlaps(params[:start], params[:end]).to_json
                          else
-                           RentRecord.includes(:borrower).actived.where(item_id: current_user.items).to_json
+                           RentRecord.includes(:borrower).where(item_id: current_user.items)
+                             .overlaps(params[:start], params[:end]).to_json
                          end
+
+    respond_to do |format|
+      format.html { render :calendar }
+      format.json { render json: rent_records_json }
+    end
   end
 
   private
