@@ -1,9 +1,7 @@
 <% breadcrumb :rent_record, @item, @rent_record %>
 
 <div class="btn-group pull-right">
-  <%= render_edit_rent_record_link(@rent_record) %>
-  <%= link_to(render_icon("download-alt", class: "text-warning"), item_rent_record_path(@item, @rent_record, format: :pdf),
-              target: :_blank, class: "btn btn-default", title: "下載契約", data: { toggle: "tooltip" }) %>
+  <%= render_operate_rent_record_links(@rent_record) %>
 </div>
 
 <table class="table">

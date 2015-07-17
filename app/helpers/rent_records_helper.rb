@@ -47,7 +47,7 @@ module RentRecordsHelper
   end
 
   def render_show_rent_record_link(rent_record)
-    if rent_record.viewable_by?(current_user)
+    if rent_record.viewable_by?(current_user) && !current_page?(item_rent_record_path(rent_record.item, rent_record))
       link_to(render_icon("zoom-in", class: "text-info"), item_rent_record_path(rent_record.item, rent_record),
               class: "btn btn-default", title: "查閱", data: { toggle: "tooltip" })
     end
