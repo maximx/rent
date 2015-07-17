@@ -48,11 +48,11 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]
-    resources :rent_records, only: [ :index ]
-
-    resource :items, only: [ :show ] do
+    resource :rent_records, only: [ :show ] do
       get :calendar, on: :member
     end
+
+    resource :items, only: [ :show ]
   end
 
   resources :categories, only: [ :show ]
