@@ -54,7 +54,7 @@ module ItemsHelper
   end
 
   def new_rent_record_button_display?(item)
-    item.rentable_by?(current_user) && item_action_display?
+    (current_user.blank? || item.rentable_by?(current_user) ) && item_action_display?
   end
 
   def item_action_display?
