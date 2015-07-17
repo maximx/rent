@@ -17,9 +17,8 @@ class RentRecord < ActiveRecord::Base
 
   scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
-      .where.not(aasm_state: "withdrawed")
+      .actived
   end
-
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
 
   aasm no_direct_assignment: true do

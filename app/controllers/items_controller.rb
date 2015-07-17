@@ -91,7 +91,13 @@ class ItemsController < ApplicationController
   end
 
   def calendar
-    @rent_records_json = @item.active_records.includes(:borrower).to_json
+    @rent_records_json = @item.rent_records.includes(:borrower)
+      .overlaps(params[:start], params[:end]).to_json
+
+    respond_to do |format|
+      format.html { render :calendar }
+      format.json { render json: @rent_records_json }
+    end
   end
 
   def questions

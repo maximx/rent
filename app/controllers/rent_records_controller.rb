@@ -124,7 +124,7 @@ class RentRecordsController < ApplicationController
   end
 
   def find_rent_records_json
-    @rent_records_json = @item.active_records.includes(:borrower).to_json
+    @rent_records_json = @item.rent_records.includes(:borrower).actived.to_json
   end
 
   def set_start_and_end_params

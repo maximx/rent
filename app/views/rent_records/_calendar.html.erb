@@ -30,7 +30,9 @@
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      events: <%= raw rent_records_json %>,
+      eventSources: {
+        url: '<%= event_sources_path %>'
+      },
       selectable: true,
       selectOverlap: false,
       select: function(start, end) {

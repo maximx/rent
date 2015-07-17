@@ -48,10 +48,6 @@ class Item < ActiveRecord::Base
     "$#{price}/#{period}"
   end
 
-  def active_records
-    rent_records.actived.order(started_at: :desc)
-  end
-
   def self.overlaps_types
     [["尚未出租", "record_not_overlaps"], ["已出租", "record_overlaps"]]
   end
