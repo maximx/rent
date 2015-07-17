@@ -1,5 +1,8 @@
 zh-TW:
   activerecord:
+    models:
+      item: "出租物"
+      rent_record: "承租預約"
     attributes:
       rent_record:
         aasm_state:
@@ -11,6 +14,7 @@ zh-TW:
           bad: '負評'
           good: '好評'
           notyet: '未評價'
+
     errors:
       models:
         item:

@@ -1,1 +1,5 @@
 zh-TW:
+  helpers:
+    submit:
+      create: "新增%{model}"
+      update: "修改%{model}"
