@@ -27,6 +27,7 @@ zh-TW:
         price: '租金'
         minimum_period: '最短租期'
         deposit: '押金'
+        down_payment: '訂金'
         address: '物品所在地'
         description: '介紹'
         pictures:
