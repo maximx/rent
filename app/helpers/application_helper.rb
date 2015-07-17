@@ -14,10 +14,6 @@ module ApplicationHelper
     end
   end
 
-  def settings_page?
-    "profiles" == params[:controller] || params[:controller].start_with?("settings")
-  end
-
   def render_alert(msg)
     @msg = msg
     alert_notice_tag("danger") if msg.present?
@@ -87,6 +83,10 @@ module ApplicationHelper
 
   def render_mute(text)
     content_tag(:h3, text, class: "text-muted text-center")
+  end
+
+  def settings_page?
+    "profiles" == params[:controller] || params[:controller].start_with?("settings")
   end
 
   def is_remote?(type)

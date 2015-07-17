@@ -61,10 +61,8 @@ module ItemsHelper
     !["review"].include?(params[:action])
   end
 
-  private
-
-    def uncollect_link_display?(item)
-     ( current_user && current_user.is_collected?(item) && item_action_display? )
-    end
+  def uncollect_link_display?(item)
+   ( current_user && current_user.is_collected?(item) && item_action_display? )
+  end
 
 end
