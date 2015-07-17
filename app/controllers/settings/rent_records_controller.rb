@@ -4,7 +4,7 @@ class Settings::RentRecordsController < ApplicationController
   before_action :login_required
 
   def show
-    @rent_records = current_user.rent_records.reverse_order.page(params[:page])
+    @rent_records = current_user.rent_records.includes(:item).reverse_order.page(params[:page])
   end
 
   def calendar
