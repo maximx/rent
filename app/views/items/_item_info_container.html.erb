@@ -1,22 +1,46 @@
-<div class="item-info-container clearfix">
+<div class="item-header clearfix">
   <h3 class="item-title"><%= link_to(@item.name, item_path(@item)) %></h3>
 
-  <div class="col-md-6">
-    <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
+  <div class="item-action btn-group">
+    <%= render_collect_item_links(item) %>
+    <%= render_new_rent_record_link(item) %>
   </div>
+</div>
 
-  <div class="col-md-6">
-    <div id="map"></div>
+<div class="item-show-container">
 
-    <div>出租者∶<%= link_to(item.lender.email, user_path(item.lender)) %></div>
-    <div>租金∶<%= item.price_period %></div>
-    <div>最少租期∶<%= "#{item.minimum_period}#{item.period}" %></div>
-    <div>押金∶$<%= item.deposit %></div>
-    <div>出租物地址∶<%= item.address %></div>
+  <div class="row">
 
-    <div class="item-action">
-      <%= render_collect_item_links(item) %>
-      <%= link_to("預約承租", new_item_rent_record_path(item), class: "btn btn-success") if rent_record_button_display?(item) %>
+    <div class="col-md-6">
+      <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
     </div>
+
+    <div class="col-md-6">
+      <div class="item-map-detail">
+        <div id="map" class="img-thumbnail"></div>
+
+        <dl class="dl-horizontal">
+          <dt>出租者</dt>
+          <dd><%= link_to(item.lender.email, user_path(item.lender)) %></dd>
+
+          <dt>出租物地址</dt>
+          <dd><%= item.address %></dd>
+
+          <dt>租金</dt>
+          <dd><%= item.price_period %></dd>
+
+          <dt>最短租期</dt>
+          <dd><%= "#{item.minimum_period}#{item.period}" %></dd>
+
+          <dt>訂金</dt>
+          <dd>$<%= item.down_payment %></dd>
+
+          <dt>押金</dt>
+          <dd>$<%= item.deposit %></dd>
+        </dl>
+      </div>
+    </div>
+
   </div>
+
 </div>

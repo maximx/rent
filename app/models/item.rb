@@ -40,12 +40,16 @@ class Item < ActiveRecord::Base
     user && user == lender
   end
 
+  def rentable_by?(user)
+    user && user != lender
+  end
+
   def city
     address[0..2]
   end
 
   def price_period
-    "$#{price}/#{period}"
+    "#{currency_price}/#{period}"
   end
 
   def self.overlaps_types

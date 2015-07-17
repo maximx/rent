@@ -7,7 +7,7 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel-inner img-thumbnail" role="listbox">
   <% pictures.each_with_index do |picture, index| %>
     <div class="item<%= " active" if index == 0 %>">
       <%= render_cl_image_lg(picture.public_id) %>

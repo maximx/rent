@@ -71,8 +71,6 @@ a:hover { text-decoration: none; }
         color: $gray-darker;
         padding-right: 20px;
         padding-left: 20px;
-
-        > span { margin-right: 5px; }
       }
 
       &.active {
@@ -223,3 +221,5 @@ a:hover { text-decoration: none; }
 
 .img-thumbnail { padding: 0; }
 p.description { font-size: 15px; }
+
+a > span.glyphicon { margin-right: 5px; }
