@@ -30,4 +30,4 @@
 <%= hidden_field_tag :minimun_period, item.minimum_period %>
 <%= hidden_field_tag :item_price, item.price %>
 
-<%= render partial: "rent_records/calendar", locals: { rent_records_json: rent_records_json } %>
+<%= render partial: "rent_records/calendar", locals: { event_sources_path: event_sources_path } %>

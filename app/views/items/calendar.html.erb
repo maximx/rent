@@ -1,5 +1,5 @@
 <% breadcrumb :item_calendar, @item %>
 
 <%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
-  <%= render partial: "rent_records/calendar", locals: { event_sources_path: calendar_item_path(@item) } %>
+  <%= render partial: "rent_records/calendar", locals: { event_sources_path: @event_sources_path } %>
 <% end %>

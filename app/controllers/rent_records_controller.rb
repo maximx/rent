@@ -3,8 +3,8 @@ class RentRecordsController < ApplicationController
   before_action :find_item
   before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
   before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :withdrawing, :ask_for_review ]
-  before_action :find_rent_records_json, only: [ :new, :create, :edit, :update ]
   before_action :find_navbar_categories
+  before_action :set_calendar_event_sources_path, only: [ :new, :create, :edit, :update ]
 
   def index
     @rent_records = @item.rent_records.includes(:borrower).page(params[:page])
@@ -123,8 +123,8 @@ class RentRecordsController < ApplicationController
     @rent_record = @item.rent_records.find(params[:id])
   end
 
-  def find_rent_records_json
-    @rent_records_json = @item.rent_records.includes(:borrower).actived.to_json
+  def set_calendar_event_sources_path
+    @event_sources_path = calendar_item_path(@item, format: :json)
   end
 
   def set_start_and_end_params
