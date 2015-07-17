@@ -1,5 +1,5 @@
 <% breadcrumb :item, @item %>
 
 <%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
-  <%= simple_format @item.description %>
+  <%= simple_format @item.description, class: "description" %>
 <% end %>
