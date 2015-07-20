@@ -22,10 +22,10 @@ class RentRecord < ActiveRecord::Base
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
 
   aasm no_direct_assignment: true do
-    state :booking, initial: true
-    state :renting
-    state :withdrawed
-    state :returned
+    state :booking, initial: true, before_enter: :set_state_updated_at
+    state :renting, before_enter: :set_state_updated_at
+    state :withdrawed, before_enter: :set_state_updated_at
+    state :returned, before_enter: :set_state_updated_at
 
     event :rent do
       transitions from: :booking, to: :renting
@@ -135,6 +135,14 @@ class RentRecord < ActiveRecord::Base
 
     def set_price
       self.price =  rent_days * item.price
+    end
+
+  private
+
+    def set_state_updated_at
+      attribute_name = aasm.to_state.to_s + "_at="
+      attribute_name = aasm.current_state.to_s + "_at=" if aasm.to_state.nil?
+      self.send(attribute_name, Time.now)
     end
 
 end
