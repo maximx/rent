@@ -91,19 +91,22 @@ a:hover { text-decoration: none; }
   > .form-group {
     display: inline;
 
-    &.city-form-group {
-      float: left;
-      margin-right: 5px;
-    }
-
     > .input-group {
       display: table;
       margin-top: 0;
       width: auto;
 
       > .input-group-btn { width: 1%; }
+
+      #city {
+        color: $gray-light;
+        border-radius: 0;
+        border-left: none;
+        -webkit-appearance: none;
+      }
     }
   }
+
 }
 
 .form-horizontal {
