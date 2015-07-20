@@ -89,14 +89,7 @@ a:hover { text-decoration: none; }
   margin-bottom: 5px;
   border-top: 0;
 
-  .form-group {
-    position: relative;
-
-    &.input-group {
-      margin-top: 0;
-      width: 200px;
-    }
-  }
+  .form-group.input-group { margin-top: 0; }
 }
 
 .form-horizontal {
