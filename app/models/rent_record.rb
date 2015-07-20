@@ -75,20 +75,21 @@ class RentRecord < ActiveRecord::Base
     }
   end
 
+  # state changed calendar event
   def aasm_state_dates_json
     dates_json = [ as_json ]
 
-    aasm.states.map(&:name).each do |state|
+    aasm.states.each do |state|
       attribute_name = state.to_s + "_at"
       state_changed_at = self.send( attribute_name )
 
       unless state_changed_at.nil?
         dates_json << {
-          id: state,
-          title: state,
+          id: state.name,
+          title: state.human_name,
           start: state_changed_at,
           end: state_changed_at + 1.day,
-          color: "#%06x" % (rand * 0xffffff)
+          color: state_color(state.name)
         }
       end
     end
@@ -164,6 +165,14 @@ class RentRecord < ActiveRecord::Base
       attribute_name = aasm.to_state.to_s + "_at="
       attribute_name = aasm.current_state.to_s + "_at=" if aasm.to_state.nil?
       self.send(attribute_name, Time.now)
+    end
+
+    def state_color(state)
+      colors = {
+        booking: :blue, renting: :green,
+        withdrawed: :gray, returned: :red
+      }
+      colors[state.to_sym]
     end
 
 end
