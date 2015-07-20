@@ -86,10 +86,24 @@ a:hover { text-decoration: none; }
 
 #search-form {
   margin-top: 10px;
-  margin-bottom: 5px;
-  border-top: 0;
+  margin-bottom: 0px;
 
-  .form-group.input-group { margin-top: 0; }
+  > .form-group {
+    display: inline;
+
+    &.city-form-group {
+      float: left;
+      margin-right: 5px;
+    }
+
+    > .input-group {
+      display: table;
+      margin-top: 0;
+      width: auto;
+
+      > .input-group-btn { width: 1%; }
+    }
+  }
 }
 
 .form-horizontal {
@@ -142,7 +156,7 @@ a:hover { text-decoration: none; }
 .user-navbar {
   list-style: none;
   margin-top: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   padding: 0;
   float: right;
 
