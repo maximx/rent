@@ -11,7 +11,7 @@ class RentRecord < ActiveRecord::Base
   belongs_to :item
   has_many :reviews
 
-  self.per_page = 20
+  self.per_page = 15
 
   before_save :set_price
 
@@ -73,6 +73,27 @@ class RentRecord < ActiveRecord::Base
       end: ended_at,
       url: Rails.application.routes.url_helpers.item_rent_record_path(item, id)
     }
+  end
+
+  def aasm_state_dates_json
+    dates_json = [ as_json ]
+
+    aasm.states.map(&:name).each do |state|
+      attribute_name = state.to_s + "_at"
+      state_changed_at = self.send( attribute_name )
+
+      unless state_changed_at.nil?
+        dates_json << {
+          id: state,
+          title: state,
+          start: state_changed_at,
+          end: state_changed_at + 1.day,
+          color: "#%06x" % (rand * 0xffffff)
+        }
+      end
+    end
+
+    dates_json
   end
 
   #可查閱

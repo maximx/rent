@@ -12,9 +12,13 @@ class RentRecordsController < ApplicationController
   end
 
   def show
+    @event_sources_path = item_rent_record_path(@item, @rent_record)
+    rent_record_dates = @rent_record.aasm_state_dates_json
+
     if @rent_record.viewable_by?(current_user)
       respond_to do |format|
         format.html
+        format.json { render json: rent_record_dates }
         format.pdf do
           pdf = RentRecordPdf.new(@item, @rent_record)
 
