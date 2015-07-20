@@ -61,6 +61,8 @@ gem 'cloudinary'
 gem 'gretel'
 gem 'will_paginate'
 
+gem 'whenever'
+
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
