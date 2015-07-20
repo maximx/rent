@@ -1,7 +1,7 @@
 class RentRecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
   before_action :find_item
-  before_action :find_user_rent_record, only: [ :edit, :update, :destroy ]
+  before_action :find_user_rent_record, only: [ :edit, :update ]
   before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :withdrawing, :ask_for_review ]
   before_action :find_navbar_categories
   before_action :set_calendar_event_sources_path, only: [ :new, :create, :edit, :update ]
@@ -60,11 +60,6 @@ class RentRecordsController < ApplicationController
     end
   end
 
-  def destroy
-    @rent_record.destroy
-    redirect_to  item_path(@item)
-  end
-
   def review
     if @rent_record.can_review_by?(current_user)
       @review = @rent_record.reviews.build
@@ -89,17 +84,17 @@ class RentRecordsController < ApplicationController
 
   def renting
     @rent_record.rent! if @rent_record.can_rent_by?(current_user)
-    redirect_to item_rent_records_path(@item)
+    redirect_to :back
   end
 
   def returning
     @rent_record.return! if @rent_record.can_return_by?(current_user)
-    redirect_to item_rent_records_path(@item)
+    redirect_to :back
   end
 
   def withdrawing
     @rent_record.withdraw! if @rent_record.can_withdraw_by?(current_user)
-    redirect_to item_path(@item)
+    redirect_to :back
   end
 
   private

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get :questions
     end
 
-    resources :rent_records do
+    resources :rent_records, except: [ :destroy ] do
       resources :reviews, only: [ :create ]
 
       member do
