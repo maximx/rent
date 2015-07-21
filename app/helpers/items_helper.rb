@@ -54,7 +54,7 @@ module ItemsHelper
   end
 
   def new_rent_record_button_display?(item)
-    (current_user.blank? || item.rentable_by?(current_user) ) && item_action_display?
+    (!user_signed_in? || item.rentable_by?(current_user) ) && item_action_display?
   end
 
   def item_action_display?
@@ -62,7 +62,7 @@ module ItemsHelper
   end
 
   def uncollect_link_display?(item)
-   ( current_user && current_user.is_collected?(item) && item_action_display? )
+    user_signed_in? && current_user.is_collected?(item) && item_action_display?
   end
 
 end

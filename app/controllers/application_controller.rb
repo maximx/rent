@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def login_required
-    if current_user.blank?
+    unless user_signed_in?
       respond_to do |format|
         format.html { authenticate_user! }
         format.all { head(:unauthorized) }
