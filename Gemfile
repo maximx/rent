@@ -62,6 +62,7 @@ gem 'gretel'
 gem 'will_paginate'
 
 gem 'whenever'
+gem 'meta-tags'
 
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
