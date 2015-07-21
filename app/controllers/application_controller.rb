@@ -6,12 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def login_required
-    unless user_signed_in?
-      respond_to do |format|
-        format.html { authenticate_user! }
-        format.all { head(:unauthorized) }
-      end
-    end
+    authenticate_user! unless user_signed_in?
   end
 
   def find_navbar_categories

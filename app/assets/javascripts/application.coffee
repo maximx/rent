@@ -100,3 +100,7 @@ $ ->
 
   $(document).on 'page:receive', ->
     tinymce.remove()
+
+  $(document).ajaxError (e, xhr, settings) ->
+    if xhr.status == 401 && confirm(xhr.responseJSON.error)
+      window.location = "/users/sign_in"
