@@ -20,4 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 every :hour do
   rake "rent_records:withdraw_overdue"
+  rake "rent_records:notice_return"
 end

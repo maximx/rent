@@ -27,9 +27,17 @@ class UserMailer < ApplicationMailer
     @judger = judger
     @review = review
     @user = user
-    @item = review.rent_record.item
+    @item = review.item
 
     mail to: user.email, subject: ask_for_review_subject
+  end
+
+  def notify_rent_record_return(rent_record)
+    @borrower_name = rent_record.borrower.profile.name
+    @rent_record = rent_record
+    @lender = rent_record.item.lender
+
+    mail to: rent_record.borrower.email, subject: "承租物#{rent_record.item.name}即將到期"
   end
 
   private

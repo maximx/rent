@@ -1,0 +1,18 @@
+<h4>您好, <%= @borrower_name %></h4>
+
+<p>
+您的承租物品 - <%= link_to(@rent_record.item.name, item_url(@rent_record.item)) %>，
+</p>
+
+<p>
+預訂歸還時間為<%= @rent_record.ended_at.to_s(:tw) %>，請在約定時間內返還。
+如因故無法於約定時間內歸還，或欲延長承租時間，請與出租人聯繫。
+</p>
+
+<p><%= link_to("至此", item_rent_record_url(@rent_record.item, @rent_record)) %>參閱詳細承租資訊，謝謝</p>
+
+*****************
+<p>出租人資訊<p>
+<p>姓名∶<%= @lender.profile.name %></p>
+<p>電子郵件∶<%= @lender.email %></p>
+<p>電話∶<%= @lender.profile.phone %></p>
