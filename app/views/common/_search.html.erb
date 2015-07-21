@@ -2,12 +2,12 @@
 
   <div class="form-group">
     <div class="input-group">
-      <%= text_field_tag :query, nil, class: "form-control keyword", placeholder: "關鍵字", value: params[:query] %>
-
       <div class="input-group-btn">
         <%= select_tag :city, options_for_select(City.options_collection, params[:city]),
                        include_blank: "選擇地點", class: "form-control" %>
       </div>
+
+      <%= text_field_tag :query, nil, class: "form-control keyword", placeholder: "關鍵字", value: params[:query] %>
 
       <span class="input-group-btn">
         <button type="submit" class="btn btn-default"><%= render_icon("search") %></button>
