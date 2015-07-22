@@ -4,7 +4,8 @@ module ApplicationHelper
     display_meta_tags(
       site: SITE_NAME,
       keywords: KEYWORDS,
-      og: { site_name: SITE_NAME, type: "website" }
+      og: { site_name: SITE_NAME, type: "website" },
+      reverse: true
     )
   end
 

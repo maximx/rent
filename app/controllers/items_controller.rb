@@ -130,7 +130,6 @@ class ItemsController < ApplicationController
         keywords: @item.seo_keywords,
         description: @item.price_description,
         canonical: item_url(@item),
-        reverse: true,
         og: {
           title: @item.name,
           description: @item.price_description,
