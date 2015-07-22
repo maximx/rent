@@ -36,6 +36,8 @@ class Item < ActiveRecord::Base
     where.not(id: record_overlaps(started_at, ended_at))
   end
 
+  scope :index_pictures_urls, -> { all.map{ |i| cloudinary_url(i.index_picture_public_id) }.uniq }
+
   def editable_by?(user)
     user && user == lender
   end
@@ -64,16 +66,16 @@ class Item < ActiveRecord::Base
     "租金∶#{price_period}"
   end
 
+  def meta_keywords
+    KEYWORDS + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
+  end
+
   def index_picture_public_id
     pictures.first.public_id
   end
 
-  def pictures_url
-    pictures.map { |p| Cloudinary::Utils.cloudinary_url(p.public_id) }
-  end
-
-  def seo_keywords
-    KEYWORDS + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
+  def pictures_urls
+    pictures.map { |p| cloudinary_url(p.public_id) }.uniq
   end
 
   protected
@@ -102,5 +104,9 @@ class Item < ActiveRecord::Base
     arr = [str]
     arr << str.sub("臺", "台")
     arr.uniq.join("|")
+  end
+
+  def self.cloudinary_url(public_id)
+    Cloudinary::Utils.cloudinary_url(public_id)
   end
 end

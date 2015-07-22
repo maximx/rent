@@ -127,14 +127,14 @@ class ItemsController < ApplicationController
     def set_item_meta_tags
       set_meta_tags(
         title: @item.name,
-        keywords: @item.seo_keywords,
+        keywords: @item.meta_keywords,
         description: @item.price_description,
         canonical: item_url(@item),
         og: {
           title: @item.name,
           description: @item.price_description,
           url: item_url(@item),
-          image: @item.pictures_url
+          image: @item.pictures_urls
         }
       )
     end

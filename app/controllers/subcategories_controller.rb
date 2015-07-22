@@ -8,7 +8,7 @@ class SubcategoriesController < ApplicationController
     @items = @subcategory.items.page(params[:page])
     @breadcrumbs_object = @subcategory
     find_users_reviews_count
-    meta_pagination_links @items
+    set_subcategory_meta_tags
     render "items/index"
   end
 
@@ -16,5 +16,20 @@ class SubcategoriesController < ApplicationController
 
     def find_subcategory
       @subcategory = Subcategory.find(params[:id])
+    end
+
+    def set_subcategory_meta_tags
+      meta_pagination_links @items
+
+      set_meta_tags(
+        title: @subcategory.title,
+        keywords: @subcategory.meta_keywords,
+        og: {
+          title: @subcategory.title,
+          #TODO: description
+          url: url_for(params),
+          image: @items.index_pictures_urls
+        }
+      )
     end
 end
