@@ -6,8 +6,9 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @items = @category.items.page(params[:page])
-    @obj = @category
+    @breadcrumbs_object = @category
     find_users_reviews_count
+    meta_pagination_links @items
     render "items/index"
   end
 end

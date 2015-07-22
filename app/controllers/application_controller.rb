@@ -26,4 +26,12 @@ class ApplicationController < ActionController::Base
     view_context.link_to( item.name, item_url(item) )
   end
 
+  def meta_pagination_links(collection)
+    if collection.previous_page
+      set_meta_tags prev: url_for(params.merge(page: collection.previous_page, :only_path => false))
+    end
+    if collection.next_page
+      set_meta_tags next: url_for(params.merge(page: collection.next_page, :only_path => false))
+    end
+  end
 end

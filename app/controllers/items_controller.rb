@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.includes(:pictures).page(params[:page])
     find_users_reviews_count
+    meta_pagination_links @items
   end
 
   def show
@@ -126,7 +127,7 @@ class ItemsController < ApplicationController
     def set_item_meta_tags
       set_meta_tags(
         title: @item.name,
-        keywords: KEYWORDS + @item.name.split(" "),
+        keywords: @item.seo_keywords,
         description: @item.price_description,
         canonical: item_url(@item),
         reverse: true,
@@ -138,5 +139,4 @@ class ItemsController < ApplicationController
         }
       )
     end
-
 end

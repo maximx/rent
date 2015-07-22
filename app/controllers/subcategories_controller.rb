@@ -6,8 +6,9 @@ class SubcategoriesController < ApplicationController
 
   def show
     @items = @subcategory.items.page(params[:page])
-    @obj = @subcategory
+    @breadcrumbs_object = @subcategory
     find_users_reviews_count
+    meta_pagination_links @items
     render "items/index"
   end
 
@@ -16,5 +17,4 @@ class SubcategoriesController < ApplicationController
     def find_subcategory
       @subcategory = Subcategory.find(params[:id])
     end
-
 end

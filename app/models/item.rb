@@ -72,6 +72,10 @@ class Item < ActiveRecord::Base
     pictures.map { |p| Cloudinary::Utils.cloudinary_url(p.public_id) }
   end
 
+  def seo_keywords
+    KEYWORDS + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
+  end
+
   protected
 
   def set_category_id
