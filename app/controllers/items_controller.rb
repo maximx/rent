@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show, :search, :questions, :calendar ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
-  before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
+  before_action :find_item, :set_item_meta_tags, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :set_item_maps_marker, only: [ :show, :calendar, :questions ]
   before_action :set_picture_public_id, only: [ :create, :update ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect ]
@@ -121,6 +121,22 @@ class ItemsController < ApplicationController
 
     def find_item
       @item = Item.find(params[:id])
+    end
+
+    def set_item_meta_tags
+      set_meta_tags(
+        title: @item.name,
+        keywords: KEYWORDS + @item.name.split(" "),
+        description: @item.price_description,
+        canonical: item_url(@item),
+        reverse: true,
+        og: {
+          title: @item.name,
+          description: @item.price_description,
+          url: item_url(@item),
+          image: @item.pictures_url
+        }
+      )
     end
 
 end

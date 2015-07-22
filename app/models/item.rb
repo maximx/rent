@@ -60,6 +60,18 @@ class Item < ActiveRecord::Base
     self.overlaps_types.to_h.values
   end
 
+  def price_description
+    "租金∶#{price_period}"
+  end
+
+  def index_picture_public_id
+    pictures.first.public_id
+  end
+
+  def pictures_url
+    pictures.map { |p| Cloudinary::Utils.cloudinary_url(p.public_id) }
+  end
+
   protected
 
   def set_category_id

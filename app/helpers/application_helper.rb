@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def render_meta_tags
+    display_meta_tags(
+      site: SITE_NAME,
+      keywords: KEYWORDS,
+      og: { site_name: SITE_NAME, type: "website" }
+    )
+  end
+
   def render_category_navbar
     if ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
       render partial: "common/category_navbar"
