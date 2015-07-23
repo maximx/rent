@@ -1,4 +1,3 @@
-
 <%= simple_form_for @user, url: settings_account_path, method: :put do |f| %>
   <div class="form-group">
     <h2 class="col-xs-offet-4 col-xs-8 col-sm-offset-3 col-sm-9">變更密碼</h2>
@@ -10,6 +9,7 @@
 
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :name, required: true %>
     <%= f.input :password, autocomplete: "off", hint: t("devise.views.edit_password_hint"), required: false %>
     <%= f.input :password_confirmation, required: false %>
     <%= f.input :current_password, required: true %>

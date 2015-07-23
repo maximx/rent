@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_accessor :login
+
   has_one :profile
   has_many :items
   has_many :questions
@@ -19,7 +21,16 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+         :confirmable, authentication_keys: [:login]
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where("name = :value OR email = :value", value: login.downcase).first
+    else
+      where(conditions.to_h).first
+    end
+  end
 
   # user follow
   def follow!(user)
