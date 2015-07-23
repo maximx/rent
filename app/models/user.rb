@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :login
 
-  validates_presence_of :account, uniqness: true
+  validates :account, presence: true, uniqueness: true, format: { with: /\A[\w]*\z/ }
 
   has_one :profile
   has_many :items

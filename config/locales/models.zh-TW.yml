@@ -60,6 +60,7 @@ zh-TW:
           attributes:
             account:
               blank: '帳戶名稱為必填'
+              invalid: '帳戶名稱應為英文、數字及_等字元組成'
               taken: '此帳戶名稱已在使用'
             email:
               invalid: '不合法的電子郵件'
