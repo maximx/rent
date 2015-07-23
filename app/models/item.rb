@@ -75,7 +75,7 @@ class Item < ActiveRecord::Base
   end
 
   def pictures_urls
-    pictures.map { |p| cloudinary_url(p.public_id) }.uniq
+    pictures.map { |p| self.class.cloudinary_url(p.public_id) }.uniq
   end
 
   protected
