@@ -19,7 +19,7 @@ class Review < ActiveRecord::Base
   end
 
   def human_rate
-    Review.human_attribute_name("rate.#{rate}")
+    self.class.human_attribute_name("rate.#{rate}")
   end
 
   def item
