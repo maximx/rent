@@ -9,7 +9,7 @@
 # init user
 user = User.new(
   email: "maxim7667@outlook.com",
-  name: "maximx",
+  account: "maximx",
   password: "julius23",
   confirmed_at: Time.now
 )

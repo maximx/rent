@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :login
 
-  validates_presence_of :name, uniqness: true
+  validates_presence_of :account, uniqness: true
 
   has_one :profile
   has_many :items
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions.to_h).where("name = :value OR email = :value", value: login.downcase).first
+      where(conditions.to_h).where("account = :value OR email = :value", value: login).first
     else
       where(conditions.to_h).first
     end
