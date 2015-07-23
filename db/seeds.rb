@@ -7,7 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # init user
-user = User.new(email: "maxim7667@outlook.com", password: "julius23", confirmed_at: Time.now)
+user = User.new(
+  email: "maxim7667@outlook.com",
+  name: "maximx",
+  password: "julius23",
+  confirmed_at: Time.now
+)
 user.save
 
 

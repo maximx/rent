@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :login
 
+  validates_presence_of :name, uniqness: true
+
   has_one :profile
   has_many :items
   has_many :questions

@@ -3,6 +3,7 @@ namespace :fake do
     10.times do
       user = User.new(
         email: FFaker::Internet.email,
+        name: FFaker::Name.first_name,
         password: "julius23",
         confirmed_at: Time.now
       )

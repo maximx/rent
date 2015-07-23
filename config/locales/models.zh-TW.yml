@@ -58,6 +58,9 @@ zh-TW:
               blank: '至少上傳一張圖片'
         user:
           attributes:
+            name:
+              blank: '帳戶名稱為必填'
+              taken: '此帳戶名稱已在使用'
             email:
               invalid: '不合法的電子郵件'
               blank: '電子郵件為必填'
