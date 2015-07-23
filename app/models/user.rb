@@ -66,4 +66,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def meta_keywords
+    KEYWORDS +  [ profile.name ]
+  end
+
+  def picture_url
+    public_id = ApplicationController.helpers.public_id_of(self)
+    Cloudinary::Utils.cloudinary_url(public_id)
+  end
 end

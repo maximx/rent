@@ -1,5 +1,4 @@
 module PicturesHelper
-
   def render_cl_image_sm(public_id, options = {})
     default_options = { width: 200, height: 150, crop: :fill }
     render_cl_image(public_id, default_options, options)
@@ -45,18 +44,17 @@ module PicturesHelper
     cl_image_tag(public_id, options)
   end
 
-  private
-
-    def public_id_of(user)
-      if user.profile && user.profile.picture
-        user.profile.picture.public_id
-      else
-        DEFAULT_AVATAR
-      end
+  def public_id_of(user)
+    if user.profile && user.profile.picture
+      user.profile.picture.public_id
+    else
+      DEFAULT_AVATAR
     end
+  end
+
+  private
 
     def avatar_default_options
       { crop: :fill, gravity: :face, radius: :max, class: "img-circle img-thumbnail" }
     end
-
 end

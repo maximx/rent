@@ -4,9 +4,7 @@ class UsersController < ApplicationController
   layout "application_aside"
 
   before_action :login_required, only: [ :follow, :unfollow ]
-  before_action :find_user
-  before_action :find_total_reviews
-  before_action :find_profile
+  before_action :find_user, :find_total_reviews, :find_profile, :set_user_meta_tags
 
   def show
   end
@@ -68,5 +66,20 @@ class UsersController < ApplicationController
 
     def find_profile
       @profile = @user.profile || @user.build_profile
+    end
+
+    def set_user_meta_tags
+      set_meta_tags(
+        title: @profile.name,
+        keywords: @user.meta_keywords,
+        canonical: user_url(@user),
+        og: {
+          title: @profile.name,
+          type: "profile",
+          #TODO: description
+          url: user_url(@user),
+          image: @user.picture_url
+        }
+      )
     end
 end
