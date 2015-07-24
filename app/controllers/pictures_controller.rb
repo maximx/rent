@@ -1,12 +1,11 @@
 class PicturesController < ApplicationController
   before_action :login_required
-  before_action :find_item, only: [ :destroy ]
-  before_action :find_picture, only: [ :destroy ]
+  before_action :find_item, :find_picture, only: [ :destroy ]
 
   def destroy
     unless @picture.only_one?
-      result = Cloudinary::Uploader.destroy(@picture.public_id)
       @picture.destroy
+      result = { result: "ok" }
     else
       result = { result: "false" }
     end
@@ -17,7 +16,6 @@ class PicturesController < ApplicationController
   end
 
   private
-
     def find_item
       @item = current_user.items.find(params[:item_id])
     end
@@ -25,5 +23,4 @@ class PicturesController < ApplicationController
     def find_picture
       @picture = @item.pictures.find(params[:id])
     end
-
 end
