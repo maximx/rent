@@ -4,7 +4,7 @@ namespace :fake do
       user = User.new(
         email: FFaker::Internet.email,
         account: FFaker::Name.first_name,
-        password: "julius23",
+        password: "abcdefg",
         confirmed_at: Time.now
       )
 
