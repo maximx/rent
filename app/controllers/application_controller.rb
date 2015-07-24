@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
       marker.infowindow("<h4>#{link_of(item)}</h4><br />#{item.address}")
       marker.json({ title: item.name })
     end
+
+    @maps.delete_if { |marker| marker[:lat].nil? || marker[:lng].nil? }
   end
 
   def link_of(item)
