@@ -10,7 +10,7 @@
 user = User.new(
   email: "maxim7667@outlook.com",
   account: "maximx",
-  password: "abcdefg",
+  password: "abcdefgh",
   confirmed_at: Time.now
 )
 user.save
