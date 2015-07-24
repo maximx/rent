@@ -1,5 +1,5 @@
 <% breadcrumb :item, @item %>
 
 <%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
-  <%= @item.description, class: "description" %>
+  <%= @item.description.html_safe unless @item.description.nil? %>
 <% end %>
