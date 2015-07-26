@@ -68,7 +68,7 @@ module ApplicationHelper
   end
 
   def render_icon_with_text(icon, text, options = {})
-    "#{render_icon(icon, options)}#{text}"
+    "#{render_icon(icon, options)}#{text}".html_safe
   end
 
   def render_icon(icon, options = {})

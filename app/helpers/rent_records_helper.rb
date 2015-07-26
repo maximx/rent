@@ -30,7 +30,7 @@ module RentRecordsHelper
 
   def render_withdrawing_rent_record_link(rent_record)
     if rent_record.can_withdraw_by?(current_user)
-      link_to(render_icon("remove", class: "text-danger").html_safe,
+      link_to(render_icon("remove", class: "text-danger"),
               withdrawing_item_rent_record_path(rent_record.item, rent_record),
               method: :delete,
               class: "btn btn-default", title: "取消預訂",

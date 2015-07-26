@@ -14,7 +14,7 @@ module ItemsHelper
       link_to(render_icon( icon ), uncollect_item_path(item, format: :json),
               remote: is_remote?(type), method: :delete, class: "btn btn-danger item-bookmark")
     else
-      link_to(render_icon_with_text(icon, "取消收藏").html_safe, uncollect_item_path(item),
+      link_to(render_icon_with_text(icon, "取消收藏"), uncollect_item_path(item),
               method: :delete, class: "btn btn-default")
     end
   end
@@ -25,7 +25,7 @@ module ItemsHelper
       link_to(render_icon( icon ), collect_item_path(item, format: :json),
               remote: is_remote?(type), method: :post, class: "btn btn-default item-bookmark")
     else
-      link_to(render_icon_with_text(icon, "收藏").html_safe, collect_item_path(item),
+      link_to(render_icon_with_text(icon, "收藏"), collect_item_path(item),
               method: :post, class: "btn btn-default item-bookmark")
     end
   end
@@ -49,7 +49,7 @@ module ItemsHelper
 
   def render_new_rent_record_link(item)
     if new_rent_record_button_display?(item)
-      link_to(render_icon_with_text("paperclip", "預約承租").html_safe, new_item_rent_record_path(item), class: "btn btn-default")
+      link_to(render_icon_with_text("paperclip", "預約承租"), new_item_rent_record_path(item), class: "btn btn-default")
     end
   end
 

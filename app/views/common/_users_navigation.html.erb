@@ -1,8 +1,8 @@
 <%= render_link_li class: "nav nav-sidebar" do |li|
-      li << [ render_icon_with_text("user", "基本資料").html_safe, user_path ]
-      li << [ render_icon_with_text("th", "出租物").html_safe, items_user_path ]
-      li << [ render_icon_with_text("stats", "出租評價").html_safe, lender_reviews_user_path ]
-      li << [ render_icon_with_text("stats", "承租評價").html_safe, borrower_reviews_user_path ]
-      li << [ render_icon_with_text("heart", "追蹤").html_safe, following_user_path ]
-      li << [ render_icon_with_text("bookmark", "收藏").html_safe, items_collect_user_path ]
+      li << [ render_icon_with_text("user", "基本資料"), user_path ]
+      li << [ render_icon_with_text("th", "出租物"), items_user_path ]
+      li << [ render_icon_with_text("stats", "出租評價"), lender_reviews_user_path ]
+      li << [ render_icon_with_text("stats", "承租評價"), borrower_reviews_user_path ]
+      li << [ render_icon_with_text("heart", "追蹤"), following_user_path ]
+      li << [ render_icon_with_text("bookmark", "收藏"), items_collect_user_path ]
     end %>
