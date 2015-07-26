@@ -1,7 +1,14 @@
 <% render_item_index_breadcrumbs(@breadcrumbs_object) %>
 
+<div class="clearfix">
+  <div class="btn-group btn-group-sm pull-right">
+    <%= active_link_to(render_icon("list"), items_path(view: :list), class: "btn btn-default", role: "botton") %>
+    <%= active_link_to(render_icon("th-large"), items_path(view: :grid), class: "btn btn-default") %>
+  </div>
+</div>
+
 <div id="item-container">
-  <%= render partial: "items/item", collection: @items, as: :item %>
+  <%= render partial: "items/#{@view}", locals: { items: @items } %>
 </div>
 
 <%= will_paginate @items, class: "hidden-sm hidden-xs" %>

@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def render_meta_tags
     display_meta_tags(
       site: SITE_NAME,
@@ -68,6 +67,11 @@ module ApplicationHelper
   end
 
   def render_icon_with_text(icon, text, options = {})
+    css_class = []
+    css_class << options[:class] if options[:class]
+    css_class << "text"
+    options[:class] = css_class.join(" ")
+
     "#{render_icon(icon, options)}#{text}".html_safe
   end
 
@@ -92,6 +96,15 @@ module ApplicationHelper
 
   def render_mute(text)
     content_tag(:h3, text, class: "text-muted text-center")
+  end
+
+  def active_link_to(body, url, html_options = {})
+    css_class = []
+    css_class << "active" if current_page? url
+    css_class << html_options[:class] if html_options.has_key?(:class)
+    html_options[:class] = css_class.join(" ")
+
+    link_to body, url, html_options
   end
 
   def settings_page?
@@ -122,5 +135,4 @@ module ApplicationHelper
     def span_close
       content_tag(:span, "x", aria: { hidden: true })
     end
-
 end

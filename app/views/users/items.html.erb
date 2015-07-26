@@ -2,7 +2,7 @@
            default_content: { obj: @items, text: "沒東西 (́◉◞౪◟◉‵)"} } %>
 
 <div id="item-container">
-  <%= render partial: "items/item", collection: @items, as: :item %>
+  <%= render partial: "items/grid", collection: @items, as: :item %>
 </div>
 
 <%= will_paginate @items, class: "hidden-sm hidden-xs" %>

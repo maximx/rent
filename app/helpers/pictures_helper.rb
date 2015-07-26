@@ -1,4 +1,9 @@
 module PicturesHelper
+  def render_cl_image_xs(public_id, options = {})
+    default_options = { width: 100, height: 75, crop: :fill }
+    render_cl_image(public_id, default_options, options)
+  end
+
   def render_cl_image_sm(public_id, options = {})
     default_options = { width: 200, height: 150, crop: :fill }
     render_cl_image(public_id, default_options, options)
