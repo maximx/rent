@@ -1,12 +1,25 @@
 <ul class="item-list">
 <% items.each do |item| %>
-  <li class="item-list-cell">
-    <%= link_to(render_cl_image_sm(item.index_picture_public_id), item_path(item)) %>
-    <%= link_to(item.name, item_path(item)) %>
-    <%= item.price_period %>
-    <%= item.city %>
-    <%= link_to(render_cl_avatar_sm(item.lender), user_path(item.lender), data: { toggle: "tooltip" }, title: item.lender.account) %>
-    <%= render_user_reviews(item.lender, @users_reviews_count) %>
+  <li class="item-list-cell clearfix">
+    <div class="item-list-img"><%= link_to(render_cl_image_sm(item.index_picture_public_id), item_path(item)) %></div>
+    <div class="item-list-info">
+      <h4 class="item-list-name"><%= link_to(item.name, item_path(item)) %></h4>
+      <div><%= "#{t("simple_form.labels.item.price")}∶#{item.price_period}" %></div>
+      <div><%= "#{t("simple_form.labels.item.minimum_period")}∶#{item.minimum_period}#{item.period}" %></div>
+      <div><%= "#{t("simple_form.labels.item.deposit")}∶$#{item.deposit}" %></div>
+      <div><%= "#{t("simple_form.labels.item.down_payment")}∶$#{item.down_payment}" %></div>
+      <div><%= item.address %></div>
+    </div>
+
+    <div class="item-list-user">
+      <div class="item-list-avatar text-center">
+        <%= link_to(render_cl_avatar_sm(item.lender), user_path(item.lender), class: "img-circle img-thumbnail") %>
+      </div>
+      <div class="text-center"><%= link_to(item.lender.account, user_path(item.lender)) %></div>
+      <div class="item-list-review">
+        <%= render_user_reviews(item.lender, @users_reviews_count) %>
+      </div>
+    </div>
   </li>
 <% end %>
 </ul>

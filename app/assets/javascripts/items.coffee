@@ -18,6 +18,6 @@ $ ->
     $(this).tab('show')
     $('#calendar').fullCalendar('render')
 
-  $('#item-container').wookmark
+  $('.item-grid').closest('#item-container').wookmark
     autoResize: true
     offset: 15
