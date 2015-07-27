@@ -1,5 +1,5 @@
 <div class="item-header clearfix">
-  <h3 class="item-title"><%= link_to(@item.name, item_path(@item)) %></h3>
+  <h3 class="item-title"><%= link_to(item.name, item_path(item)) %></h3>
 
   <div class="item-action btn-group">
     <%= render_collect_item_links(item) %>
@@ -8,39 +8,28 @@
 </div>
 
 <div class="item-show-container">
+  <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
 
-  <div class="row">
+  <dl class="dl-horizontal">
+    <dt>出租者</dt>
+    <dd><%= link_to(item.lender.account, user_path(item.lender)) %></dd>
 
-    <div class="col-md-6">
-      <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
-    </div>
+    <dt>出租物地址</dt>
+    <dd><%= item.address %></dd>
 
-    <div class="col-md-6">
-      <div class="item-map-detail">
-        <div id="map" class="img-thumbnail"></div>
+    <dt>租金</dt>
+    <dd><%= item.price_period %></dd>
 
-        <dl class="dl-horizontal">
-          <dt>出租者</dt>
-          <dd><%= link_to(item.lender.email, user_path(item.lender)) %></dd>
+    <dt>最短租期</dt>
+    <dd><%= "#{item.minimum_period}#{item.period}" %></dd>
 
-          <dt>出租物地址</dt>
-          <dd><%= item.address %></dd>
+    <dt>訂金</dt>
+    <dd>$<%= item.down_payment %></dd>
 
-          <dt>租金</dt>
-          <dd><%= item.price_period %></dd>
+    <dt>押金</dt>
+    <dd>$<%= item.deposit %></dd>
 
-          <dt>最短租期</dt>
-          <dd><%= "#{item.minimum_period}#{item.period}" %></dd>
-
-          <dt>訂金</dt>
-          <dd>$<%= item.down_payment %></dd>
-
-          <dt>押金</dt>
-          <dd>$<%= item.deposit %></dd>
-        </dl>
-      </div>
-    </div>
-
-  </div>
-
+    <dt>描述</dt>
+    <dd><%= raw item.description %></dd>
+  </dl>
 </div>

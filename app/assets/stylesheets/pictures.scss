@@ -1,4 +1,9 @@
+@import "bootstrap/variables";
+@import "mixins/variables";
+
+/*item edit*/
 #pictures-container { position: relative; }
+
 .picture {
   float: left;
   position: relative;
@@ -24,10 +29,17 @@
 
 }
 
+/*item show*/
 #picture-carousel {
-  width: 450px;
-  height: 350px;
-  margin-right: auto;
-  margin-left: auto;
+  width: 100%;
+  height: $carousel-height;
   margin-bottom: 15px;
+
+  .item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: $body-bg;
+    background-position: 50% 50%;
+    height: $carousel-height;
+  }
 }

@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
     member do
       get :calendar
-      get :questions
     end
 
     resources :rent_records, except: [ :destroy ] do

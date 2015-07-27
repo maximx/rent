@@ -1,5 +1,22 @@
 <% breadcrumb :item, @item %>
 
-<%= render layout: "items/tab", locals: { item: @item, maps: @maps } do %>
-  <%= raw @item.description %>
-<% end %>
+<section>
+  <%= render partial: "items/item_info_container", locals: { item: @item } %>
+  <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
+  <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
+</section>
+
+<div id="map"></div>
+
+<div class="hide">
+  <%= form_for @item, url: new_item_rent_record_path(@item), method: :get, html: { id: "new_rent_record_form" } do %>
+    <%= hidden_field_tag :rent_record_started_at %>
+    <%= hidden_field_tag :rent_record_ended_at %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    buildGoogleMap(<%= raw @maps.to_json %>);
+  });
+</script>
