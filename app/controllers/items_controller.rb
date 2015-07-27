@@ -2,10 +2,10 @@ class ItemsController < ApplicationController
   include RentCloudinary
   include UsersReviewsCount
 
-  before_action :login_required, except: [ :index, :show, :search, :calendar ]
+  before_action :login_required, except: [ :index, :show, :search ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
-  before_action :find_item, :set_item_meta_tags, only: [ :show, :collect, :uncollect, :calendar ]
-  before_action :set_item_maps_marker, only: [ :show, :calendar ]
+  before_action :find_item, :set_item_meta_tags, only: [ :show, :collect, :uncollect ]
+  before_action :set_item_maps_marker, only: [ :show ]
   before_action :set_picture_public_id, only: [ :create, :update ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect ]
 
@@ -91,17 +91,6 @@ class ItemsController < ApplicationController
     find_users_reviews_count
 
     render :index
-  end
-
-  def calendar
-    @event_sources_path = calendar_item_path(@item, format: :json)
-    rent_records_json = @item.rent_records.includes(:borrower)
-      .overlaps(params[:start], params[:end]).to_json
-
-    respond_to do |format|
-      format.html { render :calendar }
-      format.json { render json: rent_records_json }
-    end
   end
 
   private

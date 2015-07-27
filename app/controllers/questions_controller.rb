@@ -8,6 +8,8 @@ class QuestionsController < ApplicationController
     @question.asker = current_user
     @question.save
 
+    flash[:notice] = "已成功提問"
+
     redirect_to item_path(@item)
   end
 
