@@ -1,9 +1,10 @@
 @import "bootstrap/variables";
+@import "mixins/variables";
 
 .user-info-container {
   padding-bottom: 10px;
   margin-bottom: 10px;
-  border-bottom: 1px solid lighten($gray-base, 85%);
+  border-bottom: 1px solid $gray-85;
 }
 
 .users-list { list-style-type: none; }
