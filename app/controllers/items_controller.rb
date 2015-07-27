@@ -11,8 +11,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:pictures).page(params[:page])
-    @view ||= "grid"
-    @view = params[:view] if ["list", "grid"].include? params[:view]
     find_users_reviews_count
     meta_pagination_links @items
   end

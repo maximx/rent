@@ -1,9 +1,10 @@
 <%= render partial: "profiles/profile", locals: { user: @user, profile: @profile,
            default_content: { obj: @items, text: "沒東西 (́◉◞౪◟◉‵)"} } %>
 
+<%= render partial: "items/type" %>
+
 <div id="item-container">
-  <%= render partial: "items/grid", collection: @items, as: :item %>
+  <%= render partial: "items/#{render_item_view}", locals: { items: @items } %>
 </div>
 
-<%= will_paginate @items, class: "hidden-sm hidden-xs" %>
-<%= will_paginate @items, class: "hidden-lg hidden-md", page_links: false %>
+<%= render partial: "items/pagination", locals: { items: @items } %>

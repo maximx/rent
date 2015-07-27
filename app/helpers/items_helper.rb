@@ -1,5 +1,4 @@
 module ItemsHelper
-
   def render_collect_item_links(item, type = "")
     if uncollect_link_display?(item)
       render_uncollect_item_link(item, type)
@@ -72,4 +71,9 @@ module ItemsHelper
     user_signed_in? && current_user.is_collected?(item) && item_action_display?
   end
 
+  def render_item_view
+    view ||= "grid"
+    view = params[:view] if ["list", "grid"].include? params[:view]
+    view
+  end
 end

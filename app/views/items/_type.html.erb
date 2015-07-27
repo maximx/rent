@@ -1,0 +1,6 @@
+<div class="item-view clearfix">
+  <div class="btn-group btn-group-sm pull-right">
+    <%= active_link_to(render_icon("list"), params.merge(view: :list), class: "btn btn-default", role: "botton") %>
+    <%= active_link_to(render_icon("th-large"), params.merge(view: :grid), class: "btn btn-default") %>
+  </div>
+</div>
