@@ -11,11 +11,14 @@
       <div><%= item.address %></div>
     </div>
 
-    <div class="item-list-user">
-      <div class="item-list-avatar text-center">
-        <%= link_to(render_cl_avatar_sm(item.lender), user_path(item.lender), class: "img-circle img-thumbnail") %>
+    <div class="item-list-user text-right">
+      <div><%= render_collect_item_links(item, :remote) %></div>
+
+      <div class="item-list-avatar">
+        <%= link_to(render_cl_avatar_sm(item.lender), user_path(item.lender),
+                    class: "img-circle img-thumbnail", data: { toggle: "tooltip", placement: "left" },
+                    title: item.lender.account) %>
       </div>
-      <div class="text-center"><%= link_to(item.lender.account, user_path(item.lender)) %></div>
       <div class="item-list-review">
         <%= render_user_reviews(item.lender, @users_reviews_count) %>
       </div>
