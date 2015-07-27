@@ -2,6 +2,7 @@
 
 <section>
   <%= render partial: "items/item_info_container", locals: { item: @item } %>
+  <%= render partial: "reviews/review", collection: @reviews, as: :review %>
   <%= render partial: "questions/question", collection: @item.questions.includes(:asker) %>
   <%= render partial: "questions/ask_question", locals: { item: @item, question: @question } %>
 </section>

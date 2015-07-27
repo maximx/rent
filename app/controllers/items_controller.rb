@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
 
   def show
     @question = @item.questions.build
+    @reviews = @item.reviews.where(user_id: @item.lender)
   end
 
   def new

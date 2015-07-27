@@ -78,6 +78,10 @@ class Item < ActiveRecord::Base
     pictures.map { |p| self.class.cloudinary_url(p.public_id) }.uniq
   end
 
+  def reviews
+    Review.where(rent_record_id: rent_records)
+  end
+
   protected
 
   def set_category_id
