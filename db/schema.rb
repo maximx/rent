@@ -107,19 +107,6 @@ ActiveRecord::Schema.define(version: 20150723030632) do
     t.datetime "returned_at"
   end
 
-  create_table "requirements", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
-    t.string   "phone",       limit: 255
-    t.string   "address",     limit: 255
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.integer  "user_id",     limit: 4
-    t.float    "price",       limit: 24
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.integer  "rent_record_id", limit: 4
     t.integer  "judger_id",      limit: 4
