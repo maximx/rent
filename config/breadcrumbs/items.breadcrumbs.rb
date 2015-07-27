@@ -18,7 +18,7 @@ crumb :new_item do
 end
 
 crumb :item do |item|
-  link item.name, item_path(item)
+  link render_item_name(item), item_path(item)
   parent :subcategory, item.subcategory
 end
 

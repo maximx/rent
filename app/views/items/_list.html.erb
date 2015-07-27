@@ -3,7 +3,7 @@
   <li class="item-list-cell clearfix">
     <div class="item-list-img"><%= link_to(render_cl_image_sm(item.index_picture_public_id), item_path(item)) %></div>
     <div class="item-list-info">
-      <h4 class="item-list-name"><%= link_to(item.name, item_path(item)) %></h4>
+      <h4 class="item-list-name"><%= link_to(render_item_name(item), item_path(item)) %></h4>
       <div><%= "#{t("simple_form.labels.item.price")}∶#{item.price_period}" %></div>
       <div><%= "#{t("simple_form.labels.item.minimum_period")}∶#{item.minimum_period}#{item.period}" %></div>
       <div><%= "#{t("simple_form.labels.item.deposit")}∶$#{item.deposit}" %></div>

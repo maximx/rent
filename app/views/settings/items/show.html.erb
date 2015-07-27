@@ -15,7 +15,7 @@
   <tbody>
   <% @items.each do |item| %>
     <tr>
-      <td><%= link_to(item.name, item_path(item)) %></td>
+      <td><%= link_to(render_item_name(item), item_path(item)) %></td>
       <td><%= item.price_period %></td>
       <td><%= @rent_records_count[[item.id,"booking"]] %></td>
       <td><%= @rent_records_count[[item.id,"returned"]] %></td>

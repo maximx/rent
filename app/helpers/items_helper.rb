@@ -76,4 +76,8 @@ module ItemsHelper
     view = params[:view] if ["list", "grid"].include? params[:view]
     view
   end
+
+  def render_item_name(item, length = 22)
+    truncate item.name, length: length
+  end
 end

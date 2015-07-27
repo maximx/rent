@@ -1,6 +1,6 @@
 <% breadcrumb :item_edit, @item %>
 
-<h2 class="col-xs-offset-4 col-sm-offset-3">修改<%= @item.name %></h2>
+<h2 class="col-xs-offset-4 col-sm-offset-3">修改<%= render_item_name(@item) %></h2>
 
 <div id="pictures-container">
 <% @item.pictures.each do |picture| %>
