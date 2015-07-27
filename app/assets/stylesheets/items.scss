@@ -4,8 +4,7 @@
 #item-container {
   position: relative;
 
-  .item-box {
-    float: left;
+  .item-grid {
     width: 252px;
     margin-right: 10px;
     margin-bottom: 5px;
@@ -33,6 +32,9 @@
         margin-bottom: 5px;
       }
     }
+  }
+
+  .item-list {
   }
 }
 

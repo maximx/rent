@@ -1,26 +1,12 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>圖</th>
-      <th>名稱</th>
-      <th>租金</th>
-      <th>地址</th>
-      <th>出租人</th>
-      <th>評價</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% items.each do |item| %>
-    <tr>
-      <td><%= render_cl_image_sm(item.index_picture_public_id) %></td>
-      <td>
-        <%= item.name %>
-        <%= item.price_period %>
-      </td>
-      <td><%= item.city %></td>
-      <td><%= item.lender.email %></td>
-      <td>評價</td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<ul class="item-list">
+<% items.each do |item| %>
+  <li class="item-list-cell">
+    <%= link_to(render_cl_image_sm(item.index_picture_public_id), item_path(item)) %>
+    <%= link_to(item.name, item_path(item)) %>
+    <%= item.price_period %>
+    <%= item.city %>
+    <%= link_to(render_cl_avatar_sm(item.lender), user_path(item.lender), data: { toggle: "tooltip" }, title: item.lender.account) %>
+    <%= render_user_reviews(item.lender, @users_reviews_count) %>
+  </li>
+<% end %>
+</ul>

@@ -39,12 +39,19 @@ module ItemsHelper
     end
   end
 
-  def render_user_reviews(user, good_or_bad, total_count)
-    if total_count && !total_count.empty?
-      total_count[ [user.id, Review.rates[good_or_bad] ] ] || 0
-    else
-      0
+  def render_user_reviews(user, total_count)
+    output = []
+    Review.rates.slice(:good, :bad).keys.each do |type|
+      output << render_user_review(user, total_count, type)
     end
+    output.join(" ")
+  end
+
+  def render_user_review(user, total_count, type)
+    text = Review.human_attribute_name("rate.#{type}")
+    count = (total_count && !total_count.empty?) ?
+      (total_count[ [user.id, Review.rates[type] ] ] || 0) : 0
+    "#{text}∶#{count}"
   end
 
   def render_new_rent_record_link(item)
