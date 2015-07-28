@@ -1,6 +1,6 @@
 <div class="item-header clearfix">
   <%= render partial: "pictures/picture_carousel", locals: { pictures: item.pictures } %>
-  <h3 class="item-title"><%= link_to(item.name, item_path(item)) %></h3>
+  <h3 class="item-title"><%= item.name %></h3>
 
   <div class="item-action btn-group">
     <%= render_collect_item_links(item) %>
