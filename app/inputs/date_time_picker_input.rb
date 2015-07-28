@@ -1,13 +1,16 @@
 class DateTimePickerInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
+    Rails.logger.info input_html_options
     template.content_tag(:div, class: 'input-group date form_datetime') do
-      template.concat @builder.text_field(attribute_name, input_html_options)
+      template.concat @builder.text_field(attribute_name, picker_input_html_options)
       template.concat span_table
     end
   end
 
-  def input_html_options
-    { class: "form-control", placeholder: "年-月-日" }
+  def picker_input_html_options
+    input_html_options[:class] << "form-control"
+    input_html_options[:placeholder] = "年-月-日"
+    input_html_options
   end
 
   def span_table
@@ -19,5 +22,4 @@ class DateTimePickerInput < SimpleForm::Inputs::Base
   def icon_table
     "<i class='glyphicon glyphicon-th'></i>".html_safe
   end
-
 end
