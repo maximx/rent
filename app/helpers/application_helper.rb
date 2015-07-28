@@ -98,13 +98,18 @@ module ApplicationHelper
     content_tag(:h3, text, class: "text-muted text-center")
   end
 
-  def active_link_to(body, url, html_options = {})
-    css_class = []
-    css_class << "active" if current_page? url
-    css_class << html_options[:class] if html_options.has_key?(:class)
-    html_options[:class] = css_class.join(" ")
+  def render_items_view_links
+    links = []
+    current_view = ( ["list", "grid"].include?(params[:view]) ) ? params[:view] : "grid"
 
-    link_to body, url, html_options
+    ["list", "th-large"].each do |type|
+      link_view = (type == "list") ? type : "grid"
+      css_class = "btn btn-default"
+      css_class += " active" if link_view == current_view
+      links << link_to( render_icon(type), params.merge(view: link_view), class: css_class, role: "botton" )
+    end
+
+    raw links.join
   end
 
   def settings_page?
