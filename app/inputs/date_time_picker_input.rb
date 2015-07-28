@@ -7,7 +7,7 @@ class DateTimePickerInput < SimpleForm::Inputs::Base
   end
 
   def input_html_options
-    { class: 'form-control' }
+    { class: "form-control", placeholder: "年-月-日" }
   end
 
   def span_table
