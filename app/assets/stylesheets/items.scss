@@ -77,8 +77,9 @@
 }
 
 .item-show-container {
-  border-bottom: 1px solid $gray-85;
   margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $gray-85;
 }
 
 #map {

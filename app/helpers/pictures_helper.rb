@@ -36,6 +36,15 @@ module PicturesHelper
   end
 
   def render_cl_avatar_md(user, options = {})
+    size_options = { width: 100, height: 100 }
+    size_options.reverse_merge! avatar_default_options
+
+    public_id = public_id_of(user)
+
+    render_cl_image(public_id, size_options, options)
+  end
+
+  def render_cl_avatar_lg(user, options = {})
     size_options = { width: 150, height: 150 }
     size_options.reverse_merge! avatar_default_options
 

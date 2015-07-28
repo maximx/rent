@@ -1,5 +1,5 @@
 <div class="user-info-container row">
-  <div class="col-xs-4 col-sm-3 text-center"><%= render_cl_avatar_md user %></div>
+  <div class="col-xs-4 col-sm-3 text-center"><%= render_cl_avatar_lg(user) %></div>
 
   <div class="user-info col-xs-5 col-sm-5">
     <h4><%= link_to(user.email, user_path(user)) %></h4>
