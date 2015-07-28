@@ -89,6 +89,8 @@ a:hover { text-decoration: none; }
   margin-top: 10px;
   margin-bottom: 0px;
 
+  .input-other { margin-bottom: 5px; }
+
   > .form-group {
     display: inline;
 
@@ -107,7 +109,6 @@ a:hover { text-decoration: none; }
       }
     }
   }
-
 }
 
 .form-horizontal {
