@@ -13,7 +13,7 @@
   <tbody>
     <% rent_records.each do |rent_record| %>
     <tr>
-      <td><%= link_to(rent_record.borrower.email, user_path(rent_record.borrower)) %></td>
+      <td><%= link_to(rent_record.borrower.account, user_path(rent_record.borrower)) %></td>
       <td><%= render_datetime(rent_record.started_at) %></td>
       <td><%= render_datetime(rent_record.ended_at) %></td>
       <td><%= rent_record.rent_days %></td>

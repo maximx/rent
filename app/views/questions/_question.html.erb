@@ -1,4 +1,4 @@
-<div><%= question.asker.email %> ∶ <%= question.content %></div>
+<div><%= question.asker.account %> ∶ <%= question.content %></div>
 <% if question.reply? %>
   <div><%= question.reply %></div>
 <% elsif question.replied_by?(current_user) %>

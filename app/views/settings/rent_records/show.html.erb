@@ -13,7 +13,7 @@
       <td><%= link_to(rent_record.item.name, item_path(rent_record.item)) %></td>
       <td>
         <%= link_to user_path(rent_record.lender), class: "img-circle img-thumbnail",
-                    data: { toggle: "tooltip" }, title: rent_record.lender.email do %>
+                    data: { toggle: "tooltip" }, title: rent_record.lender.account do %>
           <%= render_cl_avatar_sm(rent_record.lender) %>
         <% end %>
 

@@ -19,9 +19,9 @@
     </tr>
 
     <tr>
-      <td>電子郵件</td>
-      <td><%= link_to(@item.lender.email, user_path(@item.lender)) %></td>
-      <td><%= link_to(@rent_record.borrower.email, user_path(@rent_record.borrower)) %></td>
+      <td>帳號</td>
+      <td><%= link_to(@item.lender.account, user_path(@item.lender)) %></td>
+      <td><%= link_to(@rent_record.borrower.account, user_path(@rent_record.borrower)) %></td>
     </tr>
   </thead>
 
