@@ -5,7 +5,12 @@
   <div>
     <%= simple_form_for [question.item, question] do |f| %>
       <%= f.input :reply %>
-      <%= f.submit "回覆" %>
+
+      <div class="form-group">
+        <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9">
+        <%= f.button :submit, "回覆" %>
+        </div>
+      </div>
     <% end %>
   </div>
 <% end %>
