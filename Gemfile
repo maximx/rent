@@ -63,6 +63,7 @@ gem 'will_paginate'
 
 gem 'whenever'
 gem 'meta-tags'
+gem 'slim-rails'
 
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
