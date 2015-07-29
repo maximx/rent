@@ -7,7 +7,7 @@ class RentRecordsController < ApplicationController
   before_action :set_calendar_event_sources_path, only: [ :new, :create, :edit, :update ]
 
   def index
-    @rent_records = @item.rent_records.includes(:borrower).page(params[:page])
+    @rent_records = @item.rent_records.includes(:borrower).booking_order.page(params[:page])
     set_item_maps_marker
   end
 
