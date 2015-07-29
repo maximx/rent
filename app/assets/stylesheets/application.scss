@@ -23,6 +23,12 @@
 body { padding-top: 51px; }
 a:hover { text-decoration: none; }
 .anchor { padding-top: 55px; margin-top: -55px; }
+a > span.glyphicon.text { margin-right: 5px; }
+
+.img-thumbnail { padding: 0; }
+p.description { font-size: 15px; }
+
+ul { list-style: none; }
 
 //header
 .site-header {
@@ -159,7 +165,6 @@ a:hover { text-decoration: none; }
 }
 
 .user-navbar {
-  list-style: none;
   margin-top: 15px;
   margin-bottom: 4px;
   padding: 0;
@@ -219,7 +224,6 @@ a:hover { text-decoration: none; }
       margin-bottom: 0;
 
       .list-group-item {
-        list-style: none;
         border: none;
 
         a {
@@ -230,8 +234,3 @@ a:hover { text-decoration: none; }
     }
   }
 }
-
-.img-thumbnail { padding: 0; }
-p.description { font-size: 15px; }
-
-a > span.glyphicon.text { margin-right: 5px; }

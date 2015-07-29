@@ -1,20 +1,16 @@
 class UsersController < ApplicationController
   include UsersReviewsCount
 
-  layout "application_aside"
-
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user, :find_total_reviews, :find_profile, :set_user_meta_tags
 
   def show
+    @items = @user.items.select(:id, :name)
+    @lender_reviews = @user.lender_reviews
+    @borrower_reviews = @user.borrower_reviews
   end
 
-  def items
-    @items = @user.items.page(params[:page])
-    find_profile
-    find_users_reviews_count
-  end
-
+  #TODO: ajax load review
   def lender_reviews
     @reviews = @user.lender_reviews
     render :reviews
@@ -31,7 +27,7 @@ class UsersController < ApplicationController
 
   def items_collect
     @items = @user.collections.page(params[:page])
-    render :items
+    render "items/index"
   end
 
   def follow

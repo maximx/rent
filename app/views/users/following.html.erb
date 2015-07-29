@@ -1,7 +1,7 @@
 <%= render partial: "profiles/profile", locals: { user: @user, profile: @profile,
            default_content: { obj: @followings, text: "不尾行人的 ヽ(✿ﾟ▽ﾟ)ノ"} } %>
 
-<ol class="users-list">
+<ul>
 <% @followings.each do |follow| %>
   <li class="follow-container clearfix">
     <%= link_to user_path(follow), class: "follow-avatar img-circle img-thumbnail" do %>
@@ -17,4 +17,4 @@
     </div>
   </li>
 <% end %>
-</ol>
+</ul>
