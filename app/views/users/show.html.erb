@@ -52,13 +52,13 @@
     <% end %>
 
     <% unless @lender_reviews.empty? && @borrower_reviews.empty? %>
-      <%= content_tag(:h3, "Reviews") %>
+      <%= content_tag(:h3, "評價") %>
       <% unless @borrower_reviews.empty? %>
-        <h4>Reviews From Borrowers</h4>
+        <h4 class="text-warning">出租者評價</h4>
         <%= render partial: "reviews/review", collection: @borrower_reviews, as: :review %>
       <% end %>
       <% unless @lender_reviews.empty? %>
-        <h4>Reviews From Lenders</h4>
+        <h4 class="text-warning">承租者評價</h4>
         <%= render partial: "reviews/review", collection: @lender_reviews, as: :review %>
       <% end %>
     <% end %>

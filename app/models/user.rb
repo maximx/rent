@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :revieweds, class_name: "Review", foreign_key: "judger_id"
   has_many :reviews, class_name: "Review", foreign_key: "user_id"
 
+  after_save :init_profile
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, authentication_keys: [:login]
@@ -83,4 +85,10 @@ class User < ActiveRecord::Base
     public_id = ApplicationController.helpers.public_id_of(self)
     Cloudinary::Utils.cloudinary_url(public_id)
   end
+
+  private
+
+    def init_profile
+      build_profile.save
+    end
 end
