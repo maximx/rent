@@ -6,6 +6,7 @@ $(document).ready ->
     $end_picker_obj = $('#rent_record_ended_at').closest('.form_datetime')
     minimum_period = $('#minimun_period').val()
 
+    #TODO: it's wierd
     $start_picker_obj.on('dp.change', (e)->
       $end_picker_obj.data('DateTimePicker').minDate(
         e.date.add(minimum_period, 'd')
