@@ -1,0 +1,17 @@
+header class="site-header"
+  nav class="navbar navbar-default navbar-fixed-top"
+    div class="navbar-header"
+      button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#user-navigation" aria-expanded="false" type="button"
+        span class="sr-only"
+          | Toggle navigation
+        span class="icon-bar"
+        span class="icon-bar"
+        span class="icon-bar"
+
+      h1 class="navbar-brand"
+        = link_to SITE_NAME, root_path, id: "site-logo"
+      = render_category_navbar
+
+    div class="collapse navbar-collapse" id="user-navigation"
+      = render partial: "common/user_login"
+      = render partial: "common/search" unless settings_page?
