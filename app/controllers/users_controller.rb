@@ -22,11 +22,6 @@ class UsersController < ApplicationController
     render :reviews
   end
 
-  def items_collect
-    @items = @user.collections.page(params[:page])
-    render "items/index"
-  end
-
   def follow
     unless current_user.is_following?(@user)
       current_user.follow!(@user)
