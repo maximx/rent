@@ -1,0 +1,15 @@
+- breadcrumb :review_rent_record, @item, @rent_record
+
+= render partial: "items/item_info_container", locals: { item: @item }
+
+- rates_radio = Review.rates_radio_collections
+= simple_form_for [ @item, @rent_record, @review ] do |f|
+  = f.input :rate, as: :radio_buttons, collection: rates_radio, checked: rates_radio.first,
+                   wrapper: :default, label: false,
+                   wrapper_html: { class: "col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9" },
+                   item_wrapper_class: "inline"
+  = f.input :content
+
+  div class="form-group"
+    div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9"
+      = f.button :submit, "送出評價"
