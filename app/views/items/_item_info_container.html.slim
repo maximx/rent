@@ -1,0 +1,53 @@
+div class="item-header clearfix"
+  = render partial: "pictures/picture_carousel", locals: { pictures: item.pictures }
+  h3 class="item-title"
+    = item.name
+  div class="item-action btn-group"
+    = render_collect_item_links(item)
+    = render_new_rent_record_link(item)
+
+div class="item-show-container"
+  dl class="dl-horizontal"
+    dt
+    dd
+      = link_to user_path(item.lender) do
+        = render_cl_avatar_md(item.lender)
+        = item.lender.account
+
+    dt
+      | 出租物地址
+    dd
+      = item.address
+
+    dt
+      | 租金
+    dd
+      = item.price_period
+
+    dt
+      | 最短租期
+    dd
+      = item.minimum_period
+      = item.period
+
+    dt
+      | 訂金
+    dd
+      | $
+      = item.down_payment
+
+    dt
+      | 押金
+    dd
+      | $
+      = item.deposit
+
+    dt
+      | 描述
+    dd
+      = raw item.description
+
+    /TODO: javascript calendar
+    dt
+    dd
+      | 查看日曆
