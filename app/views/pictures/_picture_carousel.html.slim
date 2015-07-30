@@ -1,0 +1,17 @@
+div id="picture-carousel" class="carousel slide" data-ride="carousel"
+  ol class="carousel-indicators"
+    - pictures.each_with_index do |picture, index|
+      li data-target="#picture-carousel" data-slide-to="#{ index }" class="#{ "active " if index == 0 }"
+
+  div class="carousel-inner img-thumbnail" role="listbox"
+    - pictures.each_with_index do |picture, index|
+      div class="item#{ " active" if index == 0 }" style="background-image: url(#{ cloudinary_url(picture.public_id) });"
+
+  a class="left carousel-control" href="#picture-carousel" role="button" data-slide="prev"
+    = render_icon("chevron-left")
+    span class="sr-only"
+      | Previous
+  a class="right carousel-control" href="#picture-carousel" role="button" data-slide="next"
+    = render_icon("chevron-right")
+    span class="sr-only"
+     | Next
