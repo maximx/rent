@@ -91,6 +91,25 @@ ul { list-style: none; }
 
 }
 
+/*footer*/
+.site-footer {
+  background-color: $gray-base;
+
+  .footer-links {
+    > li {
+      padding: 10px 20px;
+      margin-right: 10px;
+      float: left;
+      a { color: $gray-85; }
+    }
+  }
+  .footer-copyright {
+    color: $gray-85;
+    text-align: right;
+    padding: 20px;
+  }
+}
+
 #search-form {
   margin-top: 10px;
   margin-bottom: 0px;
