@@ -52,7 +52,10 @@ ul { list-style: none; }
 }
 
 // site container
-#site-content { padding: 10px 20px; }
+#site-content {
+  padding: 10px 20px;
+  min-height: 700px;
+}
 
 /* Sidebar navigation */
 .sidebar {

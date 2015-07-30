@@ -1,7 +1,7 @@
 #picture-carousel.carousel.slide data-ride="carousel"
   ol.carousel-indicators
     - pictures.each_with_index do |picture, index|
-      li data-target="#picture-carousel" data-slide-to="#{ index }".#{ "active " if index == 0 }"
+      li data-target="#picture-carousel" data-slide-to="#{ index }" class="#{ "active " if index == 0 }"
 
   .carousel-inner.img-thumbnail role="listbox"
     - pictures.each_with_index do |picture, index|
