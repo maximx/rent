@@ -6,8 +6,9 @@ class UsersController < ApplicationController
 
   def show
     @items = @user.items.select(:id, :name)
-    @lender_reviews = @user.lender_reviews
-    @borrower_reviews = @user.borrower_reviews
+    @user_lender_reviews = @user.lender_reviews
+    @user_borrower_reviews = @user.borrower_reviews
+    @followings = @user.following
   end
 
   #TODO: ajax load review
@@ -19,10 +20,6 @@ class UsersController < ApplicationController
   def borrower_reviews
     @reviews = @user.borrower_reviews
     render :reviews
-  end
-
-  def following
-    @followings = @user.following
   end
 
   def items_collect

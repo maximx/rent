@@ -34,7 +34,6 @@ Rails.application.routes.draw do
     member do
       get :lender_reviews
       get :borrower_reviews
-      get :following
       get :items_collect
 
       post :follow

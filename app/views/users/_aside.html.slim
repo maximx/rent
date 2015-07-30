@@ -1,0 +1,29 @@
+aside.user-aside
+  .user-avatar = render_cl_avatar_lg(user)
+
+  .panel.panel-default
+    .panel-heading 總評價
+
+    table.table.table-bordered.text-center
+      thead
+        tr
+          th.text-center 正評
+          th.text-center 負評
+      tbody
+        tr
+          td = total_reviews[Review.rates[:good]] || 0
+          td = total_reviews[Review.rates[:bad]] || 0
+
+  - if items.size > 0
+    h3
+      | 出租物
+      small
+        | (#{items.size})
+    ul.user-item-list
+      - items.limit(3).each do |item|
+        li.item
+          = link_to item_path(item) do
+            = render_cl_image_sm(item.index_picture_public_id)
+            .carousel-caption = render_item_name(item, 12)
+
+      li.item = link_to("+ 看更多", search_path(user_id: user)) if items.size > 3

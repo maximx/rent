@@ -1,34 +1,5 @@
 .row
-  .col-md-3
-    .user-aside
-      .user-avatar = render_cl_avatar_lg(@user)
-
-      .panel.panel-default
-        .panel-heading 總評價
-
-        table.table.table-bordered.text-center
-          thead
-            tr
-              th class="text-center" 正評
-              th class="text-center" 負評
-          tbody
-            tr
-              td = @total_reviews[Review.rates[:good]] || 0
-              td = @total_reviews[Review.rates[:bad]] || 0
-
-      - if @items.size > 0
-        h3
-          | 出租物
-          small
-            | (#{@items.size})
-        ul.user-item-list
-          - @items.limit(3).each do |item|
-            li.item
-              = link_to item_path(item) do
-                = render_cl_image_sm(item.index_picture_public_id)
-                .carousel-caption = render_item_name(item, 12)
-
-          li.item = link_to("+ 看更多", search_path(user_id: @user)) if @items.size > 3
+  .col-md-3 = render partial: "users/aside", locals: { user: @user, total_reviews: @total_reviews, items: @items }
 
   .col-md-9
     h2.user-account.clearfix
@@ -40,13 +11,16 @@
         .panel-heading 描述
         .panel-body = raw @profile.description
 
-    - unless @lender_reviews.empty? && @borrower_reviews.empty?
-      h3 評價
+    ul.nav.nav-tabs role="tablist"
+      li.active role="presentation"
+        a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab" 評價
+      li role="presentation"
+        a href="#follows" aria-controls="follows" role="tab" data-toggle="tab" 關注
 
-      - unless @borrower_reviews.empty?
-        h4.text-warning 出租者評價
-        = render partial: "reviews/review", collection: @borrower_reviews, as: :review
+    .tab-content
+      #reviews.tab-pane.active
+        = render partial: "users/reviews",
+                 locals: { user_lender_reviews: @user_lender_reviews, user_borrower_reviews: @user_borrower_reviews}
 
-      - unless @lender_reviews.empty?
-        h4.text-warning 承租者評價
-        = render partial: "reviews/review", collection: @lender_reviews, as: :review
+      #follows.tab-pane
+        = render partial: "users/following", locals: { followings: @followings }

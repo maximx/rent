@@ -1,0 +1,9 @@
+- unless user_lender_reviews.empty? && user_borrower_reviews.empty?
+  - unless user_borrower_reviews.empty?
+    h4 出租者評價
+    = render partial: "reviews/review", collection: user_borrower_reviews, as: :review
+
+  - unless user_lender_reviews.empty?
+    h4 承租者評價
+    = render partial: "reviews/review", collection: user_lender_reviews, as: :review
+
