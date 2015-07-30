@@ -3,9 +3,9 @@ footer.site-footer
     .row
       ul.footer-links.col-lg-6
         li
-          h5 = link_to "About", "/"
+          h5 = link_to "About", about_path
         li
-          h5 = link_to "Privacy", "/"
+          h5 = link_to "Terms", terms_path
         li
-          h5 = link_to "Rent", "/"
-      .footer-copyright.col-lg-6 © 2015 Rent. All rights reserved.
+          h5 = link_to "Privacy", privacy_path
+      .footer-copyright.col-lg-6 © #{Time.now.year} Rent. All rights reserved.

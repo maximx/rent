@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root to: "items#index"
   get "/search", to: "items#search"
+  get "/about", to: "pages#about"
+  get "/terms", to: "pages#terms"
+  get "/privacy", to: "pages#privacy"
 
   devise_for :users
 
@@ -52,7 +55,4 @@ Rails.application.routes.draw do
 
   resources :categories, only: [ :show ]
   resources :subcategories, only: [ :show ]
-
-  resources :pages, only:[ :index ] if Rails.env.development?
-
 end
