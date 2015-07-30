@@ -1,19 +1,19 @@
-ul class="user-navbar"
+ul.user-navbar
   - if user_signed_in?
-    li class="nav-item"
+    li.nav-item
       = link_to render_cl_avatar_xs(current_user), user_path(current_user),
                 class: "nav-link profile", title: "個人頁面", data: { toggle: "tooltip", placement: "bottom" }
-    li class="nav-item"
+    li.nav-item
       = link_to render_icon("plus"), new_item_path,
                 class: "nav-link", title: "新增出租物", data: { toggle: "tooltip", placement: "bottom" }
-    li class="nav-item"
+    li.nav-item
       = link_to render_icon("cog"), settings_account_path,
                 class: "nav-link", title: "管理與設定", data: { toggle: "tooltip", placement: "bottom" }
-    li class="nav-item"
+    li.nav-item
       = link_to render_icon("log-out"), destroy_user_session_path,
                 method: :delete, class: "nav-link", title: "登出", data: { toggle: "tooltip", placement: "bottom" }
   - else
-    li class="nav-item login"
+    li.nav-item.login
       = link_to "註冊", new_user_registration_path, class: "btn btn-default"
       = " "
       = link_to "登入", new_user_session_path, class: "btn btn-default"

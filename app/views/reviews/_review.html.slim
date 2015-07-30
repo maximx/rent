@@ -1,17 +1,17 @@
-div class="reviews-container col-xs-12 col-sm-12"
-  div class="col-xs-offset-3 col-xs-2 col-sm-offset-2 col-sm-1"
+.reviews-container.col-xs-12.col-sm-12
+  .col-xs-offset-3.col-xs-2.col-sm-offset-2.col-sm-1
     = render_cl_avatar_sm review.judger
 
-  div class="col-xs-7 col-sm-9"
-    table class="review-info"
+  .col-xs-7.col-sm-9
+    table.review-info
       tr
-        td class="text-right" 交易人員∶
+        td.text-right 交易人員∶
         td
           = link_to(review.judger.account, user_path(review.judger))
           | (#{ review.human_rate })
       tr
-        td class="text-right" 承租物∶
+        td.text-right 承租物∶
         td = link_to(review.item.name, item_path(review.item))
       tr
-        td class="text-right" 意見∶
+        td.text-right 意見∶
         td = simple_format review.content

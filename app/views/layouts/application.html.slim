@@ -12,7 +12,7 @@ html lang="zh"
   body
     = render partial: "common/header"
 
-    div id="site-content" class="container-fluid" role="main"
+    #site-content.container-fluid role="main"
       = render_notice(notice)
       = render_alert(alert)
       = breadcrumbs style: :bootstrap

@@ -1,7 +1,7 @@
 - render_item_index_breadcrumbs(@breadcrumbs_object)
 = render partial: "items/type"
 
-div id="item-container"
+#item-container
   = render partial: "items/#{render_item_view}", locals: { items: @items }
 
 = render partial: "items/pagination", locals: { items: @items }

@@ -1,15 +1,15 @@
 = simple_form_for @user, url: settings_account_path, method: :put do |f|
-  div class="form-group"
-    h2 class="col-xs-offet-4 col-xs-8 col-sm-offset-3 col-sm-9" 變更密碼
-    div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9" = f.error_notification
+  .form-group
+    h2.col-xs-offet-4.col-xs-8.col-sm-offset-3.col-sm-9 變更密碼
+    .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9 = f.error_notification
 
-  div class="form-inputs"
+  .form-inputs
     = f.input :email, required: true, autofocus: true
     = f.input :account, required: true
     = f.input :password, autocomplete: "off", hint: t("devise.views.edit_password_hint"), required: false
     = f.input :password_confirmation, required: false
     = f.input :current_password, required: true
 
-  div class="form-group"
-    div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9"
+  .form-group
+    .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
       = f.button :submit, "變更"

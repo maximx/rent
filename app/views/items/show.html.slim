@@ -6,9 +6,9 @@ section
   = render partial: "questions/question", collection: @item.questions.includes(:asker)
   = render partial: "questions/ask_question", locals: { item: @item, question: @question }
 
-div id="map"
+#map
 
-div class="hide"
+.hide
   = form_for @item, url: new_item_rent_record_path(@item), method: :get, html: { id: "new_rent_record_form" } do
     = hidden_field_tag :rent_record_started_at
     = hidden_field_tag :rent_record_ended_at

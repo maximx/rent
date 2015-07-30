@@ -1,11 +1,11 @@
-ul class="item-list"
+ul.item-list
   - items.each do |item|
-    li class="item-list-cell clearfix"
-      div class="item-list-img"
-        = link_to(render_cl_image_sm(item.index_picture_public_id), item_path(item))
-      div class="item-list-info"
-        h4 class="item-list-name"
-          = link_to(render_item_name(item), item_path(item))
+
+    li.item-list-cell.clearfix
+      .item-list-img = link_to(render_cl_image_sm(item.index_picture_public_id), item_path(item))
+
+      .item-list-info
+        h4.item-list-name = link_to(render_item_name(item), item_path(item))
         div
           = t("simple_form.labels.item.price")
           | ∶
@@ -23,15 +23,15 @@ ul class="item-list"
           = t("simple_form.labels.item.down_payment")
           | ∶ $
           = item.down_payment
-        div
-          = item.address
 
-      div class="item-list-user text-right"
-        div
-          = render_collect_item_links(item, :remote)
-        div class="item-list-avatar"
+        div = item.address
+
+      .item-list-user.text-right
+        div = render_collect_item_links(item, :remote)
+
+        .item-list-avatar
           = link_to render_cl_avatar_sm(item.lender), user_path(item.lender),
                     class: "img-circle img-thumbnail", title: item.lender.account,
                     data: { toggle: "tooltip", placement: "left" }
-        div class="item-list-review"
+        .item-list-review
           = render_user_reviews(item.lender, @users_reviews_count)

@@ -1,4 +1,4 @@
-table class="table table-hover"
+table.table.table-hover
   thead
     th 承租物
     th 評價
@@ -18,7 +18,7 @@ table class="table table-hover"
         td = rent_record.currency_price
         td = render_datetime_period(rent_record, :date_only)
         td = rent_record.aasm.human_state
-        td class="btn-group"
+        td.btn-group
           = render_operate_rent_record_links(rent_record)
 
 = will_paginate @rent_records, class: "hidden-sm hidden-xs"
