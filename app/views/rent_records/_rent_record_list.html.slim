@@ -1,0 +1,21 @@
+table class="table"
+  thead
+    tr
+      th 承租人
+      th 起租日期
+      th 歸還日期
+      th 總天數
+      th 租金
+      th 狀態
+      th #
+  tbody
+    - rent_records.each do |rent_record|
+      tr
+        td = link_to(rent_record.borrower.account, user_path(rent_record.borrower))
+        td = render_datetime(rent_record.started_at)
+        td = render_datetime(rent_record.ended_at)
+        td = rent_record.rent_days
+        td = rent_record.currency_price
+        td = rent_record.aasm.human_state
+        td class="btn-group"
+          = render_operate_rent_record_links(rent_record)

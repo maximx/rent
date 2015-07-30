@@ -1,0 +1,27 @@
+= simple_form_for [item, rent_record] do |f|
+  div class="form-group"
+    div class="col-xs-4 col-sm-3 control-label"
+      label 承租物
+
+    div class="col-xs-6 col-sm-6"
+      = text_field_tag nil, item.name, class: "form-control", disabled: true
+
+  = f.input :name
+  = f.input :phone
+  = f.input :started_at, as: :date_time_picker
+  = f.input :ended_at, as: :date_time_picker
+
+  div class="form-group"
+    div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9"
+      div class="item-price-days"
+        | 承租天數∶
+        span id="rent_days"
+        | 總金額∶
+        span id="total_price"
+
+      = f.button :submit
+
+= hidden_field_tag :minimun_period, item.minimum_period
+= hidden_field_tag :item_price, item.price
+
+= render partial: "rent_records/calendar", locals: { event_sources_path: event_sources_path }

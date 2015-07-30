@@ -1,0 +1,49 @@
+- breadcrumb :rent_record, @item, @rent_record
+
+div class="btn-group pull-right"
+  = render_operate_rent_record_links(@rent_record)
+
+table class="table"
+  thead
+    tr
+      td
+      td
+        span 出租者
+        = render_cl_avatar_sm(@item.lender)
+      td
+        span 承租者
+        = render_cl_avatar_sm(@rent_record.borrower)
+    tr
+      td 帳號
+      td = link_to(@item.lender.account, user_path(@item.lender))
+      td = link_to(@rent_record.borrower.account, user_path(@rent_record.borrower))
+  tbody
+    tr
+      td 姓名
+      td = @item.lender.profile.name
+      td = @rent_record.borrower.profile.name
+    tr
+      td 電話
+      td = @item.lender.profile.phone
+      td = @rent_record.borrower.profile.phone
+    tr
+      td 評價
+      td = @rent_record.review_of_judger(@item.lender).human_rate
+      td = @rent_record.review_of_judger(@rent_record.borrower).human_rate
+    tr
+      td 承租物
+      td colspan="2" = link_to(@item.name, item_path(@item))
+    tr
+      td 狀態
+      td colspan="2" = @rent_record.aasm.human_state
+    tr
+      td 租金
+      td colspan="2" = @rent_record.currency_price
+    tr
+      td 承租物
+      td colspan="2" = @item.name
+    tr
+      td 租期
+      td colspan="2" = render_datetime_period(@rent_record, :tw)
+
+= render partial: "rent_records/calendar", locals: { event_sources_path: @event_sources_path }

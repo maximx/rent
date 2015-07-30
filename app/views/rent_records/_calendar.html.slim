@@ -1,13 +1,9 @@
-<button class="btn btn-default calendar-direction"
-        data-toggle="tooltip" data-placement="right"
-        title="預約承租亦可於出租日曆上使用滑鼠選擇日期">
-  <%= render_icon("question-sign") %>
-  說明
-</button>
+button[class="btn btn-default calendar-direction" title="預約承租亦可於出租日曆上使用滑鼠選擇日期"
+       data-toggle="tooltip" data-placement="right"]
+  = render_icon_with_text("question-sign", "說明")
+div id="calendar"
 
-<div id="calendar"></div>
-
-<script type="text/javascript">
+javascript:
   $(document).ready(function() {
     var calendar_format = 'YYYY-MM-DD HH:mm:ss';
     var default_date;
@@ -32,7 +28,7 @@
       },
       businessHours: true,
       eventSources: {
-        url: '<%= event_sources_path %>'
+        url: '#{ event_sources_path }'
       },
       selectable: true,
       selectOverlap: false,
@@ -56,4 +52,3 @@
 
     update_rent_days_price();
   });
-</script>
