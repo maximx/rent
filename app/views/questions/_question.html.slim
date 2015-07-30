@@ -1,0 +1,16 @@
+div
+  = question.asker.account
+  | ∶
+  = question.content
+
+- if question.reply?
+  div
+    = question.reply
+- elsif question.replied_by?(current_user)
+  div
+    = simple_form_for [question.item, question] do |f|
+      = f.input :reply
+
+      div class="form-group"
+        div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9"
+          = f.button :submit, "回覆"
