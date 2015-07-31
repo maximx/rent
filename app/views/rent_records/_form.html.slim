@@ -2,12 +2,9 @@
   .form-group
     .col-xs-4.col-sm-3.control-label
       label 承租物
-
     .col-xs-6.col-sm-6
       = text_field_tag nil, item.name, class: "form-control", disabled: true
 
-  = f.input :name
-  = f.input :phone
   = f.input :started_at, as: :date_time_picker
   = f.input :ended_at, as: :date_time_picker
 

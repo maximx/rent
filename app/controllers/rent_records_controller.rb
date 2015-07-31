@@ -35,7 +35,6 @@ class RentRecordsController < ApplicationController
     if current_user != @item.lender
       @rent_record = @item.rent_records.build
       set_start_and_end_params
-      set_name_and_phone_from_profile
     else
       flash[:notice] = "您沒有權限"
       redirect_to item_path(@item)
@@ -130,12 +129,4 @@ class RentRecordsController < ApplicationController
     @rent_record["started_at"] = params[:rent_record_started_at]
     @rent_record["ended_at"] = params[:rent_record_ended_at]
   end
-
-  def set_name_and_phone_from_profile
-    if current_user.profile
-      @rent_record.name = current_user.profile.name
-      @rent_record.phone = current_user.profile.phone
-    end
-  end
-
 end
