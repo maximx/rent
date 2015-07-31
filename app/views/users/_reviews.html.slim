@@ -1,12 +1,14 @@
 - unless lender_reviews.empty? && borrower_reviews.empty?
   - unless borrower_reviews.empty?
-    h4 出租者評價
     .reviews-container
-      = render partial: "reviews/reviews_list", locals: { reviews: borrower_reviews }
-    = render_see_more_reviews(borrower_reviews_user_path(user, page: borrower_reviews.next_page))
+      h4 承租者評價
+      .reviews-list
+        = render partial: "reviews/reviews_list", locals: { reviews: lender_reviews }
+      = render_see_more_reviews(lender_reviews_user_path(user, page: lender_reviews.next_page))
 
   - unless lender_reviews.empty?
-    h4 承租者評價
     .reviews-container
-      = render partial: "reviews/reviews_list", locals: { reviews: lender_reviews }
-    = render_see_more_reviews(lender_reviews_user_path(user, page: lender_reviews.next_page))
+      h4 出租者評價
+      .reviews-list
+        = render partial: "reviews/reviews_list", locals: { reviews: borrower_reviews }
+      = render_see_more_reviews(borrower_reviews_user_path(user, page: borrower_reviews.next_page))

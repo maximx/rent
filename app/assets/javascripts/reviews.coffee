@@ -1,6 +1,6 @@
 $ ->
   $('.user-reviews').on('ajax:success', (e, data, status, xhr) ->
-    $(this).siblings('.reviews-container').append(data)
+    $(this).closest('.reviews-container').find('.reviews-list').append(data)
 
     next_page = $('.review-container:last').data('page')
     if next_page == 0
