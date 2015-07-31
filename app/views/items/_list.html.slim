@@ -2,7 +2,9 @@ ul.item-list
   - items.each do |item|
 
     li.item-list-cell.clearfix
-      .item-list-img = link_to(render_cl_image_sm(item.index_picture_public_id), item_path(item))
+      .item-list-img
+        = link_to item_path(item) do
+          figure = render_cl_image_sm(item.index_picture_public_id)
 
       .item-list-info
         h4.item-list-name = link_to(render_item_name(item), item_path(item))
