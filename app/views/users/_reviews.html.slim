@@ -1,9 +1,14 @@
-- unless user_lender_reviews.empty? && user_borrower_reviews.empty?
-  - unless user_borrower_reviews.empty?
+- unless lender_reviews.empty? && borrower_reviews.empty?
+  - unless borrower_reviews.empty?
     h4 出租者評價
-    = render partial: "reviews/review", collection: user_borrower_reviews, as: :review
+    .reviews-container
+      = render partial: "reviews/review", locals: { reviews: borrower_reviews }
+    = link_to "+看更多", borrower_reviews_user_path(user, page: borrower_reviews.next_page),
+              remote: true, class: "user-reviews"
 
-  - unless user_lender_reviews.empty?
+  - unless lender_reviews.empty?
     h4 承租者評價
-    = render partial: "reviews/review", collection: user_lender_reviews, as: :review
-
+    .reviews-container
+      = render partial: "reviews/review", locals: { reviews: lender_reviews }
+    = link_to "+看更多", lender_reviews_user_path(user, page: lender_reviews.next_page),
+              remote: true, class: "user-reviews"

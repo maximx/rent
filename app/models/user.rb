@@ -62,15 +62,9 @@ class User < ActiveRecord::Base
     collections.include?(item)
   end
 
-  # rent record review
-  def lender_reviews
-    user_role = Review.user_roles["lender"]
-    reviews.where(user_role: user_role).order("created_at DESC")
-  end
-
-  def borrower_reviews
-    user_role = Review.user_roles["borrower"]
-    reviews.where(user_role: user_role).order("created_at DESC")
+  def reviews_of(role)
+    role = Review.user_roles[role.to_s]
+    reviews.where(user_role: role).order(:created_at).reverse_order
   end
 
   def role_of(rent_record)

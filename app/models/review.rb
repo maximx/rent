@@ -9,6 +9,8 @@ class Review < ActiveRecord::Base
   enum rate: [ :bad, :good, :notyet ]
   enum user_role: [ :lender, :borrower ]
 
+  self.per_page = 5
+
   before_validation :set_user_and_role
 
   # notyet is default

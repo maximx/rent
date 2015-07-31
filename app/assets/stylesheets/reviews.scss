@@ -1,8 +1,8 @@
 @import "bootstrap/variables";
 
-.reviews-container {
+.review-container {
   border-bottom: solid 1px $gray-lighter;
-  padding-bottom: 5px;
+  padding: 5px 0;
 
   .review-info {
     p { margin: 0px; }
