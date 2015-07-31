@@ -1,0 +1,3 @@
+.reviews-container
+  = render partial: "reviews/reviews_list", locals: { reviews: reviews }
+= render_see_more_reviews(reviews_item_path(item, page: reviews.next_page)) unless reviews.next_page.nil?

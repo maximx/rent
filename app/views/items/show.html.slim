@@ -10,10 +10,7 @@ section
       a href="#questions" aria-controls="questions" role="tab" data-toggle="tab" 問與答
 
   .tab-content
-    #reviews.tab-pane.active
-      .reviews-container
-        = render partial: "reviews/reviews_list", locals: { reviews: @reviews }
-        = render_see_more_reviews(reviews_item_path(@item, page: @reviews.next_page)) unless @reviews.next_page.nil?
+    #reviews.tab-pane.active = render partial: "items/reviews", locals: { item: @item, reviews: @reviews }
 
     #questions.tab-pane
       = render partial: "questions/question", collection: @item.questions.includes(:asker)
