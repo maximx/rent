@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
 
   def update
     @question.update(question_params)
+    flash[:notice] = "已成功回覆"
     redirect_to item_path(@item)
   end
 

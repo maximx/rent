@@ -1,16 +1,25 @@
-div
-  = question.asker.account
-  | ∶
-  = question.content
+article.question
+  .row
+    .ask.clearfix
+        .col-lg-1.col-lg-offset-2.text-center
+          = link_to user_path(question.asker) do
+            = render_cl_avatar_sm(question.asker)
+            div = question.asker.account
+        .col-lg-9 問題∶ #{ question.content }
 
-- if question.reply?
-  div = question.reply
+    - if question.reply?
+      .reply.clearfix
+          .col-lg-1.col-lg-offset-2.text-center
+            = link_to user_path(question.item.lender) do
+              = render_cl_avatar_sm(question.item.lender)
+              div = question.item.lender.account
+          .col-lg-9 回覆∶#{ question.reply }
 
-- elsif question.replied_by?(current_user)
-  div
-    = simple_form_for [question.item, question] do |f|
-      = f.input :reply
+    - elsif question.replied_by?(current_user)
+      .reply.row
+        = simple_form_for [question.item, question] do |f|
+          = f.input :reply
 
-      .form-group
-        .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
-          = f.button :submit, "回覆"
+          .form-group
+            .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+              = f.button :submit, "回覆"
