@@ -2,7 +2,12 @@
 
 section
   = render partial: "items/item_info_container", locals: { item: @item }
-  = render partial: "reviews/review", collection: @reviews, as: :review
+
+  .reviews-container
+    = render partial: "reviews/reviews_list", locals: { reviews: @reviews }
+  - unless @reviews.next_page.nil?
+    = render_see_more_reviews(reviews_item_path(@item, page: @reviews.next_page))
+
   = render partial: "questions/question", collection: @item.questions.includes(:asker)
   = render partial: "questions/ask_question", locals: { item: @item, question: @question }
 

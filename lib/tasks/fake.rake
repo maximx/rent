@@ -65,7 +65,7 @@ namespace :fake do
 
   task :rent_records => :environment do
     Item.all.each do |item|
-      50.times do
+      20.times do
         users = User.where.not(id: item.lender)
         user = users[ rand(0..(users.length - 1))]
         started_at = time_rand
@@ -89,7 +89,6 @@ namespace :fake do
     to = to.to_time if to.is_a? Date
     Time.at(from + rand * (to.to_f - from.to_f)).to_date
   end
-
 end
 
 task fake: [ "fake:users", "fake:profiles", "fake:items", "fake:regeocode", "fake:rent_records" ]

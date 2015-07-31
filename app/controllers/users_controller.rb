@@ -13,12 +13,12 @@ class UsersController < ApplicationController
 
   def lender_reviews
     reviews = @user.reviews_of("lender").page(params[:page])
-    render partial: "reviews/review", layout: false, locals: { reviews: reviews }
+    render partial: "reviews/reviews_list", layout: false, locals: { reviews: reviews }
   end
 
   def borrower_reviews
     reviews = @user.reviews_of("borrower").page(params[:page])
-    render partial: "reviews/review", layout: false, locals: { reviews: reviews }
+    render partial: "reviews/reviews_list", layout: false, locals: { reviews: reviews }
   end
 
   def follow

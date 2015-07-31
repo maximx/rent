@@ -1,3 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('.user-reviews').on('ajax:success', (e, data, status, xhr) ->
+    $(this).siblings('.reviews-container').append(data)
+
+    next_page = $('.review-container:last').data('page')
+    if next_page == 0
+      $(this).remove()
+    else
+      href = $(this).attr('href').split('?')
+      href.pop 1 # pop out page parameter
+      href.push('page=' + next_page)
+      $(this).attr('href', href.join('?'))
+  )

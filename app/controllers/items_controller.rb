@@ -2,12 +2,13 @@ class ItemsController < ApplicationController
   include RentCloudinary
   include UsersReviewsCount
 
-  before_action :login_required, except: [ :index, :show, :search ]
+  before_action :login_required, except: [ :index, :show, :search, :reviews ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
-  before_action :find_item, :set_item_meta_tags, only: [ :show, :collect, :uncollect, :calendar ]
-  before_action :set_item_maps_marker, only: [ :show ]
+  before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :reviews ]
+  before_action :find_reviews, only: [ :show, :reviews ]
+  before_action :set_item_meta_tags, :set_item_maps_marker, only: [ :show ]
   before_action :set_picture_public_id, only: [ :create, :update ]
-  before_action :find_navbar_categories, except: [ :collect, :uncollect ]
+  before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar, :reviews ]
 
   def index
     @items = Item.includes(:pictures).page(params[:page])
@@ -17,7 +18,6 @@ class ItemsController < ApplicationController
 
   def show
     @question = @item.questions.build
-    @reviews = @item.reviews.where(user_id: @item.lender)
   end
 
   def new
@@ -103,6 +103,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def reviews
+    render partial: "reviews/reviews_list", layout: false, locals: { reviews: @reviews }
+  end
+
   private
 
     def item_params
@@ -134,5 +138,9 @@ class ItemsController < ApplicationController
           image: @item.pictures_urls
         }
       )
+    end
+
+    def find_reviews
+      @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
     end
 end

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
 
     member do
+      get :reviews
       post :collect
       delete :uncollect
       get :calendar
