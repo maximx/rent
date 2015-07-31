@@ -15,10 +15,7 @@ aside.user-aside
           td = total_reviews[Review.rates[:bad]] || 0
 
   - if items.size > 0
-    h3
-      | 出租物
-      small
-        | (#{items.size})
+    h3 出租物 <small>(#{items.size})</small>
     ul.user-item-list
       - items.limit(3).each do |item|
         li.item
