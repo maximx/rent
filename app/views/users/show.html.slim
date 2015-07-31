@@ -19,7 +19,8 @@
 
     .tab-content
       #reviews.tab-pane.active
-        = render partial: "users/reviews", locals: { user: @user, lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews}
+        = render partial: "users/reviews", locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
+                                                     lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }
 
       #follows.tab-pane
         = render partial: "users/following", locals: { followings: @followings }

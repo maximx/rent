@@ -1,14 +1,14 @@
 - unless lender_reviews.empty? && borrower_reviews.empty?
-  - unless borrower_reviews.empty?
+  - unless lender_reviews.empty?
     .reviews-container
-      h4 承租者評價
+      h4 承租者評價 <small>(#{ grouped_reviews_count[Review.user_roles["lender"]] })</small>
       .reviews-list
         = render partial: "reviews/reviews_list", locals: { reviews: lender_reviews }
       = render_see_more_reviews(lender_reviews_user_path(user, page: lender_reviews.next_page))
 
-  - unless lender_reviews.empty?
+  - unless borrower_reviews.empty?
     .reviews-container
-      h4 出租者評價
+      h4 出租者評價 <small>(#{ grouped_reviews_count[Review.user_roles["borrower"]] })</small>
       .reviews-list
         = render partial: "reviews/reviews_list", locals: { reviews: borrower_reviews }
       = render_see_more_reviews(borrower_reviews_user_path(user, page: borrower_reviews.next_page))

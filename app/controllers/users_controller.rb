@@ -6,9 +6,11 @@ class UsersController < ApplicationController
 
   def show
     @items = @user.items.select(:id, :name)
+    @followings = @user.following
+
+    @grouped_reviews_count = @user.reviews.group(:user_role).count
     @lender_reviews = @user.reviews_of("lender").page(params[:page])
     @borrower_reviews = @user.reviews_of("borrower").page(params[:page])
-    @followings = @user.following
   end
 
   def lender_reviews
