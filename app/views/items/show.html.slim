@@ -3,22 +3,30 @@
 section
   = render partial: "items/item_info_container", locals: { item: @item }
 
-  .reviews-container
-    = render partial: "reviews/reviews_list", locals: { reviews: @reviews }
-  - unless @reviews.next_page.nil?
-    = render_see_more_reviews(reviews_item_path(@item, page: @reviews.next_page))
+  ul.nav.nav-tabs.nav-justified role="tablist"
+    li.active role="presentation"
+      a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab" 評價
+    li role="presentation"
+      a href="#questions" aria-controls="questions" role="tab" data-toggle="tab" 問與答
 
-  = render partial: "questions/question", collection: @item.questions.includes(:asker)
-  = render partial: "questions/ask_question", locals: { item: @item, question: @question }
+  .tab-content
+    #reviews.tab-pane.active
+      .reviews-container
+        = render partial: "reviews/reviews_list", locals: { reviews: @reviews }
+        = render_see_more_reviews(reviews_item_path(@item, page: @reviews.next_page)) unless @reviews.next_page.nil?
 
-#map
+    #questions.tab-pane
+      = render partial: "questions/question", collection: @item.questions.includes(:asker)
+      = render partial: "questions/ask_question", locals: { item: @item, question: @question }
 
-.hide
-  = form_for @item, url: new_item_rent_record_path(@item), method: :get, html: { id: "new_rent_record_form" } do
-    = hidden_field_tag :rent_record_started_at
-    = hidden_field_tag :rent_record_ended_at
+  #map
 
-javascript:
-  $(document).ready(function() {
-    buildGoogleMap( #{raw @maps.to_json} );
-  });
+  .hide
+    = form_for @item, url: new_item_rent_record_path(@item), method: :get, html: { id: "new_rent_record_form" } do
+      = hidden_field_tag :rent_record_started_at
+      = hidden_field_tag :rent_record_ended_at
+
+  javascript:
+    $(document).ready(function() {
+      buildGoogleMap( #{raw @maps.to_json} );
+    });

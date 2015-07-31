@@ -20,15 +20,24 @@
 
 @import "mixins/variables";
 
-body { padding-top: 51px; }
-a:hover { text-decoration: none; }
-.anchor { padding-top: 55px; margin-top: -55px; }
-a > span.glyphicon.text { margin-right: 5px; }
 
-.img-thumbnail { padding: 0; }
+body { padding-top: 51px; }
+ul { list-style: none; }
 p.description { font-size: 15px; }
 
-ul { list-style: none; }
+a {
+  &:hover { text-decoration: none; }
+  > span.glyphicon.text { margin-right: 5px; }
+}
+
+.tab-content {
+  padding-top: 10px;
+  min-height: 200px;
+}
+
+.anchor { padding-top: 55px; margin-top: -55px; }
+.img-thumbnail { padding: 0; }
+
 
 //header
 .site-header {
