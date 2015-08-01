@@ -69,7 +69,7 @@ class RentRecord < ActiveRecord::Base
   def as_json(options={})
     {
       id: id,
-      title: "#{name} - #{borrower.email}",
+      title: borrower.account,
       start: started_at,
       end: ended_at,
       url: Rails.application.routes.url_helpers.item_rent_record_path(item, id)

@@ -1,7 +1,9 @@
-- breadcrumb :rent_records, @item
+- unless request.xhr?
+  - breadcrumb :rent_records, @item
+  = render partial: "items/item_info_container", locals: { item: @item }
+- else
+  h3.item-title = @item.name
 
-= render partial: "items/item_info_container", locals: { item: @item }
-= render partial: "rent_records/rent_record_list", locals: { rent_records: @rent_records.reverse }
-= will_paginate @rent_records
+= render partial: "rent_records/rent_record_list", locals: { rent_records: @rent_records }
 
 = render_default_content(@rent_records, "無承租紀錄")

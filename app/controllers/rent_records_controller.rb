@@ -7,9 +7,10 @@ class RentRecordsController < ApplicationController
   before_action :set_calendar_event_sources_path, only: [ :new, :create, :edit, :update ]
 
   def index
-    @rent_records = @item.rent_records.includes(:borrower).booking_order.page(params[:page])
-    set_item_maps_marker unless request.xhr?
-    render :index, layout: !request.xhr?
+    @is_xhr = (request.xhr?) ? true : false
+    @rent_records = @item.rent_records.includes(:borrower).booking_order.reverse_order.page(params[:page])
+    set_item_maps_marker unless @is_xhr
+    render :index, layout: !@is_xhr
   end
 
   def show

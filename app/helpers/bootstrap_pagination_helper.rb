@@ -23,8 +23,12 @@ module BootstrapPaginationHelper
   end
 
   class LinkRenderer < WillPaginate::ActionView::LinkRenderer
-    protected
+    def prepare(collection, options, template)
+      @link_html = options.delete(:link_html)
+      super
+    end
 
+    protected
       def page_number(page)
         unless page == current_page
           link(page, page, :rel => rel_value(page))
@@ -58,12 +62,12 @@ module BootstrapPaginationHelper
           target = url(target)
         end
 
-        unless target == "#"
-          attributes[:href] = target
-        end
-
         classname = attributes[:class]
         attributes.delete(:classname)
+
+        attributes[:href] = target unless target == "#"
+        attributes.merge!(@link_html) unless @link_html.nil?
+
         tag(:li, tag(:a, text, attributes), :class => classname)
       end
   end
