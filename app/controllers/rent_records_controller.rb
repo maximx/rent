@@ -8,7 +8,8 @@ class RentRecordsController < ApplicationController
 
   def index
     @rent_records = @item.rent_records.includes(:borrower).booking_order.page(params[:page])
-    set_item_maps_marker
+    set_item_maps_marker unless request.xhr?
+    render :index, layout: !request.xhr?
   end
 
   def show

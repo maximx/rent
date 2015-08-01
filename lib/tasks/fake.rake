@@ -73,8 +73,6 @@ namespace :fake do
 
         rent_record = item.rent_records.build(
           user_id: user.id,
-          phone: user.profile.phone,
-          name: user.profile.name,
           started_at: started_at,
           ended_at: ended_at
         )

@@ -3,7 +3,7 @@ class RentRecord < ActiveRecord::Base
   include CurrencyPrice
   include I18nMessage
 
-  validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :name
+  validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state
   validate :start_end_date
   validate :not_overlap
 
@@ -11,7 +11,7 @@ class RentRecord < ActiveRecord::Base
   belongs_to :item
   has_many :reviews
 
-  self.per_page = 15
+  self.per_page = 10
 
   before_save :set_price
 
@@ -175,5 +175,4 @@ class RentRecord < ActiveRecord::Base
       }
       colors[state.to_sym]
     end
-
 end
