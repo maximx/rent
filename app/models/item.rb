@@ -67,7 +67,7 @@ class Item < ActiveRecord::Base
   end
 
   def meta_keywords
-    KEYWORDS + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
+    Rent::KEYWORDS + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
   end
 
   def index_picture_public_id

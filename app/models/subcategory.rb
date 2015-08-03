@@ -3,7 +3,7 @@ class Subcategory < ActiveRecord::Base
   has_many :items
 
   def meta_keywords
-    KEYWORDS + [name]
+    Rent::KEYWORDS + [name]
   end
 
   def title

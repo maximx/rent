@@ -63,7 +63,7 @@ class UsersController < ApplicationController
         title: @user.account,
         canonical: user_url(@user),
         og: {
-          title: @user.account + "的個人資料 - " + SITE_NAME,
+          title: @user.account + "的個人資料 - " + Rent::SITE_NAME,
           type: "profile",
           url: user_url(@user),
           image: @user.picture_url

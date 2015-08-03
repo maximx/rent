@@ -10,7 +10,7 @@ class Picture < ActiveRecord::Base
   private
 
     def delete_cloudinary
-      unless self.public_id == DEFAULT_AVATAR
+      unless self.public_id == Rent::DEFAULT_AVATAR
         Cloudinary::Uploader.destroy(self.public_id)
       end
     end

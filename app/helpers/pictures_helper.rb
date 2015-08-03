@@ -59,7 +59,7 @@ module PicturesHelper
     if user.profile && user.profile.picture
       user.profile.picture.public_id
     else
-      DEFAULT_AVATAR
+      Rent::DEFAULT_AVATAR
     end
   end
 

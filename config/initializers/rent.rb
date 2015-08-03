@@ -1,3 +1,5 @@
-DEFAULT_AVATAR = 'default-avatar'
-SITE_NAME = '廣和行'
-KEYWORDS = [ SITE_NAME, '出租', '承租', '租', '共享經濟' ]
+module Rent
+  DEFAULT_AVATAR = 'default-avatar'
+  SITE_NAME = '廣和行'
+  KEYWORDS = [ SITE_NAME, '出租', '承租', '租', '共享經濟' ]
+end

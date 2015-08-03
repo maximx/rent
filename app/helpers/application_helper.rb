@@ -1,9 +1,9 @@
 module ApplicationHelper
   def render_meta_tags
     display_meta_tags(
-      site: SITE_NAME,
-      keywords: KEYWORDS,
-      og: { site_name: SITE_NAME, type: "website" },
+      site: Rent::SITE_NAME,
+      keywords: Rent::KEYWORDS,
+      og: { site_name: Rent::SITE_NAME, type: "website" },
       reverse: true
     )
   end

@@ -3,6 +3,6 @@ class Category < ActiveRecord::Base
   has_many :items
 
   def meta_keywords
-    KEYWORDS + name.split("、")
+    Rent::KEYWORDS + name.split("、")
   end
 end
