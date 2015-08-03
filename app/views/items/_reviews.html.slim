@@ -2,3 +2,5 @@
   .reviews-list
     = render partial: "reviews/reviews_list", locals: { reviews: reviews }
   = render_see_more_reviews(reviews_item_path(item, page: reviews.next_page)) unless reviews.next_page.nil?
+
+= render_default_content(reviews, "尚未收到評價")
