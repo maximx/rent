@@ -2,15 +2,14 @@ header.site-header
   nav.navbar.navbar-default.navbar-fixed-top
     .navbar-header
       button.navbar-toggle.collapsed data-toggle="collapse" data-target="#user-navigation" aria-expanded="false" type="button"
-        span.sr-only
-          | Toggle navigation
+        span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
 
       h1.navbar-brand
         = link_to SITE_NAME, root_path, id: "site-logo"
-      = render_category_navbar
+      = render partial: "common/category_navbar" if items_related_controller?
 
     #user-navigation.collapse.navbar-collapse
       = render partial: "common/user_login"

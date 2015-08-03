@@ -5,8 +5,7 @@
   .form-group
     .col-xs-4.col-sm-3.control-label
       label 電子郵件
-    .col-xs-6.col-sm-6
-      = text_field_tag nil, @profile.user.email, class: "form-control", disabled: true
+    .col-xs-6.col-sm-6 = render_disabled_input @profile.user.email
 
   = f.simple_fields_for :picture, @profile do |p|
     = p.input :public_id, as: :file_select

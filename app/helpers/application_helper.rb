@@ -8,12 +8,6 @@ module ApplicationHelper
     )
   end
 
-  def render_category_navbar
-    if ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
-      render partial: "common/category_navbar"
-    end
-  end
-
   def render_aside_navigation
     if settings_page?
       render partial: "common/settings_navigation"
@@ -110,6 +104,14 @@ module ApplicationHelper
     end
 
     raw links.join
+  end
+
+  def render_disabled_input(attribute)
+    text_field_tag nil, attribute, class: "form-control", disabled: true
+  end
+
+  def items_related_controller?
+    ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
   end
 
   def settings_page?
