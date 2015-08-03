@@ -3,6 +3,7 @@ module ApplicationHelper
     display_meta_tags(
       site: Rent::SITE_NAME,
       keywords: Rent::KEYWORDS,
+      description: Rent::DESCRIPTION,
       og: { site_name: Rent::SITE_NAME, type: "website" },
       reverse: true
     )
