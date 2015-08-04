@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
     Cloudinary::Utils.cloudinary_url(public_id)
   end
 
+  def meta_description
+    profile.description || "您好，我是#{account}，我在#{Rent::SITE_NAME}"
+  end
+
   private
 
     def init_profile

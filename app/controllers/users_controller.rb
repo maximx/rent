@@ -57,13 +57,14 @@ class UsersController < ApplicationController
       @profile = @user.profile || @user.build_profile
     end
 
-    #TODO: description
     def set_user_meta_tags
       set_meta_tags(
         title: @user.account,
         canonical: user_url(@user),
+        description: @user.meta_description,
         og: {
           title: @user.account + "的個人資料 - " + Rent::SITE_NAME,
+          description: @user.meta_description,
           type: "profile",
           url: user_url(@user),
           image: @user.picture_url

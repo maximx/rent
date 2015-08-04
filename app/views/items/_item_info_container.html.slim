@@ -1,7 +1,6 @@
 .item-header.clearfix
   = render partial: "pictures/picture_carousel", locals: { pictures: item.pictures }
-  h3.item-title
-    = item.name
+  h3.item-title = item.name
   .item-action.btn-group
     = render_collect_item_links(item)
     = render_new_rent_record_link(item)
