@@ -21,3 +21,10 @@ $ ->
   $('.item-grid').closest('#item-container').wookmark
     autoResize: true
     offset: 15
+
+  $('#rent[data-spy="affix"').affix
+    offset:
+      top: 425
+      bottom: () ->
+        if $('#map').size() > 0
+          $(document).height() - $('#map').offset().top + 15

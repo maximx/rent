@@ -9,7 +9,7 @@
         .panel-heading.clearfix
           .price #{item.currency_price} 元
           .period = item.period
-        .panel-body = render partial: "rent_records/form_sm", locals: { item: item, rent_record: rent_record }
+        .panel-body = render partial: "rent_records/form", locals: { item: item, rent_record: rent_record }
 
 .item-show-container
   .row

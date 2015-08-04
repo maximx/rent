@@ -166,13 +166,13 @@ SimpleForm.setup do |config|
 
   config.wrappers :bootstrap_horizontal, tag: :div, class: 'form-group' do |b|
     b.use :html5
-    b.use :label, wrap_with: { class: "col-xs-4 col-sm-3 control-label" }
+    b.use :label, wrap_with: { class: "col-xs-4 col-sm-4 control-label" }
 
     b.wrapper tag: :div, class: 'col-xs-6 col-sm-6' do |ba|
       ba.use :input, class: "form-control"
     end
 
-    b.wrapper tag: :div, class: 'col-xs-2 col-sm-3 hint-error' do |ba|
+    b.wrapper tag: :div, class: 'col-xs-2 col-sm-2 hint-error' do |ba|
       ba.use :hint, wrap_with: { tag: :u, class: 'hint' }
       ba.use :error, wrap_with: { tag: :code, class: 'error' }
     end

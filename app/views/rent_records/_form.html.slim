@@ -1,8 +1,9 @@
 = simple_form_for [item, rent_record] do |f|
-  .form-group
-    .col-xs-4.col-sm-3.control-label
-      label 承租物
-    .col-xs-6.col-sm-6 = render_disabled_input item.name
+  - if rent_records_controller?
+    .form-group
+      .col-xs-4.col-sm-3.control-label
+        label 承租物
+      .col-xs-6.col-sm-6 = render_disabled_input item.name
 
   = f.input :started_at, as: :date_time_picker
   = f.input :ended_at, as: :date_time_picker
@@ -20,4 +21,5 @@
 = hidden_field_tag :minimun_period, item.minimum_period
 = hidden_field_tag :item_price, item.price
 
-= render partial: "rent_records/calendar", locals: { event_sources_path: event_sources_path }
+- if rent_records_controller?
+  = render partial: "rent_records/calendar", locals: { event_sources_path: event_sources_path }

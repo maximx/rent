@@ -1,5 +1,4 @@
 module RentRecordsHelper
-
   def render_edit_rent_record_link(rent_record)
     if rent_record.editable_by?(current_user)
       link_to(render_icon("edit", class: "text-success"),
@@ -83,4 +82,7 @@ module RentRecordsHelper
     datetime.to_s(type)
   end
 
+  def rent_records_controller?
+    params[:controller] == 'rent_records'
+  end
 end

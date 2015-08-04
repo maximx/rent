@@ -108,15 +108,7 @@ module ApplicationHelper
   end
 
   def render_disabled_input(attribute)
-    text_field_tag nil, attribute, class: "form-control", disabled: true
-  end
-
-  def items_related_controller?
-    ["items", "categories", "subcategories", "rent_records"].include?(params[:controller])
-  end
-
-  def settings_page?
-    "profiles" == params[:controller] || params[:controller].start_with?("settings")
+    text_field_tag nil, attribute, class: 'form-control', disabled: true
   end
 
   def is_remote?(type)
