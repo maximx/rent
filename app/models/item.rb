@@ -62,12 +62,12 @@ class Item < ActiveRecord::Base
     self.overlaps_types.to_h.values
   end
 
-  def price_description
-    "租金∶#{price_period}"
-  end
-
   def meta_keywords
     Rent::KEYWORDS + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
+  end
+
+  def meta_description
+    "租金∶#{price_period}。#{ApplicationController.helpers.strip_tags(description)}"
   end
 
   def index_picture_public_id

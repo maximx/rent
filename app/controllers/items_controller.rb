@@ -129,11 +129,11 @@ class ItemsController < ApplicationController
       set_meta_tags(
         title: @item.name,
         keywords: @item.meta_keywords,
-        description: @item.price_description,
+        description: @item.meta_description,
         canonical: item_url(@item),
         og: {
           title: @item.name,
-          description: @item.price_description,
+          description: @item.meta_description,
           url: item_url(@item),
           image: @item.pictures_urls
         }

@@ -24,9 +24,10 @@ class SubcategoriesController < ApplicationController
       set_meta_tags(
         title: @subcategory.title,
         keywords: @subcategory.meta_keywords,
+        description: @subcategory.meta_description,
         og: {
           title: @subcategory.title,
-          #TODO: description
+          description: @subcategory.meta_description,
           url: url_for(params),
           image: @items.index_pictures_urls
         }

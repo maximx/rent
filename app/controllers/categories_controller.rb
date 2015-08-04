@@ -20,9 +20,10 @@ class CategoriesController < ApplicationController
       set_meta_tags(
         title: @category.name,
         keywords: @category.meta_keywords,
+        description: @category.meta_description,
         og: {
           title: @category.name,
-          #TODO: description
+          description: @category.meta_description,
           url: url_for(params),
           image: @items.index_pictures_urls
         }
