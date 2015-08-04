@@ -17,7 +17,7 @@ class Item < ActiveRecord::Base
   has_many :pictures, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :pictures
 
-  enum period: [ :時, :日, :月, :年 ]
+  enum period: [ :每日, :每月, :每年 ]
 
   geocoded_by :address
   after_validation :geocode

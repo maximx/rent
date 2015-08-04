@@ -62,16 +62,34 @@
 /*show*/
 .item-header {
   border-bottom: 1px solid $gray-85;
-  padding-bottom: 5px;
+  margin-top: -40px;
+  padding-top: 40px;
   margin-bottom: 15px;
+  padding-bottom: 5px;
 
-  > .item-title {
-    float: left;
-    margin-top: 0;
-    > a { color: $gray-base; }
+  #rent {
+    border-radius: 0;
+    position: absolute;
+    margin-top: -40px;
+    width: 380px;
+    z-index: 10;
+
+    .panel-heading { padding: 0; }
+    .price {
+      padding: 3px 15px;
+      font-size: 24px;
+      float: left;
+    }
+    .period {
+      padding: 10px 15px;
+      float: right;
+    }
+
+    &.affix {
+      top: 90px;
+      position: fixed;
+    }
   }
-
-  > .item-action { float: right; }
 }
 
 .item-show-container {

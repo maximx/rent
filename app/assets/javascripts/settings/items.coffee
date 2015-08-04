@@ -12,3 +12,8 @@ $ ->
     $(document).scrollTop(0)
     return false
   )
+
+  $('#rent[data-spy="affix"').affix
+    offset:
+      top: 425
+      bottom: $(document).height() - $('#map').offset().top + 15

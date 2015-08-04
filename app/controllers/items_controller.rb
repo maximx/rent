@@ -18,6 +18,7 @@ class ItemsController < ApplicationController
 
   def show
     @question = @item.questions.build
+    @rent_record = @item.rent_records.build
   end
 
   def new
