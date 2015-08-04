@@ -74,6 +74,14 @@ module RentRecordsHelper
     ].join(" ").html_safe
   end
 
+  def render_rent_records_form_wrapper
+    rent_records_controller? ? 'bootstrap_horizontal' : 'default'
+  end
+
+  def render_rent_records_input_wrapper(html, options = { class: 'col-sm-12' })
+    rent_records_controller? ? html : content_tag(:div, html, options)
+  end
+
   def render_datetime_period(obj, type = :db)
     "#{render_datetime(obj.started_at, type)} ~ #{render_datetime(obj.ended_at, type)}"
   end

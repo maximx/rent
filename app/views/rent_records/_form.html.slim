@@ -1,15 +1,15 @@
-= simple_form_for [item, rent_record] do |f|
+= simple_form_for [item, rent_record], wrapper: render_rent_records_form_wrapper do |f|
   - if rent_records_controller?
     .form-group
       .col-xs-4.col-sm-3.control-label
         label 承租物
       .col-xs-6.col-sm-6 = render_disabled_input item.name
 
-  = f.input :started_at, as: :date_time_picker
-  = f.input :ended_at, as: :date_time_picker
+  = render_rent_records_input_wrapper(f.input :started_at, as: :date_time_picker)
+  = render_rent_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
 
   .form-group
-    .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+    div class=(rent_records_controller? ? 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9' : 'col-sm-12 text-center')
       .item-price-days
         | 承租天數∶
         span#rent_days
@@ -23,3 +23,9 @@
 
 - if rent_records_controller?
   = render partial: "rent_records/calendar", locals: { event_sources_path: event_sources_path }
+
+
+javascript:
+  $(document).ready(function(){
+    update_rent_days_price();
+  });

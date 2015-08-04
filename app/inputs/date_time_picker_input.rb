@@ -1,9 +1,6 @@
 class DateTimePickerInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
-    Rails.logger.info input_html_options
-    template.content_tag(:div, class: 'form-group') do
-      template.concat @builder.text_field(attribute_name, picker_input_html_options)
-    end
+    @builder.text_field(attribute_name, picker_input_html_options)
   end
 
   def picker_input_html_options
