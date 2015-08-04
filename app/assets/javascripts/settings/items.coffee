@@ -3,10 +3,12 @@ $ ->
     back_link = '<div><a href="#" id="back_to_items" class="text-danger"><< 回到出租物列表</a></div><br />'
     $('#items-container').hide()
     $('#rent_records_list_container').html(back_link + data).show()
+    $(document).scrollTop(0)
   )
 
   $(document).on('click', '#back_to_items', (e) ->
     $('#rent_records_list_container').hide()
     $('#items-container').show()
+    $(document).scrollTop(0)
     return false
   )
