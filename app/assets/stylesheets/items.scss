@@ -62,15 +62,13 @@
 /*show*/
 .item-header {
   border-bottom: 1px solid $gray-85;
-  margin-top: -40px;
-  padding-top: 40px;
   margin-bottom: 15px;
   padding-bottom: 5px;
 
   #rent {
     border-radius: 0;
     position: absolute;
-    margin-top: -40px;
+    margin-top: 20px;
     width: 350px;
     z-index: 10;
 
@@ -86,7 +84,7 @@
     }
 
     &.affix {
-      top: 90px;
+      top: 25px;
       position: fixed;
     }
   }

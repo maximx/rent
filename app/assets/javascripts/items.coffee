@@ -24,7 +24,7 @@ $ ->
 
   $('#rent[data-spy="affix"').affix
     offset:
-      top: 425
+      top: 490
       bottom: () ->
         if $('#map').size() > 0
           $(document).height() - $('#map').offset().top + 15
