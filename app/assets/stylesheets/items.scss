@@ -39,8 +39,8 @@
 
   .item-list {
     > .item-list-cell {
-      padding: 5px 0;
-      border-bottom: 1px solid $gray-85;
+      padding: 10px 0;
+      border-top: 1px solid $gray-85;
 
       .item-list-name { margin-top: 3px; }
       .item-list-user {
@@ -51,7 +51,6 @@
 
       .item-list-info, .item-list-img {
         margin-right: 15px;
-        margin-bottom: 10px;
         float: left;
       }
       .item-list-avatar { margin: 10px 0; }
