@@ -1,6 +1,6 @@
 namespace :fake do
   task :users => :environment do
-    10.times do
+    15.times do
       user = User.new(
         email: FFaker::Internet.email,
         account: FFaker::Name.first_name,
