@@ -50,6 +50,10 @@ class Item < ActiveRecord::Base
     address[0..2]
   end
 
+  def period_without_per
+    period.slice(1)
+  end
+
   def price_period
     "#{currency_price}/#{period}"
   end

@@ -4,12 +4,15 @@
   .row
     .col-lg-8
       h3.item-title = item.name
-    .col-lg-4
-      #rent.panel.panel-default data-spy="affix"
-        .panel-heading.clearfix
-          .price #{item.currency_price} 元
-          .period = item.period
-        .panel-body = render partial: "rent_records/form", locals: { item: item, rent_record: rent_record }
+    - if params[:controller] == 'items'
+      .col-lg-4
+        #rent.panel.panel-default data-spy="affix"
+          .panel-heading.clearfix
+            .price #{item.currency_price} 元
+            .period = item.period
+          .panel-body
+            = render partial: "rent_records/form", locals: { item: item, rent_record: rent_record }
+            .text-right = render_collect_item_links(item, :remote)
 
 .item-show-container
   .row
@@ -29,7 +32,7 @@
         dt 最短租期
         dd
           = item.minimum_period
-          = item.period
+          = item.period_without_per
 
         dt 訂金
         dd $ #{ item.down_payment }
