@@ -6,7 +6,7 @@
       span.text-muted 您好，我是#{ @user.account }
       .pull-right = render_follow_link(@user)
 
-    - unless @profile.description.nil?
+    - if @profile.description.to_s != ''
       .panel.panel-default
         .panel-heading 描述
         .panel-body = raw @profile.description
