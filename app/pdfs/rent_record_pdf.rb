@@ -1,9 +1,8 @@
 class RentRecordPdf < Prawn::Document
-
   def self.pdf_config(item_id, rent_record_id)
     {
       filename: "item#{item_id}_record#{rent_record_id}.pdf",
-      type: "application/pdf",
+      type: 'application/pdf',
       disposition: :inline
     }
   end
@@ -12,7 +11,8 @@ class RentRecordPdf < Prawn::Document
     super()
     @item = item
     @rent_record = rent_record
-    font "#{Prawn::DATADIR}/fonts/华文仿宋.ttf"
+    #font "#{Prawn::DATADIR}/fonts/华文仿宋.ttf"
+    font '/Library/Fonts/华文仿宋.ttf'
 
     declare_code
     first_code
@@ -31,10 +31,10 @@ class RentRecordPdf < Prawn::Document
   end
 
   def declare_code
-    text "出租合約書", size: 20, align: :center
+    text '出租合約書', size: 20, align: :center
     move_down 15
 
-    text "#{@rent_record.borrower.email}(以下簡稱甲方)向#{@item.lender.email}(以下簡稱乙方)承租#{@item.name}特訂立本契約並經雙方同意，條件如下∶"
+    text "#{@rent_record.borrower.account}(以下簡稱甲方)向#{@item.lender.account}(以下簡稱乙方)承租#{@item.name}特訂立本契約並經雙方同意，條件如下∶"
     next_line
   end
 
@@ -157,12 +157,11 @@ class RentRecordPdf < Prawn::Document
 
     def sign_content
       [
-        ["甲方", "", "乙方", ""],
-        ["姓名∶", "", "姓名∶", ""],
-        ["身份證字號∶", "", "身份證字號∶", ""],
-        ["地址∶", "", "地址∶", ""],
-        ["電話∶", "", "電話∶", ""]
+        ['甲方', '', '乙方', ''],
+        ['姓名∶', '', '姓名∶', ''],
+        ['身份證字號∶', '', '身份證字號∶', ''],
+        ['地址∶', '', '地址∶', ''],
+        ['電話∶', '', '電話∶', '']
       ]
     end
-
 end

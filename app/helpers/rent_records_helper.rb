@@ -1,4 +1,13 @@
 module RentRecordsHelper
+  def render_download_rent_record_link(rent_record)
+    if rent_record.viewable_by?(current_user)
+      link_to(render_icon('download-alt', class: 'text-danger'),
+              item_rent_record_path(rent_record.item, rent_record, format: 'pdf'),
+              target: '_blank', title: '下載契約',
+              class: 'btn btn-default', data: { toggle: 'tooltip' })
+    end
+  end
+
   def render_edit_rent_record_link(rent_record)
     if rent_record.editable_by?(current_user)
       link_to(render_icon("edit", class: "text-success"),
@@ -63,15 +72,16 @@ module RentRecordsHelper
   end
 
   def render_operate_rent_record_links(rent_record)
-    [
+    raw [
       render_withdrawing_rent_record_link(rent_record),
       render_renting_rent_record_link(rent_record),
       render_returning_rent_record_link(rent_record),
       render_edit_rent_record_link(rent_record),
       render_ask_for_review_rent_record_link(rent_record),
       render_review_rent_record_link(rent_record),
-      render_show_rent_record_link(rent_record)
-    ].join(" ").html_safe
+      render_show_rent_record_link(rent_record),
+      render_download_rent_record_link(rent_record)
+    ].join(" ")
   end
 
   def render_rent_records_form_wrapper
