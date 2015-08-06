@@ -22,7 +22,7 @@ $ ->
     autoResize: true
     offset: 15
 
-  $('#rent[data-spy="affix"').affix
+  $('#rent[data-spy="affix"]').affix
     offset:
       top: 490
       bottom: () ->
