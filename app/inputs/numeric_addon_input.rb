@@ -1,13 +1,14 @@
 class NumericAddonInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
     template.content_tag(:div, class: 'input-group addon') do
-      template.concat @builder.number_field(attribute_name, input_html_options)
+      template.concat @builder.number_field(attribute_name, picker_input_html_options)
       template.concat span_table
     end
   end
 
-  def input_html_options
-    { class: 'form-control' }
+  def picker_input_html_options
+    input_html_options[:class] << 'form-control'
+    input_html_options
   end
 
   def span_table
@@ -15,5 +16,4 @@ class NumericAddonInput < SimpleForm::Inputs::Base
       template.concat options[:direction]
     end
   end
-
 end
