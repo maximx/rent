@@ -1,14 +1,14 @@
 = simple_form_for item do |f|
   = f.simple_fields_for :pictures, item.pictures.build do |p|
-    = p.input :public_id, as: :file_select, input_html: { multiple: true }, hint: "可選取多個檔案"
+    = p.input :public_id, as: :file_select, input_html: { multiple: true }, hint: '可選取多個檔案'
     = item.errors[:pictures].first
 
   = f.input :name
   = f.input :subcategory_id, as: :grouped_select, collection: Category.includes(:subcategories).all, group_method: :subcategories
   = f.input :price, as: :numeric_addon, direction: "元 / #{item.period}", input_html: { min: 0 }
   = f.input :minimum_period, as: :numeric_addon, direction: item.period_without_per, input_html: { min: 1 }
-  = f.input :deposit, as: :numeric_addon, direction: "元", hint: "會退還"
-  = f.input :down_payment, as: :numeric_addon, direction: "元", hint: "就是首付款"
+  = f.input :deposit, as: :numeric_addon, direction: '元', hint: '會退還', input_html: { min: 0 }
+  = f.input :down_payment, as: :numeric_addon, direction: '元', hint: '就是首付款', input_html: { min: 0 }
   = f.input :address
   = f.input :description
 
