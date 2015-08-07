@@ -18,8 +18,8 @@ table.table.table-hover
         td = rent_record.currency_price
         td = render_datetime_period(rent_record, :date_only)
         td = rent_record.aasm.human_state
-        td.btn-group
-          = render_operate_rent_record_links(rent_record)
+        td
+          .btn-group = render_operate_rent_record_links(rent_record)
 
 = will_paginate @rent_records, class: "hidden-sm hidden-xs"
 = will_paginate @rent_records, class: "hidden-lg hidden-md", page_links: false
