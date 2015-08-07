@@ -5,8 +5,8 @@
 
   = f.input :name
   = f.input :subcategory_id, as: :grouped_select, collection: Category.includes(:subcategories).all, group_method: :subcategories
-  = f.input :price, as: :numeric_addon, direction: "元 / 每#{item.period}"
-  = f.input :minimum_period, as: :numeric_addon, direction: item.period
+  = f.input :price, as: :numeric_addon, direction: "元 / #{item.period}"
+  = f.input :minimum_period, as: :numeric_addon, direction: item.period_without_per
   = f.input :deposit, as: :numeric_addon, direction: "元", hint: "會退還"
   = f.input :down_payment, as: :numeric_addon, direction: "元", hint: "就是首付款"
   = f.input :address
