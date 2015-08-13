@@ -24,7 +24,7 @@ class Item < ActiveRecord::Base
 
   self.per_page = 20
 
-  before_save :set_category_id
+  before_save :set_category_and_price
 
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
   scope :search_city, -> (query) { where("items.address regexp ?", tai_word(query)) if query.present? }
@@ -88,7 +88,10 @@ class Item < ActiveRecord::Base
 
   protected
 
-  def set_category_id
+  def set_category_and_price
+    self.price ||= 0
+    self.deposit ||= 0
+    self.down_payment ||= 0
     self.category_id = Subcategory.find(subcategory_id).category_id
   end
 
