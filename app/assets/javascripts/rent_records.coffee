@@ -1,12 +1,12 @@
 $(document).ready ->
     $('.form_datetime').datetimepicker
       format: 'YYYY-MM-DD HH:mm:ss'
+      useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
 
     $start_picker_obj = $('#rent_record_started_at').closest('.form_datetime')
     $end_picker_obj = $('#rent_record_ended_at').closest('.form_datetime')
     minimum_period = $('#minimun_period').val()
 
-    #TODO: it's wierd
     $start_picker_obj.on('dp.change', (e)->
       $end_picker_obj.data('DateTimePicker').minDate(
         e.date.add(minimum_period, 'd')

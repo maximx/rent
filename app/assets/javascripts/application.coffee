@@ -47,6 +47,7 @@ $ ->
   #active date time picker
   $('.form_date').datetimepicker
     format: 'YYYY-MM-DD'
+    useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
 
   # date time picker logic
   $search_form_date = $('.form_date')
@@ -59,7 +60,8 @@ $ ->
     else
       $end_picker_obj.data('DateTimePicker').minDate(false)
 
-    $search_form_date.prop('required', true)
+    console.log 'hi3'
+    #$search_form_date.prop('required', true)
   )
   $end_picker_obj.on('dp.change', (e)->
     if e.date
