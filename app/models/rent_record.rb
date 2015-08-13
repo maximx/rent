@@ -13,7 +13,7 @@ class RentRecord < ActiveRecord::Base
 
   self.per_page = 10
 
-  before_save :set_price
+  before_save :set_item_attributes
 
   scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
@@ -146,10 +146,6 @@ class RentRecord < ActiveRecord::Base
     reviews.where(judger_id: user.id).exists?
   end
 
-  def rent_days
-    ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
-  end
-
   def lender
     self.item.lender
   end
@@ -158,6 +154,15 @@ class RentRecord < ActiveRecord::Base
 
     def set_price
       self.price =  rent_days * item.price
+    end
+
+    def set_item_attributes
+      self.item_price = item.price
+      self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
+      self.item_deposit = item.deposit
+      self.item_down_payment = item.down_payment
+
+      self.price =  rent_days * item_price
     end
 
   private

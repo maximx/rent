@@ -38,10 +38,13 @@ table.table
       td colspan="2" = @rent_record.aasm.human_state
     tr
       td 租金
-      td colspan="2" = @rent_record.currency_price
+      td colspan="2" $#{@rent_record.item_price}(租金) * #{@rent_record.rent_days}(天) = #{@rent_record.currency_price}(總金額)
     tr
-      td 承租物
-      td colspan="2" = @item.name
+      td 押金
+      td colspan="2" $#{@rent_record.item_deposit}
+    tr
+      td 訂金
+      td colspan="2" $#{@rent_record.item_down_payment}
     tr
       td 租期
       td colspan="2" = render_datetime_period(@rent_record, :tw)
