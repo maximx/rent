@@ -3,8 +3,8 @@ $(document).ready ->
       format: 'YYYY-MM-DD HH:mm:ss'
       useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
 
-    $start_picker_obj = $('#rent_record_started_at').closest('.form_datetime')
-    $end_picker_obj = $('#rent_record_ended_at').closest('.form_datetime')
+    $start_picker_obj = $('#rent_record_started_at')
+    $end_picker_obj = $('#rent_record_ended_at')
     minimum_period = $('#minimun_period').val()
 
     $start_picker_obj.on('dp.change', (e)->

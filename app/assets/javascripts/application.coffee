@@ -60,8 +60,7 @@ $ ->
     else
       $end_picker_obj.data('DateTimePicker').minDate(false)
 
-    console.log 'hi3'
-    #$search_form_date.prop('required', true)
+    $search_form_date.prop('required', true)
   )
   $end_picker_obj.on('dp.change', (e)->
     if e.date
