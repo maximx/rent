@@ -18,13 +18,12 @@
 #= require bootstrap-datetimepicker
 #= require underscore
 #= require gmaps/google
-#= require build_google_map
 #= require fullcalendar
 #= require fullcalendar/lang-all
 #= require tinymce
-#= require init_tinymce
 #= require turbolinks
 #= require wookmark.min
+#= require rent_js_methods
 #= require_tree .
 
 $ ->
@@ -44,10 +43,7 @@ $ ->
   .click (e)->
     e.preventDefault()
 
-  #active date time picker
-  $('.form_date').datetimepicker
-    format: 'YYYY-MM-DD'
-    useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
+  buildDateTimePicker($('.form_date'), 'YYYY-MM-DD')
 
   # date time picker logic
   $search_form_date = $('.form_date')

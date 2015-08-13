@@ -86,6 +86,12 @@ class Item < ActiveRecord::Base
     Review.where(rent_record_id: rent_records)
   end
 
+  def booked_dates
+    rent_records.booking.where('started_at > ?', Time.now)
+      .collect { |rent_record| (rent_record.started_at.to_date .. rent_record.ended_at.to_date).map(&:to_s) }
+      .flatten
+  end
+
   protected
 
   def set_category_and_price

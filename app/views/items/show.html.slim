@@ -28,4 +28,5 @@ section
   javascript:
     $(document).ready(function() {
       buildGoogleMap( #{raw @maps.to_json} );
+      buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD HH:mm:ss', #{raw @disabled_dates})
     });

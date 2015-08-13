@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
   def show
     @question = @item.questions.build
     @rent_record = @item.rent_records.build
+    @disabled_dates = @item.booked_dates
   end
 
   def new
