@@ -35,10 +35,10 @@
           = item.period_without_per
 
         dt 訂金
-        dd $ #{ item.down_payment }
+        dd = item.currency_down_payment
 
         dt 押金
-        dd $ #{ item.deposit }
+        dd = item.currency_deposit
 
         dt 描述
         dd = raw item.description
