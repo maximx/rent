@@ -93,20 +93,6 @@ module ApplicationHelper
     content_tag(:h3, text, class: "text-muted text-center")
   end
 
-  def render_items_view_links
-    links = []
-    current_view = ( ["list", "grid"].include?(params[:view]) ) ? params[:view] : "grid"
-
-    ["list", "th-large"].each do |type|
-      link_view = (type == "list") ? type : "grid"
-      css_class = "btn btn-default"
-      css_class += " active" if link_view == current_view
-      links << link_to( render_icon(type), params.merge(view: link_view), class: css_class, role: "botton" )
-    end
-
-    raw links.join
-  end
-
   def render_disabled_input(attribute)
     text_field_tag nil, attribute, class: 'form-control', disabled: true
   end

@@ -1,6 +1,9 @@
 = form_tag search_path, method: :get, id: 'advanced-search-form', class: 'navbar-form' do
   = hidden_field_tag :price_min, render_price_min
   = hidden_field_tag :price_max, render_price_max
+  = hidden_field_tag :city, params[:city], id: nil
+  = hidden_field_tag :query, params[:query], id: nil
+  = hidden_field_tag :view, params[:view], id: nil
 
   .row
     .col-lg-12

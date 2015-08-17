@@ -34,6 +34,7 @@ $ ->
     $('#advanced-search-form').submit()
   )
 
+
 @setPriceRange = () ->
   $price_range = $('#price_range')
   range = $price_range.slider('getValue')

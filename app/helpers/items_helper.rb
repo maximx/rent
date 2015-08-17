@@ -29,6 +29,22 @@ module ItemsHelper
     end
   end
 
+  def render_items_view_links
+    links = []
+    current_view = ( ['list', 'grid'].include?(params[:view]) ) ? params[:view] : 'grid'
+
+    ['list', 'th-large'].each do |type|
+      link_view = (type == 'list') ? type : 'grid'
+      css_class = 'btn btn-default view-type'
+      css_class += ' active' if link_view == current_view
+      links << link_to( render_icon(type),
+                        params.merge(view: link_view),
+                        class: css_class, role: 'botton', data: { view: link_view } )
+    end
+
+    raw links.join
+  end
+
   def render_item_index_breadcrumbs(obj = {})
     case params[:controller]
     when "categories"
