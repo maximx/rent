@@ -23,6 +23,7 @@
 #= require tinymce
 #= require turbolinks
 #= require wookmark.min
+#= require bootstrap-slider
 #= require rent_js_methods
 #= require_tree .
 
@@ -42,6 +43,8 @@ $ ->
     html: true
   .click (e)->
     e.preventDefault()
+
+  $('.slider').slider()
 
   buildDateTimePicker($('.form_date'), 'YYYY-MM-DD')
 

@@ -71,6 +71,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'fullcalendar-rails'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
+gem 'bootstrap-slider-rails'
 
 gem 'ffaker'
 
