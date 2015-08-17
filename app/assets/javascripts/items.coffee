@@ -28,3 +28,21 @@ $ ->
       bottom: () ->
         if $('#map').size() > 0
           $(document).height() - $('#map').offset().top + 15
+
+  $('#price_range').on('slideStop', () ->
+    setPriceRange()
+    $('#advanced-search-form').submit()
+  )
+
+@setPriceRange = () ->
+  $price_range = $('#price_range')
+  range = $price_range.slider('getValue')
+
+  min = range[0]
+  max = range[1]
+
+  $('#price_min').val(min)
+  $('#price_min').remove() if min == $price_range.data('slider-min')
+
+  $('#price_max').val(max)
+  $('#price_max').remove() if max == $price_range.data('slider-max')

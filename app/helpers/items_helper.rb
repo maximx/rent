@@ -59,6 +59,24 @@ module ItemsHelper
     end
   end
 
+  def render_item_view
+    view ||= 'grid'
+    view = params[:view] if ['list', 'grid'].include? params[:view]
+    view
+  end
+
+  def render_item_name(item, length = 20)
+    truncate item.name, length: length
+  end
+
+  def render_price_min
+    ( params[:price_min].present? ) ? params[:price_min].to_i : Item::PRICE_MIN
+  end
+
+  def render_price_max
+    ( params[:price_max].present? ) ? params[:price_max].to_i : Item::PRICE_MAX
+  end
+
   def new_rent_record_button_display?(item)
     (!user_signed_in? || item.rentable_by?(current_user) ) && item_action_display?
   end
@@ -73,15 +91,5 @@ module ItemsHelper
 
   def items_related_controller?
     ['items', 'categories', 'subcategories', 'rent_records'].include?(params[:controller])
-  end
-
-  def render_item_view
-    view ||= "grid"
-    view = params[:view] if ["list", "grid"].include? params[:view]
-    view
-  end
-
-  def render_item_name(item, length = 20)
-    truncate item.name, length: length
   end
 end
