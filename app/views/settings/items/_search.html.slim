@@ -1,16 +1,17 @@
-= form_tag settings_items_path, method: :get, id: "search-form", class: "navbar-form navbar-right" do
+= form_tag settings_items_path, method: :get, id: 'search-form', class: 'navbar-form' do
   .input-other
     .form-group
-      = select_tag :overlaps, options_for_select(Item.overlaps_types, params[:overlaps]), class: "form-control"
+      = select_tag :overlaps, options_for_select(Item.overlaps_types, params[:overlaps]), class: 'form-control'
 
     .form-group
-      = text_field_tag :started_at, nil, class: "form-control form_date", placeholder: "起租日期", value: params[:started_at]
+      = text_field_tag :started_at, params[:started_at], class: 'form-control form_date', placeholder: '起租日期'
 
     .form-group
-      = text_field_tag :ended_at, nil, class: "form-control form_date", placeholder: "迄租日期", value: params[:ended_at]
+      = text_field_tag :ended_at, params[:ended_at], class: 'form-control form_date', placeholder: '迄租日期'
 
   .form-group
     .input-group
-      = text_field_tag :query, nil, class: "form-control keyword", placeholder: "關鍵字", value: params[:query]
+      = text_field_tag :query, params[:query], class: 'form-control keyword', placeholder: '關鍵字'
       span.input-group-btn
-        button.btn.btn-default type="submit" = render_icon("search")
+        button.btn.btn-default type="submit"
+          = render_icon("search")

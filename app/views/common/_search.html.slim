@@ -4,7 +4,7 @@
       span.input-group-btn
         = select_tag :city, options_for_select(City.options_collection, params[:city]), include_blank: "選擇地點", class: "form-control"
 
-      = text_field_tag :query, nil, class: "form-control keyword", placeholder: "關鍵字", value: params[:query]
+      = text_field_tag :query, params[:query], class: 'form-control keyword', placeholder: '關鍵字'
 
       span.input-group-btn
         button.btn.btn-default type="submit"
