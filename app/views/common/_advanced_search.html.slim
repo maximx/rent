@@ -1,0 +1,14 @@
+= form_tag search_path, method: :get, id: 'search-form', class: 'navbar-form' do
+  .row
+    .col-lg-12
+      .form-group
+        = text_field_tag :started_at, params[:started_at], class: 'form-control form_date', placeholder: '起租日期'
+
+      .form-group
+        = text_field_tag :ended_at, params[:ended_at], class: 'form-control form_date', placeholder: '迄租日期'
+
+      .form-group
+        = text_field_tag :price_range, nil, class: 'slider',
+                         data: { 'slider-orientation': 'horizontal', 'slider-selection': 'after', 'slider-step': 5,
+                                 'slider-min': Item::PRICE_MIN, 'slider-max': Item::PRICE_MAX,
+                                 'slider-value': [ params[:price_min].to_i, params[:price_max].to_i ] }

@@ -88,8 +88,12 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.includes(:pictures).search_city(params[:city])
-      .search_by(params[:query]).page(params[:page])
+    @items = Item.includes(:pictures)
+                 .record_not_overlaps(params[:started_at], params[:ended_at])
+                 .price_range(params[:price_min], params[:price_max])
+                 .search_by(params[:query])
+                 .city_at(params[:city])
+                 .page(params[:page])
     @items = @items.where(user_id: params[:user_id]) if params.has_key?(:user_id)
     find_users_reviews_count
     render :index

@@ -1,3 +1,17 @@
 .item-view.clearfix
-  .btn-group.btn-group-sm.pull-right
+  .btn-group.btn-group-sm role="group"
     = render_items_view_links
+
+    .btn-group.btn-group-sm role="group"
+      button.btn.btn-default.dropdown-toggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        | 排序
+        span.caret
+      ul.dropdown-menu
+        li
+          a 最高租金
+        li
+          a 最低租金
+        li
+          a 最高評價
+        li
+          a 最新物品

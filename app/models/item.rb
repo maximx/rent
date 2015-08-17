@@ -1,6 +1,9 @@
 class Item < ActiveRecord::Base
   include CurrencyPrice
 
+  PRICE_MIN = 5
+  PRICE_MAX = 2000
+
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
@@ -27,7 +30,11 @@ class Item < ActiveRecord::Base
   before_save :set_category_and_price
 
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
-  scope :search_city, -> (query) { where("items.address regexp ?", tai_word(query)) if query.present? }
+  scope :city_at, -> (query) { where('items.address regexp ?', tai_word(query)) if query.present? }
+
+  scope :price_range, -> (min, max) { price_greater_than(min).price_less_than(max) }
+  scope :price_greater_than, -> (min) { where('price > ?', min) if min.present? && min != PRICE_MIN }
+  scope :price_less_than, -> (max) { where('price < ?', max) if max.present? && max != PRICE_MAX }
 
   scope :record_overlaps, ->(started_at, ended_at) do
     where(id: RentRecord.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))

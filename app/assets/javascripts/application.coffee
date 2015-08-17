@@ -44,6 +44,7 @@ $ ->
   .click (e)->
     e.preventDefault()
 
+  #price range slider
   $('.slider').slider()
 
   buildDateTimePicker($('.form_date'), 'YYYY-MM-DD')
