@@ -39,6 +39,10 @@ a {
 .anchor { padding-top: 55px; margin-top: -55px; }
 .img-thumbnail { padding: 0; }
 
+/*bootstrap slider*/
+.slider-handle { border: 1px solid $gray-light; }
+.slider.slider-horizontal { width: 100%; }
+
 
 //header
 .site-header {

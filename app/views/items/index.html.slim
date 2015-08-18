@@ -1,6 +1,7 @@
 - render_item_index_breadcrumbs(@breadcrumbs_object)
 
-= render partial: 'items/advanced_search'
+- if params[:action] == 'search'
+  = render partial: 'items/advanced_search'
 = render partial: 'items/type'
 
 #item-container

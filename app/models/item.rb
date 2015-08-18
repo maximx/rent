@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
   include CurrencyPrice
 
   PRICE_MIN = 5
-  PRICE_MAX = 2000
+  PRICE_MAX = 500
 
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures
 
