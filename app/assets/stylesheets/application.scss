@@ -40,13 +40,15 @@ a {
 .img-thumbnail { padding: 0; }
 
 /*bootstrap slider*/
+#price_slider { margin-top: 8px; }
+
 .slider.slider-horizontal {
   width: 100%;
 
   .slider-track { height: 6px; }
 }
 
-.slider-selection { background: $brand-success; }
+.slider-selection { background: $gray-light; }
 .slider-handle { border: 1px solid $gray-light; }
 
 //header
@@ -162,6 +164,7 @@ a {
   select { width: 200px; }
 
   input[type="number"] { text-align: right; }
+  input.form-control { margin-bottom: 5px; }
 
   .input-group {
     margin-top: 0;

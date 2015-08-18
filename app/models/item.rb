@@ -33,8 +33,8 @@ class Item < ActiveRecord::Base
   scope :city_at, -> (query) { where('items.address regexp ?', tai_word(query)) if query.present? }
 
   scope :price_range, -> (min, max) { price_greater_than(min).price_less_than(max) }
-  scope :price_greater_than, -> (min) { where('price > ?', min) if min.present? && min != PRICE_MIN }
-  scope :price_less_than, -> (max) { where('price < ?', max) if max.present? && max != PRICE_MAX }
+  scope :price_greater_than, -> (min) { where('price >= ?', min) if min.present? && min != PRICE_MIN }
+  scope :price_less_than, -> (max) { where('price <= ?', max) if max.present? && max != PRICE_MAX }
 
   scope :record_overlaps, ->(started_at, ended_at) do
     where(id: RentRecord.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
