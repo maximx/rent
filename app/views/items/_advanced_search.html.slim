@@ -22,3 +22,13 @@
                            data: { 'slider-orientation': 'horizontal', 'slider-selection': 'after', 'slider-step': 5,
                                    'slider-min': Item::PRICE_MIN, 'slider-max': Item::PRICE_MAX, 'slider-id': 'price_slider',
                                    'slider-value': [ render_price_min, render_price_max ] }
+
+    .col-md-12
+      .col-md-offset-3.col-md-6
+        .price_shower.clearfix.text-muted
+          .pull-left
+            span $
+            span.price_min = render_price_min
+          .pull-right
+            span $
+            span.price_max = render_price_max

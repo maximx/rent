@@ -29,10 +29,13 @@ $ ->
         if $('#map').size() > 0
           $(document).height() - $('#map').offset().top + 15
 
-  $('#price_range').on 'slideStop', () ->
+  $('#price_range').on('slide', () ->
+    setPriceRange()
+  ).on('slideStop', () ->
     setPriceRange()
     removeInputName()
     $('#advanced-search-form').submit()
+  )
 
 
 @setPriceRange = () ->
@@ -40,16 +43,18 @@ $ ->
   range = $price_range.slider('getValue')
 
   min = range[0]
-  max = range[1]
-
   $('#price_min').val(min)
-  $('#price_max').val(max)
+  $('span.price_min').text(min)
 
-  $('#price_min').remove() if min == $price_range.data('slider-min')
-  $('#price_max').remove() if max == $price_range.data('slider-max')
+  max = range[1]
+  $('#price_max').val(max)
+  $('span.price_max').text(max)
 
 
 @removeInputName = () ->
   $('#advanced-search-form input').not('.price').each () ->
     $('#price_range').removeAttr('name')
+    $('#price_min').remove() if $('#price_min').val() == $('#price_range').data('slider-min')
+    $('#price_max').remove() if $('#price_max').val() == $('#price_range').data('slider-max')
+
     $(this).removeAttr('name') if $(this).val() == ''
