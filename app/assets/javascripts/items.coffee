@@ -29,14 +29,22 @@ $ ->
         if $('#map').size() > 0
           $(document).height() - $('#map').offset().top + 15
 
+  $('.form_date').on('blur', () ->
+    submitAdvancedSearchForm() if checkFormDateInput()
+  )
+
   $('#price_range').on('slide', () ->
     setPriceRange()
   ).on('slideStop', () ->
     setPriceRange('slideStop')
-    removeInputName()
-    $('#advanced-search-form').submit()
+    submitAdvancedSearchForm() if checkFormDateInput()
   )
 
+@checkFormDateInput = () ->
+  started_at = $('#started_at').val()
+  ended_at = $('#ended_at').val()
+  #all empty or all present
+  return ( started_at == '' && ended_at == '' ) || ( started_at != '' && ended_at != '' )
 
 @setPriceRange = (action = 'slide') ->
   $price_range = $('#price_range')
@@ -59,3 +67,7 @@ $ ->
   $('#advanced-search-form input').not('.price').each () ->
     $('#price_range').removeAttr('name')
     $(this).removeAttr('name') if $(this).val() == ''
+
+@submitAdvancedSearchForm = () ->
+  removeInputName()
+  $('#advanced-search-form').submit()

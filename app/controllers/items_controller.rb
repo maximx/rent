@@ -88,13 +88,17 @@ class ItemsController < ApplicationController
   end
 
   def search
+    params[:sort] = 'items.created_at' unless ['price', 'items.created_at'].include? params[:sort]
+
     @items = Item.includes(:pictures)
                  .record_not_overlaps(params[:started_at], params[:ended_at])
                  .price_range(params[:price_min], params[:price_max])
                  .search_by(params[:query])
                  .city_at(params[:city])
-                 .page(params[:page])
     @items = @items.where(user_id: params[:user_id]) if params.has_key?(:user_id)
+    @items = @items.order(params[:sort])
+    @items = @items.reverse_order unless params[:order] == 'asc'
+    @items = @items.page(params[:page])
     find_users_reviews_count
     render :index
   end

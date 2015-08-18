@@ -108,4 +108,13 @@ module ItemsHelper
   def items_related_controller?
     ['items', 'categories', 'subcategories', 'rent_records'].include?(params[:controller])
   end
+
+  #items sort type
+  def items_sort_order_list
+    {
+      '最新物品': params.delete_if { |key| ['sort', 'order'].include? key },
+      '最高價格': params.merge(sort: 'price', order: 'desc'),
+      '最低價格': params.merge(sort: 'price').delete_if { |key| key == 'order' }
+    }
+  end
 end

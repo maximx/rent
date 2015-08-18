@@ -1,17 +1,12 @@
 .item-view
-  .btn-group.btn-group-sm.col-xs-offset-8.col-sm-offset-10 role="group"
+  .btn-group.btn-group-sm.col-xs-offset-7.col-sm-offset-9.col-md-offset-10 role="group"
     = render_items_view_links
 
     .btn-group.btn-group-sm role="group"
       button.btn.btn-default.dropdown-toggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-        | 排序
+        | 最高價格
         span.caret
       ul.dropdown-menu.pull-right
-        li
-          a 最高租金
-        li
-          a 最低租金
-        li
-          a 最高評價
-        li
-          a 最新物品
+        /TODO: 最高評價 li = link_to('最高評價', '')
+        - items_sort_order_list.each do |key, val|
+          li = link_to key, val
