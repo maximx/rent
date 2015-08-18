@@ -40,10 +40,14 @@ a {
 .img-thumbnail { padding: 0; }
 
 /*bootstrap slider*/
-.slider-handle { border: 1px solid $gray-light; }
-.slider.slider-horizontal { width: 100%; }
-.slider-selection { background: $brand-danger; }
+.slider.slider-horizontal {
+  width: 100%;
 
+  .slider-track { height: 6px; }
+}
+
+.slider-selection { background: $brand-success; }
+.slider-handle { border: 1px solid $gray-light; }
 
 //header
 .site-header {

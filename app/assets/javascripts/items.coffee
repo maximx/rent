@@ -51,5 +51,5 @@ $ ->
 
 @removeInputName = () ->
   $('#advanced-search-form input').not('.price').each () ->
-    $('#price_range').remove()
-    $(this).remove() if $(this).val() == ''
+    $('#price_range').removeAttr('name')
+    $(this).removeAttr('name') if $(this).val() == ''
