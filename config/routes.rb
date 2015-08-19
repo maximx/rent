@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "items#index"
+  root to: "pages#index"
   get "/search", to: "items#search"
   get "/about", to: "pages#about"
   get "/terms", to: "pages#terms"

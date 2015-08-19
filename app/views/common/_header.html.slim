@@ -9,8 +9,8 @@ header.site-header
 
       h1.navbar-brand
         = link_to Rent::SITE_NAME, root_path, id: "site-logo"
-      = render partial: "common/category_navbar" if items_related_controller?
+      = render partial: 'common/category_navbar' if items_related_controller?
 
     #user-navigation.collapse.navbar-collapse
-      = render partial: "common/user_login"
-      = render partial: "common/search" unless settings_page?
+      = render partial: 'common/user_login'
+      = render partial: 'common/search' if items_related_controller?
