@@ -11,7 +11,8 @@ class ItemsController < ApplicationController
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar, :reviews ]
 
   def index
-    @items = Item.includes(:pictures).page(params[:page])
+    @items = Item.includes(:pictures)
+    sort_and_paginate_items
     find_users_reviews_count
     meta_pagination_links @items
   end
@@ -88,17 +89,13 @@ class ItemsController < ApplicationController
   end
 
   def search
-    params[:sort] = 'items.created_at' unless ['price', 'items.created_at'].include? params[:sort]
-
     @items = Item.includes(:pictures)
                  .record_not_overlaps(params[:started_at], params[:ended_at])
                  .price_range(params[:price_min], params[:price_max])
                  .search_by(params[:query])
                  .city_at(params[:city])
     @items = @items.where(user_id: params[:user_id]) if params.has_key?(:user_id)
-    @items = @items.order(params[:sort])
-    @items = @items.reverse_order unless params[:order] == 'asc'
-    @items = @items.page(params[:page])
+    sort_and_paginate_items
     find_users_reviews_count
     render :index
   end
@@ -127,12 +124,22 @@ class ItemsController < ApplicationController
       )
     end
 
+    def sort_params
+      ( ['price'].include? params[:sort] ) ? params[:sort] : 'items.created_at'
+    end
+
     def find_lender_item
       @item = current_user.items.find(params[:id])
     end
 
     def find_item
       @item = Item.find(params[:id])
+    end
+
+    def sort_and_paginate_items
+      @items = @items.order(sort_params)
+      @items = @items.reverse_order unless params[:order] == 'asc'
+      @items = @items.page(params[:page])
     end
 
     def set_item_meta_tags

@@ -109,12 +109,18 @@ module ItemsHelper
     ['items', 'categories', 'subcategories', 'rent_records'].include?(params[:controller])
   end
 
+  def render_sort_text
+    text = items_sort_order_list.select { |text, uri| current_page? uri }
+    #非預設排序，以最新物品表示
+    (text.empty?) ? items_sort_order_list.keys.first : text.keys.last
+  end
+
   #items sort type
   def items_sort_order_list
     {
       '最新物品': params.delete_if { |key| ['sort', 'order'].include? key },
-      '最高價格': params.merge(sort: 'price', order: 'desc'),
-      '最低價格': params.merge(sort: 'price').delete_if { |key| key == 'order' }
+      '最低價格': params.merge(sort: 'price', order: 'asc'),
+      '最高價格': params.merge(sort: 'price').delete_if { |key| key == 'order' }
     }
   end
 end
