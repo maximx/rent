@@ -1,6 +1,7 @@
 aside.user-aside
   .user-avatar
-    = render_cl_avatar_lg(user)
+    = link_to render_cl_avatar_lg(user), user_path(user), class: 'img-thumbnail', title: user.account, data: { toggle: 'tooltip' }
+
     .btn-group.btn-group-justified
       = render_follow_link user
       = link_to render_icon_with_text('bookmark', '他的收藏'), wish_user_path(user), class: 'btn btn-default'
