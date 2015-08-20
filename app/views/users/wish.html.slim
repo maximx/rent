@@ -3,4 +3,4 @@
     span.text-muted #{ @user.account }的收藏
     .pull-right = render_follow_link( @user )
 
-  = render partial: 'items/index', locals: { items: @items }
+  = render partial: 'items/index', locals: { items: @wish_items }

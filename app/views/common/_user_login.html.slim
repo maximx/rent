@@ -9,7 +9,7 @@ ul.user-navbar
         li = link_to render_icon_with_text('plus', '新增出租物'), new_item_path
         li.divider role="separator"
 
-        li = link_to '收藏物', ''
+        li = link_to render_icon_with_text('heart', '收藏物'), wish_user_path(current_user)
         li.divider role="separator"
 
         li = link_to render_icon_with_text('cog', '管理與設定'), settings_account_path

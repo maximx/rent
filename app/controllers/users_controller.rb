@@ -2,10 +2,9 @@ class UsersController < ApplicationController
   include UsersReviewsCount
 
   before_action :login_required, only: [ :follow, :unfollow ]
-  before_action :find_user, :find_total_reviews, :find_profile, :set_user_meta_tags
+  before_action :find_user, :find_total_reviews, :find_profile, :set_user_meta_tags, :find_user_items
 
   def show
-    @items = @user.items.select(:id, :name)
     @followings = @user.following
     @grouped_reviews_count = @user.reviews.group(:user_role).count
     @lender_reviews = @user.reviews_of('lender').page(params[:page])
@@ -13,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def wish
-    @items = current_user.collections.page(params[:page])
+    @wish_items = @user.collections.page(params[:page])
   end
 
   def lender_reviews
@@ -58,6 +57,10 @@ class UsersController < ApplicationController
 
     def find_profile
       @profile = @user.profile || @user.build_profile
+    end
+
+    def find_user_items
+      @items = @user.items.select(:id, :name)
     end
 
     def set_user_meta_tags
