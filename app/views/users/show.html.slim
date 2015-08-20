@@ -1,7 +1,6 @@
 = render layout: 'users/show', locals: { user: @user, total_reviews: @total_reviews, items: @items } do
   h2.user-account.clearfix
     span.text-muted 您好，我是#{ @user.account }
-    .pull-right = render_follow_link( @user )
 
   - if @profile.description.to_s != ''
     .panel.panel-default
@@ -18,6 +17,5 @@
     #reviews.tab-pane.active
       = render partial: "users/reviews", locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
                                                    lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }
-
     #follows.tab-pane
       = render partial: "users/following", locals: { followings: @followings }

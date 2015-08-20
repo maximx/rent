@@ -1,6 +1,4 @@
 = render layout: 'users/show', locals: { user: @user, total_reviews: @total_reviews, items: @items } do
   h2.user-account.text-center.clearfix
     span.text-muted #{ @user.account }的收藏
-    .pull-right = render_follow_link( @user )
-
   = render partial: 'items/index', locals: { items: @wish_items }

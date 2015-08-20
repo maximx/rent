@@ -22,7 +22,11 @@
   margin-bottom: 20px;
   width: 200px;
 
-  .user-avatar { margin-bottom: 10px; }
+  .user-avatar {
+    margin-bottom: 10px;
+    > img { margin-bottom: 10px; }
+  }
+
   .user-item-list {
     padding: 0;
     > .item {

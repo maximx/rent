@@ -1,5 +1,9 @@
 aside.user-aside
-  .user-avatar = render_cl_avatar_lg(user)
+  .user-avatar
+    = render_cl_avatar_lg(user)
+    .btn-group.btn-group-justified
+      = render_follow_link user
+      = link_to render_icon_with_text('bookmark', '他的收藏'), wish_user_path(user), class: 'btn btn-default'
 
   .panel.panel-default
     .panel-heading 總評價
