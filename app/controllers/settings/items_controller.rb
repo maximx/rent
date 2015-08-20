@@ -9,11 +9,6 @@ class Settings::ItemsController < ApplicationController
     @rent_records_count.default = 0
   end
 
-  def collect
-    @items = current_user.collections.page(params[:page])
-    render "items/index"
-  end
-
   private
 
     def find_items
@@ -28,5 +23,4 @@ class Settings::ItemsController < ApplicationController
         Item.overlaps_types.first.second
       end
     end
-
 end

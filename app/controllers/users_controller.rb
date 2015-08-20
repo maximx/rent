@@ -43,6 +43,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def wish
+    @items = current_user.collections.page(params[:page])
+    render 'items/index'
+  end
+
   private
 
     def find_user

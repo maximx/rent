@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     member do
       get :lender_reviews
       get :borrower_reviews
+      get :wish
 
       post :follow
       delete :unfollow
@@ -45,12 +46,9 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]
+    resource :items, only: [ :show ]
     resource :rent_records, only: [ :show ] do
       get :calendar, on: :member
-    end
-
-    resource :items, only: [ :show ] do
-      get :collect, on: :member
     end
   end
 
