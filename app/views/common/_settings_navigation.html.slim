@@ -1,7 +1,6 @@
 = render_link_li class: "nav nav-sidebar" do |li|
   - li << [ render_icon_with_text("user", "基本資料"), settings_account_path ]
   - li << [ render_icon_with_text("lock", "帳戶設定"), edit_settings_account_path ]
-  - li << [ render_icon_with_text("heart", "收藏"), collect_settings_items_path ]
   - li << [ render_icon_with_text("list", "出租物管理"), settings_items_path ]
   - li << [ render_icon_with_text("record", "承租紀錄"), settings_rent_records_path ]
   - li << [ render_icon_with_text("calendar", "出租日曆"), calendar_settings_rent_records_path(role: "lender") ]
