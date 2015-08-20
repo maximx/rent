@@ -1,26 +1,23 @@
-.row
-  .col-md-3 = render partial: "users/aside", locals: { user: @user, total_reviews: @total_reviews, items: @items }
+= render layout: 'users/show', locals: { user: @user, total_reviews: @total_reviews, items: @items } do
+  h2.user-account.clearfix
+    span.text-muted 您好，我是#{ @user.account }
+    .pull-right = render_follow_link( @user )
 
-  .col-md-9
-    h2.user-account.clearfix
-      span.text-muted 您好，我是#{ @user.account }
-      .pull-right = render_follow_link(@user)
+  - if @profile.description.to_s != ''
+    .panel.panel-default
+      .panel-heading 描述
+      .panel-body = raw @profile.description
 
-    - if @profile.description.to_s != ''
-      .panel.panel-default
-        .panel-heading 描述
-        .panel-body = raw @profile.description
+  ul.nav.nav-tabs.nav-justified role="tablist"
+    li.active role="presentation"
+      a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab" 評價
+    li role="presentation"
+      a href="#follows" aria-controls="follows" role="tab" data-toggle="tab" 關注
 
-    ul.nav.nav-tabs.nav-justified role="tablist"
-      li.active role="presentation"
-        a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab" 評價
-      li role="presentation"
-        a href="#follows" aria-controls="follows" role="tab" data-toggle="tab" 關注
+  .tab-content
+    #reviews.tab-pane.active
+      = render partial: "users/reviews", locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
+                                                   lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }
 
-    .tab-content
-      #reviews.tab-pane.active
-        = render partial: "users/reviews", locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
-                                                     lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }
-
-      #follows.tab-pane
-        = render partial: "users/following", locals: { followings: @followings }
+    #follows.tab-pane
+      = render partial: "users/following", locals: { followings: @followings }

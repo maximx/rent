@@ -1,11 +1,5 @@
 - render_item_index_breadcrumbs(@breadcrumbs_object)
 
-- if params[:action] == 'search'
-  = render partial: 'items/advanced_search'
+= render partial: 'items/advanced_search' if params[:action] == 'search'
 = render partial: 'items/type'
-
-#item-container
-  = render partial: "items/#{render_item_view}", locals: { items: @items }
-
-= render partial: 'items/pagination', locals: { items: @items }
-= render_default_content(@items, '沒東西...')
+= render partial: 'items/index', locals: { items: @items }

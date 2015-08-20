@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   def show
     @items = @user.items.select(:id, :name)
     @followings = @user.following
-
     @grouped_reviews_count = @user.reviews.group(:user_role).count
-    @lender_reviews = @user.reviews_of("lender").page(params[:page])
-    @borrower_reviews = @user.reviews_of("borrower").page(params[:page])
+    @lender_reviews = @user.reviews_of('lender').page(params[:page])
+    @borrower_reviews = @user.reviews_of('borrower').page(params[:page])
+  end
+
+  def wish
+    @items = current_user.collections.page(params[:page])
   end
 
   def lender_reviews
@@ -41,11 +44,6 @@ class UsersController < ApplicationController
       format.html { redirect_to user_path(@user) }
       format.json { render json: result }
     end
-  end
-
-  def wish
-    @items = current_user.collections.page(params[:page])
-    render 'items/index'
   end
 
   private
