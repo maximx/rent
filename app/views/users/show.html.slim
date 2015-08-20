@@ -1,6 +1,6 @@
 = render layout: 'users/show', locals: { user: @user, total_reviews: @total_reviews, items: @items } do
   h2.user-account.clearfix
-    span.text-muted 您好，我是#{ @user.account }
+    span.text-muted 您好，我是#{ @user.account.camelize }
 
   - if @profile.description.to_s != ''
     .panel.panel-default
