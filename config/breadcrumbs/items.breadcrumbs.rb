@@ -1,5 +1,5 @@
 crumb :root do
-  link "首頁", root_path
+  link '出租物', items_path
 end
 
 crumb :category do |category|
