@@ -1,4 +1,10 @@
 $ ->
+  #ref:http://stackoverflow.com/questions/17029399/clicking-back-in-the-browser-disables-my-javascript-code-if-im-using-turbolin
+  $(document).on('page:restore', () ->
+    init_tinymce('#item_description')
+  )
+  init_tinymce('#item_description')
+
   $('.remove-picture').on('ajax:success', (e, data, status, xhr) ->
     if data.result == 'ok'
       $(this).closest('.picture').remove()
@@ -11,8 +17,6 @@ $ ->
       $(this).attr("href", data.href).data("method", data.method)
         .removeClass("btn-default btn-danger").addClass(data.class)
   )
-
-  init_tinymce('#item_description')
 
   $('#item-calendar').click ()->
     $(this).tab('show')
