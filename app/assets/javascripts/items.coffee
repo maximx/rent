@@ -36,7 +36,6 @@ $ ->
   $('#price_range').on('slide', () ->
     setPriceRange()
   ).on('slideStop', () ->
-    setPriceRange('slideStop')
     submitAdvancedSearchForm() if checkFormDateInput()
   )
 
@@ -69,5 +68,6 @@ $ ->
     $(this).removeAttr('name') if $(this).val() == ''
 
 @submitAdvancedSearchForm = () ->
+  setPriceRange('slideStop')
   removeInputName()
   $('#advanced-search-form').submit()
