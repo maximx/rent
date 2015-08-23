@@ -9,21 +9,25 @@ class ProfilesController < ApplicationController
 
   def create
     @profile = @user.build_profile(profile_params)
-    save_profile @profile.save
+    after_save_profile @profile.save
   end
 
   def update
     @profile = @user.profile
-    save_profile @profile.update(profile_params)
+    after_save_profile @profile.update(profile_params)
   end
 
   private
 
     def profile_params
-      params.require(:profile).permit(:name, :address, :phone, :description, picture_attributes: [ :public_id ])
+      params.require(:profile).permit(
+        :name, :address, :phone,
+        :description, :bank_code, :bank_account,
+        picture_attributes: [ :public_id ]
+      )
     end
 
-    def save_profile(is_success)
+    def after_save_profile(is_success)
       if is_success
         flash[:notice] = "修改成功"
         redirect_to settings_account_path

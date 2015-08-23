@@ -15,6 +15,8 @@
   = f.input :name
   = f.input :phone
   = f.input :address
+  = f.input :bank_code, input_html: { maxlength: 3, minlength: 3 }
+  = f.input :bank_account
   = f.input :description
 
   .form-group

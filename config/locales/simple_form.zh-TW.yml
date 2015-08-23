@@ -20,6 +20,8 @@ zh-TW:
         name: '名字'
         address: '地址'
         phone: '電話'
+        bank_code: '銀行代碼'
+        bank_account: '銀行帳號'
         description: '介紹'
         picture:
           public_id: '圖片'
