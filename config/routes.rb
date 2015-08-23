@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root to: "pages#index"
-  get "/search", to: "items#search"
   get "/about", to: "pages#about"
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
@@ -23,6 +22,7 @@ Rails.application.routes.draw do
       end
     end
 
+    get :search, on: :collection
     member do
       get :reviews
       post :collect

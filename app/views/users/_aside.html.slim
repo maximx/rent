@@ -29,4 +29,4 @@ aside.user-aside
               = render_cl_image_sm(item.index_picture_public_id, width: 200, height: 250)
               figcaption.carousel-caption = render_item_name(item, 12)
 
-      li.item = link_to("+ 看更多", search_path(user_id: user)) if items.size > 3
+      li.item = link_to("+ 看更多", search_items_path(user_id: user)) if items.size > 3
