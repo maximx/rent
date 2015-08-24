@@ -31,7 +31,7 @@ namespace :fake do
       item = user.items.build(
         name: FFaker::LoremCN.words.join(" "),
         subcategory_id: rand(1..subcategory_count),
-        city_id: city,
+        city_id: city.id,
         price: rand(1..20),
         minimum_period: rand(1..3),
         deposit: rand(100..1000),
