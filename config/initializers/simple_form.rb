@@ -177,4 +177,24 @@ SimpleForm.setup do |config|
       ba.use :error, wrap_with: { tag: :code, class: 'error' }
     end
   end
+
+  config.wrappers :vertical_radio_and_checkboxes, tag: :div, class: 'form-group' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, wrap_with: { class: 'col-xs-4 col-sm-3 control-label' }
+
+    b.wrapper tag: :div, class: 'col-xs-6 col-sm-6' do |ba|
+      ba.use :input
+    end
+
+    b.wrapper tag: :div, class: 'col-xs-2 col-sm-3 hint-error' do |ba|
+      ba.use :hint, wrap_with: { tag: :u, class: 'hint' }
+      ba.use :error, wrap_with: { tag: :code, class: 'error' }
+    end
+  end
+
+  config.wrapper_mappings = {
+    check_boxes: :vertical_radio_and_checkboxes,
+    radio_buttons: :vertical_radio_and_checkboxes
+  }
 end
