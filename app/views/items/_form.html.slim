@@ -9,7 +9,9 @@
   = f.input :minimum_period, as: :numeric_addon, direction: item.period_without_per, input_html: { min: 1 }
   = f.input :deposit, as: :numeric_addon, direction: '元', hint: '會退還', input_html: { min: 0 }
   = f.input :down_payment, as: :numeric_addon, direction: '元', hint: '就是首付款', input_html: { min: 0 }
-  = f.input :address
+  = f.input :address do
+    = f.association :city, as: :select, collection: City.all, include_blank: '請選擇縣市', label: false
+    = f.input_field :address, class: 'form-control'
   = f.input :description
 
   .form-group

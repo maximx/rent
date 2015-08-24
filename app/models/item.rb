@@ -10,6 +10,7 @@ class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :subcategory
   has_many :questions, -> { order("created_at").reverse_order }, dependent: :destroy
+  belongs_to :city
 
   has_many :rent_records, -> { order(started_at: :desc) }, class_name: "RentRecord", foreign_key: "item_id"
   has_many :borrowers, through: :rent_records, source: :user
@@ -22,7 +23,8 @@ class Item < ActiveRecord::Base
 
   enum period: [ :每日, :每月, :每年 ]
 
-  geocoded_by :address
+  #geocoded_by :address
+  geocoded_by :full_address
   after_validation :geocode
 
   self.per_page = 20
@@ -53,8 +55,8 @@ class Item < ActiveRecord::Base
     user && user != lender
   end
 
-  def city
-    address[0..2]
+  def full_address
+    city.name + address
   end
 
   def period_without_per
