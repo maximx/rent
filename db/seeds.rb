@@ -46,7 +46,13 @@ end
 
 # init city
 city_list = %w(基隆市 臺北市 新北市 桃園市 新竹市 新竹縣 苗栗縣 臺中市 彰化縣 南投縣 雲林縣 嘉義市 嘉義縣 臺南市 高雄市 屏東縣 臺東縣 花蓮縣 宜蘭縣 澎湖縣 金門縣 連江縣)
-city_list.each do |city|
-  city = City.new(name: city)
+city_list.each do |city_name|
+  city = City.new(name: city_name)
   city.save
+end
+
+deliver_list = %w(郵局寄送 面交自取)
+deliver_list.each do |deliver_name|
+  deliver = Deliver.new(name: deliver_name)
+  deliver.save
 end

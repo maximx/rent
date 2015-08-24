@@ -21,6 +21,10 @@ class Item < ActiveRecord::Base
   has_many :pictures, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :pictures
 
+  has_many :deliver_relationship, class_name: 'ItemDeliver', foreign_key: 'item_id'
+  has_many :delivers, through: :deliver_relationship, source: :deliver
+  accepts_nested_attributes_for :delivers
+
   enum period: [ :每日, :每月, :每年 ]
 
   geocoded_by :full_address
