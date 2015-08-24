@@ -34,6 +34,7 @@ zh-TW:
         down_payment: '訂金'
         address: '物品所在地'
         description: '介紹'
+        delivers: '運送方式'
         pictures:
           public_id: '圖片'
       requirement:
