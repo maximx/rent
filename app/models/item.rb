@@ -23,7 +23,6 @@ class Item < ActiveRecord::Base
 
   enum period: [ :每日, :每月, :每年 ]
 
-  #geocoded_by :address
   geocoded_by :full_address
   after_validation :geocode
 
@@ -32,7 +31,7 @@ class Item < ActiveRecord::Base
   before_save :set_category_and_price
 
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
-  scope :city_at, -> (query) { where('items.address regexp ?', tai_word(query)) if query.present? }
+  scope :city_at, -> (city_id) { where(city_id: city_id) if city_id.present? }
 
   scope :price_range, -> (min, max) { price_greater_than(min).price_less_than(max) }
   scope :price_greater_than, -> (min) { where('price >= ?', min) if min.present? && min != PRICE_MIN }
@@ -56,7 +55,7 @@ class Item < ActiveRecord::Base
   end
 
   def full_address
-    city.name + address
+    (city.present?) ? city.name + address : address
   end
 
   def period_without_per
@@ -124,12 +123,6 @@ class Item < ActiveRecord::Base
 
   def self.basic_search_str
     "concat(items.name, items.description) like ?"
-  end
-
-  def self.tai_word(str)
-    arr = [str]
-    arr << str.sub("臺", "台")
-    arr.uniq.join("|")
   end
 
   def self.cloudinary_url(public_id)

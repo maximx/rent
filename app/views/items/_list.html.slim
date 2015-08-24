@@ -26,7 +26,10 @@ ul.item-list
           | ∶
           = item.currency_down_payment
 
-        div = item.address
+        div
+          = t("simple_form.labels.item.address")
+          | ∶
+          = item.full_address
 
       .item-list-user.text-right
         div = render_collect_item_links(item, :remote)

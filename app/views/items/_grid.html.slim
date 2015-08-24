@@ -6,7 +6,7 @@
       .item-info-short.clearfix
         header.item-title = render_item_name(item)
         .pull-left = item.price_period
-        .pull-right = item.city
+        .pull-right = item.city.name if item.city.present?
 
     .item-info-short
       = link_to(item.lender.account, user_path(item.lender))

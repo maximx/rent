@@ -180,11 +180,8 @@ class CityAreaTW
 
   @cities = @city_areas.keys
 
-  def self.rand_full_cityarea
-    city = @cities[ rand( 0..((@cities.length) -1) ) ]
-    areas = @city_areas[ city ]
-    area = areas[ rand( 0..((areas.length) -1) )]
-    city.to_s + area.to_s
+  def self.rand_area_at(city)
+    areas = @city_areas[ city.name.to_sym ]
+    areas[ rand( 0..((areas.length) -1) )].to_s
   end
-
 end

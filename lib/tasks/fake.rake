@@ -17,6 +17,7 @@ namespace :fake do
 
     user_count = User.count
     subcategory_count = Subcategory.count
+    city_count = City.count
 
     100.times do
       picutres_arr = []
@@ -25,14 +26,16 @@ namespace :fake do
       end
 
       user = User.find( rand(1..user_count) )
+      city = City.find( rand(1..city_count) )
 
       item = user.items.build(
         name: FFaker::LoremCN.words.join(" "),
         subcategory_id: rand(1..subcategory_count),
+        city_id: city,
         price: rand(1..20),
         minimum_period: rand(1..3),
         deposit: rand(100..1000),
-        address: CityAreaTW.rand_full_cityarea,
+        address: CityAreaTW.rand_area_at(city),
         description: FFaker::LoremCN.paragraphs.join(","),
         pictures_attributes: picutres_arr
       )
