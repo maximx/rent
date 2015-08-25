@@ -1,4 +1,5 @@
 $ ->
+  #form
   #ref:http://stackoverflow.com/questions/17029399/clicking-back-in-the-browser-disables-my-javascript-code-if-im-using-turbolin
   $(document).on('page:restore', () ->
     init_tinymce('#item_description')
@@ -12,20 +13,18 @@ $ ->
       alert('只有一張圖片，不得刪除')
   )
 
+  # index
   $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
     if data.status == 'ok'
       $(this).attr("href", data.href).data("method", data.method)
         .removeClass("btn-default btn-danger").addClass(data.class)
   )
 
-  $('#item-calendar').click ()->
-    $(this).tab('show')
-    $('#calendar').fullCalendar('render')
-
   $('.item-grid').closest('#item-container').wookmark
     autoResize: true
     offset: 15
 
+  #show
   $('#rent[data-spy="affix"]').affix
     offset:
       top: 490
