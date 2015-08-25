@@ -39,8 +39,10 @@ namespace :fake do
         description: FFaker::LoremCN.paragraphs.join(","),
         pictures_attributes: picutres_arr
       )
-
       item.save
+
+      item.delivers << Deliver.find(1) if rand(0..1) == 1
+      item.delivers << Deliver.find(2) if rand(0..1) == 1 || item.delivers.empty?
     end
   end
 
@@ -68,7 +70,7 @@ namespace :fake do
 
   task :rent_records => :environment do
     Item.all.each do |item|
-      20.times do
+      15.times do
         users = User.where.not(id: item.lender)
         user = users[ rand(0..(users.length - 1))]
         started_at = time_rand
@@ -76,6 +78,7 @@ namespace :fake do
 
         rent_record = item.rent_records.build(
           user_id: user.id,
+          deliver_id: item.delivers.sample.id,
           started_at: started_at,
           ended_at: ended_at
         )
@@ -85,7 +88,7 @@ namespace :fake do
     end
   end
 
-  def time_rand( from = Time.now, to = Time.local(2015, 10, 30) )
+  def time_rand( from = Time.now, to = Time.local(2015, 12, 30) )
     from = from.to_time if from.is_a? Date
     to = to.to_time if to.is_a? Date
     Time.at(from + rand * (to.to_f - from.to_f)).to_date

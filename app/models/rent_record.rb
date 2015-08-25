@@ -9,6 +9,7 @@ class RentRecord < ActiveRecord::Base
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
+  belongs_to :deliver
   has_many :reviews
 
   self.per_page = 10
