@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
   PRICE_MIN = 0
   PRICE_MAX = 500
 
-  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures
+  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
@@ -21,9 +21,9 @@ class Item < ActiveRecord::Base
   has_many :pictures, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :pictures
 
-  has_many :deliver_relationship, class_name: 'ItemDeliver', foreign_key: 'item_id'
-  has_many :delivers, through: :deliver_relationship, source: :deliver
-  accepts_nested_attributes_for :delivers
+  has_many :item_deliver, dependent: :destroy
+  has_many :delivers, through: :item_deliver
+  #accepts_nested_attributes_for :delivers
 
   enum period: [ :每日, :每月, :每年 ]
 

@@ -2,7 +2,8 @@ class RentRecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
   before_action :find_item
   before_action :find_user_rent_record, only: [ :edit, :update ]
-  before_action :find_item_rent_record, only: [ :show, :review, :renting, :returning, :withdrawing, :ask_for_review ]
+  before_action :find_item_rent_record, only: [ :show, :review, :remitting, :delivering, :renting,
+                                                :returning, :withdrawing, :ask_for_review ]
   before_action :find_navbar_categories
   before_action :set_calendar_event_sources_path, only: [ :new, :create, :edit, :update ]
 
@@ -85,6 +86,16 @@ class RentRecordsController < ApplicationController
       flash[:notice] = "請您先行評價"
       redirect_to review_item_rent_record_path(@item, @rent_record)
     end
+  end
+
+  def remitting
+    @rent_record.remit! if @rent_record.can_remit_by?(current_user)
+    redirect_to :back
+  end
+
+  def delivering
+    @rent_record.delivery! if @rent_record.can_delivery_by?(current_user)
+    redirect_to :back
   end
 
   def renting

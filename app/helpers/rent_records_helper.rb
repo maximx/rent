@@ -10,9 +10,27 @@ module RentRecordsHelper
 
   def render_edit_rent_record_link(rent_record)
     if rent_record.editable_by?(current_user)
-      link_to(render_icon("edit", class: "text-success"),
+      link_to(render_icon('edit', class: 'text-info'),
               edit_item_rent_record_path(rent_record.item, rent_record),
               class: "btn btn-default", title: "修改", data: { toggle: "tooltip" })
+    end
+  end
+
+  def render_remitting_rent_record_link(rent_record)
+    if rent_record.can_remit_by?(current_user)
+      link_to render_icon('usd', class: 'text-success'),
+              remitting_item_rent_record_path(rent_record.item, rent_record),
+              method: :put, class: 'btn btn-default', title: '已匯款',
+              data: { toggle: 'tooltip', confirm: '確定已完成匯款嗎？' }
+    end
+  end
+
+  def render_delivering_rent_record_link(rent_record)
+    if rent_record.can_delivery_by?(current_user)
+      link_to render_icon('globe', class: 'text-primary'),
+              delivering_item_rent_record_path(rent_record.item, rent_record),
+              method: :put, class: 'btn btn-default', title: '已寄送',
+              data: { toggle: 'tooltip', confirm: '確定已寄送出租物嗎？' }
     end
   end
 
@@ -56,7 +74,7 @@ module RentRecordsHelper
 
   def render_show_rent_record_link(rent_record)
     if rent_record.viewable_by?(current_user) && !current_page?(item_rent_record_path(rent_record.item, rent_record))
-      link_to(render_icon("zoom-in", class: "text-info"), item_rent_record_path(rent_record.item, rent_record),
+      link_to(render_icon('zoom-in'), item_rent_record_path(rent_record.item, rent_record),
               class: "btn btn-default", title: "查閱", data: { toggle: "tooltip" })
     end
   end
@@ -74,6 +92,8 @@ module RentRecordsHelper
   def render_operate_rent_record_links(rent_record)
     raw [
       render_withdrawing_rent_record_link(rent_record),
+      render_remitting_rent_record_link(rent_record),
+      render_delivering_rent_record_link(rent_record),
       render_renting_rent_record_link(rent_record),
       render_returning_rent_record_link(rent_record),
       render_edit_rent_record_link(rent_record),

@@ -15,9 +15,11 @@ namespace :fake do
   task :items => :environment do
     require 'city_area_tw'
 
-    user_count = User.count
-    subcategory_count = Subcategory.count
-    city_count = City.count
+    users = User.all
+    cities = City.all
+    subcategories = Subcategory.all
+    deliver_1 = Deliver.find 1
+    deliver_2 = Deliver.find 2
 
     100.times do
       picutres_arr = []
@@ -25,24 +27,27 @@ namespace :fake do
         picutres_arr << {public_id: "test#{rand(1..7)}"}
       end
 
-      user = User.find( rand(1..user_count) )
-      city = City.find( rand(1..city_count) )
+      deliver_arr = []
+      deliver_arr << deliver_1.id if rand(0..1) == 1
+      deliver_arr << deliver_2.id if rand(0..1) == 1 || deliver_arr.empty?
+      Rails.logger.info deliver_arr
 
-      item = user.items.build(
+      city = cities.sample
+
+      item = users.sample.items.build(
         name: FFaker::LoremCN.words.join(" "),
-        subcategory_id: rand(1..subcategory_count),
+        subcategory_id: subcategories.sample.id,
         city_id: city.id,
-        price: rand(1..20),
+        price: rand(0..20),
         minimum_period: rand(1..3),
-        deposit: rand(100..1000),
+        deposit: rand(0..1000),
         address: CityAreaTW.rand_area_at(city),
         description: FFaker::LoremCN.paragraphs.join(","),
+        deliver_ids: deliver_arr,
         pictures_attributes: picutres_arr
       )
-      item.save
 
-      item.delivers << Deliver.find(1) if rand(0..1) == 1
-      item.delivers << Deliver.find(2) if rand(0..1) == 1 || item.delivers.empty?
+      item.save
     end
   end
 
@@ -72,12 +77,11 @@ namespace :fake do
     Item.all.each do |item|
       15.times do
         users = User.where.not(id: item.lender)
-        user = users[ rand(0..(users.length - 1))]
         started_at = time_rand
         ended_at = time_rand(started_at + 1.day, started_at + rand(3..5).day)
 
         rent_record = item.rent_records.build(
-          user_id: user.id,
+          user_id: users.sample.id,
           deliver_id: item.delivers.sample.id,
           started_at: started_at,
           ended_at: ended_at

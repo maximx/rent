@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
       member do
         get :review
+        put :remitting
+        put :delivering
         put :renting
         put :returning
         delete :withdrawing

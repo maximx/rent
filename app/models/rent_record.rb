@@ -25,12 +25,27 @@ class RentRecord < ActiveRecord::Base
 
   aasm no_direct_assignment: true do
     state :booking, initial: true, before_enter: :set_state_updated_at
+    state :remited
+    state :delivering
     state :renting, before_enter: :set_state_updated_at
     state :withdrawed, before_enter: :set_state_updated_at
     state :returned, before_enter: :set_state_updated_at
 
+    event :remit, guards: [ :remit_needed? ] do
+      transitions from: :booking, to: :remited
+    end
+
+    event :delivery, guards: [ :delivery_needed? ] do
+      transitions from: :booking, to: :delivering, unless: :remit_needed?
+      transitions from: :remited, to: :delivering, guards: :remit_needed?
+    end
+
     event :rent do
-      transitions from: :booking, to: :renting
+      # 已預訂，免付款, 自取
+      transitions from: :booking, to: :renting, unless: [ :remit_needed?, :delivery_needed? ]
+      # 已付款，自取
+      transitions from: :remited, to: :renting, unless: [ :delivery_needed? ]
+      transitions from: :delivering, to: :renting #TODO: whenver task
     end
 
     event :withdraw do
@@ -118,9 +133,19 @@ class RentRecord < ActiveRecord::Base
     user && is_reviewed_by_judger?(user) && can_review_by?(review_of_judger(user).user)
   end
 
+  def can_remit_by?(user)
+    user && editable_by?(user) && remit_needed? && booking?
+  end
+
+  def can_delivery_by?(user)
+    user && delivery_needed? && item.lender == user &&
+      ( ( booking? && !remit_needed? ) || ( remited? && remit_needed? ) )
+  end
+
   #可確認出租
   def can_rent_by?(user)
-    user && booking? && item.lender == user
+    user && item.lender == user &&
+      ( delivering? || (!delivery_needed? && ( ( booking? && remit_needed? ) || remited? ) ) )
   end
 
   #可確認歸還
@@ -180,5 +205,13 @@ class RentRecord < ActiveRecord::Base
         withdrawed: :gray, returned: :red
       }
       colors[state.to_sym]
+    end
+
+    def remit_needed?
+      ( price + item_deposit + item_down_payment ) > 0
+    end
+
+    def delivery_needed?
+      deliver.name != '面交自取'
     end
 end
