@@ -22,7 +22,7 @@ class RentRecord < ActiveRecord::Base
       .actived
   end
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
-  scope :booking_order, -> { order(:booking_at).reverse_order }
+  scope :rencent, -> { order(:created_at).reverse_order }
 
   aasm no_direct_assignment: true do
     state :booking, initial: true

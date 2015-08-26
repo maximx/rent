@@ -9,7 +9,7 @@ class RentRecordsController < ApplicationController
 
   def index
     @is_xhr = (request.xhr?) ? true : false
-    @rent_records = @item.rent_records.includes(:borrower).booking_order.reverse_order.page(params[:page])
+    @rent_records = @item.rent_records.includes(:borrower).rencent.reverse_order.page(params[:page])
     set_item_maps_marker unless @is_xhr
     render :index, layout: !@is_xhr
   end
