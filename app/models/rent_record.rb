@@ -116,7 +116,7 @@ class RentRecord < ActiveRecord::Base
 
   #可查閱
   def viewable_by?(user)
-    user && [item.lender, borrower].include?(user)
+    user && [lender, borrower].include?(user)
   end
 
   #可修改
@@ -138,19 +138,19 @@ class RentRecord < ActiveRecord::Base
   end
 
   def can_delivery_by?(user)
-    user && delivery_needed? && item.lender == user &&
+    user && delivery_needed? && lender == user &&
       ( ( booking? && !remit_needed? ) || ( remited? && remit_needed? ) )
   end
 
   #可確認出租
   def can_rent_by?(user)
-    user && item.lender == user &&
-      ( delivering? || (!delivery_needed? && ( ( booking? && remit_needed? ) || remited? ) ) )
+    user && lender == user &&
+      ( delivering? || (!delivery_needed? && ( ( booking? && !remit_needed? ) || remited? ) ) )
   end
 
   #可確認歸還
   def can_return_by?(user)
-    renting? && item.lender == user
+    renting? && lender == user
   end
 
   #可取消預訂

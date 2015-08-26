@@ -95,6 +95,7 @@ class RentRecordsController < ApplicationController
 
   def delivering
     @rent_record.delivery! if @rent_record.can_delivery_by?(current_user)
+    @rent_record.rent! if @rent_record.can_rent_by?(current_user)
     redirect_to :back
   end
 
