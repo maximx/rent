@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rent_record_id: 1
+  aasm_state: MyString
+  info: MyString
+
+two:
+  rent_record_id: 1
+  aasm_state: MyString
+  info: MyString

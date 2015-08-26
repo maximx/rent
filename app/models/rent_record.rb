@@ -11,6 +11,7 @@ class RentRecord < ActiveRecord::Base
   belongs_to :item
   belongs_to :deliver
   has_many :reviews
+  has_many :rent_record_state_logs, class_name: 'RentRecordStateLog', foreign_key: 'rent_record_id'
 
   self.per_page = 10
 
@@ -24,12 +25,12 @@ class RentRecord < ActiveRecord::Base
   scope :booking_order, -> { order(:booking_at).reverse_order }
 
   aasm no_direct_assignment: true do
-    state :booking, initial: true, before_enter: :set_state_updated_at
-    state :remited
-    state :delivering
-    state :renting, before_enter: :set_state_updated_at
-    state :withdrawed, before_enter: :set_state_updated_at
-    state :returned, before_enter: :set_state_updated_at
+    state :booking, initial: true
+    state :remited, before_enter: :create_rent_record_state_log
+    state :delivering, before_enter: :create_rent_record_state_log
+    state :renting, before_enter: :create_rent_record_state_log
+    state :withdrawed, before_enter: :create_rent_record_state_log
+    state :returned, before_enter: :create_rent_record_state_log
 
     event :remit, guards: [ :remit_needed? ] do
       transitions from: :booking, to: :remited
@@ -193,10 +194,9 @@ class RentRecord < ActiveRecord::Base
 
   private
 
-    def set_state_updated_at
-      attribute_name = aasm.to_state.to_s + "_at="
-      attribute_name = aasm.current_state.to_s + "_at=" if aasm.to_state.nil?
-      self.send(attribute_name, Time.now)
+    def create_rent_record_state_log
+      log = rent_record_state_logs.build(aasm_state: aasm.to_state)
+      log.save
     end
 
     def state_color(state)
