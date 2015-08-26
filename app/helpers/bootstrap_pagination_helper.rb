@@ -25,7 +25,7 @@ module BootstrapPaginationHelper
   class LinkRenderer < WillPaginate::ActionView::LinkRenderer
     def prepare(collection, options, template)
       @link_html = options.delete(:link_html)
-      @link_html.delete(:'data-remote') if @link_html[:'data-remote'] == false
+      @link_html.delete(:'data-remote') if !@link_html.nil? && @link_html[:'data-remote'] == false
       super
     end
 
