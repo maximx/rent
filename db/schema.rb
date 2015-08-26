@@ -117,10 +117,6 @@ ActiveRecord::Schema.define(version: 20150825070244) do
     t.datetime "updated_at",                    null: false
     t.string   "aasm_state",        limit: 255
     t.float    "price",             limit: 24
-    t.datetime "booking_at"
-    t.datetime "renting_at"
-    t.datetime "withdrawed_at"
-    t.datetime "returned_at"
     t.float    "item_price",        limit: 24
     t.integer  "rent_days",         limit: 4
     t.float    "item_deposit",      limit: 24
