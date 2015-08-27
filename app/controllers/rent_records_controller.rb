@@ -5,7 +5,7 @@ class RentRecordsController < ApplicationController
   before_action :find_item_rent_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
   before_action :find_navbar_categories
-  before_action :set_calendar_event_sources_path, only: [ :new, :create, :edit, :update ]
+  before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create, :edit, :update ]
 
   def index
     @is_xhr = (request.xhr?) ? true : false
@@ -118,7 +118,7 @@ class RentRecordsController < ApplicationController
 
   def rent_record_params
     params.require(:rent_record).permit(
-      :name, :phone,
+      :name, :phone, :deliver_id,
       :started_at, :ended_at
     )
   end
@@ -137,6 +137,10 @@ class RentRecordsController < ApplicationController
 
   def set_calendar_event_sources_path
     @event_sources_path = calendar_item_path(@item, format: :json)
+  end
+
+  def find_disabled_dates
+    @disabled_dates = @item.booked_dates
   end
 
   def set_start_and_end_params

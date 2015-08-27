@@ -1,7 +1,7 @@
 - breadcrumb :item, @item
 
 section
-  = render partial: "items/item_info_container", locals: { item: @item, rent_record: @rent_record }
+  = render partial: "items/item_info_container", locals: { item: @item, rent_record: @rent_record, disabled_dates: @disabled_dates }
 
   .row
     .col-lg-8
@@ -28,5 +28,4 @@ section
   javascript:
     $(document).ready(function() {
       buildGoogleMap( #{raw @maps.to_json} );
-      buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD HH:mm:ss', #{raw @disabled_dates})
     });

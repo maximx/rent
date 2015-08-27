@@ -11,7 +11,7 @@
             .price #{item.currency_price} 元
             .period = item.period
           .panel-body
-            = render partial: "rent_records/form", locals: { item: item, rent_record: rent_record }
+            = render partial: "rent_records/form", locals: { item: item, rent_record: rent_record, disabled_dates: disabled_dates }
             .text-right = render_collect_item_links(item, :remote)
 
 .item-show-container
