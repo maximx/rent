@@ -3,13 +3,13 @@ class RentRecord < ActiveRecord::Base
   include CurrencyPrice
   include I18nMessage
 
-  validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state
+  validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :deliver_id
   validate :start_end_date
   validate :not_overlap
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
-  belongs_to :deliver
+  belongs_to :deliver, required: true
   has_many :reviews
   has_many :rent_record_state_logs, class_name: 'RentRecordStateLog', foreign_key: 'rent_record_id'
 

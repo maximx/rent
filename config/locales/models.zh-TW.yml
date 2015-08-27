@@ -53,6 +53,8 @@ zh-TW:
               blank: '起租日期為必填'
               bad_started_at: '起租日應大於現在並小於迄租日'
               bad_period: '租期應大於 %{period}'
+            deliver_id:
+              blank: '運送方式為必填'
         requirement:
           attributes:
             name:

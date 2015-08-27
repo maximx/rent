@@ -7,6 +7,8 @@
 
   = render_rent_records_input_wrapper(f.input :started_at, as: :date_time_picker)
   = render_rent_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
+  .col-sm-12
+    = f.input :deliver_id, as: :select, collection: item.delivers, input_html: { class: 'form-control' }
 
   .form-group
     div class=(rent_records_controller? ? 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9' : 'col-sm-12 text-center')
