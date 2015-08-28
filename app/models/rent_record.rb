@@ -16,6 +16,7 @@ class RentRecord < ActiveRecord::Base
   self.per_page = 10
 
   before_save :set_item_attributes
+  before_save :set_ended_at
 
   scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
@@ -190,6 +191,11 @@ class RentRecord < ActiveRecord::Base
       self.item_down_payment = item.down_payment
 
       self.price =  rent_days * item_price
+    end
+
+    #為整點 則減去一秒 避免 overlap
+    def set_ended_at
+      self.ended_at -= 1.second if self.ended_at.strftime('%H%M%S') == '000000'
     end
 
   private

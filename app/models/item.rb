@@ -100,7 +100,7 @@ class Item < ActiveRecord::Base
 
   def booked_dates
     rent_records.booking.where('started_at > ?', Time.now)
-      .collect { |rent_record| (rent_record.started_at.to_date .. (rent_record.ended_at - 1.second).to_date).map(&:to_s) }
+      .collect { |rent_record| (rent_record.started_at.to_date .. (rent_record.ended_at).to_date).map(&:to_s) }
       .flatten
   end
 
