@@ -27,26 +27,26 @@ class RentRecord < ActiveRecord::Base
 
   aasm no_direct_assignment: true do
     state :booking, initial: true
-    state :remited, before_enter: :create_rent_record_state_log
+    state :remitted, before_enter: :create_rent_record_state_log
     state :delivering, before_enter: :create_rent_record_state_log
     state :renting, before_enter: :create_rent_record_state_log
     state :withdrawed, before_enter: :create_rent_record_state_log
     state :returned, before_enter: :create_rent_record_state_log
 
     event :remit, guards: [ :remit_needed? ] do
-      transitions from: :booking, to: :remited
+      transitions from: :booking, to: :remitted
     end
 
     event :delivery, guards: [ :delivery_needed? ] do
       transitions from: :booking, to: :delivering, unless: :remit_needed?
-      transitions from: :remited, to: :delivering, guards: :remit_needed?
+      transitions from: :remitted, to: :delivering, guards: :remit_needed?
     end
 
     event :rent do
       # 已預訂，免付款, 自取
       transitions from: :booking, to: :renting, unless: [ :remit_needed?, :delivery_needed? ]
       # 已付款，自取
-      transitions from: :remited, to: :renting, unless: [ :delivery_needed? ]
+      transitions from: :remitted, to: :renting, unless: [ :delivery_needed? ]
       transitions from: :delivering, to: :renting #TODO: whenver task
     end
 
@@ -98,19 +98,14 @@ class RentRecord < ActiveRecord::Base
   def aasm_state_dates_json
     dates_json = [ as_json ]
 
-    aasm.states.each do |state|
-      attribute_name = state.to_s + "_at"
-      state_changed_at = self.send( attribute_name )
-
-      unless state_changed_at.nil?
-        dates_json << {
-          id: state.name,
-          title: state.human_name,
-          start: state_changed_at,
-          end: state_changed_at + 1.day,
-          color: state_color(state.name)
-        }
-      end
+    rent_record_state_logs.each do |log|
+      dates_json << {
+        id: log.aasm_state,
+        title: I18n.t("activerecord.attributes.rent_record.aasm_state.#{log.aasm_state}"),
+        start: log.created_at,
+        end: log.created_at + 1.day - 1.second,
+        color: state_color(log.aasm_state)
+      }
     end
 
     dates_json
@@ -208,6 +203,7 @@ class RentRecord < ActiveRecord::Base
     def state_color(state)
       colors = {
         booking: :blue, renting: :green,
+        remitted: :brown, delivering: :yellow,
         withdrawed: :gray, returned: :red
       }
       colors[state.to_sym]

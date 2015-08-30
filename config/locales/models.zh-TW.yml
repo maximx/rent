@@ -7,7 +7,7 @@ zh-TW:
       rent_record:
         aasm_state:
             booking: '預訂'
-            remitting: '完成匯款'
+            remitted: '完成匯款'
             delivering: '寄送中'
             renting: '出租中'
             withdrawed: '已取消'
@@ -16,7 +16,6 @@ zh-TW:
           bad: '負評'
           good: '好評'
           notyet: '未評價'
-
     errors:
       models:
         item:
