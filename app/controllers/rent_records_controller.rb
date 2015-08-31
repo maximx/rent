@@ -1,10 +1,9 @@
 class RentRecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
-  before_action :find_item
+  before_action :find_item, :find_navbar_categories
   before_action :find_user_rent_record, only: [ :edit, :update ]
   before_action :find_item_rent_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
-  before_action :find_navbar_categories
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create, :edit, :update ]
 
   def index

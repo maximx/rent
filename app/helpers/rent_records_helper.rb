@@ -101,7 +101,7 @@ module RentRecordsHelper
       render_review_rent_record_link(rent_record),
       render_show_rent_record_link(rent_record),
       render_download_rent_record_link(rent_record)
-    ].join(" ")
+    ].join
   end
 
   def render_rent_records_form_wrapper

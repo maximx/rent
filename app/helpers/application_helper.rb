@@ -119,6 +119,6 @@ module ApplicationHelper
     end
 
     def span_close
-      content_tag(:span, "x", aria: { hidden: true })
+      content_tag(:span, "&times;", aria: { hidden: true })
     end
 end

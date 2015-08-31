@@ -2,6 +2,5 @@
 
 div
   h3.col-md-offset-3 預約承租
-  = render partial: 'form',
-           locals: { item: @item, rent_record: @rent_record,
-                     event_sources_path: @event_sources_path, disabled_dates: @disabled_dates }
+  = render partial: 'form', locals: { item: @item, rent_record: @rent_record,
+                                      event_sources_path: @event_sources_path, disabled_dates: @disabled_dates }
