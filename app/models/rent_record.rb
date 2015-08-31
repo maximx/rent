@@ -105,7 +105,7 @@ class RentRecord < ActiveRecord::Base
         id: log.aasm_state,
         title: i18n_activerecord_attribute("aasm_state.#{log.aasm_state}"),
         start: log.created_at,
-        end: log.created_at + 1.day - 1.second,
+        end: log.created_at + 1.minute,
         color: state_color(log.aasm_state)
       }
     end
@@ -138,13 +138,13 @@ class RentRecord < ActiveRecord::Base
 
   def can_delivery_by?(user)
     user && delivery_needed? && lender == user &&
-      ( ( booking? && !remit_needed? ) || ( remited? && remit_needed? ) )
+      ( ( booking? && !remit_needed? ) || ( remitted? && remit_needed? ) )
   end
 
   #可確認出租
   def can_rent_by?(user)
     user && lender == user &&
-      ( delivering? || (!delivery_needed? && ( ( booking? && !remit_needed? ) || remited? ) ) )
+      ( delivering? || (!delivery_needed? && ( ( booking? && !remit_needed? ) || remitted? ) ) )
   end
 
   #可確認歸還
