@@ -98,6 +98,8 @@ class RentRecord < ActiveRecord::Base
   def aasm_state_dates_json
     dates_json = [ as_json ]
 
+    dates_json << initial_state_date_json
+
     rent_record_state_logs.each do |log|
       dates_json << {
         id: log.aasm_state,
@@ -198,6 +200,18 @@ class RentRecord < ActiveRecord::Base
     def create_rent_record_state_log
       log = rent_record_state_logs.build(aasm_state: aasm.to_state)
       log.save
+    end
+
+    def initial_state_date_json
+      initial_state = self.class.aasm.initial_state
+
+      {
+        id: initial_state,
+        title: i18n_activerecord_attribute("aasm_state.#{initial_state}"),
+        start: created_at,
+        end: created_at + 1.minute,
+        color: state_color(initial_state)
+      }
     end
 
     def state_color(state)
