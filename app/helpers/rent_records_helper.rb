@@ -20,8 +20,8 @@ module RentRecordsHelper
     if rent_record.can_remit_by?(current_user)
       link_to render_icon('usd', class: 'text-success'),
               remitting_item_rent_record_path(rent_record.item, rent_record),
-              method: :put, class: 'btn btn-default', title: '已匯款',
-              data: { toggle: 'tooltip', confirm: '確定已完成匯款嗎？' }
+              method: :put, class: 'btn btn-default modal', title: '已匯款',
+              data: { toggle: 'tooltip', input: '匯帳號末五碼' }
     end
   end
 
@@ -29,18 +29,18 @@ module RentRecordsHelper
     if rent_record.can_delivery_by?(current_user)
       link_to render_icon('globe', class: 'text-primary'),
               delivering_item_rent_record_path(rent_record.item, rent_record),
-              method: :put, class: 'btn btn-default', title: '已寄送',
-              data: { toggle: 'tooltip', confirm: '確定已寄送出租物嗎？' }
+              method: :put, class: 'btn btn-default modal', title: '已寄送',
+              data: { toggle: 'tooltip', input: '寄送編號' }
     end
   end
 
   def render_renting_rent_record_link(rent_record)
     if rent_record.can_rent_by?(current_user)
-      link_to(render_icon("ok", class: "text-primary"),
+      link_to render_icon('ok', class: 'text-primary'),
               renting_item_rent_record_path(rent_record.item, rent_record),
               method: :put,
-              class: "btn btn-default", title: "確認出租",
-              data: { toggle: "tooltip", confirm: "確認已交付出租物嗎？" })
+              class: 'btn btn-default modal', title: '確認出租',
+              data: { toggle: 'tooltip', input: '簽約附件' }
     end
   end
 
@@ -90,7 +90,7 @@ module RentRecordsHelper
   end
 
   def render_operate_rent_record_links(rent_record)
-    raw [
+    links = raw [
       render_withdrawing_rent_record_link(rent_record),
       render_remitting_rent_record_link(rent_record),
       render_delivering_rent_record_link(rent_record),
@@ -102,6 +102,8 @@ module RentRecordsHelper
       render_show_rent_record_link(rent_record),
       render_download_rent_record_link(rent_record)
     ].join
+
+    content_tag :div, links, class: 'btn-group rent_record_operates'
   end
 
   def render_rent_records_form_wrapper
