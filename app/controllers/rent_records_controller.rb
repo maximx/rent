@@ -49,7 +49,7 @@ class RentRecordsController < ApplicationController
     @rent_record.borrower = current_user
 
     if @rent_record.save
-      redirect_to item_path(@item)
+      redirect_to item_rent_record_path(@item, @rent_record)
     else
       render :new
     end
