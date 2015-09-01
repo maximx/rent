@@ -38,8 +38,8 @@ module RentRecordsHelper
     if rent_record.can_rent_by?(current_user)
       link_to render_icon('ok', class: 'text-primary'),
               renting_item_rent_record_path(rent_record.item, rent_record),
-              method: :put, class: 'btn btn-default rent_record_form_modal', title: '確認出租',
-              data: { toggle: 'tooltip', label: '簽約附件', type: 'file' }
+              method: :put, class: 'btn btn-default', title: '確認出租',
+              data: { toggle: 'tooltip' }
     end
   end
 

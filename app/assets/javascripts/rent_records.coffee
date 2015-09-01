@@ -32,11 +32,6 @@ $(document).ready ->
     $state_log_form.find('label').text( label_text )
     $state_log_form.attr( 'action', $(this).attr('href') )
 
-    if type == 'file'
-      $('#rent_record_state_log_text').closest('.form-group').remove()
-    else
-      $('#rent_record_state_log_file').closest('.form-group').remove()
-
     $('#rent_record_modal').modal('show')
     return false
 
