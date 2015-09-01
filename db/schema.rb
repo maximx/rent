@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827022152) do
+ActiveRecord::Schema.define(version: 20150831081506) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20150827022152) do
     t.string   "aasm_state",     limit: 255
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "info",           limit: 255
   end
 
   create_table "rent_records", force: :cascade do |t|

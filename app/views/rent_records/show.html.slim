@@ -1,6 +1,7 @@
 - breadcrumb :rent_record, @item, @rent_record
 
 .pull-right = render_operate_rent_record_links(@rent_record)
+= render partial: 'rent_records/state_log_modal'
 
 table.table
   thead
