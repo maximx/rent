@@ -88,18 +88,18 @@ class RentRecordsController < ApplicationController
   end
 
   def remitting
-    @rent_record.remit! if @rent_record.can_remit_by?(current_user)
+    @rent_record.remit!( rent_record_state_log_params ) if @rent_record.can_remit_by?(current_user)
     redirect_to :back
   end
 
   def delivering
-    @rent_record.delivery! if @rent_record.can_delivery_by?(current_user)
+    @rent_record.delivery!( rent_record_state_log_params ) if @rent_record.can_delivery_by?(current_user)
     @rent_record.rent! if @rent_record.can_rent_by?(current_user)
     redirect_to :back
   end
 
   def renting
-    @rent_record.rent! if @rent_record.can_rent_by?(current_user)
+    @rent_record.rent!( rent_record_state_log_params ) if @rent_record.can_rent_by?(current_user)
     redirect_to :back
   end
 
@@ -120,6 +120,10 @@ class RentRecordsController < ApplicationController
       :name, :phone, :deliver_id,
       :started_at, :ended_at
     )
+  end
+
+  def rent_record_state_log_params
+    params.require(:rent_record_state_log).permit(:info)
   end
 
   def find_item

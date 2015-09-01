@@ -197,8 +197,10 @@ class RentRecord < ActiveRecord::Base
 
   private
 
-    def create_rent_record_state_log
-      log = rent_record_state_logs.build(aasm_state: aasm.to_state)
+    # TODO: to_state == 'renting', upload file
+    def create_rent_record_state_log(params = {})
+      params[:aasm_state] = aasm.to_state
+      log = rent_record_state_logs.build(params)
       log.save
     end
 
