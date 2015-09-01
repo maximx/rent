@@ -42,8 +42,15 @@ $(document).ready ->
 
 @update_rent_days_price = ()->
   if $('.item-price-days').size() > 0
-    ended_date = new Date($('#rent_record_started_at').val())
-    started_date = new Date($('#rent_record_ended_at').val())
+    validify_date = (val) ->
+      date_and_time =  val.split(' ')
+      date_and_time[0] + 'T' + date_and_time[1]
+
+    valid_started =  validify_date( $('#rent_record_started_at').val() )
+    valid_ended =  validify_date( $('#rent_record_ended_at').val() )
+
+    started_date = new Date( valid_started )
+    ended_date = new Date( valid_ended )
 
     diff = Math.abs(ended_date - started_date)
     days = Math.ceil( diff / (24 * 60 * 60 * 1000))
