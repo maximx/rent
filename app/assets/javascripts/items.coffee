@@ -42,6 +42,10 @@ $ ->
     submitAdvancedSearchForm() if checkFormDateInput()
   )
 
+  $('#use_profile_address').on 'change', () ->
+    if $(this).prop('checked')
+      $('#item_address').val( $(this).val() )
+
 @checkFormDateInput = () ->
   started_at = $('#started_at').val()
   ended_at = $('#ended_at').val()
