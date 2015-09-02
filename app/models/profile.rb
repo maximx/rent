@@ -1,4 +1,6 @@
 class Profile < ActiveRecord::Base
+  extend I18nMessage
+
   belongs_to :user
   has_one :picture, as: :imageable, dependent: :destroy
   belongs_to :city
@@ -15,6 +17,6 @@ class Profile < ActiveRecord::Base
       errors << self.class.i18n_simple_form_label(attr) if self.send(attr).blank?
     end
 
-    { errors: errors, message: "請完成#{errors.join(' ')}的資料填寫" }
+    { errors: errors, message: "請完成#{errors.join('、')}的資料填寫" }
   end
 end

@@ -89,6 +89,6 @@ class User < ActiveRecord::Base
   private
 
     def init_profile
-      build_profile.save
+      self.build_profile.save(validate: false) unless profile
     end
 end
