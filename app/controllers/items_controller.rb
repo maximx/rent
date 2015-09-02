@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   include UsersReviewsCount
 
   before_action :login_required, except: [ :index, :show, :search, :reviews ]
+  before_action :validates_profile, only: [ :new, :create, :edit, :update ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :reviews ]
   before_action :find_reviews, only: [ :show, :reviews ]
@@ -160,5 +161,14 @@ class ItemsController < ApplicationController
 
     def find_reviews
       @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
+    end
+
+    def validates_profile
+      result = current_user.profile.validates
+
+      unless result[:errors].empty?
+        flash[:notice] = result[:message]
+        redirect_to settings_account_path
+      end
     end
 end

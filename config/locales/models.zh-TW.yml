@@ -34,6 +34,8 @@ zh-TW:
           attributes:
             name:
               blank: '姓名為必墳'
+            address:
+              blank: '地址為必墳'
             bank_code:
               too_long: '銀行代碼長度應為3'
               too_short: '銀行代碼長度應為3'
