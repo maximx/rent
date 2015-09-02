@@ -13,6 +13,12 @@ $ ->
       alert('只有一張圖片，不得刪除')
   )
 
+  $('#use_profile_address').on 'change', () ->
+    if $(this).prop('checked')
+      data = JSON.parse( $(this).val() )
+      $('#item_city_id').val( data.city_id )
+      $('#item_address').val( data.address )
+
   # index
   $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
     if data.status == 'ok'
@@ -41,10 +47,6 @@ $ ->
   ).on('slideStop', () ->
     submitAdvancedSearchForm() if checkFormDateInput()
   )
-
-  $('#use_profile_address').on 'change', () ->
-    if $(this).prop('checked')
-      $('#item_address').val( $(this).val() )
 
 @checkFormDateInput = () ->
   started_at = $('#started_at').val()

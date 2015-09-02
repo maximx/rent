@@ -11,6 +11,10 @@ class Profile < ActiveRecord::Base
 
   accepts_nested_attributes_for :picture
 
+  def city_address_json
+    { city_id: city_id, address: address }.to_json
+  end
+
   def validates
     errors = []
     [ 'name', 'address' ].each do |attr|
