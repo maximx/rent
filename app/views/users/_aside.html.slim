@@ -19,6 +19,12 @@ aside.user-aside
           td = total_reviews[Review.rates[:good]] || 0
           td = total_reviews[Review.rates[:bad]] || 0
 
+  .panel.panel-default
+    .panel-heading 已驗證身份
+    .panel-body
+      = render_icon('ok', class: 'text-success')
+      = User.i18n_simple_form_label('email')
+
   - if items.size > 0
     h3 出租物 <small>(#{items.size})</small>
     ul.user-item-list

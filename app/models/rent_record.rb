@@ -1,7 +1,7 @@
 class RentRecord < ActiveRecord::Base
   include AASM
   include CurrencyPrice
-  include I18nMessage
+  extend I18nMessage
 
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :deliver_id
   validate :start_end_date
@@ -62,17 +62,17 @@ class RentRecord < ActiveRecord::Base
   def start_end_date
     if booking? && ended_at && started_at
       if ended_at < started_at || started_at < Time.now
-        errors[:started_at] << i18n_activerecord_error("started_at.bad_started_at")
+        errors[:started_at] << self.class.i18n_activerecord_error("started_at.bad_started_at")
       end
 
       if (ended_at - started_at) < item.minimum_period.days
-        errors[:ended_at] << i18n_activerecord_error("started_at.bad_period", period: "#{item.minimum_period} #{item.period}")
+        errors[:ended_at] << self.class.i18n_activerecord_error("started_at.bad_period", period: "#{item.minimum_period} #{item.period}")
       end
     end
   end
 
   def not_overlap
-    errors[:ended_at] << i18n_activerecord_error("ended_at.overlap") if overlaps? && booking?
+    errors[:ended_at] << self.class.i18n_activerecord_error("ended_at.overlap") if overlaps? && booking?
   end
 
   def overlaps?
@@ -103,7 +103,7 @@ class RentRecord < ActiveRecord::Base
     rent_record_state_logs.each do |log|
       dates_json << {
         id: log.aasm_state,
-        title: i18n_activerecord_attribute("aasm_state.#{log.aasm_state}"),
+        title: self.class.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}"),
         start: log.created_at,
         end: log.created_at + 1.minute,
         color: state_color(log.aasm_state)
@@ -208,7 +208,7 @@ class RentRecord < ActiveRecord::Base
 
       {
         id: initial_state,
-        title: i18n_activerecord_attribute("aasm_state.#{initial_state}"),
+        title: self.class.i18n_activerecord_attribute("aasm_state.#{initial_state}"),
         start: created_at,
         end: created_at + 1.minute,
         color: state_color(initial_state)

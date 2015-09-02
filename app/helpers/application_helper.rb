@@ -64,10 +64,10 @@ module ApplicationHelper
   def render_icon_with_text(icon, text, options = {})
     css_class = []
     css_class << options[:class] if options[:class]
-    css_class << "text"
+    css_class << 'text'
     options[:class] = css_class.join(" ")
 
-    "#{render_icon(icon, options)}#{text}".html_safe
+    raw "#{render_icon(icon, options)}#{text}"
   end
 
   def render_icon(icon, options = {})
