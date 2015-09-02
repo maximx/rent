@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: [ :create, :update ]
+  resources :profiles, only: [ :update ]
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]

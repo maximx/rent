@@ -1,8 +1,9 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
   has_one :picture, as: :imageable, dependent: :destroy
+  belongs_to :city
 
-  validates_presence_of :name, :address
+  validates_presence_of :name, :city_id, :address
   validates_length_of :bank_code, minimum: 3, maximum:3 , allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?
 
