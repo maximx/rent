@@ -28,6 +28,12 @@ zh-TW:
               blank: '每日租金為必填'
             minimum_period:
               blank: '最短租期為必填'
+            deliver_ids:
+              blank: '運送方式為必填'
+            city_id:
+              blank: '請選擇縣市'
+            address:
+              blank: '面交自取時請填寫物品所在地'
             pictures:
               blank: '至少上傳一張圖片'
         profile:

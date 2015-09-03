@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   PRICE_MAX = 500
 
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids
+  validates_presence_of :city_id, :address, if: lambda { |i| i.address_needed? }
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
@@ -102,6 +103,10 @@ class Item < ActiveRecord::Base
     rent_records.booking.where('started_at > ?', Time.now)
       .collect { |rent_record| (rent_record.started_at.to_date .. (rent_record.ended_at).to_date).map(&:to_s) }
       .flatten
+  end
+
+  def address_needed?
+    delivers.include?( Deliver.where(name: '面交自取').first )
   end
 
   protected

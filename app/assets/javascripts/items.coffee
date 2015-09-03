@@ -19,6 +19,10 @@ $ ->
       $('#item_city_id').val( data.city_id )
       $('#item_address').val( data.address )
 
+  $('#item_deliver_ids_2').on 'change', () ->
+    $('#item_address').prop('required', true) if $(this).prop('checked')
+
+
   # index
   $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
     if data.status == 'ok'
