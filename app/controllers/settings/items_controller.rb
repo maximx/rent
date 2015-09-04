@@ -4,7 +4,7 @@ class Settings::ItemsController < ApplicationController
   before_action :login_required
   before_action :find_items
 
-  def show
+  def index
     @rent_records_count = @items.joins(:rent_records).group(:item_id, :aasm_state).count
     @rent_records_count.default = 0
   end
