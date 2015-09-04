@@ -7,10 +7,8 @@ class RentRecordsController < ApplicationController
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create, :edit, :update ]
 
   def index
-    @is_xhr = (request.xhr?) ? true : false
     @rent_records = @item.rent_records.includes(:borrower).rencent.reverse_order.page(params[:page])
-    set_item_maps_marker unless @is_xhr
-    render :index, layout: !@is_xhr
+    set_item_maps_marker
   end
 
   def show
