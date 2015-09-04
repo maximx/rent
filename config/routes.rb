@@ -48,7 +48,9 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]
-    resources :items, only: [ :index, :show ]
+    resources :items, only: [ :index, :show ] do
+      resources :records, only: :index
+    end
     resource :rent_records, only: [ :show ] do
       get :calendar, on: :member
     end

@@ -1,0 +1,2 @@
+module Settings::RecordsHelper
+end
