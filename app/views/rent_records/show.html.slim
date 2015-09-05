@@ -51,5 +51,3 @@ table.table
     tr
       td 租期
       td colspan="2" = render_datetime_period(@rent_record, :tw)
-
-= render partial: "rent_records/calendar", locals: { event_sources_path: @event_sources_path }
