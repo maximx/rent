@@ -175,6 +175,10 @@ class RentRecord < ActiveRecord::Base
     self.item.lender
   end
 
+  def next_states
+    aasm.states(permitted: true).map(&:name)
+  end
+
   protected
 
     def set_price

@@ -1,0 +1,27 @@
+table.table.table-condensed
+  thead
+    tr
+      th = RentRecord.i18n_activerecord_attribute('aasm_state.booking')
+      - rent_record_state_logs.each do |log|
+        th = RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
+      - rent_record.next_states.each do |state|
+        th.active = RentRecord.i18n_activerecord_attribute("aasm_state.#{state}")
+  tbody
+    tr
+      td = link_to rent_record.borrower.account, user_path(rent_record.borrower)
+      - rent_record_state_logs.each do |log|
+        td = link_to log.user.account, user_path(log.user)
+      - rent_record.next_states.each do |state|
+        td.active
+    tr
+      td
+      - rent_record_state_logs.each do |log|
+        td #{ info_label[ log.aasm_state.to_sym ] } #{ log.info }
+      - rent_record.next_states.each do |state|
+        td.active = info_label[state]
+    tr
+      td = render_datetime( rent_record.created_at, :tw )
+      - rent_record_state_logs.each do |log|
+        td = render_datetime( log.created_at, :tw)
+      - rent_record.next_states.each do |state|
+        td.active

@@ -21,7 +21,7 @@ module RentRecordsHelper
       link_to render_icon('usd', class: 'text-success'),
               remitting_item_rent_record_path(rent_record.item, rent_record),
               method: :put, class: 'btn btn-default rent_record_form_modal', title: '已匯款',
-              data: { toggle: 'tooltip', label: '匯帳號末五碼' }
+              data: { toggle: 'tooltip', label: info_label[:remitted] }
     end
   end
 
@@ -30,7 +30,7 @@ module RentRecordsHelper
       link_to render_icon('globe', class: 'text-primary'),
               delivering_item_rent_record_path(rent_record.item, rent_record),
               method: :put, class: 'btn btn-default rent_record_form_modal', title: '已寄送',
-              data: { toggle: 'tooltip', label: '寄送編號' }
+              data: { toggle: 'tooltip', label: info_label[:delivering] }
     end
   end
 
@@ -103,6 +103,13 @@ module RentRecordsHelper
     ].join
 
     content_tag :div, links, class: 'btn-group rent_record_operates'
+  end
+
+  def info_label
+    {
+      remitted: '帳號末五碼',
+      delivering: '寄送編號'
+    }
   end
 
   def render_rent_records_form_wrapper
