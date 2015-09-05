@@ -56,3 +56,6 @@ deliver_list.each do |deliver_name|
   deliver = Deliver.new(name: deliver_name)
   deliver.save
 end
+
+# init banks
+Rake::Task['banks:seeds'].invoke
