@@ -12,10 +12,9 @@ class RentRecordsController < ApplicationController
   end
 
   def show
-    @event_sources_path = item_rent_record_path(@item, @rent_record)
-    rent_record_dates = @rent_record.aasm_state_dates_json
-
     if @rent_record.viewable_by?(current_user)
+      rent_record_dates = @rent_record.aasm_state_dates_json
+
       respond_to do |format|
         format.html
         format.json { render json: rent_record_dates }
@@ -26,7 +25,7 @@ class RentRecordsController < ApplicationController
         end
       end
     else
-      flash[:alert] = "您沒有權限"
+      flash[:alert] = '您沒有權限'
       redirect_to item_path(@item)
     end
   end
@@ -97,7 +96,7 @@ class RentRecordsController < ApplicationController
   end
 
   def renting
-    @rent_record.rent!( rent_record_state_log_params ) if @rent_record.can_rent_by?(current_user)
+    @rent_record.rent! if @rent_record.can_rent_by?(current_user)
     redirect_to :back
   end
 
