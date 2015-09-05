@@ -85,28 +85,28 @@ class RentRecordsController < ApplicationController
   end
 
   def remitting
-    @rent_record.remit!( rent_record_state_log_params ) if @rent_record.can_remit_by?(current_user)
+    @rent_record.remit!( current_user, rent_record_state_log_params ) if @rent_record.can_remit_by?(current_user)
     redirect_to :back
   end
 
   def delivering
-    @rent_record.delivery!( rent_record_state_log_params ) if @rent_record.can_delivery_by?(current_user)
+    @rent_record.delivery!( current_user, rent_record_state_log_params ) if @rent_record.can_delivery_by?(current_user)
     @rent_record.rent! if @rent_record.can_rent_by?(current_user)
     redirect_to :back
   end
 
   def renting
-    @rent_record.rent! if @rent_record.can_rent_by?(current_user)
+    @rent_record.rent!( current_user ) if @rent_record.can_rent_by?(current_user)
     redirect_to :back
   end
 
   def returning
-    @rent_record.return! if @rent_record.can_return_by?(current_user)
+    @rent_record.return!( current_user ) if @rent_record.can_return_by?(current_user)
     redirect_to :back
   end
 
   def withdrawing
-    @rent_record.withdraw! if @rent_record.can_withdraw_by?(current_user)
+    @rent_record.withdraw!( current_user ) if @rent_record.can_withdraw_by?(current_user)
     redirect_to :back
   end
 

@@ -197,9 +197,10 @@ class RentRecord < ActiveRecord::Base
 
   private
 
-    def create_rent_record_state_log(params = {})
+    def create_rent_record_state_log(user, params = {})
       params[:aasm_state] = aasm.to_state
       log = rent_record_state_logs.build(params)
+      log.user = user
       log.save
     end
 
