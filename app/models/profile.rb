@@ -4,9 +4,10 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   has_one :picture, as: :imageable, dependent: :destroy
   belongs_to :city
+  belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
 
   validates_presence_of :name, :city_id, :address
-  validates_length_of :bank_code, minimum: 3, maximum:3 , allow_blank: true
+  validates :bank_code, length: { is: 3 }, inclusion: Bank.all.map(&:code), allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?
 
   accepts_nested_attributes_for :picture
