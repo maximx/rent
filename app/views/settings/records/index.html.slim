@@ -1,0 +1,8 @@
+= link_to content_tag(:b, '<< 回到列表'), settings_items_path, class: 'text-success'
+h3.item-title
+  = link_to item_path(@item) do
+    small = render_icon 'link', class: 'text-muted'
+    = @item.name
+
+= render partial: 'rent_records/rent_record_list', locals: { rent_records: @rent_records }
+= render_default_content(@rent_records, '無承租紀錄')

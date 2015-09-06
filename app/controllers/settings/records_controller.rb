@@ -6,7 +6,6 @@ class Settings::RecordsController < ApplicationController
 
   def index
     @rent_records = @item.rent_records.actived.rencent.page(params[:page])
-    render 'rent_records/index'
   end
 
   private
