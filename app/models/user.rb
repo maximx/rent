@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
-  validates :account, presence: true, uniqueness: true, format: { with: /\A[\w]*\z/ }
+  validates :account, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[\w]*\z/ }
 
   has_one :profile
   has_many :items
