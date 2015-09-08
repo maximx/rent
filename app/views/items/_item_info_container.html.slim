@@ -44,4 +44,5 @@
         dd = raw item.description
 
         /TODO: javascript calendar
-        dd 查看日曆
+        dd = link_to '+查看日曆+', ''
+        dd = render partial: 'messages/new', locals: { user: item.lender }
