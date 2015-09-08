@@ -50,20 +50,24 @@ group :development, :test do
 end
 
 gem 'devise'
-gem 'simple_form'
 
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'prawn'
 gem 'prawn-table'
-gem 'aasm'
 gem 'cloudinary'
-gem 'gretel'
-gem 'will_paginate'
-
 gem 'whenever'
-gem 'meta-tags'
+
+# models
+gem 'aasm'
+gem 'mailboxer'
+
+# views
 gem 'slim-rails'
+gem 'meta-tags'
+gem 'gretel'
+gem 'simple_form'
+gem 'will_paginate'
 
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
