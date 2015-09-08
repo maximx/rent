@@ -56,3 +56,5 @@ zh-TW:
         reply: '回覆'
       review:
         content: '評語'
+      message:
+        body: '訊息'

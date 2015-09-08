@@ -1,4 +1,4 @@
-button.btn.btn-success.btn-sm.btn-messages-modal type="button" data-toggle="modal" data-target="#messages_modal" 聯繫房東
+button.btn.btn-success.btn-sm.btn-messages-modal type="button" data-toggle="modal" data-target="#messages_modal" 聯繫出租者
 
 .modal.fade id="messages_modal" tabindex="-1" role="dialog" aria-labelledby="messagesMedalLabel"
   .modal-dialog role="document"
@@ -7,11 +7,11 @@ button.btn.btn-success.btn-sm.btn-messages-modal type="button" data-toggle="moda
         .modal-header
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;
-          h4.modal-title id="messagesMedalLabel" 發送訊息給#{user.account}
+          h4.modal-title id="messagesMedalLabel" 發送訊息給#{user.account}#{render_cl_avatar_sm(user)}
 
         .modal-body
           = f.input :recipient, as: :hidden, input_html: { value: user.id }
-          = f.input :body
+          = f.input :body, as: :text
 
         .modal-footer
           = f.button :submit
