@@ -1,9 +1,11 @@
 button.btn.btn-success.btn-sm.btn-messages-modal type="button" data-toggle="modal" data-target="#messages_modal" 聯繫出租者
+#message_form_success.hide
+  code
 
 .modal.fade id="messages_modal" tabindex="-1" role="dialog" aria-labelledby="messagesMedalLabel"
   .modal-dialog role="document"
     .modal-content
-      = simple_form_for :message, url: messages_path do |f|
+      = simple_form_for :message, url: messages_path(format: :json), remote: true, html: { id: 'message_form' } do |f|
         .modal-header
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;
