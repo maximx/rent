@@ -1,0 +1,3 @@
+ul.list-group
+  - @conversations.each do |conversation|
+    li.list-group-item = link_to conversation.subject, conversation_path(conversation)

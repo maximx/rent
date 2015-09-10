@@ -59,5 +59,6 @@ Rails.application.routes.draw do
   resources :categories, only: [ :show ]
   resources :subcategories, only: [ :show ]
 
+  resources :conversations, only: [ :index, :show, :destroy ]
   resources :messages, only: [ :create ]
 end
