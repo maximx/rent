@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, authentication_keys: [:login]
 
+  acts_as_messageable
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -36,6 +38,11 @@ class User < ActiveRecord::Base
     else
       where(conditions.to_h).first
     end
+  end
+
+  # mailboxer
+  def mailboxer_email(object)
+    email
   end
 
   # user follow
@@ -84,6 +91,10 @@ class User < ActiveRecord::Base
 
   def meta_description
     profile.description || "您好，我是#{account}，我在#{Rent::SITE_NAME}"
+  end
+
+  def inbox_unread_count
+    mailbox.inbox(unread: true).count
   end
 
   private

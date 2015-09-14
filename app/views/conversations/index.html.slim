@@ -1,0 +1,3 @@
+ul.list-group
+  - @conversations.each do |conversation|
+    = link_to render_conversation_subject(conversation), conversation_path(conversation), class: 'list-group-item'

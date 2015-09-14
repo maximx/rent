@@ -67,6 +67,11 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     chronic (0.10.2)
     cloudinary (1.1.0)
       aws_cf_signer
@@ -92,6 +97,8 @@ GEM
     erubis (2.7.0)
     execjs (2.6.0)
     ffaker (2.1.0)
+    foreigner (1.7.4)
+      activerecord (>= 3.0.0)
     fullcalendar-rails (2.3.1.0)
       jquery-rails (>= 3.1.1, < 5.0.0)
       momentjs-rails (~> 2.8, >= 2.8.4)
@@ -119,6 +126,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mailboxer (0.13.0)
+      carrierwave (>= 0.5.8)
+      foreigner (>= 0.9.1)
+      rails (>= 3.2.0)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     mime-types (2.6.1)
@@ -262,6 +273,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  mailboxer
   meta-tags
   momentjs-rails
   mysql2

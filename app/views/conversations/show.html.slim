@@ -1,0 +1,8 @@
+.panel.panel-default
+  .panel-heading
+    .panel-title = @conversation.subject
+
+  .panel-body
+    - @conversation.receipts_for(current_user).each do |receipt|
+      = render 'messages/message', message: receipt.message
+    = render partial: 'messages/form', locals: { conversation: @conversation }
