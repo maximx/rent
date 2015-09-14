@@ -1,5 +1,6 @@
 ul.user-navbar
   - if user_signed_in?
+    li = render_inbox_link
     li.dropdown
       a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button"
         = render_cl_avatar_xs(current_user)
