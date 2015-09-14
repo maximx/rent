@@ -1,0 +1,6 @@
+= simple_form_for :message, url: reply_conversation_path(conversation) do |f|
+  = f.input :body, as: :text
+
+  .form-group
+    .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+      = f.button :submit, '回覆訊息'

@@ -1,4 +1,10 @@
+@import "mixins/variables";
+
 .message {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid $gray-85;
+
   .message-avatar { float: left; }
   .message-content { padding-left: 60px; }
 }

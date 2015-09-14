@@ -11,6 +11,12 @@ class ConversationsController < ApplicationController
     @conversation.mark_as_read(current_user)
   end
 
+  def reply
+    current_user.reply_to_conversation(@conversation, params[:message][:body])
+    flash[:notice] = '成功回覆訊息'
+    redirect_to conversation_path(@conversation)
+  end
+
   private
 
     def find_mailbox
