@@ -1,5 +1,6 @@
 @import "mixins/variables";
 
+/*index*/
 .mailbox {
   li {
     .subject {
@@ -8,3 +9,6 @@
     }
   }
 }
+
+/*show*/
+.conversation_operates { margin-bottom: 5px; }

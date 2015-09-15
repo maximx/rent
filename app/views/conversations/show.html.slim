@@ -1,5 +1,12 @@
 - breadcrumb :conversation, @conversation
 
+.text-right.conversation_operates
+  .btn-group
+    = link_to render_icon('trash', class: 'text-danger'),
+              conversation_path,
+              method: :delete, title: '刪除', class: 'btn btn-default',
+              data: { toggle: 'tooltip', confirm: '確定要刪除嗎？' }
+
 .panel.panel-default
   .panel-heading
     .panel-title = @conversation.subject

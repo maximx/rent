@@ -35,6 +35,12 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def destroy
+    @conversation.move_to_trash(current_user)
+    flash[:notice] = '已成功刪除交談紀錄'
+    redirect_to conversations_path
+  end
+
   private
 
     def find_mailbox
@@ -42,6 +48,6 @@ class ConversationsController < ApplicationController
     end
 
     def find_conversation
-      @conversation = @mailbox.conversations.find(params[:id])
+      @conversation = @mailbox.inbox.find(params[:id])
     end
 end
