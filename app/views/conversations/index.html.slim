@@ -9,7 +9,14 @@ div.mailbox
     ul.list-group
       - @conversations.each do |conversation|
         li.list-group-item.clearfix
-          = link_to render_conversation_subject(conversation), conversation_path(conversation)
-          .info
-            .pull-left.text-muted = render_datetime(conversation.updated_at)
-            .pull-right = link_to(render_icon('ok'), mark_as_read_conversation_path(conversation), remote: true, method: :put)
+          .row
+            .col-sm-11
+              = link_to conversation_path(conversation), class: 'clearfix' do
+                div
+                  span.subject = render_conversation_subject(conversation)
+                  .pull-right.text-muted = render_datetime(conversation.updated_at)
+            .col-sm-1
+              .pull-right
+                = link_to(render_icon('ok'),
+                          mark_as_read_conversation_path(conversation, format: :json),
+                          remote: true, method: :put, class: 'mark-read')

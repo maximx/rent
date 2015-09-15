@@ -61,7 +61,10 @@ Rails.application.routes.draw do
 
   resources :conversations, only: [ :index, :show, :destroy ] do
     get :unread, on: :collection
-    post :reply, on: :member
+    member do
+      put :mark_as_read
+      post :reply
+    end
   end
   resources :messages, only: [ :create ]
 end

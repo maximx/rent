@@ -2,7 +2,7 @@
 
 .mailbox {
   li {
-    > a {
+    a {
       color: $gray-base;
       &:hover { color: $brand-primary; }
     }

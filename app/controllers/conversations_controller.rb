@@ -22,6 +22,19 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(@conversation)
   end
 
+  def mark_as_read
+    result = { status: 'error' }
+
+    if request.xhr?
+      @conversation.mark_as_read(current_user)
+      result = { status: 'ok' }
+    end
+
+    respond_to do |format|
+      format.json { render json: result }
+    end
+  end
+
   private
 
     def find_mailbox
