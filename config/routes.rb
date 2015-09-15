@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   resources :subcategories, only: [ :show ]
 
   resources :conversations, only: [ :index, :show, :destroy ] do
+    get :unread, on: :collection
     post :reply, on: :member
   end
   resources :messages, only: [ :create ]

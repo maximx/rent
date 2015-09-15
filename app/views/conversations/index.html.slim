@@ -1,3 +1,15 @@
-ul.list-group
-  - @conversations.each do |conversation|
-    = link_to render_conversation_subject(conversation), conversation_path(conversation), class: 'list-group-item'
+div.mailbox
+  / Nav tabs
+  = render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
+    - li << [ render_icon_with_text('eye-open', 'Unread'), unread_conversations_path ]
+    - li << [ render_icon_with_text('inbox', 'Inbox'), conversations_path ]
+
+  / Tab panes
+  .tab-content
+    ul.list-group
+      - @conversations.each do |conversation|
+        li.list-group-item.clearfix
+          = link_to render_conversation_subject(conversation), conversation_path(conversation)
+          .info
+            .pull-left.text-muted = render_datetime(conversation.updated_at)
+            .pull-right = link_to(render_icon('ok'), mark_as_read_conversation_path(conversation), remote: true, method: :put)

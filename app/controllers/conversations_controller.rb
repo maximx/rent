@@ -1,10 +1,15 @@
 class ConversationsController < ApplicationController
   before_action :login_required
   before_action :find_mailbox
-  before_action :find_conversation, except: [ :index ]
+  before_action :find_conversation, except: [ :index, :unread ]
 
   def index
     @conversations = @mailbox.inbox
+  end
+
+  def unread
+    @conversations = @mailbox.inbox(unread: true)
+    render :index
   end
 
   def show
