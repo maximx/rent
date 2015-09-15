@@ -13,10 +13,12 @@ div.mailbox
             .col-sm-11
               = link_to conversation_path(conversation), class: 'clearfix' do
                 div
-                  span.subject = render_conversation_subject(conversation)
+                  span.subject.text-muted = render_conversation_subject(conversation)
                   .pull-right.text-muted = render_datetime(conversation.updated_at)
             .col-sm-1
               .pull-right
-                = link_to(render_icon('ok'),
-                          mark_as_read_conversation_path(conversation, format: :json),
-                          remote: true, method: :put, class: 'mark-read')
+                - if conversation.is_unread?(current_user)
+                  = link_to(render_icon('ok', class: 'text-success'),
+                            mark_as_read_conversation_path(conversation, format: :json),
+                            remote: true, method: :put, class: 'mark-read',
+                            title: '標記已讀', data: { toggle: 'tooltip' })

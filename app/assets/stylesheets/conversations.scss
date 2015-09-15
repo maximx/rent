@@ -2,8 +2,8 @@
 
 .mailbox {
   li {
-    a {
-      color: $gray-base;
+    .subject {
+      strong { color: $gray-base; }
       &:hover { color: $brand-primary; }
     }
   }
