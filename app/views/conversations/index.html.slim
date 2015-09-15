@@ -1,8 +1,8 @@
 div.mailbox
   / Nav tabs
   = render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
-    - li << [ render_icon_with_text('eye-open', 'Unread'), unread_conversations_path ]
-    - li << [ render_icon_with_text('inbox', 'Inbox'), conversations_path ]
+    - li << [ render_icon_with_text('eye-open', '未讀訊息'), unread_conversations_path ]
+    - li << [ render_icon_with_text('inbox', '收件匣'), conversations_path ]
 
   / Tab panes
   .tab-content

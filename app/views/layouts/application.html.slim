@@ -15,7 +15,7 @@ html lang="zh"
     #site-content.container-fluid role="main"
       = render_notice(notice)
       = render_alert(alert)
-      = raw breadcrumbs style: :bootstrap
+      = raw breadcrumbs style: :bootstrap, autoroot: false
       = yield
 
     = render partial: "common/footer"
