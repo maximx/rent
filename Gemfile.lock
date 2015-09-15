@@ -138,7 +138,7 @@ GEM
     momentjs-rails (2.10.3)
       railties (>= 3.1)
     multi_json (1.11.2)
-    mysql2 (0.4.0)
+    mysql2 (0.3.20)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.10.0)
@@ -276,7 +276,7 @@ DEPENDENCIES
   mailboxer
   meta-tags
   momentjs-rails
-  mysql2
+  mysql2 (~> 0.3.20)
   prawn
   prawn-table
   rails (= 4.2.1)
