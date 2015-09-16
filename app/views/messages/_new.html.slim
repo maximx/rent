@@ -12,6 +12,7 @@ button.btn.btn-success.btn-sm.btn-messages-modal type="button" data-toggle="moda
           h4.modal-title id="messagesMedalLabel" 發送訊息給#{user.account}#{render_cl_avatar_sm(user)}
 
         .modal-body
+          = f.input :item_id, as: :hidden, input_html: { value: item.id }
           = f.input :recipient, as: :hidden, input_html: { value: user.id }
           = f.input :body, as: :text
 

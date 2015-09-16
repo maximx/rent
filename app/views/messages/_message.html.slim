@@ -5,4 +5,4 @@
   .message-content
     .pull-right = render_datetime(message.created_at)
     strong = link_to message.sender.account, user_path(message.sender)
-    div = message.body
+    div = raw message.body
