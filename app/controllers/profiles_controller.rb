@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   layout "application_aside"
 
   before_action :login_required
-  before_action :set_picture_public_id, only: [ :update ]
+  before_action :set_picture_attrs, only: [ :update ]
   before_action :set_user, only: [ :update ]
 
   def update
@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(
         :name, :city_id, :address, :phone,
         :description, :bank_code, :bank_account,
-        picture_attributes: [ :public_id ]
+        picture_attributes: [ :public_id, :file_cached ]
       )
     end
 

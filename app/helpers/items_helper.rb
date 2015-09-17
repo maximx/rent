@@ -105,6 +105,10 @@ module ItemsHelper
     user_signed_in? && current_user.is_collected?(item) && item_action_display?
   end
 
+  def items_controller?
+    params[:controller] == 'items'
+  end
+
   def items_related_controller?
     ['items', 'categories', 'subcategories', 'rent_records'].include?(params[:controller])
   end

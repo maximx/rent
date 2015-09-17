@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   before_action :find_reviews, only: [ :show, :reviews ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar, :reviews ]
   before_action :set_item_meta_tags, :set_item_maps_marker, only: [ :show ]
-  before_action :set_picture_public_id, only: [ :create, :update ]
+  before_action :set_picture_attrs, only: [ :create, :update ]
 
   def index
     @items = Item.includes(:pictures)

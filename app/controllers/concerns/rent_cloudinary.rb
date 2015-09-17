@@ -1,14 +1,15 @@
 module RentCloudinary
   private
 
-    def set_picture_public_id
-      if params[model_name].has_key?(:pictures_attributes)
+    def set_picture_attrs
+      if view_context.items_controller?
         pictures_attributes["0"][:public_id].each_with_index do |picture, index|
           pictures_attributes["#{index}"] = { public_id: picture.original_filename, file_cached: picture }
         end
-      elsif params[model_name].has_key?(:picture_attributes)
+      elsif view_context.settings_account_related_controller?
         if picture_attributes.has_key?(:public_id)
-          picture_attributes[:public_id] = upload_to_cloudinary picture_attributes[:public_id]
+          picture_attributes[:file_cached] =  picture_attributes[:public_id]
+          picture_attributes[:public_id] = picture_attributes[:file_cached].original_filename
         else
           # avoid picture delete
           params[model_name].delete(:picture_attributes)
@@ -16,12 +17,8 @@ module RentCloudinary
       end
     end
 
-    def upload_to_cloudinary(pic)
-      Cloudinary::Uploader.upload(pic, use_filename: true)["public_id"]
-    end
-
+    # item
     def pictures_attributes
-    # item, requirement
       params[model_name][:pictures_attributes]
     end
 
