@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  include RentCloudinary
+  include PicturesAttrsSetter
 
   layout "application_aside"
 

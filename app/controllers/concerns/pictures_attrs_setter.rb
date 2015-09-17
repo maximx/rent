@@ -1,4 +1,4 @@
-module RentCloudinary
+module PicturesAttrsSetter
   private
 
     def set_picture_attrs
@@ -6,7 +6,7 @@ module RentCloudinary
         pictures_attributes["0"][:public_id].each_with_index do |picture, index|
           pictures_attributes["#{index}"] = { public_id: picture.original_filename, file_cached: picture }
         end
-      elsif view_context.settings_account_related_controller?
+      elsif view_context.profiles_controller?
         if picture_attributes.has_key?(:public_id)
           picture_attributes[:file_cached] =  picture_attributes[:public_id]
           picture_attributes[:public_id] = picture_attributes[:file_cached].original_filename

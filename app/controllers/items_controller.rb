@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  include RentCloudinary
+  include PicturesAttrsSetter
   include UsersReviewsCount
 
   before_action :login_required, except: [ :index, :show, :search, :reviews ]
