@@ -112,6 +112,13 @@ module RentRecordsHelper
     }
   end
 
+  def render_state_log_title(log)
+    titles = [ log.user.account ]
+    titles << "#{info_label[log.aasm_state.to_sym]} #{log.info}" unless log.info.blank?
+    titles << render_datetime(log.created_at, :tw)
+    titles.join(tag(:br))
+  end
+
   def render_rent_records_form_wrapper
     rent_records_controller? ? 'bootstrap_horizontal' : 'default'
   end

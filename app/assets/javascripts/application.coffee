@@ -38,6 +38,7 @@ $ ->
   # bootstrap tooltip, popover
   $('[data-toggle="tooltip"]').tooltip
     container: 'body'
+    html: true
 
   $('[data-toggle="popover"]').popover
     html: true

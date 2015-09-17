@@ -180,11 +180,15 @@ class RentRecord < ActiveRecord::Base
     aasm.states(permitted: true).map(&:name)
   end
 
-  def permitted_states
+  def all_permitted_states
     states = aasm.states.map(&:name)
     states.delete(:remitted) unless remit_needed?
     states.delete(:delivering) unless delivery_needed?
     states.delete_if { |state| state == :withdrawed }
+  end
+
+  def pending_states
+    all_permitted_states - rent_record_state_logs.map { |log| log.aasm_state.to_sym }
   end
 
   protected
