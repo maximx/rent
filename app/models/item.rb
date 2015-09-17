@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   include CurrencyPrice
 
+  self.per_page = 20
   PRICE_MIN = 0
   PRICE_MAX = 500
 
@@ -24,15 +25,12 @@ class Item < ActiveRecord::Base
 
   has_many :item_deliver, dependent: :destroy
   has_many :delivers, through: :item_deliver
-  #accepts_nested_attributes_for :delivers
 
   enum period: [ :每日, :每月, :每年 ]
 
   geocoded_by :full_address
+
   after_validation :geocode
-
-  self.per_page = 20
-
   before_save :set_category_and_price
 
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
