@@ -17,6 +17,7 @@ class RentRecord < ActiveRecord::Base
 
   before_save :set_item_attributes
   before_save :set_ended_at
+  after_save :save_booking_state_log
 
   scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
@@ -179,6 +180,13 @@ class RentRecord < ActiveRecord::Base
     aasm.states(permitted: true).map(&:name)
   end
 
+  def permitted_states
+    states = aasm.states.map(&:name)
+    states.delete(:remitted) unless remit_needed?
+    states.delete(:delivering) unless delivery_needed?
+    states.delete_if { |state| state == :withdrawed }
+  end
+
   protected
 
     def set_price
@@ -199,10 +207,14 @@ class RentRecord < ActiveRecord::Base
       self.ended_at -= 1.second if self.ended_at.strftime('%H%M%S') == '000000'
     end
 
+    def save_booking_state_log
+      create_rent_record_state_log(borrower) if rent_record_state_logs.empty?
+    end
+
   private
 
     def create_rent_record_state_log(user, params = {})
-      params[:aasm_state] = aasm.to_state
+      params[:aasm_state] = (rent_record_state_logs.empty?) ? aasm.current_state : aasm.to_state
       log = rent_record_state_logs.build(params)
       log.user = user
       log.save
