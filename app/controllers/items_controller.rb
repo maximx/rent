@@ -7,9 +7,9 @@ class ItemsController < ApplicationController
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :reviews ]
   before_action :find_reviews, only: [ :show, :reviews ]
+  before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar, :reviews ]
   before_action :set_item_meta_tags, :set_item_maps_marker, only: [ :show ]
   before_action :set_picture_public_id, only: [ :create, :update ]
-  before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar, :reviews ]
 
   def index
     @items = Item.includes(:pictures)
@@ -122,7 +122,7 @@ class ItemsController < ApplicationController
         :name, :price, :minimum_period, :city_id, :address,
         :deposit, :down_payment, :description,
         :subcategory_id, deliver_ids: [ ],
-        pictures_attributes: [ :public_id ]
+        pictures_attributes: [ :public_id, :file_cached ]
       )
     end
 

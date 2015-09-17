@@ -1,5 +1,7 @@
 class Picture < ActiveRecord::Base
-  validates_presence_of :public_id
+  attr_accessor :file_cached
+
+  validates_presence_of :public_id, :file_cached
   belongs_to :imageable, polymorphic: true
   before_destroy :delete_cloudinary
 

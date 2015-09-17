@@ -32,6 +32,7 @@ class Item < ActiveRecord::Base
 
   after_validation :geocode
   before_save :set_category_and_price
+  before_save :upload_and_set_public_id
 
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
   scope :city_at, -> (city_id) { where(city_id: city_id) if city_id.present? }
@@ -114,6 +115,12 @@ class Item < ActiveRecord::Base
     self.deposit ||= 0
     self.down_payment ||= 0
     self.category_id = Subcategory.find(subcategory_id).category_id
+  end
+
+  def upload_and_set_public_id
+    self.pictures.each do |picture|
+      picture.public_id = Cloudinary::Uploader.upload(picture.file_cached, use_filename: true)["public_id"]
+    end
   end
 
   def self.search_criteria(query)
