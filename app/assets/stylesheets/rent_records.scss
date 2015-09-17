@@ -1,5 +1,10 @@
-// Place all the styles related to the rent_records controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "mixins/variables";
+
 .input-group { margin-top: 10px; width: 300px; }
+
 .btn.calendar-direction { margin-bottom: 5px; }
+
+.progress-bar.progress-bar-muted {
+  color: $gray-65;
+  background-color: $progress-bg;
+}

@@ -7,5 +7,5 @@
         = RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
 
   - rent_record.pending_states.each do |state|
-    .progress-bar role="progressbar" style="width: #{width}%"
+    .progress-bar.progress-bar-muted role="progressbar" style="width: #{width}%"
       = RentRecord.i18n_activerecord_attribute("aasm_state.#{state}")
