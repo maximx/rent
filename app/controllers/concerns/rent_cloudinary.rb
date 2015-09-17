@@ -3,7 +3,7 @@ module RentCloudinary
 
     def set_picture_public_id
       if params[model_name].has_key?(:pictures_attributes)
-        pictures_attributes["0"][:file_cached].each_with_index do |picture, index|
+        pictures_attributes["0"][:public_id].each_with_index do |picture, index|
           pictures_attributes["#{index}"] = { public_id: picture.original_filename, file_cached: picture }
         end
       elsif params[model_name].has_key?(:picture_attributes)

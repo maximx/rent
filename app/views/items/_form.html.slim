@@ -1,6 +1,6 @@
 = simple_form_for item do |f|
   = f.simple_fields_for :pictures, item.pictures.build do |p|
-    = p.input :file_cached, as: :file_select, input_html: { multiple: true }, hint: '可選取多個檔案'
+    = p.input :public_id, as: :file_select, input_html: { multiple: true }, hint: '可選取多個檔案'
     = item.errors[:pictures].first
 
   = f.input :name
