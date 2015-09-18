@@ -1,14 +1,2 @@
-@import "mixins/variables";
-
-/*index*/
-.mailbox {
-  li {
-    .subject {
-      strong { color: $gray-base; }
-      &:hover { color: $brand-primary; }
-    }
-  }
-}
-
 /*show*/
 .conversation_operates { margin-bottom: 5px; }

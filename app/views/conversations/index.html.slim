@@ -1,24 +1,18 @@
-div.mailbox
-  / Nav tabs
-  = render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
-    - li << [ render_icon_with_text('eye-open', '未讀訊息'), unread_conversations_path ]
-    - li << [ render_icon_with_text('inbox', '收件匣'), conversations_path ]
+= render partial: 'common/settings_navigation', locals: { list: conversations_navbar_list }
 
-  / Tab panes
-  .tab-content
-    ul.list-group
-      - @conversations.each do |conversation|
-        li.list-group-item.clearfix
-          .row
-            .col-sm-11
-              = link_to conversation_path(conversation), class: 'clearfix' do
-                div
-                  span.subject.text-muted = render_conversation_subject(conversation)
-                  .pull-right.text-muted = render_datetime(conversation.updated_at)
-            .col-sm-1
-              .pull-right
-                - if conversation.is_unread?(current_user)
-                  = link_to(render_icon('ok', class: 'text-success'),
-                            mark_as_read_conversation_path(conversation, format: :json),
-                            remote: true, method: :put, class: 'mark-read',
-                            title: '標記已讀', data: { toggle: 'tooltip' })
+ul.list-group
+  - @conversations.each do |conversation|
+    li.list-group-item.clearfix
+      .row
+        .col-sm-11
+          = link_to conversation_path(conversation), class: 'clearfix' do
+            div
+              span.subject.text-muted = render_conversation_subject(conversation)
+              .pull-right.text-muted = render_datetime(conversation.updated_at)
+        .col-sm-1
+          .pull-right
+            - if conversation.is_unread?(current_user)
+              = link_to(render_icon('ok', class: 'text-success'),
+                        mark_as_read_conversation_path(conversation, format: :json),
+                        remote: true, method: :put, class: 'mark-read',
+                        title: '標記已讀', data: { toggle: 'tooltip' })

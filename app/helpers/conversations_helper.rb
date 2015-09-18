@@ -10,4 +10,11 @@ module ConversationsHelper
 
     link_to(icon + badge, unread_conversations_path, class: 'conversations-icon')
   end
+
+  def conversations_navbar_list
+    render_link_li class: 'nav navbar-nav' do |li|
+      li << [ render_icon_with_text('eye-open', '未讀訊息'), unread_conversations_path ]
+      li << [ render_icon_with_text('inbox', '收件匣'), conversations_path ]
+    end
+  end
 end
