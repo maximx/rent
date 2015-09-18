@@ -12,10 +12,10 @@ ul.user-navbar
         li.dropdown-header 出租物
         li = link_to render_icon_with_text('plus', '新增'), new_item_path
         li = link_to render_icon_with_text('heart', '收藏'), '#TODO'
-        li = link_to render_icon_with_text('cog', '管理'), settings_account_path
+        li = link_to render_icon_with_text('cog', '管理'), dashboard_items_path
         li.divider role="separator"
 
-        li = link_to render_icon_with_text('lock', '帳號設定'), settings_account_path
+        li = link_to render_icon_with_text('lock', '設定'), settings_account_path
         li.divider role="separator"
 
         li = link_to render_icon_with_text('log-out', '登出'), destroy_user_session_path, method: :delete

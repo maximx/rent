@@ -11,18 +11,18 @@ module ApplicationHelper
 
   def render_navigation
     if settings_account_related_controller?
-      render partial: 'common/settings_navigation'
+      render partial: 'common/settings_navigation', locals: { list: settings_navbar_list }
+    elsif dashboard_related_controller?
+      render partial: 'common/settings_navigation', locals: { list: dashboard_navbar_list }
     end
   end
 
   def render_alert(msg)
-    @msg = msg
-    alert_notice_tag("danger") if msg.present?
+    alert_notice_tag("danger", msg) if msg.present?
   end
 
   def render_notice(msg)
-    @msg = msg
-    alert_notice_tag("warning") if msg.present?
+    alert_notice_tag("warning", msg) if msg.present?
   end
 
   def render_link_li(list=[], options={})
@@ -101,19 +101,19 @@ module ApplicationHelper
 
   private
 
-    def alert_notice_tag(type)
-      content_tag(:p, notice_content_with_close,
+    def alert_notice_tag(type, msg)
+      content_tag(:p, notice_content_with_close(msg),
         class: "alert alert-#{type} alert-dismissible",
         role: :alert
       )
     end
 
-    def notice_content_with_close
+    def notice_content_with_close(msg)
       content_tag(:button, span_close,
         type: :button, class: :close,
         data: { dismiss: :alert }, aria: { label: :Close }
       ) +
-      content_tag(:strong, @msg)
+      content_tag(:strong, msg)
     end
 
     def span_close
