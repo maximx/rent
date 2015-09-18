@@ -5,10 +5,9 @@ module ConversationsHelper
   end
 
   def render_unread_link
+    icon = render_icon('envelope', title: '未讀訊息', data: { toggle: 'tooltip', placement: 'bottom' })
     badge = content_tag(:span, current_user.inbox_unread_count, class: 'badge')
 
-    link_to(render_icon('envelope') + badge,
-            unread_conversations_path,
-            class: 'conversations-icon', title: '訊息', data: { toggle: 'tooltip', placement: 'bottom' })
+    link_to(icon + badge, unread_conversations_path, class: 'conversations-icon')
   end
 end

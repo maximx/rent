@@ -1,7 +1,7 @@
-ul.user-navbar
+ul.nav.navbar-nav.navbar-right
   - if user_signed_in?
-    li = render_unread_link
-    li.dropdown
+    li.logged = render_unread_link
+    li.logged.dropdown
       a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button"
         = render_cl_avatar_xs(current_user)
         span.caret
@@ -21,6 +21,5 @@ ul.user-navbar
         li = link_to render_icon_with_text('log-out', '登出'), destroy_user_session_path, method: :delete
 
   - else
-    li.nav-item.login
-      = link_to '註冊', new_user_registration_path, class: 'btn btn-default'
-      = link_to '登入', new_user_session_path, class: 'btn btn-default'
+    li = link_to '註冊', new_user_registration_path
+    li.active = link_to '登入', new_user_session_path, class: 'login'

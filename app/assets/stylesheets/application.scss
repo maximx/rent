@@ -173,34 +173,21 @@ a {
   }
 }
 
-.user-navbar {
-  margin-top: 10px;
-  margin-bottom: 4px;
-  padding: 0 10px;
-  float: right;
+/*navbar*/
+@media (min-width: $grid-float-breakpoint) {
+  #user-navigation {
+    padding-right: 20px;
 
-  > li {
-    float: left;
-
-    .conversations-icon {
-      position: relative;
-      font-size: 24px;
-      margin-top: 5px;
-      margin-right: 10px;
-    }
-
-    span.badge {
-      position: absolute;
-      right: -10px;
-      bottom: -5px;
+    .navbar-nav > li.logged > a {
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
   }
+}
 
-  .login {
-    margin-top: -1px;
-    margin-left: 10px;
-    a { margin-left: 5px; }
-  }
+#user-navigation {
+  a.login { color: $brand-primary; }
+  a.conversations-icon { font-size: 24px; }
 }
 
 /*pagination*/
