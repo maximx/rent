@@ -1,4 +1,4 @@
-class Settings::RecordsController < ApplicationController
+class Dashboard::RecordsController < ApplicationController
   layout "application_aside"
 
   before_action :login_required

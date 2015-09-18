@@ -1,5 +1,4 @@
-module Settings::ItemsHelper
-
+module Dashboard::ItemsHelper
   def render_renting_checkbox(count)
     if count == 1
       render_icon("ok")
@@ -7,5 +6,4 @@ module Settings::ItemsHelper
       render_icon("unchecked")
     end
   end
-
 end

@@ -1,0 +1,2 @@
+module Dashboard::RentRecordsHelper
+end

@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to settings_items_path
+    redirect_to dashboard_items_path
   end
 
   def collect

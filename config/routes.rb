@@ -47,6 +47,9 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]
+  end
+
+  namespace :dashboard do
     resources :items, only: [ :index, :show ] do
       resources :records, only: :index
     end

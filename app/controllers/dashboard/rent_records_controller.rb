@@ -1,4 +1,4 @@
-class Settings::RentRecordsController < ApplicationController
+class Dashboard::RentRecordsController < ApplicationController
   layout "application_aside"
 
   before_action :login_required

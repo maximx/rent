@@ -1,4 +1,4 @@
-class Settings::ItemsController < ApplicationController
+class Dashboard::ItemsController < ApplicationController
   layout "application_aside"
 
   before_action :login_required
