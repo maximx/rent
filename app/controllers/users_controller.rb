@@ -11,10 +11,6 @@ class UsersController < ApplicationController
     @borrower_reviews = @user.reviews_of('borrower').page(params[:page])
   end
 
-  def wish
-    @wish_items = @user.collections.page(params[:page])
-  end
-
   def lender_reviews
     reviews = @user.reviews_of("lender").page(params[:page])
     render partial: "reviews/reviews_list", layout: false, locals: { reviews: reviews }

@@ -37,7 +37,6 @@ Rails.application.routes.draw do
     member do
       get :lender_reviews
       get :borrower_reviews
-      get :wish
 
       post :follow
       delete :unfollow
