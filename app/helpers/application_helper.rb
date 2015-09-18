@@ -10,10 +10,8 @@ module ApplicationHelper
   end
 
   def render_aside_navigation
-    if settings_page?
-      render partial: "common/settings_navigation"
-    elsif "users" == params[:controller]
-      render partial: "common/users_navigation"
+    if settings_account_related_controller?
+      render partial: 'common/settings_navigation'
     end
   end
 
