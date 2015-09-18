@@ -16,6 +16,7 @@ html lang="zh"
       = render_notice(notice)
       = render_alert(alert)
       = raw breadcrumbs style: :bootstrap, autoroot: false
+      = render_navigation
       = yield
 
     = render partial: "common/footer"

@@ -81,43 +81,6 @@ a {
   min-height: 700px;
 }
 
-/* Sidebar navigation */
-.sidebar {
-  position: fixed;
-  top: 51px;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  display: block;
-  padding: 10px 20px;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  background-color: $body-bg;
-  border-right: 1px solid $gray-85;
-
-  .nav-sidebar {
-    margin-right: -21px; /* 20px padding + 1px border */
-    margin-bottom: 20px;
-    margin-left: -20px;
-
-    > li {
-      > a {
-        color: $gray-darker;
-        padding-right: 20px;
-        padding-left: 20px;
-      }
-
-      &.active {
-        > a, > a:hover, > a:focus {
-          color: $body-bg;
-          background-color: #428bca;
-        }
-      }
-    }
-  }
-
-}
-
 /*footer*/
 .site-footer {
   background-color: $gray-base;

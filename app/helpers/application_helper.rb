@@ -9,7 +9,7 @@ module ApplicationHelper
     )
   end
 
-  def render_aside_navigation
+  def render_navigation
     if settings_account_related_controller?
       render partial: 'common/settings_navigation'
     end
