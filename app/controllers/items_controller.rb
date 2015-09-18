@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   include PicturesAttrsSetter
   include UsersReviewsCount
+  include SortPaginate
 
   before_action :login_required, except: [ :index, :show, :search, :reviews ]
   before_action :validates_profile, only: [ :new, :create, :edit, :update ]
@@ -126,22 +127,12 @@ class ItemsController < ApplicationController
       )
     end
 
-    def sort_params
-      ( ['price'].include? params[:sort] ) ? params[:sort] : 'items.created_at'
-    end
-
     def find_lender_item
       @item = current_user.items.find(params[:id])
     end
 
     def find_item
       @item = Item.find(params[:id])
-    end
-
-    def sort_and_paginate_items
-      @items = @items.order(sort_params)
-      @items = @items.reverse_order unless params[:order] == 'asc'
-      @items = @items.page(params[:page])
     end
 
     def set_item_meta_tags

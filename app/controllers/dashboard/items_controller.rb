@@ -1,10 +1,20 @@
 class Dashboard::ItemsController < ApplicationController
+  include UsersReviewsCount
+  include SortPaginate
+
   before_action :login_required
-  before_action :find_items
+  before_action :find_items, only: [ :index ]
 
   def index
     @rent_records_count = @items.joins(:rent_records).group(:item_id, :aasm_state).count
     @rent_records_count.default = 0
+  end
+
+  def wish
+    @items = current_user.collections.page(params[:page])
+    sort_and_paginate_items
+    find_users_reviews_count
+    render 'items/index'
   end
 
   private

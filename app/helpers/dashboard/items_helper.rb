@@ -1,6 +1,6 @@
 module Dashboard::ItemsHelper
   def dashboard_related_controller?
-    params[:controller].start_with?('dashboard')
+    params[:controller].start_with?('dashboard') && params[:action] != 'wish'
   end
 
   def dashboard_navbar_list

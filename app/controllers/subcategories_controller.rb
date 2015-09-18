@@ -1,15 +1,17 @@
 class SubcategoriesController < ApplicationController
   include UsersReviewsCount
+  include SortPaginate
 
   before_action :find_subcategory, only: [ :show ]
   before_action :find_navbar_categories, only: [ :show ]
 
   def show
-    @items = @subcategory.items.page(params[:page])
     @breadcrumbs_object = @subcategory
+    @items = @subcategory.items
+    sort_and_paginate_items
     find_users_reviews_count
     set_subcategory_meta_tags
-    render "items/index"
+    render 'items/index'
   end
 
   private

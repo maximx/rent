@@ -1,15 +1,17 @@
 class CategoriesController < ApplicationController
   include UsersReviewsCount
+  include SortPaginate
 
   before_action :find_navbar_categories, only: [ :show ]
 
   def show
     @category = Category.find(params[:id])
-    @items = @category.items.page(params[:page])
     @breadcrumbs_object = @category
+    @items = @category.items
+    sort_and_paginate_items
     find_users_reviews_count
     set_category_meta_tags
-    render "items/index"
+    render 'items/index'
   end
 
   private
