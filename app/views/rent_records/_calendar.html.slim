@@ -31,6 +31,21 @@ javascript:
       eventSources: {
         url: '#{ event_sources_path }'
       },
+      eventClick: function(event, jsEvent, view) {
+        var $this = $(this);
+        $('.fc-event').not($this).popover('hide');
+
+        $.get($(this).attr('href'), function(data){
+          $this.popover({
+            html: true,
+            title: event.title,
+            content: data,
+            placement: 'top'
+          }).popover('show');
+        });
+
+        return false;
+      },
       selectable: true,
       selectOverlap: false,
       select: function(start, end) {

@@ -1,0 +1,17 @@
+table.table.table-hover
+  tbody
+    tr
+      td 出租者
+      td = link_to(@rent_record.lender.account, user_path(@rent_record.lender))
+    tr
+      td 承租者
+      td = link_to(@rent_record.borrower.account, user_path(@rent_record.borrower))
+    tr
+      td 起租日期
+      td = render_datetime @rent_record.started_at
+    tr
+      td 迄租日期
+      td = render_datetime @rent_record.ended_at
+    tr
+      td
+      td = link_to('詳細', item_rent_record_path(@item, @rent_record))

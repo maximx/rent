@@ -16,11 +16,11 @@ class RentRecordsController < ApplicationController
       rent_record_dates = @rent_record.aasm_state_dates_json
 
       respond_to do |format|
-        format.html
-        format.json { render json: rent_record_dates }
+        format.html do
+          ( request.xhr? ) ? render('rent_records/show_popover', layout: false) : :show
+        end
         format.pdf do
           pdf = RentRecordPdf.new(@item, @rent_record)
-
           send_data pdf.render, RentRecordPdf.pdf_config(@item.id, @rent_record.id)
         end
       end
