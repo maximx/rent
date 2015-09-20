@@ -8,10 +8,10 @@ table.table.table-hover
       td = link_to(@rent_record.borrower.account, user_path(@rent_record.borrower))
     tr
       td 起租日期
-      td = render_datetime @rent_record.started_at
+      td = render_datetime(@rent_record.started_at, :date_only)
     tr
       td 迄租日期
-      td = render_datetime @rent_record.ended_at
+      td = render_datetime(@rent_record.ended_at, :date_only)
     tr
       td
       td = link_to('詳細', item_rent_record_path(@item, @rent_record))
