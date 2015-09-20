@@ -64,6 +64,13 @@ a {
       margin: 0;
       padding-top: 0;
 
+      &.category {
+        > ul.nav > li > a {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+
       #site-logo {
         text-indent: -119988px;
         background-image: url("logo.gif");
@@ -117,6 +124,7 @@ a {
       > .input-group-btn { width: 1%; }
 
       #city {
+        width: 85px;
         color: $gray-light;
         border-radius: 0;
         border-right: none;
