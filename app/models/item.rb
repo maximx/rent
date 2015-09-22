@@ -28,7 +28,7 @@ class Item < ActiveRecord::Base
 
   enum period: [ :每日, :每月, :每年 ]
 
-  geocoded_by :full_address
+  geocoded_by :address
 
   after_validation :geocode
   before_save :set_category_and_price
@@ -55,10 +55,6 @@ class Item < ActiveRecord::Base
 
   def rentable_by?(user)
     user && user != lender
-  end
-
-  def full_address
-    (city.present?) ? city.name + address : address
   end
 
   def period_without_per

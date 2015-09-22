@@ -120,7 +120,7 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(
-        :name, :price, :minimum_period, :city_id, :address,
+        :name, :price, :minimum_period, :address,
         :deposit, :down_payment, :description,
         :subcategory_id, deliver_ids: [ ],
         pictures_attributes: [ :public_id, :file_cached ]

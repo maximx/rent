@@ -12,7 +12,6 @@
   = f.association :delivers, as: :check_boxes
 
   = f.input :address do
-    = f.association :city, as: :select, collection: City.all, include_blank: '請選擇縣市', label: false
     = f.input_field :address, class: 'form-control'
     span.checkbox
       span.help-block
