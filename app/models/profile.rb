@@ -6,7 +6,7 @@ class Profile < ActiveRecord::Base
   belongs_to :city
   belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
 
-  validates_presence_of :name, :city_id, :address
+  validates_presence_of :name, :address
   validates :bank_code, length: { is: 3 }, inclusion: Bank.all.map(&:code), allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?
 

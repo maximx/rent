@@ -16,7 +16,6 @@
   = f.input :phone
 
   = f.input :address do
-    = f.association :city, as: :select, collection: City.all, include_blank: '請選擇縣市', label: false
     = f.input_field :address, class: 'form-control'
 
   = f.input :bank_code, input_html: { maxlength: 3, minlength: 3 }
