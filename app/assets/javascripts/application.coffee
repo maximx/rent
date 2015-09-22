@@ -23,6 +23,7 @@
 #= require tinymce
 #= require turbolinks
 #= require wookmark.min
+#= require jquery.geocomplete.min
 #= require bootstrap-slider
 #= require rent_js_methods
 #= require_tree .
