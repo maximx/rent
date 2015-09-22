@@ -2,7 +2,7 @@ module PicturesAttrsSetter
   private
 
     def set_picture_attrs
-      if view_context.items_controller?
+      if view_context.items_controller? and picture_selected?
         pictures_attributes["0"][:public_id].each_with_index do |picture, index|
           pictures_attributes["#{index}"] = { public_id: picture.original_filename, file_cached: picture }
         end
@@ -29,5 +29,9 @@ module PicturesAttrsSetter
 
     def model_name
       params[:controller].singularize
+    end
+
+    def picture_selected?
+      params[model_name].has_key?(:pictures_attributes)
     end
 end

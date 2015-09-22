@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
   PRICE_MAX = 500
 
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids
-  validates_presence_of :city_id, :address, if: lambda { |i| i.address_needed? }
+  validates_presence_of :address, if: lambda { |i| i.address_needed? }
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
@@ -28,10 +28,10 @@ class Item < ActiveRecord::Base
 
   enum period: [ :每日, :每月, :每年 ]
 
-  geocoded_by :address
+  geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
   after_validation :geocode
-  before_save :set_category_and_price
+  before_save :set_category_and_price, :set_city
 
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
   scope :city_at, -> (city_id) { where(city_id: city_id) if city_id.present? }
@@ -110,6 +110,15 @@ class Item < ActiveRecord::Base
     self.deposit ||= 0
     self.down_payment ||= 0
     self.category_id = Subcategory.find(subcategory_id).category_id
+  end
+
+  def set_city
+    geo_address = Geocoder.address([latitude, longitude], language: 'zh-TW')
+    if geo_address
+      city_name, level = geo_address.match(/(\D{2}(市|縣))/i).captures
+      cities = City.where(name: city_name.sub('台', '臺'))
+      self.city = cities.first
+    end
   end
 
   def self.search_criteria(query)
