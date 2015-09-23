@@ -1,5 +1,5 @@
 class RentRecordsController < ApplicationController
-  include PicturesAttrsSetter
+  include FileAttrSetter
 
   before_action :login_required, except: [ :index ]
   before_action :find_item, :find_navbar_categories

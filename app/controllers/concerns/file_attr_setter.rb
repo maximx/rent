@@ -1,4 +1,4 @@
-module PicturesAttrsSetter
+module FileAttrSetter
   private
 
     def set_picture_attrs
