@@ -1,6 +1,6 @@
-.progress
-  - width = 100 / rent_record.all_permitted_states.size
+- width = 100 / rent_record.all_permitted_states.size
 
+.progress
   - rent_record.rent_record_state_logs.each do |log|
     .progress-bar.progress-bar-success role="progressbar" style="width: #{width}%"
       span data-toggle="tooltip" title="#{render_state_log_title(log)}"
