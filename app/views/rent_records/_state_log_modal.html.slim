@@ -1,14 +1,15 @@
 #rent_record_modal.modal.fade tabindex="-1" role="dialog" aria-labelledby="rent_record_operate_modal"
   .modal-dialog role="document"
     .modal-content
-      = simple_form_for :rent_record_state_log, method: :put, html: { id: 'rent_record_state_log_form' } do |f|
+      = simple_form_for rent_record_state_log, url: '', method: :put, html: { id: 'rent_record_state_log_form' } do |f|
         .modal-header
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;
           h4.modal-title
 
         .modal-body
-          = f.input :info, as: :file_select, required: false, input_html: { class: 'rent_record_state_log_text' }
+          = f.simple_fields_for :attachments, rent_record_state_log.attachments.build do |p|
+            = p.input :public_id, as: :file_select, input_html: { class: 'rent_record_state_log_text' }
           = f.input :info, required: false, input_html: { class: 'rent_record_state_log_text' }
 
         .modal-footer

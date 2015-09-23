@@ -1,8 +1,6 @@
 class ProfilesController < ApplicationController
   include PicturesAttrsSetter
 
-  layout "application_aside"
-
   before_action :login_required
   before_action :set_picture_attrs, only: [ :update ]
   before_action :set_user, only: [ :update ]
