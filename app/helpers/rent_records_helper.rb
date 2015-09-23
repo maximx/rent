@@ -38,8 +38,8 @@ module RentRecordsHelper
     if rent_record.can_rent_by?(current_user)
       link_to render_icon('ok', class: 'text-primary'),
               renting_item_rent_record_path(rent_record.item, rent_record),
-              method: :put, class: 'btn btn-default', title: '確認出租',
-              data: { toggle: 'tooltip' }
+              method: :put, class: 'btn btn-default rent_record_form_modal', title: '確認出租',
+              data: { toggle: 'tooltip', type: 'file', label: info_label[:renting] }
     end
   end
 
@@ -108,7 +108,8 @@ module RentRecordsHelper
   def info_label
     {
       remitted: '帳號末五碼',
-      delivering: '寄送編號'
+      delivering: '寄送編號',
+      renting: '承租契約'
     }
   end
 

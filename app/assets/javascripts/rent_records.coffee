@@ -23,14 +23,19 @@ $(document).ready ->
     update_rent_days_price()
   )
 
+  # rent record state log
   $('.rent_record_operates a.rent_record_form_modal').click () ->
-    type = $(this).data('type')
     label_text = $(this).data('label')
     $state_log_form = $('#rent_record_state_log_form')
 
     $('.modal-title').text( label_text )
     $state_log_form.find('label').text( label_text )
     $state_log_form.attr( 'action', $(this).attr('href') )
+
+    if 'file' == $(this).data('type')
+      $('.rent_record_state_log_text:not(:file)').closest('.form-group').remove()
+    else
+      $('.rent_record_state_log_text:file').closest('.form-group').remove()
 
     $('#rent_record_modal').modal('show')
     return false
