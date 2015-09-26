@@ -24,24 +24,22 @@ namespace :fake do
     100.times do
       picutres_arr = []
       rand(1..4).times do
-        picutres_arr << {public_id: "test#{rand(1..7)}"}
+        picutres_arr << { public_id: "test#{rand(1..7)}", file_cached: 'faker' }
       end
 
       deliver_arr = []
       deliver_arr << deliver_1.id if rand(0..1) == 1
       deliver_arr << deliver_2.id if rand(0..1) == 1 || deliver_arr.empty?
-      Rails.logger.info deliver_arr
 
       city = cities.sample
 
       item = users.sample.items.build(
         name: FFaker::LoremCN.words.join(" "),
         subcategory_id: subcategories.sample.id,
-        city_id: city.id,
         price: rand(0..20),
         minimum_period: rand(1..3),
         deposit: rand(0..1000),
-        address: CityAreaTW.rand_area_at(city),
+        address: city.name + CityAreaTW.rand_area_at(city),
         description: FFaker::LoremCN.paragraphs.join(","),
         deliver_ids: deliver_arr,
         pictures_attributes: picutres_arr

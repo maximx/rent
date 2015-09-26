@@ -113,9 +113,13 @@ class Item < ActiveRecord::Base
   end
 
   def set_city
-    geo_address = Geocoder.address([latitude, longitude], language: 'zh-TW')
-    if geo_address
+    if geo_address = Geocoder.address([latitude, longitude], language: 'zh-TW')
       city_name, level = geo_address.match(/(\D{2}(市|縣))/i).captures
+    elsif m = address.match(/(\D{2}(市|縣))/i)
+      city_name, level = m.captures
+    end
+
+    if city_name
       cities = City.where(name: city_name.sub('台', '臺'))
       self.city = cities.first
     end

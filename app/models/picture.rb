@@ -5,7 +5,7 @@ class Picture < ActiveRecord::Base
 
   belongs_to :imageable, polymorphic: true
 
-  before_save :upload_and_set_public_id
+  before_save :upload_and_set_public_id, if: Proc.new { |p| p.file_cached != 'faker' }
   before_destroy :delete_cloudinary
 
   def only_one?
