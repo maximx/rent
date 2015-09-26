@@ -188,7 +188,7 @@ class RentRecord < ActiveRecord::Base
   end
 
   def pending_states
-    all_permitted_states - rent_record_state_logs.map { |log| log.aasm_state.to_sym }
+    all_permitted_states - rent_record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
   end
 
   protected

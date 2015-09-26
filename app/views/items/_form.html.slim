@@ -15,7 +15,7 @@
     = f.input_field :address, class: 'form-control'
     span.checkbox
       span.help-block
-        label #{check_box_tag(nil, current_user.profile.city_address_json, false, class: 'check_boxes', id: 'use_profile_address')}同聯絡地址
+        label #{check_box_tag(nil, current_user.profile.address, false, class: 'check_boxes', id: 'use_profile_address')}同聯絡地址
 
   = f.input :description
 

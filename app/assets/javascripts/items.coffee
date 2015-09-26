@@ -15,9 +15,7 @@ $ ->
 
   $('#use_profile_address').on 'change', () ->
     if $(this).prop('checked')
-      data = JSON.parse( $(this).val() )
-      $('#item_city_id').val( data.city_id )
-      $('#item_address').val( data.address )
+      $('#item_address').val( $(this).val() )
 
   $('#item_deliver_ids_2').on 'change', () ->
     $('#item_address').prop('required', true) if $(this).prop('checked')

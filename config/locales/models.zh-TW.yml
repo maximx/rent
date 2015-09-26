@@ -66,14 +66,10 @@ zh-TW:
               bad_period: '租期應大於 %{period}'
             deliver_id:
               blank: '運送方式為必填'
-        requirement:
+        rent_record_state_log:
           attributes:
-            name:
-              blank: '名稱為必填'
-            description:
-              blank: '敘述為必填'
-            pictures:
-              blank: '至少上傳一張圖片'
+            info:
+              blank: '此欄位為必填'
         user:
           attributes:
             account:

@@ -1,10 +1,10 @@
 - breadcrumb :rent_record, @item, @rent_record
 
 = render partial: 'rent_records/state_log_list',
-         locals: { rent_record: @rent_record, rent_record_state_logs: @rent_record.rent_record_state_logs }
+         locals: { rent_record: @rent_record, rent_record_state_logs: @rent_record_state_logs }
 
 .text-right = render_operate_rent_record_links(@rent_record)
-= render partial: 'rent_records/state_log_modal'
+= render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
 
 table.table
   thead

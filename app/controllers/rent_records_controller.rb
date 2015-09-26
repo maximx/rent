@@ -1,10 +1,13 @@
 class RentRecordsController < ApplicationController
+  include FileAttrSetter
+
   before_action :login_required, except: [ :index ]
   before_action :find_item, :find_navbar_categories
   before_action :find_user_rent_record, only: [ :edit, :update ]
   before_action :find_item_rent_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create, :edit, :update ]
+  before_action :set_attachment_attrs, only: [ :renting ]
 
   def index
     @rent_records = @item.rent_records.includes(:borrower).rencent.reverse_order.page(params[:page])
@@ -14,6 +17,8 @@ class RentRecordsController < ApplicationController
   def show
     if @rent_record.viewable_by?(current_user)
       rent_record_dates = @rent_record.aasm_state_dates_json
+      @rent_record_state_logs = @rent_record.rent_record_state_logs
+      @rent_record_state_log = @rent_record_state_logs.build
 
       respond_to do |format|
         format.html do
@@ -85,18 +90,25 @@ class RentRecordsController < ApplicationController
   end
 
   def remitting
-    @rent_record.remit!( current_user, rent_record_state_log_params ) if @rent_record.can_remit_by?(current_user)
-    redirect_to :back
+    if @rent_record.can_remit_by?(current_user)
+      if @rent_record.remit!(current_user, rent_record_state_log_params)
+        redirect_to :back
+      else
+        @rent_record_state_logs = @rent_record.rent_record_state_logs
+        @rent_record_state_log = @rent_record_state_logs.last
+        flash[:alert] = '請填寫匯款帳號後五碼'
+        render :show
+      end
+    end
   end
 
   def delivering
-    @rent_record.delivery!( current_user, rent_record_state_log_params ) if @rent_record.can_delivery_by?(current_user)
-    @rent_record.rent! if @rent_record.can_rent_by?(current_user)
+    @rent_record.delivery!(current_user, rent_record_state_log_params) if @rent_record.can_delivery_by?(current_user)
     redirect_to :back
   end
 
   def renting
-    @rent_record.rent!( current_user ) if @rent_record.can_rent_by?(current_user)
+    @rent_record.rent!(current_user, rent_record_state_log_params) if @rent_record.can_rent_by?(current_user)
     redirect_to :back
   end
 
@@ -120,7 +132,9 @@ class RentRecordsController < ApplicationController
   end
 
   def rent_record_state_log_params
-    params.require(:rent_record_state_log).permit(:info)
+    params.require(:rent_record_state_log).permit(
+      :info, attachments_attributes: [ :public_id, :file_cached ]
+    )
   end
 
   def find_item
