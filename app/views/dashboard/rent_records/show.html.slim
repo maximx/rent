@@ -20,6 +20,8 @@ table.table.table-hover
         td = rent_record.aasm.human_state
         td = render_operate_rent_record_links(rent_record)
 
+= render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
+
 = will_paginate @rent_records, class: "hidden-sm hidden-xs"
 = will_paginate @rent_records, class: "hidden-lg hidden-md", page_links: false
 

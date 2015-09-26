@@ -3,6 +3,7 @@ class Dashboard::RentRecordsController < ApplicationController
 
   def show
     @rent_records = current_user.rent_records.includes(:item).rencent.page(params[:page])
+    @rent_record_state_log = @rent_records.first.rent_record_state_logs.build
   end
 
   def calendar
