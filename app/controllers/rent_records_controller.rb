@@ -92,7 +92,7 @@ class RentRecordsController < ApplicationController
   def remitting
     if @rent_record.can_remit_by?(current_user)
       if @rent_record.remit!(current_user, rent_record_state_log_params)
-        redirect_to :back
+        redirect_to item_rent_record_path(@item, @rent_record)
       else
         @rent_record_state_logs = @rent_record.rent_record_state_logs
         @rent_record_state_log = @rent_record_state_logs.last
