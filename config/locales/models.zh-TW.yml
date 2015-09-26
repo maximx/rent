@@ -69,7 +69,9 @@ zh-TW:
         rent_record_state_log:
           attributes:
             info:
-              blank: '此欄位為必填'
+              blank: '匯款帳號為必填'
+              invalid: '匯款帳號末五碼應為數字'
+              wrong_length: '請填寫匯款帳號末五碼'
         user:
           attributes:
             account:

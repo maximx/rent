@@ -96,7 +96,7 @@ class RentRecordsController < ApplicationController
       else
         @rent_record_state_logs = @rent_record.rent_record_state_logs
         @rent_record_state_log = @rent_record_state_logs.last
-        flash[:alert] = '請填寫匯款帳號後五碼'
+        flash[:alert] = '請檢查匯款帳號資訊'
         render :show
       end
     end
