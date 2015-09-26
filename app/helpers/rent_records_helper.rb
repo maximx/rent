@@ -21,7 +21,7 @@ module RentRecordsHelper
       link_to render_icon('usd', class: 'text-success'),
               remitting_item_rent_record_path(rent_record.item, rent_record),
               method: :put, class: 'btn btn-default rent_record_form_modal', title: '已匯款',
-              data: { toggle: 'tooltip', label: info_label[:remitted] }
+              data: { toggle: 'tooltip', label: info_label[:remitted], required: 'required' }
     end
   end
 

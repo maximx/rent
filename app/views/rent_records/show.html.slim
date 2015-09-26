@@ -4,7 +4,7 @@
          locals: { rent_record: @rent_record, rent_record_state_logs: @rent_record_state_logs }
 
 .text-right = render_operate_rent_record_links(@rent_record)
-= render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_logs.build }
+= render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
 
 table.table
   thead
