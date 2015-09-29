@@ -4,13 +4,16 @@ class MessagesController < ApplicationController
   before_action :find_item
 
   def create
-    result = { status: 'error' }
-    if request.xhr?
+    result = { status: 'error', message: '來源錯誤' } unless request.xhr?
+    result = { status: 'error', message: '錯誤的收訊人' } if current_user == @recipient
+    result = { status: 'error', message: '請填寫訊息內容' } if message_params[:body].blank?
+
+    unless result
       message = current_user.send_message(@recipient, message_body, subject)
       if message.id
         result = { status: 'ok', message: '成功送出訊息' }
-      elsif message_params[:body].blank?
-        result[:message] = '<code>請填寫訊息內容</code>'
+      else
+        result = { status: 'error', message: '未知的錯誤，請稍後再試一次' }
       end
     end
 
