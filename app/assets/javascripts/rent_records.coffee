@@ -1,28 +1,4 @@
 $(document).ready ->
-  $start_picker_obj = $('#rent_record_started_at')
-  $end_picker_obj = $('#rent_record_ended_at')
-  minimum_period = $('#minimun_period').val()
-
-  $start_picker_obj.on('dp.change', (e)->
-    if e.date
-      $end_picker_obj.data('DateTimePicker').minDate(
-        e.date.add(minimum_period, 'd')
-      )
-    else
-      $end_picker_obj.data('DateTimePicker').minDate(moment().format('YYYY-MM-DD'))
-
-    update_rent_days_price()
-  )
-  $end_picker_obj.on('dp.change', (e)->
-    if e.date
-      $start_picker_obj.data('DateTimePicker').maxDate(
-        e.date.subtract(minimum_period, 'd')
-      )
-    else
-      $start_picker_obj.data('DateTimePicker').maxDate(moment().format('YYYY-MM-DD'))
-    update_rent_days_price()
-  )
-
   # rent record state log
   $('.rent_record_operates a.rent_record_form_modal').click () ->
     $state_log_form = $('#rent_record_state_log_form')
@@ -48,10 +24,6 @@ $(document).ready ->
 
 @update_rent_days_price = ()->
   if $('.item-price-days').size() > 0
-    validify_date = (val) ->
-      date_and_time =  val.split(' ')
-      date_and_time[0] + 'T' + date_and_time[1]
-
     valid_started =  validify_date( $('#rent_record_started_at').val() )
     valid_ended =  validify_date( $('#rent_record_ended_at').val() )
 

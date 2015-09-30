@@ -1,14 +1,17 @@
 @buildDateTimePicker = (target, format, disabled_dates = [])->
+  return if $(target).size() == 0
+
   options = {
     format: format
     useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
   }
+
   if disabled_dates.length > 0
     options.minDate = moment().format(format)
     options.disabledDates = disabled_dates
 
-  min_date = $(target).first().val()
-  max_date = $(target).last().val()
+  min_date = validify_date( $(target).first().val() )
+  max_date = validify_date( $(target).last().val() )
   if min_date == '' && max_date == ''
     $(target).each ()->
       $(this).datetimepicker(options)
@@ -21,3 +24,30 @@
       delete options.minDate
       options.maxDate = max_date
       $(target).first().datetimepicker(options)
+
+
+@rentRecordPickerChange = ()->
+  $start_picker_obj = $('#rent_record_started_at')
+  $end_picker_obj = $('#rent_record_ended_at')
+  minimum_period = $('#minimun_period').val()
+
+  $start_picker_obj.on('dp.change', (e)->
+    if e.date
+      $end_picker_obj.data('DateTimePicker').minDate(
+        e.date.add(minimum_period, 'd')
+      )
+    else
+      $end_picker_obj.data('DateTimePicker').minDate(moment())
+
+    update_rent_days_price()
+  )
+  $end_picker_obj.on('dp.change', (e)->
+    if e.date
+      $start_picker_obj.data('DateTimePicker').maxDate(
+        e.date.subtract(minimum_period, 'd')
+      )
+    else
+      $start_picker_obj.data('DateTimePicker').maxDate(moment())
+
+    update_rent_days_price()
+  )

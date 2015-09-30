@@ -94,9 +94,11 @@ class Item < ActiveRecord::Base
   end
 
   def booked_dates
-    rent_records.booking.where('started_at > ?', Time.now)
-      .collect { |rent_record| (rent_record.started_at.to_date .. (rent_record.ended_at).to_date).map(&:to_s) }
-      .flatten
+    dates = rent_records.actived
+                        .where('started_at > ?', Time.now)
+                        .collect { |rent_record| (rent_record.started_at.to_date .. (rent_record.ended_at).to_date).map(&:to_s) }
+    dates << Time.now.yesterday.to_date.to_s
+    dates.flatten
   end
 
   def address_needed?
