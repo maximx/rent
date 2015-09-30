@@ -7,6 +7,7 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids
   validates_presence_of :address, if: lambda { |i| i.address_needed? }
+  validate :profile_bank_info_presented, if: lambda { |i| i.bank_info_needed? }
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
@@ -48,6 +49,12 @@ class Item < ActiveRecord::Base
   end
 
   scope :index_pictures_urls, -> { all.map{ |i| cloudinary_url(i.index_picture_public_id) }.uniq }
+
+  def profile_bank_info_presented
+    unless lender.profile.bank_code.present? and lender.profile.bank_account.present?
+      errors.add(:delivers, '請先填寫匯款資訊')
+    end
+  end
 
   def editable_by?(user)
     user && user == lender
@@ -103,6 +110,10 @@ class Item < ActiveRecord::Base
 
   def address_needed?
     delivers.include?( Deliver.where(name: '面交自取').first )
+  end
+
+  def bank_info_needed?
+    delivers.include?( Deliver.where.not(name: '面交自取').first )
   end
 
   protected
