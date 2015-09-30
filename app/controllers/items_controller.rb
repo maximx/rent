@@ -60,10 +60,11 @@ class ItemsController < ApplicationController
     unless current_user.is_collected?(@item)
       current_user.collect!(@item)
       result = {
-        status: "ok",
+        status: 'ok',
         href: uncollect_item_path(@item, format: :json),
-        method: "delete",
-        class: "btn-danger"
+        title: '取消收藏',
+        method: 'delete',
+        class: 'btn-danger'
       }
     end
 
@@ -77,10 +78,11 @@ class ItemsController < ApplicationController
     if current_user.is_collected?(@item)
       current_user.uncollect!(@item)
       result = {
-        status: "ok",
+        status: 'ok',
         href: collect_item_path(@item, format: :json),
-        method: "post",
-        class: "btn-default"
+        title: '收藏',
+        method: 'post',
+        class: 'btn-default'
       }
     end
 

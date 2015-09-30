@@ -8,24 +8,30 @@ module ItemsHelper
   end
 
   def render_uncollect_item_link(item, type = "")
-    icon = "bookmark"
+    icon = 'bookmark'
     if is_remote?(type)
-      link_to(render_icon( icon ), uncollect_item_path(item, format: :json),
-              remote: is_remote?(type), method: :delete, class: "btn btn-danger item-bookmark")
+      link_to render_icon( icon ),
+              uncollect_item_path(item, format: :json),
+              remote: is_remote?(type), method: :delete, class: 'btn btn-danger item-bookmark',
+              title: '取消收藏', data: { toggle: 'tooltip' }
     else
-      link_to(render_icon_with_text(icon, "取消收藏"), uncollect_item_path(item),
-              method: :delete, class: "btn btn-default")
+      link_to render_icon_with_text(icon, '取消收藏'),
+              uncollect_item_path(item),
+              method: :delete, class: 'btn btn-default'
     end
   end
 
   def render_collect_item_link(item, type = "")
-    icon = "bookmark"
+    icon = 'bookmark'
     if is_remote?(type)
-      link_to(render_icon( icon ), collect_item_path(item, format: :json),
-              remote: is_remote?(type), method: :post, class: "btn btn-default item-bookmark")
+      link_to render_icon( icon ),
+              collect_item_path(item, format: :json),
+              remote: is_remote?(type), method: :post, class: 'btn btn-default item-bookmark',
+              title: '收藏', data: { toggle: 'tooltip' }
     else
-      link_to(render_icon_with_text(icon, "收藏"), collect_item_path(item),
-              method: :post, class: "btn btn-default item-bookmark")
+      link_to render_icon_with_text(icon, '收藏'),
+              collect_item_path(item),
+              method: :post, class: 'btn btn-default item-bookmark'
     end
   end
 

@@ -24,8 +24,10 @@ $ ->
   # index
   $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
     if data.status == 'ok'
-      $(this).attr("href", data.href).data("method", data.method)
-        .removeClass("btn-default btn-danger").addClass(data.class)
+      $(this).attr('href', data.href)
+        .data('method', data.method)
+        .attr('data-original-title', data.title)
+        .removeClass('btn-default btn-danger').addClass(data.class)
   )
 
   $('.item-grid').closest('#item-container').wookmark
