@@ -18,6 +18,7 @@ class RentRecord < ActiveRecord::Base
   before_save :set_item_attributes
   before_save :set_ended_at
   after_save :save_booking_state_log
+  after_save :send_remit_info, if: :remit_needed?
 
   scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
@@ -176,6 +177,10 @@ class RentRecord < ActiveRecord::Base
     self.item.lender
   end
 
+  def total_price
+    price + item_deposit + item_down_payment
+  end
+
   def next_states
     aasm.states(permitted: true).map(&:name)
   end
@@ -189,6 +194,10 @@ class RentRecord < ActiveRecord::Base
 
   def pending_states
     all_permitted_states - rent_record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
+  end
+
+  def send_remit_info
+    RentRecordMailer.notify_remit_info(self).deliver
   end
 
   protected
@@ -246,7 +255,7 @@ class RentRecord < ActiveRecord::Base
     end
 
     def remit_needed?
-      ( price + item_deposit + item_down_payment ) > 0
+      total_price > 0
     end
 
     def delivery_needed?
