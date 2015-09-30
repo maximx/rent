@@ -90,6 +90,10 @@ module ApplicationHelper
     text_field_tag nil, attribute, class: 'form-control', disabled: true
   end
 
+  def render_root_input_lg
+    ' input-lg' if current_page? root_path
+  end
+
   def is_remote?(type)
     type.to_sym == :remote
   end

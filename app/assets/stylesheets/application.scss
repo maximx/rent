@@ -131,6 +131,12 @@ nav.navbar { margin-bottom: 10px; }
         border-radius: 0;
         border-right: none;
         -webkit-appearance: none;
+
+        &.input-lg {
+          width: 100px;
+          padding: 0;
+          padding-left: 8px;
+        }
       }
     }
   }

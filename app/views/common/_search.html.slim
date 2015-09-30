@@ -1,11 +1,13 @@
-= form_tag search_items_path, method: :get, id: "search-form", class: "navbar-form" do
+= form_tag search_items_path, method: :get, id: 'search-form', class: 'navbar-form' do
   .form-group
     .input-group
       span.input-group-btn
-        = select_tag :city, options_for_select(City.options_collection, params[:city]), include_blank: "選擇地點", class: "form-control"
+        = select_tag :city,
+                     options_for_select(City.options_collection, params[:city]),
+                     include_blank: '選擇地點', class: "form-control#{render_root_input_lg}"
 
-      = text_field_tag :query, params[:query], class: 'form-control keyword', placeholder: '關鍵字'
+      = text_field_tag :query, params[:query], class: "form-control keyword#{render_root_input_lg}", placeholder: '關鍵字'
 
       span.input-group-btn
-        button.btn.btn-default type="submit"
-          = render_icon("search")
+        button type="submit" class="btn btn-default#{render_root_input_lg}"
+          = render_icon('search')
