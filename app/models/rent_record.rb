@@ -4,8 +4,7 @@ class RentRecord < ActiveRecord::Base
   extend I18nMessage
 
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :deliver_id
-  validate :start_end_date
-  validate :not_overlap
+  validate :start_end_date, :not_overlap, :borrower_not_lender
 
   belongs_to :borrower, class_name: "User", foreign_key: "user_id"
   belongs_to :item
@@ -15,8 +14,7 @@ class RentRecord < ActiveRecord::Base
 
   self.per_page = 10
 
-  before_save :set_item_attributes
-  before_save :set_ended_at
+  before_save :set_item_attributes, :set_ended_at
   after_save :save_booking_state_log
   after_save :send_remit_info, if: :remit_needed?
 
@@ -85,6 +83,10 @@ class RentRecord < ActiveRecord::Base
     item.rent_records.where.not(id: id || -1).overlaps(started_at, ended_at)
   end
 
+  def borrower_not_lender
+    errors[:started_at] << '您沒有權限' unless can_borrower_by?(borrower)
+  end
+
   #gmaps4rails
   def as_json(options={})
     {
@@ -123,6 +125,10 @@ class RentRecord < ActiveRecord::Base
   #可修改
   def editable_by?(user)
     user && borrower == user && booking?
+  end
+
+  def can_borrower_by?(user)
+    user and user != lender
   end
 
   #可評價

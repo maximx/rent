@@ -36,11 +36,11 @@ class RentRecordsController < ApplicationController
   end
 
   def new
-    if current_user != @item.lender
-      @rent_record = @item.rent_records.build
+    @rent_record = @item.rent_records.build
+    if @rent_record.can_borrower_by?(current_user)
       set_start_and_end_params
     else
-      flash[:notice] = "您沒有權限"
+      flash[:alert] = '您沒有權限'
       redirect_to item_path(@item)
     end
   end
@@ -49,10 +49,12 @@ class RentRecordsController < ApplicationController
     @rent_record = @item.rent_records.build(rent_record_params)
     @rent_record.borrower = current_user
 
-    if @rent_record.save
-      redirect_to item_rent_record_path(@item, @rent_record)
+    if @rent_record.can_borrower_by?(current_user)
+      ( @rent_record.save ) ?
+        redirect_to(item_rent_record_path(@item, @rent_record)) : render(:new)
     else
-      render :new
+      flash[:alert] = '您沒有權限'
+      redirect_to item_path(@item)
     end
   end
 
