@@ -21,8 +21,12 @@ module FileAttrSetter
     end
 
     def set_attachment_attrs
-      if view_context.rent_records_controller? and attchment_selected?
-        set_attrs( params['rent_record_state_log'][:attachments_attributes]["0"] )
+      if view_context.rent_records_controller?
+        if attchment_selected?
+          set_attrs( params['rent_record_state_log'][:attachments_attributes]["0"] )
+        else
+          params['rent_record_state_log'] = { info: nil }
+        end
       end
     end
 
@@ -45,6 +49,6 @@ module FileAttrSetter
     end
 
     def attchment_selected?
-      params['rent_record_state_log'].has_key?(:attachments_attributes)
+      params.has_key?(:rent_record_state_log)
     end
 end
