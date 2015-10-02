@@ -83,7 +83,8 @@ class RentRecordsController < ApplicationController
   def ask_for_review
     if @rent_record.is_reviewed_by_judger?(current_user)
       review = @rent_record.review_of_judger(current_user)
-      UserMailer.ask_for_review(current_user, review, review.user).deliver
+      RentRecordMailer.ask_for_review(current_user, review, review.user).deliver
+      flash[:notice] = '邀請評價已寄送'
       redirect_to dashboard_rent_records_path
     else
       flash[:notice] = "請您先行評價"

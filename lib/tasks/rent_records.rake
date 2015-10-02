@@ -8,7 +8,7 @@ namespace :rent_records do
     rent_records = RentRecord.renting.where("ended_at between ? and ?", Time.now, Time.now + 1.hour)
 
     rent_records.each do |rent_record|
-      UserMailer.notify_rent_record_return(rent_record).deliver
+      RentRecordMailer.notify_rent_record_return(rent_record).deliver
     end
   end
 end
