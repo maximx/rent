@@ -1,4 +1,7 @@
 $ ->
-  $('.unfollow-user').on('ajax:success', (e, data, status, xhr) ->
-    $(this).closest('.follow-container').remove() if data.status == 'ok'
+  $('.follow-user').on('ajax:success', (e, data, status, xhr) ->
+    if data.status == 'ok'
+      $(this).attr('href', data.href)
+             .html(data.text)
+             .data('method', data.method)
   )

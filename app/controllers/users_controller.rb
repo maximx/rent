@@ -22,15 +22,29 @@ class UsersController < ApplicationController
   def follow
     unless current_user.is_following?(@user)
       current_user.follow!(@user)
+      result = {
+        status: 'ok',
+        text: view_context.render_icon_with_text('star', '取消追蹤'),
+        href: unfollow_user_path(@user, format: :json),
+        method: 'delete'
+      }
     end
 
-    redirect_to user_path(@user)
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: result }
+    end
   end
 
   def unfollow
     if current_user.is_following?(@user)
       current_user.unfollow!(@user)
-      result = { status: "ok" }
+      result = {
+        status: 'ok',
+        text: view_context.render_icon_with_text('star-empty', '追蹤'),
+        href: follow_user_path(@user, format: :json),
+        method: 'put'
+      }
     end
 
     respond_to do |format|

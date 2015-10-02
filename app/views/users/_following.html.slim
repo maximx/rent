@@ -1,10 +1,8 @@
 ul
   - followings.each do |follow|
     li.follow-container.clearfix
-      = link_to user_path(follow), class: "follow-avatar img-circle img-thumbnail" do
+      = link_to user_path(follow), class: 'follow-avatar img-circle img-thumbnail' do
         = render_cl_avatar_sm(follow)
       .follow-info
         div = link_to(follow.account, user_path(follow))
-        span
-          = link_to("取消追蹤", unfollow_user_path(follow, format: :json),
-                    method: :delete, remote: true, class: "btn btn-default unfollow-user")
+        span = render_follow_link(follow, :remote)

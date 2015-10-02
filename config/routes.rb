@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       get :lender_reviews
       get :borrower_reviews
 
-      post :follow
+      put :follow
       delete :unfollow
     end
   end
