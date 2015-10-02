@@ -12,10 +12,10 @@ class Question < ActiveRecord::Base
   end
 
   def send_new_question_message
-    UserMailer.notify_question(self.item.lender, self).deliver
+    QuestionMailer.notify_question(self).deliver
   end
 
   def send_reply_question_message
-    UserMailer.notify_question_reply(self.asker, self).deliver
+    QuestionMailer.notify_question_reply(self).deliver
   end
 end

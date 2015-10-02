@@ -2,7 +2,7 @@ article.question
   .row
     .ask.clearfix
         .col-lg-1.col-lg-offset-2.text-center
-          = link_to user_path(question.asker) do
+          = link_to user_url(question.asker) do
             = render_cl_avatar_sm(question.asker)
             div = question.asker.account
         .col-lg-9 問題∶ #{ question.content }
@@ -10,7 +10,7 @@ article.question
     - if question.reply?
       .reply.clearfix
           .col-lg-1.col-lg-offset-2.text-center
-            = link_to user_path(question.item.lender) do
+            = link_to user_url(question.item.lender) do
               = render_cl_avatar_sm(question.item.lender)
               div = question.item.lender.account
           .col-lg-9 回覆∶#{ question.reply }
