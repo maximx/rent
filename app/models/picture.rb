@@ -15,7 +15,8 @@ class Picture < ActiveRecord::Base
   private
 
     def upload_and_set_public_id
-      self.public_id = Cloudinary::Uploader.upload(self.file_cached, use_filename: true)["public_id"]
+      info = Cloudinary::Uploader.upload(self.file_cached, use_filename: true)
+      self.public_id = [ info['public_id'], info['format'] ].join('.')
     end
 
     def delete_cloudinary

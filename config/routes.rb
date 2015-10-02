@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   end
 
   resources :profiles, only: [ :update ]
+  resources :pictures, only: [] do
+    get :download, on: :member
+  end
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ]

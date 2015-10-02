@@ -5,6 +5,10 @@ class RentRecordStateLog < ActiveRecord::Base
   belongs_to :rent_record
   belongs_to :user
 
-  has_many :attachments, class_name: 'Picture', as: :imageable
+  has_many :attachments, class_name: 'Picture', as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :attachments
+
+  def attachment
+    attachments.first
+  end
 end
