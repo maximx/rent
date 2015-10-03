@@ -30,8 +30,7 @@ class RentRecordsController < ApplicationController
         end
       end
     else
-      flash[:alert] = '您沒有權限'
-      redirect_to item_path(@item)
+      no_permission( item_path(@item) )
     end
   end
 
@@ -40,8 +39,7 @@ class RentRecordsController < ApplicationController
     if @rent_record.can_borrower_by?(current_user)
       set_start_and_end_params
     else
-      flash[:alert] = '您沒有權限'
-      redirect_to item_path(@item)
+      no_permission( item_path(@item) )
     end
   end
 
@@ -53,8 +51,7 @@ class RentRecordsController < ApplicationController
       ( @rent_record.save ) ?
         redirect_to(item_rent_record_path(@item, @rent_record)) : render(:new)
     else
-      flash[:alert] = '您沒有權限'
-      redirect_to item_path(@item)
+      no_permission( item_path(@item) )
     end
   end
 
@@ -75,8 +72,7 @@ class RentRecordsController < ApplicationController
       set_item_maps_marker
       render "reviews/new"
     else
-      flash[:alert] = "您沒有權限"
-      redirect_to item_path(@item)
+      no_permission( item_path(@item) )
     end
   end
 

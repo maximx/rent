@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   # mailboxer
   def mailboxer_email(object)
-    email if object.class == Mailboxer::Message
+    email
   end
 
   # user follow

@@ -8,9 +8,15 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:account, :email, :password, :password_confirmation, :remember_me) }
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:account, :email, :password, :password_confirmation, :remember_me)
+    end
+
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :account, :email, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:account, :email, :password, :password_confirmation, :current_password) }
+
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:account, :email, :password, :password_confirmation, :current_password)
+    end
   end
 
   def login_required
@@ -54,5 +60,10 @@ class ApplicationController < ActionController::Base
       url_params = params.merge(page: collection.next_page, only_path: false)
       set_meta_tags next: url_for(url_params)
     end
+  end
+
+  def no_permission(url)
+      flash[:alert] = '您沒有權限'
+      redirect_to item_path(@item)
   end
 end
