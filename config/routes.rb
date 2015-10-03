@@ -73,6 +73,8 @@ Rails.application.routes.draw do
       post :reply
     end
   end
-  resources :notifications, only: [ :index, :show ]
+  resources :notifications, only: [ :index, :show ] do
+    put :mark_as_read, on: :member
+  end
   resources :messages, only: [ :create ]
 end
