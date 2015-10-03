@@ -46,6 +46,12 @@ class RentRecordsController < ApplicationController
 
   def create
     if @rent_record.save
+      subject = "#{@rent_record.borrower.account} " \
+                " 於 #{view_context.render_datetime_period(@rent_record, :tw)}" \
+                "#{RentRecord.i18n_activerecord_attribute("aasm_state.#{@rent_record.aasm.current_state}")} " \
+                "#{@rent_record.item.name}"
+
+      @rent_record.lender.notify(subject, @rent_record.id)
       redirect_to(item_rent_record_path(@item, @rent_record))
     else
       render :new
