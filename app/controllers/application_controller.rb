@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   end
 
   def no_permission(url)
-      flash[:alert] = '您沒有權限'
-      redirect_to item_path(@item)
+    flash[:alert] = '您沒有權限'
+    redirect_to url
   end
 end
