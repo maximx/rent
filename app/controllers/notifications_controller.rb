@@ -9,6 +9,8 @@ class NotificationsController < ApplicationController
 
   def show
     @notification.mark_as_read(current_user)
+    rent_record = RentRecord.find @notification.body
+    redirect_to item_rent_record_path(rent_record.item, rent_record)
   end
 
   def mark_as_read
