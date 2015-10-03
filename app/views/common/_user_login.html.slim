@@ -1,6 +1,6 @@
 ul.nav.navbar-nav.navbar-right
   - if user_signed_in?
-    li.logged = render_unread_link
+    li.logged = render_notifications_link
     li.logged.dropdown
       a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button"
         = render_cl_avatar_xs(current_user)

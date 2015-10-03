@@ -73,5 +73,6 @@ Rails.application.routes.draw do
       post :reply
     end
   end
+  resources :notifications, only: [ :index, :show ]
   resources :messages, only: [ :create ]
 end

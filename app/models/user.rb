@@ -93,8 +93,8 @@ class User < ActiveRecord::Base
     profile.description || "您好，我是#{account}，我在#{Rent::SITE_NAME}"
   end
 
-  def inbox_unread_count
-    mailbox.inbox(unread: true).count
+  def unread_count
+    mailbox.inbox(unread: true).count + mailbox.notifications(unread: true).count
   end
 
   private
