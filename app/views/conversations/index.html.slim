@@ -1,6 +1,6 @@
 = render partial: 'common/navigation', locals: { list: conversations_navbar_list }
 
-ul#conversation-list.list-group
+ul.list-group
   - @conversations.each do |conversation|
     li.list-group-item.clearfix
       .row

@@ -1,5 +1,9 @@
 $ ->
-  $('#conversation-list .mark-read').on 'ajax:success', (e, data, status, xhr) ->
+  $('.mark-read').on 'ajax:success', (e, data, status, xhr) ->
     if data.status == 'ok'
-      $link = $(this).closest('.list-group-item').find('span.subject')
+      $list = $(this).closest('.list-group-item')
+
+      $link = $list.find('span.subject')
       $link.html($link.text())
+
+      $list.find('.pull-right a').tooltip('hide').remove()

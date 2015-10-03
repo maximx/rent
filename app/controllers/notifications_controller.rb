@@ -4,16 +4,11 @@ class NotificationsController < ApplicationController
   before_action :find_notification, only: [ :show, :mark_as_read ]
 
   def index
-    @notifications = @mailbox.notifications(unread: true)
+    @notifications = @mailbox.notifications
   end
 
   def show
-    if request.xhr?
-      @notification.mark_as_read(current_user)
-      respond_to do |format|
-        format.json { render json: @notification }
-      end
-    end
+    @notification.mark_as_read(current_user)
   end
 
   def mark_as_read
