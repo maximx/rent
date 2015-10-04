@@ -36,6 +36,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to item_path(@item)
     else
+      flash[:alert] = '請檢查紅字錯誤欄位'
       render :new
     end
   end
@@ -47,6 +48,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
+      flash[:alert] = '請檢查紅字錯誤欄位'
       render :edit
     end
   end

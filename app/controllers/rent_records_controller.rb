@@ -50,8 +50,9 @@ class RentRecordsController < ApplicationController
                 " 於 #{view_context.render_datetime_period(@rent_record, :tw)}" \
                 "#{RentRecord.i18n_activerecord_attribute("aasm_state.#{@rent_record.aasm.current_state}")} " \
                 "#{@rent_record.item.name}"
+      body = item_rent_record_path(@item, @rent_record)
 
-      @rent_record.lender.notify(subject, @rent_record.id)
+      @rent_record.lender.notify(subject, body)
       redirect_to(item_rent_record_path(@item, @rent_record))
     else
       render :new
