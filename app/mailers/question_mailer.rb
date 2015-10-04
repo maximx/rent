@@ -6,12 +6,6 @@ class QuestionMailer < ApplicationMailer
   #
   #   en.question_mailer.notify_question.subject
   #
-  def notify_question(question)
-    @question = question
-    @item = question.item
-    mail to: @item.lender.email, subject: "您的出租物#{@item.name}有人提出新問題，請您回覆"
-  end
-
   def notify_question_reply(question)
     @question = question
     @item = @question.item

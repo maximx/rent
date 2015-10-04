@@ -8,7 +8,8 @@ class QuestionsController < ApplicationController
     @question.asker = current_user
 
     if @question.save
-      QuestionMailer.notify_question(@question).deliver
+      subject = "#{current_user.account}詢問#{@item.name}，請您回覆"
+      @question.item.lender.notify subject, item_path(@item)
       redirect_with_message item_path(@item), notice: '已成功提問'
     end
   end
