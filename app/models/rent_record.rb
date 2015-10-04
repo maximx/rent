@@ -66,7 +66,8 @@ class RentRecord < ActiveRecord::Base
       end
 
       if (ended_at - started_at) < item.minimum_period.days
-        errors[:ended_at] << self.class.i18n_activerecord_error("started_at.bad_period", period: "#{item.minimum_period} #{item.period}")
+        errors[:ended_at] << self.class.i18n_activerecord_error("started_at.bad_period",
+                                                                period: "#{item.minimum_period} #{item.period}")
       end
     end
   end
