@@ -31,7 +31,7 @@ class RentRecordsController < ApplicationController
         end
       end
     else
-      no_permission( item_path(@item) )
+      redirect_with_message(item_path(@item))
     end
   end
 
@@ -40,7 +40,7 @@ class RentRecordsController < ApplicationController
     if @rent_record.can_borrower_by?(current_user)
       set_start_and_end_params
     else
-      no_permission( item_path(@item) )
+      redirect_with_message( item_path(@item) )
     end
   end
 
@@ -76,7 +76,7 @@ class RentRecordsController < ApplicationController
       set_item_maps_marker
       render "reviews/new"
     else
-      no_permission( item_path(@item) )
+      redirect_with_message( item_path(@item) )
     end
   end
 
@@ -168,6 +168,6 @@ class RentRecordsController < ApplicationController
   def validates_rent_record
     @rent_record = @item.rent_records.build(rent_record_params)
     @rent_record.borrower = current_user
-    no_permission( item_path(@item) ) unless @rent_record.can_borrower_by?(current_user)
+    redirect_with_message(item_path(@item)) unless @rent_record.can_borrower_by?(current_user)
   end
 end

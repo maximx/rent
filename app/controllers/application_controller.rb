@@ -62,8 +62,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def no_permission(url)
-    flash[:alert] = '您沒有權限'
+  def redirect_with_message(url, msg = '您沒有權限')
+    flash[:alert] = msg
     redirect_to url
   end
 end

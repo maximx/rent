@@ -36,7 +36,7 @@ class PicturesController < ApplicationController
     def validate_permission
       obj = @attachment.imageable
       unless obj.is_a? RentRecordStateLog and obj.rent_record.viewable_by?(current_user)
-        no_permission(items_path)
+        redirect_with_message(items_path)
       end
     end
 end
