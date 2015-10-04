@@ -162,8 +162,7 @@ class ItemsController < ApplicationController
       result = current_user.profile.validates
 
       unless result[:errors].empty?
-        flash[:notice] = result[:message]
-        redirect_to settings_account_path
+        redirect_with_message(settings_account_path, notice: result[:message])
       end
     end
 end

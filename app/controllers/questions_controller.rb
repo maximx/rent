@@ -9,22 +9,20 @@ class QuestionsController < ApplicationController
 
     if @question.save
       QuestionMailer.notify_question(@question).deliver
-      flash[:notice] = '已成功提問'
-      redirect_to item_path(@item)
+      redirect_with_message item_path(@item), notice: '已成功提問'
     end
   end
 
   def update
     if @question.update(question_params)
       QuestionMailer.notify_question_reply(@question).deliver
-      flash[:notice] = '已成功回覆'
-      redirect_to item_path(@item)
+      redirect_with_message item_path(@item), notice: '已成功回覆'
     end
   end
 
   def destroy
     @question.destroy
-    redirect_to items_path
+    redirect_with_message items_path, notice: '已成功刪除'
   end
 
 

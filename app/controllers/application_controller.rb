@@ -62,8 +62,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def redirect_with_message(url, msg = '您沒有權限')
-    flash[:alert] = msg
+  def redirect_with_message(url, msg = { alert: '您沒有權限' })
+    msg.each { |key, val| flash[key] = val }
     redirect_to url
   end
 end

@@ -84,11 +84,9 @@ class RentRecordsController < ApplicationController
     if @rent_record.is_reviewed_by_judger?(current_user)
       review = @rent_record.review_of_judger(current_user)
       RentRecordMailer.ask_for_review(current_user, review, review.user).deliver
-      flash[:notice] = '邀請評價已寄送'
-      redirect_to dashboard_rent_records_path
+      redirect_with_message dashboard_rent_records_path, notice: '邀請評價已寄送'
     else
-      flash[:notice] = "請您先行評價"
-      redirect_to review_item_rent_record_path(@item, @rent_record)
+      redirect_with_message review_item_rent_record_path(@item, @rent_record), notice: '請您先行評價'
     end
   end
 

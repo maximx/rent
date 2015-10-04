@@ -9,8 +9,7 @@ class ProfilesController < ApplicationController
     @profile = @user.profile
 
     if @profile.update(profile_params)
-      flash[:notice] = '修改成功'
-      redirect_to settings_account_path
+      redirect_with_message settings_account_path, notice: '修改成功'
     else
       render 'settings/accounts/show'
     end
