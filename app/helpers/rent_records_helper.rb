@@ -8,14 +8,6 @@ module RentRecordsHelper
     end
   end
 
-  def render_edit_rent_record_link(rent_record)
-    if rent_record.editable_by?(current_user)
-      link_to(render_icon('edit', class: 'text-info'),
-              edit_item_rent_record_path(rent_record.item, rent_record),
-              class: "btn btn-default", title: "修改", data: { toggle: "tooltip" })
-    end
-  end
-
   def render_remitting_rent_record_link(rent_record)
     if rent_record.can_remit_by?(current_user)
       link_to render_icon('usd', class: 'text-success'),
@@ -95,7 +87,6 @@ module RentRecordsHelper
       render_delivering_rent_record_link(rent_record),
       render_renting_rent_record_link(rent_record),
       render_returning_rent_record_link(rent_record),
-      render_edit_rent_record_link(rent_record),
       render_ask_for_review_rent_record_link(rent_record),
       render_review_rent_record_link(rent_record),
       render_show_rent_record_link(rent_record),

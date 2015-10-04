@@ -13,11 +13,6 @@ crumb :rent_record do |item, rent_record|
   parent :rent_records, item
 end
 
-crumb :edit_rent_record do |item, rent_record|
-  link "修改", edit_item_rent_record_path(item, rent_record)
-  parent :rent_record, item, rent_record
-end
-
 crumb :review_rent_record do |item, rent_record|
   link "評價", review_item_rent_record_path(item, rent_record)
   parent :rent_record, item, rent_record
