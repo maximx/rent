@@ -29,6 +29,11 @@ table.table
       td 電話
       td = @item.lender.profile.phone
       td = @rent_record.borrower.profile.phone
+    - if @rent_record.remit_needed?
+      tr
+        td 匯款帳號
+        td = "#{@item.lender.profile.bank_code} #{@item.lender.profile.bank_account}"
+        td
     tr
       td 評價
       td = @rent_record.review_of_judger(@item.lender).human_rate

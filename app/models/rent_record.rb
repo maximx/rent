@@ -260,8 +260,10 @@ class RentRecord < ActiveRecord::Base
       colors[state.to_sym]
     end
 
+    # 訂金、押金需先付，或是物品為郵件寄送，且有金額需結算
     def remit_needed?
-      total_price > 0
+      ( (item_deposit + item_down_payment) > 0 ) or
+        ( total_price > 0 and delivery_needed? )
     end
 
     def delivery_needed?
