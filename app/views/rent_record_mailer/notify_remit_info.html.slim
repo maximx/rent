@@ -1,9 +1,0 @@
-p
-  | #{@rent_record.borrower.account}您好，您於#{render_datetime(@rent_record.updated_at, :tw)}
-  | 預約租借 #{link_to(@item.name, item_url(@item))}，
-  br/
-  | 請於24小時內將金額 #{@rent_record.currency_total_price}元 匯至∶
-  br/
-  | 銀行代碼∶ #{@bank_code}
-  br/
-  | 銀行帳號∶ #{@bank_account}

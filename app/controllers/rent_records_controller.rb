@@ -46,27 +46,10 @@ class RentRecordsController < ApplicationController
 
   def create
     if @rent_record.save
-      subject = "#{@rent_record.borrower.account} " \
-                " 於 #{view_context.render_datetime_period(@rent_record, :tw)}" \
-                "#{RentRecord.i18n_activerecord_attribute("aasm_state.#{@rent_record.aasm.current_state}")} " \
-                "#{@rent_record.item.name}"
-      body = item_rent_record_path(@item, @rent_record)
-
-      @rent_record.lender.notify(subject, body)
-      redirect_to(item_rent_record_path(@item, @rent_record))
-    else
-      render :new
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @rent_record.update(rent_record_params)
+      notify_lender_rent_record_booking
       redirect_to item_rent_record_path(@item, @rent_record)
     else
-      render :edit
+      render :new
     end
   end
 
@@ -167,5 +150,17 @@ class RentRecordsController < ApplicationController
     @rent_record = @item.rent_records.build(rent_record_params)
     @rent_record.borrower = current_user
     redirect_with_message(item_path(@item)) unless @rent_record.can_borrower_by?(current_user)
+  end
+
+  def notify_lender_rent_record_booking
+    subject = [
+      @rent_record.borrower.account,
+      '於',
+      view_context.render_datetime_period(@rent_record, :tw),
+      RentRecord.i18n_activerecord_attribute("aasm_state.#{@rent_record.aasm.current_state}"),
+      @rent_record.item.name
+    ].join(' ')
+    body = item_rent_record_path(@item, @rent_record)
+    @rent_record.lender.notify(subject, body)
   end
 end

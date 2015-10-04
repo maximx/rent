@@ -1,17 +1,6 @@
 class RentRecordMailer < ApplicationMailer
   add_template_helper RentRecordsHelper
 
-  def notify_remit_info(rent_record)
-    @rent_record = rent_record
-    @item = @rent_record.item
-
-    lender = rent_record.lender
-    @bank_code = lender.profile.bank_code
-    @bank_account = lender.profile.bank_account
-
-    mail to: @rent_record.borrower.email, subject: "您已預約承租#{@item.name},請於24小時內完成匯款"
-  end
-
   def ask_for_review(judger, review, user)
     @judger = judger
     @review = review

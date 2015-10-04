@@ -16,7 +16,6 @@ class RentRecord < ActiveRecord::Base
 
   before_save :set_item_attributes, :set_ended_at
   after_save :save_booking_state_log
-  after_save :send_remit_info, if: :remit_needed?
 
   scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
@@ -180,6 +179,16 @@ class RentRecord < ActiveRecord::Base
     reviews.where(judger_id: user.id).exists?
   end
 
+  # 訂金、押金需先付，或是物品為郵件寄送，且有金額需結算
+  def remit_needed?
+    ( (item_deposit + item_down_payment) > 0 ) or
+      ( total_price > 0 and delivery_needed? )
+  end
+
+  def delivery_needed?
+    deliver.name != '面交自取'
+  end
+
   def lender
     self.item.lender
   end
@@ -201,10 +210,6 @@ class RentRecord < ActiveRecord::Base
 
   def pending_states
     all_permitted_states - rent_record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
-  end
-
-  def send_remit_info
-    RentRecordMailer.notify_remit_info(self).deliver
   end
 
   protected
@@ -259,15 +264,5 @@ class RentRecord < ActiveRecord::Base
         withdrawed: :gray, returned: :red
       }
       colors[state.to_sym]
-    end
-
-    # 訂金、押金需先付，或是物品為郵件寄送，且有金額需結算
-    def remit_needed?
-      ( (item_deposit + item_down_payment) > 0 ) or
-        ( total_price > 0 and delivery_needed? )
-    end
-
-    def delivery_needed?
-      deliver.name != '面交自取'
     end
 end

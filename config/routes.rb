@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :questions, only: [ :create, :update, :destroy ]
     resources :pictures, only: [ :destroy ]
 
-    resources :rent_records, except: [ :destroy ] do
+    resources :rent_records, except: [ :edit, :update, :destroy ] do
       resources :reviews, only: [ :create ]
 
       member do
