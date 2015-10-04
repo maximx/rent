@@ -212,6 +212,16 @@ class RentRecord < ActiveRecord::Base
     all_permitted_states - rent_record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
   end
 
+  def notify_booking_subject
+    [
+      borrower.account,
+      '於',
+      ApplicationController.helpers.render_datetime_period(self, :tw),
+      self.class.i18n_activerecord_attribute("aasm_state.#{aasm.current_state}"),
+      item.name
+    ].join(' ')
+  end
+
   protected
 
     def set_price

@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     @review.rent_record = @rent_record
 
     if @review.save
-      redirect_to item_rent_records_path(@item)
+      redirect_to item_rent_record_path(@item, @rent_record)
     else
       render :new
     end

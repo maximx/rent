@@ -28,6 +28,17 @@ class Review < ActiveRecord::Base
     self.rent_record.item
   end
 
+  def notify_ask_for_review_subject
+    [
+      judger.account,
+      '對',
+      item.name,
+      '承租評價為',
+      human_rate,
+      '並邀請您為他評價'
+    ].join(' ')
+  end
+
   private
 
     def set_user_and_role
@@ -39,5 +50,4 @@ class Review < ActiveRecord::Base
         self.user = rent_record.lender
       end
     end
-
 end

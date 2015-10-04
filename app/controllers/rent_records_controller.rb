@@ -46,7 +46,7 @@ class RentRecordsController < ApplicationController
 
   def create
     if @rent_record.save
-      notify_lender_rent_record_booking
+      @rent_record.lender.notify @rent_record.notify_booking_subject, item_rent_record_path(@item, @rent_record)
       redirect_to item_rent_record_path(@item, @rent_record)
     else
       render :new
@@ -66,8 +66,8 @@ class RentRecordsController < ApplicationController
   def ask_for_review
     if @rent_record.is_reviewed_by_judger?(current_user)
       review = @rent_record.review_of_judger(current_user)
-      RentRecordMailer.ask_for_review(current_user, review, review.user).deliver
-      redirect_with_message dashboard_rent_records_path, notice: '邀請評價已寄送'
+      review.user.notify review.notify_ask_for_review_subject, review_item_rent_record_path(@item, @rent_record)
+      redirect_with_message :back, notice: '邀請評價通知已寄送'
     else
       redirect_with_message review_item_rent_record_path(@item, @rent_record), notice: '請您先行評價'
     end
@@ -150,17 +150,5 @@ class RentRecordsController < ApplicationController
     @rent_record = @item.rent_records.build(rent_record_params)
     @rent_record.borrower = current_user
     redirect_with_message(item_path(@item)) unless @rent_record.can_borrower_by?(current_user)
-  end
-
-  def notify_lender_rent_record_booking
-    subject = [
-      @rent_record.borrower.account,
-      '於',
-      view_context.render_datetime_period(@rent_record, :tw),
-      RentRecord.i18n_activerecord_attribute("aasm_state.#{@rent_record.aasm.current_state}"),
-      @rent_record.item.name
-    ].join(' ')
-    body = item_rent_record_path(@item, @rent_record)
-    @rent_record.lender.notify(subject, body)
   end
 end
