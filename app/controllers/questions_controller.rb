@@ -30,15 +30,15 @@ class QuestionsController < ApplicationController
 
   private
 
-  def question_params
-    params.require(:question).permit(:content, :reply)
-  end
+    def question_params
+      params.require(:question).permit(:content, :reply)
+    end
 
-  def find_item
-    @item = Item.find(params[:item_id])
-  end
+    def find_item
+      @item = Item.find(params[:item_id])
+    end
 
-  def find_question
-    @question = @item.questions.find(params[:id])
-  end
+    def find_question
+      @question = @item.questions.find(params[:id])
+    end
 end
