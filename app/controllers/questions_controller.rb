@@ -6,17 +6,20 @@ class QuestionsController < ApplicationController
   def create
     @question = @item.questions.build(question_params)
     @question.asker = current_user
-    @question.save
 
-    flash[:notice] = "已成功提問"
-
-    redirect_to item_path(@item)
+    if @question.save
+      QuestionMailer.notify_question(@question).deliver
+      flash[:notice] = '已成功提問'
+      redirect_to item_path(@item)
+    end
   end
 
   def update
-    @question.update(question_params)
-    flash[:notice] = "已成功回覆"
-    redirect_to item_path(@item)
+    if @question.update(question_params)
+      QuestionMailer.notify_question_reply(@question).deliver
+      flash[:notice] = '已成功回覆'
+      redirect_to item_path(@item)
+    end
   end
 
   def destroy
