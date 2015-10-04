@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
 
     if @question.save
       subject = "#{current_user.account}詢問#{@item.name}，請您回覆"
-      @question.item.lender.notify subject, item_path(@item)
+      @item.lender.notify subject, item_path(@item)
       redirect_with_message item_path(@item), notice: '已成功提問'
     end
   end
