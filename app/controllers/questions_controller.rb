@@ -16,7 +16,8 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      QuestionMailer.notify_question_reply(@question).deliver
+      subject = "#{current_user.account}已回覆#{@item.name}的問題，請檢視"
+      @question.asker.notify subject, item_path(@item)
       redirect_with_message item_path(@item), notice: '已成功回覆'
     end
   end
@@ -25,7 +26,6 @@ class QuestionsController < ApplicationController
     @question.destroy
     redirect_with_message items_path, notice: '已成功刪除'
   end
-
 
   private
 
