@@ -1,0 +1,9 @@
+您有新通知∶
+
+===============================================
+
+<%= @notification.subject.html_safe? ? @notification.subject : strip_tags(@notification.subject) %>
+
+-----------------------------------------------
+
+請至<%= @notification.body %>查看詳細資訊
