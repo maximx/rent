@@ -8,7 +8,11 @@ class MessagesController < ApplicationController
     result = { status: 'error', message: '請填寫訊息內容' } if message_params[:body].blank?
 
     unless result
-      message = current_user.send_message(@item.lender, message_body, subject)
+      subject = "#{current_user.account} 與您聯繫 - #{@item.name}"
+      body = [ '出租物∶', view_context.link_to(@item.name, item_url(@item)), '<br />',
+               "<p>#{message_params[:body]}</p>" ].join
+      message = current_user.send_message(@item.lender, body, subject)
+
       if message.id
         result = { status: 'ok', message: '成功送出訊息' }
       else
@@ -29,14 +33,5 @@ class MessagesController < ApplicationController
 
     def find_item
       @item = Item.find(message_params[:item_id])
-    end
-
-    def message_body
-      view_context.content_tag(:p, view_context.link_to(@item.name, item_url(@item))) +
-        view_context.content_tag(:p, message_params[:body])
-    end
-
-    def subject
-      "#{current_user.account}向您聯繫(#{@item.name})"
     end
 end
