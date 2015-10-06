@@ -3,6 +3,6 @@ html
   head
     meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
   body
-    h1 您有新通知:
+    h1 您有新通知
     p = @notification.subject.html_safe? ? @notification.subject : strip_tags(@notification.subject)
     p 請#{link_to('至此', @notification.body)}查看詳細資訊
