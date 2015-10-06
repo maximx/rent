@@ -8,16 +8,14 @@ class QuestionsController < ApplicationController
     @question.asker = current_user
 
     if @question.save
-      subject = "#{current_user.account}詢問#{@item.name}，請您回覆"
-      @item.lender.notify subject, item_path(@item)
+      @item.lender.notify @question.notify_new_question_subject, item_path(@item)
       redirect_with_message item_path(@item), notice: '已成功提問'
     end
   end
 
   def update
     if @question.update(question_params)
-      subject = "#{current_user.account}已回覆#{@item.name}的問題，請檢視"
-      @question.asker.notify subject, item_path(@item)
+      @question.asker.notify @question.notify_reply_question_subject, item_path(@item)
       redirect_with_message item_path(@item), notice: '已成功回覆'
     end
   end
