@@ -7,5 +7,5 @@ zh-TW:
     notification_mailer:
       subject: "通知∶%{subject}"
     message_mailer:
-      subject_new: "新訊息∶%{subject}"
-      subject_reply: "訊息回覆∶%{subject}"
+      subject_new: "訊息∶%{subject}"
+      subject_reply: "回覆∶%{subject}"

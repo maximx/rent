@@ -1,10 +1,8 @@
-You have a new message: <%= @subject %>
+新訊息∶ <%= @subject %>
 ===============================================
 
-You have received a new message:
-
------------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
+
 -----------------------------------------------
 
-Visit <%= root_url %> and go to your inbox for more info.
+請至<%= conversation_url @message.conversation %>查看詳細資訊
