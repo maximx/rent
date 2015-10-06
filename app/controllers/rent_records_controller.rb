@@ -46,7 +46,7 @@ class RentRecordsController < ApplicationController
 
   def create
     if @rent_record.save
-      @rent_record.lender.notify @rent_record.notify_booking_subject, item_rent_record_path(@item, @rent_record)
+      @rent_record.lender.notify @rent_record.notify_booking_subject, item_rent_record_url(@item, @rent_record)
       redirect_to item_rent_record_path(@item, @rent_record)
     else
       render :new
@@ -66,7 +66,7 @@ class RentRecordsController < ApplicationController
   def ask_for_review
     if @rent_record.is_reviewed_by_judger?(current_user)
       review = @rent_record.review_of_judger(current_user)
-      review.user.notify review.notify_ask_for_review_subject, review_item_rent_record_path(@item, @rent_record)
+      review.user.notify review.notify_ask_for_review_subject, review_item_rent_record_url(@item, @rent_record)
       redirect_with_message :back, notice: '邀請評價通知已寄送'
     else
       redirect_with_message review_item_rent_record_path(@item, @rent_record), notice: '請您先行評價'
