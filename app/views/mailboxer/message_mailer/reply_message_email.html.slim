@@ -3,8 +3,7 @@ html
   head
     meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
   body
-    h1 未讀回覆
-    p = @subject
+    h1 回覆: #{@subject}
     blockquote
       p = raw @message.body
     p 請#{link_to('至此', conversation_url(@message.conversation))}查看詳細資訊

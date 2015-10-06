@@ -1,4 +1,4 @@
-新訊息∶ <%= @subject %>
+訊息∶ <%= @subject %>
 ===============================================
 
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
