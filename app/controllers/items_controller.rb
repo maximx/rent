@@ -3,13 +3,12 @@ class ItemsController < ApplicationController
   include UsersReviewsCount
   include SortPaginate
 
-  before_action :login_required, except: [ :index, :show, :search, :reviews ]
+  before_action :login_required, except: [ :index, :show, :search, :questions ]
   before_action :validates_profile, only: [ :new, :create, :edit, :update ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
-  before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :reviews ]
-  before_action :find_reviews, only: [ :show, :reviews ]
-  before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar, :reviews ]
-  before_action :set_item_meta_tags, :set_item_maps_marker, only: [ :show ]
+  before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
+  before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
+  before_action :set_item_meta_tags, :set_item_maps_marker, :build_rent_record, :find_item_disabled_dates, only: [ :show, :questions ]
   before_action :set_pictures_attrs, only: [ :create, :update ]
 
   def index
@@ -20,9 +19,11 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
+  end
+
+  def questions
     @question = @item.questions.build
-    @rent_record = @item.rent_records.build
-    @disabled_dates = @item.booked_dates
   end
 
   def new
@@ -116,10 +117,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def reviews
-    render partial: "reviews/reviews_list", layout: false, locals: { reviews: @reviews }
-  end
-
   private
 
     def item_params
@@ -154,8 +151,12 @@ class ItemsController < ApplicationController
       )
     end
 
-    def find_reviews
-      @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
+    def find_item_disabled_dates
+      @disabled_dates = @item.booked_dates
+    end
+
+    def build_rent_record
+      @rent_record = @item.rent_records.build
     end
 
     def validates_profile

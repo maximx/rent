@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
     get :search, on: :collection
     member do
-      get :reviews
+      get :questions
       post :collect
       delete :uncollect
       get :calendar

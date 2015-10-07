@@ -1,0 +1,21 @@
+- breadcrumb :item, item
+
+section
+  = render partial: 'items/item_info_container', locals: { item: item, rent_record: rent_record, disabled_dates: disabled_dates }
+
+  .row
+    .col-lg-8
+      = render_item_reviews_questions(item)
+      = yield
+
+  #map
+
+  .hide
+    = form_for item, url: new_item_rent_record_path(item), method: :get, html: { id: "new_rent_record_form" } do
+      = hidden_field_tag :rent_record_started_at
+      = hidden_field_tag :rent_record_ended_at
+
+  javascript:
+    $(document).ready(function() {
+      buildGoogleMap( #{raw maps.to_json} );
+    });
