@@ -2,21 +2,27 @@
 
 .item-header
   .row
-    .col-lg-8
+    .col-md-8
       h3.item-title = item.name
-    - if params[:controller] == 'items'
-      .col-lg-4
+
+    .col-md-4
+      - if items_controller?
         #rent.panel.panel-default data-spy="affix"
           .panel-heading.clearfix
-            .price #{item.currency_price} 元
-            .period = item.period
-          .panel-body
+            .hidden-sm.hidden-xs
+              .price #{item.currency_price} 元
+              .period = item.period
+
+            h4.hidden-lg.hidden-md.text-center
+              = link_to '預約承租', new_item_rent_record_path(item, rent_record), class: 'text-success'
+
+          .panel-body.hidden-sm.hidden-xs
             = render partial: "rent_records/form", locals: { item: item, rent_record: rent_record, disabled_dates: disabled_dates }
             .text-right = render_collect_item_links(item, :remote)
 
 .item-show-container
   .row
-    .col-lg-8
+    .col-md-8
       dl.dl-horizontal
         dd
           = link_to user_path(item.lender) do
