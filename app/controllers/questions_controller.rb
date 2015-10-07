@@ -9,14 +9,14 @@ class QuestionsController < ApplicationController
 
     if @question.save
       @item.lender.notify @question.notify_new_question_subject, item_url(@item)
-      redirect_with_message item_path(@item), notice: '已成功提問'
+      redirect_with_message questions_item_path(@item), notice: '已成功提問'
     end
   end
 
   def update
     if @question.update(question_params)
       @question.asker.notify @question.notify_reply_question_subject, item_url(@item)
-      redirect_with_message item_path(@item), notice: '已成功回覆'
+      redirect_with_message questions_item_path(@item), notice: '已成功回覆'
     end
   end
 
