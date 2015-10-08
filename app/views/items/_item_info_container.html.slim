@@ -49,6 +49,5 @@
         dt 描述
         dd = raw item.description
 
-        dd = link_to '+查看日曆+', new_item_rent_record_path(item, anchor: 'calendar')
-        - unless item.lender == current_user
-          dd = render partial: 'messages/new', locals: { item: item }
+        dd = render_item_calendar_link(item)
+        dd = render partial: 'messages/new', locals: { item: item } unless item.editable_by? current_user

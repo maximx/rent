@@ -35,6 +35,12 @@ module ItemsHelper
     end
   end
 
+  def render_item_calendar_link(item)
+    url = item.editable_by?(current_user) ?
+            dashboard_item_records_path(item) : new_item_rent_record_path(item, anchor: 'calendar')
+    link_to '+查看日曆+', url
+  end
+
   def render_items_view_links
     links = []
     current_view = ( ['list', 'grid'].include?(params[:view]) ) ? params[:view] : 'grid'
