@@ -17,6 +17,16 @@ class Dashboard::ItemsController < ApplicationController
     render 'items/index'
   end
 
+  def rent_records
+    @item = Item.find params[:id]
+    @rent_records = @item.rent_records.actived.rencent.page(params[:page])
+    @rent_record_state_log = unless @rent_records.empty?
+                               @rent_records.first.rent_record_state_logs.build
+                             else
+                               RentRecordStateLog.new
+                             end
+  end
+
   private
 
     def find_items

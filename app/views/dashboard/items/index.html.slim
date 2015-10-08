@@ -23,7 +23,7 @@
           td = render_renting_checkbox(@rent_records_count[[item.id,"renting"]])
           td
             .btn-group
-              = link_to(render_icon("list-alt", class: "text-primary"), dashboard_item_records_path(item),
+              = link_to(render_icon('list-alt', class: 'text-primary'), rent_records_dashboard_item_path(item),
                         class: "btn btn-default rent-records-list", title: "出租紀錄", data: { toggle: "tooltip" })
               = link_to(render_icon("edit", class: "text-success"), edit_item_path(item),
                         class: "btn btn-default", title: "修改", data: { toggle: "tooltip" })

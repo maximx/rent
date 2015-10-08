@@ -55,9 +55,8 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :items, only: [ :index, :show ] do
-      resources :records, only: :index
-
       get :wish, on: :collection
+      get :rent_records, on: :member
     end
     resource :rent_records, only: [ :show ] do
       get :calendar, on: :member
