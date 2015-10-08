@@ -1,6 +1,6 @@
 .row
-  .col-md-3
-    = render partial: 'users/aside', locals: { user: user, total_reviews: total_reviews, items: items }
+  .col-md-3 = render partial: 'users/aside', locals: { user: user, total_reviews: total_reviews, items: items }
+
   .col-md-9
     h2.user-account.clearfix
       span.text-muted 您好，我是#{ user.account.camelize }
@@ -8,10 +8,10 @@
     - if current_user == user
       = link_to(render_icon_with_text('pencil', '編輯個人資料'), settings_account_path)
 
-    - unless profile.description.to_s == ''
+    - unless profile.description.blank?
       .panel.panel-default
         .panel-heading 描述
         .panel-body = raw profile.description
 
-    = render_user_reviews_follows user
+    = render_user_reviews_follows(user)
     .tab-content = yield

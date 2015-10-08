@@ -1,4 +1,6 @@
-- unless lender_reviews.empty? && borrower_reviews.empty?
+= render_default_content(lender_reviews + borrower_reviews, '目前無評價')
+
+- unless lender_reviews.empty? and borrower_reviews.empty?
   - unless lender_reviews.empty?
     .reviews-container
       h4 承租者評價 <small>(#{ grouped_reviews_count[Review.user_roles["lender"]] })</small>
