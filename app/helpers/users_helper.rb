@@ -13,9 +13,9 @@ module UsersHelper
   end
 
   def render_user_reviews_follows(user)
-    render_link_li class: 'nav nav-tabs nav-justified', role: 'tablist' do |li|
-      li << [ '評價', user_path(user) ]
-      li << [ '關注', follows_user_path(user) ]
+    render_link_li class: 'nav nav-tabs nav-justified anchor', role: 'tablist', id: 'reviews-follows' do |li|
+      li << [ '評價', user_path(user, anchor: 'reviews-follows') ]
+      li << [ '關注', follows_user_path(user, anchor: 'reviews-follows') ]
     end
   end
 end

@@ -1,4 +1,3 @@
 = render layout: 'users/show', locals: { user: @user, profile: @profile, total_reviews: @total_reviews, items: @items } do
-  #reviews
-    = render partial: 'users/reviews', locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
+  = render partial: 'users/reviews', locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
                                                  lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }
