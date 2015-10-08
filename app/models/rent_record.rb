@@ -84,7 +84,7 @@ class RentRecord < ActiveRecord::Base
   end
 
   def borrower_not_lender
-    errors[:started_at] << '您沒有權限' unless can_borrower_by?(borrower)
+    errors[:started_at] << '您沒有權限' unless rentable_by?(borrower)
   end
 
   #gmaps4rails
@@ -127,8 +127,8 @@ class RentRecord < ActiveRecord::Base
     user && borrower == user && booking?
   end
 
-  def can_borrower_by?(user)
-    user and user != lender
+  def rentable_by?(user)
+    item.rentable_by? user
   end
 
   #可評價

@@ -3,11 +3,10 @@ class RentRecordsController < ApplicationController
 
   before_action :login_required, except: [ :index ]
   before_action :find_item, :find_navbar_categories
-  before_action :validates_rent_record, only: [ :create ]
-  before_action :find_user_rent_record, only: [ :edit, :update ]
+  before_action :validates_item_rentable, only: [ :new, :create ]
   before_action :find_item_rent_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
-  before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create, :edit, :update ]
+  before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create ]
   before_action :set_attachment_attrs, only: [ :renting ]
 
   def index
@@ -42,14 +41,13 @@ class RentRecordsController < ApplicationController
 
   def new
     @rent_record = @item.rent_records.build
-    if @rent_record.can_borrower_by?(current_user)
-      set_start_and_end_params
-    else
-      redirect_with_message( item_path(@item) )
-    end
+    set_start_and_end_params
   end
 
   def create
+    @rent_record = @item.rent_records.build(rent_record_params)
+    @rent_record.borrower = current_user
+
     if @rent_record.save
       @rent_record.lender.notify @rent_record.notify_booking_subject, item_rent_record_url(@item, @rent_record)
       redirect_to item_rent_record_path(@item, @rent_record)
@@ -130,6 +128,10 @@ class RentRecordsController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
+  def validates_item_rentable
+    redirect_with_message(item_path(@item)) unless @item.rentable_by?(current_user)
+  end
+
   def find_user_rent_record
     @rent_record = current_user.rent_records.find(params[:id])
   end
@@ -149,11 +151,5 @@ class RentRecordsController < ApplicationController
   def set_start_and_end_params
     @rent_record["started_at"] = params[:rent_record_started_at]
     @rent_record["ended_at"] = params[:rent_record_ended_at]
-  end
-
-  def validates_rent_record
-    @rent_record = @item.rent_records.build(rent_record_params)
-    @rent_record.borrower = current_user
-    redirect_with_message(item_path(@item)) unless @rent_record.can_borrower_by?(current_user)
   end
 end
