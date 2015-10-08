@@ -31,7 +31,12 @@ class RentRecordsController < ApplicationController
         end
       end
     else
-      redirect_with_message(item_path(@item))
+      respond_to do |format|
+        format.html do
+          ( request.xhr? ) ? render(text: '您沒有權限') : redirect_with_message(item_path(@item))
+        end
+        format.pdf { redirect_with_message(item_path(@item)) }
+      end
     end
   end
 

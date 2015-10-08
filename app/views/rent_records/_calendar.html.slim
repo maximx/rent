@@ -50,7 +50,7 @@ javascript:
       selectOverlap: false,
       select: function(start, end) {
         if (start < moment()) {
-          alert("不能選擇過去");
+          alert('不能選擇過去');
           return;
         }
         $started_obj.val(start.format(calendar_format));

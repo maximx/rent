@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
     @profile = @user.profile
 
     if @profile.update(profile_params)
-      redirect_with_message settings_account_path, notice: '修改成功'
+      redirect_with_message user_path(@user), notice: '修改成功'
     else
       render 'settings/accounts/show'
     end
