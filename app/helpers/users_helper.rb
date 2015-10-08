@@ -11,4 +11,11 @@ module UsersHelper
               remote: is_remote?(type), method: :put, class: 'btn btn-default follow-user'
     end
   end
+
+  def render_user_reviews_follows(user)
+    render_link_li class: 'nav nav-tabs nav-justified', role: 'tablist' do |li|
+      li << [ '評價', user_path(user) ]
+      li << [ '關注', follows_user_path(user) ]
+    end
+  end
 end

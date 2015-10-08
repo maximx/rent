@@ -1,22 +1,30 @@
 class UsersController < ApplicationController
   before_action :login_required, only: [ :follow, :unfollow ]
-  before_action :find_user, :find_total_reviews, :find_profile, :set_user_meta_tags, :find_user_items
+  before_action :find_user
+  before_action :find_total_reviews, :find_profile, :set_user_meta_tags, :find_user_items, only: [ :show, :follows ]
 
   def show
-    @followings = @user.following
     @grouped_reviews_count = @user.reviews.group(:user_role).count
     @lender_reviews = @user.reviews_of('lender').page(params[:page])
     @borrower_reviews = @user.reviews_of('borrower').page(params[:page])
   end
 
   def lender_reviews
-    reviews = @user.reviews_of("lender").page(params[:page])
-    render partial: "reviews/reviews_list", layout: false, locals: { reviews: reviews }
+    if request.xhr?
+      reviews = @user.reviews_of("lender").page(params[:page])
+      render partial: "reviews/reviews_list", layout: false, locals: { reviews: reviews }
+    end
   end
 
   def borrower_reviews
-    reviews = @user.reviews_of("borrower").page(params[:page])
-    render partial: "reviews/reviews_list", layout: false, locals: { reviews: reviews }
+    if request.xhr?
+      reviews = @user.reviews_of("borrower").page(params[:page])
+      render partial: "reviews/reviews_list", layout: false, locals: { reviews: reviews }
+    end
+  end
+
+  def follows
+    @followings = @user.following
   end
 
   def follow

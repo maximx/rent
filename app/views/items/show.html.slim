@@ -1,2 +1,2 @@
 = render layout: 'items/show', locals: { item: @item, rent_record: @rent_record, disabled_dates: @disabled_dates, maps: @maps } do
-  #reviews.tab-pane.active = render partial: 'items/reviews', locals: { item: @item, reviews: @reviews }
+  #reviews = render partial: 'items/reviews', locals: { item: @item, reviews: @reviews }

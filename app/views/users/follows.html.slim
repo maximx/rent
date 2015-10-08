@@ -1,0 +1,3 @@
+= render layout: 'users/show', locals: { user: @user, profile: @profile, total_reviews: @total_reviews, items: @items } do
+  #follows
+    = render partial: 'users/following', locals: { followings: @followings }
