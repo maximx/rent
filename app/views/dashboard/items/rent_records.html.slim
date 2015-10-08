@@ -7,5 +7,6 @@ h3.item-title
 
 = render partial: 'rent_records/rent_record_list', locals: { rent_records: @rent_records }
 = render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
+= render partial: 'rent_records/calendar', locals: { event_sources_path: @event_sources_path }
 
 = render_default_content(@rent_records, '無承租紀錄')

@@ -4,6 +4,7 @@ class Dashboard::ItemsController < ApplicationController
 
   before_action :login_required
   before_action :find_items, only: [ :index ]
+  before_action :find_item, :set_calendar_event_sources_path, only: [ :rent_records ]
 
   def index
     @rent_records_count = @items.joins(:rent_records).group(:item_id, :aasm_state).count
@@ -18,7 +19,6 @@ class Dashboard::ItemsController < ApplicationController
   end
 
   def rent_records
-    @item = Item.find params[:id]
     @rent_records = @item.rent_records.actived.rencent.page(params[:page])
     @rent_record_state_log = unless @rent_records.empty?
                                @rent_records.first.rent_record_state_logs.build
@@ -40,5 +40,13 @@ class Dashboard::ItemsController < ApplicationController
       else
         Item.overlaps_types.first.second
       end
+    end
+
+    def find_item
+      @item = Item.find params[:id]
+    end
+
+    def set_calendar_event_sources_path
+      @event_sources_path = calendar_item_path(@item, format: :json)
     end
 end
