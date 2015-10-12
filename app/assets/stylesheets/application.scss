@@ -22,7 +22,10 @@
 @import "mixins/variables";
 
 
-body { padding-top: 51px; }
+body {
+  padding-top: 51px;
+  &.root { padding-top: 0; }
+}
 ul { list-style: none; }
 p.description { font-size: 15px; }
 
