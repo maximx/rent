@@ -206,7 +206,10 @@ nav.navbar { margin-bottom: 10px; }
 
 #user-navigation {
   a.login { color: $brand-primary; }
-  a.conversations-icon { font-size: 24px; }
+  a.conversations-icon {
+    color: $gray-light;
+    font-size: 24px;
+  }
 }
 
 /*pagination*/
