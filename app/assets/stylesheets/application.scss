@@ -212,17 +212,17 @@ nav.navbar { margin-bottom: 10px; }
 }
 
 .root {
-  li {
-    &.open > a {
-      background: none;
-      &:hover { background: none; }
-    }
+  #user-navigation {
+    li {
+      &.open > a {
+        background: none;
+        &:hover { background: none; }
+      }
 
-    > a {
-      &:hover { background: none; }
-      &.conversations-icon { color: $body-bg; }
-
-      .caret { color: $body-bg; }
+      > a {
+        &.conversations-icon, &.login, .caret { color: $body-bg; }
+        &:hover { background: none; }
+      }
     }
   }
 }
