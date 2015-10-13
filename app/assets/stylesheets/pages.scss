@@ -1,13 +1,49 @@
+@import "mixins/variables";
+
 .site-description {
   position: relative;
-  height: 720px;
+  height: $carousel-height;
+
+  #video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+
+    video {
+      position: absolute;
+      bottom: 0;
+      width: auto;
+      height: 100%;
+    }
+  }
 
   .search-form-container {
     position: absolute;
     margin: 0 auto;
-    width: 800px;
-    bottom: 200px;
+    width: 90%;
+    bottom: $navbar-height;
     right: 0;
     left: 0;
+  }
+}
+
+@media (min-width: $screen-sm) {
+  .site-description {
+    height: $modal-md;
+
+    .search-form-container {
+      width: 75%;
+      bottom: 200px;
+    }
+  }
+}
+
+@media (min-width: 1100px) {
+  .site-description #video-background video {
+    height: auto;
+    width: 100%;
   }
 }
