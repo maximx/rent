@@ -220,7 +220,7 @@ nav.navbar { margin-bottom: 10px; }
       }
 
       > a {
-        &.conversations-icon, &.login, .caret { color: $body-bg; }
+        &.conversations-icon, &.signup, &.login, .caret { color: $body-bg; }
         &:hover { background: none; }
       }
     }
