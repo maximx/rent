@@ -12,12 +12,12 @@ html lang="zh"
 
   body
     = render partial: "common/header"
+    = render_navigation
 
     #site-content.container-fluid role="main"
       = render_notice(notice)
       = render_alert(alert)
       = raw breadcrumbs style: :bootstrap, autoroot: false
-      = render_navigation
       = yield
 
     = render partial: "common/footer"

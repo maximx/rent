@@ -59,6 +59,10 @@ a {
 
 //header
 nav.navbar { margin-bottom: 10px; }
+nav.navbar.navbar-sub {
+  min-height: 30px;
+  ul.nav.navbar-nav > li > a { padding-top: 10px; padding-bottom: 10px; }
+}
 
 .site-header {
 
