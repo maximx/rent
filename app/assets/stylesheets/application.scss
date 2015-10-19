@@ -98,17 +98,14 @@ nav.navbar { margin-bottom: 10px; }
   background-color: $gray-base;
 
   .footer-links {
+    color: $gray-85;
+
     > li {
       padding: 10px 20px;
       margin-right: 10px;
       float: left;
       a { color: $gray-85; }
     }
-  }
-  .footer-copyright {
-    color: $gray-85;
-    text-align: right;
-    padding: 20px;
   }
 }
 

@@ -1,11 +1,12 @@
 footer.site-footer
   .container
     .row
-      ul.footer-links.col-lg-6
+      ul.footer-links
         li
-          h5 = link_to "About", about_path
+          h5 = link_to "關於", about_path
         li
-          h5 = link_to "Terms", terms_path
+          h5 = link_to "使用條款", terms_path
         li
-          h5 = link_to "Privacy", privacy_path
-      .footer-copyright.col-lg-6 © #{Time.now.year} Rent. All rights reserved.
+          h5 = link_to "隱私權政策", privacy_path
+      ul.footer-links.pull-right
+        li © #{Time.now.year} Rent. All rights reserved.
