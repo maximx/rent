@@ -1,7 +1,7 @@
 module PagesHelper
   def render_root_navbar_class
-    default_class = pages_index_action? ? '' : ' navbar-default'
-    "navbar navbar-fixed-top" + default_class
+    default_class = pages_index_action? ? '' : ' navbar-fixed-top'
+    "navbar navbar-default " + default_class
   end
 
   def pages_index_action?

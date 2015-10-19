@@ -212,9 +212,15 @@ nav.navbar { margin-bottom: 10px; }
 }
 
 .root {
+  .navbar-default {
+    background: none;
+    border: none;
+    .icon-bar { background-color: $body-bg; }
+  }
+
   #user-navigation {
     li {
-      &.open > a {
+      &.active > a, &.open > a {
         background: none;
         &:hover { background: none; }
       }
