@@ -5,7 +5,8 @@ module ApplicationHelper
       keywords: Rent::KEYWORDS,
       description: Rent::DESCRIPTION,
       og: { site_name: Rent::SITE_NAME, type: "website" },
-      reverse: true
+      reverse: true,
+      viewport: "width=device-width, initial-scale=1"
     )
   end
 
