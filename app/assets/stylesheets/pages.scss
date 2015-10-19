@@ -30,7 +30,7 @@
   }
 }
 
-@media (min-width: $screen-xs) {
+@media screen and (min-width: $screen-xs) {
   .root-background {
     height: $carousel-height;
 
@@ -47,7 +47,7 @@
   }
 }
 
-@media (min-width: $screen-sm) {
+@media screen and (min-width: $screen-sm) {
   .root-background {
     height: $modal-md;
 

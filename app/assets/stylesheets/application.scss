@@ -193,7 +193,7 @@ nav.navbar { margin-bottom: 10px; }
 }
 
 /*navbar*/
-@media (min-width: $grid-float-breakpoint) {
+@media screen and (min-width: $grid-float-breakpoint) {
   #user-navigation {
     padding-right: 20px;
 
