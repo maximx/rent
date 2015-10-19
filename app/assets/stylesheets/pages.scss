@@ -2,23 +2,13 @@
 
 .site-description {
   position: relative;
-  height: $carousel-height;
-
-  #video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-
-    video {
-      position: absolute;
-      bottom: 0;
-      width: auto;
-      height: 100%;
-    }
-  }
+  height: $modal-sm;
+  width: 100%;
+  background-image: url("root");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: $body-bg;
+  background-position: 50% 50%;
 
   .search-form-container {
     position: absolute;
@@ -30,20 +20,24 @@
   }
 }
 
+@media (min-width: $screen-xs) {
+  .site-description {
+    height: $carousel-height;
+
+    .search-form-container {
+      width: 75%;
+      bottom: $navbar-height;
+    }
+  }
+}
+
 @media (min-width: $screen-sm) {
   .site-description {
     height: $modal-md;
 
     .search-form-container {
       width: 75%;
-      bottom: 200px;
+      bottom: $tooltip-max-width;
     }
-  }
-}
-
-@media (min-width: 1100px) {
-  .site-description #video-background video {
-    height: auto;
-    width: 100%;
   }
 }
