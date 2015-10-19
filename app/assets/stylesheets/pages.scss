@@ -1,6 +1,6 @@
 @import "mixins/variables";
 
-.site-description {
+.root-background {
   position: relative;
   height: $modal-sm;
   width: 100%;
@@ -10,20 +10,36 @@
   background-color: $body-bg;
   background-position: 50% 50%;
 
+  .description {
+    color: $body-bg;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 100px;
+
+    .title { font-size: 24px; font-weight: 400; }
+    .detail { font-size: 16px; }
+  }
+
   .search-form-container {
     position: absolute;
     margin: 0 auto;
     width: 90%;
-    bottom: $navbar-height;
     right: 0;
     left: 0;
+    bottom: $navbar-height;
   }
 }
 
 @media (min-width: $screen-xs) {
-  .site-description {
+  .root-background {
     height: $carousel-height;
 
+    .description {
+      padding-top: 150px;
+
+      .title { font-size: 40px; font-weight: 500; }
+      .detail { font-size: 20px; }
+    }
     .search-form-container {
       width: 75%;
       bottom: $navbar-height;
@@ -32,12 +48,16 @@
 }
 
 @media (min-width: $screen-sm) {
-  .site-description {
+  .root-background {
     height: $modal-md;
 
-    .search-form-container {
-      width: 75%;
-      bottom: $tooltip-max-width;
+    .description {
+      padding-top: 180px;
+
+      .title { font-size: 60px; font-weight: 700; }
+      .detail { font-size: 24px; }
     }
+
+    .search-form-container { bottom: $search-form-bottom; }
   }
 }
