@@ -17,6 +17,8 @@ module ApplicationHelper
       render partial: 'common/navigation', locals: { list: dashboard_navbar_list }
     elsif ["notifications", "conversations"].include? params[:controller]
       render partial: 'common/navigation', locals: { list: conversations_navbar_list }
+    elsif pages_controller? and !pages_index_action?
+      render partial: 'common/navigation', locals: { list: pages_navbar_list }
     end
   end
 
