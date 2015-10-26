@@ -106,10 +106,13 @@ nav.navbar.navbar-sub {
     color: $gray-85;
 
     > li {
-      padding: 10px 20px;
-      margin-right: 10px;
-      float: left;
-      a { color: $gray-85; }
+      a {
+        color: $gray-85;
+        &:hover {
+          background-color: $gray-base;
+          color: $body-bg;
+        }
+      }
     }
   }
 }
