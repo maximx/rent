@@ -1,7 +1,7 @@
 set :stage, :production
 set :branch, 'master'
 
-set :domain, '54.254.131.190'
+set :domain, '54.169.252.203'
 set :user_domain, "apps@#{fetch(:domain)}"
 role :app, [ fetch(:user_domain) ]
 role :web, [ fetch(:user_domain) ]
