@@ -1,16 +1,19 @@
 class Profile < ActiveRecord::Base
   extend I18nMessage
 
-  belongs_to :user
-  has_one :picture, as: :imageable, dependent: :destroy
-  belongs_to :city
-  belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
-
   validates_presence_of :name, :address
   validates :bank_code, length: { is: 3 }, inclusion: Bank.all.map(&:code), allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?
 
+  belongs_to :user
+  belongs_to :city
+  belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
+
+  has_one :picture, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :picture
+
+  before_update :generate_confirmation_token, if: :phone_changed?
+  after_update :send_confirmation_instructions, if: :phone_changed?
 
   def city_address_json
     { city_id: city_id, address: address }.to_json
@@ -24,4 +27,22 @@ class Profile < ActiveRecord::Base
 
     { errors: errors, message: "請完成#{errors.join('、')}的資料填寫" }
   end
+
+  def phone_confimed
+    self.confirmation_token = nil
+    self.confirmation_sent_at = nil
+    self.confirmed_at = Time.now
+    self.save
+  end
+
+  private
+
+    def generate_confirmation_token
+      self.confirmation_sent_at = Time.now
+      self.confirmation_token = 4.times.map { rand 10 }.join
+    end
+
+    def send_confirmation_instructions
+      logger.info '-------- 寄簡訊 --------'
+    end
 end

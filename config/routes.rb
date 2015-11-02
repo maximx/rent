@@ -50,7 +50,9 @@ Rails.application.routes.draw do
   end
 
   namespace :settings do
-    resource :account, only: [ :show, :edit, :update ]
+    resource :account, only: [ :show, :edit, :update ] do
+      get :phone_confirmation, on: :collection
+    end
   end
 
   namespace :dashboard do
