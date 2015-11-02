@@ -1,0 +1,10 @@
+h1 手機驗證
+
+p.text-muted 您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：
+
+= form_tag phone_confirmed_settings_account_path, method: :post do |f|
+  .form-group
+    = text_field_tag :token, nil, class: 'form-control', placeholder: '驗證碼', maxlength: 4, size: 4, style: 'width: 200px;'
+
+  .form-group
+    button.btn type="submit" 送出

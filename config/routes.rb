@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ] do
       get :phone_confirmation, on: :collection
+      post :phone_confirmed, on: :collection
     end
   end
 

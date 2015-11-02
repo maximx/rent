@@ -28,16 +28,21 @@ class Profile < ActiveRecord::Base
     { errors: errors, message: "請完成#{errors.join('、')}的資料填寫" }
   end
 
-  def phone_confimed
+  def phone_confirmed
     self.confirmation_token = nil
     self.confirmation_sent_at = nil
     self.confirmed_at = Time.now
     self.save
   end
 
+  def phone_confirmed?
+    !!confirmed_at
+  end
+
   private
 
     def generate_confirmation_token
+      self.confirmed_at = nil
       self.confirmation_sent_at = Time.now
       self.confirmation_token = 4.times.map { rand 10 }.join
     end

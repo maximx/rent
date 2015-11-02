@@ -29,6 +29,25 @@ class Settings::AccountsController < ApplicationController
     end
   end
 
+  def phone_confirmation
+    profile = current_user.profile
+
+    if profile.phone_confirmed?
+      redirect_with_message settings_account_path, notice: '手機已驗證。'
+    end
+  end
+
+  def phone_confirmed
+    profile = current_user.profile
+
+    if params[:token] == profile.confirmation_token
+      profile.phone_confirmed
+      redirect_with_message user_path(current_user), notice: '手機驗證成功。'
+    else
+      flash[:alert] = '驗證碼錯誤，請再確認一次。'
+    end
+  end
+
   private
 
     def update_needs_confirmation?(user, prev_email)
