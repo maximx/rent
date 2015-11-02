@@ -48,6 +48,18 @@ class Profile < ActiveRecord::Base
     end
 
     def send_confirmation_instructions
-      logger.info '-------- 寄簡訊 --------'
+      sms_url = 'http://smexpress.mitake.com.tw:9600/SmSendGet.asp?'
+      msg = "#{self.name}您好，這是#{Rent::SITE_NAME}的手機驗證簡訊，驗證碼：#{self.confirmation_token}，如您非本人請忽略此訊息"
+      query = {
+        username: '0928479770',
+        password: 'julius23',
+        dstaddr: self.phone,
+        smbody: msg,
+        encoding: 'UTF8'
+      }
+
+      uri = URI.parse(sms_url + query.to_query)
+      request = Net::HTTP::Get.new uri.to_s
+      response = Net::HTTP.start(uri.host, uri.port) { |http| http.request(request) }
     end
 end
