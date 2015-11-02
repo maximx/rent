@@ -41,5 +41,4 @@ class Settings::AccountsController < ApplicationController
         :email, :current_password, :account
       )
     end
-
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922094337) do
+ActiveRecord::Schema.define(version: 20151102054833) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -150,15 +150,18 @@ ActiveRecord::Schema.define(version: 20150922094337) do
   add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4
-    t.string   "name",         limit: 255
-    t.string   "address",      limit: 255
-    t.string   "phone",        limit: 255
-    t.text     "description",  limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "bank_code",    limit: 255
-    t.string   "bank_account", limit: 255
+    t.integer  "user_id",              limit: 4
+    t.string   "name",                 limit: 255
+    t.string   "address",              limit: 255
+    t.string   "phone",                limit: 255
+    t.text     "description",          limit: 65535
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "bank_code",            limit: 255
+    t.string   "bank_account",         limit: 255
+    t.string   "confirmation_token",   limit: 255
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
   create_table "questions", force: :cascade do |t|
