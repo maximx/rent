@@ -21,8 +21,13 @@ aside.user-aside
   .panel.panel-default
     .panel-heading 已驗證身份
     .panel-body
-      = render_icon('ok', class: 'text-success')
-      = User.i18n_simple_form_label('email')
+      div
+        = render_icon('ok', class: 'text-success')
+        = User.i18n_simple_form_label('email')
+      - if user.profile.phone_confirmed?
+        div
+          = render_icon('ok', class: 'text-success')
+          = Profile.i18n_simple_form_label('phone')
 
   - if items.size > 0
     h3 出租物 <small>(#{items.size})</small>

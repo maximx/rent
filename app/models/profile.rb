@@ -52,7 +52,7 @@ class Profile < ActiveRecord::Base
       msg = "#{self.name}您好，這是#{Rent::SITE_NAME}的手機驗證簡訊，驗證碼：#{self.confirmation_token}，如您非本人請忽略此訊息"
       query = {
         username: '0928479770',
-        password: 'julius23',
+        password: 'ju2li3us',
         dstaddr: self.phone,
         smbody: msg,
         encoding: 'UTF8'
