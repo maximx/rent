@@ -45,6 +45,17 @@ namespace :fake do
         pictures_attributes: picutres_arr
       )
 
+      if deliver_arr.include?(1)
+        profile = item.lender.profile
+
+        profile.name = FFaker::NameCN.name
+        profile.address = FFaker::AddressAU.full_address,
+        profile.bank_code = '700'
+        profile.bank_account = '123456789000'
+
+        profile.save
+      end
+
       item.save
     end
   end
