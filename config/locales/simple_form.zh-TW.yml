@@ -35,6 +35,7 @@ zh-TW:
         address: '物品所在地'
         description: '介紹'
         delivers: '運送方式'
+        deliver_fee: '運送費用'
         pictures:
           public_id: '圖片'
       requirement:
