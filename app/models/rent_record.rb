@@ -224,17 +224,14 @@ class RentRecord < ActiveRecord::Base
 
   protected
 
-    def set_price
-      self.price =  rent_days * item.price
-    end
-
     def set_item_attributes
       self.item_price = item.price
       self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
       self.item_deposit = item.deposit
       self.item_down_payment = item.down_payment
+      self.deliver_fee = (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
 
-      self.price =  rent_days * item_price
+      self.price = rent_days * item_price + deliver_fee
     end
 
     #為整點 則減去一秒 避免 overlap

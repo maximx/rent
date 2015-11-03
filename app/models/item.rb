@@ -109,7 +109,7 @@ class Item < ActiveRecord::Base
   end
 
   def address_needed?
-    delivers.include?( Deliver.where(name: '面交自取').first )
+    delivers.include?( Deliver.face_to_face )
   end
 
   def bank_info_needed?

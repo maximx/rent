@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103074830) do
+ActiveRecord::Schema.define(version: 20151103095047) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20151103074830) do
     t.float    "item_deposit",      limit: 24
     t.float    "item_down_payment", limit: 24
     t.integer  "deliver_id",        limit: 4,   null: false
+    t.float    "deliver_fee",       limit: 24
   end
 
   create_table "reviews", force: :cascade do |t|
