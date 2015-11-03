@@ -28,7 +28,12 @@ body {
   &.root { padding-top: 0; }
   font-family: "微軟正黑體",Arial !important;
 }
-ul { list-style: none; }
+
+ul {
+  list-style: none;
+  &.disc { list-style: disc; }
+}
+
 p.description { font-size: 15px; }
 
 a {

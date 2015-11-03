@@ -1,0 +1,9 @@
+.container
+  article
+    header: h1.text-center: b 聯繫方式
+
+    section
+      ul.disc
+        li
+          span 電子郵件：
+          = link_to @admin.email, "mailto:#{@admin.email}"

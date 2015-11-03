@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "/about", to: "pages#about"
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
+  get "/contact", to: "pages#contact"
 
   devise_for :users
 

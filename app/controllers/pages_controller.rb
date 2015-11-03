@@ -12,4 +12,8 @@ class PagesController < ApplicationController
 
   def privacy
   end
+
+  def contact
+    @admin = User.find 1
+  end
 end

@@ -4,6 +4,7 @@ module PagesHelper
       li << [ '關於', about_path ]
       li << [ '服務條款', terms_path ]
       li << [ '隱私權政策', privacy_path ]
+      li << [ '聯繫方式', contact_path ]
     end
   end
 
