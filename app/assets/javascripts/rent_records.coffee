@@ -1,4 +1,14 @@
 $(document).ready ->
+  # rent record form
+  $('#rent_record_deliver_id').change () ->
+    if is_face_to_face()
+      $('#item_deliver_fee').addClass('hide')
+    else
+      $('#item_deliver_fee').removeClass('hide')
+
+    update_rent_days_price()
+
+
   # rent record state log
   $('.rent_record_operates a.rent_record_form_modal').click () ->
     $state_log_form = $('#rent_record_state_log_form')
@@ -34,5 +44,17 @@ $(document).ready ->
     days = Math.ceil( diff / (24 * 60 * 60 * 1000))
     days = 0 if isNaN(days)
 
+    total_fee = days * $('#item_price').val()
+    if $('#rent_record_deliver_id').val() and !is_face_to_face()
+      total_fee += Number( $('#item_deliver_fee').data('deliver-fee') )
+
     $('#rent_days').text(days + ' 天')
-    $('#total_price').text('$' + days * $('#item_price').val() + ' 元')
+    $('#total_price').text('$ ' + total_fee + ' 元')
+
+
+@is_face_to_face = ()->
+  # `a ==b`
+  # ref: http://stackoverflow.com/questions/7032398/does-coffeescript-allow-javascript-style-equality-semantics
+
+  # deliver_id = 2 為面交自取
+  `$('#rent_record_deliver_id').val() == 2`
