@@ -231,7 +231,8 @@ class RentRecord < ActiveRecord::Base
       self.item_down_payment = item.down_payment
       self.deliver_fee = (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
 
-      self.price = rent_days * item_price + deliver_fee
+      self.price = rent_days * item_price
+      #self.total_payment = price + item_deposit + deliver_fee
     end
 
     #為整點 則減去一秒 避免 overlap

@@ -45,8 +45,11 @@ table.table
       td 狀態
       td colspan="2" = @rent_record.aasm.human_state
     tr
+      td 租期
+      td colspan="2" #{render_datetime_period(@rent_record, :tw)} ( #{@rent_record.rent_days} 天 )
+    tr
       td 租金
-      td colspan="2" #{@rent_record.currency_item_price}(租金) * #{@rent_record.rent_days}(天) + #{@rent_record.currency_deliver_fee}(運費) = #{@rent_record.currency_price}(總金額)
+      td colspan="2" #{@rent_record.currency_item_price}(租金) * #{@rent_record.rent_days}(天) = #{@rent_record.currency_price}(總金額)
     tr
       td 押金
       td colspan="2" #{@rent_record.currency_item_deposit}
@@ -54,5 +57,5 @@ table.table
       td 訂金
       td colspan="2" #{@rent_record.currency_item_down_payment}
     tr
-      td 租期
-      td colspan="2" = render_datetime_period(@rent_record, :tw)
+      td 應付總額
+      td colspan="2" #{@rent_record.currency_price} + #{@rent_record.currency_deliver_fee} + #{@rent_record.currency_item_deposit}
