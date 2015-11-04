@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103095047) do
+ActiveRecord::Schema.define(version: 20151104100732) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(version: 20151103095047) do
     t.float    "latitude",       limit: 24
     t.float    "longitude",      limit: 24
     t.integer  "minimum_period", limit: 4,     default: 1
-    t.float    "down_payment",   limit: 24,    default: 0.0
     t.integer  "city_id",        limit: 4
     t.float    "deliver_fee",    limit: 24,    default: 0.0
   end
@@ -184,20 +183,19 @@ ActiveRecord::Schema.define(version: 20151103095047) do
   end
 
   create_table "rent_records", force: :cascade do |t|
-    t.integer  "item_id",           limit: 4
-    t.integer  "user_id",           limit: 4
+    t.integer  "item_id",      limit: 4
+    t.integer  "user_id",      limit: 4
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.string   "aasm_state",        limit: 255
-    t.float    "price",             limit: 24
-    t.float    "item_price",        limit: 24
-    t.integer  "rent_days",         limit: 4
-    t.float    "item_deposit",      limit: 24
-    t.float    "item_down_payment", limit: 24
-    t.integer  "deliver_id",        limit: 4,   null: false
-    t.float    "deliver_fee",       limit: 24
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "aasm_state",   limit: 255
+    t.float    "price",        limit: 24
+    t.float    "item_price",   limit: 24
+    t.integer  "rent_days",    limit: 4
+    t.float    "item_deposit", limit: 24
+    t.integer  "deliver_id",   limit: 4,   null: false
+    t.float    "deliver_fee",  limit: 24
   end
 
   create_table "reviews", force: :cascade do |t|
