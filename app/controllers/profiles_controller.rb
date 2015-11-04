@@ -9,10 +9,11 @@ class ProfilesController < ApplicationController
     @profile = @user.profile
 
     if @profile.update(profile_params)
-      if @profile.phone_confirmed?
-        redirect_with_message user_path(@user), notice: '個人資料修改成功。'
+      if @profile.phone.present? and !@profile.phone_confirmed?
+        redirect_with_message phone_confirmation_settings_account_path,
+                              notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
       else
-        redirect_with_message phone_confirmation_settings_account_path, notice: '請輸入手機驗證碼'
+        redirect_with_message user_path(@user), notice: '個人資料修改成功。'
       end
     else
       render 'settings/accounts/show'
