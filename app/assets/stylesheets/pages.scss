@@ -35,12 +35,12 @@
   .description {
     .alert {
       position: absolute;
-      width: 200px;
-      height: 50px;
+      width: 240px;
       margin: auto;
-      top: 0;
+      top: 5px;
       left: 0;
       right: 0;
+      z-index: 999999999;
     }
 
     color: $body-bg;
@@ -69,6 +69,7 @@
     .description {
       padding-top: 150px;
 
+      .alert { width: 300px; }
       .title { font-size: 40px; font-weight: 500; }
       .detail { font-size: 20px; }
     }
@@ -86,6 +87,7 @@
     .description {
       padding-top: 180px;
 
+      .alert { width: 500px; }
       .title { font-size: 60px; font-weight: 700; }
       .detail { font-size: 24px; }
     }
