@@ -90,3 +90,5 @@ zh-TW:
               invalid: '密碼有誤'
             password_confirmation:
               confirmation: '請確認兩次輸入之密碼相同'
+            agreement:
+              accepted: '請確認同意接受服務條款'
