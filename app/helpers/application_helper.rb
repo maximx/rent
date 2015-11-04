@@ -98,7 +98,7 @@ module ApplicationHelper
   private
 
     def alert_notice_tag(type, msg)
-      content_tag(:p, notice_content_with_close(msg),
+      content_tag(:div, notice_content_with_close(msg),
         class: "alert alert-#{type} alert-dismissible",
         role: :alert
       )

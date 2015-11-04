@@ -224,28 +224,6 @@ nav.navbar.navbar-sub {
   }
 }
 
-.root {
-  .navbar-default {
-    background: none;
-    border: none;
-    .icon-bar { background-color: $body-bg; }
-  }
-
-  #user-navigation {
-    li {
-      &.active > a, &.open > a {
-        background: none;
-        &:hover { background: none; }
-      }
-
-      > a {
-        &.conversations-icon, &.signup, &.login, .caret { color: $body-bg; }
-        &:hover { background: none; }
-      }
-    }
-  }
-}
-
 /*pagination*/
 .pagination-wrapper {
   text-align: center;
