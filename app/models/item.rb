@@ -122,7 +122,6 @@ class Item < ActiveRecord::Base
   def set_category_and_price
     self.price ||= 0
     self.deposit ||= 0
-    self.down_payment ||= 0
     self.category_id = Subcategory.find(subcategory_id).category_id
   end
 

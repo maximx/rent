@@ -181,7 +181,7 @@ class RentRecord < ActiveRecord::Base
 
   # 訂金、押金需先付，或是物品為郵件寄送，且有金額需結算
   def remit_needed?
-    ( (item_deposit + item_down_payment) > 0 ) or
+    item_deposit  > 0 or
       ( total_price > 0 and delivery_needed? )
   end
 
@@ -194,7 +194,7 @@ class RentRecord < ActiveRecord::Base
   end
 
   def total_price
-    price + item_deposit + item_down_payment
+    price + item_deposit + deliver_fee
   end
 
   def next_states
@@ -228,7 +228,6 @@ class RentRecord < ActiveRecord::Base
       self.item_price = item.price
       self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
       self.item_deposit = item.deposit
-      self.item_down_payment = item.down_payment
       self.deliver_fee = (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
 
       self.price = rent_days * item_price
