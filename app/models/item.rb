@@ -6,8 +6,9 @@ class Item < ActiveRecord::Base
   PRICE_MAX = 500
 
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids
-  validates_presence_of :address, if: lambda { |i| i.address_needed? }
-  validate :profile_bank_info_presented, if: lambda { |i| i.bank_info_needed? }
+  validates_presence_of :address, if: :delivers_include_face?
+  validates_numericality_of :deliver_fee, equal_to: 0, unless: :delivers_include_non_face?
+  validate :profile_bank_info_presented, if: :delivers_include_non_face?
 
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
@@ -108,11 +109,11 @@ class Item < ActiveRecord::Base
     dates.flatten
   end
 
-  def address_needed?
+  def delivers_include_face?
     delivers.include?( Deliver.face_to_face )
   end
 
-  def bank_info_needed?
+  def delivers_include_non_face?
     delivers.include?( Deliver.where.not(name: '面交自取').first )
   end
 
