@@ -12,11 +12,16 @@ class Picture < ActiveRecord::Base
     imageable.pictures.size == 1
   end
 
+  def filename
+    [public_id, format].join('.')
+  end
+
   private
 
     def upload_and_set_public_id
       info = Cloudinary::Uploader.upload(self.file_cached, use_filename: true)
       self.public_id = info['public_id']
+      self.format = info['format']
     end
 
     def delete_cloudinary

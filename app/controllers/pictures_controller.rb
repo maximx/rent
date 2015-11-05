@@ -17,7 +17,7 @@ class PicturesController < ApplicationController
   end
 
   def download
-    send_data Cloudinary::Downloader.download(@attachment.public_id), filename: @attachment.public_id
+    send_data Cloudinary::Downloader.download(@attachment.public_id), filename: @attachment.filename
   end
 
   private
