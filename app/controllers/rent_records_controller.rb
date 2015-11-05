@@ -52,6 +52,7 @@ class RentRecordsController < ApplicationController
       @rent_record.lender.notify @rent_record.notify_booking_subject, item_rent_record_url(@item, @rent_record)
       redirect_to item_rent_record_path(@item, @rent_record)
     else
+      flash[:alert] = '請檢查紅字錯誤欄位'
       render :new
     end
   end

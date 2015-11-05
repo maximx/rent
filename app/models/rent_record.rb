@@ -15,7 +15,7 @@ class RentRecord < ActiveRecord::Base
   self.per_page = 10
 
   before_save :set_item_attributes, :set_ended_at
-  after_save :save_booking_state_log
+  after_save :save_booking_state_log, :send_payment_message
 
   scope :overlaps, ->(started_at, ended_at) do
     where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
@@ -240,6 +240,10 @@ class RentRecord < ActiveRecord::Base
 
     def save_booking_state_log
       create_rent_record_state_log(borrower) if rent_record_state_logs.empty?
+    end
+
+    def send_payment_message
+      RentRecordMailer.send_payment_message(self).deliver if remit_needed? and booking?
     end
 
   private
