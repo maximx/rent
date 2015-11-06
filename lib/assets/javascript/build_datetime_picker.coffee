@@ -1,18 +1,20 @@
-@buildDateTimePicker = (target, format, disabled_dates = [])->
+@buildDateTimePicker = (target, format = false, disabled_dates = [])->
   return if $(target).size() == 0
 
   options = {
-    format: format
+    format: format,
+    locale: 'zh-TW',
+    stepping: 10,
     useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
   }
 
   if disabled_dates.length > 0
-    options.minDate = moment().format(format)
+    options.minDate = moment().format('YYYY-MM-DD')
     options.disabledDates = disabled_dates
 
   min_date = validify_date( $(target).first().val() )
   max_date = validify_date( $(target).last().val() )
-  if min_date == '' && max_date == ''
+  if min_date == '' and max_date == ''
     $(target).each ()->
       $(this).datetimepicker(options)
   else
