@@ -4,7 +4,6 @@
   options = {
     format: format,
     locale: 'zh-TW',
-    stepping: 10,
     useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
   }
 
