@@ -11,6 +11,8 @@ class RentRecordPdf < Prawn::Document
     super()
     @item = item
     @rent_record = rent_record
+    @borrower_profile = rent_record.borrower.profile
+    @lender_profile = rent_record.lender.profile
 
     font "#{Rails.root.join("app", "assets", "fonts", "华文仿宋.ttf")}"
 
@@ -34,16 +36,16 @@ class RentRecordPdf < Prawn::Document
     text '出租合約書', size: 20, align: :center
     move_down 15
 
-    text "#{@rent_record.borrower.account}（以下簡稱甲方）向#{@item.lender.account}（以下簡稱乙方）承租 #{@item.name} 特訂立本契約並經雙方同意，條件如下∶"
+    text "#{underline_str @borrower_profile.name}（以下簡稱甲方）向"\
+         "#{underline_str @lender_profile.name}（以下簡稱乙方）承租 #{underline_str @item.name} 特訂立本契約並經雙方同意，條件如下∶", inline_format: true
     next_line
   end
 
   def first_code
     text "第一條：租期"
     text_with_space "本合約以標的物驗收手續完成後隔日起租，標的物返還時間以本合約規定為準。"
-
-    text_with_space "自 #{date_format(@rent_record.started_at)} 起，"\
-                     "至 #{date_format(@rent_record.ended_at)} 止，共計 #{@rent_record.rent_days} 天。"
+    text_with_space "自 #{underline_str date_format(@rent_record.started_at)} 起，"\
+                     "至 #{underline_str date_format(@rent_record.ended_at)} 止，共計 #{@rent_record.rent_days} 天。", inline_format: true
     next_line
   end
 
@@ -113,12 +115,12 @@ class RentRecordPdf < Prawn::Document
   end
 
   def eleventh_code
-    text "第十一條：合約租金 #{@rent_record.price} 元整。"
+    text "第十一條：合約租金 #{underline_str @rent_record.currency_price} 元整。", inline_format: true
     next_line
   end
 
   def twelfth_code
-    text "第十二條：合約押金 #{@item.deposit} 元整。"
+    text "第十二條：合約押金 #{underline_str @item.currency_deposit} 元整。", inline_format: true
     next_line
     start_new_page
   end
@@ -150,13 +152,17 @@ class RentRecordPdf < Prawn::Document
       move_down 10
     end
 
+    def underline_str(string)
+      string ? "<u>      #{string}      </u>" : "_________________"
+    end
+
     def sign_content
       [
         ['甲方', '', '乙方', ''],
-        ['姓名：', '', '姓名：', ''],
+        ['姓名：', @borrower_profile.name, '姓名：', @lender_profile.name],
         ['身份證字號：', '', '身份證字號：', ''],
-        ['地址：', '', '地址：', ''],
-        ['電話：', '', '電話：', '']
+        ['地址：', @borrower_profile.address, '地址：', @lender_profile.address],
+        ['電話：', @borrower_profile.phone, '電話：', @lender_profile.phone]
       ]
     end
 end
