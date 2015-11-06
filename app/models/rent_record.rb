@@ -179,10 +179,9 @@ class RentRecord < ActiveRecord::Base
     reviews.where(judger_id: user.id).exists?
   end
 
-  # 訂金、押金需先付，或是物品為郵件寄送，且有金額需結算
+  # 物品為郵件寄送，且有金額需結算
   def remit_needed?
-    item_deposit  > 0 or
-      ( total_price > 0 and delivery_needed? )
+    total_price > 0 and delivery_needed?
   end
 
   def delivery_needed?
