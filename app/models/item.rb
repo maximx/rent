@@ -52,7 +52,7 @@ class Item < ActiveRecord::Base
   scope :index_pictures_urls, -> { all.map{ |i| cloudinary_url(i.index_picture_public_id) }.uniq }
 
   def profile_bank_info_presented
-    unless lender.profile.bank_code.present? and lender.profile.bank_account.present?
+    unless lender.profile.bank_info_present?
       errors.add(:delivers, '請先填寫匯款資訊')
     end
   end

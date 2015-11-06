@@ -22,3 +22,12 @@
   .form-group
     .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
       = f.button :submit
+
+- if item.delivers_include_non_face? and !current_user.profile.bank_info_present?
+  = simple_form_for item.lender.profile, remote: true do |f|
+    = f.input :bank_code, input_html: { maxlength: 3, minlength: 3 }
+    = f.input :bank_account
+
+    .form-group
+      .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+        = f.button :submit

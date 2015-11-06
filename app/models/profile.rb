@@ -15,8 +15,12 @@ class Profile < ActiveRecord::Base
   before_update :generate_confirmation_token, if: :phone_changed?
   after_update :send_confirmation_instructions, if: :phone_changed?
 
-  def city_address_json
-    { city_id: city_id, address: address }.to_json
+  def bank_info_present?
+    bank_code.present? and bank_account.present?
+  end
+
+  def phone_confirmed?
+    !!confirmed_at
   end
 
   def validates
@@ -28,15 +32,15 @@ class Profile < ActiveRecord::Base
     { errors: errors, message: "請完成#{errors.join('、')}的資料填寫" }
   end
 
+  def city_address_json
+    { city_id: city_id, address: address }.to_json
+  end
+
   def phone_confirmed
     self.confirmation_token = nil
     self.confirmation_sent_at = nil
     self.confirmed_at = Time.now
     self.save
-  end
-
-  def phone_confirmed?
-    !!confirmed_at
   end
 
   private
