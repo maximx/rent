@@ -1,0 +1,22 @@
+- if item.delivers_include_non_face? and !profile.bank_info_present?
+  #bank_info_modal.modal.fade tabindex="-1" role="dialog" aria-labelledby="fill_bank_info_modal"
+    .modal-dialog role="document"
+      .modal-content
+        = simple_form_for profile, url: update_bank_info_profile_path(profile, format: :json), remote: true, html: { method: :put, id: 'bank_info_form' } do |f|
+          .modal-header
+            button.close type="button" data-dismiss="modal" aria-label="Close"
+              span aria-hidden="true" &times;
+            h4.modal-title 更新匯款資訊
+
+          .modal-body
+              = f.input :bank_code, input_html: { maxlength: 3, minlength: 3 }
+              = f.input :bank_account
+
+          .modal-footer
+            button.btn.btn-default type="button" data-dismiss="modal" 取消
+            = f.button :submit, '送出'
+
+  javascript:
+    $(document).ready(function(){
+      $('#bank_info_modal').modal('show');
+    });

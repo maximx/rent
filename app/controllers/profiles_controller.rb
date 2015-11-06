@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   before_action :login_required
   before_action :set_picture_attrs, only: [ :update ]
-  before_action :set_user, only: [ :update ]
+  before_action :set_user, only: [ :update, :update_bank_info ]
 
   def update
     @profile = @user.profile
@@ -17,6 +17,19 @@ class ProfilesController < ApplicationController
       end
     else
       render 'settings/accounts/show'
+    end
+  end
+
+  def update_bank_info
+    result = { status: 'error' }
+
+    if request.xhr?
+      profile = @user.profile
+      result = { status: 'ok' } if profile.update(profile_params)
+    end
+
+    respond_to do |format|
+      format.json { render json: result }
     end
   end
 

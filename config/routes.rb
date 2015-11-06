@@ -45,7 +45,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: [ :update ]
+  resources :profiles, only: [ :update ] do
+    put :update_bank_info, on: :member
+  end
   resources :pictures, only: [] do
     get :download, on: :member
   end

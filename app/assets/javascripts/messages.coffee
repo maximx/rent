@@ -1,6 +1,6 @@
 $ ->
   $('#message_form').on 'ajax:success', (e, data, status, xhr) ->
-    if data && data.status == 'ok'
+    if data and data.status == 'ok'
       $(this).find('textarea').val('')
       $('#message_form_success').removeClass('hide').find('code').text(data.message)
       $('#messages_modal').modal('hide')

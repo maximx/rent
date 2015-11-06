@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('#bank_info_form').on 'ajax:success', (e, data, status, xhr) ->
+    if data and data.status == 'ok'
+      $alert_strong = $('.alert strong')
+      text = ' 帳號資訊已成功更新，' + $alert_strong.text()
+
+      $alert_strong.text(text)
+      $('#bank_info_modal').modal('hide')
