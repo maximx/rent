@@ -3,15 +3,14 @@
 .progress
   - rent_record.rent_record_state_logs.each do |log|
     - if log.id
-      .progress-bar.progress-bar-success role="progressbar" style="width: #{width}%"
+      .progress-bar.progress-bar-success.text-danger role="progressbar" style="width: #{width}%" data-toggle="tooltip" title="#{render_state_log_title(log)}"
         - if log.attachments.present?
           = link_to render_icon_with_text('download-alt',
                                           RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")),
                     download_picture_path(log.attachment.id),
-                    target: '_blank', title: render_state_log_title(log), data: { toggle: 'tooltip' }, class: 'text-danger'
+                    target: '_blank'
         - else
-          span data-toggle="tooltip" title="#{render_state_log_title(log)}"
-            = RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
+          = RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
 
   - rent_record.pending_states.each do |state|
     .progress-bar.progress-bar-muted role="progressbar" style="width: #{width}%"
