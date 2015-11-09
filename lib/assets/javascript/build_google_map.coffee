@@ -2,7 +2,7 @@
   target_id = 'map'
   if $('#' + target_id).size() > 0
     handler = Gmaps.build('Google')
-    handler.buildMap({ provider: {}, internal: { id: target_id } }, ->
+    handler.buildMap({ provider: { scrollwheel: false, zoomControl: false }, internal: { id: target_id } }, ->
       if _.isEmpty(markers)
         handler.getMap().setZoom(6)
         handler.getMap().setCenter({lat: 23.69781, lng: 120.96051})
