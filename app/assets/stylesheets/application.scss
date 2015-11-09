@@ -23,10 +23,12 @@
 
 
 body {
+  font-family: "微軟正黑體",Arial !important;
   padding-top: 51px;
   font-size: 15px;
+  background-color: $table-bg-hover;
+
   &.root { padding-top: 0; }
-  font-family: "微軟正黑體",Arial !important;
 }
 
 ul {
