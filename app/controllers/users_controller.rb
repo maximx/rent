@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  layout 'user'
+
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user
   before_action :find_total_reviews, :find_profile, :set_user_meta_tags, :find_user_items, only: [ :show, :follows ]

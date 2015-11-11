@@ -1,3 +1,14 @@
-= render layout: 'users/show', locals: { user: @user, profile: @profile, total_reviews: @total_reviews, items: @items } do
-  = render partial: 'users/reviews', locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
-                                                 lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }
+= render partial: 'pictures/picture_carousel', locals: { pictures: Item.find(1).pictures }
+
+.row
+  .col-md-4
+    ul
+      li
+        = render_icon_with_text 'envelope', User.i18n_simple_form_label('email')
+      li
+        = render_icon_with_text 'map-marker', Profile.i18n_simple_form_label('address')
+      li
+        = render_icon_with_text 'phone', Profile.i18n_simple_form_label('phone')
+/= render layout: 'users/show', locals: { user: @user, profile: @profile, total_reviews: @total_reviews, items: @items } do
+  /= render partial: 'users/reviews', locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
+                                                 /lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }

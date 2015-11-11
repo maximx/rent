@@ -1,0 +1,8 @@
+doctype html
+html lang="zh"
+  = render partial: 'layouts/head'
+
+  body.root
+    / nav bar
+    = yield
+    = render partial: 'common/footer'

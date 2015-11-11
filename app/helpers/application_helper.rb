@@ -62,7 +62,7 @@ module ApplicationHelper
     css_class << 'text'
     options[:class] = css_class.join(" ")
 
-    raw "#{render_icon(icon, options)}#{text}"
+    raw "#{render_icon(icon, options)}#{label_tag text}"
   end
 
   def render_icon(icon, options = {})
