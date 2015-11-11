@@ -1,16 +1,20 @@
 @import "mixins/variables";
 
 /*show*/
-.info.container {
-  padding-top: 20px;
-  padding-bottom: 20px;
+.user {
+  .site-header nav.navbar { margin: 0; }
 
-  ul > li {
-    margin-bottom: 15px;
+  .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
 
-    span {
-      margin-right: 5px;
-      &.glyphicon.text { margin-right: 10px; }
+    ul > li {
+      margin-bottom: 15px;
+
+      span {
+        margin-right: 5px;
+        &.glyphicon.text { margin-right: 10px; }
+      }
     }
   }
 }

@@ -1,41 +1,44 @@
-.row
-  .col-md.12
-    = render partial: 'pictures/picture_carousel', locals: { pictures: Item.find(1).pictures }
+= render partial: 'users/header', locals: { user: @user }
 
-.container.info
+section
   .row
-    .col-md-6
-      ul
-        li
-          = render_icon_with_text 'envelope', "#{User.i18n_simple_form_label('email')}："
-          span = @user.email
-          = render_icon('ok', class: 'text-success', data: { toggle: 'tooltip' }, title: '已驗證')
-        li
-          = render_icon_with_text 'map-marker', "#{Profile.i18n_simple_form_label('address')}："
-          span = @user.profile.address
-        - if @user.profile.phone.present?
+    .col-md.12
+      = render partial: 'pictures/picture_carousel', locals: { pictures: Item.find(1).pictures }
+
+  .container
+    .row
+      .col-md-8
+        ul
           li
-            = render_icon_with_text 'phone', "#{Profile.i18n_simple_form_label('phone')}："
-            span = @user.profile.phone
-            = render_icon('ok', class: 'text-success', data: { toggle: 'tooltip' }, title: '已驗證') if @user.profile.phone_confirmed?
-    .col-md-6
-      .panel.panel-default
-        .panel-heading 總評價
+            = render_icon_with_text 'envelope', "#{User.i18n_simple_form_label('email')}："
+            span = @user.email
+            = render_icon('ok', class: 'text-success', data: { toggle: 'tooltip' }, title: '已驗證')
+          li
+            = render_icon_with_text 'map-marker', "#{Profile.i18n_simple_form_label('address')}："
+            span = @user.profile.address
+          - if @user.profile.phone.present?
+            li
+              = render_icon_with_text 'phone', "#{Profile.i18n_simple_form_label('phone')}："
+              span = @user.profile.phone
+              = render_icon('ok', class: 'text-success', data: { toggle: 'tooltip' }, title: '已驗證') if @user.profile.phone_confirmed?
+      .col-md-4
+        .panel.panel-default
+          .panel-heading.text-center: strong 總評價
 
-        table.table.table-bordered.text-center
-          thead
-            tr
-              th.text-center 正評
-              th.text-center 負評
-          tbody
-            tr
-              td = @total_reviews[Review.rates[:good]] || 0
-              td = @total_reviews[Review.rates[:bad]] || 0
-.row
-  .col-md-12
-    #map
+          table.table.table-bordered.text-center
+            thead
+              tr
+                th.text-center 正評
+                th.text-center 負評
+            tbody
+              tr
+                td = @total_reviews[Review.rates[:good]] || 0
+                td = @total_reviews[Review.rates[:bad]] || 0
+  .row
+    .col-md-12
+      #map
 
-javascript:
-  $(document).ready(function() {
-    buildGoogleMap( { } );
-  });
+    javascript:
+      $(document).ready(function() {
+        buildGoogleMap( { } );
+      });
