@@ -36,12 +36,9 @@ ul {
   &.disc { list-style: disc; }
 }
 
+a:hover { text-decoration: none; }
 p.description { font-size: 15px; }
-
-a {
-  &:hover { text-decoration: none; }
-  > span.glyphicon.text { margin-right: 5px; }
-}
+span.glyphicon.text { margin-right: 5px; }
 
 .well.well-white { background-color: $body-bg; }
 .tab-content {

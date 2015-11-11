@@ -1,6 +1,20 @@
 @import "mixins/variables";
 
 /*show*/
+.info.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  ul > li {
+    margin-bottom: 15px;
+
+    span {
+      margin-right: 5px;
+      &.glyphicon.text { margin-right: 10px; }
+    }
+  }
+}
+
 .follow-container {
   float: left;
   width: 310px;
