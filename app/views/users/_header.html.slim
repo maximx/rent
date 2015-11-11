@@ -7,10 +7,12 @@ header.site-header
         span.icon-bar
         span.icon-bar
 
-      h1.navbar-brand = link_to user.profile.name, user_path(user), id: 'site-logo'
+      h1.navbar-brand
+        = link_to render_cl_avatar_logo(user), user_path(user)
+
       .category.navbar-brand
         ul.nav.navbar-nav
           li = link_to user.profile.name, user_path(user)
 
     #user-navigation.collapse.navbar-collapse
-      = render partial: 'common/user_login'
+      = user_navbar_list user

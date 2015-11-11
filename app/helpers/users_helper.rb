@@ -18,4 +18,13 @@ module UsersHelper
       li << [ '關注', follows_user_path(user, anchor: 'reviews-follows') ]
     end
   end
+
+  def user_navbar_list(user)
+    render_link_li class: 'nav navbar-nav navbar-right' do |li|
+      li << [ '關於', user_path(user) ]
+      li << [ '評價', '#' ]
+      li << [ '出租物', '#' ]
+      li << [ '預約到店', '#' ]
+    end
+  end
 end
