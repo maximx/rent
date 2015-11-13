@@ -23,7 +23,7 @@ module UsersHelper
     render_link_li class: 'nav navbar-nav navbar-right' do |li|
       li << [ '關於', user_path(user) ]
       li << [ '評價', reviews_user_path(user) ]
-      li << [ '出租物', '#' ]
+      li << [ '出租物', items_user_path(user) ]
       li << [ '預約到店', '#' ]
     end
   end
