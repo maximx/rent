@@ -1,6 +1,6 @@
 class RentRecordStateLog < ActiveRecord::Base
   validates_presence_of :aasm_state, :user_id, :rent_record_id
-  validates :info, presence: true, length: { is: 5 }, format: { with: /\d/ }, if: Proc.new { |log| log.aasm_state == 'remitted' }
+  validates :info, presence: true, length: { is: 5 }, format: { with: /\d/ }, if: :remitted?
 
   belongs_to :rent_record
   belongs_to :user
@@ -10,5 +10,9 @@ class RentRecordStateLog < ActiveRecord::Base
 
   def attachment
     attachments.first
+  end
+
+  def remitted?
+    aasm_state == 'remitted'
   end
 end
