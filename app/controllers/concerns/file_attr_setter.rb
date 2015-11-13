@@ -21,44 +21,25 @@ module FileAttrSetter
 
       if view_context.send "#{controller_name}_controller?"
         if file_selected? model_name, attributes
+          attr_params = params[model_name][attributes]
+
           if file_multiple? attributes_name
-            params[model_name][attributes]["0"][:public_id].each_with_index do |p, index|
-              params[model_name][attributes]["#{index}"] = { public_id: p.original_filename, file_cached: p }
+            attr_params["0"][:public_id].each_with_index do |p, index|
+              attr_params["#{index}"] = { public_id: p.original_filename, file_cached: p }
             end
           else
-            params[model_name][attributes][:file_cached] =  params[model_name][attributes][:public_id]
-            params[model_name][attributes][:public_id] = params[model_name][attributes][:file_cached].original_filename
+            attr_params[:file_cached] =  attr_params[:public_id]
+            attr_params[:public_id] = attr_params[:file_cached].original_filename
           end
         else
           # avoid file delete
           if model_name == 'rent_record_state_log'
             params[model_name] = { info: nil }
           else
-            params[model_name].delete(attributes)
+            params[model_name].delete attributes
           end
         end
       end
-    end
-
-    def set_pictures_attrs_backup
-      if view_context.items_controller? and pictures_selected?
-        pictures_attributes["0"][:public_id].each_with_index do |picture, index|
-          pictures_attributes["#{index}"] = { public_id: picture.original_filename, file_cached: picture }
-        end
-      end
-    end
-
-    # item
-    def pictures_attributes
-      params[model_name][:pictures_attributes]
-    end
-
-    def model_name
-      params[:controller].singularize
-    end
-
-    def pictures_selected?
-      params[model_name].has_key?(:pictures_attributes)
     end
 
     def file_multiple?(attributes_name)
