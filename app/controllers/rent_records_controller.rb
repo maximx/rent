@@ -7,7 +7,7 @@ class RentRecordsController < ApplicationController
   before_action :find_item_rent_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create ]
-  before_action :set_attachment_attrs, only: [ :renting ]
+  before_action :set_attachments_attr, only: [ :renting ]
 
   def index
     @rent_records = @item.rent_records.includes(:borrower).rencent.reverse_order.page(params[:page])

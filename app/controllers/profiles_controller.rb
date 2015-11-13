@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   include FileAttrSetter
 
   before_action :login_required
-  before_action :set_picture_attrs, only: [ :update ]
+  before_action :set_avatar_attr, only: [ :update ]
   before_action :set_user, only: [ :update, :update_bank_info ]
 
   def update
@@ -39,7 +39,7 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(
         :name, :city_id, :address, :phone,
         :description, :bank_code, :bank_account,
-        picture_attributes: [ :public_id, :file_cached ]
+        avatar_attributes: [ :public_id, :file_cached ]
       )
     end
 

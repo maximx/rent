@@ -26,7 +26,7 @@ zh-TW:
         bank_code: '銀行代碼'
         bank_account: '銀行帳號'
         description: '介紹'
-        picture:
+        avatar:
           public_id: '大頭照'
       item:
         name: '名稱'

@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_rent_record, :find_item_disabled_dates, only: [ :show, :questions ]
-  before_action :set_pictures_attrs, only: [ :create, :update ]
+  before_action :set_pictures_attr, only: [ :create, :update ]
 
   def index
     @items = Item.includes(:pictures)
