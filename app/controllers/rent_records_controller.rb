@@ -11,7 +11,6 @@ class RentRecordsController < ApplicationController
 
   def index
     @rent_records = @item.rent_records.includes(:borrower).rencent.reverse_order.page(params[:page])
-    set_item_maps_marker
   end
 
   def show
@@ -60,7 +59,6 @@ class RentRecordsController < ApplicationController
   def review
     if @rent_record.can_review_by?(current_user)
       @review = @rent_record.reviews.build
-      set_item_maps_marker
       render "reviews/new"
     else
       redirect_with_message( item_path(@item) )

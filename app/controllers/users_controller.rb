@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   before_action :find_total_reviews, only: [ :show ]
 
   def show
+    set_maps_marker @profile
   end
 
   def reviews

@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
-  before_action :set_item_meta_tags, :set_item_maps_marker, :build_rent_record, :find_item_disabled_dates, only: [ :show, :questions ]
+  before_action :set_item_meta_tags, :build_rent_record, :find_item_disabled_dates, only: [ :show, :questions ]
   before_action :set_pictures_attrs, only: [ :create, :update ]
 
   def index
@@ -19,10 +19,12 @@ class ItemsController < ApplicationController
   end
 
   def show
+    set_maps_marker @item
     @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
   end
 
   def questions
+    set_maps_marker @item
     @question = @item.questions.build
   end
 

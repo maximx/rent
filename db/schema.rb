@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105030619) do
+ActiveRecord::Schema.define(version: 20151113040922) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(version: 20151105030619) do
     t.string   "confirmation_token",   limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.float    "latitude",             limit: 24
+    t.float    "longitude",            limit: 24
   end
 
   create_table "questions", force: :cascade do |t|

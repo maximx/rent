@@ -44,5 +44,5 @@
 
     javascript:
       $(document).ready(function() {
-        buildGoogleMap( { } );
+        buildGoogleMap( #{raw @maps.to_json} );
       });

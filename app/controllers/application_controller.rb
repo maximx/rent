@@ -27,19 +27,22 @@ class ApplicationController < ActionController::Base
     @categories = Category.includes(:subcategories).all
   end
 
-  def set_item_maps_marker
-    @maps = Gmaps4rails.build_markers(@item) do |item, marker|
-      marker.lat item.latitude
-      marker.lng item.longitude
-      marker.infowindow("<h4>#{link_of(item)}</h4><br />#{item.address}")
-      marker.json({ title: item.name })
+  def set_maps_marker(object)
+    @maps = Gmaps4rails.build_markers(object) do |obj, marker|
+      google_url = "http://maps.google.com/maps?q=#{obj.latitude},#{obj.longitude}"
+      info = [
+        "<h4>#{obj.name}</h4>",
+        obj.address,
+        view_context.link_to('詳細', google_url, target: '_blank')
+      ]
+
+      marker.lat obj.latitude
+      marker.lng obj.longitude
+      marker.infowindow info.join("<br />")
+      marker.json({ title: obj.name })
     end
 
     @maps.delete_if { |marker| marker[:lat].nil? || marker[:lng].nil? }
-  end
-
-  def link_of(item)
-    view_context.link_to( item.name, item_url(item) )
   end
 
   def meta_pagination_links(collection)
