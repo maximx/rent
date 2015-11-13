@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   layout 'user'
 
   before_action :login_required, only: [ :follow, :unfollow ]
-  before_action :find_user
-  before_action :find_total_reviews, :find_profile, :set_user_meta_tags, :find_user_items, only: [ :show, :follows ]
+  before_action :find_user, :find_profile, :set_user_meta_tags
+  before_action :find_total_reviews, only: [ :show ]
 
   def show
   end
@@ -80,10 +80,6 @@ class UsersController < ApplicationController
       @profile = @user.profile || @user.build_profile
     end
 
-    def find_user_items
-      @items = @user.items.select(:id, :name)
-    end
-
     def set_user_meta_tags
       set_meta_tags(
         title: @user.account,
@@ -92,7 +88,7 @@ class UsersController < ApplicationController
         og: {
           title: @user.account + "的個人資料 - " + Rent::SITE_NAME,
           description: @user.meta_description,
-          type: "profile",
+          type: 'profile',
           url: user_url(@user),
           image: @user.picture_url
         }
