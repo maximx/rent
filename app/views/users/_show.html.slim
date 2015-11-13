@@ -3,5 +3,5 @@
 section
   .row
     .col-md.12
-      = render partial: 'pictures/picture_carousel', locals: { pictures: Item.find(1).pictures }
+      = render partial: 'pictures/picture_carousel', locals: { pictures: user.covers }
   = yield

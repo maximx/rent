@@ -1,15 +1,16 @@
-#picture-carousel.carousel.slide data-ride="carousel"
-  ol.carousel-indicators
-    - pictures.each_with_index do |picture, index|
-      li data-target="#picture-carousel" data-slide-to="#{ index }" class="#{ "active " if index == 0 }"
+- if pictures and pictures.present?
+  #picture-carousel.carousel.slide data-ride="carousel"
+    ol.carousel-indicators
+      - pictures.each_with_index do |picture, index|
+        li data-target="#picture-carousel" data-slide-to="#{ index }" class="#{ "active " if index == 0 }"
 
-  .carousel-inner.img-thumbnail role="listbox"
-    - pictures.each_with_index do |picture, index|
-      div class="item#{ " active" if index == 0 }" style="background-image: url(#{ cloudinary_url(picture.public_id) });"
+    .carousel-inner.img-thumbnail role="listbox"
+      - pictures.each_with_index do |picture, index|
+        div class="item#{ " active" if index == 0 }" style="background-image: url(#{ cloudinary_url(picture.public_id) });"
 
-  a.left.carousel-control href="#picture-carousel" role="button" data-slide="prev"
-    = render_icon("chevron-left")
-    span.sr-only" Previous
-  a.right.carousel-control href="#picture-carousel" role="button" data-slide="next"
-    = render_icon("chevron-right")
-    span.sr-only" Next
+    a.left.carousel-control href="#picture-carousel" role="button" data-slide="prev"
+      = render_icon("chevron-left")
+      span.sr-only" Previous
+    a.right.carousel-control href="#picture-carousel" role="button" data-slide="next"
+      = render_icon("chevron-right")
+      span.sr-only" Next
