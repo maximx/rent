@@ -20,7 +20,7 @@ module PicturesHelper
   end
 
   def render_cl_avatar_logo(user, options = {})
-    size_options = { width: 50, height: 50 }
+    size_options = { width: 50, height: 50, crop: :fill }
     public_id = public_id_of(user)
 
     render_cl_image(public_id, size_options, options)
@@ -63,8 +63,8 @@ module PicturesHelper
   end
 
   def public_id_of(user)
-    if user.profile && user.profile.picture
-      user.profile.picture.public_id
+    if user.profile and user.profile.avatar
+      user.profile.avatar.public_id
     else
       Rent::DEFAULT_AVATAR
     end
