@@ -1,16 +1,8 @@
-.col-xs-offset-4.col-sm-offset-3.profile-picture
-  = render_cl_avatar_lg(current_user)
-
 = simple_form_for @profile do |f|
   .form-group
     .col-xs-4.col-sm-3.control-label
       label 電子郵件
     .col-xs-6.col-sm-6 = render_disabled_input @profile.user.email
-
-  = f.simple_fields_for :picture, @profile do |p|
-    = p.input :public_id, as: :file_select
-    = current_user.profile.errors[:pictures].first
-    = @profile.errors[:picture].first
 
   = f.input :name
   = f.input :phone

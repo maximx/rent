@@ -1,0 +1,30 @@
+.row
+  .col-xs-offset-4.col-sm-offset-3.profile-picture
+    = render_cl_avatar_lg(@user)
+
+  = simple_form_for @profile do |f|
+    = f.simple_fields_for :picture, @profile do |p|
+      = p.input :public_id, as: :file_select, input_html: { class: 'remote' }
+      = current_user.profile.errors[:pictures].first
+      = @profile.errors[:picture].first
+
+    .form-group
+      .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+        = f.button :submit, '更新'
+
+  #pictures-container
+    - @user.covers.each do |cover|
+      .picture
+        = link_to "x", '',
+                  class: "close remove-picture", method: :delete, remote: true,
+                  data: { confirm: "確定要刪除嗎？" }
+        = render_cl_image_sm cover.public_id, data: { id: picture.id }
+
+  = simple_form_for @user do |f|
+    = f.simple_fields_for :covers, @user.covers.build do |c|
+      = c.input :public_id, as: :file_select, input_html: { multiple: true }, hint: '可選取多個檔案'
+      = @user.errors[:covers].first
+
+    .form-group
+      .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+        = f.button :submit, '更新'

@@ -87,7 +87,7 @@ $ ->
 
   # custom bootstrap shape file select button
   $('.btn-file :file').on('fileselect', (event, numFiles, label)->
-    $input = $('#file-name')
+    $input = $(this).closest('.input-group').find('input.file-name')
     text = if numFiles > 1 then '已選擇 ' + numFiles + ' 個檔案' else label
 
     if $input.length

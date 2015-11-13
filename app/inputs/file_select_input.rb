@@ -1,5 +1,4 @@
 class FileSelectInput < SimpleForm::Inputs::Base
-
   def input(wrapper_options)
     out = ActiveSupport::SafeBuffer.new
 
@@ -27,7 +26,6 @@ class FileSelectInput < SimpleForm::Inputs::Base
   end
 
   def file_name_input
-    "<input type='text' class='form-control' id='file-name' readonly>".html_safe
+    "<input type='text' class='form-control file-name' readonly>".html_safe
   end
-
 end

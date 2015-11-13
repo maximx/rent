@@ -17,6 +17,8 @@ zh-TW:
         remember_me: '記住我'
         current_password: '原密碼'
         agreement: '已閱讀並接受%{terms_link}'
+        covers:
+          public_id: '封面圖'
       profile:
         name: '名字'
         address: '地址'
@@ -25,7 +27,7 @@ zh-TW:
         bank_account: '銀行帳號'
         description: '介紹'
         picture:
-          public_id: '圖片'
+          public_id: '大頭照'
       item:
         name: '名稱'
         subcategory_id: '分類'

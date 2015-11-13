@@ -48,6 +48,11 @@ class Settings::AccountsController < ApplicationController
     end
   end
 
+  def images
+    @user = current_user
+    @profile = @user.profile
+  end
+
   private
 
     def update_needs_confirmation?(user, prev_email)
