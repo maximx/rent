@@ -6,12 +6,14 @@ class Profile < ActiveRecord::Base
   validates_presence_of :bank_account, if: :bank_code?
 
   belongs_to :user
-  belongs_to :city
   belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
 
   has_one :picture, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :picture
 
+  geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
+
+  after_validation :geocode
   before_update :generate_confirmation_token, if: :phone_changed?
   after_update :send_confirmation_instructions, if: :phone_changed?
 
@@ -30,10 +32,6 @@ class Profile < ActiveRecord::Base
     end
 
     { errors: errors, message: "請完成#{errors.join('、')}的資料填寫" }
-  end
-
-  def city_address_json
-    { city_id: city_id, address: address }.to_json
   end
 
   def phone_confirmed
