@@ -1,10 +1,4 @@
-= render partial: 'users/header', locals: { user: @user }
-
-section
-  .row
-    .col-md.12
-      = render partial: 'pictures/picture_carousel', locals: { pictures: Item.find(1).pictures }
-
+= render layout: 'users/show', locals: { user: @user } do
   .container
     .row
       .col-md-8
@@ -15,11 +9,11 @@ section
             = render_icon('ok', class: 'text-success', data: { toggle: 'tooltip' }, title: '已驗證')
           li
             = render_icon_with_text 'map-marker', "#{Profile.i18n_simple_form_label('address')}："
-            span = @user.profile.address
-          - if @user.profile.phone.present?
+            span = @profile.address
+          - if @profile.phone.present?
             li
               = render_icon_with_text 'phone', "#{Profile.i18n_simple_form_label('phone')}："
-              span = @user.profile.phone
+              span = @profile.phone
               = render_icon('ok', class: 'text-success', data: { toggle: 'tooltip' }, title: '已驗證') if @user.profile.phone_confirmed?
       .col-md-4
         .panel.panel-default

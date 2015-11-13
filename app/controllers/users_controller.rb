@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   before_action :find_total_reviews, :find_profile, :set_user_meta_tags, :find_user_items, only: [ :show, :follows ]
 
   def show
+  end
+
+  def reviews
     @grouped_reviews_count = @user.reviews.group(:user_role).count
     @lender_reviews = @user.reviews_of('lender').page(params[:page])
     @borrower_reviews = @user.reviews_of('borrower').page(params[:page])

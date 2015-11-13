@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [ :show ] do
     member do
+      get :reviews
       get :follows
       get :lender_reviews
       get :borrower_reviews
