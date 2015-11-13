@@ -25,6 +25,7 @@ module UsersHelper
       li << [ '評價', reviews_user_path(user) ]
       li << [ '出租物', items_user_path(user) ]
       li << [ '預約到店', '#' ]
+      li << [ content_tag(:span, "回到#{Rent::SITE_NAME}", class: 'text-danger'), items_path ]
     end
   end
 end
