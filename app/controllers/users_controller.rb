@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   layout 'user'
 
+  include UsersReviewsCount
+  include SortPaginate
+
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user, :find_profile, :set_user_meta_tags
   before_action :find_total_reviews, only: [ :show ]
@@ -28,8 +31,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def follows
-    @followings = @user.following
+  def items
+    @items = @user.items
+    sort_and_paginate_items
+    find_users_reviews_count
+    meta_pagination_links @items
   end
 
   def follow

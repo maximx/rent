@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       get :reviews
       get :lender_reviews
       get :borrower_reviews
+      get :items
 
       put :follow
       delete :unfollow
