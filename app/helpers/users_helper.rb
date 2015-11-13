@@ -22,7 +22,7 @@ module UsersHelper
   def user_navbar_list(user)
     render_link_li class: 'nav navbar-nav navbar-right' do |li|
       li << [ '關於', user_path(user) ]
-      li << [ '評價', '#' ]
+      li << [ '評價', reviews_user_path(user) ]
       li << [ '出租物', '#' ]
       li << [ '預約到店', '#' ]
     end
