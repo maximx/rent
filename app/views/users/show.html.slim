@@ -28,9 +28,9 @@
               tr
                 td = @total_reviews[Review.rates[:good]] || 0
                 td = @total_reviews[Review.rates[:bad]] || 0
+
   .row
-    .col-md-12
-      #map
+    .col-md-12: #map
 
     javascript:
       $(document).ready(function() {
