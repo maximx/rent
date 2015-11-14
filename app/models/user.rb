@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   validates :agreement, acceptance: true
 
   has_one :profile, as: :user
-  has_many :items
   has_many :questions
   has_many :requirements
   has_many :customers
@@ -16,7 +15,12 @@ class User < ActiveRecord::Base
   has_many :following, through: :following_relationships, source: :followed
   has_many :followers, through: :following_relationships, source: :follower
 
-  has_many :rent_records, as: :borrower
+  has_many :items
+  has_many :rent_records, through: :items
+  has_many :borrowers, through: :rent_records, source_type: 'User'
+  alias_method :lend_records, :rent_records
+
+  has_many :borrow_records, class_name: 'RentRecord', as: :borrower
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
   has_many :collections, through: :collect_relationships, source: :item
@@ -47,6 +51,10 @@ class User < ActiveRecord::Base
   # mailboxer
   def mailboxer_email(object)
     email
+  end
+
+  def consumers
+    customers + borrowers
   end
 
   # user follow

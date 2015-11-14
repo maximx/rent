@@ -7,8 +7,6 @@ class Customer < ActiveRecord::Base
   has_one :profile, as: :user
   accepts_nested_attributes_for :profile
 
-  self.per_page = 15
-
   def account
     profile.name
   end

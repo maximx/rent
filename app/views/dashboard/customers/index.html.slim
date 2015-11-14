@@ -4,11 +4,11 @@ table.table.table-hover
     th 電話
     th
   tbody
-    - @customers.each do |customer|
+    - @consumers.each do |consumer|
       tr
-        td = customer.account
+        td = consumer.account
         td
-          = customer.profile.phone
-          = render_icon_confirmed if customer.profile.phone_confirmed?
+          = consumer.profile.phone
+          = render_icon_confirmed if consumer.profile.phone_confirmed?
         td
-          = render_operate_customer_links customer
+          = render_operate_customer_links consumer
