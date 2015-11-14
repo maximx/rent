@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :account, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[\w]*\z/ }
   validates :agreement, acceptance: true
 
-  has_one :profile
+  has_one :profile, as: :user
   has_many :items
   has_many :questions
   has_many :requirements

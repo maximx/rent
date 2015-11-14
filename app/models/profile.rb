@@ -5,7 +5,7 @@ class Profile < ActiveRecord::Base
   validates :bank_code, length: { is: 3 }, inclusion: Bank.all.map(&:code), allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?
 
-  belongs_to :user
+  belongs_to :user, polymorphic: true
   belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
 
   has_one :avatar, class_name: 'Picture', as: :imageable, dependent: :destroy
