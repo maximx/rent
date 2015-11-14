@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     resource :rent_records, only: [ :show ] do
       get :calendar, on: :member
     end
+    resources :customers
   end
 
   resources :categories, only: [ :show ]
