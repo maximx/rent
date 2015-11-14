@@ -11,10 +11,11 @@ class Dashboard::CustomersController < ApplicationController
 
   def new
     @customer = current_user.customers.build
-    @customer.build_profile
+    @profile = @customer.build_profile
   end
 
   def edit
+    @profile = @customer.profile
   end
 
   private
