@@ -4,6 +4,7 @@ zh-TW:
       item: "出租物"
       rent_record: "承租預約"
       profile: "個人資料"
+      customer: "客戶"
     attributes:
       rent_record:
         aasm_state:

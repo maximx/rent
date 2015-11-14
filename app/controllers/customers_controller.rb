@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   before_action :find_customer, only: [ :update, :destroy ]
 
   def create
-    @customer = current_user.customers.build customer_params
+    @customer = current_user.customers.build(customer_params)
 
     if @customer.save
       redirect_to dashboard_customer_path @customer
@@ -28,7 +28,10 @@ class CustomersController < ApplicationController
   private
 
     def customer_params
-      params.require(:customer).permit(:email)
+      params.require(:customer).permit(
+        :email,
+        profile_attributes: [ :name, :address, :phone ]
+      )
     end
 
     def find_customer

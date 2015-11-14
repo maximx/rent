@@ -1,7 +1,11 @@
 = simple_form_for customer do |f|
   = f.input :email
 
-  = f.simple_fields_for :profile, customer.profile do |p|
+  = f.simple_fields_for :profile do |p|
     = p.input :name
     = p.input :phone
     = p.input :address
+
+  .form-group
+    .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+      = f.button :submit
