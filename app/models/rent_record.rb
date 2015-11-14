@@ -6,7 +6,7 @@ class RentRecord < ActiveRecord::Base
   validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :deliver_id
   validate :start_end_date, :not_overlap, :borrower_not_lender
 
-  belongs_to :borrower, class_name: "User", foreign_key: "user_id"
+  belongs_to :borrower, polymorphic: true
   belongs_to :item
   belongs_to :deliver, required: true
   has_many :reviews

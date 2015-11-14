@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
   has_many :following, through: :following_relationships, source: :followed
   has_many :followers, through: :following_relationships, source: :follower
 
-  has_many :rent_records, class_name: "RentRecord", foreign_key: "user_id"
-  has_many :borrows, through: :rent_records, source: :item
+  has_many :rent_records, class_name: 'RentRecord', as: :borrower
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
   has_many :collections, through: :collect_relationships, source: :item
