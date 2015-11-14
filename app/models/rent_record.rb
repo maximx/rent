@@ -3,7 +3,7 @@ class RentRecord < ActiveRecord::Base
   include CurrencyPrice
   extend I18nMessage
 
-  validates_presence_of :item_id, :user_id, :started_at, :ended_at, :aasm_state, :deliver_id
+  validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
   validate :start_end_date, :not_overlap, :borrower_not_lender
 
   belongs_to :borrower, polymorphic: true
