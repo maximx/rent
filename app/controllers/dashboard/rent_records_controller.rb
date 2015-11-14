@@ -16,7 +16,7 @@ class Dashboard::RentRecordsController < ApplicationController
                           current_user.borrow_records.includes(:borrower)
                             .overlaps(params[:start], params[:end]).to_json
                         else
-                          RentRecord.includes(:borrower).where(item: current_user.items)
+                          current_user.lend_records.includes(:borrower)
                             .overlaps(params[:start], params[:end]).to_json
                         end
 
