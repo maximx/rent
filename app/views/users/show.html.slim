@@ -39,10 +39,9 @@
                 td = @total_reviews[Review.rates[:good]] || 0
                 td = @total_reviews[Review.rates[:bad]] || 0
 
-  .row
-    .col-md-12: #map
+  #map
 
-    javascript:
-      $(document).ready(function() {
-        buildGoogleMap( #{raw @maps.to_json} );
-      });
+  javascript:
+    $(document).ready(function() {
+      buildGoogleMap( #{raw @maps.to_json} );
+    });

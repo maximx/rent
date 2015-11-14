@@ -1,9 +1,7 @@
 = render partial: 'users/header', locals: { user: user }
 
 section
-  .row
-    .col-md.12
-      = render partial: 'pictures/picture_carousel', locals: { pictures: user.covers }
+  = render partial: 'pictures/picture_carousel', locals: { pictures: user.covers }
 
   = render_notice(notice)
   = render_alert(alert)
