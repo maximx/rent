@@ -17,31 +17,23 @@ Rails.application.routes.draw do
 
       member do
         get :review
-        put :remitting
-        put :delivering
-        put :renting
-        put :returning
-        delete :withdrawing
+        put :remitting, :delivering, :renting, :returning
         post :ask_for_review
+        delete :withdrawing
       end
     end
 
     get :search, on: :collection
     member do
-      get :questions
+      get :questions, :calendar
       post :collect
       delete :uncollect
-      get :calendar
     end
   end
 
   resources :users, only: [ :show ] do
     member do
-      get :reviews
-      get :lender_reviews
-      get :borrower_reviews
-      get :items
-
+      get :reviews, :lender_reviews, :borrower_reviews, :items
       put :follow
       delete :unfollow
     end
@@ -56,10 +48,8 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ] do
-      get :images
-      get :phone_confirmation
-      post :phone_confirmed
-      post :upload
+      get :images, :phone_confirmation
+      post :phone_confirmed, :upload
     end
   end
 
