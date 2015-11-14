@@ -6,7 +6,7 @@ ul.nav.navbar-nav.navbar-right
         = render_cl_avatar_xs(current_user)
         span.caret
       ul.dropdown-menu.dropdown-menu-right
-        li = link_to render_icon_with_text('user', '個人頁面'), user_path(current_user)
+        li = link_to render_icon_with_text('home', '個人頁面'), user_path(current_user)
         li.divider role="separator"
 
         li.dropdown-header 出租物
