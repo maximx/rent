@@ -50,6 +50,14 @@ span.glyphicon.text { margin-right: 5px; }
 .img-thumbnail { padding: 0; }
 .breadcrumb { background-color: $body-bg; border: 1px solid $gray-85; }
 
+.nav-tabs {
+  &.nav-justified > .active > a { border-bottom-color: transparent; }
+  > li.active > a {
+    background-color: transparent;
+    &:hover { background-color: transparent; }
+  }
+}
+
 /*bootstrap slider*/
 #price_slider { margin-top: 8px; }
 
