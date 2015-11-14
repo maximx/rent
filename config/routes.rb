@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: "pages#index"
+
   get "/about", to: "pages#about"
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
@@ -58,6 +59,7 @@ Rails.application.routes.draw do
       get :images
       get :phone_confirmation
       post :phone_confirmed
+      post :upload
     end
   end
 

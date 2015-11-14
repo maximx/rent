@@ -1,5 +1,8 @@
 class Settings::AccountsController < ApplicationController
+  include FileAttrSetter
+
   before_action :login_required
+  before_action :set_covers_attr, only: [ :upload ]
 
   def show
     @user = current_user
@@ -53,6 +56,16 @@ class Settings::AccountsController < ApplicationController
     @profile = @user.profile
   end
 
+  def upload
+    @user = User.find(current_user.id)
+    if @user.update(user_params)
+      redirect_with_message user_path(@user), notice: '封面圖片更新成功。'
+    else
+      flash[:alert] = '上傳失敗，請重新再試一次。'
+      render 'settings/account/images'
+    end
+  end
+
   private
 
     def update_needs_confirmation?(user, prev_email)
@@ -62,7 +75,8 @@ class Settings::AccountsController < ApplicationController
     def user_params
       params.require(:user).permit(
         :password, :password_confirmation,
-        :email, :current_password, :account
+        :email, :current_password, :account,
+        covers_attributes: [ :public_id, :file_cached ]
       )
     end
 end

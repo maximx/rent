@@ -13,6 +13,10 @@ module FileAttrSetter
       set_file_attr model_name: 'item', attributes_name: 'pictures'
     end
 
+    def set_covers_attr
+      set_file_attr controller: 'settings_account', model_name: 'user', attributes_name: 'covers'
+    end
+
     def set_file_attr(options)
       model_name = options[:model_name]
       attributes_name = options[:attributes_name]
