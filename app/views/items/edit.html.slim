@@ -2,12 +2,6 @@
 
 h2.col-xs-offset-4.col-sm-offset-3  修改 #{ render_item_name(@item) }
 
-#pictures-container
-  - @item.pictures.each do |picture|
-    .picture
-      = link_to "x", item_picture_path(@item, picture),
-                class: "close remove-picture", method: :delete, remote: true,
-                data: { confirm: "確定要刪除嗎？" }
-      = render_cl_image_sm picture.public_id, data: { id: picture.id }
 .row
+  = render partial: 'pictures/picture', locals: { pictures: @item.pictures }
   = render partial: "form", locals: { item: @item }

@@ -15,4 +15,8 @@ class RentRecordStateLog < ActiveRecord::Base
   def remitted?
     aasm_state == 'remitted'
   end
+
+  def editable_by?(user)
+    self.user == user
+  end
 end

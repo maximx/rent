@@ -6,13 +6,6 @@ $ ->
   )
   init_tinymce('#item_description')
 
-  $('.remove-picture').on('ajax:success', (e, data, status, xhr) ->
-    if data.result == 'ok'
-      $(this).closest('.picture').remove()
-    else if data.result == "false"
-      alert('只有一張圖片，不得刪除')
-  )
-
   $('#use_profile_address').on 'change', () ->
     if $(this).prop('checked')
       $('#item_address').val( $(this).val() )

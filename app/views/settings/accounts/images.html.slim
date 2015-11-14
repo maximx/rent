@@ -2,20 +2,24 @@
   .col-xs-offset-4.col-sm-offset-3.profile-picture
     = render_cl_avatar_lg(@user)
 
-  = simple_form_for @profile do |f|
-    = f.simple_fields_for :avatar, @profile do |a|
-      = a.input :public_id, as: :file_select
-      = @profile.errors[:avatar].first
+  .col-md-12
+    = simple_form_for @profile do |f|
+      = f.simple_fields_for :avatar, @profile do |a|
+        = a.input :public_id, as: :file_select
+        = @profile.errors[:avatar].first
 
-    .form-group
-      .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
-        = f.button :submit, '更新'
+      .form-group
+        .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+          = f.button :submit, '更新'
 
-  = simple_form_for @user, url: upload_settings_account_path, html: { method: :post } do |f|
-    = f.simple_fields_for :covers, @user.covers.build do |c|
-      = c.input :public_id, as: :file_select, input_html: { multiple: true }, hint: '可選取多個檔案'
-      = @user.errors[:covers].first
+  = render partial: 'pictures/picture', locals: { pictures: @user.covers }
 
-    .form-group
-      .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
-        = f.button :submit, '更新'
+  .col-md-12
+    = simple_form_for @user, url: upload_settings_account_path, html: { method: :post } do |f|
+      = f.simple_fields_for :covers, @user.covers.build do |c|
+        = c.input :public_id, as: :file_select, input_html: { multiple: true }, hint: '可選取多個檔案'
+        = @user.errors[:covers].first
+
+      .form-group
+        .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+          = f.button :submit, '更新'

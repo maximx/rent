@@ -8,12 +8,24 @@ class Picture < ActiveRecord::Base
   before_save :upload_and_set_public_id, if: Proc.new { |p| p.file_cached != 'faker' }
   before_destroy :delete_cloudinary
 
-  def only_one?
-    imageable.pictures.size == 1
-  end
-
   def filename
     [public_id, format].join('.')
+  end
+
+  def viewable_by?(user)
+    user and (
+      ( imageable.is_a? RentRecordStateLog and imabeable.rent_record.viewable_by?(user) ) or
+      ( imageable.is_a? Item ) or
+      ( imageable.is_a? User )
+    )
+  end
+
+  def editable_by?(user)
+    user and (
+      ( imageable.is_a? RentRecordStateLog and imabeable.editable_by?(user) ) or
+      ( imageable.is_a? User and imageable == user ) or
+      ( imageable.is_a? Item and imageable.editable_by?(user) )
+    )
   end
 
   private

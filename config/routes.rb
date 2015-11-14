@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
-    resources :pictures, only: [ :destroy ]
 
     resources :rent_records, except: [ :edit, :update, :destroy ] do
       resources :reviews, only: [ :create ]
@@ -42,7 +41,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [ :update ] do
     put :update_bank_info, on: :member
   end
-  resources :pictures, only: [] do
+  resources :pictures, only: [ :destroy ] do
     get :download, on: :member
   end
 

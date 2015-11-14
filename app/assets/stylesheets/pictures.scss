@@ -1,9 +1,8 @@
 @import "mixins/variables";
 
-/*item edit*/
-#pictures-container { position: relative; }
-
+/* items/edit and settings/account/images */
 .picture {
+  z-index: 99999;
   float: left;
   position: relative;
   width: 200px;
@@ -25,7 +24,6 @@
     opacity: 0.5;
     .close { display: block; }
   }
-
 }
 
 /*item show*/
