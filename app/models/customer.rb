@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+  extend I18nMessage
+
   belongs_to :user
   has_many :rent_records, as: :borrower
 

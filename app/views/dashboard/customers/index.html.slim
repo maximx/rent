@@ -1,15 +1,14 @@
 table.table.table-hover
   thead
     th 帳號
-    th 姓名
     th 電話
     th
   tbody
     - @customers.each do |customer|
       tr
         td = customer.account
-        td = customer.profile.name
         td
           = customer.profile.phone
           = render_icon_confirmed if customer.profile.phone_confirmed?
-        td = link_to customer.account, dashboard_customer_path(customer)
+        td
+          = render_operate_customer_links customer

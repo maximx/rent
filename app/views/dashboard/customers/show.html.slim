@@ -1,0 +1,17 @@
+h1 = @customer.account
+
+table.table
+  thead
+    tr
+      td.text-right = "#{Customer.i18n_simple_form_label('email')}："
+      td = @customer.email
+  tbody
+    tr
+      td.text-right = "#{Profile.i18n_simple_form_label('name')}："
+      td = @profile.name
+    tr
+      td.text-right = "#{Profile.i18n_simple_form_label('phone')}："
+      td = @profile.phone
+    tr
+      td.text-right = "#{Profile.i18n_simple_form_label('address')}："
+      td = @profile.address
