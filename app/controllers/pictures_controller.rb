@@ -24,6 +24,6 @@ class PicturesController < ApplicationController
     end
 
     def viewable?
-      redirect_with_message(item_rent_records_path) unless @picture.viewable_by?
+      redirect_with_message(item_rent_records_path) unless @picture.viewable_by? current_user
     end
 end

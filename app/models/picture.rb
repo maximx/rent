@@ -14,7 +14,7 @@ class Picture < ActiveRecord::Base
 
   def viewable_by?(user)
     user and (
-      ( imageable.is_a? RentRecordStateLog and imabeable.rent_record.viewable_by?(user) ) or
+      ( imageable.is_a? RentRecordStateLog and imageable.rent_record.viewable_by?(user) ) or
       ( imageable.is_a? Item ) or
       ( imageable.is_a? User )
     )
@@ -22,7 +22,7 @@ class Picture < ActiveRecord::Base
 
   def editable_by?(user)
     user and (
-      ( imageable.is_a? RentRecordStateLog and imabeable.editable_by?(user) ) or
+      ( imageable.is_a? RentRecordStateLog and imageable.editable_by?(user) ) or
       ( imageable.is_a? User and imageable == user ) or
       ( imageable.is_a? Item and imageable.editable_by?(user) )
     )
