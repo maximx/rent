@@ -59,7 +59,7 @@ class Settings::AccountsController < ApplicationController
   def upload
     @user = User.find(current_user.id)
     if @user.update(user_params)
-      redirect_with_message user_path(@user), notice: '封面圖片更新成功。'
+      redirect_with_message images_settings_account_path, notice: '封面圖片更新成功。'
     else
       flash[:alert] = '上傳失敗，請重新再試一次。'
       render 'settings/account/images'
