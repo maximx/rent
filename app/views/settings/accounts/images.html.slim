@@ -4,7 +4,7 @@
 
   .col-md-12
     = simple_form_for @profile do |f|
-      = f.simple_fields_for :avatar, @profile do |a|
+      = f.simple_fields_for :avatar, (@profile.avatar || @profile.build_avatar) do |a|
         = a.input :public_id, as: :file_select
         = @profile.errors[:avatar].first
 

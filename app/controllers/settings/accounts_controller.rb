@@ -6,7 +6,7 @@ class Settings::AccountsController < ApplicationController
 
   def show
     @user = current_user
-    @profile = @user.profile || @user.build_profile
+    @profile = @user.profile
   end
 
   def edit

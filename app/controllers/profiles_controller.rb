@@ -39,7 +39,7 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(
         :name, :city_id, :address, :phone,
         :description, :bank_code, :bank_account,
-        avatar_attributes: [ :public_id, :file_cached ]
+        avatar_attributes: [ :id, :public_id, :file_cached ]
       )
     end
 
