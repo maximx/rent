@@ -3,6 +3,7 @@ class Dashboard::CustomersController < ApplicationController
   before_action :find_customer, only: [ :show, :edit ]
 
   def index
+    @customers = current_user.customers.includes(:profile).page(params[:page])
   end
 
   def show
