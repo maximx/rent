@@ -81,12 +81,6 @@ module ItemsHelper
     "#{text}∶#{count}"
   end
 
-  def render_new_rent_record_link(item)
-    if new_rent_record_button_display?(item)
-      link_to(render_icon_with_text("paperclip", "預約承租"), new_item_rent_record_path(item), class: "btn btn-default")
-    end
-  end
-
   def render_item_view
     view ||= 'grid'
     view = params[:view] if ['list', 'grid'].include? params[:view]
