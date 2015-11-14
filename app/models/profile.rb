@@ -17,6 +17,10 @@ class Profile < ActiveRecord::Base
   before_update :generate_confirmation_token, if: :phone_changed?
   after_update :send_confirmation_instructions, if: :phone_changed?
 
+  def logo_name
+    name || user.account
+  end
+
   def bank_info_present?
     bank_code.present? and bank_account.present?
   end

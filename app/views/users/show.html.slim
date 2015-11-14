@@ -2,7 +2,7 @@
   .container
     .row
       .page-header.clearfix
-        h1.pull-left 關於#{@profile.name}
+        h1.pull-left 關於#{@profile.logo_name}
         .pull-right
           br/
           = render_follow_link @user
@@ -17,9 +17,10 @@
             = render_icon_with_text 'envelope', label_tag("#{User.i18n_simple_form_label('email')}：")
             span = @user.email
             = render_icon('ok', class: 'text-success', data: { toggle: 'tooltip' }, title: '已驗證')
-          li
-            = render_icon_with_text 'map-marker', label_tag("#{Profile.i18n_simple_form_label('address')}：")
-            span = @profile.address
+          - if @profile.address.present?
+            li
+              = render_icon_with_text 'map-marker', label_tag("#{Profile.i18n_simple_form_label('address')}：")
+              span = @profile.address
           - if @profile.phone.present?
             li
               = render_icon_with_text 'phone', label_tag("#{Profile.i18n_simple_form_label('phone')}：")
