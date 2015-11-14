@@ -55,6 +55,8 @@ zh-TW:
               blank: '請填寫銀行帳號'
             picture:
               blank: '請上傳圖片'
+            phone:
+              taken: '電話已被綁定'
         rent_record:
           attributes:
             name:

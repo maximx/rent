@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114080718) do
+ActiveRecord::Schema.define(version: 20151114112850) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20151114080718) do
     t.string   "user_type",            limit: 255
   end
 
+  add_index "profiles", ["phone"], name: "index_profiles_on_phone", unique: true, using: :btree
   add_index "profiles", ["user_id", "user_type"], name: "index_profiles_on_user_id_and_user_type", using: :btree
 
   create_table "questions", force: :cascade do |t|
