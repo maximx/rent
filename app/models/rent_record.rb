@@ -221,6 +221,10 @@ class RentRecord < ActiveRecord::Base
     ].join(' ')
   end
 
+  def emailable?
+    borrower.email.present?
+  end
+
   protected
 
     def set_item_attributes
@@ -242,15 +246,15 @@ class RentRecord < ActiveRecord::Base
     end
 
     def send_payment_message
-      RentRecordMailer.send_payment_message(self).deliver if remit_needed? and booking?
+      RentRecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
     end
 
   private
 
-    def create_rent_record_state_log(user, params = {})
+    def create_rent_record_state_log(borrower, params = {})
       params[:aasm_state] = (rent_record_state_logs.empty?) ? aasm.current_state : aasm.to_state
       log = rent_record_state_logs.build(params)
-      log.user = user
+      log.borrower = borrower
       log.save
     end
 

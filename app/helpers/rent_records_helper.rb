@@ -105,7 +105,7 @@ module RentRecordsHelper
   end
 
   def render_state_log_title(log)
-    titles = [ log.user.account ]
+    titles = [ log.borrower.account ]
     titles << "#{info_label[log.aasm_state.to_sym]} #{log.info}" unless log.info.blank?
     titles << render_datetime(log.created_at, :tw)
     titles.join(tag(:br))
