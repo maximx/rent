@@ -65,6 +65,7 @@ Rails.application.routes.draw do
 
   resources :categories, only: [ :show ]
   resources :subcategories, only: [ :show ]
+  resources :customers, only: [ :create, :update, :destroy ]
 
   resources :conversations, only: [ :index, :show, :destroy ] do
     get :unread, on: :collection

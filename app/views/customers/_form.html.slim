@@ -1,0 +1,7 @@
+= simple_form_for customer do |f|
+  = f.input :email
+
+  = f.simple_fields_for :profile, customer.profile do |p|
+    = p.input :name
+    = p.input :phone
+    = p.input :address
