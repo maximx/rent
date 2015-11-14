@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :items
   has_many :questions
   has_many :requirements
+  has_many :customers
 
   has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :following_relationships, source: :followed
