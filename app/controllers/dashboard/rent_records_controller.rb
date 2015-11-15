@@ -1,7 +1,7 @@
 class Dashboard::RentRecordsController < ApplicationController
   before_action :login_required
 
-  def show
+  def index
     @rent_records = current_user.borrow_records.includes(:item).rencent.page(params[:page])
     @rent_record_state_log = unless @rent_records.empty?
                                @rent_records.first.rent_record_state_logs.build

@@ -57,8 +57,8 @@ Rails.application.routes.draw do
       get :wish, on: :collection
       get :rent_records, on: :member
     end
-    resource :rent_records, only: [ :show ] do
-      get :calendar, on: :member
+    resources :rent_records, only: [ :index ] do
+      get :calendar, on: :collection
     end
     resources :customers
   end
