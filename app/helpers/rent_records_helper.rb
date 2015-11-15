@@ -112,11 +112,11 @@ module RentRecordsHelper
   end
 
   def render_rent_records_form_wrapper
-    rent_records_controller? ? 'bootstrap_horizontal' : 'default'
+    items_controller? ? 'default' : 'bootstrap_horizontal'
   end
 
   def render_rent_records_input_wrapper(html, options = { class: 'col-sm-12' })
-    rent_records_controller? ? html : content_tag(:div, html, options)
+    items_controller? ? content_tag(:div, html, options) : html
   end
 
   def render_datetime_period(obj, type = :db)

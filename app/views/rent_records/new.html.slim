@@ -1,6 +1,6 @@
-- breadcrumb :new_rent_record, @item
+- breadcrumb :new_rent_record, @item unless dashboard_related_controller?
 
 div
   h3.col-md-offset-3 預約承租
-  = render partial: 'form', locals: { item: @item, rent_record: @rent_record,
+  = render partial: 'rent_records/form', locals: { item: @item, rent_record: @rent_record,
                                       event_sources_path: @event_sources_path, disabled_dates: @disabled_dates }

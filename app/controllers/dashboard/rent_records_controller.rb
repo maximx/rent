@@ -17,6 +17,14 @@ class Dashboard::RentRecordsController < ApplicationController
     render (find_item? ? :item_index : :index)
   end
 
+  def new
+    @event_sources_path = calendar_item_path(@item, format: :json)
+    @rent_record = @item.rent_records.build
+    @disabled_dates = @item.booked_dates
+
+    render 'rent_records/new'
+  end
+
   def calendar
     @event_sources_path = calendar_dashboard_rent_records_path(format: :json, role: params[:role])
     rent_records_json = if params[:role] == "borrower"
