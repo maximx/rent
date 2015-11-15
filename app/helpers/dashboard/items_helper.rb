@@ -1,6 +1,8 @@
 module Dashboard::ItemsHelper
-  def dashboard_related_controller?
-    params[:controller].start_with?('dashboard') && params[:action] != 'wish'
+  def render_item_rent_records_link(item)
+    link_to render_icon('list-alt', class: 'text-primary'),
+            rent_records_dashboard_item_path(item),
+            class: 'btn btn-default rent-records-list', title: '出租紀錄', data: { toggle: 'tooltip' }
   end
 
   def dashboard_navbar_list
@@ -19,5 +21,9 @@ module Dashboard::ItemsHelper
     else
       render_icon("unchecked")
     end
+  end
+
+  def dashboard_related_controller?
+    params[:controller].start_with?('dashboard') && params[:action] != 'wish'
   end
 end

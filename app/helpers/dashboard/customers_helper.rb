@@ -20,6 +20,6 @@ module Dashboard::CustomersHelper
       render_show_customer_link(customer),
       render_edit_customer_link(customer)
     ].join
-    content_tag :div, links, class: 'btn-group rent_record_operates'
+    content_tag :div, links, class: 'btn-group'
   end
 end

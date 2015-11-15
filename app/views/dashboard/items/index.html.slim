@@ -21,15 +21,7 @@
           td = @rent_records_count[[item.id,"returned"]]
           td = @rent_records_count[[item.id,"withdrawed"]]
           td = render_renting_checkbox(@rent_records_count[[item.id,"renting"]])
-          td
-            .btn-group
-              = link_to(render_icon('list-alt', class: 'text-primary'), rent_records_dashboard_item_path(item),
-                        class: "btn btn-default rent-records-list", title: "出租紀錄", data: { toggle: "tooltip" })
-              = link_to(render_icon("edit", class: "text-success"), edit_item_path(item),
-                        class: "btn btn-default", title: "修改", data: { toggle: "tooltip" })
-              = link_to(render_icon("trash", class: "text-danger"), item_path(item),
-                        class: "btn btn-default", method: :delete,
-                        title: "刪除", data: { toggle: "tooltip", confirm: "確定要刪除#{item.name}嗎？"})
+          td = render_operate_item_links item
 
 #rent_records_list_container
 

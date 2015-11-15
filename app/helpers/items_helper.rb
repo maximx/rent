@@ -41,6 +41,29 @@ module ItemsHelper
     link_to '+查看日曆+', url, class: 'btn btn-danger'
   end
 
+  def render_edit_item_link(item)
+    link_to render_icon('edit', class: 'text-success'),
+            edit_item_path(item),
+            class: 'btn btn-default', title: '修改', data: { toggle: 'tooltip' }
+  end
+
+  def render_destroy_item_link(item)
+    link_to render_icon('trash', class: 'text-danger'),
+            item_path(item),
+            { class: 'btn btn-default', method: :delete, title: '刪除',
+              data: { toggle: 'tooltip', confirm: "確定要刪除#{item.name}嗎？"} }
+  end
+
+  def render_operate_item_links(item)
+    links = raw [
+      render_item_rent_records_link(item),
+      render_edit_item_link(item),
+      render_destroy_item_link(item)
+    ].join
+
+    content_tag :div, links, class: 'btn-group'
+  end
+
   def render_items_view_links
     links = []
     current_view = ( ['list', 'grid'].include?(params[:view]) ) ? params[:view] : 'grid'
