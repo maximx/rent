@@ -1,7 +1,7 @@
 module Dashboard::ItemsHelper
   def render_item_rent_records_link(item)
     link_to render_icon('list-alt', class: 'text-primary'),
-            rent_records_dashboard_item_path(item),
+            dashboard_item_rent_records_path(item),
             class: 'btn btn-default rent-records-list', title: '出租紀錄', data: { toggle: 'tooltip' }
   end
 

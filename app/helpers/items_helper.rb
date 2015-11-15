@@ -37,7 +37,7 @@ module ItemsHelper
 
   def render_item_calendar_link(item)
     url = item.editable_by?(current_user) ?
-            rent_records_dashboard_item_path(item, anchor: 'calendar') : new_item_rent_record_path(item, anchor: 'calendar')
+            dashboard_item_rent_records_path(item, anchor: 'calendar') : new_item_rent_record_path(item, anchor: 'calendar')
     link_to '+查看日曆+', url, class: 'btn btn-danger'
   end
 
