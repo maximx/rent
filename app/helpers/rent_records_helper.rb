@@ -111,12 +111,12 @@ module RentRecordsHelper
     titles.join(tag(:br))
   end
 
-  def render_rent_records_form_wrapper
-    items_controller? ? 'default' : 'bootstrap_horizontal'
+  def rent_records_form_wrapper
+    full_form? ? 'bootstrap_horizontal' : 'default'
   end
 
   def render_rent_records_input_wrapper(html, options = { class: 'col-sm-12' })
-    items_controller? ? content_tag(:div, html, options) : html
+    full_form? ? html : content_tag(:div, html, options)
   end
 
   def render_datetime_period(obj, type = :db)
@@ -125,6 +125,10 @@ module RentRecordsHelper
 
   def render_datetime(datetime, type = :db)
     datetime.to_s(type)
+  end
+
+  def full_form?
+    !items_controller?
   end
 
   def rent_records_controller?
