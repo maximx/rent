@@ -15,6 +15,17 @@ module Dashboard::ItemsHelper
     end
   end
 
+  def render_operate_item_links(item)
+    links = raw [
+      render_new_item_rent_record_path(item),
+      render_item_rent_records_link(item),
+      render_edit_item_link(item),
+      render_destroy_item_link(item)
+    ].join
+
+    content_tag :div, links, class: 'btn-group'
+  end
+
   def render_renting_checkbox(count)
     if count == 1
       render_icon("ok")
