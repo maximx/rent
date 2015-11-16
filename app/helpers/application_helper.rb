@@ -7,7 +7,7 @@ module ApplicationHelper
       og: {
         site_name: Rent::SITE_NAME,
         type: 'website',
-        image: asset_path('logo'),
+        image: asset_url('logo'),
         url: request.original_url,
         title: "#{Rent::SUB_TITLE} - #{Rent::SITE_NAME}",
         description: Rent::DESCRIPTION
