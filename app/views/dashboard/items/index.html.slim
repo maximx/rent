@@ -25,7 +25,7 @@
           td = render_renting_checkbox(@rent_records_count[[item.id,"renting"]])
           td = render_operate_item_links item
 
-#rent_records_list_container
+  = render partial: 'common/pagination', locals: { objects: @items }
 
 = render_default_content(@items) do
   | 沒有出租物！馬上

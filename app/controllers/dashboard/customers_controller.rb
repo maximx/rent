@@ -3,7 +3,7 @@ class Dashboard::CustomersController < ApplicationController
   before_action :find_customer, :find_profile, only: [ :show, :edit ]
 
   def index
-    @consumers = current_user.consumers.paginate(page: params[:page], per_page: 15)
+    @consumers = current_user.consumers.paginate(page: params[:page], per_page: 10)
   end
 
   def show

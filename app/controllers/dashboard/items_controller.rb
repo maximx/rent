@@ -21,7 +21,7 @@ class Dashboard::ItemsController < ApplicationController
 
     def find_items
       @items = current_user.items.send(overlap_method, params[:started_at], params[:ended_at])
-                .search_by(params[:query])
+                .search_by(params[:query]).page(params[:page])
     end
 
     def overlap_method

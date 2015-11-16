@@ -23,5 +23,4 @@ table.table
         - unless rent_records_controller?
           td = render_operate_rent_record_links(rent_record)
 
-= will_paginate rent_records, class: "hidden-sm hidden-xs", link_html: { "data-remote": @is_xhr }
-= will_paginate rent_records, class: "hidden-lg hidden-md", page_links: false, link_html: { "data-remote": @is_xhr }
+= render partial: 'common/pagination', locals: { objects: rent_records }

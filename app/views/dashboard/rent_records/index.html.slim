@@ -22,8 +22,7 @@ table.table.table-hover
 
 = render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
 
-= will_paginate @rent_records, class: "hidden-sm hidden-xs"
-= will_paginate @rent_records, class: "hidden-lg hidden-md", page_links: false
+= render partial: 'common/pagination', locals: { objects: @rent_records }
 
 = render_default_content(@rent_records) do
   | 沒租過
