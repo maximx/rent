@@ -9,7 +9,9 @@
   = render_rent_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
 
   /是為了 rent_records/new 與 items/show 的 form 美觀
-  - unless dashboard_related_controller?
+  - if dashboard_related_controller?
+    = f.association :borrower, collection: current_user.customers, label_method: :account
+  - else
     div class=(full_form? ? '' : 'col-sm-12')
       = f.input :deliver_id, as: :select, collection: item.delivers, input_html: { class: 'form-control' }
 

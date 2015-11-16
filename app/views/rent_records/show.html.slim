@@ -19,7 +19,7 @@ table.table
     tr
       td 帳號
       td = link_to(@item.lender.account, user_path(@item.lender))
-      td = link_to(@rent_record.borrower.account, user_path(@rent_record.borrower))
+      td = link_to(@rent_record.borrower.account, borrower_path(@rent_record.borrower))
   tbody
     tr
       td 姓名
@@ -34,10 +34,11 @@ table.table
         td 匯款帳號
         td = "#{@item.lender.profile.bank_code} #{@item.lender.profile.bank_account}"
         td
-    tr
-      td 評價
-      td = @rent_record.review_of_judger(@item.lender).human_rate
-      td = @rent_record.review_of_judger(@rent_record.borrower).human_rate
+    - unless is_customer? @rent_record.borrower
+      tr
+        td 評價
+        td = @rent_record.review_of_judger(@item.lender).human_rate
+        td = @rent_record.review_of_judger(@rent_record.borrower).human_rate
     tr
       td 承租物
       td colspan="2" = link_to(@item.name, item_path(@item))
