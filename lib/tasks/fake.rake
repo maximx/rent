@@ -90,11 +90,11 @@ namespace :fake do
         ended_at = time_rand(started_at + 1.day, started_at + rand(3..5).day)
 
         rent_record = item.rent_records.build(
-          user_id: users.sample.id,
           deliver_id: item.delivers.sample.id,
           started_at: started_at,
           ended_at: ended_at
         )
+        rent_record.borrower = users.sample
 
         rent_record.save
       end
