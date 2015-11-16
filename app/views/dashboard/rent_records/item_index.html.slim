@@ -1,4 +1,4 @@
-.text-right = link_to content_tag(:b, '回到出租物列表'), dashboard_items_path, class: 'btn btn-success'
+- breadcrumb :dashboard_rent_records, @item
 
 h3.item-title
   = link_to item_path(@item) do
