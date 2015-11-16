@@ -4,7 +4,14 @@ module ApplicationHelper
       site: Rent::SITE_NAME,
       keywords: Rent::KEYWORDS,
       description: Rent::DESCRIPTION,
-      og: { site_name: Rent::SITE_NAME, type: 'website', image: asset_path('logo') },
+      og: {
+        site_name: Rent::SITE_NAME,
+        type: 'website',
+        image: asset_path('logo'),
+        url: request.original_url,
+        title: "#{Rent::SUB_TITLE} - #{Rent::SITE_NAME}",
+        description: Rent::DESCRIPTION
+      },
       reverse: true,
       viewport: "width=device-width, initial-scale=1"
     )

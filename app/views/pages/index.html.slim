@@ -3,7 +3,7 @@
     = render_notice(notice)
     = render_alert(alert)
 
-    .title.text-center 使用與體驗並不需購買擁有
-    .detail.text-center 從附近鄰居家中租借閒置物品
+    .title.text-center = Rent::TITLE
+    .detail.text-center = Rent::SUB_TITLE
 
   .search-form-container = render partial: 'common/search'
