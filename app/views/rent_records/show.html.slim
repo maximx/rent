@@ -34,7 +34,7 @@ table.table
         td 匯款帳號
         td = "#{@item.lender.profile.bank_code} #{@item.lender.profile.bank_account}"
         td
-    - unless is_customer? @rent_record.borrower
+    - unless @rent_record.borrower.is_customer?
       tr
         td 評價
         td = @rent_record.review_of_judger(@item.lender).human_rate

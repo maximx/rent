@@ -10,4 +10,8 @@ class Customer < ActiveRecord::Base
   def account
     profile.name
   end
+
+  def is_customer?
+    self.is_a? Customer
+  end
 end

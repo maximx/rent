@@ -124,7 +124,10 @@ class RentRecord < ActiveRecord::Base
 
   #可修改
   def editable_by?(user)
-    user && borrower == user && booking?
+    user and booking? and (
+      borrower == user or
+      ( lender == user and borrower.is_customer? )
+    )
   end
 
   def rentable_by?(user)

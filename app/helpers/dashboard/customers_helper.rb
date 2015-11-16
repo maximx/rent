@@ -6,7 +6,7 @@ module Dashboard::CustomersHelper
   end
 
   def render_edit_customer_link(borrower)
-    if is_customer? borrower
+    if borrower.is_customer?
       link_to render_icon('edit', class: 'text-success'),
               edit_dashboard_customer_path(borrower),
               class: 'btn btn-default', title: '修改', data: { toggle: 'tooltip' }
@@ -22,10 +22,6 @@ module Dashboard::CustomersHelper
   end
 
   def borrower_path borrower
-    is_customer?(borrower) ? dashboard_customer_path(borrower) : user_path(borrower)
-  end
-
-  def is_customer? borrower
-    borrower.is_a? Customer
+    borrower.is_customer? ? dashboard_customer_path(borrower) : user_path(borrower)
   end
 end

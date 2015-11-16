@@ -13,7 +13,7 @@ table.table
   tbody
     - rent_records.each do |rent_record|
       tr
-        td = link_to(rent_record.borrower.account, user_path(rent_record.borrower))
+        td = link_to(rent_record.borrower.account, borrower_path(rent_record.borrower))
         td = render_datetime(rent_record.started_at)
         td = render_datetime(rent_record.ended_at)
         - unless rent_records_controller?

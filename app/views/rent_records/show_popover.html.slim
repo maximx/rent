@@ -5,7 +5,7 @@ table.table.table-hover
       td = link_to(@rent_record.lender.account, user_path(@rent_record.lender))
     tr
       td 承租者
-      td = link_to(@rent_record.borrower.account, user_path(@rent_record.borrower))
+      td = link_to(@rent_record.borrower.account, borrower_path(@rent_record.borrower))
     tr
       td 起租日期
       td = render_datetime(@rent_record.started_at, :date_only)

@@ -109,6 +109,10 @@ class User < ActiveRecord::Base
     mailbox.inbox(unread: true).count + mailbox.notifications(unread: true).count
   end
 
+  def is_customer?
+    self.is_a? Customer
+  end
+
   private
 
     def init_profile
