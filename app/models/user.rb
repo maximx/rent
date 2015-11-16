@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   end
 
   def consumers
-    (customers + borrowers).uniq
+    (customers.includes(:profile) + borrowers.includes(:profile)).uniq
   end
 
   # user follow
