@@ -3,6 +3,8 @@ class Dashboard::RentRecordsController < ApplicationController
   before_action :find_item, only: [ :index, :new, :create ]
 
   def index
+    @event_sources_path = calendar_item_path(@item, format: :json) if find_item?
+
     @rent_records = if find_item?
                       @item.rent_records.actived.rencent.page(params[:page])
                     else
