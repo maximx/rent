@@ -1,4 +1,4 @@
-= simple_form_for [item, rent_record], wrapper: rent_records_form_wrapper do |f|
+= simple_form_for [item, rent_record], render_rent_records_form_options(item) do |f|
   - if dashboard_related_controller?
     .form-group
       .col-xs-4.col-sm-3.control-label

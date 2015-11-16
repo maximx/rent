@@ -111,6 +111,13 @@ module RentRecordsHelper
     titles.join(tag(:br))
   end
 
+  def render_rent_records_form_options(item)
+    options = {}
+    options[:wrapper] = 'default' unless full_form?
+    options[:url] = dashboard_item_rent_records_path(item) if dashboard_related_controller?
+    options
+  end
+
   def rent_records_form_wrapper
     full_form? ? 'bootstrap_horizontal' : 'default'
   end

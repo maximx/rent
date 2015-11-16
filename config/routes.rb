@@ -56,7 +56,7 @@ Rails.application.routes.draw do
     resources :customers
 
     resources :items, only: [ :index, :show ] do
-      resources :rent_records, only: [ :index, :new ]
+      resources :rent_records, only: [ :index, :new, :create ]
       get :wish, on: :collection
     end
 
