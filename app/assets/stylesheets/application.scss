@@ -99,7 +99,7 @@ nav.navbar.navbar-sub {
 
       #site-logo {
         text-indent: -119988px;
-        background-image: url("logo");
+        background-image: cloudinary-url('logo.png');
         height: 50px;
         width: 50px;
         display: block;

@@ -26,7 +26,7 @@
   position: relative;
   height: $modal-sm;
   width: 100%;
-  background-image: url("root");
+  background-image: cloudinary-url('root.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-color: $body-bg;
