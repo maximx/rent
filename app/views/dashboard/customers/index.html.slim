@@ -14,3 +14,5 @@ table.table.table-hover
           = render_icon_confirmed if consumer.profile.phone_confirmed?
         td
           = render_operate_customer_links consumer
+
+= render partial: 'common/pagination', locals: { objects: @consumers }
