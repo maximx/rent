@@ -205,10 +205,10 @@ class RentRecord < ActiveRecord::Base
 
   def all_permitted_states
     states = aasm.states.map(&:name)
+    states.delete_if { |state| state == :withdrawed } unless aasm.current_state == :withdrawed
     states.delete(:remitted) unless remit_needed?
     states.delete(:delivering) unless delivery_needed?
-    states.delete(:renting) if aasm.current_state == :withdrawed
-    states.delete_if { |state| state == :withdrawed }
+    states.delete_if { |state| ![:withdrawed, :booking].include? state } if aasm.current_state == :withdrawed
   end
 
   def pending_states
