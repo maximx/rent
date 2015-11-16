@@ -12,7 +12,7 @@
   = f.input :deliver_fee, as: :numeric_addon, direction: '元', input_html: { min: 0 }
 
   = f.input :address do
-    = f.input_field :address, class: 'form-control'
+    = f.input_field :address, class: 'form-control address_geocomplete'
     span.checkbox
       span.help-block
         label #{check_box_tag(nil, current_user.profile.address, false, class: 'check_boxes', id: 'use_profile_address')}同聯絡地址

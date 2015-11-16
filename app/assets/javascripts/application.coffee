@@ -50,7 +50,7 @@ $ ->
   $('.slider').slider()
 
   # google maps autocomplete
-  $('#item_address, #profile_address').geocomplete()
+  $('.address_geocomplete').geocomplete()
 
   buildDateTimePicker($('.form_date'), 'YYYY-MM-DD')
 
