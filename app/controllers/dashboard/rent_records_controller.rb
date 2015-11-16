@@ -6,7 +6,7 @@ class Dashboard::RentRecordsController < ApplicationController
     @event_sources_path = calendar_item_path(@item, format: :json) if find_item?
 
     @rent_records = if find_item?
-                      @item.rent_records.actived.rencent.page(params[:page])
+                      @item.rent_records.rencent.page(params[:page])
                     else
                       current_user.borrow_records.includes(:item).rencent.page(params[:page])
                     end
@@ -61,7 +61,7 @@ class Dashboard::RentRecordsController < ApplicationController
   private
 
     def rent_record_params
-      params.require(:rent_record).permit(:borrower_id, :borrower_type, :started_at, :ended_at)
+      params.require(:rent_record).permit(:borrower_id, :started_at, :ended_at)
     end
 
     def find_item

@@ -111,10 +111,7 @@ class RentRecordsController < ApplicationController
   private
 
   def rent_record_params
-    params.require(:rent_record).permit(
-      :name, :phone, :deliver_id,
-      :started_at, :ended_at
-    )
+    params.require(:rent_record).permit(:deliver_id, :started_at, :ended_at)
   end
 
   def rent_record_state_log_params
