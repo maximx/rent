@@ -25,5 +25,7 @@ module Rent
 
     config.i18n.available_locales = [:"zh-TW"]
     config.i18n.default_locale = :"zh-TW"
+
+    config.time_zone = 'Taipei'
   end
 end
