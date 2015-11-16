@@ -28,17 +28,21 @@ class Picture < ActiveRecord::Base
     )
   end
 
+  def delete_cloudinary
+    unless self.public_id == Rent::DEFAULT_AVATAR
+      Cloudinary::Uploader.destroy(self.public_id)
+    end
+  end
+
   private
 
     def upload_and_set_public_id
+      unless self.new_record?
+        self.class.find(self.id).delete_cloudinary
+      end
+
       info = Cloudinary::Uploader.upload(self.file_cached, use_filename: true)
       self.public_id = info['public_id']
       self.format = info['format']
-    end
-
-    def delete_cloudinary
-      unless self.public_id == Rent::DEFAULT_AVATAR
-        Cloudinary::Uploader.destroy(self.public_id)
-      end
     end
 end
