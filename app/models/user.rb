@@ -55,8 +55,8 @@ class User < ActiveRecord::Base
 
   def consumers(options = {})
     (
-      customers.joins(:profile).where(options) +
-      borrowers.joins(:profile).where(options)
+      customers.includes(:profile).where(options) +
+      borrowers.includes(:profile).where(options)
     ).uniq
   end
 

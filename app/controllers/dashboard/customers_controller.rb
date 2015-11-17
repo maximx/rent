@@ -3,7 +3,8 @@ class Dashboard::CustomersController < ApplicationController
   before_action :find_customer, :find_profile, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @consumers = current_user.consumers.paginate(page: params[:page], per_page: 10)
+    @consumers = current_user.consumers(search_params)
+                  .paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -47,6 +48,10 @@ class Dashboard::CustomersController < ApplicationController
         :email,
         profile_attributes: [ :id, :name, :address, :phone ]
       )
+    end
+
+    def search_params
+      params[:search].map { |k, v| [k.to_sym, v] }.to_h if params.has_key?(:search)
     end
 
     def find_customer

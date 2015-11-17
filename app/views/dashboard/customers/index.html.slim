@@ -2,13 +2,15 @@
 
 table.table.table-hover
   thead
-    th 帳號
-    th 電話
+    th = Profile.i18n_simple_form_label 'name'
+    th = Customer.i18n_simple_form_label 'account'
+    th = Profile.i18n_simple_form_label 'phone'
     th
   tbody
     - @consumers.each do |consumer|
       tr
         td = consumer.account
+        td = consumer.profile.name
         td
           = consumer.profile.phone
           = render_icon_confirmed if consumer.profile.phone_confirmed?
