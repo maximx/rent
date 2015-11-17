@@ -1,8 +1,9 @@
-table.table.table-hover
-  tbody
+table.table
+  thead
     tr
       td 出租者
       td = link_to(@rent_record.lender.account, user_path(@rent_record.lender))
+  tbody
     tr
       td 承租者
       td = link_to(@rent_record.borrower.account, borrower_path(@rent_record.borrower))
