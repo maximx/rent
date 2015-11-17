@@ -6,9 +6,11 @@ class Dashboard::RentRecordsController < ApplicationController
     @event_sources_path = calendar_item_path(@item, format: :json) if find_item?
 
     @rent_records = if find_item?
-                      @item.rent_records.rencent.page(params[:page])
+                      @item.rent_records.includes(:borrower, :deliver, :item).rencent.page(params[:page])
                     else
-                      current_user.borrow_records.includes(:item).rencent.page(params[:page])
+                      current_user.borrow_records
+                        .includes(:borrower, :deliver, [ item: [ lender: [profile: :avatar] ] ])
+                        .rencent.page(params[:page])
                     end
 
     @rent_record_state_log = unless @rent_records.empty?
