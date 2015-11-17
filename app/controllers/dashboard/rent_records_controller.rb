@@ -47,10 +47,10 @@ class Dashboard::RentRecordsController < ApplicationController
   def calendar
     @event_sources_path = calendar_dashboard_rent_records_path(format: :json, role: params[:role])
     rent_records_json = if params[:role] == "borrower"
-                          current_user.borrow_records.includes(:borrower)
+                          current_user.borrow_records.includes(:borrower, :item)
                             .overlaps(params[:start], params[:end]).to_json
                         else
-                          current_user.lend_records.includes(:borrower)
+                          current_user.lend_records.includes(:borrower, :item)
                             .overlaps(params[:start], params[:end]).to_json
                         end
 
