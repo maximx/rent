@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def items
-    @items = @user.items
+    @items = @user.items.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
     sort_and_paginate_items
     find_users_reviews_count
     meta_pagination_links @items
