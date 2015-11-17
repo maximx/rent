@@ -11,7 +11,7 @@ class Dashboard::ItemsController < ApplicationController
   end
 
   def wish
-    @items = current_user.collections.page(params[:page])
+    @items = current_user.collections.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
     sort_and_paginate_items
     find_users_reviews_count
     render 'items/index'

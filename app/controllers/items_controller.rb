@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   before_action :set_pictures_attr, only: [ :create, :update ]
 
   def index
-    @items = Item.includes(:pictures, :lender, :city, :collectors)
+    @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
     sort_and_paginate_items
     find_users_reviews_count
     meta_pagination_links @items
@@ -99,7 +99,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.includes(:pictures, :lender, :city, :collectors)
+    @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
                  .record_not_overlaps(params[:started_at], params[:ended_at])
                  .price_range(params[:price_min], params[:price_max])
                  .search_by(params[:query])

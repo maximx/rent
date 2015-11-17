@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @breadcrumbs_object = @category
-    @items = @category.items.includes(:pictures, :lender, :city, :collectors)
+    @items = @category.items.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
     sort_and_paginate_items
     find_users_reviews_count
     set_category_meta_tags

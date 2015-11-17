@@ -7,7 +7,7 @@ class SubcategoriesController < ApplicationController
   def show
     @subcategory = Subcategory.find(params[:id])
     @breadcrumbs_object = @subcategory
-    @items = @subcategory.items.includes(:pictures, :lender, :city, :collectors)
+    @items = @subcategory.items.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
     sort_and_paginate_items
     find_users_reviews_count
     set_subcategory_meta_tags
