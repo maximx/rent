@@ -2,12 +2,12 @@ class SubcategoriesController < ApplicationController
   include UsersReviewsCount
   include SortPaginate
 
-  before_action :find_subcategory, only: [ :show ]
   before_action :find_navbar_categories, only: [ :show ]
 
   def show
+    @subcategory = Subcategory.find(params[:id])
     @breadcrumbs_object = @subcategory
-    @items = @subcategory.items
+    @items = @subcategory.items.includes(:pictures, :lender, :city, :collectors)
     sort_and_paginate_items
     find_users_reviews_count
     set_subcategory_meta_tags
@@ -15,10 +15,6 @@ class SubcategoriesController < ApplicationController
   end
 
   private
-
-    def find_subcategory
-      @subcategory = Subcategory.find(params[:id])
-    end
 
     def set_subcategory_meta_tags
       meta_pagination_links @items
