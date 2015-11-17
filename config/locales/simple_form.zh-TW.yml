@@ -55,3 +55,4 @@ zh-TW:
         body: '訊息'
       customer:
         email: '電子郵件'
+        account: '帳號'

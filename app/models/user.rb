@@ -53,8 +53,11 @@ class User < ActiveRecord::Base
     email
   end
 
-  def consumers
-    (customers.includes(:profile) + borrowers.includes(:profile)).uniq
+  def consumers(options = {})
+    (
+      customers.joins(:profile).where(options) +
+      borrowers.joins(:profile).where(options)
+    ).uniq
   end
 
   # user follow
