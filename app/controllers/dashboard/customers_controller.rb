@@ -51,7 +51,10 @@ class Dashboard::CustomersController < ApplicationController
     end
 
     def search_params
-      params[:search].map { |k, v| [k.to_sym, v] }.to_h if params.has_key?(:search)
+      if !params[:query].blank? and ['email', 'name', 'phone'].include?(params[:type])
+        'email' == params[:type] ?
+          Hash[ params[:type], params[:query] ] : Hash[:profiles, Hash[ params[:type], params[:query] ] ]
+      end
     end
 
     def find_customer

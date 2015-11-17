@@ -11,6 +11,14 @@ class Customer < ActiveRecord::Base
     profile.name
   end
 
+  def self.search_types
+    [
+      [i18n_simple_form_label('email'), 'email'],
+      [Profile.i18n_simple_form_label('name'), 'name'],
+      [Profile.i18n_simple_form_label('phone'), 'phone']
+    ]
+  end
+
   def is_customer?
     self.is_a? Customer
   end

@@ -1,0 +1,11 @@
+= form_tag dashboard_customers_path, method: :get, id: 'search-form', class: 'navbar-form' do
+  .form-group
+    .input-group
+      span.input-group-btn
+        = select_tag :type, options_for_select(Customer.search_types, params[:type]), class: 'form-control'
+
+      = text_field_tag :query, params[:query], class: 'form-control keyword', placeholder: '關鍵字'
+
+      span.input-group-btn
+        button.btn.btn-default type="submit"
+          = render_icon('search')

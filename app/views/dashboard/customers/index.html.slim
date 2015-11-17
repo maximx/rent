@@ -1,5 +1,7 @@
 = link_to '新增客戶', new_dashboard_customer_path, class: 'btn btn-primary'
 
+= render partial: 'search'
+
 table.table.table-hover
   thead
     th = Profile.i18n_simple_form_label 'name'
