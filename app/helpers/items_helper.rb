@@ -128,7 +128,7 @@ module ItemsHelper
   end
 
   def uncollect_link_display?(item)
-    user_signed_in? && current_user.is_collected?(item) && item_action_display?
+    user_signed_in? && item.collected_by?(current_user) && item_action_display?
   end
 
   def items_controller?

@@ -20,7 +20,7 @@ class Item < ActiveRecord::Base
   has_many :borrowers, through: :rent_records, source: :user
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
-  has_many :collector, through: :collect_relationships, source: :user
+  has_many :collectors, through: :collect_relationships, source: :user
 
   has_many :pictures, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :pictures
@@ -115,6 +115,10 @@ class Item < ActiveRecord::Base
 
   def delivers_include_non_face?
     delivers.include?( Deliver.where.not(name: '面交自取').first )
+  end
+
+  def collected_by? user
+    collectors.include? user
   end
 
   protected
