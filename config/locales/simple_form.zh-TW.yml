@@ -28,6 +28,8 @@ zh-TW:
         description: '介紹'
         avatar:
           public_id: '大頭照'
+        facebook: 'Facebook'
+        line: 'Line'
       item:
         name: '名稱'
         subcategory_id: '分類'
