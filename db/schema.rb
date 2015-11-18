@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116052242) do
+ActiveRecord::Schema.define(version: 20151118024112) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -187,19 +187,19 @@ ActiveRecord::Schema.define(version: 20151116052242) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "rent_record_state_logs", force: :cascade do |t|
-    t.integer  "rent_record_id", limit: 4
-    t.string   "aasm_state",     limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "info",           limit: 255
-    t.integer  "borrower_id",    limit: 4
-    t.string   "borrower_type",  limit: 255
+  create_table "record_state_logs", force: :cascade do |t|
+    t.integer  "record_id",     limit: 4
+    t.string   "aasm_state",    limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "info",          limit: 255
+    t.integer  "borrower_id",   limit: 4
+    t.string   "borrower_type", limit: 255
   end
 
-  add_index "rent_record_state_logs", ["borrower_id", "borrower_type"], name: "index_rent_record_state_logs_on_borrower_id_and_borrower_type", using: :btree
+  add_index "record_state_logs", ["borrower_id", "borrower_type"], name: "index_record_state_logs_on_borrower_id_and_borrower_type", using: :btree
 
-  create_table "rent_records", force: :cascade do |t|
+  create_table "records", force: :cascade do |t|
     t.integer  "item_id",       limit: 4
     t.integer  "borrower_id",   limit: 4
     t.datetime "started_at"
@@ -216,20 +216,20 @@ ActiveRecord::Schema.define(version: 20151116052242) do
     t.string   "borrower_type", limit: 255
   end
 
-  add_index "rent_records", ["borrower_id", "borrower_type"], name: "index_rent_records_on_borrower_id_and_borrower_type", using: :btree
+  add_index "records", ["borrower_id", "borrower_type"], name: "index_records_on_borrower_id_and_borrower_type", using: :btree
 
   create_table "reviews", force: :cascade do |t|
-    t.integer  "rent_record_id", limit: 4
-    t.integer  "judger_id",      limit: 4
-    t.integer  "user_id",        limit: 4
-    t.integer  "user_role",      limit: 4
-    t.text     "content",        limit: 65535
-    t.integer  "rate",           limit: 4,     default: 2
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "record_id",  limit: 4
+    t.integer  "judger_id",  limit: 4
+    t.integer  "user_id",    limit: 4
+    t.integer  "user_role",  limit: 4
+    t.text     "content",    limit: 65535
+    t.integer  "rate",       limit: 4,     default: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
-  add_index "reviews", ["rent_record_id", "judger_id", "user_id"], name: "index_reviews_on_rent_record_id_and_judger_id_and_user_id", unique: true, using: :btree
+  add_index "reviews", ["record_id", "judger_id", "user_id"], name: "index_reviews_on_record_id_and_judger_id_and_user_id", unique: true, using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        limit: 255
