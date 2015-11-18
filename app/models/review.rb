@@ -1,9 +1,9 @@
 class Review < ActiveRecord::Base
-  validates_presence_of :content, :rate, :user_role, :user_id, :judger_id, :rent_record_id
+  validates_presence_of :content, :rate, :user_role, :user_id, :judger_id, :record_id
 
   belongs_to :judger, class_name: "User", foreign_key: "judger_id"
   belongs_to :user
-  belongs_to :rent_record
+  belongs_to :record
 
   # 負評、好評、未評
   enum rate: [ :bad, :good, :notyet ]
@@ -25,7 +25,7 @@ class Review < ActiveRecord::Base
   end
 
   def item
-    self.rent_record.item
+    self.record.item
   end
 
   def notify_ask_for_review_subject
@@ -42,12 +42,12 @@ class Review < ActiveRecord::Base
   private
 
     def set_user_and_role
-      if "lender" == judger.role_of(rent_record)
+      if "lender" == judger.role_of(record)
         self.user_role = "borrower"
-        self.user = rent_record.borrower
-      elsif "borrower" == judger.role_of(rent_record)
+        self.user = record.borrower
+      elsif "borrower" == judger.role_of(record)
         self.user_role = "lender"
-        self.user = rent_record.lender
+        self.user = record.lender
       end
     end
 end

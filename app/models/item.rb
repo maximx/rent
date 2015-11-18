@@ -16,8 +16,8 @@ class Item < ActiveRecord::Base
   has_many :questions, -> { order("created_at").reverse_order }, dependent: :destroy
   belongs_to :city
 
-  has_many :rent_records, -> { order(started_at: :desc) }, class_name: "RentRecord", foreign_key: "item_id"
-  has_many :borrowers, through: :rent_records, source: :user
+  has_many :records, -> { order(started_at: :desc) }, class_name: 'Record', foreign_key: 'item_id'
+  has_many :borrowers, through: :records, source: :user
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
   has_many :collectors, through: :collect_relationships, source: :user
@@ -43,7 +43,7 @@ class Item < ActiveRecord::Base
   scope :price_less_than, -> (max) { where('price <= ?', max) if max.present? && max != PRICE_MAX }
 
   scope :record_overlaps, ->(started_at, ended_at) do
-    where(id: RentRecord.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
+    where(id: Record.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
   end
   scope :record_not_overlaps, ->(started_at, ended_at) do
     where.not(id: record_overlaps(started_at, ended_at))
@@ -98,13 +98,13 @@ class Item < ActiveRecord::Base
   end
 
   def reviews
-    Review.where(rent_record_id: rent_records)
+    Review.where(record_id: records)
   end
 
   def booked_dates
-    dates = rent_records.actived
-                        .where('started_at > ?', Time.now)
-                        .collect { |rent_record| (rent_record.started_at.to_date .. (rent_record.ended_at).to_date).map(&:to_s) }
+    dates = records.actived
+                   .where('started_at > ?', Time.now)
+                   .collect { |record| (record.started_at.to_date .. (record.ended_at).to_date).map(&:to_s) }
     dates << Time.now.yesterday.to_date.to_s
     dates.flatten
   end

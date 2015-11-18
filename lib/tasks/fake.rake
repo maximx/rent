@@ -82,21 +82,21 @@ namespace :fake do
     end
   end
 
-  task :rent_records => :environment do
+  task :records => :environment do
     Item.all.each do |item|
       15.times do
         users = User.where.not(id: item.lender)
         started_at = time_rand
         ended_at = time_rand(started_at + 1.day, started_at + rand(3..5).day)
 
-        rent_record = item.rent_records.build(
+        record = item.records.build(
           deliver_id: item.delivers.sample.id,
           started_at: started_at,
           ended_at: ended_at
         )
-        rent_record.borrower = users.sample
+        record.borrower = users.sample
 
-        rent_record.save
+        record.save
       end
     end
   end

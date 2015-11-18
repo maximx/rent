@@ -1,4 +1,4 @@
-class RentRecord < ActiveRecord::Base
+class Record < ActiveRecord::Base
   include AASM
   include CurrencyPrice
   extend I18nMessage
@@ -10,7 +10,7 @@ class RentRecord < ActiveRecord::Base
   belongs_to :item
   belongs_to :deliver, required: true
   has_many :reviews
-  has_many :rent_record_state_logs, class_name: 'RentRecordStateLog', foreign_key: 'rent_record_id'
+  has_many :record_state_logs, class_name: 'RecordStateLog', foreign_key: 'record_id'
 
   self.per_page = 10
 
@@ -26,11 +26,11 @@ class RentRecord < ActiveRecord::Base
 
   aasm no_direct_assignment: true do
     state :booking, initial: true
-    state :remitted, before_enter: :create_rent_record_state_log
-    state :delivering, before_enter: :create_rent_record_state_log
-    state :renting, before_enter: :create_rent_record_state_log
-    state :withdrawed, before_enter: :create_rent_record_state_log
-    state :returned, before_enter: :create_rent_record_state_log
+    state :remitted, before_enter: :create_record_state_log
+    state :delivering, before_enter: :create_record_state_log
+    state :renting, before_enter: :create_record_state_log
+    state :withdrawed, before_enter: :create_record_state_log
+    state :returned, before_enter: :create_record_state_log
 
     event :remit, guards: [ :remit_needed? ] do
       transitions from: :booking, to: :remitted
@@ -80,7 +80,7 @@ class RentRecord < ActiveRecord::Base
   end
 
   def overlaps
-    item.rent_records.where.not(id: id || -1).overlaps(started_at, ended_at)
+    item.records.where.not(id: id || -1).overlaps(started_at, ended_at)
   end
 
   def borrower_not_lender
@@ -94,7 +94,7 @@ class RentRecord < ActiveRecord::Base
       title: "#{borrower.account} - #{ApplicationController.helpers.render_item_name(item, 15)}",
       start: started_at,
       end: ended_at,
-      url: Rails.application.routes.url_helpers.item_rent_record_path(item, id)
+      url: Rails.application.routes.url_helpers.item_record_path(item, id)
     }
   end
 
@@ -104,7 +104,7 @@ class RentRecord < ActiveRecord::Base
 
     dates_json << initial_state_date_json
 
-    rent_record_state_logs.each do |log|
+    record_state_logs.each do |log|
       dates_json << {
         id: log.aasm_state,
         title: self.class.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}"),
@@ -212,7 +212,7 @@ class RentRecord < ActiveRecord::Base
   end
 
   def pending_states
-    all_permitted_states - rent_record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
+    all_permitted_states - record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
   end
 
   def notify_booking_subject
@@ -246,7 +246,7 @@ class RentRecord < ActiveRecord::Base
     end
 
     def save_booking_state_log
-      create_rent_record_state_log(borrower) if rent_record_state_logs.empty?
+      create_record_state_log(borrower) if record_state_logs.empty?
     end
 
     def send_payment_message
@@ -255,9 +255,9 @@ class RentRecord < ActiveRecord::Base
 
   private
 
-    def create_rent_record_state_log(borrower, params = {})
-      params[:aasm_state] = (rent_record_state_logs.empty?) ? aasm.current_state : aasm.to_state
-      log = rent_record_state_logs.build(params)
+    def create_record_state_log(borrower, params = {})
+      params[:aasm_state] = (record_state_logs.empty?) ? aasm.current_state : aasm.to_state
+      log = record_state_logs.build(params)
       log.borrower = borrower
       log.save
     end
