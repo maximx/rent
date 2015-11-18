@@ -7,22 +7,9 @@
           br/
           = render_follow_link @user
 
-      .col-md-8
-        ul
-          li
-            = render_icon_with_text 'envelope', label_tag("#{User.i18n_simple_form_label('email')}：")
-            span = @user.email
-            = render_icon_confirmed
-          - if @profile.address.present?
-            li
-              = render_icon_with_text 'map-marker', label_tag("#{Profile.i18n_simple_form_label('address')}：")
-              span = @profile.address
-          - if @profile.phone.present?
-            li
-              = render_icon_with_text 'phone', label_tag("#{Profile.i18n_simple_form_label('phone')}：")
-              span = @profile.phone
-              = render_icon_confirmed if @user.profile.phone_confirmed?
-      .col-md-4
+      = render partial: 'users/info', locals: { user: @user, profile: @profile }
+
+      div class="col-md-4"
         .panel.panel-default
           .panel-heading.text-center: strong 總評價
 
@@ -35,6 +22,13 @@
               tr
                 td = @total_reviews[Review.rates[:good]] || 0
                 td = @total_reviews[Review.rates[:bad]] || 0
+
+      - if @profile.facebook.present?
+        .col-md-4
+          .fb-page data-href="#{@profile.facebook}" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"
+            .fb-xfbml-parse-ignore
+              blockquote cite="#{@profile.facebook}"
+                = link_to @profile.name, @profile.facebook
 
       - if @profile.description.present?
         .col-md-12

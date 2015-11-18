@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
 
     def profile_params
       params.require(:profile).permit(
-        :name, :city_id, :address, :phone,
+        :name, :city_id, :address, :phone, :facebook,
         :description, :bank_code, :bank_account,
         avatar_attributes: [ :id, :public_id, :file_cached ]
       )
