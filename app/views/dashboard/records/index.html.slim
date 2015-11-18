@@ -7,23 +7,23 @@ table.table.table-hover
     th 狀態
     th
   tbody
-    - @rent_records.each do |rent_record|
+    - @records.each do |record|
       tr
-        td = link_to(rent_record.item.name, item_path(rent_record.item))
+        td = link_to(record.item.name, item_path(record.item))
         td
-          = link_to user_path(rent_record.lender), class: "img-circle img-thumbnail",
-                    data: { toggle: "tooltip" }, title: rent_record.lender.account do
-            = render_cl_avatar_sm(rent_record.lender)
-          span = rent_record.review_of_user(current_user).human_rate
-        td = rent_record.currency_price
-        td = render_datetime_period(rent_record, :date_only)
-        td = rent_record.aasm.human_state
-        td = render_operate_rent_record_links(rent_record)
+          = link_to user_path(record.lender), class: "img-circle img-thumbnail",
+                    data: { toggle: "tooltip" }, title: record.lender.account do
+            = render_cl_avatar_sm(record.lender)
+          span = record.review_of_user(current_user).human_rate
+        td = record.currency_price
+        td = render_datetime_period(record, :date_only)
+        td = record.aasm.human_state
+        td = render_operate_record_links(record)
 
-= render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
+= render partial: 'records/state_log_modal', locals: { record_state_log: @record_state_log }
 
-= render partial: 'common/pagination', locals: { objects: @rent_records }
+= render partial: 'common/pagination', locals: { objects: @records }
 
-= render_default_content(@rent_records) do
+= render_default_content(@records) do
   | 沒租過
   mark = link_to('來去租', items_path, class: "text-danger")

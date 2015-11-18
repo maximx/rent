@@ -1,14 +1,14 @@
-= simple_form_for [item, rent_record], render_rent_records_form_options(item) do |f|
+= simple_form_for [item, record], render_records_form_options(item) do |f|
   - if dashboard_related_controller?
     .form-group
       .col-xs-4.col-sm-3.control-label
         label 承租物
       .col-xs-6.col-sm-6 = render_disabled_input item.name
 
-  = render_rent_records_input_wrapper(f.input :started_at, as: :date_time_picker)
-  = render_rent_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
+  = render_records_input_wrapper(f.input :started_at, as: :date_time_picker)
+  = render_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
 
-  /是為了 rent_records/new 與 items/show 的 form 美觀
+  /是為了 records/new 與 items/show 的 form 美觀
   - if dashboard_related_controller?
     = f.association :borrower, collection: current_user.customers, label_method: :account
   - else
@@ -32,7 +32,7 @@
 = hidden_field_tag :item_price, item.price
 
 - if full_form?
-  = render partial: 'rent_records/calendar', locals: { event_sources_path: event_sources_path }
+  = render partial: 'records/calendar', locals: { event_sources_path: event_sources_path }
 
 javascript:
   $(document).ready(function(){

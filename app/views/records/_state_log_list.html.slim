@@ -1,7 +1,7 @@
-- width = 100 / rent_record.all_permitted_states.size
+- width = 100 / record.all_permitted_states.size
 
 .progress
-  - rent_record.rent_record_state_logs.each do |log|
+  - record.record_state_logs.each do |log|
     - if log.id
       .progress-bar.progress-bar-success.text-danger role="progressbar" style="width: #{width}%" data-toggle="tooltip" title="#{render_state_log_title(log)}"
         - if log.attachments.present?
@@ -12,6 +12,6 @@
         - else
           = RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
 
-  - rent_record.pending_states.each do |state|
+  - record.pending_states.each do |state|
     .progress-bar.progress-bar-muted role="progressbar" style="width: #{width}%"
       = RentRecord.i18n_activerecord_attribute("aasm_state.#{state}")

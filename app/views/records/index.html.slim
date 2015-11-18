@@ -1,6 +1,6 @@
-- breadcrumb :rent_records, @item
+- breadcrumb :records, @item
 
 = render partial: 'items/item_info_container', locals: { item: @item }
 
-= render partial: 'rent_records/rent_record_list', locals: { rent_records: @rent_records }
-= render_default_content(@rent_records, '無承租紀錄')
+= render partial: 'records/record_list', locals: { records: @records }
+= render_default_content(@records, '無承租紀錄')

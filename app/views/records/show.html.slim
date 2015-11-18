@@ -1,10 +1,10 @@
-- breadcrumb :rent_record, @item, @rent_record
+- breadcrumb :record, @item, @record
 
-= render partial: 'rent_records/state_log_list',
-         locals: { rent_record: @rent_record, rent_record_state_logs: @rent_record_state_logs }
+= render partial: 'records/state_log_list',
+         locals: { record: @record, record_state_logs: @record_state_logs }
 
-.text-right = render_operate_rent_record_links(@rent_record)
-= render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
+.text-right = render_operate_record_links(@record)
+= render partial: 'records/state_log_modal', locals: { record_state_log: @record_state_log }
 
 table.table
   thead
@@ -15,48 +15,48 @@ table.table
         = render_cl_avatar_sm(@item.lender)
       td
         span 承租者
-        = render_cl_avatar_sm(@rent_record.borrower)
+        = render_cl_avatar_sm(@record.borrower)
     tr
       td 帳號
       td = link_to(@item.lender.account, user_path(@item.lender))
-      td = link_to(@rent_record.borrower.account, borrower_path(@rent_record.borrower))
+      td = link_to(@record.borrower.account, borrower_path(@record.borrower))
   tbody
     tr
       td 姓名
       td = @item.lender.profile.name
-      td = @rent_record.borrower.profile.name
+      td = @record.borrower.profile.name
     tr
       td 電話
       td = @item.lender.profile.phone
-      td = @rent_record.borrower.profile.phone
-    - if @rent_record.remit_needed?
+      td = @record.borrower.profile.phone
+    - if @record.remit_needed?
       tr
         td 匯款帳號
         td = "#{@item.lender.profile.bank_code} #{@item.lender.profile.bank_account}"
         td
-    - unless @rent_record.borrower.is_customer?
+    - unless @record.borrower.is_customer?
       tr
         td 評價
-        td = @rent_record.review_of_judger(@item.lender).human_rate
-        td = @rent_record.review_of_judger(@rent_record.borrower).human_rate
+        td = @record.review_of_judger(@item.lender).human_rate
+        td = @record.review_of_judger(@record.borrower).human_rate
     tr
       td 承租物
       td colspan="2" = link_to(@item.name, item_path(@item))
     tr
       td 狀態
-      td colspan="2" = @rent_record.aasm.human_state
+      td colspan="2" = @record.aasm.human_state
     tr
       td 運送方式
-      td colspan="2" #{@rent_record.deliver.name}（地址：#{@rent_record.item.address}）
+      td colspan="2" #{@record.deliver.name}（地址：#{@record.item.address}）
     tr
       td 租期
-      td colspan="2" #{render_datetime_period(@rent_record, :tw)} （#{@rent_record.rent_days} 天）
+      td colspan="2" #{render_datetime_period(@record, :tw)} （#{@record.rent_days} 天）
     tr
       td 租金
-      td colspan="2" #{@rent_record.currency_item_price}（租金）* #{@rent_record.rent_days}（天） = #{@rent_record.currency_price}（總金額）
+      td colspan="2" #{@record.currency_item_price}（租金）* #{@record.rent_days}（天） = #{@record.currency_price}（總金額）
     tr
       td 押金
-      td colspan="2" #{@rent_record.currency_item_deposit}
+      td colspan="2" #{@record.currency_item_deposit}
     tr
       td 應付總額
-      td colspan="2" #{@rent_record.currency_price} + #{@rent_record.currency_deliver_fee} + #{@rent_record.currency_item_deposit} = #{@rent_record.currency_total_price} 元
+      td colspan="2" #{@record.currency_price} + #{@record.currency_deliver_fee} + #{@record.currency_item_deposit} = #{@record.currency_total_price} 元

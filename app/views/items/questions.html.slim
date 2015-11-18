@@ -1,3 +1,3 @@
-= render layout: 'items/show', locals: { item: @item, rent_record: @rent_record, disabled_dates: @disabled_dates, maps: @maps } do
+= render layout: 'items/show', locals: { item: @item, record: @record, disabled_dates: @disabled_dates, maps: @maps } do
   = render partial: 'questions/question', collection: @item.questions.includes(:asker)
   = render partial: 'questions/ask_question', locals: { item: @item, question: @question }

@@ -2,11 +2,11 @@ zh-TW:
   activerecord:
     models:
       item: "出租物"
-      rent_record: "承租預約"
+      record: "承租預約"
       profile: "個人資料"
       customer: "客戶"
     attributes:
-      rent_record:
+      record:
         aasm_state:
             booking: '預訂'
             remitted: '完成匯款'
@@ -57,7 +57,7 @@ zh-TW:
               blank: '請上傳圖片'
             phone:
               taken: '電話已被綁定'
-        rent_record:
+        record:
           attributes:
             name:
               blank: '承租人姓名為必填'
@@ -72,7 +72,7 @@ zh-TW:
               bad_period: '租期應大於 %{period}'
             deliver_id:
               blank: '運送方式為必填'
-        rent_record_state_log:
+        record_state_log:
           attributes:
             info:
               blank: '匯款帳號為必填'

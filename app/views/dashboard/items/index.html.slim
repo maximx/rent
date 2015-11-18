@@ -19,10 +19,10 @@
         tr
           td = link_to(render_item_name(item), item_path(item))
           td = item.price_period
-          td = @rent_records_count[[item.id,"booking"]]
-          td = @rent_records_count[[item.id,"returned"]]
-          td = @rent_records_count[[item.id,"withdrawed"]]
-          td = render_renting_checkbox(@rent_records_count[[item.id,"renting"]])
+          td = @records_count[[item.id,"booking"]]
+          td = @records_count[[item.id,"returned"]]
+          td = @records_count[[item.id,"withdrawed"]]
+          td = render_renting_checkbox(@records_count[[item.id,"renting"]])
           td = render_operate_item_links item
 
   = render partial: 'common/pagination', locals: { objects: @items }

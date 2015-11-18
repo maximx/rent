@@ -14,10 +14,10 @@
               .period = item.period
 
             h4.hidden-lg.hidden-md.text-center
-              = link_to '預約承租', new_item_rent_record_path(item, rent_record), class: 'text-success'
+              = link_to '預約承租', new_item_record_path(item, record), class: 'text-success'
 
           .panel-body.hidden-sm.hidden-xs
-            = render partial: "rent_records/form", locals: { item: item, rent_record: rent_record, disabled_dates: disabled_dates }
+            = render partial: 'records/form', locals: { item: item, record: record, disabled_dates: disabled_dates }
             .text-right = render_collect_item_links(item, :remote)
 
 .item-show-container

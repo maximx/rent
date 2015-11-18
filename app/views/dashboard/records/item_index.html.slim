@@ -1,12 +1,12 @@
-- breadcrumb :dashboard_rent_records, @item
+- breadcrumb :dashboard_records, @item
 
 h3.item-title
   = link_to item_path(@item) do
     small = render_icon 'link', class: 'text-muted'
     = @item.name
 
-= render partial: 'rent_records/rent_record_list', locals: { rent_records: @rent_records }
-= render partial: 'rent_records/state_log_modal', locals: { rent_record_state_log: @rent_record_state_log }
-= render partial: 'rent_records/calendar', locals: { event_sources_path: @event_sources_path }
+= render partial: 'records/record_list', locals: { records: @records }
+= render partial: 'records/state_log_modal', locals: { record_state_log: @record_state_log }
+= render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }
 
-= render_default_content(@rent_records, '無承租紀錄')
+= render_default_content(@records, '無承租紀錄')

@@ -108,4 +108,4 @@ namespace :fake do
   end
 end
 
-task fake: [ "fake:users", "fake:profiles", "fake:items", "fake:regeocode", "fake:rent_records" ]
+task fake: [ "fake:users", "fake:profiles", "fake:items", "fake:regeocode", "fake:records" ]

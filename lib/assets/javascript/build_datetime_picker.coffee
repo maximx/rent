@@ -28,8 +28,8 @@
 
 
 @rentRecordPickerChange = ()->
-  $start_picker_obj = $('#rent_record_started_at')
-  $end_picker_obj = $('#rent_record_ended_at')
+  $start_picker_obj = $('#record_started_at')
+  $end_picker_obj = $('#record_ended_at')
   minimum_period = $('#minimun_period').val()
 
   $start_picker_obj.on('dp.change', (e)->

@@ -1,14 +1,14 @@
-namespace :rent_records do
+namespace :records do
   task :withdraw_overdue => :environment do
-    rent_records = RentRecord.booking.where("started_at <= ?", Time.now - 1.hour)
-    rent_records.each { |rent_record| rent_record.withdraw! }
+    records = Record.booking.where("started_at <= ?", Time.now - 1.hour)
+    records.each { |record| record.withdraw! }
   end
 
   task :notice_return => :environment do
-    rent_records = RentRecord.renting.where("ended_at between ? and ?", Time.now, Time.now + 1.hour)
+    records = Record.renting.where("ended_at between ? and ?", Time.now, Time.now + 1.hour)
 
-    rent_records.each do |rent_record|
-      RentRecordMailer.notify_rent_record_return(rent_record).deliver
+    records.each do |record|
+      RecordMailer.notify_record_return(record).deliver
     end
   end
 end

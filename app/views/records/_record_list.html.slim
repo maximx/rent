@@ -4,23 +4,23 @@ table.table
       th 承租人
       th 起租日期
       th 歸還日期
-      - unless rent_records_controller?
+      - unless records_controller?
         th 總天數
         th 租金
       th 狀態
-      - unless rent_records_controller?
+      - unless records_controller?
         th #
   tbody
-    - rent_records.each do |rent_record|
+    - records.each do |record|
       tr
-        td = link_to(rent_record.borrower.account, borrower_path(rent_record.borrower))
-        td = render_datetime(rent_record.started_at)
-        td = render_datetime(rent_record.ended_at)
-        - unless rent_records_controller?
-          td = rent_record.rent_days
-          td = rent_record.currency_price
-        td = rent_record.aasm.human_state
-        - unless rent_records_controller?
-          td = render_operate_rent_record_links(rent_record)
+        td = link_to(record.borrower.account, borrower_path(record.borrower))
+        td = render_datetime(record.started_at)
+        td = render_datetime(record.ended_at)
+        - unless records_controller?
+          td = record.rent_days
+          td = record.currency_price
+        td = record.aasm.human_state
+        - unless records_controller?
+          td = render_operate_record_links(record)
 
-= render partial: 'common/pagination', locals: { objects: rent_records }
+= render partial: 'common/pagination', locals: { objects: records }

@@ -2,17 +2,17 @@ table.table
   thead
     tr
       td 出租者
-      td = link_to(@rent_record.lender.account, user_path(@rent_record.lender))
+      td = link_to(@record.lender.account, user_path(@record.lender))
   tbody
     tr
       td 承租者
-      td = link_to(@rent_record.borrower.account, borrower_path(@rent_record.borrower))
+      td = link_to(@record.borrower.account, borrower_path(@record.borrower))
     tr
       td 起租日期
-      td = render_datetime(@rent_record.started_at, :date_only)
+      td = render_datetime(@record.started_at, :date_only)
     tr
       td 迄租日期
-      td = render_datetime(@rent_record.ended_at, :date_only)
+      td = render_datetime(@record.ended_at, :date_only)
     tr
       td
-      td = link_to('詳細', item_rent_record_path(@item, @rent_record))
+      td = link_to('詳細', item_record_path(@item, @record))
