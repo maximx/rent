@@ -1,18 +1,18 @@
-class RentRecordPdf < Prawn::Document
-  def self.pdf_config(item_id, rent_record_id)
+class RecordPdf < Prawn::Document
+  def self.pdf_config(item_id, record_id)
     {
-      filename: "item#{item_id}_record#{rent_record_id}.pdf",
+      filename: "item#{item_id}_record#{record_id}.pdf",
       type: 'application/pdf',
       disposition: :inline
     }
   end
 
-  def initialize(item, rent_record)
+  def initialize(item, record)
     super()
     @item = item
-    @rent_record = rent_record
-    @borrower_profile = rent_record.borrower.profile
-    @lender_profile = rent_record.lender.profile
+    @record = record
+    @borrower_profile = record.borrower.profile
+    @lender_profile = record.lender.profile
 
     font "#{Rails.root.join("app", "assets", "fonts", "华文仿宋.ttf")}"
 
@@ -44,8 +44,8 @@ class RentRecordPdf < Prawn::Document
   def first_code
     text "第一條：租期"
     text_with_space "本合約以標的物驗收手續完成後隔日起租，標的物返還時間以本合約規定為準。"
-    text_with_space "自 #{underline_str date_format(@rent_record.started_at)} 起，"\
-                     "至 #{underline_str date_format(@rent_record.ended_at)} 止，共計 #{@rent_record.rent_days} 天。", inline_format: true
+    text_with_space "自 #{underline_str date_format(@record.started_at)} 起，"\
+                     "至 #{underline_str date_format(@record.ended_at)} 止，共計 #{@record.rent_days} 天。", inline_format: true
     next_line
   end
 
@@ -115,7 +115,7 @@ class RentRecordPdf < Prawn::Document
   end
 
   def eleventh_code
-    text "第十一條：合約租金 #{underline_str @rent_record.currency_price} 元整。", inline_format: true
+    text "第十一條：合約租金 #{underline_str @record.currency_price} 元整。", inline_format: true
     next_line
   end
 

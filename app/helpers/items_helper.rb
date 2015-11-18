@@ -37,7 +37,7 @@ module ItemsHelper
 
   def render_item_calendar_link(item)
     url = item.editable_by?(current_user) ?
-            dashboard_item_rent_records_path(item, anchor: 'calendar') : new_item_rent_record_path(item, anchor: 'calendar')
+            dashboard_item_records_path(item, anchor: 'calendar') : new_item_record_path(item, anchor: 'calendar')
     link_to '+查看日曆+', url, class: 'btn btn-danger'
   end
 
@@ -119,7 +119,7 @@ module ItemsHelper
     ( params[:price_max].present? ) ? params[:price_max].to_i : Item::PRICE_MAX
   end
 
-  def new_rent_record_button_display?(item)
+  def new_record_button_display?(item)
     (!user_signed_in? || item.rentable_by?(current_user) ) && item_action_display?
   end
 
@@ -136,7 +136,7 @@ module ItemsHelper
   end
 
   def items_related_controller?
-    ['items', 'categories', 'subcategories', 'rent_records'].include?(params[:controller])
+    ['items', 'categories', 'subcategories', 'records'].include?(params[:controller])
   end
 
   def render_sort_text

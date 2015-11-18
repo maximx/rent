@@ -6,8 +6,8 @@ class Dashboard::ItemsController < ApplicationController
   before_action :find_items, only: [ :index ]
 
   def index
-    @rent_records_count = @items.joins(:rent_records).group(:item_id, :aasm_state).count
-    @rent_records_count.default = 0
+    @records_count = @items.joins(:records).group(:item_id, :aasm_state).count
+    @records_count.default = 0
   end
 
   def wish

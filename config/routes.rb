@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :items do
     resources :questions, only: [ :create, :update, :destroy ]
 
-    resources :rent_records, except: [ :edit, :update, :destroy ] do
+    resources :records, except: [ :edit, :update, :destroy ] do
       resources :reviews, only: [ :create ]
 
       member do
@@ -56,11 +56,11 @@ Rails.application.routes.draw do
     resources :customers
 
     resources :items, only: [ :index, :show ] do
-      resources :rent_records, only: [ :index, :new, :create ]
+      resources :records, only: [ :index, :new, :create ]
       get :wish, on: :collection
     end
 
-    resources :rent_records, only: [ :index ] do
+    resources :records, only: [ :index ] do
       get :calendar, on: :collection
     end
   end

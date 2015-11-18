@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
-  before_action :set_item_meta_tags, :build_rent_record, :find_item_disabled_dates, only: [ :show, :questions ]
+  before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]
   before_action :set_pictures_attr, only: [ :create, :update ]
 
   def index
@@ -112,11 +112,11 @@ class ItemsController < ApplicationController
 
   def calendar
     @event_sources_path = calendar_item_path(@item, format: :json)
-    rent_records_json = @item.rent_records.actived.includes(:borrower)
+    records_json = @item.records.actived.includes(:borrower)
       .overlaps(params[:start], params[:end]).to_json
 
     respond_to do |format|
-      format.json { render json: rent_records_json}
+      format.json { render json: records_json}
     end
   end
 
@@ -158,8 +158,8 @@ class ItemsController < ApplicationController
       @disabled_dates = @item.booked_dates
     end
 
-    def build_rent_record
-      @rent_record = @item.rent_records.build
+    def build_record
+      @record = @item.records.build
     end
 
     def validates_profile

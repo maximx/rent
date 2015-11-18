@@ -6,7 +6,7 @@ module FileAttrSetter
     end
 
     def set_attachments_attr
-      set_file_attr controller: 'rent_records', model_name: 'rent_record_state_log', attributes_name: 'attachments'
+      set_file_attr controller: 'records', model_name: 'record_state_log', attributes_name: 'attachments'
     end
 
     def set_pictures_attr
@@ -37,7 +37,7 @@ module FileAttrSetter
           end
         else
           # avoid file delete
-          if model_name == 'rent_record_state_log'
+          if model_name == 'record_state_log'
             params[model_name] = { info: nil }
           else
             params[model_name].delete attributes

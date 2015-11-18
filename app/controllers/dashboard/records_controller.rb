@@ -1,20 +1,20 @@
-class Dashboard::RentRecordsController < ApplicationController
+class Dashboard::RecordsController < ApplicationController
   before_action :login_required
   before_action :find_item, only: [ :index, :new, :create ]
 
   def index
     @event_sources_path = calendar_item_path(@item, format: :json) if find_item?
 
-    @rent_records = if find_item?
-                      @item.rent_records.includes(:borrower, :deliver, :item).rencent.page(params[:page])
+    @records = if find_item?
+                      @item.records.includes(:borrower, :deliver, :item).rencent.page(params[:page])
                     else
                       current_user.borrow_records
                         .includes(:borrower, :deliver, [ item: [ lender: [profile: :avatar] ] ])
                         .rencent.page(params[:page])
                     end
 
-    @rent_record_state_log = unless @rent_records.empty?
-                               @rent_records.first.rent_record_state_logs.build
+    @record_state_log = unless @records.empty?
+                               @records.first.record_state_logs.build
                              else
                                RentRecordStateLog.new
                              end
@@ -23,21 +23,21 @@ class Dashboard::RentRecordsController < ApplicationController
 
   def new
     @event_sources_path = calendar_item_path(@item, format: :json)
-    @rent_record = @item.rent_records.build
+    @record = @item.records.build
     @disabled_dates = @item.booked_dates
 
-    render 'rent_records/new'
+    render 'records/new'
   end
 
   def create
-    @rent_record = @item.rent_records.build rent_record_params
-    @rent_record.deliver = Deliver.face_to_face
+    @record = @item.records.build record_params
+    @record.deliver = Deliver.face_to_face
 
-    customer = current_user.customers.find @rent_record.borrower_id
-    @rent_record.borrower = customer
+    customer = current_user.customers.find @record.borrower_id
+    @record.borrower = customer
 
-    if @rent_record.save
-      redirect_to item_rent_record_path(@item, @rent_record)
+    if @record.save
+      redirect_to item_record_path(@item, @record)
     else
       flash[:alert] = '請檢查紅字錯誤欄位'
       render :new
@@ -45,8 +45,8 @@ class Dashboard::RentRecordsController < ApplicationController
   end
 
   def calendar
-    @event_sources_path = calendar_dashboard_rent_records_path(format: :json, role: params[:role])
-    rent_records_json = if params[:role] == "borrower"
+    @event_sources_path = calendar_dashboard_records_path(format: :json, role: params[:role])
+    records_json = if params[:role] == "borrower"
                           current_user.borrow_records.includes(:borrower, :item)
                             .overlaps(params[:start], params[:end]).to_json
                         else
@@ -56,14 +56,14 @@ class Dashboard::RentRecordsController < ApplicationController
 
     respond_to do |format|
       format.html { render :calendar }
-      format.json { render json: rent_records_json }
+      format.json { render json: records_json }
     end
   end
 
   private
 
-    def rent_record_params
-      params.require(:rent_record).permit(:borrower_id, :started_at, :ended_at)
+    def record_params
+      params.require(:record).permit(:borrower_id, :started_at, :ended_at)
     end
 
     def find_item
@@ -71,6 +71,6 @@ class Dashboard::RentRecordsController < ApplicationController
     end
 
     def find_item?
-      !view_context.current_page? dashboard_rent_records_path
+      !view_context.current_page? dashboard_records_path
     end
 end
