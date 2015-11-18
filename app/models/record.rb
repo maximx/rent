@@ -209,6 +209,7 @@ class Record < ActiveRecord::Base
     states.delete(:remitted) unless remit_needed?
     states.delete(:delivering) unless delivery_needed?
     states.delete_if { |state| ![:withdrawed, :booking].include? state } if aasm.current_state == :withdrawed
+    states
   end
 
   def pending_states
