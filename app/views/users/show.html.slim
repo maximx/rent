@@ -7,10 +7,6 @@
           br/
           = render_follow_link @user
 
-      - if @profile.description.present?
-        .col-md-12
-          .well.well-white = raw @profile.description
-
       .col-md-8
         ul
           li
@@ -39,6 +35,12 @@
               tr
                 td = @total_reviews[Review.rates[:good]] || 0
                 td = @total_reviews[Review.rates[:bad]] || 0
+
+      - if @profile.description.present?
+        .col-md-12
+          .panel.panel-default
+            .panel-heading: strong 說明
+            .panel-body = raw @profile.description
 
   #map
 
