@@ -121,7 +121,7 @@ class RecordsController < ApplicationController
     end
 
     def find_item
-      @item = Item.find(params[:item_id])
+      @item = Item.includes(lender: [profile: :avatar]).find(params[:item_id])
     end
 
     def validates_item_rentable
@@ -133,7 +133,9 @@ class RecordsController < ApplicationController
     end
 
     def find_item_record
-      @record = @item.records.find(params[:id])
+      @record = @item.records
+                     .includes(:deliver, :reviews, borrower: [profile: :avatar], record_state_logs: :attachments)
+                     .find(params[:id])
     end
 
     def set_calendar_event_sources_path

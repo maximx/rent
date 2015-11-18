@@ -47,7 +47,7 @@ table.table
       td colspan="2" = @record.aasm.human_state
     tr
       td 運送方式
-      td colspan="2" #{@record.deliver.name}（地址：#{@record.item.address}）
+      td colspan="2" #{@record.deliver.name}（地址：#{@item.address}）
     tr
       td 租期
       td colspan="2" #{render_datetime_period(@record, :tw)} （#{@record.rent_days} 天）
