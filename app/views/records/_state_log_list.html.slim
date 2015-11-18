@@ -6,12 +6,12 @@
       .progress-bar.progress-bar-success.text-danger role="progressbar" style="width: #{width}%" data-toggle="tooltip" title="#{render_state_log_title(log)}"
         - if log.attachments.present?
           = link_to render_icon_with_text('download-alt',
-                                          RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")),
+                                          Record.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")),
                     download_picture_path(log.attachment.id),
                     target: '_blank'
         - else
-          = RentRecord.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
+          = Record.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
 
   - record.pending_states.each do |state|
     .progress-bar.progress-bar-muted role="progressbar" style="width: #{width}%"
-      = RentRecord.i18n_activerecord_attribute("aasm_state.#{state}")
+      = Record.i18n_activerecord_attribute("aasm_state.#{state}")

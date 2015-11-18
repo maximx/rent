@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RentRecordsControllerTest < ActionController::TestCase
+class RecordsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

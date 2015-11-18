@@ -250,7 +250,7 @@ class Record < ActiveRecord::Base
     end
 
     def send_payment_message
-      RentRecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
+      RecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
     end
 
   private

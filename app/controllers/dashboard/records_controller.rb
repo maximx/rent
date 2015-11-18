@@ -16,7 +16,7 @@ class Dashboard::RecordsController < ApplicationController
     @record_state_log = unless @records.empty?
                                @records.first.record_state_logs.build
                              else
-                               RentRecordStateLog.new
+                               RecordStateLog.new
                              end
     render (find_item? ? :item_index : :index)
   end
