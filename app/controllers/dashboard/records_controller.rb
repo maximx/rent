@@ -40,7 +40,7 @@ class Dashboard::RecordsController < ApplicationController
       redirect_to item_record_path(@item, @record)
     else
       flash[:alert] = '請檢查紅字錯誤欄位'
-      render :new
+      render 'records/new'
     end
   end
 

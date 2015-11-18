@@ -48,6 +48,7 @@ zh-TW:
         started_at: '起租日期'
         ended_at: '迄租日期'
         deliver_id: '運送方式'
+        borrower: '承租客戶'
       question:
         content: '問題內容'
         reply: '回覆'
