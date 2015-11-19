@@ -4,6 +4,12 @@
       label 電子郵件
     .col-xs-6.col-sm-6 = render_disabled_input @profile.user.email
 
+  .form-group
+    = f.input :send_mail,
+              as: :boolean,
+              wrapper: :default,
+              wrapper_html: { class: 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 checkbox' }
+
   = f.input :name
   = f.input :phone
   = f.input :address, input_html: { class: 'address_geocomplete'}

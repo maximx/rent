@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118063920) do
+ActiveRecord::Schema.define(version: 20151119083037) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -163,8 +163,8 @@ ActiveRecord::Schema.define(version: 20151118063920) do
     t.string   "address",              limit: 255
     t.string   "phone",                limit: 255
     t.text     "description",          limit: 65535
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "bank_code",            limit: 255
     t.string   "bank_account",         limit: 255
     t.string   "confirmation_token",   limit: 255
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20151118063920) do
     t.string   "user_type",            limit: 255
     t.string   "line",                 limit: 255
     t.string   "facebook",             limit: 255
+    t.boolean  "send_mail",            limit: 1,     default: true
   end
 
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree

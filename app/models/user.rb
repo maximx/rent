@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
 
   # mailboxer
   def mailboxer_email(object)
-    email
+    email if profile.send_mail
   end
 
   def consumers(options = {})
