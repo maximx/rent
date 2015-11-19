@@ -1,4 +1,12 @@
 module UsersHelper
+  def render_edit_user_link(user)
+    if user == current_user
+      link_to render_icon_with_text('edit', '修改'),
+              edit_user_path(user),
+              class: 'btn btn-default'
+    end
+  end
+
   def render_follow_link(user, type = '')
     format = (is_remote? type) ? 'json' : ''
     if user_signed_in? && current_user.is_following?(user)
@@ -10,6 +18,13 @@ module UsersHelper
               follow_user_path(user, format: format),
               remote: is_remote?(type), method: :put, class: 'btn btn-default follow-user'
     end
+  end
+
+  def render_operate_user_links(user)
+    raw [
+      render_edit_user_link(user),
+      render_follow_link(user)
+    ].join
   end
 
   def render_user_reviews_follows(user)

@@ -5,7 +5,7 @@
         h1.pull-left 關於#{@profile.logo_name}
         .pull-right
           br/
-          = render_follow_link @user
+          = render_operate_user_links @user
 
       = render partial: 'users/info', locals: { user: @user, profile: @profile }
 
