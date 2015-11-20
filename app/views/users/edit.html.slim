@@ -1,4 +1,4 @@
-= render layout: 'users/show', locals: { user: @user, maps: @maps } do
+= render layout: 'users/header', locals: { user: @user, maps: @maps } do
   = simple_form_for @profile do |f|
     .col-md-8
       = f.input :name

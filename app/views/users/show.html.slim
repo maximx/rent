@@ -1,4 +1,4 @@
-= render layout: 'users/show', locals: { user: @user, maps: @maps } do
+= render layout: 'users/header', locals: { user: @user, maps: @maps } do
   = render partial: 'users/info', locals: { user: @user, profile: @profile }
   = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
 

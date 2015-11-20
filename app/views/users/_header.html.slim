@@ -16,3 +16,25 @@ header.site-header
 
     #user-navigation.collapse.navbar-collapse
       = user_navbar_list user
+
+section
+  = render partial: 'pictures/picture_carousel', locals: { pictures: user.covers }
+
+  = render_notice(notice)
+  = render_alert(alert)
+
+  .container
+    .row
+      .page-header.clearfix
+        h1.pull-left 關於#{user.profile.logo_name}
+        .pull-right
+          br/
+          = render_follow_link user
+      = yield
+
+  - if defined? maps
+    #map
+    javascript:
+      $(document).ready(function() {
+        buildGoogleMap( #{raw maps.to_json} );
+      });
