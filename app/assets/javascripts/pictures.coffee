@@ -6,8 +6,14 @@ $ ->
       alert('只有一張圖片，不得刪除')
   )
 
-  $('.file_with_image .item.edit .edit_image').on 'click', () ->
+  $('.file_with_image .avatar .edit_image').on 'click', () ->
     $(this).closest('.item').find(':file').click()
 
-  $('.file_with_image .item.edit :file').on 'change', () ->
+  $('form.ajax_image'). on 'change', '.avatar :file', () ->
     $(this).closest('form').submit()
+
+  $('form.ajax_image').on 'ajax:complete', (e, data) ->
+    data = $.parseJSON(data.responseText)
+    if data.status == "ok"
+      url = 'url(' + data.src + ')'
+      $(this).find('.file_with_image .avatar .item').css('background-image', url)
