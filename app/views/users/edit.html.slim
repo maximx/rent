@@ -1,7 +1,7 @@
 = render layout: 'users/header', locals: { user: @user, maps: @maps } do
   .col-md-8
     = simple_form_for @profile, url: user_path(@user), remote: true, html: { class: 'form-horizontal ajax_image' } do |f|
-        = f.association :avatar do |a|
+        = f.simple_fields_for :avatar, (@profile.avatar || @profile.build_avatar) do |a|
           = a.input :public_id, as: :file_with_image
 
   .hidden-xs.hidden-sm
