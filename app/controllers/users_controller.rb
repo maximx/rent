@@ -2,12 +2,14 @@ class UsersController < ApplicationController
   layout 'user'
 
   include UsersReviewsCount
+  include FileAttrSetter
   include SortPaginate
 
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user, :find_profile, :set_user_meta_tags
-  before_action :validate_editable, only: [ :edit, :update ]
   before_action :find_total_reviews, only: [ :show, :edit ]
+  before_action :validate_editable, only: [ :edit, :update ]
+  before_action :set_avatar_attr, only: [ :update ]
 
   def show
     set_maps_marker @profile
@@ -15,6 +17,19 @@ class UsersController < ApplicationController
 
   def edit
     set_maps_marker @profile
+  end
+
+  def update
+    if @profile.update(profile_params)
+      if @profile.phone.present? and !@profile.phone_confirmed?
+        redirect_with_message phone_confirmation_settings_account_path,
+                              notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
+      else
+        redirect_with_message user_path(@user), notice: '個人資料修改成功。'
+      end
+    else
+      render :edit
+    end
   end
 
   def reviews
@@ -79,6 +94,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def profile_params
+      params.require(:profile).permit(
+        :name, :address, :phone, :facebook, :line,
+        :description, :bank_code, :bank_account, :send_mail,
+        avatar_attributes: [ :id, :public_id, :file_cached ]
+      )
+    end
 
     def find_user
       @user = User.includes(:covers, profile: :avatar).find(params[:id])
