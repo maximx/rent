@@ -4,11 +4,6 @@ class Settings::AccountsController < ApplicationController
   before_action :login_required
   before_action :set_covers_attr, only: [ :upload ]
 
-  def show
-    @user = current_user
-    @profile = @user.profile
-  end
-
   def edit
     @user = current_user
   end

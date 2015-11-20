@@ -1,6 +1,7 @@
 = render layout: 'users/header', locals: { user: @user, maps: @maps } do
   = simple_form_for @profile, url: user_path(@user) do |f|
     .col-md-8
+      = f.input :avatar, as: :file_with_image
       = f.input :name
       = f.input :address, input_html: { class: 'address_geocomplete' }
       = f.input :phone

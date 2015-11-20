@@ -2,7 +2,7 @@
 
 /* items/edit and settings/account/images */
 .picture {
-  z-index: 99999;
+  z-index: 9999;
   float: left;
   position: relative;
   width: 200px;
@@ -26,10 +26,17 @@
   }
 }
 
-/*item show*/
-#picture-carousel {
+/* picture caroursel*/
+.carousel {
   width: 100%;
   height: $carousel-height;
+
+  &.avatar {
+    width: 200px;
+    height: 200px;
+
+    .item { height: 100%; }
+  }
 
   .item {
     background-size: cover;
@@ -37,5 +44,16 @@
     background-color: $body-bg;
     background-position: 50% 50%;
     height: $carousel-height;
+
+    .carousel-caption {
+      right: 0;
+      left: 0;
+      bottom: 0;
+      padding: 25px 15px 15px;
+      background-color: transparent;
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.8));
+
+      &.edit_image { cursor: pointer; }
+    }
   }
 }
