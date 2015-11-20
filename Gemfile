@@ -67,6 +67,7 @@ gem 'slim-rails'
 gem 'meta-tags'
 gem 'gretel'
 gem 'simple_form'
+gem 'remotipart'
 gem 'will_paginate'
 
 gem 'bootstrap-sass'

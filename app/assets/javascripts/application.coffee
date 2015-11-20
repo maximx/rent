@@ -24,6 +24,7 @@
 #= require turbolinks
 #= require wookmark.min
 #= require jquery.geocomplete.min
+#= require jquery.remotipart
 #= require bootstrap-slider
 #= require rent_js_methods
 #= require_tree .
