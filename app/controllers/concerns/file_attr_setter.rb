@@ -2,7 +2,8 @@ module FileAttrSetter
   private
 
     def set_avatar_attr
-      set_file_attr model_name: 'profile', attributes_name: 'avatar'
+      #set_file_attr model_name: 'profile', attributes_name: 'avatar'
+      set_file_attr controller: 'users', model_name: 'profile', attributes_name: 'avatar'
     end
 
     def set_attachments_attr

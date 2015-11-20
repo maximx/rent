@@ -18,7 +18,7 @@ class FileWithImageInput < SimpleForm::Inputs::Base
   end
 
   def avatar_public_id
-    picture? ?  object.send(attribute_name).public_id : Rent::DEFAULT_AVATAR
+    picture? ?  object.send(attribute_name) : Rent::DEFAULT_AVATAR
   end
 
   def picture?

@@ -26,7 +26,8 @@ zh-TW:
         bank_code: '銀行代碼'
         bank_account: '銀行帳號'
         description: '介紹'
-        avatar: '大頭照'
+        avatar:
+          public_id: '大頭照'
         facebook: 'Facebook'
         line: 'Line'
         send_mail: '承租時接收Email通知'

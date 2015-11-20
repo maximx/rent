@@ -32,4 +32,8 @@ module UsersHelper
   def display_edit_user_link?(user)
     current_user == user and params[:controller] == 'users' and params[:action] != 'edit'
   end
+
+  def users_controller?
+    params[:controller] == 'users'
+  end
 end

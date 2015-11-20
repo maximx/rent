@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user, :find_profile, :set_user_meta_tags
-  before_action :find_total_reviews, only: [ :show, :edit ]
+  before_action :find_total_reviews, only: [ :show, :edit, :update ]
   before_action :validate_editable, only: [ :edit, :update ]
   before_action :set_avatar_attr, only: [ :update ]
 

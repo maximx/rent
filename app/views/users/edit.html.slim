@@ -1,7 +1,14 @@
 = render layout: 'users/header', locals: { user: @user, maps: @maps } do
+  .col-md-8
+    = simple_form_for @profile, url: user_path(@user), remote: true do |f|
+      = f.association :avatar do |a|
+        = a.input :public_id, as: :file_with_image
+
+  .hidden-xs.hidden-sm
+    = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
+
   = simple_form_for @profile, url: user_path(@user) do |f|
     .col-md-8
-      = f.input :avatar, as: :file_with_image
       = f.input :name
       = f.input :address, input_html: { class: 'address_geocomplete' }
       = f.input :phone
@@ -15,8 +22,6 @@
                               wrapper: :default,
                               wrapper_html: { class: 'col-xs-offset-1 col-xs-11 col-sm-offset-3 col-sm-9 checkbox' }
 
-    .hidden-xs.hidden-sm
-      = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
 
     .col-md-12
       = f.input :description, hint_wrapper: false,
