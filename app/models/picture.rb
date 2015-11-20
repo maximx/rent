@@ -1,7 +1,8 @@
 class Picture < ActiveRecord::Base
   attr_accessor :file_cached
 
-  validates_presence_of :public_id, :file_cached
+  validates_presence_of :public_id
+  validates_presence_of :file_cached, if: :upload_needed?
 
   belongs_to :imageable, polymorphic: true
 
@@ -44,5 +45,9 @@ class Picture < ActiveRecord::Base
       info = Cloudinary::Uploader.upload(self.file_cached, use_filename: true)
       self.public_id = info['public_id']
       self.format = info['format']
+    end
+
+    def upload_needed?
+      new_record? or public_id_changed?
     end
 end

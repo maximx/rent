@@ -20,27 +20,27 @@ class UsersController < ApplicationController
   end
 
   def update
+    result = { status: 'error' }
+
     if @profile.update(profile_params)
-      if remotipart_submitted?
-        if remotipart_submitted?
-          render json: {
-            status: 'ok',
-            src: view_context.cloudinary_url(@profile.avatar.public_id, crop: :fill, gravity: :face)
-          }
+      unless remotipart_submitted?
+        if @profile.phone.present? and !@profile.phone_confirmed?
+          redirect_with_message phone_confirmation_settings_account_path,
+                                notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
         else
-          if @profile.phone.present? and !@profile.phone_confirmed?
-            redirect_with_message phone_confirmation_settings_account_path,
-                                  notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
-          else
-            redirect_with_message user_path(@user), notice: '個人資料修改成功。'
-          end
+          redirect_with_message user_path(@user), notice: '個人資料修改成功。'
         end
-      else
-        render json: { status: 'error' }
       end
+
+      result = {
+        status: 'ok',
+        src: view_context.cloudinary_url(@profile.avatar.public_id, crop: :fill, gravity: :face)
+      }
     else
-      remotipart_submitted? ? render(json: { status: 'error' }) : render(:edit)
+      render :edit unless remotipart_submitted?
     end
+
+    render json: result if remotipart_submitted?
   end
 
   def reviews
