@@ -1,12 +1,4 @@
 module UsersHelper
-  def render_edit_user_link(user)
-    if user == current_user
-      link_to render_icon_with_text('edit', '修改'),
-              edit_user_path(user),
-              class: 'btn btn-default'
-    end
-  end
-
   def render_follow_link(user, type = '')
     format = (is_remote? type) ? 'json' : ''
     if user_signed_in? && current_user.is_following?(user)
@@ -18,13 +10,6 @@ module UsersHelper
               follow_user_path(user, format: format),
               remote: is_remote?(type), method: :put, class: 'btn btn-default follow-user'
     end
-  end
-
-  def render_operate_user_links(user)
-    raw [
-      render_edit_user_link(user),
-      render_follow_link(user)
-    ].join
   end
 
   def render_user_reviews_follows(user)
@@ -39,8 +24,12 @@ module UsersHelper
       li << [ '關於', user_path(user) ]
       li << [ '評價', reviews_user_path(user) ]
       li << [ '出租物', items_user_path(user) ]
-      li << [ content_tag(:strong, '設定', class: 'text-primary'), settings_account_path ] if current_user == user
+      li << [ content_tag(:strong, '編輯', class: 'text-primary'), edit_user_path(user) ] if display_edit_user_link? user
       li << [ content_tag(:strong, Rent::SITE_NAME, class: 'text-danger'), items_path ]
     end
+  end
+
+  def display_edit_user_link?(user)
+    current_user == user and params[:controller] == 'users' and params[:action] != 'edit'
   end
 end

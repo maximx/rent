@@ -166,13 +166,16 @@ SimpleForm.setup do |config|
 
   config.wrappers :bootstrap_horizontal, tag: :div, class: 'form-group' do |b|
     b.use :html5
-    b.use :label, wrap_with: { class: 'col-xs-4 col-sm-3 control-label' }
 
-    b.wrapper tag: :div, class: 'col-xs-6 col-sm-6' do |ba|
+    b.wrapper :label_wrapper, tag: :div, class: 'col-sm-3 control-label' do |ba|
+      ba.use :label
+    end
+
+    b.wrapper :input_wrapper, tag: :div, class: 'col-sm-6' do |ba|
       ba.use :input, class: 'form-control'
     end
 
-    b.wrapper tag: :div, class: 'col-xs-2 col-sm-3 hint-error' do |ba|
+    b.wrapper :hint_wrapper, tag: :div, class: 'col-sm-3 hint-error' do |ba|
       ba.use :hint, wrap_with: { tag: :u, class: 'hint' }
       ba.use :error, wrap_with: { tag: :code, class: 'error' }
     end
@@ -181,13 +184,13 @@ SimpleForm.setup do |config|
   config.wrappers :vertical_radio_and_checkboxes, tag: :div, class: 'form-group' do |b|
     b.use :html5
     b.optional :readonly
-    b.use :label, wrap_with: { class: 'col-xs-4 col-sm-3 control-label' }
+    b.use :label, wrap_with: { class: 'col-sm-3 control-label' }
 
-    b.wrapper tag: :div, class: 'col-xs-6 col-sm-6' do |ba|
+    b.wrapper tag: :div, class: 'col-sm-6' do |ba|
       ba.use :input
     end
 
-    b.wrapper tag: :div, class: 'col-xs-2 col-sm-3 hint-error' do |ba|
+    b.wrapper tag: :div, class: 'col-sm-3 hint-error' do |ba|
       ba.use :hint, wrap_with: { tag: :u, class: 'hint' }
       ba.use :error, wrap_with: { tag: :code, class: 'error' }
     end

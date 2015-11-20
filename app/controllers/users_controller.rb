@@ -6,9 +6,14 @@ class UsersController < ApplicationController
 
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user, :find_profile, :set_user_meta_tags
-  before_action :find_total_reviews, only: [ :show ]
+  before_action :validate_editable, only: [ :edit, :update ]
+  before_action :find_total_reviews, only: [ :show, :edit ]
 
   def show
+    set_maps_marker @profile
+  end
+
+  def edit
     set_maps_marker @profile
   end
 
@@ -76,7 +81,7 @@ class UsersController < ApplicationController
   private
 
     def find_user
-      @user = User.find(params[:id])
+      @user = User.includes(:covers, profile: :avatar).find(params[:id])
     end
 
     def find_total_reviews
@@ -100,5 +105,9 @@ class UsersController < ApplicationController
           image: @user.picture_url
         }
       )
+    end
+
+    def validate_editable
+      redirect_with_message user_path(@user) unless @user == current_user
     end
 end

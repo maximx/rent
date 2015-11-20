@@ -1,44 +1,16 @@
-= render layout: 'users/show', locals: { user: @user } do
-  .container
-    .row
-      .page-header.clearfix
-        h1.pull-left 關於#{@profile.logo_name}
-        .pull-right
-          br/
-          = render_operate_user_links @user
+= render layout: 'users/show', locals: { user: @user, maps: @maps } do
+  = render partial: 'users/info', locals: { user: @user, profile: @profile }
+  = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
 
-      = render partial: 'users/info', locals: { user: @user, profile: @profile }
+  - if @profile.facebook.present?
+    .col-md-4
+      .fb-page data-href="#{@profile.facebook}" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"
+        .fb-xfbml-parse-ignore
+          blockquote cite="#{@profile.facebook}"
+            = link_to @profile.name, @profile.facebook
 
-      div class="col-md-4"
-        .panel.panel-default
-          .panel-heading.text-center: strong 總評價
-
-          table.table.table-bordered.text-center
-            thead
-              tr
-                th.text-center 正評
-                th.text-center 負評
-            tbody
-              tr
-                td = @total_reviews[Review.rates[:good]] || 0
-                td = @total_reviews[Review.rates[:bad]] || 0
-
-      - if @profile.facebook.present?
-        .col-md-4
-          .fb-page data-href="#{@profile.facebook}" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"
-            .fb-xfbml-parse-ignore
-              blockquote cite="#{@profile.facebook}"
-                = link_to @profile.name, @profile.facebook
-
-      - if @profile.description.present?
-        .col-md-12
-          .panel.panel-default
-            .panel-heading: strong 說明
-            .panel-body = raw @profile.description
-
-  #map
-
-  javascript:
-    $(document).ready(function() {
-      buildGoogleMap( #{raw @maps.to_json} );
-    });
+  - if @profile.description.present?
+    .col-md-12
+      .panel.panel-default
+        .panel-heading: strong 說明
+        .panel-body = raw @profile.description
