@@ -18,7 +18,7 @@ header.site-header
       = user_navbar_list user
 
 section
-  = render partial: 'pictures/picture_carousel', locals: { pictures: user.covers }
+  = render partial: 'pictures/carousel', locals: { pictures: user.covers }
 
   = render_notice(notice)
   = render_alert(alert)
