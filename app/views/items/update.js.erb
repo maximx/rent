@@ -1,0 +1,5 @@
+<%- if remotipart_submitted? %>
+  var html = "<%= escape_javascript(render(partial: "pictures/carousel", locals: { pictures: @item.pictures })) %>";
+  $('#picture-carousel').remove();
+  $(html).insertAfter( $('ol.breadcrumb') );
+<% end %>

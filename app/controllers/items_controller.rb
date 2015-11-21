@@ -49,11 +49,12 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_with_message item_path(@item), notice: "#{@item.name}修改成功。"
-      redirect_to item_path(@item)
+      redirect_with_message item_path(@item), notice: "#{@item.name}修改成功。" unless remotipart_submitted?
     else
-      flash[:alert] = '請檢查紅字錯誤欄位'
-      render :edit
+      unless remotipart_submitted?
+        flash[:alert] = '請檢查紅字錯誤欄位'
+        render :edit
+      end
     end
   end
 

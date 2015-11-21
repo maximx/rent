@@ -25,7 +25,7 @@ class Picture < ActiveRecord::Base
     user and (
       ( imageable.is_a? RecordStateLog and imageable.editable_by?(user) ) or
       ( imageable.is_a? User and imageable == user ) or
-      ( imageable.is_a? Item and imageable.editable_by?(user) )
+      ( imageable.is_a? Item and imageable.editable_by?(user) and imageable.pictures.size > 1 )
     )
   end
 

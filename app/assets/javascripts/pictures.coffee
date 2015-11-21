@@ -9,7 +9,7 @@ $ ->
       else
         $pic_item = $(this).closest('.item')
         index = $pic_item.index()
-        active_index = ( index == 0 ) ? 1 : 0
+        active_index = 0
 
         $carousel.find('.carousel-indicators li').eq(index).remove()
         $pic_item.remove()

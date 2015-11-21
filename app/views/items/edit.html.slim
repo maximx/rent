@@ -1,7 +1,7 @@
 - breadcrumb :item_edit, @item
 
-h2.col-xs-offset-4.col-sm-offset-3  修改 #{ render_item_name(@item) }
+= render partial: 'pictures/carousel', locals: { pictures: @item.pictures }
 
+h2.col-xs-offset-4.col-sm-offset-3  修改 #{ render_item_name(@item) }
 .row
-  = render partial: 'pictures/picture', locals: { pictures: @item.pictures }
   = render partial: "form", locals: { item: @item }
