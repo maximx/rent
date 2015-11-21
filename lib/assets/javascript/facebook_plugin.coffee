@@ -24,4 +24,12 @@ restoreFacebookRoot = ->
       $('body').append @fbRoot
 
 loadFacebookSDK = ->
+  window.fbAsyncInit = initializeFacebookSDK
   $.getScript("//connect.facebook.net/zh_TW/sdk.js")
+
+initializeFacebookSDK = ->
+  FB.init
+    appId  : '433105066893080'
+    status : true
+    cookie : true
+    xfbml  : true
