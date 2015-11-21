@@ -25,7 +25,7 @@ restoreFacebookRoot = ->
 
 loadFacebookSDK = ->
   window.fbAsyncInit = initializeFacebookSDK
-  $.getScript("//connect.facebook.net/zh_TW/sdk.js")
+  $.getScript("//connect.facebook.net/zh_TW/all.js#xfbml=1&version=v2.5&appId=433105066893080")
 
 initializeFacebookSDK = ->
   FB.init
