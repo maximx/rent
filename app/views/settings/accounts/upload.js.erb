@@ -1,3 +1,5 @@
-var html = "<%= escape_javascript(render(partial: "pictures/carousel", locals: { pictures: @user.covers })) %>";
-$('#picture-carousel').remove();
-$('section:first').prepend(html);
+<%- if remotipart_submitted? %>
+  var html = "<%= escape_javascript(render(partial: "pictures/carousel", locals: { pictures: @user.covers })) %>";
+  $('#picture-carousel').remove();
+  $('section:first').prepend(html);
+<% end %>

@@ -20,8 +20,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    result = { status: 'error' }
-
     if @profile.update(profile_params)
       unless remotipart_submitted?
         if @profile.phone.present? and !@profile.phone_confirmed?
@@ -31,16 +29,9 @@ class UsersController < ApplicationController
           redirect_with_message user_path(@user), notice: '個人資料修改成功。'
         end
       end
-
-      result = {
-        status: 'ok',
-        src: view_context.cloudinary_url(@profile.avatar.public_id, crop: :fill, gravity: :face)
-      }
     else
       render :edit unless remotipart_submitted?
     end
-
-    render json: result if remotipart_submitted?
   end
 
   def reviews
