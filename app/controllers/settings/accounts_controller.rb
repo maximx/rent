@@ -46,11 +46,6 @@ class Settings::AccountsController < ApplicationController
     end
   end
 
-  def images
-    @user = current_user
-    @profile = @user.profile
-  end
-
   def upload
     if remotipart_submitted?
       result = { status: 'error' }

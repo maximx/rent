@@ -1,31 +1,5 @@
 @import "mixins/variables";
 
-/* items/edit and settings/account/images */
-.picture {
-  z-index: 9999;
-  float: left;
-  position: relative;
-  width: 200px;
-  height: 150px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-
-  .close {
-    position: absolute;
-    opacity: 0.7;
-    top: 0;
-    right: 5px;
-    display: none;
-
-    &:hover { opacity: 1; }
-  }
-
-  &:hover {
-    opacity: 0.5;
-    .close { display: block; }
-  }
-}
-
 /* picture caroursel*/
 .carousel {
   width: 100%;
