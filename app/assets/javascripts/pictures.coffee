@@ -1,19 +1,27 @@
 $ ->
-  $('.remove-picture').on('ajax:success', (e, data, status, xhr) ->
+  $(document).on 'ajax:success', '.remove-picture', (e, data, status, xhr) ->
     if data.result == 'ok'
-      $(this).closest('.picture').remove()
-    else if data.result == "false"
-      alert('只有一張圖片，不得刪除')
-  )
+      $carousel = $(this).closest('.carousel')
+      size = $carousel.find('.item').size()
 
-  $('.file_with_image .avatar .edit_image').on 'click', () ->
+      if size == 1
+        $carousel.remove()
+      else
+        $pic_item = $(this).closest('.item')
+        index = $pic_item.index()
+        active_index = ( index == 0 ) ? 1 : 0
+
+        $carousel.find('.carousel-indicators li').eq(index).remove()
+        $pic_item.remove()
+
+        $carousel.find('.carousel-indicators li').eq(active_index).addClass('active')
+        $carousel.find('.item').eq(active_index).addClass('active')
+        $carousel.carousel()
+    else if data.result == "false"
+      alert('發生錯誤')
+
+  $('.file_with_image .picture .edit_image').on 'click', () ->
     $(this).closest('.item').find(':file').click()
 
-  $('form.ajax_image'). on 'change', '.avatar :file', () ->
+  $('form.ajax_image').on 'change', '.picture :file', () ->
     $(this).closest('form').submit()
-
-  $('form.ajax_image').on 'ajax:complete', (e, data) ->
-    data = $.parseJSON(data.responseText)
-    if data.status == "ok"
-      url = 'url(' + data.src + ')'
-      $(this).find('.file_with_image .avatar .item').css('background-image', url)

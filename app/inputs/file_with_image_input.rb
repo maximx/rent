@@ -3,7 +3,7 @@ class FileWithImageInput < SimpleForm::Inputs::Base
     merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
     merged_input_options[:class] << :hidden
 
-    template.content_tag :div, class: 'carousel avatar' do
+    template.content_tag :div, class: 'carousel picture' do
       template.content_tag :div, class: 'item', style: "background-image: url(#{image_url})" do
         template.content_tag :figure do
           template.concat @builder.file_field(attribute_name, merged_input_options)
@@ -14,11 +14,15 @@ class FileWithImageInput < SimpleForm::Inputs::Base
   end
 
   def image_url
-    ApplicationController.helpers.cloudinary_url(avatar_public_id, crop: :fill, gravity: :face)
+    ApplicationController.helpers.cloudinary_url(picture_public_id, crop: :fill, gravity: :face)
   end
 
-  def avatar_public_id
-    picture? ?  object.send(attribute_name) : Rent::DEFAULT_AVATAR
+  def picture_public_id
+    if picture?
+      object.send(attribute_name)
+    else
+      object.imageable.is_a?(Profile) ? Rent::DEFAULT_AVATAR : 'sample'
+    end
   end
 
   def picture?

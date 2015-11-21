@@ -31,7 +31,7 @@
   width: 100%;
   height: $carousel-height;
 
-  &.avatar {
+  &.picture {
     width: 200px;
     height: 200px;
 
@@ -47,6 +47,14 @@
     background-color: $body-bg;
     background-position: 50% 50%;
     height: $carousel-height;
+
+    .close {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0.5;
+    }
 
     .carousel-caption {
       right: 0;
