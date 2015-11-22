@@ -4,18 +4,22 @@
 .user {
   .site-header nav.navbar { margin: 0; }
 
-  .container {
+  .user-container {
     padding-top: 20px;
     padding-bottom: 20px;
 
     .page-header { margin-top: 0; }
 
-    ul > li {
-      margin-bottom: 15px;
+    ul {
+      padding-left: 0;
 
-      span {
-        margin-right: 5px;
-        &.glyphicon.text { margin-right: 10px; }
+       > li {
+        margin-bottom: 15px;
+
+        span {
+          margin-right: 5px;
+          &.glyphicon.text { margin-right: 10px; }
+        }
       }
     }
   }

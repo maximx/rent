@@ -1,31 +1,31 @@
 - breadcrumb :dashboard_items
 
 #items-container
-  .row
-    .col-sm-12 = render partial: "dashboard/items/search"
+  = render partial: "dashboard/items/search"
 
-  table.table.table-borded.table-hover
-    thead
-      tr
-        th 名稱
-        th 價格
-        th 預訂中
-        th 成功出租
-        th 退租
-        th 出租中
-        th #
-    tbody
-      - @items.each do |item|
+  .container
+    table.table.table-borded.table-hover
+      thead
         tr
-          td = link_to(render_item_name(item), item_path(item))
-          td = item.price_period
-          td = @records_count[[item.id,"booking"]]
-          td = @records_count[[item.id,"returned"]]
-          td = @records_count[[item.id,"withdrawed"]]
-          td = render_renting_checkbox(@records_count[[item.id,"renting"]])
-          td = render_operate_item_links item
+          th 名稱
+          th 價格
+          th 預訂中
+          th 成功出租
+          th 退租
+          th 出租中
+          th #
+      tbody
+        - @items.each do |item|
+          tr
+            td = link_to(render_item_name(item), item_path(item))
+            td = item.price_period
+            td = @records_count[[item.id,"booking"]]
+            td = @records_count[[item.id,"returned"]]
+            td = @records_count[[item.id,"withdrawed"]]
+            td = render_renting_checkbox(@records_count[[item.id,"renting"]])
+            td = render_operate_item_links item
 
-  = render partial: 'common/pagination', locals: { objects: @items }
+    = render partial: 'common/pagination', locals: { objects: @items }
 
 = render_default_content(@items) do
   | 沒有出租物！馬上

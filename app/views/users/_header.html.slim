@@ -1,21 +1,21 @@
 header.site-header
   nav.navbar.navbar-default
-    .navbar-header
-      button.navbar-toggle.collapsed data-toggle="collapse" data-target="#user-navigation" aria-expanded="false" type="button"
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
+    .container
+      .navbar-header
+        button.navbar-toggle.collapsed data-toggle="collapse" data-target="#user-navigation" aria-expanded="false" type="button"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
 
-      h1.navbar-brand
-        = link_to render_cl_avatar_logo(user), user_path(user)
+        h1.navbar-brand = link_to render_cl_avatar_logo(user), user_path(user)
 
-      .category.navbar-brand
-        ul.nav.navbar-nav
-          li = link_to user.profile.logo_name, user_path(user)
+        .category.navbar-brand
+          ul.nav.navbar-nav
+            li = link_to user.profile.logo_name, user_path(user)
 
-    #user-navigation.collapse.navbar-collapse
-      = user_navbar_list user
+      #user-navigation.collapse.navbar-collapse
+        = user_navbar_list user
 
 section
   = render partial: 'pictures/carousel', locals: { pictures: user.covers }
@@ -23,13 +23,13 @@ section
   = render_notice(notice)
   = render_alert(alert)
 
-  .container
+  .user-container.container
+    .page-header.clearfix
+      h1.pull-left 關於#{user.profile.logo_name}
+      .pull-right
+        br/
+        = render_follow_link user
     .row
-      .page-header.clearfix
-        h1.pull-left 關於#{user.profile.logo_name}
-        .pull-right
-          br/
-          = render_follow_link user
       = yield
 
   - if defined? maps

@@ -4,10 +4,11 @@
 
     = render partial: 'common/header'
 
-    #site-content.container-fluid role="main"
+    #site-content role="main"
       = render_notice(notice)
       = render_alert(alert)
-      = raw breadcrumbs style: :bootstrap, autoroot: false
-      = yield
+      .container
+        = raw breadcrumbs style: :bootstrap, autoroot: false
+        = yield
 
     = render partial: 'common/footer'
