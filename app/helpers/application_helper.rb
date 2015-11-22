@@ -98,6 +98,10 @@ module ApplicationHelper
     ' input-lg' if current_page? root_path
   end
 
+  def edit_action?
+    params[:action] == 'edit'
+  end
+
   def is_remote?(type)
     type.to_sym == :remote
   end

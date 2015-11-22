@@ -1,4 +1,13 @@
 module PicturesHelper
+  def edit_picture_link(picture)
+    if edit_action? and picture.editable_by?(current_user)
+      link_to '刪除',
+              picture_path(picture, format: :json),
+              method: :delete, remote: true, data: { confirm: '確定要刪除嗎？' },
+              class: 'close remove-picture btn btn-danger'
+    end
+  end
+
   def render_cl_image_xs(public_id, options = {})
     default_options = { width: 100, height: 75, crop: :fill }
     render_cl_image(public_id, default_options, options)
