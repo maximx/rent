@@ -4,8 +4,8 @@ class ItemsController < ApplicationController
   include SortPaginate
 
   before_action :login_required, except: [ :index, :show, :search, :questions ]
-  before_action :validates_profile, only: [ :new, :create, :edit, :update ]
   before_action :find_lender_item, only: [ :edit, :update, :destroy ]
+  before_action :validates_profile, only: [ :new, :create, :edit, :update ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]

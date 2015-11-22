@@ -1,5 +1,10 @@
 @import "mixins/variables";
 
+#site-content .carousel {
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+
 /* picture caroursel*/
 .carousel {
   width: 100%;

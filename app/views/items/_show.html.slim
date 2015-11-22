@@ -1,5 +1,11 @@
 - breadcrumb :item, item
 
+- content_for :full_top do
+  = render partial: 'pictures/carousel', locals: { pictures: item.pictures }
+
+- content_for :full_bottom do
+  #map
+
 section
   = render partial: 'items/item_info_container', locals: { item: item, record: record, disabled_dates: disabled_dates }
 
@@ -7,8 +13,6 @@ section
     .col-md-8
       = render_item_reviews_questions(item)
       .tab-content = yield
-
-  #map
 
   .hide
     = form_for item, url: new_item_record_path(item), method: :get, html: { id: "new_record_form" } do
