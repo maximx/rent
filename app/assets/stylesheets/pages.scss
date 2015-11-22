@@ -33,6 +33,13 @@
   background-position: 50% 50%;
 
   .description {
+    color: $body-bg;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 100px;
+
+    .title { font-size: 24px; font-weight: 400; }
+    .detail { font-size: 16px; margin-bottom: 20px; }
     .alert {
       position: absolute;
       width: 240px;
@@ -43,22 +50,6 @@
       z-index: 999999999;
     }
 
-    color: $body-bg;
-    width: 100%;
-    margin: 0 auto;
-    padding-top: 100px;
-
-    .title { font-size: 24px; font-weight: 400; }
-    .detail { font-size: 16px; }
-  }
-
-  .search-form-container {
-    position: absolute;
-    margin: 0 auto;
-    width: 90%;
-    right: 0;
-    left: 0;
-    bottom: $navbar-height;
   }
 }
 
@@ -71,11 +62,7 @@
 
       .alert { width: 300px; }
       .title { font-size: 40px; font-weight: 500; }
-      .detail { font-size: 20px; }
-    }
-    .search-form-container {
-      width: 75%;
-      bottom: $navbar-height;
+      .detail { font-size: 20px; margin-bottom: 30px; }
     }
   }
 }
@@ -89,9 +76,7 @@
 
       .alert { width: 500px; }
       .title { font-size: 60px; font-weight: 700; }
-      .detail { font-size: 24px; }
+      .detail { font-size: 24px; margin-bottom: 100px; }
     }
-
-    .search-form-container { bottom: $search-form-bottom; }
   }
 }
