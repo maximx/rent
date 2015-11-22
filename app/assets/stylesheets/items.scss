@@ -87,6 +87,12 @@
       position: fixed;
     }
   }
+  .new-record.affix {
+    top: 60px;
+    left: 10%;
+    width: 80%;
+    z-index: 9999;
+  }
 }
 
 .item-show-container {

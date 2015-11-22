@@ -85,10 +85,13 @@ nav.navbar.navbar-sub {
     padding: 0 10px;
 
     .navbar-brand {
+      padding-left: 6px;
+      padding-right: 10px;
       margin: 0;
       padding-top: 0;
 
       &.category {
+        padding-left: 15px;
         > ul.nav > li > a {
           padding-left: 0;
           padding-right: 0;
@@ -103,6 +106,13 @@ nav.navbar.navbar-sub {
         display: block;
       }
     }
+  }
+}
+
+@media screen and (min-width: $screen-sm) {
+  .site-header .navbar .navbar-brand {
+    padding-left: 0;
+    &.category { padding-left: 0; }
   }
 }
 

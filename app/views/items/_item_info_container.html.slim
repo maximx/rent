@@ -5,16 +5,16 @@
 
     .col-md-4
       - if items_controller?
-        #rent.panel.panel-default data-spy="affix"
+        .hidden-lg.hidden-md.new-record data-spy="affix" data-offset-top="500"
+          = link_to '預約承租', new_item_record_path(item, record), class: 'btn btn-danger btn-lg btn-block'
+
+        #rent.panel.panel-default.hidden-sm.hidden-xs data-spy="affix"
           .panel-heading.clearfix
             .hidden-sm.hidden-xs
               .price #{item.currency_price} 元
               .period = item.period
 
-            h4.hidden-lg.hidden-md.text-center
-              = link_to '預約承租', new_item_record_path(item, record), class: 'text-success'
-
-          .panel-body.hidden-sm.hidden-xs
+          .panel-body
             = render partial: 'records/form', locals: { item: item, record: record, disabled_dates: disabled_dates }
             .text-right = render_collect_item_links(item, :remote)
 
