@@ -24,11 +24,8 @@
 
 body {
   font-family: "微軟正黑體",Arial !important;
-  padding-top: 51px;
   font-size: 15px;
   background-color: $table-bg-hover;
-
-  &.root, &.user { padding-top: 0; }
 }
 
 ul {
@@ -110,7 +107,7 @@ nav.navbar.navbar-sub {
 
 // site container
 #site-content {
-  padding: 10px 20px;
+  padding: 65px 20px;
   min-height: 700px;
 }
 

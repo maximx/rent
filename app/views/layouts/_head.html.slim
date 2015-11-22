@@ -17,4 +17,8 @@ html lang="zh-TW" itemtype="http://schema.org/WebPage"
         ga('create', 'UA-69638720-1', 'auto');
         ga('send', 'pageview');
 
+  body class="#{current_page?(root_path) ? 'root' : ''}"
+    #fb-root
+    = render partial: 'common/header' unless users_controller?
     = yield
+    = render partial: 'common/footer'

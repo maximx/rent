@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout 'root', only: [ :index ]
+  layout 'user', only: [ :index ]
 
   def index
   end

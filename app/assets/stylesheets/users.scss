@@ -1,25 +1,23 @@
 @import "mixins/variables";
 
 /*show*/
-.user {
-  .site-header nav.navbar { margin: 0; }
+.site-header.user nav.navbar { margin: 0; }
 
-  .user-container {
-    padding-top: 20px;
-    padding-bottom: 20px;
+.user-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
 
-    .page-header { margin-top: 0; }
+  .page-header { margin-top: 0; }
 
-    ul {
-      padding-left: 0;
+  ul {
+    padding-left: 0;
 
-       > li {
-        margin-bottom: 15px;
+     > li {
+      margin-bottom: 15px;
 
-        span {
-          margin-right: 5px;
-          &.glyphicon.text { margin-right: 10px; }
-        }
+      span {
+        margin-right: 5px;
+        &.glyphicon.text { margin-right: 10px; }
       }
     }
   }

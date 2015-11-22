@@ -1,14 +1,7 @@
 = render layout: 'layouts/head' do
-  body
-    #fb-root
-
-    = render partial: 'common/header'
-
-    #site-content role="main"
+  #site-content role="main"
+    .container
       = render_notice(notice)
       = render_alert(alert)
-      .container
-        = raw breadcrumbs style: :bootstrap, autoroot: false
-        = yield
-
-    = render partial: 'common/footer'
+      = raw breadcrumbs style: :bootstrap, autoroot: false
+      = yield
