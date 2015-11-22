@@ -73,6 +73,7 @@ span.glyphicon.text { margin-right: 5px; }
 //header
 nav.navbar { margin-bottom: 10px; }
 nav.navbar.navbar-sub {
+  margin-top: $nav-top-adjust;
   min-height: 30px;
   padding-left: 10px;
   ul.nav.navbar-nav > li > a { padding-top: 10px; padding-bottom: 10px; }

@@ -1,7 +1,7 @@
 @import "mixins/variables";
 
 #site-content .carousel {
-  margin-top: -15px;
+  margin-top: $nav-top-adjust;
   margin-bottom: 10px;
 }
 

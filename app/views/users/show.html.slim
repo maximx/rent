@@ -10,7 +10,7 @@
             = link_to @profile.name, @profile.facebook
 
   - if @profile.description.present?
-    .col-md-12
-      .panel.panel-default
-        .panel-heading: strong 說明
-        .panel-body = raw @profile.description
+    .col-md-12.description
+        .panel.panel-default
+          .panel-heading: strong 說明
+          .panel-body = raw @profile.description

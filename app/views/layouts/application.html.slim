@@ -1,5 +1,6 @@
 = render layout: 'layouts/head' do
   #site-content role="main"
+    = render_navigation
     = yield :full_top
     .container
       = render_notice(notice)
