@@ -10,8 +10,6 @@ module Dashboard::ItemsHelper
       li << [ render_icon_with_text('list', '出租物管理'), dashboard_items_path ]
       li << [ render_icon_with_text('record', '承租紀錄'), dashboard_records_path ]
       li << [ render_icon_with_text('user', '客戶管理'), dashboard_customers_path ]
-      li << [ render_icon_with_text('calendar', '出租日曆'), calendar_dashboard_records_path(role: 'lender') ]
-      li << [ render_icon_with_text('calendar', '承租日曆'), calendar_dashboard_records_path(role: 'borrower') ]
     end
   end
 
