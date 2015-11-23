@@ -15,6 +15,13 @@ module Dashboard::ItemsHelper
     end
   end
 
+  def render_dashboard_items_index_calendar
+    render_link_li class: 'nav nav-tabs nav-justified anchor', role: 'tablist' do |li|
+      li << [ '出租物列表', dashboard_items_path ]
+      li << [ '行事曆', calendar_dashboard_items_path ]
+    end
+  end
+
   def render_operate_item_links(item)
     links = raw [
       render_new_item_record_path(item),

@@ -1,7 +1,8 @@
 - breadcrumb :dashboard_items
 
-#items-container
-  = render partial: "dashboard/items/search"
+= render_dashboard_items_index_calendar
+.tab-content
+  = render partial: 'dashboard/items/search'
 
   .container
     table.table.table-borded.table-hover
@@ -27,6 +28,6 @@
 
     = render partial: 'common/pagination', locals: { objects: @items }
 
-= render_default_content(@items) do
-  | 沒有出租物！馬上
-  mark = link_to("新增", new_item_path, class: "text-danger")
+  = render_default_content(@items) do
+    | 沒有出租物！馬上
+    mark = link_to("新增", new_item_path, class: "text-danger")

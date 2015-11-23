@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
     resources :items, only: [ :index, :show ] do
       resources :records, only: [ :index, :new, :create ]
-      get :wish, on: :collection
+      get :wish, :calendar, on: :collection
     end
 
     resources :records, only: [ :index ] do

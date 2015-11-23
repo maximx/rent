@@ -17,6 +17,18 @@ class Dashboard::ItemsController < ApplicationController
     render 'items/index'
   end
 
+  def calendar
+    @event_sources_path = calendar_dashboard_items_path(format: :json)
+    records_json = current_user.lend_records
+                               .includes(:borrower, :item)
+                               .overlaps(params[:start], params[:end])
+                               .to_json
+    respond_to do |format|
+      format.html
+      format.json { render json: records_json }
+    end
+  end
+
   private
 
     def find_items
