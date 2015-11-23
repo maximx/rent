@@ -12,13 +12,6 @@ module UsersHelper
     end
   end
 
-  def render_user_reviews_follows(user)
-    render_link_li class: 'nav nav-tabs nav-justified anchor', role: 'tablist', id: 'reviews-follows' do |li|
-      li << [ '評價', user_path(user, anchor: 'reviews-follows') ]
-      li << [ '關注', follows_user_path(user, anchor: 'reviews-follows') ]
-    end
-  end
-
   def user_navbar_list(user)
     render_link_li class: 'nav navbar-nav navbar-right' do |li|
       li << [ '關於', user_path(user) ]
@@ -30,7 +23,7 @@ module UsersHelper
   end
 
   def display_edit_user_link?(user)
-    current_user == user and params[:controller] == 'users' and params[:action] != 'edit'
+    current_user == user and users_controller? and !edit_action?
   end
 
   def users_controller?
