@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
   def set_maps_marker(object)
     @maps = Gmaps4rails.build_markers(object) do |obj, marker|
-      google_url = "http://maps.google.com/maps?q=#{obj.latitude},#{obj.longitude}"
+      google_url = "http://maps.google.com/maps?q=#{obj.address}"
       info = [
         "<h4>#{obj.name}</h4>",
         obj.address,
