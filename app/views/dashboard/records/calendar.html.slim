@@ -1,1 +1,3 @@
-= render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }
+= render_dashboard_records_index_calendar
+
+.tab-content = render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }

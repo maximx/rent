@@ -45,17 +45,14 @@ class Dashboard::RecordsController < ApplicationController
   end
 
   def calendar
-    @event_sources_path = calendar_dashboard_records_path(format: :json, role: params[:role])
-    records_json = if params[:role] == "borrower"
-                          current_user.borrow_records.includes(:borrower, :item)
-                            .overlaps(params[:start], params[:end]).to_json
-                        else
-                          current_user.lend_records.includes(:borrower, :item)
-                            .overlaps(params[:start], params[:end]).to_json
-                        end
+    @event_sources_path = calendar_dashboard_records_path(format: :json)
+    records_json = current_user.borrow_records
+                               .includes(:borrower, :item)
+                               .overlaps(params[:start], params[:end])
+                               .to_json
 
     respond_to do |format|
-      format.html { render :calendar }
+      format.html
       format.json { render json: records_json }
     end
   end
