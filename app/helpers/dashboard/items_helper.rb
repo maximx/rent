@@ -7,16 +7,16 @@ module Dashboard::ItemsHelper
 
   def dashboard_navbar_list
     render_link_li class: 'nav navbar-nav' do |li|
-      li << [ render_icon_with_text('list', '出租物管理'), dashboard_items_path ]
+      li << [ render_icon_with_text('th-large', '出租物管理'), dashboard_items_path ]
       li << [ render_icon_with_text('record', '承租紀錄'), dashboard_records_path ]
       li << [ render_icon_with_text('user', '客戶管理'), dashboard_customers_path ]
     end
   end
 
   def render_dashboard_items_index_calendar
-    render_link_li class: 'nav nav-tabs nav-justified anchor', role: 'tablist' do |li|
-      li << [ '出租物列表', dashboard_items_path ]
-      li << [ '行事曆', calendar_dashboard_items_path ]
+    render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
+      li << [ render_icon_with_text('list-alt', '出租物列表'), dashboard_items_path ]
+      li << [ render_icon_with_text('calendar', '行事曆'), calendar_dashboard_items_path ]
     end
   end
 

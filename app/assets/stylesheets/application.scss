@@ -40,20 +40,13 @@ span.glyphicon.text { margin-right: 5px; }
 .well.well-white { background-color: $body-bg; }
 .tab-content {
   padding-top: 10px;
+  padding-bottom: 10px;
   min-height: 200px;
 }
 
 .anchor { padding-top: 55px; margin-top: -55px; }
 .img-thumbnail { padding: 0; }
 .breadcrumb { background-color: $body-bg; border: 1px solid $gray-85; }
-
-.nav-tabs {
-  &.nav-justified > .active > a { border-bottom-color: transparent; }
-  > li.active > a {
-    background-color: transparent;
-    &:hover { background-color: transparent; }
-  }
-}
 
 /*bootstrap slider*/
 #price_slider { margin-top: 8px; }

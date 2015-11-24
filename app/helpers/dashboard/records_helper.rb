@@ -14,9 +14,9 @@ module Dashboard::RecordsHelper
   end
 
   def render_dashboard_records_index_calendar
-    render_link_li class: 'nav nav-tabs nav-justified anchor', role: 'tablist' do |li|
-      li << [ '承租紀錄列表', dashboard_records_path ]
-      li << [ '行事曆', calendar_dashboard_records_path ]
+    render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
+      li << [ render_icon_with_text('list-alt', '承租紀錄列表'), dashboard_records_path ]
+      li << [ render_icon_with_text('calendar', '行事曆'), calendar_dashboard_records_path ]
     end
   end
 end
