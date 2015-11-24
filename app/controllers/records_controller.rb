@@ -6,7 +6,7 @@ class RecordsController < ApplicationController
   before_action :validates_item_rentable, only: [ :new, :create ]
   before_action :find_item_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
-  before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :new, :create ]
+  before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
   before_action :set_attachments_attr, only: [ :renting ]
 
   def index
