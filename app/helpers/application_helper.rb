@@ -49,8 +49,13 @@ module ApplicationHelper
     list.each_with_index do |li, index|
       link_options = (li[2] && li[2][:link_html]) ? li[2][:link_html] : {}
       li_options = (li[2] && li[2][:li_html]) ? li[2][:li_html] : {}
+      no_anchor_path = li[1].gsub(/#.*/, '')
 
-      active_class = (current_page? li[1].gsub(/#.*/, '') ) ? "active" : ""
+      if li[2] and li[2][:parent]
+        active_class = (request.fullpath.include? no_anchor_path) ? 'active' : ''
+      else
+        active_class = (current_page? no_anchor_path) ? 'active' : ''
+      end
 
       li_css_class = []
       li_css_class << li_options[:class] if li_options[:class]

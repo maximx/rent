@@ -7,8 +7,8 @@ module Dashboard::ItemsHelper
 
   def dashboard_navbar_list
     render_link_li class: 'nav navbar-nav' do |li|
-      li << [ render_icon_with_text('th-large', '出租物管理'), dashboard_items_path ]
-      li << [ render_icon_with_text('record', '承租紀錄'), dashboard_records_path ]
+      li << [ render_icon_with_text('th-large', '出租物管理'), dashboard_items_path, parent: true  ]
+      li << [ render_icon_with_text('record', '承租紀錄'), dashboard_records_path, parent: true ]
       li << [ render_icon_with_text('user', '客戶管理'), dashboard_customers_path ]
     end
   end
