@@ -83,7 +83,7 @@ module ApplicationHelper
 
   def render_default_content(obj, text = nil, &block)
     text = capture(&block) if block_given?
-    content_tag(:div, render_mute(text), class: 'well well-white') if obj.nil? || obj.empty?
+    content_tag(:div, render_mute(text), class: 'well') if obj.nil? || obj.empty?
   end
 
   def render_mute(text)
