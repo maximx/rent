@@ -167,7 +167,7 @@ class ItemsController < ApplicationController
       result = current_user.profile.validates
 
       unless result[:errors].empty?
-        redirect_with_message(settings_account_path, notice: result[:message])
+        redirect_with_message(edit_user_path(current_user), notice: result[:message])
       end
     end
 end

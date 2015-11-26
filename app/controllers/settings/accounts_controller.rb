@@ -31,7 +31,7 @@ class Settings::AccountsController < ApplicationController
     profile = current_user.profile
 
     if profile.phone_confirmed?
-      redirect_with_message settings_account_path, notice: '手機已驗證。'
+      redirect_with_message user_path(current_user), notice: '手機已驗證。'
     end
   end
 
