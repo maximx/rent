@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     member do
       get :reviews, :lender_reviews, :borrower_reviews, :items
       put :follow
+      patch :avatar
       delete :unfollow
     end
   end

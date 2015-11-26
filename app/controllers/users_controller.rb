@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   before_action :login_required, only: [ :follow, :unfollow ]
   before_action :find_user, :find_profile, :set_user_meta_tags
   before_action :find_total_reviews, only: [ :show, :edit, :update ]
-  before_action :validate_editable, only: [ :edit, :update ]
-  before_action :set_avatar_attr, only: [ :update ]
+  before_action :validate_editable, only: [ :edit, :update, :avatar ]
+  before_action :set_avatar_attr, only: [ :avatar ]
 
   def show
     set_maps_marker @profile
@@ -21,16 +21,20 @@ class UsersController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      unless remotipart_submitted?
-        if @profile.phone.present? and !@profile.phone_confirmed?
-          redirect_with_message phone_confirmation_settings_account_path,
-                                notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
-        else
-          redirect_with_message user_path(@user), notice: '個人資料修改成功。'
-        end
+      if @profile.phone.present? and !@profile.phone_confirmed?
+        redirect_with_message phone_confirmation_settings_account_path,
+                              notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
+      else
+        redirect_with_message user_path(@user), notice: '個人資料修改成功。'
       end
     else
-      render :edit unless remotipart_submitted?
+      render :edit
+    end
+  end
+
+  def avatar
+    if remotipart_submitted?
+      @profile.update_attribute(:avatar_attributes, profile_params[:avatar_attributes])
     end
   end
 
