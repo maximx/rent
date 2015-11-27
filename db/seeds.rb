@@ -46,7 +46,7 @@ city_list.each do |city_name|
   city.save
 end
 
-deliver_list = %w(郵局寄送 面交自取)
+deliver_list = %w(宅配/快遞 面交自取)
 deliver_list.each do |deliver_name|
   deliver = Deliver.new(name: deliver_name)
   deliver.save
