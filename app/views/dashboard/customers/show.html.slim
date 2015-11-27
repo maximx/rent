@@ -5,18 +5,18 @@ h1 = @customer.account
 table.table
   thead
     tr
-      td.text-right = "#{Customer.i18n_simple_form_label('email')}："
+      td.text-right #{t('simple_form.labels.customer.email')}：
       td = @customer.email
   tbody
     tr
-      td.text-right = "#{Customer.i18n_simple_form_label('account')}："
+      td.text-right #{t('simple_form.labels.customer.account')}：
       td = @customer.account
     tr
-      td.text-right = "#{Profile.i18n_simple_form_label('name')}："
+      td.text-right #{t('simple_form.labels.profile.name')}：
       td = @profile.name
     tr
-      td.text-right = "#{Profile.i18n_simple_form_label('phone')}："
+      td.text-right #{t('simple_form.labels.profile.phone')}：
       td = @profile.phone
     tr
-      td.text-right = "#{Profile.i18n_simple_form_label('address')}："
+      td.text-right #{t('simple_form.labels.profile.address')}：
       td = @profile.address

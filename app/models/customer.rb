@@ -13,9 +13,9 @@ class Customer < ActiveRecord::Base
 
   def self.search_types
     [
-      [i18n_simple_form_label('email'), 'email'],
-      [Profile.i18n_simple_form_label('name'), 'name'],
-      [Profile.i18n_simple_form_label('phone'), 'phone']
+      [ I18n.t('simple_form.labels.customer.email'), 'email' ],
+      [ I18n.t('simple_form.labels.profile.name'), 'name' ],
+      [ I18n.t('simple_form.labels.profile.phone'), 'phone' ]
     ]
   end
 

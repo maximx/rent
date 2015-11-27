@@ -4,9 +4,9 @@
 
 table.table.table-hover
   thead
-    th = Customer.i18n_simple_form_label 'account'
-    th = Profile.i18n_simple_form_label 'name'
-    th = Profile.i18n_simple_form_label 'phone'
+    th = t('simple_form.labels.customer.account')
+    th = t('simple_form.labels.profile.name')
+    th = t('simple_form.labels.profile.phone')
     th
   tbody
     - @consumers.each do |consumer|

@@ -33,7 +33,7 @@ class Profile < ActiveRecord::Base
   def validates
     errors = []
     [ 'name', 'address' ].each do |attr|
-      errors << self.class.i18n_simple_form_label(attr) if self.send(attr).blank?
+      errors << I18n.t("simple_form.labels.profile.#{attr}") if self.send(attr).blank?
     end
 
     { errors: errors, message: "請完成#{errors.join('、')}的資料填寫" }

@@ -61,7 +61,7 @@ class Record < ActiveRecord::Base
   def start_end_date
     if booking? && ended_at && started_at
       if ended_at < started_at || started_at < Time.now
-        errors[:started_at] << self.class.i18n_activerecord_error("started_at.bad_started_at")
+        errors[:started_at] << I18n.t('activerecord.errors.models.record.attributes.started_at.bad_started_at')
       end
 
       if (ended_at - started_at) < item.minimum_period.days

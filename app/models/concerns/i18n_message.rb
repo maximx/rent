@@ -8,9 +8,4 @@ module I18nMessage
     translation = "activerecord.attributes.#{name.underscore}.#{attr}"
     I18n.t(translation)
   end
-
-  def i18n_simple_form_label(attr)
-    translation = "simple_form.labels.#{name.underscore}.#{attr}"
-    I18n.t(translation)
-  end
 end

@@ -1,19 +1,19 @@
 div class="#{profile.facebook.present? ? 'col-md-4' : 'col-md-8'}"
   ul
     li
-      = render_icon_with_text 'envelope', label_tag("#{User.i18n_simple_form_label('email')}：")
+      = render_icon_with_text 'envelope', label_tag("#{t('simple_form.labels.user.email')}：")
       span = user.email
       = render_icon_confirmed
     - if profile.address.present?
       li
-        = render_icon_with_text 'map-marker', label_tag("#{Profile.i18n_simple_form_label('address')}：")
+        = render_icon_with_text 'map-marker', label_tag("#{t('simple_form.labels.profile.address')}：")
         span = profile.address
     - if profile.phone.present?
       li
-        = render_icon_with_text 'phone', label_tag("#{Profile.i18n_simple_form_label('phone')}：")
+        = render_icon_with_text 'phone', label_tag("#{t('simple_form.labels.profile.phone')}：")
         span = profile.phone
         = render_icon_confirmed if user.profile.phone_confirmed?
     - if profile.line.present?
       li
-        = render_icon_with_text 'comment', label_tag("#{Profile.i18n_simple_form_label('line')}：")
+        = render_icon_with_text 'comment', label_tag("#{t('simple_form.lables.profile.line')}：")
         span = profile.line
