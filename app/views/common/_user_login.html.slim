@@ -18,8 +18,8 @@ ul.nav.navbar-nav.navbar-right
         li = link_to render_icon_with_text('lock', '設定'), edit_settings_account_path
         li.divider role="separator"
 
-        li = link_to render_icon_with_text('log-out', '登出'), destroy_user_session_path, method: :delete
+        li = link_to render_icon_with_text('log-out', t('devise.views.sign_out')), destroy_user_session_path, method: :delete
 
   - else
-    li = link_to '註冊', new_user_registration_path, class: 'signup'
-    li.active = link_to '登入', new_user_session_path, class: 'login'
+    li = link_to t('devise.views.sign_up'), new_user_registration_path, class: 'signup'
+    li.active = link_to t('devise.views.sign_in'), new_user_session_path, class: 'login'
