@@ -15,7 +15,6 @@ class RecordsController < ApplicationController
 
   def show
     if @record.viewable_by?(current_user)
-      record_dates = @record.aasm_state_dates_json
       @record_state_logs = @record.record_state_logs
       @record_state_log = @record_state_logs.build
 

@@ -1,6 +1,4 @@
 class Profile < ActiveRecord::Base
-  extend I18nMessage
-
   validates_presence_of :name, :address
   validates :bank_code, length: { is: 3 }, inclusion: Bank.all.map(&:code), allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?

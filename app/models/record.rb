@@ -1,7 +1,6 @@
 class Record < ActiveRecord::Base
   include AASM
   include CurrencyPrice
-  extend I18nMessage
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
   validate :start_end_date, :not_overlap, :borrower_not_lender
@@ -65,14 +64,16 @@ class Record < ActiveRecord::Base
       end
 
       if (ended_at - started_at) < item.minimum_period.days
-        errors[:ended_at] << self.class.i18n_activerecord_error("started_at.bad_period",
-                                                                period: "#{item.minimum_period} #{item.period}")
+        errors[:ended_at] << I18n.t(
+          'activerecord.errors.models.record.attributes.started_at.bad_period',
+          period: "#{item.minimum_period} #{item.period}"
+        )
       end
     end
   end
 
   def not_overlap
-    errors[:ended_at] << self.class.i18n_activerecord_error("ended_at.overlap") if overlaps? && booking?
+    errors[:ended_at] << I18n.t('activerecord.errors.models.record.attributes.ended_at.overlap') if overlaps? && booking?
   end
 
   def overlaps?
@@ -96,25 +97,6 @@ class Record < ActiveRecord::Base
       end: ended_at,
       url: Rails.application.routes.url_helpers.item_record_path(item, id)
     }
-  end
-
-  # state changed calendar event
-  def aasm_state_dates_json
-    dates_json = [ as_json ]
-
-    dates_json << initial_state_date_json
-
-    record_state_logs.each do |log|
-      dates_json << {
-        id: log.aasm_state,
-        title: self.class.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}"),
-        start: log.created_at,
-        end: log.created_at + 1.minute,
-        color: state_color(log.aasm_state)
-      }
-    end
-
-    dates_json
   end
 
   #可查閱
@@ -221,7 +203,7 @@ class Record < ActiveRecord::Base
       borrower.account,
       '於',
       ApplicationController.helpers.render_datetime_period(self, :tw),
-      self.class.i18n_activerecord_attribute("aasm_state.#{aasm.current_state}"),
+      I18n.t("activerecord.attributes.record.aasm_state.#{aasm.current_state}"),
       item.name
     ].join(' ')
   end
@@ -268,7 +250,7 @@ class Record < ActiveRecord::Base
 
       {
         id: initial_state,
-        title: self.class.i18n_activerecord_attribute("aasm_state.#{initial_state}"),
+        title: I18n.t("activerecord.attributes.record.aasm_state.#{initial_state}"),
         start: created_at,
         end: created_at + 1.minute,
         color: state_color(initial_state)

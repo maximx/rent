@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  extend I18nMessage
-
   attr_accessor :login
 
   validates :account, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[\w]*\z/ }

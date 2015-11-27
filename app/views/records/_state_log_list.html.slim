@@ -5,13 +5,12 @@
     - if log.id
       .progress-bar.progress-bar-success.text-danger role="progressbar" style="width: #{width}%" data-toggle="tooltip" title="#{render_state_log_title(log)}"
         - if log.attachments.present?
-          = link_to render_icon_with_text('download-alt',
-                                          Record.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")),
+          = link_to render_icon_with_text('download-alt', t("activerecord.attributes.record.aasm_state.#{log.aasm_state}")),
                     download_picture_path(log.attachment.id),
                     target: '_blank'
         - else
-          = Record.i18n_activerecord_attribute("aasm_state.#{log.aasm_state}")
+          = t("activerecord.attributes.record.aasm_state.#{log.aasm_state}")
 
   - record.pending_states.each do |state|
     .progress-bar.progress-bar-muted role="progressbar" style="width: #{width}%"
-      = Record.i18n_activerecord_attribute("aasm_state.#{state}")
+      = t("activerecord.attributes.record.aasm_state.#{state}")
