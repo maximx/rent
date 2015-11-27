@@ -1,0 +1,12 @@
+zh-TW:
+  controller:
+    name:
+      tour: '導覽'
+      user: '個人頁面'
+      dashboard: '管理'
+      settings: '設定'
+    action:
+      new: '新增'
+      edit: '修改'
+    user:
+      collect: '收藏'
