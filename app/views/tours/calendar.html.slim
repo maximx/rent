@@ -1,0 +1,11 @@
+header.tours-header
+  = link_to raw(t('controller.tours.previous')), tours_path, class: 'btn btn-lg btn-default pull-left'
+  = link_to raw(t('controller.tours.next')), state_tours_path, class: 'btn btn-lg btn-default pull-right'
+  h1.text-center = t('controller.tours.calendar')
+
+main.tours-container
+  figure.tours-figure
+    = image_tag 'tours_calendar.png', class: 'tours-img'
+    ul.tours-notes
+      li.tours-calendar.tours-left
+        span = t('controller.tours.notes.calendar')

@@ -6,12 +6,12 @@ ul.nav.navbar-nav.navbar-right
         = render_cl_avatar_xs(current_user)
         span.caret
       ul.dropdown-menu.dropdown-menu-right
-        li = link_to render_icon_with_text('home', t('controller.name.user')), user_path(current_user)
+        li = link_to render_icon_with_text('home', t('controller.name.users')), user_path(current_user)
         li.divider role="separator"
 
         li.dropdown-header = t('activerecord.models.item')
         li = link_to render_icon_with_text('plus', t('controller.action.new')), new_item_path
-        li = link_to render_icon_with_text('heart', t('controller.user.collect')), wish_dashboard_items_path
+        li = link_to render_icon_with_text('heart', t('controller.users.collect')), wish_dashboard_items_path
         li = link_to render_icon_with_text('cog', t('controller.name.dashboard')), dashboard_items_path
         li.divider role="separator"
 
@@ -21,6 +21,6 @@ ul.nav.navbar-nav.navbar-right
         li = link_to render_icon_with_text('log-out', t('devise.views.sign_out')), destroy_user_session_path, method: :delete
 
   - else
-    li = link_to t('controller.name.tour'), '', class: 'signup'
+    li = link_to t('controller.name.tours'), tours_path, class: 'signup'
     li = link_to t('devise.views.sign_up'), new_user_registration_path, class: 'signup'
     li.active = link_to t('devise.views.sign_in'), new_user_session_path, class: 'login'

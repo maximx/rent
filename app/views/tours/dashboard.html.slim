@@ -1,0 +1,13 @@
+header.tours-header
+  = link_to raw(t('controller.tours.previous')), contract_tours_path, class: 'btn btn-lg btn-default pull-left'
+  = link_to raw(t('controller.tours.next')), tours_path, class: 'btn btn-lg btn-default pull-right'
+  h1.text-center = t('controller.tours.dashboard')
+
+main.tours-container
+  figure.tours-figure
+    = image_tag 'tours_dashboard.png', class: 'tours-img'
+    ul.tours-notes
+      li.tours-dashboard-search.tours-left
+        span = t('controller.tours.notes.dashboard-search')
+      li.tours-dashboard-records.tours-right
+        span = t('controller.tours.notes.dashboard-records')

@@ -81,4 +81,10 @@ Rails.application.routes.draw do
     put :mark_as_read, on: :member
   end
   resources :messages, only: [ :create ]
+
+  resources :tours, only: [ :index ] do
+    collection do
+      get :state, :calendar, :contract, :dashboard
+    end
+  end
 end

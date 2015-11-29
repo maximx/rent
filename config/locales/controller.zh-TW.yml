@@ -1,12 +1,30 @@
 zh-TW:
   controller:
     name:
-      tour: '導覽'
-      user: '個人頁面'
+      tours: '導覽'
+      users: '個人頁面'
       dashboard: '管理'
       settings: '設定'
     action:
       new: '新增'
       edit: '修改'
-    user:
+    users:
       collect: '收藏'
+    tours:
+      previous: '&lsaquo; 前一個'
+      next: '後一個 &rsaquo;'
+      index: '個人頁面'
+      state: '出租狀態'
+      calendar: '行事曆'
+      contract: '租賃契約'
+      dashboard: '後臺管理'
+      notes:
+        upload: '客製封面圖像'
+        facebook: 'Facebook連結'
+        calendar: '行事曆規劃管理'
+        record-info: '完整詳細承租資訊'
+        record-state: '交易狀態一目暸然'
+        download-contract: '根據雙方資訊產生契約'
+        contract: '簡易PDF格式承租契約'
+        dashboard-search: '出租空檔、承租日期查詢'
+        dashboard-records: '物品出租次數展示'
