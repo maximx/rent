@@ -2,6 +2,10 @@
 
 .tours-header {
   @include clearfix;
+  margin-top: 0;
+  padding-bottom: 20px;
+  border-bottom: $one-px-solid $gray-85;
+  h1 { margin: 0; }
 }
 
 .tours-figure {
