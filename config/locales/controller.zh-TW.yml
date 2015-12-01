@@ -8,6 +8,10 @@ zh-TW:
     action:
       new: '新增'
       edit: '修改'
+      about: '關於我們'
+      terms: '服務條款'
+      privacy: '隱私權政策'
+      contact: '聯繫方式'
     users:
       collect: '收藏'
     tours:
