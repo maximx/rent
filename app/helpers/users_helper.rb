@@ -18,7 +18,7 @@ module UsersHelper
       li << [ '評價', reviews_user_path(user) ]
       li << [ '出租物', items_user_path(user) ]
       li << [ content_tag(:strong, '編輯', class: 'text-primary'), edit_user_path(user) ] if display_edit_user_link? user
-      li << [ content_tag(:strong, Rent::SITE_NAME, class: 'text-danger'), items_path ]
+      li << [ content_tag(:strong, t('rent.site_name'), class: 'text-danger'), items_path ]
     end
   end
 

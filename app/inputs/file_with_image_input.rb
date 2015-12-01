@@ -21,7 +21,7 @@ class FileWithImageInput < SimpleForm::Inputs::Base
     if picture?
       object.send(attribute_name)
     else
-      object.imageable.is_a?(Profile) ? Rent::DEFAULT_AVATAR : 'sample'
+      object.imageable.is_a?(Profile) ? I18n.t('rent.default_avatar') : 'sample'
     end
   end
 

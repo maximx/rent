@@ -3,8 +3,8 @@
     = render_notice(notice)
     = render_alert(alert)
 
-    .title.text-center = Rent::TITLE
-    .detail.text-center = Rent::SUB_TITLE
+    .title.text-center = t('rent.title')
+    .detail.text-center = t('rent.sub_title')
 
     .container
       .search-form-container = render partial: 'common/search'

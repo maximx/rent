@@ -8,7 +8,7 @@ header.site-header
           span.icon-bar
           span.icon-bar
 
-        h1.navbar-brand = link_to Rent::SITE_NAME, root_path, id: 'site-logo'
+        h1.navbar-brand = link_to t('rent.site_name'), root_path, id: 'site-logo'
         .category.navbar-brand = render partial: 'common/category_navbar' if items_related_controller?
 
       #user-navigation.collapse.navbar-collapse

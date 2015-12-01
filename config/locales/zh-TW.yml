@@ -1,4 +1,22 @@
 zh-TW:
+  rent:
+    default_avatar: 'default-avatar'
+    site_name: &site_name '廣和租賃行'
+    title: '使用與體驗並不需購買擁有'
+    sub_title: '從附近鄰居家中租借閒置物品'
+    keywords:
+      - *site_name
+      - '廣和'
+      - '出租網'
+      - '共享經濟'
+      - '租經濟'
+      - '個人出租'
+      - '租東西'
+      - '借賃'
+    description:
+      - '在特定時日需要的某些東西，而不想花大錢購買？'
+      - *site_name
+      - '上有著各家出租業者、個人所提供的物品，以使用者付費觀念承租所需物品，亦可出租家中閒置物品。'
   helpers:
     submit:
       create: "新增%{model}"

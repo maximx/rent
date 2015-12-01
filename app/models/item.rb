@@ -82,7 +82,7 @@ class Item < ActiveRecord::Base
   end
 
   def meta_keywords
-    Rent::KEYWORDS + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
+    I18n.t('rent.keywords') + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
   end
 
   def meta_description

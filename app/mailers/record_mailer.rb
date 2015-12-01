@@ -14,6 +14,6 @@ class RecordMailer < ApplicationMailer
     @record = record
     @lender = record.item.lender
 
-    mail to: record.borrower.email, subject: "#{Rent::SITE_NAME}-承租物#{record.item.name}匯款通知"
+    mail to: record.borrower.email, subject: "#{I18n.t('rent.site_name')}-承租物#{record.item.name}匯款通知"
   end
 end

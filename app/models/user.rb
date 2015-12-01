@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   end
 
   def meta_description
-    profile.description || "您好，我是#{account}，我在#{Rent::SITE_NAME}"
+    profile.description || "您好，我是#{account}，我在#{I18n.t('rent.site_name')}"
   end
 
   def unread_count

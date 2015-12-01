@@ -1,16 +1,16 @@
 module ApplicationHelper
   def render_meta_tags
     display_meta_tags(
-      site: Rent::SITE_NAME,
-      keywords: Rent::KEYWORDS,
-      description: Rent::DESCRIPTION,
+      site: t('rent.site_name'),
+      keywords: t('rent.keywords'),
+      description: t('rent.description').join,
       og: {
-        site_name: Rent::SITE_NAME,
+        site_name: t('rent.site_name'),
         type: 'website',
         image: asset_url('logo'),
         url: request.original_url,
-        title: "#{Rent::SUB_TITLE} - #{Rent::SITE_NAME}",
-        description: Rent::DESCRIPTION
+        title: "#{t('rent.sub_title')} - #{t('rent.site_name')}",
+        description: t('rent.description').join
       },
       reverse: true,
       viewport: "width=device-width, initial-scale=1"

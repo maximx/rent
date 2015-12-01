@@ -127,7 +127,7 @@ class UsersController < ApplicationController
         canonical: user_url(@user),
         description: @user.meta_description,
         og: {
-          title: @user.account + "的個人資料 - " + Rent::SITE_NAME,
+          title: @user.account + "的個人資料 - " + t('rent.site_name'),
           description: @user.meta_description,
           type: 'profile',
           url: user_url(@user),

@@ -75,7 +75,7 @@ module PicturesHelper
     if user.profile and user.profile.avatar
       user.profile.avatar.public_id
     else
-      Rent::DEFAULT_AVATAR
+      t('rent.default_avatar')
     end
   end
 
