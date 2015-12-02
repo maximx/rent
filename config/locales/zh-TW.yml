@@ -3,10 +3,10 @@ zh-TW:
     default_avatar: 'default-avatar'
     site_name: &site_name '廣和租賃行'
     title: '使用與體驗並不需購買擁有'
-    sub_title: '從附近鄰居家中租借閒置物品'
+    sub_title: '從附近鄰居、店家租借閒置物品'
     keywords:
       - *site_name
-      - '廣和'
+      - '廣和行'
       - '出租網'
       - '共享經濟'
       - '租經濟'
@@ -23,7 +23,7 @@ zh-TW:
       update: "修改%{model}"
   mailboxer:
     notification_mailer:
-      subject: "通知∶%{subject}"
+      subject: "通知：%{subject}"
     message_mailer:
-      subject_new: "訊息∶%{subject}"
-      subject_reply: "回覆∶%{subject}"
+      subject_new: "訊息：%{subject}"
+      subject_reply: "回覆：%{subject}"
