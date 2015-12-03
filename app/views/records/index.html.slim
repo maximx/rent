@@ -3,7 +3,6 @@
 h2 = render_item_name(@item)
 
 = render partial: 'records/record_list', locals: { records: @records }
-= render_default_content(@records, '無承租紀錄')
 = render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }
 
 javascript:
