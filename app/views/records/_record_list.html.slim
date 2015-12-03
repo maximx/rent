@@ -24,3 +24,5 @@ table.table
           td = render_operate_record_links(record)
 
 = render partial: 'common/pagination', locals: { objects: records }
+
+= render_default_content(@records, '無承租紀錄')
