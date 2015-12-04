@@ -41,3 +41,6 @@ zh-TW:
       destroy:
         success: '已成功刪除%{name}。'
         fail: '%{name}有出租紀錄無法刪除。'
+    settings/account:
+      edit: '帳號設定'
+      show: '偏好設定'

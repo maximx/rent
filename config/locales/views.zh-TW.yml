@@ -1,8 +1,9 @@
 zh-TW:
   helpers:
     submit:
-      create: "新增%{model}"
-      update: "修改%{model}"
+      create: '新增%{model}'
+      update: '修改%{model}'
+      save: '儲存'
     items:
       close: &item_close '關閉'
       close_confirm:

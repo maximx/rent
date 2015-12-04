@@ -1,15 +1,17 @@
 class Settings::AccountsController < ApplicationController
   include FileAttrSetter
 
-  before_action :login_required
+  before_action :login_required, :find_user
+  before_action :find_profile, only: [ :show, :phone_confirmation, :phone_confirmed ]
   before_action :set_covers_attr, only: [ :upload ]
 
+  def show
+  end
+
   def edit
-    @user = current_user
   end
 
   def update
-    @user = User.find(current_user.id)
     prev_unconfirmed_email = @user.unconfirmed_email
 
     if @user.update_with_password(user_params)
@@ -28,19 +30,15 @@ class Settings::AccountsController < ApplicationController
   end
 
   def phone_confirmation
-    profile = current_user.profile
-
-    if profile.phone_confirmed?
-      redirect_with_message user_path(current_user), notice: '手機已驗證。'
+    if @profile.phone_confirmed?
+      redirect_with_message user_path(@user), notice: '手機已驗證。'
     end
   end
 
   def phone_confirmed
-    profile = current_user.profile
-
-    if params[:token] == profile.confirmation_token
-      profile.phone_confirmed
-      redirect_with_message user_path(current_user), notice: '手機驗證成功。'
+    if params[:token] == @profile.confirmation_token
+      @profile.phone_confirmed
+      redirect_with_message user_path(@user), notice: '手機驗證成功。'
     else
       flash[:alert] = '驗證碼錯誤，請再確認一次。'
     end
@@ -49,7 +47,6 @@ class Settings::AccountsController < ApplicationController
   def upload
     if remotipart_submitted?
       result = { status: 'error' }
-      @user = User.find(current_user.id)
       @user.update(user_params)
     end
   end
@@ -66,5 +63,17 @@ class Settings::AccountsController < ApplicationController
         :email, :current_password, :account,
         covers_attributes: [ :public_id, :file_cached ]
       )
+    end
+
+    def profile_params
+      params.require(:profile).permit(:send_mail, :borrower_info_provide)
+    end
+
+    def find_user
+      @user = User.find current_user.id
+    end
+
+    def find_profile
+      @profile = @user.profile
     end
 end
