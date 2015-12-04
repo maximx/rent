@@ -1,4 +1,6 @@
-= simple_form_for @profile, url: user_path(@user) do |f|
+h2.col-xs-offset-4.col-sm-offset-3 = t('controller.settings/account.show')
+
+= simple_form_for @profile, url: save_settings_account_path, html: { method: :patch } do |f|
   .form-group
     = f.input :send_mail,
               as: :boolean,

@@ -1,6 +1,6 @@
 = simple_form_for @user, url: settings_account_path, method: :put do |f|
   .form-group
-    h2.col-xs-offet-4.col-xs-8.col-sm-offset-3.col-sm-9 變更密碼
+    h2.col-xs-offet-4.col-xs-8.col-sm-offset-3.col-sm-9 = t('controller.settings/account.edit')
     .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9 = f.error_notification
 
   .form-inputs
@@ -12,4 +12,4 @@
 
   .form-group
     .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
-      = f.button :submit, "變更"
+      = f.button :submit, t('helpers.submit.save')

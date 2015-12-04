@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     resource :account, only: [ :show, :edit, :update ] do
       get :phone_confirmation
       post :phone_confirmed, :upload
+      patch :save
     end
   end
 

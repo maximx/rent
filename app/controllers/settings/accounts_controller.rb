@@ -2,10 +2,18 @@ class Settings::AccountsController < ApplicationController
   include FileAttrSetter
 
   before_action :login_required, :find_user
-  before_action :find_profile, only: [ :show, :phone_confirmation, :phone_confirmed ]
+  before_action :find_profile, only: [ :show, :save, :phone_confirmation, :phone_confirmed ]
   before_action :set_covers_attr, only: [ :upload ]
 
   def show
+  end
+
+  def save
+    if @profile.update(profile_params)
+      redirect_with_message settings_account_path, notice: t('controller.settings/account.save.success')
+    else
+      redirect_with_message settings_account_path, alert: t('common.error')
+    end
   end
 
   def edit

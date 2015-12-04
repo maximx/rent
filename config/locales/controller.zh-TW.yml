@@ -44,3 +44,5 @@ zh-TW:
     settings/account:
       edit: '帳號設定'
       show: '偏好設定'
+      save:
+        success: '個人偏好儲存成功。'

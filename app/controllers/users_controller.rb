@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     def profile_params
       params.require(:profile).permit(
         :name, :address, :phone, :facebook, :line,
-        :description, :bank_code, :bank_account, :send_mail,
+        :description, :bank_code, :bank_account,
         avatar_attributes: [ :id, :public_id, :file_cached ]
       )
     end
