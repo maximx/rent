@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119083037) do
+ActiveRecord::Schema.define(version: 20151204070334) do
 
   create_table "banks", force: :cascade do |t|
     t.string   "code",       limit: 255
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20151119083037) do
     t.integer  "minimum_period", limit: 4,     default: 1
     t.integer  "city_id",        limit: 4
     t.float    "deliver_fee",    limit: 24,    default: 0.0
+    t.string   "aasm_state",     limit: 255
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|

@@ -1,11 +1,12 @@
 class Item < ActiveRecord::Base
+  include AASM
   include CurrencyPrice
 
   self.per_page = 20
   PRICE_MIN = 0
   PRICE_MAX = 500
 
-  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids
+  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids, :aasm_state
   validates_presence_of :address, if: :delivers_include_face?
   validates_numericality_of :deliver_fee, equal_to: 0, unless: :delivers_include_non_face?
   validate :profile_bank_info_presented, if: :delivers_include_non_face?
@@ -50,6 +51,19 @@ class Item < ActiveRecord::Base
   end
 
   scope :index_pictures_urls, -> { all.map{ |i| cloudinary_url(i.index_picture_public_id) }.uniq }
+
+  aasm no_direct_assignment: true do
+    state :opening, initial: true
+    state :closed
+
+    event :close do
+      transitions from: :opening, to: :closed
+    end
+
+    event :open do
+      transitions from: :closed, to: :opening
+    end
+  end
 
   def profile_bank_info_presented
     unless lender.profile.bank_info_present?
