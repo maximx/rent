@@ -33,6 +33,7 @@ class Item < ActiveRecord::Base
 
   geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
+  after_initialize :init_address
   after_validation :geocode
   before_save :set_category_and_price, :set_city
 
@@ -63,6 +64,10 @@ class Item < ActiveRecord::Base
     event :open do
       transitions from: :closed, to: :opening
     end
+  end
+
+  def init_address
+    self.address = lender.profile.address
   end
 
   def profile_bank_info_presented
