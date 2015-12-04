@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   include SortPaginate
 
   before_action :login_required, except: [ :index, :show, :search, :questions ]
-  before_action :find_lender_item, only: [ :edit, :update, :destroy ]
+  before_action :find_lender_item, only: [ :edit, :update, :close, :open, :destroy ]
   before_action :validates_profile, only: [ :new, :create, :edit, :update ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
@@ -55,6 +55,24 @@ class ItemsController < ApplicationController
         flash[:alert] = '請檢查紅字錯誤欄位'
         render :edit
       end
+    end
+  end
+
+  def open
+    if @item.closed?
+      @item.open!
+      redirect_with_message dashboard_items_path, notice: t('controller.item.open.success', name: @item.name)
+    else
+      redirect_with_message dashboard_items_path, alert: t('common.error')
+    end
+  end
+
+  def close
+    if @item.opening?
+      @item.close!
+      redirect_with_message dashboard_items_path, notice: t('controller.item.close.success', name: @item.name)
+    else
+      redirect_with_message dashboard_items_path, alert: t('common.error')
     end
   end
 

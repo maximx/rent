@@ -1,4 +1,6 @@
 zh-TW:
+  common:
+    error: '發生錯誤，請重新整理並再試一次。'
   rent:
     default_avatar: 'default-avatar'
     site_name: &site_name '廣和租賃行'
@@ -17,10 +19,6 @@ zh-TW:
       - '在特定時日需要的某些東西，而不想花大錢購買？'
       - *site_name
       - '上有著各家出租業者、個人所提供的物品，以使用者付費觀念承租所需物品，亦可出租家中閒置物品。'
-  helpers:
-    submit:
-      create: "新增%{model}"
-      update: "修改%{model}"
   mailboxer:
     notification_mailer:
       subject: "通知：%{subject}"

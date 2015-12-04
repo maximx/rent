@@ -25,6 +25,8 @@ module Dashboard::ItemsHelper
       render_new_item_record_path(item),
       render_item_records_link(item),
       render_edit_item_link(item),
+      render_open_item_link(item),
+      render_close_item_link(item),
       render_destroy_item_link(item)
     ].join
 

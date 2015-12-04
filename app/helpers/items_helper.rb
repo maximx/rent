@@ -56,6 +56,24 @@ module ItemsHelper
     end
   end
 
+  def render_close_item_link(item)
+    if item.opening?
+      link_to render_icon('remove-circle', class: 'text-danger'),
+              close_item_path(item),
+              class: 'btn btn-default', method: :patch, title: t('helpers.items.close'),
+              data: { toggle: 'tooltip', confirm: t('helpers.items.close_confirm', name: item.name) }
+    end
+  end
+
+  def render_open_item_link(item)
+    if item.closed?
+      link_to render_icon('ok-circle', class: 'text-warning'),
+              open_item_path(item),
+              class: 'btn btn-default', method: :patch, title: t('helpers.items.open'),
+              data: { toggle: 'tooltip', confirm: t('helpers.items.open_confirm', name: item.name) }
+    end
+  end
+
   def render_items_view_links
     links = []
     current_view = ( ['list', 'grid'].include?(params[:view]) ) ? params[:view] : 'grid'

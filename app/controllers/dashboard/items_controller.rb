@@ -6,7 +6,7 @@ class Dashboard::ItemsController < ApplicationController
   before_action :find_items, only: [ :index ]
 
   def index
-    @records_count = @items.joins(:records).group(:item_id, :aasm_state).count
+    @records_count = @items.joins(:records).group(:item_id, 'records.aasm_state').count
     @records_count.default = 0
   end
 

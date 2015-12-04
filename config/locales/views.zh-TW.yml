@@ -1,0 +1,16 @@
+zh-TW:
+  helpers:
+    submit:
+      create: "新增%{model}"
+      update: "修改%{model}"
+    items:
+      close: &item_close '關閉'
+      close_confirm:
+        - '確定要'
+        - *item_close
+        - '%{name}嗎？'
+      open: &item_open '公開'
+      open_confirm:
+        - '確定要'
+        - *item_open
+        - '%{name}嗎？'

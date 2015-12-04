@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     member do
       get :questions, :calendar
       post :collect
+      patch :open, :close
       delete :uncollect
     end
   end

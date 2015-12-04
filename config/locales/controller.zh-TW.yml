@@ -34,6 +34,10 @@ zh-TW:
       privacy: '隱私權政策'
       contact: '聯繫方式'
     item:
+      open:
+        success: '已成功公開%{name}。'
+      close:
+        success: '已成功關閉%{name}。'
       destroy:
-        success: '%{name}已成功刪除。'
+        success: '已成功刪除%{name}。'
         fail: '%{name}有出租紀錄無法刪除。'
