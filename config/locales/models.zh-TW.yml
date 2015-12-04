@@ -57,6 +57,8 @@ zh-TW:
               blank: '請上傳圖片'
             phone:
               taken: '電話已被綁定'
+            info:
+              blank: '請完成%{attrs}的資料填寫'
         record:
           attributes:
             name:

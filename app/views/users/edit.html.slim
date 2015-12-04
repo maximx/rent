@@ -12,7 +12,7 @@
   .hidden-xs.hidden-sm
     = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
 
-  = simple_form_for @profile, url: user_path(@user) do |f|
+  = simple_form_for @profile, url: user_path(@user, redirect_url: params[:redirect_url]) do |f|
     .col-md-8
       = f.input :name
       = f.input :address, input_html: { class: 'address_geocomplete' }

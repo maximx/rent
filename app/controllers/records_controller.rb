@@ -3,7 +3,7 @@ class RecordsController < ApplicationController
 
   before_action :login_required, except: [ :index ]
   before_action :find_item, :find_navbar_categories
-  before_action :validates_item_rentable, only: [ :new, :create ]
+  before_action :validates_item_rentable, :validates_borrower_info, only: [ :new, :create ]
   before_action :find_item_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
@@ -125,6 +125,16 @@ class RecordsController < ApplicationController
 
     def validates_item_rentable
       redirect_with_message(item_path(@item)) unless @item.rentable_by?(current_user)
+    end
+
+    def validates_borrower_info
+      if @item.lender.profile.borrower_info_provide
+        errors = current_user.profile.validates_detail_info
+        unless errors.empty?
+          redirect_with_message edit_user_path(current_user, redirect_url: new_item_record_path(@item)),
+                                alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
+        end
+      end
     end
 
     def find_user_record

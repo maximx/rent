@@ -28,13 +28,20 @@ class Profile < ActiveRecord::Base
     !!confirmed_at
   end
 
-  def validates
+  def validates_basic_info
     errors = []
     [ 'name', 'address' ].each do |attr|
       errors << I18n.t("simple_form.labels.profile.#{attr}") if self.send(attr).blank?
     end
+    errors
+  end
 
-    { errors: errors, message: "請完成#{errors.join('、')}的資料填寫" }
+  def validates_detail_info
+    errors = validates_basic_info
+    [ 'phone'].each do |attr|
+      errors << I18n.t("simple_form.labels.profile.#{attr}") if self.send(attr).blank?
+    end
+    errors
   end
 
   def phone_confirmed

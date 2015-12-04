@@ -39,14 +39,16 @@ class Settings::AccountsController < ApplicationController
 
   def phone_confirmation
     if @profile.phone_confirmed?
-      redirect_with_message user_path(@user), notice: '手機已驗證。'
+      redirect_url = params[:redirect_url] || user_path(@user)
+      redirect_with_message redirect_url, notice: '手機已驗證。'
     end
   end
 
   def phone_confirmed
     if params[:token] == @profile.confirmation_token
       @profile.phone_confirmed
-      redirect_with_message user_path(@user), notice: '手機驗證成功。'
+      redirect_url = params[:redirect_url] || user_path(@user)
+      redirect_with_message redirect_url, notice: '手機驗證成功。'
     else
       flash[:alert] = '驗證碼錯誤，請再確認一次。'
     end

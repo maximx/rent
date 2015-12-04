@@ -187,10 +187,11 @@ class ItemsController < ApplicationController
     end
 
     def validates_profile
-      result = current_user.profile.validates
+      errors = current_user.profile.validates_basic_info
 
-      unless result[:errors].empty?
-        redirect_with_message(edit_user_path(current_user), notice: result[:message])
+      unless errors.empty?
+        redirect_with_message edit_user_path(current_user),
+                              alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
       end
     end
 end
