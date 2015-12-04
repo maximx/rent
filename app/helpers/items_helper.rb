@@ -48,10 +48,12 @@ module ItemsHelper
   end
 
   def render_destroy_item_link(item)
-    link_to render_icon('trash', class: 'text-danger'),
-            item_path(item),
-            { class: 'btn btn-default', method: :delete, title: '刪除',
-              data: { toggle: 'tooltip', confirm: "確定要刪除#{item.name}嗎？"} }
+    if item.records.empty?
+      link_to render_icon('trash', class: 'text-danger'),
+              item_path(item),
+              class: 'btn btn-default', method: :delete, title: '刪除',
+              data: { toggle: 'tooltip', confirm: "確定要刪除#{item.name}嗎？" }
+    end
   end
 
   def render_items_view_links

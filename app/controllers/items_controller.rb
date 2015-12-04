@@ -59,8 +59,12 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-    redirect_to dashboard_items_path
+    if @item.records.empty?
+      @item.destroy
+      redirect_with_message dashboard_items_path, notice: t('controller.item.destroy.success', name: @item.name)
+    else
+      redirect_with_message dashboard_items_path, alert: t('controller.item.destroy.fail', name: @item.name)
+    end
   end
 
   def collect

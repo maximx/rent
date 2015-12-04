@@ -33,3 +33,7 @@ zh-TW:
       terms: '服務條款'
       privacy: '隱私權政策'
       contact: '聯繫方式'
+    item:
+      destroy:
+        success: '%{name}已成功刪除。'
+        fail: '%{name}有出租紀錄無法刪除。'
