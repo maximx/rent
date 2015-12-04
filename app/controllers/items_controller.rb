@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item = current_user.items.build
     @item.pictures.build
   end
 
