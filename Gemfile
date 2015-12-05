@@ -55,8 +55,9 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'prawn'
 gem 'prawn-table'
-gem 'cloudinary'
 gem 'whenever'
+gem 'cloudinary'
+gem 'carrierwave'
 
 # models
 gem 'aasm'

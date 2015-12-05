@@ -264,6 +264,7 @@ DEPENDENCIES
   capistrano
   capistrano-rails
   capistrano-rvm
+  carrierwave
   cloudinary
   coffee-rails (~> 4.1.0)
   devise
