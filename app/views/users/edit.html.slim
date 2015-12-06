@@ -1,16 +1,12 @@
 = render layout: 'users/header', locals: { user: @user, maps: @maps } do
   .col-md-8
-    = simple_form_for @profile, url: avatar_user_path(@user), remote: true, html: { method: :patch, class: 'form-horizontal ajax_image' } do |f|
+    = simple_form_for @profile, url: avatar_user_path(@user),
+                                remote: true, html: { method: :patch, class: 'form-horizontal ajax_image' } do |f|
       = f.input :avatar, as: :file_with_image, input_html: { class: 'avatar' }
 
-    /= simple_form_for @profile, url: avatar_user_path(@user), remote: true, html: { method: :patch, class: 'form-horizontal ajax_image' } do |f|
-      /= f.simple_fields_for :avatar, (@profile.avatar || @profile.build_avatar) do |a|
-        /= a.input :public_id, as: :file_with_image, input_html: { class: 'avatar' }
-
-    /= simple_form_for @user, url: upload_settings_account_path,
-                             /remote: true, html: { method: :post, class: 'form-horizontal ajax_image' } do |f|
-      /= f.simple_fields_for :covers, @user.covers.build do |a|
-        /= a.input :public_id, as: :file_with_image, input_html: { multiple: true }, hint: '可選取多個檔案'
+    = simple_form_for @user, url: upload_settings_account_path,
+                             remote: true, html: { method: :post, class: 'form-horizontal ajax_image' } do |f|
+      = f.input :covers, as: :file_with_image, input_html: { multiple: true }
 
   .hidden-xs.hidden-sm
     = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }

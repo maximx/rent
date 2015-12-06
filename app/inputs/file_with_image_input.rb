@@ -14,14 +14,18 @@ class FileWithImageInput < SimpleForm::Inputs::Base
   end
 
   def file_url
-    if object.send(attribute_name).present?
+    if profile? and object.send(attribute_name).present?
       object.send(attribute_name).file.url
     else
-      filename = object.is_a?(Profile) ? 'default-avatar.gif' : 'sample.jpg'
+      filename = profile? ? 'default-avatar.gif' : 'sample.jpg'
       region = 's3-ap-southeast-1'
       host = 'amazonaws.com'
       bucket = 'guangho-file'
       "https://#{region}.#{host}/#{bucket}/#{filename}"
     end
+  end
+
+  def profile?
+    object.is_a? Profile
   end
 end

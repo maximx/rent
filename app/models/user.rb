@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   has_many :revieweds, class_name: "Review", foreign_key: "judger_id"
   has_many :reviews, class_name: "Review", foreign_key: "user_id"
 
-  has_many :covers, class_name: 'Picture', as: :imageable, dependent: :destroy
+  has_many :covers, class_name: 'Attachment', as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :covers
 
   after_save :init_profile

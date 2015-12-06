@@ -6,7 +6,7 @@
 
     .carousel-inner.img-thumbnail role="listbox"
       - pictures.each_with_index do |picture, index|
-        div class="item#{ " active" if index == 0 }" style="background-image: url(#{ cloudinary_url(picture.public_id) });"
+        div class="item#{ " active" if index == 0 }" style="background-image: url(#{picture.file.url});"
           = edit_picture_link picture
 
     a.left.carousel-control href="#picture-carousel" role="button" data-slide="prev"

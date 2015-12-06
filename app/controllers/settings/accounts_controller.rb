@@ -55,9 +55,10 @@ class Settings::AccountsController < ApplicationController
   end
 
   def upload
-    if remotipart_submitted?
-      result = { status: 'error' }
-      @user.update(user_params)
+    if remotipart_submitted? and params[:user][:covers]
+      params[:user][:covers].each do |cover|
+        @user.covers.create file: cover
+      end
     end
   end
 
