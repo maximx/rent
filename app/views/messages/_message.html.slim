@@ -1,6 +1,7 @@
 .message.clearfix
   .message-avatar
-    = link_to render_cl_avatar_sm(message.sender), user_path(message.sender), class: 'img-circle img-thumbnail'
+    /TODO: message.sender.avatar
+    = link_to message.sender.account, user_path(message.sender), class: 'img-circle img-thumbnail'
 
   .message-content
     .pull-right = render_datetime(message.created_at)

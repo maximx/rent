@@ -1,7 +1,8 @@
 - items.each do |item|
   article.item-grid
     = link_to item_path(item), class: "item-link" do
-      div = render_cl_image_md(item.index_picture_public_id)
+      /TODO: picture.first
+      div = item.name
 
       .item-info-short.clearfix
         header.item-title = render_item_name(item)

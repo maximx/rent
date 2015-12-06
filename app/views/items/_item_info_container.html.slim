@@ -24,7 +24,8 @@
       dl.dl-horizontal
         dd
           = link_to user_path(item.lender) do
-            = render_cl_avatar_md(item.lender)
+            /TODO: avatar
+            = item.lender.account
             = ' ' + item.lender.account
 
         dt 出租物地址

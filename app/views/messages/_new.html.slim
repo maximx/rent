@@ -9,7 +9,8 @@ button.btn.btn-success.btn-sm.btn-messages-modal type="button" data-toggle="moda
         .modal-header
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;
-          h4.modal-title id="messagesMedalLabel" 發送訊息給#{item.lender.account}#{render_cl_avatar_sm(item.lender)}
+          /TODO: item.lender.avatar
+          h4.modal-title id="messagesMedalLabel" 發送訊息給#{item.lender.account}#{item.lender.account}
 
         .modal-body
           = f.input :item_id, as: :hidden, input_html: { value: item.id }

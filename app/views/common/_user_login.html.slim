@@ -3,7 +3,8 @@ ul.nav.navbar-nav.navbar-right
     li.logged = render_notifications_link
     li.logged.dropdown
       a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button"
-        = render_cl_avatar_xs(current_user)
+        /TODO:avatar
+        = current_user.account
         span.caret
       ul.dropdown-menu.dropdown-menu-right
         li = link_to render_icon_with_text('home', t('controller.name.users')), user_path(current_user)
