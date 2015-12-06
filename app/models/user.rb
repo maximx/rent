@@ -97,9 +97,15 @@ class User < ActiveRecord::Base
     end
   end
 
-  def picture_url
-    public_id = ApplicationController.helpers.public_id_of(self)
-    Cloudinary::Utils.cloudinary_url(public_id)
+  def avatar_url
+    if profile.avatar.present?
+      profile.avatar.file.url
+    else
+      region = 's3-ap-southeast-1'
+      host = 'amazonaws.com'
+      bucket = 'guangho-file'
+      "https://#{region}.#{host}/#{bucket}/default-avatar.gif"
+    end
   end
 
   def meta_description

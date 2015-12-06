@@ -4,6 +4,7 @@ zh-TW:
       create: '新增%{model}'
       update: '修改%{model}'
       save: '儲存'
+      edit: '編輯'
     items:
       close: &item_close '關閉'
       close_confirm:

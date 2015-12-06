@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   include SortPaginate
 
   before_action :login_required, only: [ :follow, :unfollow ]
-  before_action :find_user, :find_profile, :set_user_meta_tags
-  before_action :find_total_reviews, only: [ :show, :edit, :update ]
+  before_action :find_user, :find_profile
   before_action :validate_editable, only: [ :edit, :update, :avatar ]
-  before_action :set_avatar_attr, only: [ :avatar ]
+  before_action :find_total_reviews, only: [ :show, :edit, :update ]
+  before_action :set_user_meta_tags
 
   def show
     set_maps_marker @profile
@@ -35,7 +35,12 @@ class UsersController < ApplicationController
 
   def avatar
     if remotipart_submitted?
-      @profile.update_attribute(:avatar_attributes, profile_params[:avatar_attributes])
+      if @profile.avatar
+        @profile.avatar.update file: params[:profile][:avatar]
+      else
+        avatar = @profile.build_avatar file: params[:profile][:avatar]
+        avatar.save
+      end
     end
   end
 
@@ -105,8 +110,7 @@ class UsersController < ApplicationController
     def profile_params
       params.require(:profile).permit(
         :name, :address, :phone, :facebook, :line,
-        :description, :bank_code, :bank_account,
-        avatar_attributes: [ :id, :public_id, :file_cached ]
+        :description, :bank_code, :bank_account
       )
     end
 
@@ -132,7 +136,7 @@ class UsersController < ApplicationController
           description: @user.meta_description,
           type: 'profile',
           url: user_url(@user),
-          image: @user.picture_url
+          image: @user.avatar_url
         }
       )
     end

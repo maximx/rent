@@ -4,28 +4,24 @@ class FileWithImageInput < SimpleForm::Inputs::Base
     merged_input_options[:class] << :hidden
 
     template.content_tag :div, class: 'carousel picture' do
-      template.content_tag :div, class: 'item', style: "background-image: url(#{image_url})" do
+      template.content_tag :div, class: 'item', style: "background-image: url(#{file_url})" do
         template.content_tag :figure do
           template.concat @builder.file_field(attribute_name, merged_input_options)
-          template.concat "<figcaption class='carousel-caption edit_image'>編輯</figcaption>".html_safe
+          template.concat "<figcaption class='carousel-caption edit_image'>#{I18n.t('helpers.submit.edit')}</figcaption>".html_safe
         end
       end
     end
   end
 
-  def image_url
-    ApplicationController.helpers.cloudinary_url(picture_public_id, crop: :fill, gravity: :face)
-  end
-
-  def picture_public_id
-    if picture?
-      object.send(attribute_name)
+  def file_url
+    if object.send(attribute_name).present?
+      object.send(attribute_name).file.url
     else
-      object.imageable.is_a?(Profile) ? I18n.t('rent.default_avatar') : 'sample'
+      filename = object.is_a?(Profile) ? 'default-avatar.gif' : 'sample.jpg'
+      region = 's3-ap-southeast-1'
+      host = 'amazonaws.com'
+      bucket = 'guangho-file'
+      "https://#{region}.#{host}/#{bucket}/#{filename}"
     end
-  end
-
-  def picture?
-    object.send(attribute_name).present?
   end
 end

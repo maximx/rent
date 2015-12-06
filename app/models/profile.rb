@@ -7,7 +7,7 @@ class Profile < ActiveRecord::Base
   belongs_to :user, polymorphic: true
   belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
 
-  has_one :avatar, class_name: 'Picture', as: :imageable, dependent: :destroy
+  has_one :avatar, class_name: 'Attachment', as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :avatar
 
   geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }

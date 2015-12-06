@@ -1,8 +1,7 @@
 <%- if remotipart_submitted? and @profile.errors.blank? %>
-  var image_src = "<%= cloudinary_url(@profile.avatar.public_id, crop: :fill, gravity: :face) %>";
+  var image_src = "<%= @profile.avatar.file.url %>";
 
   $('.file_with_image .picture :file.avatar').closest('.item').css('background-image', 'url(' + image_src + ')');
-
 <% else %>
   alert('發生錯誤');
 <% end %>
