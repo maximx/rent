@@ -16,8 +16,7 @@
           td
             = link_to user_path(record.lender), class: "img-circle img-thumbnail",
                       data: { toggle: "tooltip" }, title: record.lender.account do
-              /TODO:avatar
-              = record.lender.account
+              = render_avatar_thumb(record.lender)
             span = record.review_of_user(current_user).human_rate
           td = record.currency_price
           td = render_datetime_period(record, :date_only)

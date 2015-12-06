@@ -12,12 +12,10 @@ table.table
       td
       td
         span 出租者
-        /TODO: lender.avatar
-        = @item.lender.account
+        = render_avatar_thumb @item.lender
       td
         span 承租者
-        /TODO: borrower.avatar
-        = @record.borrower.account
+        = render_avatar_thumb @record.borrower
     tr
       td 帳號
       td = link_to(@item.lender.account, user_path(@item.lender))

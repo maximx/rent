@@ -22,6 +22,12 @@ module PicturesHelper
     image_tag avatar_url_of(user, :thumb), options
   end
 
+  def render_avatar_logo(user, options = {})
+    size_options = { width: 50, height: 50 }
+    options = size_options.merge(options)
+    image_tag avatar_url_of(user, :thumb), options
+  end
+
   def render_picture_cover(picture, options = {})
     size_options = { width: 250, height: 180 }
     options = size_options.merge(options)

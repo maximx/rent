@@ -8,8 +8,7 @@ header.site-header.user
           span.icon-bar
           span.icon-bar
 
-        /TODO: user.avatar.logo
-        h1.navbar-brand = link_to user.account, user_path(user)
+        h1.navbar-brand = link_to render_avatar_logo(user), user_path(user)
 
         .category.navbar-brand
           ul.nav.navbar-nav

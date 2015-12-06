@@ -1,10 +1,9 @@
 article.question
   .row
     .ask.clearfix
-        .col-lg-1.col-lg-offset-2.text-center
+        .col-lg-2.col-lg-offset-1.text-center
           = link_to user_url(question.asker) do
-            /TODO: asker.avatar
-            = question.asker.account
+            = render_avatar_thumb(question.asker)
             div = question.asker.account
         .col-lg-9 問題∶ #{ question.content }
 

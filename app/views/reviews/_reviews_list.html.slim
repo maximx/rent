@@ -1,8 +1,7 @@
 - reviews.each do |review|
   .review-container.col-xs-12.col-sm-12 data-page="#{ reviews.next_page || 0 }"
     .col-xs-offset-3.col-xs-2.col-sm-offset-2.col-sm-1
-      /TODO: judger.avatar
-      = review.judger.account
+      = render_avatar_thumb review.judger
 
     .col-xs-7.col-sm-9
       table.review-info
