@@ -46,6 +46,9 @@ Rails.application.routes.draw do
   resources :pictures, only: [ :destroy ] do
     get :download, on: :member
   end
+  resources :attachments, only: [ :destroy ] do
+    get :download, on: :member
+  end
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ] do
