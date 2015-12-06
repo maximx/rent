@@ -1,6 +1,7 @@
 class Attachment < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
   mount_uploader :file, AttachmentUploader
+  mount_uploader :image, ImageUploader
 
   after_save :recreate_image_versions!
 
@@ -22,6 +23,6 @@ class Attachment < ActiveRecord::Base
 
   private
     def recreate_image_versions!
-      file.recreate_versions!
+      image.recreate_versions! if image.present?
     end
 end

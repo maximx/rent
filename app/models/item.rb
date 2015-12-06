@@ -112,7 +112,7 @@ class Item < ActiveRecord::Base
   end
 
   def pictures_urls
-    pictures.map { |p| p.file.url }.uniq
+    pictures.map { |p| p.image.url }.uniq
   end
 
   def reviews

@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
     @item = current_user.items.build(item_params)
 
     if params[:item][:pictures] and @item.save
-      params[:item][:pictures].each { |picture| @item.pictures.create file: picture }
+      params[:item][:pictures].each { |picture| @item.pictures.create image: picture }
       redirect_to item_path(@item), notice: t('controller.items.create.success', name: @item.name)
     else
       flash[:alert] = t('controller.action.create.fail')

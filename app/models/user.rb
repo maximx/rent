@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
 
   def avatar_url
     if profile.avatar.present?
-      profile.avatar.file.url
+      profile.avatar.image.url
     else
       region = 's3-ap-southeast-1'
       host = 'amazonaws.com'

@@ -31,18 +31,18 @@ module PicturesHelper
   def render_picture_cover(picture, options = {})
     size_options = { width: 250, height: 180 }
     options = size_options.merge(options)
-    image_tag picture.file_url(:cover), options
+    image_tag picture.image_url(:cover), options
   end
 
   def render_picture_cover_list(picture, options = {})
     size_options = { width: 180, height: 130 }
     options = size_options.merge(options)
-    image_tag picture.file_url(:cover), options
+    image_tag picture.image_url(:cover), options
   end
 
   def avatar_url_of(user, version = '')
     if user.profile.avatar
-      version.blank? ? user.profile.avatar.file.url : user.profile.avatar.file_url(version)
+      version.blank? ? user.profile.avatar.image.url : user.profile.avatar.image_url(version)
     else
       filename = t('rent.default_avatar')
       region = 's3-ap-southeast-1'

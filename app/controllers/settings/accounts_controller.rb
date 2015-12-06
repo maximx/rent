@@ -54,7 +54,7 @@ class Settings::AccountsController < ApplicationController
   def upload
     if remotipart_submitted? and params[:user][:covers]
       params[:user][:covers].each do |cover|
-        @user.covers.create file: cover
+        @user.covers.create image: cover
       end
     end
   end

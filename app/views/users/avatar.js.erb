@@ -1,5 +1,5 @@
 <%- if remotipart_submitted? and @profile.errors.blank? %>
-  var image_src = "<%= @profile.avatar.file.url %>";
+  var image_src = "<%= @profile.avatar.image.url %>";
 
   $('.file_with_image .picture :file.avatar').closest('.item').css('background-image', 'url(' + image_src + ')');
 <% else %>

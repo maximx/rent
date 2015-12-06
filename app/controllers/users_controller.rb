@@ -35,9 +35,9 @@ class UsersController < ApplicationController
   def avatar
     if remotipart_submitted?
       if @profile.avatar
-        @profile.avatar.update file: params[:profile][:avatar]
+        @profile.avatar.update image: params[:profile][:avatar]
       else
-        avatar = @profile.build_avatar file: params[:profile][:avatar]
+        avatar = @profile.build_avatar image: params[:profile][:avatar]
         avatar.save
       end
     end

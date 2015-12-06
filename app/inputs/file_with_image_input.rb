@@ -15,7 +15,7 @@ class FileWithImageInput < SimpleForm::Inputs::Base
 
   def file_url
     if profile? and object.send(attribute_name).present?
-      object.send(attribute_name).file.url
+      object.send(attribute_name).image.url
     else
       filename = profile? ? 'default-avatar.gif' : 'sample.jpg'
       region = 's3-ap-southeast-1'
