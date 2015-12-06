@@ -36,14 +36,17 @@ zh-TW:
       privacy: '隱私權政策'
       contact: '聯繫方式'
     items:
+      action:
+        open: '上架'
+        close: '下架'
       create:
         success: '%{name}新增成功。'
       update:
         success: '%{name}修改成功。'
       open:
-        success: '已成功公開%{name}。'
+        success: '已成功上架%{name}。'
       close:
-        success: '已成功關閉%{name}。'
+        success: '已成功下架%{name}。'
       destroy:
         success: '已成功刪除%{name}。'
         fail: '%{name}有出租紀錄無法刪除。'

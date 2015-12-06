@@ -6,13 +6,5 @@ zh-TW:
       save: '儲存'
       edit: '編輯'
     items:
-      close: &item_close '關閉'
-      close_confirm:
-        - '確定要'
-        - *item_close
-        - '%{name}嗎？'
-      open: &item_open '公開'
-      open_confirm:
-        - '確定要'
-        - *item_open
-        - '%{name}嗎？'
+      open_confirm: '確定要上架%{name}嗎？'
+      close_confirm: '確定要下架%{name}嗎？'
