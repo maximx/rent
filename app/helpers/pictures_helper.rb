@@ -12,7 +12,7 @@ module PicturesHelper
     size_options = { width: 30, height: 30 }
     size_options.reverse_merge! avatar_default_options
     options = size_options.merge(options)
-    image_tag avatar_url_of(user, :avatar), options
+    image_tag avatar_url_of(user, :thumb), options
   end
 
   def render_avatar_thumb(user, options = {})
@@ -20,6 +20,18 @@ module PicturesHelper
     size_options.reverse_merge! avatar_default_options
     options = size_options.merge(options)
     image_tag avatar_url_of(user, :thumb), options
+  end
+
+  def render_picture_cover(picture, options = {})
+    size_options = { width: 250, height: 180 }
+    options = size_options.merge(options)
+    image_tag picture.file_url(:cover), options
+  end
+
+  def render_picture_cover_list(picture, options = {})
+    size_options = { width: 180, height: 130 }
+    options = size_options.merge(options)
+    image_tag picture.file_url(:cover), options
   end
 
   def avatar_url_of(user, version = '')

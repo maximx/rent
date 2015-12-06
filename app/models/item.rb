@@ -107,8 +107,8 @@ class Item < ActiveRecord::Base
     "租金∶#{price_period}。#{ApplicationController.helpers.strip_tags(description)}"
   end
 
-  def index_picture_public_id
-    pictures.first.public_id
+  def cover_picture
+    pictures.first
   end
 
   def pictures_urls

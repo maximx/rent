@@ -9,12 +9,14 @@ button.btn.btn-success.btn-sm.btn-messages-modal type="button" data-toggle="moda
         .modal-header
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;
-          /TODO: item.lender.avatar
-          h4.modal-title id="messagesMedalLabel" 發送訊息給#{item.lender.account}#{item.lender.account}
+          h4.modal-title id="messagesMedalLabel"
+            = t('helpers.messages.new_title_to')
+            = render_avatar(item.lender)
+            = item.lender.account
 
         .modal-body
           = f.input :item_id, as: :hidden, input_html: { value: item.id }
           = f.input :body, as: :text
 
         .modal-footer
-          = f.button :submit, '傳送訊息'
+          = f.button :submit, t('helpers.submit.send')
