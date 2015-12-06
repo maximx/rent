@@ -4,12 +4,11 @@ class ItemsController < ApplicationController
   include SortPaginate
 
   before_action :login_required, except: [ :index, :show, :search, :questions ]
-  before_action :find_lender_item, only: [ :edit, :update, :close, :open, :destroy ]
   before_action :validates_profile, only: [ :new, :create, :edit, :update ]
+  before_action :find_lender_item, only: [ :edit, :update, :close, :open, :destroy ]
   before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]
-  before_action :set_pictures_attr, only: [ :create, :update ]
 
   def index
     @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}]).opening
@@ -36,10 +35,11 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
 
-    if @item.save
-      redirect_with_message item_path(@item), notice: "#{@item.name}新增成功。"
+    if params[:item][:pictures] and @item.save
+      params[:item][:pictures].each { |picture| @item.pictures.create file: picture }
+      redirect_to item_path(@item), notice: t('controller.items.create.success', name: @item.name)
     else
-      flash[:alert] = '請檢查紅字錯誤欄位'
+      flash[:alert] = t('controller.action.create.fail')
       render :new
     end
   end
@@ -49,10 +49,11 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_with_message item_path(@item), notice: "#{@item.name}修改成功。" unless remotipart_submitted?
+      params[:item][:pictures].each { |picture| @item.pictures.create file: picture } if params[:item][:pictures]
+      redirect_to item_path(@item), notice: t('controller.items.update.success', name: @item.name) unless remotipart_submitted?
     else
       unless remotipart_submitted?
-        flash[:alert] = '請檢查紅字錯誤欄位'
+        flash[:alert] = t('controller.action.create.fail')
         render :edit
       end
     end
@@ -61,27 +62,27 @@ class ItemsController < ApplicationController
   def open
     if @item.closed?
       @item.open!
-      redirect_with_message dashboard_items_path, notice: t('controller.item.open.success', name: @item.name)
+      redirect_to dashboard_items_path, notice: t('controller.items.open.success', name: @item.name)
     else
-      redirect_with_message dashboard_items_path, alert: t('common.error')
+      redirect_to dashboard_items_path, alert: t('common.error')
     end
   end
 
   def close
     if @item.opening?
       @item.close!
-      redirect_with_message dashboard_items_path, notice: t('controller.item.close.success', name: @item.name)
+      redirect_to dashboard_items_path, notice: t('controller.items.close.success', name: @item.name)
     else
-      redirect_with_message dashboard_items_path, alert: t('common.error')
+      redirect_to dashboard_items_path, alert: t('common.error')
     end
   end
 
   def destroy
     if @item.records.empty?
       @item.destroy
-      redirect_with_message dashboard_items_path, notice: t('controller.item.destroy.success', name: @item.name)
+      redirect_to dashboard_items_path, notice: t('controller.items.destroy.success', name: @item.name)
     else
-      redirect_with_message dashboard_items_path, alert: t('controller.item.destroy.fail', name: @item.name)
+      redirect_to dashboard_items_path, alert: t('controller.items.destroy.fail', name: @item.name)
     end
   end
 
@@ -150,8 +151,7 @@ class ItemsController < ApplicationController
       params.require(:item).permit(
         :name, :price, :minimum_period, :address,
         :deposit, :description, :subcategory_id,
-        :deliver_fee, deliver_ids: [ ],
-        pictures_attributes: [ :public_id, :file_cached ]
+        :deliver_fee, deliver_ids: [ ]
       )
     end
 
@@ -190,8 +190,8 @@ class ItemsController < ApplicationController
       errors = current_user.profile.validates_basic_info
 
       unless errors.empty?
-        redirect_with_message edit_user_path(current_user),
-                              alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
+        redirect_to edit_user_path(current_user, redirect_url: new_item_path),
+                    alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
       end
     end
 end

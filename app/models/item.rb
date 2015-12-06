@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
   PRICE_MIN = 0
   PRICE_MAX = 500
 
-  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :pictures, :deliver_ids, :aasm_state
+  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :deliver_ids, :aasm_state
   validates_presence_of :address, if: :delivers_include_face?
   validates_numericality_of :deliver_fee, equal_to: 0, unless: :delivers_include_non_face?
   validate :profile_bank_info_presented, if: :delivers_include_non_face?
@@ -23,8 +23,7 @@ class Item < ActiveRecord::Base
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
   has_many :collectors, through: :collect_relationships, source: :user
 
-  has_many :pictures, as: :imageable, dependent: :destroy
-  accepts_nested_attributes_for :pictures
+  has_many :pictures, class_name: 'Attachment', as: :attachable, dependent: :destroy
 
   has_many :item_deliver, dependent: :destroy
   has_many :delivers, through: :item_deliver
@@ -113,7 +112,7 @@ class Item < ActiveRecord::Base
   end
 
   def pictures_urls
-    pictures.map { |p| self.class.cloudinary_url(p.public_id) }.uniq
+    pictures.map { |p| p.file.url }.uniq
   end
 
   def reviews

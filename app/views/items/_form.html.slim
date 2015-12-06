@@ -1,14 +1,9 @@
 - unless item.new_record?
   = simple_form_for item, remote: true, html: { class: 'form-horizontal ajax_image' } do |f|
-      = f.simple_fields_for :pictures, item.pictures.build do |p|
-        = p.input :public_id, as: :file_with_image, input_html: { multiple: true }, hint: '可選取多個檔案'
+    = f.input :pictures, as: :file_with_image, input_html: { multiple: true }
 
 = simple_form_for item do |f|
-  - if item.new_record?
-    = f.simple_fields_for :pictures, item.pictures.build do |p|
-      = p.input :public_id, as: :file_select, input_html: { multiple: true }, hint: '可選取多個檔案'
-      = item.errors[:pictures].first
-
+  = f.input :pictures, as: :file_select, input_html: { multiple: true } if item.new_record?
   = f.input :name
   = f.input :subcategory_id, as: :grouped_select, collection: Category.includes(:subcategories).all, group_method: :subcategories
   = f.input :price, as: :numeric_addon, direction: "元 / #{item.period}", input_html: { min: 0 }

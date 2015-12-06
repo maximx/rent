@@ -6,6 +6,8 @@ zh-TW:
       dashboard: '管理'
       settings: '設定'
     action:
+      create:
+        fail: '儲存失敗，請檢查紅字錯誤欄位。'
       new: '新增'
       edit: '修改'
     users:
@@ -33,7 +35,11 @@ zh-TW:
       terms: '服務條款'
       privacy: '隱私權政策'
       contact: '聯繫方式'
-    item:
+    items:
+      create:
+        success: '%{name}新增成功。'
+      update:
+        success: '%{name}修改成功。'
       open:
         success: '已成功公開%{name}。'
       close:
