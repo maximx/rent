@@ -58,6 +58,7 @@ gem 'prawn-table'
 gem 'whenever'
 gem 'cloudinary'
 gem 'carrierwave'
+gem 'fog'
 
 # models
 gem 'aasm'
