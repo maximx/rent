@@ -1,9 +1,6 @@
 class ProfilesController < ApplicationController
-  include FileAttrSetter
-
   before_action :login_required
-  before_action :set_avatar_attr, only: [ :update ]
-  before_action :set_user, only: [ :update, :update_bank_info ]
+  before_action :set_user, only: [ :update_bank_info ]
 
   def update_bank_info
     result = { status: 'error' }

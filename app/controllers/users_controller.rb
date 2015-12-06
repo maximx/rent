@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   layout 'user'
 
   include UsersReviewsCount
-  include FileAttrSetter
   include SortPaginate
 
   before_action :login_required, only: [ :follow, :unfollow ]

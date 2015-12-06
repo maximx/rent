@@ -10,6 +10,7 @@ zh-TW:
         fail: '儲存失敗，請檢查紅字錯誤欄位。'
       new: '新增'
       edit: '修改'
+      destroy: '刪除'
     users:
       collect: '收藏'
     tours:

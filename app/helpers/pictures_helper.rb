@@ -1,9 +1,9 @@
 module PicturesHelper
   def edit_picture_link(picture)
     if edit_action? and picture.editable_by?(current_user)
-      link_to '刪除',
+      link_to t('controller.action.destroy'),
               picture_path(picture, format: :json),
-              method: :delete, remote: true, data: { confirm: '確定要刪除嗎？' },
+              method: :delete, remote: true, data: { confirm: t('helpers.common.destroy_confirm') },
               class: 'close remove-picture btn btn-danger'
     end
   end

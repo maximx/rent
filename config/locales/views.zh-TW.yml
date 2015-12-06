@@ -5,6 +5,8 @@ zh-TW:
       update: '修改%{model}'
       save: '儲存'
       edit: '編輯'
+    common:
+      destroy_confirm: '確定要刪除嗎？'
     items:
       open_confirm: '確定要上架%{name}嗎？'
       close_confirm: '確定要下架%{name}嗎？'

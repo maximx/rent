@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-  include FileAttrSetter
   include UsersReviewsCount
   include SortPaginate
 

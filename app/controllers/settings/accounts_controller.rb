@@ -1,6 +1,4 @@
 class Settings::AccountsController < ApplicationController
-  include FileAttrSetter
-
   before_action :login_required, :find_user
   before_action :find_profile, only: [ :show, :save, :phone_confirmation, :phone_confirmed ]
 
