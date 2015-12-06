@@ -1,13 +1,11 @@
 class RecordsController < ApplicationController
-  include FileAttrSetter
-
   before_action :login_required, except: [ :index ]
-  before_action :find_item, :find_navbar_categories
+  before_action :find_item
   before_action :validates_item_rentable, :validates_borrower_info, only: [ :new, :create ]
   before_action :find_item_record, only: [ :show, :review, :remitting, :delivering, :renting,
                                                 :returning, :withdrawing, :ask_for_review ]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
-  before_action :set_attachments_attr, only: [ :renting ]
+  before_action :find_navbar_categories
 
   def index
     @records = @item.records.includes(:borrower).rencent.reverse_order.page(params[:page])
@@ -114,9 +112,7 @@ class RecordsController < ApplicationController
     end
 
     def record_state_log_params
-      params.require(:record_state_log).permit(
-        :info, attachments_attributes: [ :public_id, :file_cached ]
-      )
+      params.require(:record_state_log).permit(:info, attachments: [])
     end
 
     def find_item

@@ -8,10 +8,9 @@
           h4.modal-title
 
         .modal-body
-          = f.simple_fields_for :attachments, record_state_log.attachments.build do |p|
-            = p.input :public_id, as: :file_select, input_html: { multiple: true, class: 'record_state_log_text' }
+          = f.input :attachments, as: :file_select, input_html: { multiple: true, class: 'record_state_log_text' }
           = f.input :info, input_html: { class: 'record_state_log_text' }
 
         .modal-footer
-          button.btn.btn-default type="button" data-dismiss="modal" 取消
-          = f.button :submit, '送出'
+          button.btn.btn-default type="button" data-dismiss="modal" = t('helpers.submit.cancel')
+          = f.button :submit, t('helpers.submit.save')

@@ -6,10 +6,11 @@ zh-TW:
       save: '儲存'
       edit: '編輯'
       send: '傳送訊息'
+      cancel: '取消'
     common:
       destroy_confirm: '確定要刪除嗎？'
     items:
       open_confirm: '確定要上架%{name}嗎？'
       close_confirm: '確定要下架%{name}嗎？'
     messages:
-      new_title_to: '發送訊息給'
+      message_to: '發送訊息給'

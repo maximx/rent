@@ -5,8 +5,7 @@ class RecordStateLog < ActiveRecord::Base
   belongs_to :record
   belongs_to :borrower, polymorphic: true
 
-  has_many :attachments, class_name: 'Picture', as: :imageable, dependent: :destroy
-  accepts_nested_attributes_for :attachments
+  has_many :attachments, as: :attachable, dependent: :destroy
 
   def attachment
     attachments.first

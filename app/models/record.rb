@@ -238,11 +238,16 @@ class Record < ActiveRecord::Base
 
   private
 
-    def create_record_state_log(borrower, params = {})
-      params[:aasm_state] = (record_state_logs.empty?) ? aasm.current_state : aasm.to_state
-      log = record_state_logs.build(params)
+    def create_record_state_log(borrower, log_params = {})
+      log_params[:aasm_state] = (record_state_logs.empty?) ? aasm.current_state : aasm.to_state
+      attachments = log_params.delete :attachments
+
+      log = record_state_logs.build(log_params)
       log.borrower = borrower
-      log.save
+
+      if log.save and attachments
+        attachments.each { |attachment| log.attachments.create file: attachment }
+      end
     end
 
     def initial_state_date_json

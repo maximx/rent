@@ -68,8 +68,7 @@ class Settings::AccountsController < ApplicationController
     def user_params
       params.require(:user).permit(
         :password, :password_confirmation,
-        :email, :current_password, :account,
-        covers_attributes: [ :public_id, :file_cached ]
+        :email, :current_password, :account
       )
     end
 
