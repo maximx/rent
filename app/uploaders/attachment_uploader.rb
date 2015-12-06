@@ -3,7 +3,7 @@
 class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
+  include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
@@ -35,17 +35,37 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :resize_to_fit => [50, 50]
   # end
+  version :avatar, if: :is_avatar? do
+    process :resize_to_fill => [30, 30]
+  end
+
+  version :thumb, if: :is_avatar? do
+    process :resize_to_fill => [50, 50]
+  end
+
+  version :cover, if: :is_picture? do
+    process :resize_to_fill => [250, 180]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  # def extension_white_list
-  #   %w(jpg jpeg gif png)
-  # end
+  def extension_white_list
+    %w(jpg jpeg gif png bmp)
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
   #   "something.jpg" if original_filename
   # end
+  private
+    def is_avatar? uploaded_file
+      return false unless model.attachable.present?
+      model.attachable.is_a? Profile
+    end
 
+    def is_picture? uploaded_file
+      return false unless model.attachable.present?
+      model.attachable.is_a? Item
+    end
 end

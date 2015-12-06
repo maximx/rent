@@ -2,6 +2,8 @@ class Attachment < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
   mount_uploader :file, AttachmentUploader
 
+  after_save :recreate_image_versions!
+
   def viewable_by?(user)
     user and (
       ( attachable.is_a? RecordStateLog and attachable.record.viewable_by?(user) ) or
@@ -17,4 +19,9 @@ class Attachment < ActiveRecord::Base
       ( attachable.is_a? Item and attachable.editable_by?(user) and attachable.pictures.size > 1 )
     )
   end
+
+  private
+    def recreate_image_versions!
+      file.recreate_versions!
+    end
 end

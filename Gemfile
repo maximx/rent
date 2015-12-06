@@ -64,6 +64,9 @@ gem 'fog'
 gem 'aasm'
 gem 'mailboxer'
 
+# image
+gem 'rmagick'
+
 # views
 gem 'slim-rails'
 gem 'meta-tags'

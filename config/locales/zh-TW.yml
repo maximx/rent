@@ -3,7 +3,7 @@ zh-TW:
     error: '發生錯誤，請重新整理並再試一次。'
     no_privilege: '您沒有權限。'
   rent:
-    default_avatar: 'default-avatar'
+    default_avatar: 'default-avatar.gif'
     site_name: &site_name '廣和租賃行'
     title: '使用與體驗並不需購買擁有'
     sub_title: '從附近鄰居、店家租借閒置物品'

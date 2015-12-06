@@ -8,80 +8,34 @@ module PicturesHelper
     end
   end
 
-  def render_cl_image_xs(public_id, options = {})
-    default_options = { width: 100, height: 75, crop: :fill }
-    render_cl_image(public_id, default_options, options)
-  end
-
-  def render_cl_image_sm(public_id, options = {})
-    default_options = { width: 200, height: 150, crop: :fill }
-    render_cl_image(public_id, default_options, options)
-  end
-
-  def render_cl_image_md(public_id, options = {})
-    default_options = { width: 250, height: 180, crop: :fill }
-    render_cl_image(public_id, default_options, options)
-  end
-
-  def render_cl_image_lg(public_id, options = {})
-    default_options = { width: 450, height: 350, crop: :fill }
-    render_cl_image(public_id, default_options, options)
-  end
-
-  def render_cl_avatar_logo(user, options = {})
-    size_options = { width: 50, height: 50, crop: :fill }
-    public_id = public_id_of(user)
-
-    render_cl_image(public_id, size_options, options)
-  end
-
-  def render_cl_avatar_xs(user, options = {})
+  def render_avatar(user, options = {})
     size_options = { width: 30, height: 30 }
     size_options.reverse_merge! avatar_default_options
-    public_id = public_id_of(user)
-
-    render_cl_image(public_id, size_options, options)
+    options = size_options.merge(options)
+    image_tag avatar_url_of(user, :avatar), options
   end
 
-  def render_cl_avatar_sm(user, options = {})
+  def render_avatar_thumb(user, options = {})
     size_options = { width: 50, height: 50 }
     size_options.reverse_merge! avatar_default_options
-    public_id = public_id_of(user)
-
-    render_cl_image(public_id, size_options, options)
+    options = size_options.merge(options)
+    image_tag avatar_url_of(user, :thumb), options
   end
 
-  def render_cl_avatar_md(user, options = {})
-    size_options = { width: 100, height: 100 }
-    size_options.reverse_merge! avatar_default_options
-
-    public_id = public_id_of(user)
-
-    render_cl_image(public_id, size_options, options)
-  end
-
-  def render_cl_avatar_lg(user, options = {})
-    size_options = { width: 200, height: 200, crop: :fill, gravity: :face }
-    public_id = public_id_of(user)
-    render_cl_image(public_id, size_options, options)
-  end
-
-  def render_cl_image(public_id, default_options, options = {})
-    options = default_options.merge(options)
-    cl_image_tag(public_id, options)
-  end
-
-  def public_id_of(user)
-    if user.profile and user.profile.avatar
-      user.profile.avatar.public_id
+  def avatar_url_of(user, version = '')
+    if user.profile.avatar
+      version.blank? ? user.profile.avatar.file.url : user.profile.avatar.file_url(version)
     else
-      t('rent.default_avatar')
+      filename = t('rent.default_avatar')
+      region = 's3-ap-southeast-1'
+      host = 'amazonaws.com'
+      bucket = 'guangho-file'
+      "https://#{region}.#{host}/#{bucket}/#{filename}"
     end
   end
 
   private
-
     def avatar_default_options
-      { crop: :fill, gravity: :face, radius: :max, class: "img-circle img-thumbnail" }
+      { class: "img-circle img-thumbnail" }
     end
 end
