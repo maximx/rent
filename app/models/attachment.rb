@@ -3,6 +3,7 @@ class Attachment < ActiveRecord::Base
   mount_uploader :file, AttachmentUploader
   mount_uploader :image, ImageUploader
 
+  before_save :set_attachment_attributes
   after_save :recreate_image_versions!
 
   def viewable_by?(user)
@@ -22,6 +23,20 @@ class Attachment < ActiveRecord::Base
   end
 
   private
+    def set_attachment_attributes
+      if file.present? and file_changed?
+        self.original_filename = file.file.original_filename
+        self.content_type = file.file.content_type
+        self.file_size = file.file.size
+      end
+
+      if image.present? and image_changed?
+        self.original_filename = image.file.original_filename
+        self.content_type = image.file.content_type
+        self.file_size = image.file.size
+      end
+    end
+
     def recreate_image_versions!
       image.recreate_versions! if image.present?
     end

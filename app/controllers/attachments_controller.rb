@@ -15,7 +15,8 @@ class AttachmentsController < ApplicationController
   end
 
   def download
-    #send_data Cloudinary::Downloader.download(@attachment.public_id), filename: @attachment.filename
+    data = open @attachment.file_url
+    send_data data.read, type: data.content_type, x_sendfile: true, filename: @attachment.original_filename
   end
 
   private

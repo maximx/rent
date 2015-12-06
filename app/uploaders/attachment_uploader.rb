@@ -6,6 +6,8 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
+  CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
+
   # Choose what kind of storage to use for this uploader:
   # storage :file
   storage :fog
