@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206150105) do
+ActiveRecord::Schema.define(version: 20151206152751) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",   limit: 4
@@ -156,18 +156,6 @@ ActiveRecord::Schema.define(version: 20151206150105) do
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
-
-  create_table "pictures", force: :cascade do |t|
-    t.integer  "imageable_id",   limit: 4
-    t.string   "imageable_type", limit: 255
-    t.string   "public_id",      limit: 255
-    t.string   "name",           limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "format",         limit: 255
-  end
-
-  add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",               limit: 4
