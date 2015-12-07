@@ -27,7 +27,7 @@ class SubcategoriesController < ApplicationController
           title: @subcategory.title,
           description: @subcategory.meta_description,
           url: url_for(params),
-          image: @items.index_pictures_urls
+          image: @items.cover_pictures_urls
         }
       )
     end

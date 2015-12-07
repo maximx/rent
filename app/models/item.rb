@@ -50,7 +50,7 @@ class Item < ActiveRecord::Base
     where.not(id: record_overlaps(started_at, ended_at))
   end
 
-  scope :index_pictures_urls, -> { all.map{ |i| cloudinary_url(i.index_picture_public_id) }.uniq }
+  scope :cover_pictures_urls, -> { all.map{ |i| i.cover_picture.image.url } }
 
   aasm no_direct_assignment: true do
     state :opening, initial: true

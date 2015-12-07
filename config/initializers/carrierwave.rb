@@ -6,5 +6,5 @@ CarrierWave.configure do |config|
     region: 'ap-southeast-1'
   }
   config.cache_dir = "#{Rails.root}/tmp/uploads"
-  config.fog_directory = 'guangho-file'
+  config.fog_directory = Rails.env.production? ? 'guangho-file' : 'guangho-test'
 end
