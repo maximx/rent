@@ -7,7 +7,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 set :stage, %w(staging production)
 set :deploy_to, "/home/apps/#{fetch(:application)}"
-set :linked_files, fetch(:linked_files, []).push('config/database.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml').push('config/fog.yml')
 
 set :pty, true
 
@@ -42,7 +42,6 @@ set :pty, true
 # set :keep_releases, 5
 
 namespace :deploy do
-
   desc 'Restart Application'
   task :restart do
     on roles(:app), in: :sequence, wait: 2 do
@@ -75,5 +74,4 @@ namespace :deploy do
       end
     end
   end
-
 end
