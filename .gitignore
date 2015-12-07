@@ -12,4 +12,7 @@
 !/log/.keep
 /tmp
 
+/config/database.yml
+/config/fog.yml
+
 .DS_Store
