@@ -52,7 +52,7 @@ end
 # authentication
 gem 'devise'
 # authorization
-gem 'cancan'
+gem 'cancancan'
 
 gem 'geocoder'
 gem 'gmaps4rails'

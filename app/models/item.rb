@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
   PRICE_MIN = 0
   PRICE_MAX = 500
 
-  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :deliver_ids, :aasm_state
+  validates_presence_of :name, :price, :minimum_period, :subcategory_id, :deliver_ids, :aasm_state, :lender
   validates_presence_of :address, if: :delivers_include_face?
   validates_numericality_of :deliver_fee, equal_to: 0, unless: :delivers_include_non_face?
   validate :profile_bank_info_presented, if: :delivers_include_non_face?

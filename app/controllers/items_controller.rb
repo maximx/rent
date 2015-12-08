@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show, :search, :questions ]
   before_action :validates_profile, only: [ :new, :create ]
-  load_and_authorize_resource except: [ :index, :create, :search ]
+  load_and_authorize_resource except: [ :index, :search ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]
 
@@ -31,8 +31,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    pictures = item_params.delete :pictures
-    @item = current_user.items.build( item_params.except(:pictures) )
+    pictures = params[:item][:pictures]
+    @item.lender = current_user
 
     if pictures and @item.save
       pictures.each { |picture| @item.pictures.create image: picture }
@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    pictures = item_params.delete :pictures
+    pictures = params[:item][:pictures]
     if @item.update( item_params.except(:pictures) )
       pictures.each { |picture| @item.pictures.create image: picture } if pictures
       redirect_to item_path(@item), notice: t('controller.items.update.success', name: @item.name) unless remotipart_submitted?
@@ -132,7 +132,7 @@ class ItemsController < ApplicationController
       params.require(:item).permit(
         :name, :price, :minimum_period, :address,
         :deposit, :description, :subcategory_id,
-        :deliver_fee, deliver_ids: [ ], pictures: [ ]
+        :deliver_fee, deliver_ids: [ ]
       )
     end
 
