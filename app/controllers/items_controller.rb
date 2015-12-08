@@ -82,7 +82,7 @@ class ItemsController < ApplicationController
     result = {
       status: 'ok',
       href: uncollect_item_path(@item, format: :json),
-      title: '取消收藏',
+      title: t('controller.items.action.uncollect'),
       method: 'delete',
       class: 'btn-danger'
     }
@@ -97,7 +97,7 @@ class ItemsController < ApplicationController
     result = {
       status: 'ok',
       href: collect_item_path(@item, format: :json),
-      title: '收藏',
+      title: t('controller.items.action.collect'),
       method: 'post',
       class: 'btn-default'
     }

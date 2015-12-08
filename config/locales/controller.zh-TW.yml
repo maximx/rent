@@ -26,6 +26,7 @@ zh-TW:
         open: '上架'
         close: '下架'
         collect: '收藏'
+        uncollect: '取消收藏'
       create:
         success: '%{name}新增成功。'
       update:

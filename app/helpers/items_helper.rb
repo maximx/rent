@@ -4,7 +4,7 @@ module ItemsHelper
       link_to render_icon('bookmark'),
               collect_item_path(item, format: :json),
               remote: true, method: :post, class: 'btn btn-default item-bookmark',
-              title: '收藏', data: { toggle: 'tooltip' }
+              title: t('controller.items.action.collect'), data: { toggle: 'tooltip' }
     end
   end
 
@@ -13,7 +13,7 @@ module ItemsHelper
       link_to render_icon('bookmark'),
               uncollect_item_path(item, format: :json),
               remote: true, method: :delete, class: 'btn btn-danger item-bookmark',
-              title: '取消收藏', data: { toggle: 'tooltip' }
+              title: t('controller.items.action.uncollect'), data: { toggle: 'tooltip' }
     end
   end
 
