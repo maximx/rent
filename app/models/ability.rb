@@ -10,6 +10,7 @@ class Ability
     resources_records user
     resources_customers user
     resources_reviews user
+    resources_attachments user
   end
 
   protected
@@ -75,6 +76,15 @@ class Ability
       can :create, Review do |review|
         review.record.viewable_by?(user) and review.record.returned? and
           !review.record.judgers.include?(user)
+      end
+    end
+
+    def resources_attachments(user)
+      can :destroy, Attachment do |attachment|
+        attachment.editable_by? user
+      end
+      can :download, Attachment do |attachment|
+        attachment.viewable_by? user
       end
     end
 end

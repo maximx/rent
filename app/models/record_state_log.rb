@@ -12,10 +12,6 @@ class RecordStateLog < ActiveRecord::Base
   end
 
   def remitted?
-    aasm_state == 'remitted'
-  end
-
-  def editable_by?(user)
-    self.user == user
+    aasm_state.to_s == 'remitted'
   end
 end

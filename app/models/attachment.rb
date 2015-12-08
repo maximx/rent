@@ -1,5 +1,6 @@
 class Attachment < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
+
   mount_uploader :file, AttachmentUploader
   mount_uploader :image, ImageUploader
 
@@ -16,10 +17,9 @@ class Attachment < ActiveRecord::Base
 
   def editable_by?(user)
     user and (
-      ( attachable.is_a? RecordStateLog and attachable.editable_by?(user) ) or
+      ( attachable.is_a? RecordStateLog and attachable.borrower == user ) or
       ( attachable.is_a? User and attachable == user ) or
-      #TODO:( attachable.is_a? Item and attachable.editable_by?(user) and attachable.pictures.size > 1 )
-      ( attachable.is_a? Item and attachable.pictures.size > 1 and false )
+      ( attachable.is_a? Item and attachable.lender == user and attachable.pictures.size > 1 )
     )
   end
 

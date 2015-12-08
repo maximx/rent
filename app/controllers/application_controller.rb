@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_url = request.referer.present? ? :back : items_path
+    redirect_to redirect_url, alert: t('common.no_privilege')
+  end
+
   protected
 
   def configure_permitted_parameters
