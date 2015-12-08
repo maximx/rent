@@ -4,8 +4,8 @@
   .btn-group
     = link_to render_icon('trash', class: 'text-danger'),
               conversation_path,
-              method: :delete, title: '刪除', class: 'btn btn-default',
-              data: { toggle: 'tooltip', confirm: '確定要刪除嗎？' }
+              method: :delete, class: 'btn btn-default', title: t('controller.action.destroy'),
+              data: { toggle: 'tooltip', confirm: t('helpers.common.destroy_confirm') }
 
 .panel.panel-default
   .panel-heading
