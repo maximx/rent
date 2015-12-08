@@ -14,7 +14,6 @@ class Item < ActiveRecord::Base
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
   belongs_to :subcategory
-  has_many :questions, -> { order("created_at").reverse_order }, dependent: :destroy
   belongs_to :city
 
   has_many :records, -> { order(started_at: :desc) }, class_name: 'Record', foreign_key: 'item_id'

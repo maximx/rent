@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :items do
-    resources :questions, only: [ :create, :update, :destroy ]
-
     resources :records, except: [ :edit, :update, :destroy ] do
       resources :reviews, only: [ :create ]
 
@@ -24,7 +22,7 @@ Rails.application.routes.draw do
 
     get :search, on: :collection
     member do
-      get :questions, :calendar
+      get :calendar
       post :collect
       patch :open, :close
       delete :uncollect

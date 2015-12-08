@@ -1,2 +1,25 @@
-= render layout: 'items/show', locals: { item: @item, record: @record, disabled_dates: @disabled_dates, maps: @maps } do
-  = render partial: 'items/reviews', locals: { item: @item, reviews: @reviews }
+- breadcrumb :item, @item
+
+- content_for :full_top do
+  = render partial: 'pictures/carousel', locals: { pictures: @item.pictures }
+
+- content_for :full_bottom do
+  #map
+
+section
+  = render partial: 'items/item_info_container', locals: { item: @item, record: @record, disabled_dates: @disabled_dates }
+
+  .row
+    .col-md-8
+      .tab-content
+        = render partial: 'items/reviews', locals: { item: @item, reviews: @reviews }
+
+  .hide
+    = form_for @item, url: new_item_record_path(@item), method: :get, html: { id: 'new_record_form' } do
+      = hidden_field_tag :record_started_at
+      = hidden_field_tag :record_ended_at
+
+  javascript:
+    $(document).ready(function() {
+      buildGoogleMap( #{raw @maps.to_json} );
+    });

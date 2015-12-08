@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   validates :agreement, acceptance: true
 
   has_one :profile, as: :user
-  has_many :questions
   has_many :requirements
   has_many :customers
 

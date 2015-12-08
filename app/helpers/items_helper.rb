@@ -104,13 +104,6 @@ module ItemsHelper
     view
   end
 
-  def render_item_reviews_questions(item)
-    render_link_li class: 'nav nav-tabs nav-justified anchor', role: 'tablist', id: 'reviews-questions' do |li|
-      li << [ '評價', item_path(item, anchor: 'reviews-questions') ]
-      li << [ '問與答', questions_item_path(item, anchor: 'reviews-questions') ]
-    end
-  end
-
   def render_item_name(item, length = 20)
     truncate item.name, length: length
   end

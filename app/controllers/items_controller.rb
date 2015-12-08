@@ -2,11 +2,11 @@ class ItemsController < ApplicationController
   include UsersReviewsCount
   include SortPaginate
 
-  before_action :login_required, except: [ :index, :show, :search, :questions ]
+  before_action :login_required, except: [ :index, :show, :search ]
   before_action :validates_profile, only: [ :new, :create ]
   load_and_authorize_resource except: [ :index, :search ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
-  before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]
+  before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
 
   def index
     @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}]).opening
@@ -18,11 +18,6 @@ class ItemsController < ApplicationController
   def show
     set_maps_marker @item
     @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
-  end
-
-  def questions
-    set_maps_marker @item
-    @question = @item.questions.build
   end
 
   def new
