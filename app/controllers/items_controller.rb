@@ -3,9 +3,8 @@ class ItemsController < ApplicationController
   include SortPaginate
 
   before_action :login_required, except: [ :index, :show, :search, :questions ]
-  before_action :validates_profile, only: [ :new, :create, :edit, :update ]
-  before_action :find_lender_item, only: [ :edit, :update, :close, :open, :destroy ]
-  before_action :find_item, only: [ :show, :collect, :uncollect, :calendar, :questions ]
+  before_action :validates_profile, only: [ :new, :create ]
+  load_and_authorize_resource except: [ :create ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]
 
@@ -27,15 +26,16 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = current_user.items.build
+    @item.set_address current_user
     @item.pictures.build
   end
 
   def create
-    @item = current_user.items.build(item_params)
+    pictures = item_params.delete :pictures
+    @item = current_user.items.build( item_params.except(:pictures) )
 
-    if params[:item][:pictures] and @item.save
-      params[:item][:pictures].each { |picture| @item.pictures.create image: picture }
+    if pictures and @item.save
+      pictures.each { |picture| @item.pictures.create image: picture }
       redirect_to item_path(@item), notice: t('controller.items.create.success', name: @item.name)
     else
       flash[:alert] = t('controller.action.create.fail')
@@ -59,21 +59,13 @@ class ItemsController < ApplicationController
   end
 
   def open
-    if @item.closed?
-      @item.open!
-      redirect_to dashboard_items_path, notice: t('controller.items.open.success', name: @item.name)
-    else
-      redirect_to dashboard_items_path, alert: t('common.error')
-    end
+    @item.open!
+    redirect_to dashboard_items_path, notice: t('controller.items.open.success', name: @item.name)
   end
 
   def close
-    if @item.opening?
-      @item.close!
-      redirect_to dashboard_items_path, notice: t('controller.items.close.success', name: @item.name)
-    else
-      redirect_to dashboard_items_path, alert: t('common.error')
-    end
+    @item.close!
+    redirect_to dashboard_items_path, notice: t('controller.items.close.success', name: @item.name)
   end
 
   def destroy
@@ -86,37 +78,31 @@ class ItemsController < ApplicationController
   end
 
   def collect
-    unless current_user.is_collected?(@item)
-      current_user.collect!(@item)
-      result = {
-        status: 'ok',
-        href: uncollect_item_path(@item, format: :json),
-        title: '取消收藏',
-        method: 'delete',
-        class: 'btn-danger'
-      }
-    end
+    current_user.collect!(@item)
+    result = {
+      status: 'ok',
+      href: uncollect_item_path(@item, format: :json),
+      title: '取消收藏',
+      method: 'delete',
+      class: 'btn-danger'
+    }
 
     respond_to do |format|
-      format.html { redirect_to item_path(@item) }
       format.json { render json: result }
     end
   end
 
   def uncollect
-    if current_user.is_collected?(@item)
-      current_user.uncollect!(@item)
-      result = {
-        status: 'ok',
-        href: collect_item_path(@item, format: :json),
-        title: '收藏',
-        method: 'post',
-        class: 'btn-default'
-      }
-    end
+    current_user.uncollect!(@item)
+    result = {
+      status: 'ok',
+      href: collect_item_path(@item, format: :json),
+      title: '收藏',
+      method: 'post',
+      class: 'btn-default'
+    }
 
     respond_to do |format|
-      format.html { redirect_to item_path(@item) }
       format.json { render json: result }
     end
   end
@@ -150,7 +136,7 @@ class ItemsController < ApplicationController
       params.require(:item).permit(
         :name, :price, :minimum_period, :address,
         :deposit, :description, :subcategory_id,
-        :deliver_fee, deliver_ids: [ ]
+        :deliver_fee, deliver_ids: [ ], pictures: [ ]
       )
     end
 

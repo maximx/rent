@@ -27,7 +27,9 @@ ul.item-list
           = item.address
 
       .item-list-user.text-right
-        div = render_collect_item_links(item, :remote)
+        div
+          = render_collect_item_link item
+          = render_uncollect_item_link item
 
         .item-list-avatar
           = link_to render_avatar_thumb(item.lender), user_path(item.lender),

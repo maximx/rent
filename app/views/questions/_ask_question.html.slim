@@ -1,4 +1,4 @@
-- unless item.editable_by?(current_user)
+- if cannot? :update, item
   = simple_form_for [item, question] do |f|
     = f.input :content
 

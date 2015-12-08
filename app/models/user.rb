@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
     collections.destroy(item)
   end
 
-  def is_collected?(item)
+  def collected?(item)
     collections.include?(item)
   end
 

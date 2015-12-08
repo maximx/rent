@@ -1,42 +1,24 @@
 module ItemsHelper
-  def render_collect_item_links(item, type = "")
-    if uncollect_link_display?(item)
-      render_uncollect_item_link(item, type)
-    elsif item_action_display?
-      render_collect_item_link(item, type)
-    end
-  end
-
-  def render_uncollect_item_link(item, type = "")
-    icon = 'bookmark'
-    if is_remote?(type)
-      link_to render_icon( icon ),
-              uncollect_item_path(item, format: :json),
-              remote: is_remote?(type), method: :delete, class: 'btn btn-danger item-bookmark',
-              title: '取消收藏', data: { toggle: 'tooltip' }
-    else
-      link_to render_icon_with_text(icon, '取消收藏'),
-              uncollect_item_path(item),
-              method: :delete, class: 'btn btn-default'
-    end
-  end
-
-  def render_collect_item_link(item, type = "")
-    icon = 'bookmark'
-    if is_remote?(type)
-      link_to render_icon( icon ),
+  def render_collect_item_link(item)
+    if can? :collect, item
+      link_to render_icon('bookmark'),
               collect_item_path(item, format: :json),
-              remote: is_remote?(type), method: :post, class: 'btn btn-default item-bookmark',
+              remote: true, method: :post, class: 'btn btn-default item-bookmark',
               title: '收藏', data: { toggle: 'tooltip' }
-    else
-      link_to render_icon_with_text(icon, '收藏'),
-              collect_item_path(item),
-              method: :post, class: 'btn btn-default item-bookmark'
+    end
+  end
+
+  def render_uncollect_item_link(item)
+    if can? :uncollect, item
+      link_to render_icon('bookmark'),
+              uncollect_item_path(item, format: :json),
+              remote: true, method: :delete, class: 'btn btn-danger item-bookmark',
+              title: '取消收藏', data: { toggle: 'tooltip' }
     end
   end
 
   def render_item_calendar_link(item)
-    url = item.editable_by?(current_user) ?
+    url = can?(:update, item) ?
             dashboard_item_records_path(item, anchor: 'calendar') : new_item_record_path(item, anchor: 'calendar')
     link_to '+查看日曆+', url, class: 'btn btn-info'
   end

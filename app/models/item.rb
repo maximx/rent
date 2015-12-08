@@ -32,7 +32,6 @@ class Item < ActiveRecord::Base
 
   geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
-  after_initialize :init_address
   after_validation :geocode
   before_save :set_category_and_price, :set_city
 
@@ -65,18 +64,14 @@ class Item < ActiveRecord::Base
     end
   end
 
-  def init_address
-    self.address = lender.profile.address
+  def set_address(user)
+    self.address = user.profile.address
   end
 
   def profile_bank_info_presented
     unless lender.profile.bank_info_present?
       errors.add(:delivers, '請先填寫匯款資訊')
     end
-  end
-
-  def editable_by?(user)
-    user && user == lender
   end
 
   def rentable_by?(user)

@@ -18,7 +18,8 @@ class Attachment < ActiveRecord::Base
     user and (
       ( attachable.is_a? RecordStateLog and attachable.editable_by?(user) ) or
       ( attachable.is_a? User and attachable == user ) or
-      ( attachable.is_a? Item and attachable.editable_by?(user) and attachable.pictures.size > 1 )
+      #TODO:( attachable.is_a? Item and attachable.editable_by?(user) and attachable.pictures.size > 1 )
+      ( attachable.is_a? Item and attachable.pictures.size > 1 and false )
     )
   end
 

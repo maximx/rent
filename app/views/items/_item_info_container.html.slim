@@ -16,7 +16,9 @@
 
           .panel-body
             = render partial: 'records/form', locals: { item: item, record: record, disabled_dates: disabled_dates }
-            .text-right = render_collect_item_links(item, :remote)
+            .text-right
+              = render_collect_item_link item
+              = render_uncollect_item_link item
 
 .item-show-container
   .row
@@ -45,4 +47,4 @@
         dd = raw item.description
 
         dd = render_item_calendar_link(item)
-        dd = render partial: 'messages/new', locals: { item: item } unless item.editable_by? current_user
+        dd = render partial: 'messages/new', locals: { item: item } if cannot?(:update, item)

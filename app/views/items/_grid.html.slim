@@ -11,4 +11,5 @@
     .item-info-short
       = link_to(item.lender.account, user_path(item.lender))
       div = render_user_reviews(item.lender, @users_reviews_count)
-    = render_collect_item_links(item, :remote)
+    = render_collect_item_link item
+    = render_uncollect_item_link item
