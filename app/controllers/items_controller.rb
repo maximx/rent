@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show, :search, :questions ]
   before_action :validates_profile, only: [ :new, :create ]
-  load_and_authorize_resource except: [ :create, :search ]
+  load_and_authorize_resource except: [ :index, :create, :search ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]
 
@@ -70,12 +70,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.records.empty?
-      @item.destroy
-      redirect_to dashboard_items_path, notice: t('controller.items.destroy.success', name: @item.name)
-    else
-      redirect_to dashboard_items_path, alert: t('controller.items.destroy.fail', name: @item.name)
-    end
+    @item.destroy
+    redirect_to dashboard_items_path, notice: t('controller.items.destroy.success', name: @item.name)
   end
 
   def collect

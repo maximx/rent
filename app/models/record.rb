@@ -9,7 +9,7 @@ class Record < ActiveRecord::Base
   belongs_to :item
   belongs_to :deliver, required: true
   has_many :reviews
-  has_many :record_state_logs, class_name: 'RecordStateLog', foreign_key: 'record_id'
+  has_many :record_state_logs, class_name: 'RecordStateLog', foreign_key: 'record_id', dependent: :destroy
 
   self.per_page = 10
 

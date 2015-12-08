@@ -20,26 +20,28 @@ module ItemsHelper
   def render_item_calendar_link(item)
     url = can?(:update, item) ?
             dashboard_item_records_path(item, anchor: 'calendar') : new_item_record_path(item, anchor: 'calendar')
-    link_to '+查看日曆+', url, class: 'btn btn-info'
+    link_to t('helpers.items.see_calendar'), url, class: 'btn btn-info'
   end
 
   def render_edit_item_link(item)
-    link_to render_icon('edit', class: 'text-success'),
-            edit_item_path(item),
-            class: 'btn btn-default', title: '修改', data: { toggle: 'tooltip' }
+    if can? :update, item
+      link_to render_icon('edit', class: 'text-success'),
+              edit_item_path(item),
+              class: 'btn btn-default', title: t('controller.action.edit'), data: { toggle: 'tooltip' }
+    end
   end
 
   def render_destroy_item_link(item)
-    if item.records.empty?
+    if can? :destroy, item
       link_to render_icon('trash', class: 'text-danger'),
               item_path(item),
-              class: 'btn btn-default', method: :delete, title: '刪除',
-              data: { toggle: 'tooltip', confirm: "確定要刪除#{item.name}嗎？" }
+              class: 'btn btn-default', method: :delete, title: t('controller.action.destroy'),
+              data: { toggle: 'tooltip', confirm: t('helpers.items.destroy_confirm', name: item.name) }
     end
   end
 
   def render_close_item_link(item)
-    if item.opening?
+    if can? :open, item
       link_to render_icon('remove-circle', class: 'text-danger'),
               close_item_path(item),
               class: 'btn btn-default', method: :patch, title: t('controller.items.action.close'),
@@ -48,7 +50,7 @@ module ItemsHelper
   end
 
   def render_open_item_link(item)
-    if item.closed?
+    if can? :close, item
       link_to render_icon('ok-circle', class: 'text-success'),
               open_item_path(item),
               class: 'btn btn-default', method: :patch, title: t('controller.items.action.open'),
