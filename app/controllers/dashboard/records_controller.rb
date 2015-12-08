@@ -1,24 +1,16 @@
 class Dashboard::RecordsController < ApplicationController
   before_action :login_required
-  before_action :find_item, only: [ :index, :new, :create ]
+  load_and_authorize_resource :item, through: :current_user, only: [ :new, :create ]
 
   def index
-    @event_sources_path = calendar_item_path(@item, format: :json) if find_item?
-
-    @records = if find_item?
-                      @item.records.includes(:borrower, :deliver, :item).rencent.page(params[:page])
-                    else
-                      current_user.borrow_records
-                        .includes(:borrower, :deliver, [ item: [ lender: [profile: :avatar] ] ])
-                        .rencent.page(params[:page])
-                    end
-
+    @records = current_user.borrow_records
+                           .includes(:borrower, :deliver, [ item: [ lender: [profile: :avatar] ] ])
+                           .rencent.page(params[:page])
     @record_state_log = unless @records.empty?
-                               @records.first.record_state_logs.build
-                             else
-                               RecordStateLog.new
-                             end
-    render (find_item? ? :item_index : :index)
+                          @records.first.record_state_logs.build
+                        else
+                          RecordStateLog.new
+                        end
   end
 
   def new
@@ -31,15 +23,16 @@ class Dashboard::RecordsController < ApplicationController
 
   def create
     @record = @item.records.build record_params
-    @record.deliver = Deliver.face_to_face
 
+    @record.deliver = Deliver.face_to_face
+    #TODO: customers 放到 model validate
     customer = current_user.customers.find @record.borrower_id
     @record.borrower = customer
 
     if @record.save
       redirect_to item_record_path(@item, @record)
     else
-      flash[:alert] = '請檢查紅字錯誤欄位'
+      flash[:alert] = t('controller.action.create.fail')
       render 'records/new'
     end
   end
@@ -50,7 +43,6 @@ class Dashboard::RecordsController < ApplicationController
                                .includes(:borrower, :item)
                                .overlaps(params[:start], params[:end])
                                .to_json
-
     respond_to do |format|
       format.html
       format.json { render json: records_json }
@@ -58,16 +50,7 @@ class Dashboard::RecordsController < ApplicationController
   end
 
   private
-
     def record_params
       params.require(:record).permit(:borrower_id, :started_at, :ended_at)
-    end
-
-    def find_item
-      @item = current_user.items.find params[:item_id] if find_item?
-    end
-
-    def find_item?
-      !view_context.current_page? dashboard_records_path
     end
 end

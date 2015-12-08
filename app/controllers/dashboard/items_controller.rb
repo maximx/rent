@@ -3,11 +3,25 @@ class Dashboard::ItemsController < ApplicationController
   include SortPaginate
 
   before_action :login_required
-  before_action :find_items, only: [ :index ]
+  load_and_authorize_resource :item, through: :current_user, only: [ :index, :records ]
 
   def index
+    @items = @items.includes(:records)
+                   .send(overlap_method, params[:started_at], params[:ended_at])
+                   .search_by(params[:query])
+                   .page(params[:page])
     @records_count = @items.joins(:records).group(:item_id, 'records.aasm_state').count
     @records_count.default = 0
+  end
+
+  def records
+    @event_sources_path = calendar_item_path(@item, format: :json)
+    @records = @item.records.includes(:borrower, :deliver, :item).rencent.page(params[:page])
+    @record_state_log = unless @records.empty?
+                          @records.first.record_state_logs.build
+                        else
+                          RecordStateLog.new
+                        end
   end
 
   def wish
@@ -30,12 +44,6 @@ class Dashboard::ItemsController < ApplicationController
   end
 
   private
-
-    def find_items
-      @items = current_user.items.includes(:records).send(overlap_method, params[:started_at], params[:ended_at])
-                .search_by(params[:query]).page(params[:page])
-    end
-
     def overlap_method
       if Item.overlaps_values.include?(params[:overlaps])
         params[:overlaps]

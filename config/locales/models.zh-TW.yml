@@ -74,6 +74,8 @@ zh-TW:
               bad_period: '租期應大於 %{period}'
             deliver_id:
               blank: '運送方式為必填'
+            borrower:
+              blank: '請選擇客戶'
         record_state_log:
           attributes:
             info:

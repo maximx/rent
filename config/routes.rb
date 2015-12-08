@@ -77,7 +77,8 @@ Rails.application.routes.draw do
     resources :customers
 
     resources :items, only: [ :index, :show ] do
-      resources :records, only: [ :index, :new, :create ]
+      resources :records, only: [ :new, :create ]
+      get :records, on: :member
       get :wish, :calendar, on: :collection
     end
 

@@ -15,9 +15,9 @@ class User < ActiveRecord::Base
   has_many :items
   has_many :records, through: :items
   has_many :borrowers, through: :records, source_type: 'User'
-  alias_method :lend_records, :records
 
   has_many :borrow_records, class_name: 'Record', as: :borrower
+  alias_method :lend_records, :records
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
   has_many :collections, through: :collect_relationships, source: :item
