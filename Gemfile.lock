@@ -55,6 +55,7 @@ GEM
       momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (8.2.1)
+    cancan (1.6.10)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -376,6 +377,7 @@ DEPENDENCIES
   bootstrap-slider-rails
   bootstrap3-datetimepicker-rails
   byebug
+  cancan
   capistrano
   capistrano-rails
   capistrano-rvm

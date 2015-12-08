@@ -49,7 +49,10 @@ group :development, :test do
   gem 'spring'
 end
 
+# authentication
 gem 'devise'
+# authorization
+gem 'cancan'
 
 gem 'geocoder'
 gem 'gmaps4rails'
