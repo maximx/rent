@@ -11,8 +11,8 @@
     options.minDate = moment().format('YYYY-MM-DD')
     options.disabledDates = disabled_dates
 
-  min_date = validify_date( $(target).first().val() )
-  max_date = validify_date( $(target).last().val() )
+  min_date = $(target).first().val()
+  max_date = $(target).last().val()
   if min_date == '' and max_date == ''
     $(target).each ()->
       $(this).datetimepicker(options)

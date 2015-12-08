@@ -8,13 +8,8 @@
 javascript:
   $(document).ready(function() {
     var date_format = 'YYYY-MM-DD';
-    var time_format = 'HH:mm';
     var default_date;
     var $started_obj = $('#record_started_at')
-
-    var date_with_time = function(date) {
-      return date.format(date_format) + ' ' + moment().format(time_format);
-    };
 
     if ( $started_obj.size() > 0 && $started_obj.val() != "" ) {
       default_date = moment($started_obj.val(), date_format);
@@ -61,8 +56,8 @@ javascript:
           return;
         }
 
-        $started_obj.val( date_with_time(start) );
-        $('#record_ended_at').val( date_with_time(end) );
+        $started_obj.val( start.format(date_format) );
+        $('#record_ended_at').val( end.format(date_format) );
 
         //for rent record form
         update_rent_days_price();
