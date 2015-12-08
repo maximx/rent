@@ -14,5 +14,6 @@
 
 /config/database.yml
 /config/fog.yml
+/public/uploads/*
 
 .DS_Store

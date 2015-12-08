@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :customers
 
   has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
-  has_many :following, through: :following_relationships, source: :followed
+  has_many :followings, through: :following_relationships, source: :followed
   has_many :followers, through: :following_relationships, source: :follower
 
   has_many :items
@@ -60,15 +60,15 @@ class User < ActiveRecord::Base
 
   # user follow
   def follow!(user)
-    following << user
+    followings << user
   end
 
   def unfollow!(user)
-    following.destroy(user)
+    followings.destroy(user)
   end
 
-  def is_following?(user)
-    following.include?(user)
+  def following?(user)
+    followings.include?(user)
   end
 
   # item collect

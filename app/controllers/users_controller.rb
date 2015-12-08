@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   include UsersReviewsCount
   include SortPaginate
 
-  before_action :login_required, only: [ :follow, :unfollow ]
-  before_action :find_user, :find_profile
-  before_action :validate_editable, only: [ :edit, :update, :avatar ]
+  before_action :login_required, only: [ :edit, :update, :follow, :unfollow ]
+  load_and_authorize_resource
+  before_action :find_profile
   before_action :find_total_reviews, only: [ :show, :edit, :update ]
   before_action :set_user_meta_tags
 
@@ -71,37 +71,13 @@ class UsersController < ApplicationController
   end
 
   def follow
-    unless current_user.is_following?(@user)
-      current_user.follow!(@user)
-      result = {
-        status: 'ok',
-        text: view_context.render_icon_with_text('star', '取消追蹤'),
-        href: unfollow_user_path(@user, format: :json),
-        method: 'delete'
-      }
-    end
-
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.json { render json: result }
-    end
+    current_user.follow! @user
+    redirect_to :back
   end
 
   def unfollow
-    if current_user.is_following?(@user)
-      current_user.unfollow!(@user)
-      result = {
-        status: 'ok',
-        text: view_context.render_icon_with_text('star-empty', '追蹤'),
-        href: follow_user_path(@user, format: :json),
-        method: 'put'
-      }
-    end
-
-    respond_to do |format|
-      format.html { redirect_to user_path(@user) }
-      format.json { render json: result }
-    end
+    current_user.unfollow! @user
+    redirect_to user_path(@user)
   end
 
   private
@@ -113,16 +89,12 @@ class UsersController < ApplicationController
       )
     end
 
-    def find_user
-      @user = User.includes(:covers, profile: :avatar).find(params[:id])
-    end
-
     def find_total_reviews
       @total_reviews = @user.reviews.group(:rate).count
     end
 
     def find_profile
-      @profile = @user.profile || @user.build_profile
+      @profile = @user.profile
     end
 
     def set_user_meta_tags
@@ -138,9 +110,5 @@ class UsersController < ApplicationController
           image: @user.avatar_url
         }
       )
-    end
-
-    def validate_editable
-      redirect_with_message user_path(@user) unless @user == current_user
     end
 end
