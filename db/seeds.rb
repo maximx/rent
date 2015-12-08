@@ -17,7 +17,7 @@ user.save
 
 
 # init category
-category_list = [ "3C物品", "遊戲相關", "書籍、影片", "服飾", "其他" ]
+category_list = [ "攝影器材", "服飾", "旅行用品" ]
 category_list.each_with_index do |name, serial|
   category = Category.new(name: name, serial: serial)
   category.save
@@ -25,11 +25,9 @@ end
 
 subcategory_list = [
   [],
-  [ "攝影用具", "電腦及周邊", "其他家電" ],
-  [ "遊戲主機", "遊戲光碟", "桌上遊戲" ],
-  [ "戲劇影集", "漫畫", "小說", "其他書籍" ],
+  [ "相機", "鏡頭", "燈", "其他週邊" ],
   [ "禮服", "Cosplay", "其他服飾" ],
-  [ "運動用具", "旅行物品", "其他" ]
+  [ "行李箱", "嬰兒推車", "行動上網", "其他" ]
 ]
 subcategory_list.each_with_index do |sub_list, category_id|
   sub_list.each_with_index do |sub_name, serial|
