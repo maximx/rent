@@ -41,8 +41,8 @@ module ItemsHelper
   end
 
   def render_close_item_link(item)
-    if can? :open, item
-      link_to render_icon('remove-circle', class: 'text-danger'),
+    if can? :close, item
+      link_to render_icon('download', class: 'text-danger'),
               close_item_path(item),
               class: 'btn btn-default', method: :patch, title: t('controller.items.action.close'),
               data: { toggle: 'tooltip', confirm: t('helpers.items.close_confirm', name: item.name) }
@@ -50,8 +50,8 @@ module ItemsHelper
   end
 
   def render_open_item_link(item)
-    if can? :close, item
-      link_to render_icon('ok-circle', class: 'text-success'),
+    if can? :open, item
+      link_to render_icon('upload', class: 'text-success'),
               open_item_path(item),
               class: 'btn btn-default', method: :patch, title: t('controller.items.action.open'),
               data: { toggle: 'tooltip', confirm: t('helpers.items.open_confirm', name: item.name) }
@@ -121,10 +121,6 @@ module ItemsHelper
 
   def render_price_max
     ( params[:price_max].present? ) ? params[:price_max].to_i : Item::PRICE_MAX
-  end
-
-  def new_record_button_display?(item)
-    (!user_signed_in? || item.rentable_by?(current_user) ) && item_action_display?
   end
 
   def item_action_display?
