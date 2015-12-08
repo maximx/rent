@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show, :search, :questions ]
   before_action :validates_profile, only: [ :new, :create ]
-  load_and_authorize_resource except: [ :create ]
+  load_and_authorize_resource except: [ :create, :search ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show, :questions ]
 
@@ -47,8 +47,9 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
-      params[:item][:pictures].each { |picture| @item.pictures.create file: picture } if params[:item][:pictures]
+    pictures = item_params.delete :pictures
+    if @item.update( item_params.except(:pictures) )
+      pictures.each { |picture| @item.pictures.create image: picture } if pictures
       redirect_to item_path(@item), notice: t('controller.items.update.success', name: @item.name) unless remotipart_submitted?
     else
       unless remotipart_submitted?
@@ -131,21 +132,12 @@ class ItemsController < ApplicationController
   end
 
   private
-
     def item_params
       params.require(:item).permit(
         :name, :price, :minimum_period, :address,
         :deposit, :description, :subcategory_id,
         :deliver_fee, deliver_ids: [ ], pictures: [ ]
       )
-    end
-
-    def find_lender_item
-      @item = current_user.items.find(params[:id])
-    end
-
-    def find_item
-      @item = Item.find(params[:id])
     end
 
     def set_item_meta_tags
