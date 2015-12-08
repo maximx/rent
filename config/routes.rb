@@ -8,6 +8,15 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :tours, only: [ :index ] do
+    collection do
+      get :state, :calendar, :contract, :dashboard
+    end
+  end
+
+  resources :categories, only: [ :show ]
+  resources :subcategories, only: [ :show ]
+
   resources :items do
     resources :records, except: [ :edit, :update, :destroy ] do
       resources :reviews, only: [ :create ]
@@ -38,12 +47,23 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pictures, only: [ :destroy ] do
-    get :download, on: :member
-  end
   resources :attachments, only: [ :destroy ] do
     get :download, on: :member
   end
+
+  resources :customers, only: [ :create, :update, :destroy ]
+
+  resources :conversations, only: [ :index, :show, :destroy ] do
+    get :unread, on: :collection
+    member do
+      put :mark_as_read
+      post :reply
+    end
+  end
+  resources :notifications, only: [ :index, :show ] do
+    put :mark_as_read, on: :member
+  end
+  resources :messages, only: [ :create ]
 
   namespace :settings do
     resource :account, only: [ :show, :edit, :update ] do
@@ -63,28 +83,6 @@ Rails.application.routes.draw do
 
     resources :records, only: [ :index ] do
       get :calendar, on: :collection
-    end
-  end
-
-  resources :categories, only: [ :show ]
-  resources :subcategories, only: [ :show ]
-  resources :customers, only: [ :create, :update, :destroy ]
-
-  resources :conversations, only: [ :index, :show, :destroy ] do
-    get :unread, on: :collection
-    member do
-      put :mark_as_read
-      post :reply
-    end
-  end
-  resources :notifications, only: [ :index, :show ] do
-    put :mark_as_read, on: :member
-  end
-  resources :messages, only: [ :create ]
-
-  resources :tours, only: [ :index ] do
-    collection do
-      get :state, :calendar, :contract, :dashboard
     end
   end
 end
