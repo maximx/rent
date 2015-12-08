@@ -1,26 +1,25 @@
 class Dashboard::CustomersController < ApplicationController
   before_action :login_required
-  before_action :find_customer, :find_profile, only: [ :show, :edit, :update, :destroy ]
+  load_and_authorize_resource through: :current_user, except: [ :index ]
+  before_action :load_profile, only: [ :show, :edit, :update ]
 
   def index
     @consumers = current_user.consumers(search_params)
-                  .paginate(page: params[:page], per_page: 10)
+                             .paginate(page: params[:page], per_page: 10)
   end
 
   def show
   end
 
   def new
-    @customer = current_user.customers.build
     @profile = @customer.build_profile
   end
 
   def create
-    @customer = current_user.customers.build(customer_params)
-
     if @customer.save
       redirect_to dashboard_customer_path @customer
     else
+      flash[:alert] = t('controller.action.create.fail')
       render 'dashboard/customers/new'
     end
   end
@@ -32,17 +31,12 @@ class Dashboard::CustomersController < ApplicationController
     if @customer.update customer_params
       redirect_to dashboard_customer_path @customer
     else
+      flash[:alert] = t('controller.action.create.fail')
       render 'dashboard/customers/edit'
     end
   end
 
-  def destroy
-    @customer.destroy
-    redirect_to dashboard_customers_path
-  end
-
   private
-
     def customer_params
       params.require(:customer).permit(
         :email,
@@ -57,11 +51,7 @@ class Dashboard::CustomersController < ApplicationController
       end
     end
 
-    def find_customer
-      @customer = current_user.customers.find params[:id]
-    end
-
-    def find_profile
+    def load_profile
       @profile = @customer.profile
     end
 end

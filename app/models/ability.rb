@@ -8,6 +8,7 @@ class Ability
     resources_users user
     resources_items user
     resources_records user
+    resources_customers user
   end
 
   protected
@@ -15,6 +16,7 @@ class Ability
       can [ :read, :reviews, :lender_reviews, :borrower_reviews, :items ], User
       can [ :read, :create, :search, :calendar, :records ], Item
       can :index, Record
+      can [ :read, :create ], Customer
     end
 
     def resources_users(user)
@@ -66,5 +68,9 @@ class Ability
         record.viewable_by?(user) and record.returned? and
           record.judgers.include?(user) and record.reviews.size == 1
       end
+    end
+
+    def resources_customers(user)
+      can :update, Customer, user: user
     end
 end

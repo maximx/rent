@@ -51,8 +51,6 @@ Rails.application.routes.draw do
     get :download, on: :member
   end
 
-  resources :customers, only: [ :create, :update, :destroy ]
-
   resources :conversations, only: [ :index, :show, :destroy ] do
     get :unread, on: :collection
     member do
@@ -74,7 +72,7 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :customers
+    resources :customers, except: [ :destroy ]
 
     resources :items, only: [ :index, :show ] do
       resources :records, only: [ :new, :create ]
