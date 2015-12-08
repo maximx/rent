@@ -74,10 +74,6 @@ class Item < ActiveRecord::Base
     end
   end
 
-  def rentable_by?(user)
-    user and user != lender and opening?
-  end
-
   def period_without_per
     period.slice(1)
   end

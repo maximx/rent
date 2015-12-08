@@ -38,6 +38,19 @@ zh-TW:
       destroy:
         success: '已成功刪除%{name}。'
         fail: '%{name}有出租紀錄無法刪除。'
+    records:
+      action:
+        download: '下載契約'
+        show: '查閱'
+        withdrawing: '取消預訂'
+        remitting: '已匯款'
+        delivering: '已寄送'
+        renting: '確認出租'
+        returning: '確認歸還'
+        review: '評價'
+        ask_for_review: '邀請評價'
+      remitting:
+        fail: '請檢查匯款帳號資訊'
     settings/account:
       edit: '帳號設定'
       show: '偏好設定'

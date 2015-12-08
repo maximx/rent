@@ -1,82 +1,83 @@
 module RecordsHelper
   def render_download_record_link(record)
-    if record.viewable_by?(current_user)
-      link_to(render_icon('download-alt', class: 'text-danger'),
+    if can? :show, record
+      link_to render_icon('download-alt', class: 'text-danger'),
               item_record_path(record.item, record, format: 'pdf'),
-              target: '_blank', title: '下載契約',
-              class: 'btn btn-default', data: { toggle: 'tooltip' })
+              target: '_blank', class: 'btn btn-default', data: { toggle: 'tooltip' },
+              title: t('controller.records.action.download')
     end
   end
 
   def render_remitting_record_link(record)
-    if record.can_remit_by?(current_user)
+    if can? :remitting, record
       link_to render_icon('usd', class: 'text-success'),
               remitting_item_record_path(record.item, record),
-              method: :put, class: 'btn btn-default record_form_modal', title: '已匯款',
+              method: :put, class: 'btn btn-default record_form_modal', title: t('controller.records.action.remitting'),
               data: { toggle: 'tooltip', label: info_label[:remitted], required: 'required' }
     end
   end
 
   def render_delivering_record_link(record)
-    if record.can_delivery_by?(current_user)
+    if can? :delivering, record
       link_to render_icon('globe', class: 'text-primary'),
               delivering_item_record_path(record.item, record),
-              method: :put, class: 'btn btn-default record_form_modal', title: '已寄送',
+              method: :put, class: 'btn btn-default record_form_modal', title: t('controller.records.action.delivering'),
               data: { toggle: 'tooltip', label: info_label[:delivering] }
     end
   end
 
   def render_renting_record_link(record)
-    if record.can_rent_by?(current_user)
+    if can? :renting, record
       link_to render_icon('ok', class: 'text-primary'),
               renting_item_record_path(record.item, record),
-              method: :put, class: 'btn btn-default record_form_modal', title: '確認出租',
+              method: :put, class: 'btn btn-default record_form_modal', title: t('controller.records.action.renting'),
               data: { toggle: 'tooltip', type: 'file', label: info_label[:renting] }
     end
   end
 
   def render_returning_record_link(record)
-    if record.can_return_by?(current_user)
-      link_to(render_icon("home", class: "text-warning"),
+    if can? :returning, record
+      link_to render_icon('home', class: 'text-warning'),
               returning_item_record_path(record.item, record),
               method: :put,
-              class: "btn btn-default", title: "確認歸還",
-              data: { toggle: "tooltip", confirm: "確認已歸還出租物嗎？" })
+              class: 'btn btn-default', title: t('controller.records.action.returning'),
+              data: { toggle: 'tooltip', confirm: t('helpers.records.returning_confirm') }
     end
   end
 
   def render_withdrawing_record_link(record)
-    if record.can_withdraw_by?(current_user)
-      link_to(render_icon("remove", class: "text-danger"),
+    if can? :withdrawing, record
+      link_to render_icon('remove', class: 'text-danger'),
               withdrawing_item_record_path(record.item, record),
-              method: :delete,
-              class: "btn btn-default", title: "取消預訂",
-              data: { toggle: "tooltip", confirm: "確定要取消預約#{record.item.name}嗎？"})
-    end
-  end
-
-  def render_review_record_link(record)
-    if record.can_review_by?(current_user)
-      link_to(render_icon("thumbs-up", class: "text-info"),
-              review_item_record_path(record.item, record),
-              class: "btn btn-default", title: "評價", data: { toggle: "tooltip" })
+              method: :delete, class: 'btn btn-default', title: t('controller.records.action.withdrawing'),
+              data: { toggle: 'tooltip', confirm: t('helpers.records.withdrawing_confirm', name: record.item.name) }
     end
   end
 
   def render_show_record_link(record)
-    if record.viewable_by?(current_user) && !current_page?(item_record_path(record.item, record))
-      link_to(render_icon('zoom-in'), item_record_path(record.item, record),
-              class: "btn btn-default", title: "查閱", data: { toggle: "tooltip" })
+    if can?(:show, record) and !current_page?(item_record_path(record.item, record))
+      link_to render_icon('zoom-in'),
+              item_record_path(record.item, record),
+              class: 'btn btn-default', title: t('controller.records.action.show'), data: { toggle: 'tooltip' }
+    end
+  end
+
+  def render_review_record_link(record)
+    if can? :review, record
+      link_to render_icon('thumbs-up', class: 'text-info'),
+              review_item_record_path(record.item, record),
+              class: 'btn btn-default', data: { toggle: 'tooltip' },
+              title: t('controller.records.action.review')
     end
   end
 
   def render_ask_for_review_record_link(record)
-    if record.can_ask_review_by?(current_user)
-      link_to(render_icon("send", class: "text-success"),
+    if can? :ask_for_review, record
+      link_to render_icon('send', class: 'text-success'),
               ask_for_review_item_record_path(record.item, record),
-              method: :post,
-              class: "btn btn-default", title: "邀請評價",
-              data: { toggle: "tooltip", confirm: "將寄出信件邀請對方評價，確認要繼續嗎？"})
+              method: :post, class: 'btn btn-default',
+              title: t('controller.records.action.ask_for_review'),
+              data: { toggle: 'tooltip', confirm: t('helpers.records.ask_for_review_confirm') }
     end
   end
 

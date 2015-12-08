@@ -3,12 +3,15 @@ class Record < ActiveRecord::Base
   include CurrencyPrice
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
-  validate :start_end_date, :not_overlap, :borrower_not_lender
+  validate :start_end_date, :not_overlap
 
   belongs_to :borrower, polymorphic: true
   belongs_to :item
   belongs_to :deliver, required: true
+
   has_many :reviews
+  has_many :judgers, through: :reviews
+
   has_many :record_state_logs, class_name: 'RecordStateLog', foreign_key: 'record_id', dependent: :destroy
 
   self.per_page = 10
@@ -84,10 +87,6 @@ class Record < ActiveRecord::Base
     item.records.where.not(id: id || -1).overlaps(started_at, ended_at)
   end
 
-  def borrower_not_lender
-    errors[:started_at] << '您沒有權限' unless rentable_by?(borrower)
-  end
-
   #gmaps4rails
   def as_json(options={})
     {
@@ -112,44 +111,6 @@ class Record < ActiveRecord::Base
     )
   end
 
-  def rentable_by?(user)
-    item.rentable_by? user
-  end
-
-  #可評價
-  def can_review_by?(user)
-    user && viewable_by?(user) && returned? && !reviews.pluck(:judger_id).include?(user.id)
-  end
-
-  def can_ask_review_by?(user)
-    user && is_reviewed_by_judger?(user) && can_review_by?(review_of_judger(user).user)
-  end
-
-  def can_remit_by?(user)
-    user && editable_by?(user) && remit_needed? && booking?
-  end
-
-  def can_delivery_by?(user)
-    user && delivery_needed? && lender == user &&
-      ( ( booking? && !remit_needed? ) || ( remitted? && remit_needed? ) )
-  end
-
-  #可確認出租
-  def can_rent_by?(user)
-    user && lender == user &&
-      ( delivering? || (!delivery_needed? && ( ( booking? && !remit_needed? ) || remitted? ) ) )
-  end
-
-  #可確認歸還
-  def can_return_by?(user)
-    renting? && lender == user
-  end
-
-  #可取消預訂
-  def can_withdraw_by?(user)
-    booking? && editable_by?(user)
-  end
-
   def review_of_user(user)
     rv = reviews.where(user_id: user.id).first
     rv ||= user.reviews.build
@@ -158,10 +119,6 @@ class Record < ActiveRecord::Base
   def review_of_judger(user)
     rv = reviews.where(judger_id: user.id).first
     rv ||= user.reviews.build
-  end
-
-  def is_reviewed_by_judger?(user)
-    reviews.where(judger_id: user.id).exists?
   end
 
   # 物品為郵件寄送，且有金額需結算
@@ -213,7 +170,6 @@ class Record < ActiveRecord::Base
   end
 
   protected
-
     def set_item_attributes
       self.item_price = item.price
       self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil

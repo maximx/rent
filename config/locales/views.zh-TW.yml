@@ -14,6 +14,11 @@ zh-TW:
       destroy_confirm: '確定要刪除%{name}嗎？'
       open_confirm: '確定要上架%{name}嗎？'
       close_confirm: '確定要下架%{name}嗎？'
+    records:
+      withdrawing_confirm: '確定要取消預約%{name}嗎？'
+      returning_confirm: '確認已歸還出租物嗎？'
+      ask_for_review_confirm: '將寄出信件邀請對方評價，確認要繼續嗎？'
+      ask_for_review_send: '邀請評價通知已寄送。'
     messages:
       message_to: '發送訊息給'
     tours:
