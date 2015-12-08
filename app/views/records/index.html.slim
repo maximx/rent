@@ -4,8 +4,3 @@ h2 = render_item_name(@item)
 
 = render partial: 'records/record_list', locals: { records: @records }
 = render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }
-
-javascript:
-  $(document).ready(function(){
-    buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD HH:mm', #{raw @disabled_dates});
-  });
