@@ -23,7 +23,7 @@ class PagesController < ApplicationController
   private
 
     def set_title
-      @title = t("controller.pages.#{action_name}")
+      @title = t("controller.pages.action.#{action_name}")
     end
 
     def set_pages_meta_tags

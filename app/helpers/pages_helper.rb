@@ -1,10 +1,10 @@
 module PagesHelper
   def pages_navbar_list
     render_link_li class: 'nav navbar-nav footer-links' do |li|
-      li << [ '關於', about_path ]
-      li << [ '服務條款', terms_path ]
-      li << [ '隱私權政策', privacy_path ]
-      li << [ '聯繫方式', contact_path ]
+      li << [ t('controller.pages.action.about'), about_path ]
+      li << [ t('controller.pages.action.terms'), terms_path ]
+      li << [ t('controller.pages.action.privacy'), privacy_path ]
+      li << [ t('controller.pages.action.contact'), contact_path ]
     end
   end
 

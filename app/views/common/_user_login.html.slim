@@ -11,7 +11,7 @@ ul.nav.navbar-nav.navbar-right
 
         li.dropdown-header = t('activerecord.models.item')
         li = link_to render_icon_with_text('plus', t('controller.action.new')), new_item_path
-        li = link_to render_icon_with_text('heart', t('controller.users.collect')), wish_dashboard_items_path
+        li = link_to render_icon_with_text('heart', t('controller.items.action.collect')), wish_dashboard_items_path
         li = link_to render_icon_with_text('cog', t('controller.name.dashboard')), dashboard_items_path
         li.divider role="separator"
 

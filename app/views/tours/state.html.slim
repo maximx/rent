@@ -1,13 +1,13 @@
 header.tours-header
-  = link_to raw(t('controller.tours.previous')), calendar_tours_path, class: 'btn btn-lg btn-default pull-left'
-  = link_to raw(t('controller.tours.next')), contract_tours_path, class: 'btn btn-lg btn-default pull-right'
-  h1.text-center = t('controller.tours.state')
+  = link_to raw(t('helpers.tours.previous')), calendar_tours_path, class: 'btn btn-lg btn-default pull-left'
+  = link_to raw(t('helpers.tours.next')), contract_tours_path, class: 'btn btn-lg btn-default pull-right'
+  h1.text-center = t('helpers.tours.state')
 
 main.tours-container
   figure.tours-figure
     = image_tag 'tours_state.png', class: 'tours-img'
     ul.tours-notes
       li.tours-record-info.tours-left
-        span = t('controller.tours.notes.record-info')
+        span = t('helpers.tours.notes.record-info')
       li.tours-record-state.tours-right
-        span = t('controller.tours.notes.record-state')
+        span = t('helpers.tours.notes.record-state')
