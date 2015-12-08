@@ -9,8 +9,4 @@ module Settings::AccountsHelper
   def settings_account_controller?
      params[:controller] == 'settings/accounts'
   end
-
-  def settings_account_related_controller?
-    settings_account_controller? or profiles_controller?
-  end
 end

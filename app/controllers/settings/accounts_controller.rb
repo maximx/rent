@@ -7,9 +7,18 @@ class Settings::AccountsController < ApplicationController
 
   def save
     if @profile.update(profile_params)
-      redirect_with_message settings_account_path, notice: t('controller.settings/account.save.success')
+      respond_to do |format|
+        result = { status: 'ok' }
+
+        format.json { render json: result } if request.xhr?
+        format.html { redirect_to settings_account_path, notice: t('controller.settings/account.save.success') }
+      end
     else
-      redirect_with_message settings_account_path, alert: t('common.error')
+      respond_to do |format|
+        result = { status: 'error' }
+        format.json { render json: result } if request.xhr?
+        format.html { redirect_to settings_account_path, alert: t('common.error') }
+      end
     end
   end
 
@@ -25,7 +34,7 @@ class Settings::AccountsController < ApplicationController
                   else
                     :updated
                   end
-      flash[:notice] = I18n.t("devise.registrations.#{flash_key}")
+      flash[:notice] = t("devise.registrations.#{flash_key}")
 
       sign_in @user, bypass: true
       redirect_to edit_settings_account_path
@@ -60,7 +69,6 @@ class Settings::AccountsController < ApplicationController
   end
 
   private
-
     def update_needs_confirmation?(user, prev_email)
       prev_email != user.unconfirmed_email
     end
@@ -73,7 +81,7 @@ class Settings::AccountsController < ApplicationController
     end
 
     def profile_params
-      params.require(:profile).permit(:send_mail, :borrower_info_provide)
+      params.require(:profile).permit(:send_mail, :borrower_info_provide, :bank_code, :bank_account)
     end
 
     def find_user

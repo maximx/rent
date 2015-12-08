@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def render_navigation
-    if settings_account_related_controller?
+    if settings_account_controller?
       render partial: 'common/navigation', locals: { list: settings_navbar_list }
     elsif dashboard_related_controller?
       render partial: 'common/navigation', locals: { list: dashboard_navbar_list }

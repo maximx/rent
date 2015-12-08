@@ -2,7 +2,9 @@
   #bank_info_modal.modal.fade tabindex="-1" role="dialog" aria-labelledby="fill_bank_info_modal"
     .modal-dialog role="document"
       .modal-content
-        = simple_form_for profile, url: update_bank_info_profile_path(profile, format: :json), remote: true, html: { method: :put, id: 'bank_info_form' } do |f|
+        = simple_form_for profile,
+                          url: save_settings_account_path(format: :json),
+                          remote: true, html: { method: :patch, id: 'bank_info_form' } do |f|
           .modal-header
             button.close type="button" data-dismiss="modal" aria-label="Close"
               span aria-hidden="true" &times;

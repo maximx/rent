@@ -1,7 +1,7 @@
 module UsersHelper
   def render_follow_link(user)
     if can? :follow, user
-      link_to render_icon_with_text('star-empty', '追蹤'),
+      link_to render_icon_with_text('star-empty', t('controller.users.action.follow')),
               follow_user_path(user),
               method: :put, class: 'btn btn-default follow-user'
     end
@@ -9,10 +9,14 @@ module UsersHelper
 
   def render_unfollow_link(user)
     if can? :unfollow, user
-      link_to render_icon_with_text('star', '取消追蹤'),
+      link_to render_icon_with_text('star', t('controller.users.action.unfollow')),
               unfollow_user_path(user),
               method: :delete, class: 'btn btn-default follow-user'
     end
+  end
+
+  def render_icon_confirmed
+    render_icon 'ok', class: 'text-success', data: { toggle: 'tooltip' }, title: t('helpers.users.confirmed_attribute')
   end
 
   def user_navbar_list(user)
