@@ -14,6 +14,6 @@ crumb :record do |item, record|
 end
 
 crumb :review_record do |item, record|
-  link "評價", review_item_record_path(item, record)
+  link t('controller.reviews.action.new'), new_item_record_review_path(item, record)
   parent :record, item, record
 end

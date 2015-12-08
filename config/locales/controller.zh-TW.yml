@@ -47,10 +47,12 @@ zh-TW:
         delivering: '已寄送'
         renting: '確認出租'
         returning: '確認歸還'
-        review: '評價'
         ask_for_review: '邀請評價'
       remitting:
         fail: '請檢查匯款帳號資訊'
+    reviews:
+      action:
+        new: '評價'
     settings/account:
       edit: '帳號設定'
       show: '偏好設定'

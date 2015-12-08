@@ -102,3 +102,7 @@ zh-TW:
               confirmation: '請確認兩次輸入之密碼相同'
             agreement:
               accepted: '請確認同意接受服務條款'
+        review:
+          attributes:
+            content:
+              blank: '評語為必填'

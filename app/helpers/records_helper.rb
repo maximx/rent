@@ -63,11 +63,11 @@ module RecordsHelper
   end
 
   def render_review_record_link(record)
-    if can? :review, record
+    if can? :create, record.reviews.build
       link_to render_icon('thumbs-up', class: 'text-info'),
-              review_item_record_path(record.item, record),
+              new_item_record_review_path(record.item, record),
               class: 'btn btn-default', data: { toggle: 'tooltip' },
-              title: t('controller.records.action.review')
+              title: t('controller.reviews.action.new')
     end
   end
 

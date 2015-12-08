@@ -9,6 +9,7 @@ class Ability
     resources_items user
     resources_records user
     resources_customers user
+    resources_reviews user
   end
 
   protected
@@ -60,10 +61,6 @@ class Ability
       can :delivering, Record, lender: user, may_delivery?: true
       can :renting, Record, lender: user, may_rent?: true
       can :returning, Record, lender: user, may_return?: true
-      can :review, Record do |record|
-        record.viewable_by?(user) and record.returned? and
-          !record.judgers.include?(user)
-      end
       can :ask_for_review, Record do |record|
         record.viewable_by?(user) and record.returned? and
           record.judgers.include?(user) and record.reviews.size == 1
@@ -72,5 +69,12 @@ class Ability
 
     def resources_customers(user)
       can :update, Customer, user: user
+    end
+
+    def resources_reviews(user)
+      can :create, Review do |review|
+        review.record.viewable_by?(user) and review.record.returned? and
+          !review.record.judgers.include?(user)
+      end
     end
 end

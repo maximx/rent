@@ -1,31 +1,26 @@
 class ReviewsController < ApplicationController
-  before_action :login_required, only: [ :create ]
-  before_action :find_item, only: [ :create ]
-  before_action :find_record, only: [ :create ]
+  before_action :login_required
+  load_and_authorize_resource :item
+  load_and_authorize_resource :record, through: :item
+  load_and_authorize_resource :review, through: :record
+  before_action :find_navbar_categories
+
+  def new
+  end
 
   def create
-    @review = current_user.revieweds.build(review_params)
-    @review.record = @record
+    @review.judger = current_user
 
     if @review.save
       redirect_to item_record_path(@item, @record)
     else
+      flash[:alert] = t('controller.action.create.fail')
       render :new
     end
   end
 
   private
-
-  def review_params
-    params.require(:review).permit(:content, :rate)
-  end
-
-  def find_item
-    @item = Item.find(params[:item_id])
-  end
-
-  def find_record
-    @record = @item.records.find(params[:record_id])
-  end
-
+    def review_params
+      params.require(:review).permit(:content, :rate)
+    end
 end

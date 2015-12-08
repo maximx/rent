@@ -19,10 +19,9 @@ Rails.application.routes.draw do
 
   resources :items do
     resources :records, except: [ :edit, :update, :destroy ] do
-      resources :reviews, only: [ :create ]
+      resources :reviews, only: [ :new, :create ]
 
       member do
-        get :review
         put :remitting, :delivering, :renting, :returning
         post :ask_for_review
         delete :withdrawing

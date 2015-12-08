@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
   load_and_authorize_resource :record, through: :item, except: [ :index ]
   before_action :validates_borrower_info, only: [ :new, :create ]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
-  before_action :find_navbar_categories, only: [ :index, :show, :new, :create, :review ]
+  before_action :find_navbar_categories, only: [ :index, :show, :new, :create ]
 
   def index
     @records = @item.records.includes(:borrower).rencent.reverse_order.page(params[:page])
@@ -41,14 +41,9 @@ class RecordsController < ApplicationController
     end
   end
 
-  def review
-    @review = @record.reviews.build
-    render 'reviews/new'
-  end
-
   def ask_for_review
     review = @record.review_of_judger(current_user)
-    review.user.notify review.notify_ask_for_review_subject, review_item_record_url(@item, @record)
+    review.user.notify review.notify_ask_for_review_subject, new_item_record_review_url(@item, @record)
     redirect_to :back, notice: t('helpers.records.ask_for_review_send')
   end
 
