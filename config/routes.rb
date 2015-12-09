@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [ :show, :edit, :update ] do
+  resources :users, param: :account, only: [ :show, :edit, :update ] do
     member do
       get :reviews, :lender_reviews, :borrower_reviews, :items
       put :follow

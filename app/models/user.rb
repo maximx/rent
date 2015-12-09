@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def to_param
+    account
+  end
+
   # mailboxer
   def mailboxer_email(object)
     email if profile.send_mail

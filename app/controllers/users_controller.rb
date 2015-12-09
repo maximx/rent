@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   include SortPaginate
 
   before_action :login_required, only: [ :edit, :update, :follow, :unfollow ]
-  load_and_authorize_resource
+  load_and_authorize_resource id_param: :account, find_by: :account
   before_action :find_profile
   before_action :find_total_reviews, only: [ :show, :edit, :update ]
   before_action :set_user_meta_tags
