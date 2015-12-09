@@ -28,6 +28,7 @@ class UsersController < ApplicationController
         redirect_with_message redirect_url, notice: '個人資料修改成功。'
       end
     else
+      flash[:alert] = t('controller.action.create.fail')
       render :edit
     end
   end

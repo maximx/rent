@@ -15,5 +15,5 @@ div class="#{profile.facebook.present? ? 'col-md-4' : 'col-md-8'}"
         = render_icon_confirmed if user.profile.phone_confirmed?
     - if profile.line.present?
       li
-        = render_icon_with_text 'comment', label_tag("#{t('simple_form.lables.profile.line')}：")
+        = render_icon_with_text 'comment', label_tag("#{t('simple_form.labels.profile.line')}：")
         span = profile.line
