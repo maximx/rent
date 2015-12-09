@@ -53,6 +53,7 @@ end
 gem 'devise'
 # authorization
 gem 'cancancan'
+gem 'rolify'
 
 gem 'geocoder'
 gem 'gmaps4rails'

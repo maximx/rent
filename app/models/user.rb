@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   attr_accessor :login
 
   validates :account, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[\w]*\z/ }
