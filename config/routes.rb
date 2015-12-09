@@ -62,12 +62,22 @@ Rails.application.routes.draw do
   end
   resources :messages, only: [ :create ]
 
-  namespace :settings do
-    resource :account, only: [ :show, :edit, :update ] do
-      get :phone_confirmation
+  # TODO issue 122
+  namespace :account do
+    resource :settings, only: [ :show, :update ] do
+      get :preferences, :phone_confirmation
       post :phone_confirmed, :upload
       patch :save
     end
+
+    resources :stores, param: :account do
+      resources :items do
+        resources :records
+      end
+    end
+
+    resources :customers
+    #resources :records
   end
 
   namespace :dashboard do

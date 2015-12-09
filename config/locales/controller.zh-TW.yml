@@ -53,9 +53,16 @@ zh-TW:
     reviews:
       action:
         new: '評價'
-    settings/account:
-      edit: '帳號設定'
-      show: '偏好設定'
+    account/settings:
+      action:
+        phone_confirmation: '手機驗證'
+        show: '帳號設定'
+        preferences: '偏好設定'
+      phone_confirmation:
+        confirmed: '手機已驗證。'
+      phone_confirmed:
+        success: '手機驗證成功。'
+        fail: '驗證碼錯誤，請再確認一次。'
       save:
         success: '個人偏好儲存成功。'
     dashboard/customers:

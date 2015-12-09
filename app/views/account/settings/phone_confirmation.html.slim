@@ -1,0 +1,10 @@
+h1 = t('controller.account/settings.action.phone_confirmation')
+
+p.text-muted = t('helpers.account/settings.phone_confirmation.description')
+
+= form_tag phone_confirmed_account_settings_path(redirect_url: params[:redirect_url]), method: :post do |f|
+  .form-group
+    = text_field_tag :token, nil, class: 'form-control', placeholder: '驗證碼', maxlength: 4, size: 4, style: 'width: 200px;'
+
+  .form-group
+    button.btn type="submit" = t('helpers.submit.submit')

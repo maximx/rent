@@ -1,6 +1,6 @@
-h2.col-xs-offset-4.col-sm-offset-3 = t('controller.settings/account.show')
+h2.col-xs-offset-4.col-sm-offset-3 = t('controller.account/settings.action.preferences')
 
-= simple_form_for @profile, url: save_settings_account_path, html: { method: :patch } do |f|
+= simple_form_for @profile, url: save_account_settings_path, html: { method: :patch } do |f|
   .form-group
     = f.input :send_mail,
               as: :boolean,

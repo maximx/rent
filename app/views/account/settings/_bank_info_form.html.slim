@@ -3,7 +3,7 @@
     .modal-dialog role="document"
       .modal-content
         = simple_form_for profile,
-                          url: save_settings_account_path(format: :json),
+                          url: save_account_settings_path(format: :json),
                           remote: true, html: { method: :patch, id: 'bank_info_form' } do |f|
           .modal-header
             button.close type="button" data-dismiss="modal" aria-label="Close"

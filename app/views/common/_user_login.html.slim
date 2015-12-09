@@ -15,7 +15,7 @@ ul.nav.navbar-nav.navbar-right
         li = link_to render_icon_with_text('cog', t('controller.name.dashboard')), dashboard_items_path
         li.divider role="separator"
 
-        li = link_to render_icon_with_text('lock', t('controller.name.settings')), edit_settings_account_path
+        li = link_to render_icon_with_text('lock', t('controller.name.settings')), account_settings_path
         li.divider role="separator"
 
         li = link_to render_icon_with_text('log-out', t('devise.views.sign_out')), destroy_user_session_path, method: :delete

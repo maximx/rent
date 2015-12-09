@@ -3,6 +3,7 @@ zh-TW:
     submit:
       create: '新增%{model}'
       update: '修改%{model}'
+      submit: '送出'
       save: '儲存'
       edit: '編輯'
       send: '傳送訊息'
@@ -23,6 +24,9 @@ zh-TW:
       ask_for_review_send: '邀請評價通知已寄送。'
     messages:
       message_to: '發送訊息給'
+    account/settings:
+      phone_confirmation:
+        description: '您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：'
     tours:
       previous: '&lsaquo; 前一個'
       next: '後一個 &rsaquo;'
