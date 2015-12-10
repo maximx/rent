@@ -1,4 +1,7 @@
 class Selection < ActiveRecord::Base
+  validates_presence_of :vector_id, :tag_id
+  validates_uniqueness_of :tag_id, scope: :vector_id
+
   belongs_to :vector
   belongs_to :tag, autosave: true
   accepts_nested_attributes_for :tag
@@ -15,5 +18,6 @@ class Selection < ActiveRecord::Base
         tag.save!
         self.tag = tag
       end
+      self.valid?
     end
 end

@@ -1,5 +1,6 @@
 class Vector < ActiveRecord::Base
   validates_presence_of :user_id, :subcategory_id
+  validates_uniqueness_of :tag_id, scope: [ :user_id, :subcategory_id ]
 
   belongs_to :user
   belongs_to :subcategory
@@ -21,5 +22,6 @@ class Vector < ActiveRecord::Base
         tag.save!
         self.tag = tag
       end
+      self.valid?
     end
 end
