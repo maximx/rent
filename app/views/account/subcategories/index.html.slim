@@ -1,0 +1,11 @@
+- @subcategories.each do |subcategory|
+  .panel.panel-default
+    .panel-heading = subcategory.name
+
+    ul.list-group
+      - subcategory.vectors.each do |vector|
+        /TODO: vectors 只選出 user
+        - if can? :update, vector
+          li.list-group-item
+            = vector.name
+            .help-block

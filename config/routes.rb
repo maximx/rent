@@ -74,6 +74,9 @@ Rails.application.routes.draw do
     resources :subcategories, only: [ :index ] do
       resources :vectors, only: [ :create, :destroy ]
     end
+    resources :vectors, only: [ ] do
+      resources :selections, only: [ :create, :destroy ]
+    end
   end
 
   namespace :dashboard do

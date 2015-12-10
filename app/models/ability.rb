@@ -17,6 +17,7 @@ class Ability
 
       can :read, Category
       can :read, Subcategory
+
       can [ :read, :create ], Vector
       can [ :update, :destroy ], Vector, user_id: user.id
     end

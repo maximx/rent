@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
   has_many :covers, class_name: 'Attachment', as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :covers
 
+  has_many :vectors
+  has_many :subcategories, through: :vectors
+
   after_save :init_profile
 
   devise :database_authenticatable, :registerable,
