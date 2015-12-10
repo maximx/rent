@@ -18,6 +18,10 @@ $ ->
     load_item_selections()
   )
 
+  $(document).on('change', '.item_selection :input', ()->
+    $(this).closest('.form-group').find(':input').not(this).prop('checked', false)
+  )
+
 
   # index
   $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
