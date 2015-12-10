@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210063316) do
+ActiveRecord::Schema.define(version: 20151210073751) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -239,6 +239,15 @@ ActiveRecord::Schema.define(version: 20151210063316) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "selections", force: :cascade do |t|
+    t.integer  "vector_id",  limit: 4
+    t.integer  "tag_id",     limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "selections", ["vector_id", "tag_id"], name: "index_selections_on_vector_id_and_tag_id", unique: true, using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        limit: 255
