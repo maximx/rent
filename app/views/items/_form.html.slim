@@ -2,12 +2,18 @@
   = simple_form_for item, remote: true, html: { class: 'form-horizontal ajax_image' } do |f|
     = f.input :pictures, as: :file_with_image, input_html: { multiple: true }
 
+/put item selection here to avoid form append
+#selections-hide.hide
+
 = simple_form_for item do |f|
   = f.input :pictures, as: :file_select, input_html: { multiple: true } if item.new_record?
   = f.input :name
   = f.input :subcategory_id, as: :grouped_select,
                              collection: categories_grouped_select,
                              group_method: :last
+  /from #selections-hide
+  #selections-container
+
   = f.input :price, as: :numeric_addon, direction: "元 / #{item.period}", input_html: { min: 0 }
   = f.input :minimum_period, as: :numeric_addon, direction: item.period_without_per, input_html: { min: 1 }
   = f.input :deposit, as: :numeric_addon, direction: '元', hint: '會退還', input_html: { min: 0 }

@@ -8,7 +8,7 @@ class Category < ActiveRecord::Base
         [
           s.name,
           s.id,
-          { 'data-href': Rails.application.routes.url_helpers.account_subcategory_path(s) }
+          { 'data-href': Rails.application.routes.url_helpers.account_subcategory_vectors_path(s) }
         ]
       end
       [ c.name, subcategories ]

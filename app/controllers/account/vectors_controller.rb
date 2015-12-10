@@ -3,6 +3,10 @@ class Account::VectorsController < ApplicationController
   load_and_authorize_resource :subcategory
   load_and_authorize_resource through: :subcategory
 
+  def index
+    @vectors = @vectors.where(user: current_user).includes(:tag, [selections: :tag])
+  end
+
   def create
     @vector.user = current_user
     @vector.save

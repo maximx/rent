@@ -5,6 +5,7 @@ $ ->
     init_tinymce('#item_description')
   )
   init_tinymce('#item_description')
+  load_item_selections()
 
   $('#use_profile_address').on 'change', () ->
     if $(this).prop('checked')
@@ -12,6 +13,10 @@ $ ->
 
   $('#item_deliver_ids_2').on 'change', () ->
     $('#item_address').prop('required', true) if $(this).prop('checked')
+
+  $('#item_subcategory_id').on('change', ()->
+    load_item_selections()
+  )
 
 
   # index
@@ -77,3 +82,19 @@ $ ->
   setPriceRange('slideStop')
   removeInputName()
   $('#advanced-search-form').submit()
+
+#load item selection on items/form
+@load_item_selections = ()->
+    url = $('#item_subcategory_id').find('option:selected').data('href')
+    $container = $('#selections-container')
+    $hide_container = $('#selections-hide')
+
+    $container.html('')
+    $hide_container.html('')
+
+    $.get(url, (html)->
+      $hide_container.html(html)
+      html = $hide_container.find('#item-selections-list').html()
+      $container.html(html)
+      $hide_container.html('')
+    )

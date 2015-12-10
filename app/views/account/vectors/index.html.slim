@@ -1,0 +1,10 @@
+= simple_form_for :item do |f|
+  /only get form-group item-selection
+  #item-selections-list
+    - @vectors.each do |vector|
+      - if vector.selections.present?
+        = f.input :selections_attributes, as: :check_boxes,
+                                          collection: vector.selections,
+                                          label: vector.name,
+                                          required: false,
+                                          item_wrapper_class: 'checkbox-inline'

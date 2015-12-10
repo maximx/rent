@@ -71,8 +71,8 @@ Rails.application.routes.draw do
     end
 
     resources :categories, only: [ :index ]
-    resources :subcategories, only: [ :index, :show ] do
-      resources :vectors, only: [ :create, :destroy ]
+    resources :subcategories, only: [ :index ] do
+      resources :vectors, only: [ :create, :destroy, :index ]
     end
     resources :vectors, only: [ ] do
       resources :selections, only: [ :create, :destroy ]
