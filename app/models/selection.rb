@@ -3,24 +3,25 @@ class Selection < ActiveRecord::Base
   validates_uniqueness_of :tag_id, scope: :vector_id
 
   belongs_to :vector
-  belongs_to :tag, autosave: true
+  belongs_to :tag
   accepts_nested_attributes_for :tag
 
   has_many :items_selections
   has_many :items, through: :items_selections
+
+  before_validation :set_tag_id
 
   def name
     tag.name
   end
 
   private
-    def autosave_associated_records_for_tag
-      if new_tag = Tag.find_by_name(tag.name)
-        self.tag = new_tag
+    def set_tag_id
+      if exist_tag = Tag.find_by_name(tag.name)
+        self.tag_id = exist_tag.id
       else
         tag.save!
-        self.tag = tag
+        self.tag_id = tag.id
       end
-      self.valid?
     end
 end
