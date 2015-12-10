@@ -1,5 +1,12 @@
-.categories-list input.tag-list-input {
-  width: 150px;
-  border: none;
-  margin-left: 10px;
+.categories-list, .subcategories-list {
+  input.tag-list-input {
+    width: 150px;
+    border: none;
+    margin-left: 10px;
+  }
+}
+
+.label.tag-label {
+  margin-right: 5px;
+  padding: 5px 0 5px 10px;
 }

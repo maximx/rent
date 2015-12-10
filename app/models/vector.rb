@@ -6,7 +6,7 @@ class Vector < ActiveRecord::Base
   belongs_to :tag, autosave: true
   accepts_nested_attributes_for :tag
 
-  has_many :selections
+  has_many :selections, dependent: :destroy
   has_many :selections_tags, through: :selections, source: :tag
 
   def name

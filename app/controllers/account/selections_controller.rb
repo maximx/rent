@@ -4,16 +4,11 @@ class Account::SelectionsController < ApplicationController
   load_and_authorize_resource through: :vector
 
   def create
-    if @selection.save
-      notice_param = { vector: @vector.name, tag: @selection.name }
-      redirect_to account_subcategories_path,
-                  notice: t('controller.account/selections.create.success', notice_param)
-    end
+    @selection.save
   end
 
   def destroy
     @selection.destroy
-    redirect_to account_subcategories_path
   end
 
   private

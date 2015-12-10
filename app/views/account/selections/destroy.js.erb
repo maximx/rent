@@ -1,0 +1,3 @@
+<% if request.xhr? and @selection.errors.empty? %>
+  $('.tag-label[data-selection="<%= @selection.id %>"]').remove();
+<% end %>

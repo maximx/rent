@@ -6,6 +6,6 @@ module Account::VectorsHelper
                    method: :delete, class: 'badge', remote: true)
     content_tag :div,
                 raw(text),
-                class: 'label label-default vector-label', data: { vector: vector.id }
+                class: 'label label-default tag-label', data: { vector: vector.id }
   end
 end
