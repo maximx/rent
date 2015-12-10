@@ -20,6 +20,10 @@ class Ability
 
       can [ :read, :create ], Vector
       can [ :update, :destroy ], Vector, user_id: user.id
+
+      can :manage, Selection do |selection|
+        selection.vector.user_id = user.id
+      end
     end
   end
 

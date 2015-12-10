@@ -71,6 +71,9 @@ zh-TW:
     account/vectors:
       create:
         success: '分類%{subcategory}已建立屬性%{tag}。'
+    account/selections:
+      create:
+        success: '屬性%{vector}已建立選項%{tag}。'
     dashboard/customers:
       destroy:
         success: '客戶資料刪除成功。'

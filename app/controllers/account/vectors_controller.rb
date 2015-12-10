@@ -6,7 +6,7 @@ class Account::VectorsController < ApplicationController
   def create
     @vector.user = current_user
     if @vector.save
-      notice_param = { subcategory: @subcategory.name, tag: @vector.tag.name }
+      notice_param = { subcategory: @subcategory.name, tag: @vector.name }
       redirect_to account_categories_path,
                   notice: t('controller.account/vectors.create.success', notice_param)
     end

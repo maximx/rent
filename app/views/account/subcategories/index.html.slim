@@ -9,3 +9,11 @@
           li.list-group-item
             = vector.name
             .help-block
+              - vector.selections.each do |selection|
+                span = selection.name
+                span = link_to raw("&times;"), account_vector_selection_path(vector, selection), method: :delete
+            .help-block
+              = simple_form_for vector.selections.build, url: account_vector_selections_path(vector) do |f|
+                = f.simple_fields_for :tag, Tag.new do |t|
+                  = t.input :name
+                = f.submit

@@ -7,13 +7,14 @@
         li.list-group-item
           = subcategory.name
           .help-block
+            /TODO: vectors 只選出 user
+            - subcategory.vectors.each do |vector|
+              - if can? :update, vector
+                span = vector.name
+                span = link_to raw("&times;"), account_subcategory_vector_path(subcategory, vector), method: :delete
+          .help-block
             = simple_form_for subcategory.vectors.build,
                               url: account_subcategory_vectors_path(subcategory) do |f|
               = f.simple_fields_for :tag, Tag.new do |t|
                 = t.input :name
               = f.submit
-          .help-block
-            - subcategory.vectors.each do |vector|
-              - if can? :update, vector
-                span = vector.tag.name
-                span = link_to raw("&times;"), account_subcategory_vector_path(subcategory, vector), method: :delete
