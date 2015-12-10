@@ -111,12 +111,13 @@ ActiveRecord::Schema.define(version: 20151210164001) do
 
   create_table "items_selections", force: :cascade do |t|
     t.integer  "item_id",      limit: 4
+    t.integer  "vector_id",    limit: 4
     t.integer  "selection_id", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "items_selections", ["item_id", "selection_id"], name: "index_items_selections_on_item_id_and_selection_id", unique: true, using: :btree
+  add_index "items_selections", ["item_id", "vector_id"], name: "index_items_selections_on_item_id_and_vector_id", unique: true, using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id",   limit: 4
