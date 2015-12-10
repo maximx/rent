@@ -1,4 +1,4 @@
 - breadcrumb :new_item
 
 h2.col-xs-offset-4.col-sm-offset-3 新增出租物
-= render partial: 'form', locals: { item: @item }
+= render partial: 'form', locals: { item: @item, categories_grouped_select: @categories_grouped_select }

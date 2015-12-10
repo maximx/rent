@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   before_action :login_required, except: [ :index, :show, :search ]
   before_action :validates_profile, only: [ :new, :create ]
   load_and_authorize_resource except: [ :index, :search ]
+  before_action :load_categories_grouped_select, only: [ :new, :create, :edit, :update ]
   before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
 
@@ -148,6 +149,10 @@ class ItemsController < ApplicationController
 
     def find_item_disabled_dates
       @disabled_dates = @item.booked_dates
+    end
+
+    def load_categories_grouped_select
+      @categories_grouped_select = Category.grouped_select
     end
 
     def build_record
