@@ -6,6 +6,9 @@ class Selection < ActiveRecord::Base
   belongs_to :tag, autosave: true
   accepts_nested_attributes_for :tag
 
+  has_many :items_selections
+  has_many :items, through: :items_selections
+
   def name
     tag.name
   end

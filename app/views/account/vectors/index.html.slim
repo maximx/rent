@@ -3,8 +3,10 @@
   #item-selections-list
     - @vectors.each do |vector|
       - if vector.selections.present?
-        = f.input :selections_attributes, as: :check_boxes,
-                                          collection: vector.selections,
-                                          label: vector.name,
-                                          required: false,
-                                          item_wrapper_class: 'checkbox-inline'
+        = f.input :id, as: :check_boxes,
+                       collection: vector.selections,
+                       label: vector.name,
+                       required: false,
+                       checked: @selections,
+                       item_wrapper_class: 'checkbox-inline',
+                       input_html: { name: 'item[selection_ids][]'}

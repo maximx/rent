@@ -5,7 +5,8 @@
 /put item selection here to avoid form append
 #selections-hide.hide
 
-= simple_form_for item do |f|
+/ data-item 是給 item selections 用的，見 item.coffee
+= simple_form_for item, html: { data: { item: item.id } } do |f|
   = f.input :pictures, as: :file_select, input_html: { multiple: true } if item.new_record?
   = f.input :name
   = f.input :subcategory_id, as: :grouped_select,

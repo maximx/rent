@@ -85,16 +85,21 @@ $ ->
 
 #load item selection on items/form
 @load_item_selections = ()->
-    url = $('#item_subcategory_id').find('option:selected').data('href')
-    $container = $('#selections-container')
-    $hide_container = $('#selections-hide')
+  url = $('#item_subcategory_id').find('option:selected').data('href')
+  # 找出 item 已選擇的 selections
+  item_id = $('form.edit_item').data('item')
+  param = $.param { item_id: item_id}
+  url += '?' + param
 
-    $container.html('')
+  $container = $('#selections-container')
+  $hide_container = $('#selections-hide')
+
+  $container.html('')
+  $hide_container.html('')
+
+  $.get(url, (html)->
+    $hide_container.html(html)
+    html = $hide_container.find('#item-selections-list').html()
+    $container.html(html)
     $hide_container.html('')
-
-    $.get(url, (html)->
-      $hide_container.html(html)
-      html = $hide_container.find('#item-selections-list').html()
-      $container.html(html)
-      $hide_container.html('')
-    )
+  )

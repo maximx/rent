@@ -5,6 +5,12 @@ class Account::VectorsController < ApplicationController
 
   def index
     @vectors = @vectors.where(user: current_user).includes(:tag, [selections: :tag])
+    if params[:item_id]
+      item = Item.includes(:selections).find(params[:item_id])
+      @selections = item.selections_checked
+    else
+      @selections = []
+    end
   end
 
   def create

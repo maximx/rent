@@ -128,7 +128,8 @@ class ItemsController < ApplicationController
       params.require(:item).permit(
         :name, :price, :minimum_period, :address,
         :deposit, :description, :subcategory_id,
-        :deliver_fee, deliver_ids: [ ]
+        :deliver_fee, deliver_ids: [ ],
+        selection_ids: [ ]
       )
     end
 

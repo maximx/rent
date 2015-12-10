@@ -27,6 +27,10 @@ class Item < ActiveRecord::Base
   has_many :item_deliver, dependent: :destroy
   has_many :delivers, through: :item_deliver
 
+  has_many :items_selections, dependent: :destroy
+  has_many :selections, through: :items_selections
+  accepts_nested_attributes_for :selections
+
   enum period: [ :每日, :每月, :每年 ]
 
   geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
@@ -115,6 +119,10 @@ class Item < ActiveRecord::Base
                    .collect { |record| (record.started_at.to_date .. (record.ended_at).to_date).map(&:to_s) }
     dates << Time.now.yesterday.to_date.to_s
     dates.flatten
+  end
+
+  def selections_checked
+    selections.select(:id).map { |s| s.id }
   end
 
   def delivers_include_face?
