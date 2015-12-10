@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210073751) do
+ActiveRecord::Schema.define(version: 20151210164001) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20151210073751) do
     t.datetime "updated_at",           null: false
   end
 
+  add_index "item_collections", ["user_id", "item_id"], name: "index_item_collections_on_user_id_and_item_id", unique: true, using: :btree
+
   create_table "item_delivers", force: :cascade do |t|
     t.integer  "item_id",    limit: 4
     t.integer  "deliver_id", limit: 4
@@ -106,6 +108,15 @@ ActiveRecord::Schema.define(version: 20151210073751) do
     t.float    "deliver_fee",    limit: 24,    default: 0.0
     t.string   "aasm_state",     limit: 255
   end
+
+  create_table "items_selections", force: :cascade do |t|
+    t.integer  "item_id",      limit: 4
+    t.integer  "selection_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "items_selections", ["item_id", "selection_id"], name: "index_items_selections_on_item_id_and_selection_id", unique: true, using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id",   limit: 4
