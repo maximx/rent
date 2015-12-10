@@ -6,11 +6,12 @@ class ItemsSelection < ActiveRecord::Base
   belongs_to :vector
   belongs_to :selection
 
-  before_save :set_vector_id
+  before_validation :set_vector_id
 
   private
     def set_vector_id
-      self.vector_id = self.selection.vector.id
-      self.valid?
+      if self.new_record?
+        self.vector_id = self.selection.vector.id
+      end
     end
 end
