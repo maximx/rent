@@ -1,0 +1,13 @@
+- @categories.each do |category|
+  .panel.panel-default
+    .panel-heading = category.name
+
+    ul.list-group
+      - category.subcategories.each do |subcategory|
+        li.list-group-item
+          = subcategory.name
+          .help-block
+            = simple_form_for subcategory.vector_tags.build,
+                              url: account_subcategory_vectors_path(subcategory) do |f|
+              = f.input :name
+              = f.submit

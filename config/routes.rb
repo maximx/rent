@@ -70,14 +70,10 @@ Rails.application.routes.draw do
       patch :save
     end
 
-    resources :stores, param: :account do
-      resources :items do
-        resources :records
-      end
+    resources :categories, only: [ :index ]
+    resources :subcategories, only: [ :index ] do
+      resources :vectors, only: [ :create, :destroy ]
     end
-
-    resources :customers
-    #resources :records
   end
 
   namespace :dashboard do
