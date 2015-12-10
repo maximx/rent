@@ -1,0 +1,3 @@
+<% if request.xhr? and @vector.errors.empty? %>
+  $('.vector-label[data-vector="<%= @vector.id %>"]').remove();
+<% end %>

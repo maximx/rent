@@ -68,9 +68,6 @@ zh-TW:
         fail: '驗證碼錯誤，請再確認一次。'
       save:
         success: '個人偏好儲存成功。'
-    account/vectors:
-      create:
-        success: '分類%{subcategory}已建立屬性%{tag}。'
     account/selections:
       create:
         success: '屬性%{vector}已建立選項%{tag}。'

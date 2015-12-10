@@ -1,0 +1,7 @@
+<% if request.xhr? and @vector.errors.empty? %>
+  var html = "<%= escape_javascript(render_destroy_vector_link @vector) %>";
+  var $tag_list = $('.help-block.tag-list[data-subcategory="<%= @subcategory.id %>"]');
+
+  $tag_list.append(html);
+  $tag_list.closest('.list-group-item').find('.tag-list-input').val('');
+<% end %>

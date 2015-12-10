@@ -1,20 +1,23 @@
-- @categories.each do |category|
-  .panel.panel-default
-    .panel-heading = category.name
+.categories-list
+  - @categories.each do |category|
+    .panel.panel-default
+      .panel-heading: h4 = category.name
 
-    ul.list-group
-      - category.subcategories.each do |subcategory|
-        li.list-group-item
-          = subcategory.name
-          .help-block
-            /TODO: vectors 只選出 user
-            - subcategory.vectors.each do |vector|
-              - if can? :update, vector
-                span = vector.name
-                span = link_to raw("&times;"), account_subcategory_vector_path(subcategory, vector), method: :delete
-          .help-block
+      ul.list-group
+        - category.subcategories.each do |subcategory|
+          li.list-group-item
+            strong = subcategory.name
+            .help-block.tag-list data-subcategory="#{subcategory.id}"
+              /TODO: vectors 只選出 user
+              - subcategory.vectors.each do |vector|
+                - if can? :update, vector
+                  = render_destroy_vector_link vector
             = simple_form_for subcategory.vectors.build,
-                              url: account_subcategory_vectors_path(subcategory) do |f|
+                              url: account_subcategory_vectors_path(subcategory),
+                              wrapper: :default, remote: true do |f|
               = f.simple_fields_for :tag, Tag.new do |t|
-                = t.input :name
-              = f.submit
+                = render_icon('tags', class: 'text-muted')
+                = t.input :name, label: false,
+                                 wrapper: false,
+                                 input_html: { placeholder: t('helpers.account/categories.add_vector'),
+                                               class: 'tag-list-input' }

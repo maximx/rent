@@ -107,12 +107,7 @@ module ApplicationHelper
     params[:action] == 'edit'
   end
 
-  def is_remote?(type)
-    type.to_sym == :remote
-  end
-
   private
-
     def alert_notice_tag(type, msg)
       content_tag(:div, notice_content_with_close(msg),
         class: "alert alert-#{type} alert-dismissible",
