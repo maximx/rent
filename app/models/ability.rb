@@ -8,9 +8,18 @@ class Ability
     resources_users user
     resources_items user
     resources_records user
-    resources_customers user if user.has_role? :company
     resources_reviews user
     resources_attachments user
+
+    if user.has_role? :company
+      can [ :read, :create ], Customer
+      can :update, Customer, user: user
+
+      can :read, Category
+      can :read, Subcategory
+      can [ :read, :create ], Vector
+      can [ :update, :destroy ], Vector, user_id: user.id
+    end
   end
 
   protected
@@ -65,11 +74,6 @@ class Ability
         record.viewable_by?(user) and record.returned? and
           record.judgers.include?(user) and record.reviews.size == 1
       end
-    end
-
-    def resources_customers(user)
-      can [ :read, :create ], Customer
-      can :update, Customer, user: user
     end
 
     def resources_reviews(user)

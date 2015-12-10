@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210011739) do
+ActiveRecord::Schema.define(version: 20151210063316) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -286,6 +286,16 @@ ActiveRecord::Schema.define(version: 20151210011739) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "vectors", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "subcategory_id", limit: 4
+    t.integer  "tag_id",         limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "vectors", ["user_id", "subcategory_id", "tag_id"], name: "index_vectors_on_user_id_and_subcategory_id_and_tag_id", unique: true, using: :btree
 
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
