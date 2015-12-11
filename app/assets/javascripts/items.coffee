@@ -8,8 +8,8 @@ $ ->
   init_tinymce('#item_description')
   wookmark_item()
 
-  load_item_selections($('#item_subcategory_id'), false)
-  load_item_selections($('select.filter-subcategory'), true)
+  subcategory_selects = '#item_subcategory_id, select.filter-subcategory'
+  load_item_selections($(subcategory_selects))
 
   $('#use_profile_address').on 'change', () ->
     if $(this).prop('checked')
@@ -79,11 +79,11 @@ $ ->
       $sort_selected.data('sort', sort).text($(this).text())
   )
 
-  $('#item_subcategory_id').on('change', ()->
-    load_item_selections($(this), false)
-  )
-  $('select.filter-subcategory').on('change', ()->
-    load_item_selections($(this), true)
+  $(subcategory_selects).on('change', ()->
+    if $(this).data('controller') == 'items' and $(this).data('action') == 'search'
+      submitAdvancedSearchForm()
+    else
+      load_item_selections($(this))
   )
 
   $(document).on('change', '#advanced-search-form .item_selection :checkbox', ()->
@@ -154,34 +154,44 @@ $ ->
 
 
 #load item selection on items/form
-@load_item_selections = (target, is_search = true)->
+@load_item_selections = (target)->
   $target = $(target)
   if $target.size() > 0
     param = $.param { source: 'users' }
     url = $target.find('option:selected').data('href')
-    is_item_form = ($target.attr('id') == 'item_subcategory_id')
 
-    if url
+    # 只有 items/search  與 users/items
+    # 有屬性 data controller data action
+    controller = $target.data('controller')
+    action = $target.data('action')
+
+    #非 items/search 都要有使用者自定選項
+    if url and !(controller == 'items' and action == 'search')
       $container = $('#selections-container')
       $hide_container = $('#selections-hide')
       $container.html('')
       $hide_container.html('')
 
-      if is_item_form
-        # 找出 item 已選擇的 selections
-        item_id = $('form.edit_item').data('item')
-        param = $.param({item_id: item_id}) if item_id
-      else
+      #為 search 類的要傳出所有參數
+      if controller and action
         #複製 hidden input 到 navbar 的 search form
         $('input.filter-subcategory').val( $target.val() )
         param = location.search + '&' + param unless location.search == ''
+      else
+        # items/new items/edit 沒 data controller data action
+        # 找出 item 已選擇的 selections
+        item_id = $('form.edit_item').data('item')
+        param = $.param({item_id: item_id}) if item_id
 
       $.get(url, param, (html)->
         $hide_container.html(html)
         html = $hide_container.find('#selections-list-container').html()
         $container.html(html)
         $hide_container.html('')
-        submitAdvancedSearchForm() if is_search
+
+        # items/new items/edit 不用submit form
+        if controller and action
+          submitAdvancedSearchForm()
       )
 
 @wookmark_item = ()->
