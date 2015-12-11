@@ -24,12 +24,13 @@ section
   = render_alert(alert)
 
   .user-container.container
-    .page-header.clearfix
-      h1.pull-left 關於#{user.profile.logo_name}
-      .pull-right
-        br/
-        = render_follow_link user
-        = render_unfollow_link user
+    - if defined? page_name
+      .page-header.clearfix
+        h1.pull-left = page_name
+        .pull-right
+          br/
+          = render_follow_link user
+          = render_unfollow_link user
     .row
       = yield
 

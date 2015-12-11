@@ -1,3 +1,3 @@
-= render layout: 'users/header', locals: { user: @user } do
+= render layout: 'users/header', locals: { user: @user, page_name: t('controller.users.action.reviews') } do
   = render partial: 'users/reviews', locals: { user: @user, grouped_reviews_count: @grouped_reviews_count,
                                                lender_reviews: @lender_reviews, borrower_reviews: @borrower_reviews }

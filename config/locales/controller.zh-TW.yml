@@ -24,6 +24,10 @@ zh-TW:
       action:
         follow: '追蹤'
         unfollow: '取消追蹤'
+        reviews: '評價'
+        show: '關於%{name}'
+        edit: '編輯%{name}'
+        items: '出租物'
     items:
       action:
         open: '上架'

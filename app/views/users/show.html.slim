@@ -1,4 +1,5 @@
-= render layout: 'users/header', locals: { user: @user, maps: @maps } do
+- page_name = t('controller.users.action.show', name: @user.profile.logo_name)
+= render layout: 'users/header', locals: { user: @user, maps: @maps, page_name: page_name } do
   = render partial: 'users/info', locals: { user: @user, profile: @profile }
   = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
 

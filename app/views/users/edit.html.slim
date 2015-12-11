@@ -1,4 +1,5 @@
-= render layout: 'users/header', locals: { user: @user, maps: @maps } do
+- page_name = t('controller.users.action.edit', name: @user.profile.logo_name)
+= render layout: 'users/header', locals: { user: @user, maps: @maps, page_name: page_name } do
   .col-md-8
     = simple_form_for @profile, url: avatar_user_path(@user),
                                 remote: true, html: { method: :patch, class: 'form-horizontal ajax_image' } do |f|
