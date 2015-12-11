@@ -107,10 +107,15 @@ class ItemsController < ApplicationController
                  .price_range(params[:price_min], params[:price_max])
                  .search_by(params[:query])
                  .city_at(params[:city])
-    @items = @items.where(user_id: params[:user_id]) if params.has_key?(:user_id)
+    @items = @items.where(user_id: params[:user_id]) if params[:user_id].present?
     sort_and_paginate_items
     find_users_reviews_count
-    render :index
+
+    if request.xhr?
+      render partial: 'items/index', locals: { items: @items }
+    else
+      render :index
+    end
   end
 
   def calendar

@@ -1,5 +1,4 @@
-#item-container = render partial: "items/#{render_item_view}", locals: { items: items }
-
-= render partial: 'common/pagination', locals: { objects: items }
-
-= render_default_content(items, '沒東西...')
+#item-container
+  = render partial: "items/#{render_item_view}", locals: { items: items }
+  = render partial: 'common/pagination', locals: { objects: items }
+  = render_default_content(items, '沒東西...')

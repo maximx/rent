@@ -3,9 +3,11 @@ $ ->
   #ref:http://stackoverflow.com/questions/17029399/clicking-back-in-the-browser-disables-my-javascript-code-if-im-using-turbolin
   $(document).on('page:restore', () ->
     init_tinymce('#item_description')
+    wookmark_item()
   )
   init_tinymce('#item_description')
   load_item_selections()
+  wookmark_item()
 
   $('#use_profile_address').on 'change', () ->
     if $(this).prop('checked')
@@ -31,10 +33,6 @@ $ ->
         .attr('data-original-title', data.title)
         .removeClass('btn-default btn-danger').addClass(data.class)
   )
-
-  $('.item-grid').closest('#item-container').wookmark
-    autoResize: true
-    offset: 15
 
   #show
   $('#rent[data-spy="affix"]').affix
@@ -65,27 +63,45 @@ $ ->
   range = $price_range.slider('getValue')
 
   min = range[0]
-  $('#price_min').val(min)
+  $(':input.price_min').val(min)
   $('span.price_min').text(min)
 
   max = range[1]
-  $('#price_max').val(max)
+  $(':input.price_max').val(max)
   $('span.price_max').text(max)
-
-  if action == 'slideStop'
-    $('#price_min').remove() if min == $price_range.data('slider-min')
-    $('#price_max').remove() if max == $price_range.data('slider-max')
 
 
 @removeInputName = () ->
-  $('#advanced-search-form input').not('.price').each () ->
-    $('#price_range').removeAttr('name')
+  $hidden_inputs = $('#search-hidden-inputs-container :input')
+
+  $price_range = $('#price_range')
+  range = $price_range.slider('getValue')
+  $hidden_inputs.filter('.price_min').remove() if range[0] == $price_range.data('slider-min')
+  $hidden_inputs.filter('.price_max').remove() if range[1] == $price_range.data('slider-max')
+
+  $hidden_inputs.not('.price').each () ->
     $(this).removeAttr('name') if $(this).val() == ''
+
+
+@cloneFilterInputs = () ->
+  $clone_inputs = $('#advanced-search-form :input.clone').clone()
+  $append_target = $('#search-hidden-inputs-container')
+  $append_target.html($clone_inputs)
+  $append_target.find(':input').removeAttr('id').attr('type', 'hidden')
+
 
 @submitAdvancedSearchForm = () ->
   setPriceRange('slideStop')
+  cloneFilterInputs()
   removeInputName()
-  $('#advanced-search-form').submit()
+  params = $('#search-form').serialize()
+  url = $('#search-form').attr('action')
+  $.get(url, params, (html)->
+    $('#item-container').remove()
+    $('#advanced-search-form').after(html)
+    wookmark_item()
+  )
+
 
 #load item selection on items/form
 @load_item_selections = ()->
@@ -108,3 +124,8 @@ $ ->
       $container.html(html)
       $hide_container.html('')
     )
+
+@wookmark_item = ()->
+  $('.item-grid').closest('#item-container').wookmark
+    autoResize: true
+    offset: 15

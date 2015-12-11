@@ -1,10 +1,6 @@
-= form_tag search_items_path, method: :get, id: 'advanced-search-form', class: 'form-horizontal' do
-  = hidden_field_tag :price_min, render_price_min, class: 'price'
-  = hidden_field_tag :price_max, render_price_max, class: 'price'
-  = hidden_field_tag :city, params[:city], id: nil
-  = hidden_field_tag :query, params[:query], id: nil
-  = hidden_field_tag :view, params[:view], id: nil
-  = hidden_field_tag :user_id, params[:user_id]
+form#advanced-search-form.form-horizontal
+  = hidden_field_tag :price_min, render_price_min, class: 'price_min price clone', id: nil
+  = hidden_field_tag :price_max, render_price_max, class: 'price_max price clone', id: nil
 
   .row
     .col-sm-12
@@ -15,12 +11,12 @@
           = text_field_tag :started_at,
                            params[:started_at],
                            placeholder: t('helpers.items.search.started_at'),
-                           class: 'form-control form_date'
+                           class: 'form-control form_date clone'
         .col-sm-3
           = text_field_tag :ended_at,
                            params[:ended_at],
-                           placeholder: t('helpers.items.search.started_at'),
-                           class: 'form-control form_date'
+                           placeholder: t('helpers.items.search.ended_at'),
+                           class: 'form-control form_date clone'
 
     .col-sm-12
       .form-group

@@ -1,4 +1,6 @@
 = form_tag search_items_path, method: :get, id: 'search-form', class: 'navbar-form' do
+  = hidden_field_tag :user_id, params[:user_id]
+
   .form-group
     .input-group
       span.input-group-btn
@@ -15,3 +17,6 @@
       span.input-group-btn
         button type="submit" class="btn btn-default#{render_root_input_lg}"
           = render_icon('search')
+
+  /view, sort, price range, rent date
+  #search-hidden-inputs-container.hide
