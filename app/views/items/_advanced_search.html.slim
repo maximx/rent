@@ -1,11 +1,24 @@
+/put item selection here to avoid form append
+#selections-hide.hide
+
 form#advanced-search-form.form-horizontal
   = hidden_field_tag :view, params[:view], class: 'view-type clone', id: nil
   = hidden_field_tag :sort, params[:sort], class: 'filter-sort clone', id: nil
+  = hidden_field_tag :subcategory_id, params[:subcategory_id], class: 'filter-subcategory clone', id: nil
   = hidden_field_tag :price_min, render_price_min, class: 'price_min price clone', id: nil
   = hidden_field_tag :price_max, render_price_max, class: 'price_max price clone', id: nil
 
   .row
     .col-sm-12
+      .form-group
+        .col-sm-offset-3.col-sm-9
+          = select_tag '',
+                       grouped_options_for_select(Category.grouped_select, selected: params[:subcategory_id]),
+                       class: 'form-control filter-subcategory',
+                       include_blank: t('helpers.items.search.subcategory_blank')
+      /from #selections-hide
+      #selections-container
+
       .form-group
         .col-sm-offset-1.col-sm-2.control-label
           = label_tag 'rent_dates', t('helpers.items.search.rent_date')

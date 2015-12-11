@@ -4,7 +4,7 @@
       span.input-group-btn
         = select_tag :city,
                      options_for_select(City.options_collection, params[:city]),
-                     include_blank: t('helpers.items.search.city_select'),
+                     include_blank: t('helpers.items.search.city_blank'),
                      class: "form-control#{render_root_input_lg}"
 
       = text_field_tag :query,

@@ -14,7 +14,8 @@ zh-TW:
       confirmed_attribute: '已驗證'
     items:
       search:
-        city_select: '選擇地點'
+        subcategory_blank: '選擇分類'
+        city_blank: '選擇地點'
         keyword: '要找什麼物品呢？'
         rent_date: '租借日期'
         started_at: '起租日期'

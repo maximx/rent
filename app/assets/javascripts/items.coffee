@@ -6,8 +6,10 @@ $ ->
     wookmark_item()
   )
   init_tinymce('#item_description')
-  load_item_selections()
   wookmark_item()
+
+  subcategory_selects = '#item_subcategory_id, select.filter-subcategory'
+  load_item_selections($(subcategory_selects))
 
   $('#use_profile_address').on 'change', () ->
     if $(this).prop('checked')
@@ -16,11 +18,12 @@ $ ->
   $('#item_deliver_ids_2').on 'change', () ->
     $('#item_address').prop('required', true) if $(this).prop('checked')
 
-  $('#item_subcategory_id').on('change', ()->
-    load_item_selections()
+  $(subcategory_selects).on('change', ()->
+    load_item_selections($(this))
+    submitAdvancedSearchForm()
   )
 
-  $(document).on('change', '.item_selection :input', ()->
+  $(document).on('change', '.edit_item .item_selection :checkbox, .new_item .item_selection :checkbox', ()->
     $(this).closest('.form-group').find(':input').not(this).prop('checked', false)
   )
 
@@ -43,13 +46,13 @@ $ ->
   )
 
   $('.form_date').on('blur', () ->
-    submitAdvancedSearchForm() if checkFormDateInput()
+    submitAdvancedSearchForm()
   )
 
   $('#price_range').on('slide', () ->
     setPriceRange()
   ).on('slideStop', () ->
-    submitAdvancedSearchForm() if checkFormDateInput()
+    submitAdvancedSearchForm()
   )
 
   $('.view-type[role="button"]').on('click', (e)->
@@ -60,7 +63,7 @@ $ ->
 
     unless original_view == view
       $view_input.val(view)
-      submitAdvancedSearchForm() if checkFormDateInput()
+      submitAdvancedSearchForm()
 
       $('.view-type[role="button"]').not(this).removeClass('active')
       $(this).addClass('active')
@@ -76,7 +79,7 @@ $ ->
 
     unless original_sort == sort
       $sort_input.val(sort)
-      submitAdvancedSearchForm() if checkFormDateInput()
+      submitAdvancedSearchForm()
 
       $sort_selected.data('sort', sort).text($(this).text())
   )
@@ -121,46 +124,55 @@ $ ->
 
 
 @submitAdvancedSearchForm = () ->
-  setPriceRange('slideStop')
-  cloneFilterInputs()
-  removeInputName()
+  if checkFormDateInput()
+    setPriceRange('slideStop')
+    cloneFilterInputs()
+    removeInputName()
 
-  url = $('#search-form').attr('action')
-  params = $('#search-form').serialize()
+    url = $('#search-form').attr('action')
+    params = $('#search-form').serialize()
 
-  $.get(url, params, (html)->
-    $('#item-container').remove()
-    $('#advanced-search-form').after(html)
-    wookmark_item()
-  )
+    $.get(url, params, (html)->
+      $('#item-container').remove()
+      $('#advanced-search-form').after(html)
+      wookmark_item()
+    )
 
-  if history.pushState
-    url +=  '?' + params
-    state = { url: url }
-    window.history.pushState(state, $('title').text(), url)
+    if history.pushState
+      url +=  '?' + params
+      state = { url: url }
+      window.history.pushState(state, $('title').text(), url)
 
 
 #load item selection on items/form
-@load_item_selections = ()->
-  if $('#item_subcategory_id').size() > 0
-    url = $('#item_subcategory_id').find('option:selected').data('href')
-    # 找出 item 已選擇的 selections
-    item_id = $('form.edit_item').data('item')
-    param = $.param { item_id: item_id}
-    url += '?' + param
+@load_item_selections = (target)->
+  $target = $(target)
+  if $target.size() > 0
+    param = {}
+    url = $target.find('option:selected').data('href')
+    is_item_form = ($target.attr('id') == 'item_subcategory_id')
 
-    $container = $('#selections-container')
-    $hide_container = $('#selections-hide')
+    if url
+      if is_item_form
+        # 找出 item 已選擇的 selections
+        item_id = $('form.edit_item').data('item')
+        param = $.param { item_id: item_id} if item_id
+      else
+        #複製 hidden input 到 navbar 的 search form
+        param = $.param { input_name: 'item_selections[]' }
+        $('input.filter-subcategory').val( $target.val() )
 
-    $container.html('')
-    $hide_container.html('')
-
-    $.get(url, (html)->
-      $hide_container.html(html)
-      html = $hide_container.find('#item-selections-list').html()
-      $container.html(html)
+      $container = $('#selections-container')
+      $hide_container = $('#selections-hide')
+      $container.html('')
       $hide_container.html('')
-    )
+
+      $.get(url, param, (html)->
+        $hide_container.html(html)
+        html = $hide_container.find('#selections-list-container').html()
+        $container.html(html)
+        $hide_container.html('')
+      )
 
 @wookmark_item = ()->
   $('.item-grid').closest('#item-container').wookmark
