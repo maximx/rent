@@ -58,12 +58,27 @@ $ ->
     original_view = $view_input.val()
     view = $(this).data('view')
 
-    if original_view != view
+    unless original_view == view
       $view_input.val(view)
       submitAdvancedSearchForm() if checkFormDateInput()
 
       $('.view-type[role="button"]').not(this).removeClass('active')
       $(this).addClass('active')
+  )
+
+  $('.filter-sort[role="button"]').on('click', (e)->
+    e.preventDefault()
+
+    $sort_input = $('#advanced-search-form input.filter-sort')
+    $sort_selected = $('.sort-selected')
+    original_sort = $sort_selected.data('sort')
+    sort = $(this).data('sort')
+
+    unless original_sort == sort
+      $sort_input.val(sort)
+      submitAdvancedSearchForm() if checkFormDateInput()
+
+      $sort_selected.data('sort', sort).text($(this).text())
   )
 
 

@@ -8,4 +8,4 @@
         span.caret
       ul.dropdown-menu.dropdown-menu-right
         - items_sort_order_list.each do |key, data_options|
-          li = link_to key, '#', data: data_options, class: 'filter-sort'
+          li = link_to key, '#', data: data_options, class: 'filter-sort', role: 'button'
