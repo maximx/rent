@@ -8,8 +8,8 @@ $ ->
   init_tinymce('#item_description')
   wookmark_item()
 
-  subcategory_selects = '#item_subcategory_id, select.filter-subcategory'
-  load_item_selections($(subcategory_selects))
+  load_item_selections($('#item_subcategory_id'), false)
+  load_item_selections($('select.filter-subcategory'), true)
 
   $('#use_profile_address').on 'change', () ->
     if $(this).prop('checked')
@@ -79,9 +79,11 @@ $ ->
       $sort_selected.data('sort', sort).text($(this).text())
   )
 
-  $(subcategory_selects).on('change', ()->
-    load_item_selections($(this))
-    submitAdvancedSearchForm()
+  $('#item_subcategory_id').on('change', ()->
+    load_item_selections($(this), false)
+  )
+  $('select.filter-subcategory').on('change', ()->
+    load_item_selections($(this), true)
   )
 
   $(document).on('change', '#advanced-search-form .item_selection :checkbox', ()->
@@ -152,33 +154,34 @@ $ ->
 
 
 #load item selection on items/form
-@load_item_selections = (target)->
+@load_item_selections = (target, is_search = true)->
   $target = $(target)
   if $target.size() > 0
-    param = {}
+    param = $.param { source: 'users' }
     url = $target.find('option:selected').data('href')
     is_item_form = ($target.attr('id') == 'item_subcategory_id')
 
     if url
-      if is_item_form
-        # 找出 item 已選擇的 selections
-        item_id = $('form.edit_item').data('item')
-        param = $.param { item_id: item_id} if item_id
-      else
-        #複製 hidden input 到 navbar 的 search form
-        param = $.param { input_name: 'selections[]' }
-        $('input.filter-subcategory').val( $target.val() )
-
       $container = $('#selections-container')
       $hide_container = $('#selections-hide')
       $container.html('')
       $hide_container.html('')
+
+      if is_item_form
+        # 找出 item 已選擇的 selections
+        item_id = $('form.edit_item').data('item')
+        param = $.param({item_id: item_id}) if item_id
+      else
+        #複製 hidden input 到 navbar 的 search form
+        $('input.filter-subcategory').val( $target.val() )
+        param = location.search + '&' + param unless location.search == ''
 
       $.get(url, param, (html)->
         $hide_container.html(html)
         html = $hide_container.find('#selections-list-container').html()
         $container.html(html)
         $hide_container.html('')
+        submitAdvancedSearchForm() if is_search
       )
 
 @wookmark_item = ()->
