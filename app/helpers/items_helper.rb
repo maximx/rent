@@ -130,10 +130,14 @@ module ItemsHelper
     ['items', 'categories', 'subcategories', 'records'].include?(params[:controller])
   end
 
-  def render_sort_text
+  def render_sort_span
     text = items_sort_order_list.select { |text, options| options[:sort] == params[:sort] }
     #非預設排序，以最新物品表示
-    (text.empty?) ? items_sort_order_list.keys.first : text.keys.last
+    text = (text.empty?) ? items_sort_order_list.keys.first : text.keys.last
+    content_tag(:span,
+                text,
+                class: 'sort-selected',
+                data: items_sort_order_list[text])
   end
 
   #items sort type

@@ -6,7 +6,7 @@ module SortPaginate
 
     def sort_and_paginate_items
       if get_sort_param == 'recent'
-        @items = @items.order('created_at')
+        @items = @items.order('items.created_at')
       else
         @items = @items.order('price')
       end
