@@ -82,9 +82,10 @@ nav.navbar.navbar-sub {
       margin: 0;
       padding-top: 0;
 
-      &.category {
+      &.brand-title {
         padding-left: 15px;
         > ul.nav > li > a {
+          &:hover { color: $gray-light; }
           padding-left: 0;
           padding-right: 0;
         }

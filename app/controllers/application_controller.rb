@@ -32,10 +32,6 @@ class ApplicationController < ActionController::Base
     authenticate_user! unless user_signed_in?
   end
 
-  def find_navbar_categories
-    @categories = Category.includes(:subcategories).all
-  end
-
   def set_maps_marker(object)
     @maps = Gmaps4rails.build_markers(object) do |obj, marker|
       google_url = "http://maps.google.com/maps?q=#{obj.address}"

@@ -9,7 +9,9 @@ header.site-header
           span.icon-bar
 
         h1.navbar-brand = link_to t('rent.site_name'), root_path, id: 'site-logo'
-        .category.navbar-brand = render partial: 'common/category_navbar' if items_related_controller?
+        .brand-title.navbar-brand
+          ul.nav.navbar-nav
+            li = link_to t('rent.site_name'), root_path
 
       #user-navigation.collapse.navbar-collapse
         = render partial: 'common/user_login'

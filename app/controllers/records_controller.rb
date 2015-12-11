@@ -4,7 +4,6 @@ class RecordsController < ApplicationController
   load_and_authorize_resource :record, through: :item, except: [ :index ]
   before_action :validates_borrower_info, only: [ :new, :create ]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
-  before_action :find_navbar_categories, only: [ :index, :show, :new, :create ]
 
   def index
     @records = @item.records.includes(:borrower).rencent.reverse_order.page(params[:page])

@@ -2,8 +2,6 @@ class CategoriesController < ApplicationController
   include UsersReviewsCount
   include SortPaginate
 
-  before_action :find_navbar_categories, only: [ :show ]
-
   def show
     @category = Category.find(params[:id])
     @breadcrumbs_object = @category

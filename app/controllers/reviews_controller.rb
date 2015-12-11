@@ -3,7 +3,6 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource :item
   load_and_authorize_resource :record, through: :item
   load_and_authorize_resource :review, through: :record
-  before_action :find_navbar_categories
 
   def new
   end

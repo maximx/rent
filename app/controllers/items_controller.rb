@@ -6,7 +6,6 @@ class ItemsController < ApplicationController
   before_action :validates_profile, only: [ :new, :create ]
   load_and_authorize_resource except: [ :index, :search ]
   before_action :load_categories_grouped_select, only: [ :new, :create, :edit, :update ]
-  before_action :find_navbar_categories, except: [ :collect, :uncollect, :calendar ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
 
   def index

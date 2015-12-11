@@ -1,9 +1,0 @@
-- @categories.each do |category|
-  .category-list
-    .panel-heading
-      = link_to category.name, category_path(category)
-
-    ul.list-group
-      - category.subcategories.each do |subcategory|
-        li.list-group-item
-          = link_to subcategory.name, subcategory_path(subcategory)
