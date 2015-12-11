@@ -18,11 +18,6 @@ $ ->
   $('#item_deliver_ids_2').on 'change', () ->
     $('#item_address').prop('required', true) if $(this).prop('checked')
 
-  $(subcategory_selects).on('change', ()->
-    load_item_selections($(this))
-    submitAdvancedSearchForm()
-  )
-
   $(document).on('change', '.edit_item .item_selection :checkbox, .new_item .item_selection :checkbox', ()->
     $(this).closest('.form-group').find(':input').not(this).prop('checked', false)
   )
@@ -84,6 +79,15 @@ $ ->
       $sort_selected.data('sort', sort).text($(this).text())
   )
 
+  $(subcategory_selects).on('change', ()->
+    load_item_selections($(this))
+    submitAdvancedSearchForm()
+  )
+
+  $(document).on('change', '#advanced-search-form .item_selection :checkbox', ()->
+    submitAdvancedSearchForm()
+  )
+
 
 @checkFormDateInput = () ->
   started_at = $('#started_at').val()
@@ -117,10 +121,13 @@ $ ->
 
 
 @cloneFilterInputs = () ->
-  $clone_inputs = $('#advanced-search-form :input.clone').clone()
+  $clone_inputs = $('#advanced-search-form :input.clone').not(':checkbox').clone()
   $append_target = $('#search-hidden-inputs-container')
   $append_target.html($clone_inputs)
   $append_target.find(':input').removeAttr('id').attr('type', 'hidden')
+
+  $checkbox_inputs = $('#advanced-search-form :checked.clone').clone()
+  $append_target.append($checkbox_inputs)
 
 
 @submitAdvancedSearchForm = () ->
@@ -159,7 +166,7 @@ $ ->
         param = $.param { item_id: item_id} if item_id
       else
         #複製 hidden input 到 navbar 的 search form
-        param = $.param { input_name: 'item_selections[]' }
+        param = $.param { input_name: 'selections[]' }
         $('input.filter-subcategory').val( $target.val() )
 
       $container = $('#selections-container')
