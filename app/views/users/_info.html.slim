@@ -1,5 +1,5 @@
 div class="#{profile.facebook.present? ? 'col-md-4' : 'col-md-8'}"
-  ul
+  ul.user-info
     li
       = render_icon_with_text 'envelope', label_tag("#{t('simple_form.labels.user.email')}：")
       span = user.email
