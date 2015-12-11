@@ -13,6 +13,13 @@ zh-TW:
     users:
       confirmed_attribute: '已驗證'
     items:
+      search:
+        city_select: '選擇地點'
+        keyword: '要找什麼物品呢？'
+        rent_date: '租借日期'
+        started_at: '起租日期'
+        ended_at: '迄租日期'
+        price_range: '價格範圍'
       see_calendar: '查看日曆'
       destroy_confirm: '確定要刪除%{name}嗎？'
       open_confirm: '確定要上架%{name}嗎？'

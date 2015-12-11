@@ -9,17 +9,26 @@
   .row
     .col-sm-12
       .form-group
-        .col-sm-offset-1.col-sm-2.control-label = label_tag 'rent_dates', '租借日期'
+        .col-sm-offset-1.col-sm-2.control-label
+          = label_tag 'rent_dates', t('helpers.items.search.rent_date')
         .col-sm-3
-          = text_field_tag :started_at, params[:started_at], class: 'form-control form_date', placeholder: '起租日期'
+          = text_field_tag :started_at,
+                           params[:started_at],
+                           placeholder: t('helpers.items.search.started_at'),
+                           class: 'form-control form_date'
         .col-sm-3
-          = text_field_tag :ended_at, params[:ended_at], class: 'form-control form_date', placeholder: '迄租日期'
+          = text_field_tag :ended_at,
+                           params[:ended_at],
+                           placeholder: t('helpers.items.search.started_at'),
+                           class: 'form-control form_date'
 
     .col-sm-12
       .form-group
-        .col-sm-offset-1.col-sm-2.control-label = label_tag 'price_range', '價格範圍'
+        .col-sm-offset-1.col-sm-2.control-label
+          = label_tag 'price_range', t('helpers.items.search.price_range')
         .col-sm-6
-          = text_field_tag :price_range, nil, class: 'slider',
+          = text_field_tag :price_range, nil,
+                           class: 'slider',
                            data: { 'slider-orientation': 'horizontal', 'slider-selection': 'after', 'slider-step': 5,
                                    'slider-min': Item::PRICE_MIN, 'slider-max': Item::PRICE_MAX, 'slider-id': 'price_slider',
                                    'slider-value': [ render_price_min, render_price_max ] }
