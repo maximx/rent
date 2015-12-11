@@ -24,16 +24,6 @@ $ ->
     $(this).closest('.form-group').find(':input').not(this).prop('checked', false)
   )
 
-
-  # index
-  $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
-    if data.status == 'ok'
-      $(this).attr('href', data.href)
-        .data('method', data.method)
-        .attr('data-original-title', data.title)
-        .removeClass('btn-default btn-danger').addClass(data.class)
-  )
-
   #show
   $('#rent[data-spy="affix"]').affix
     offset:
@@ -41,6 +31,16 @@ $ ->
       bottom: () ->
         if $('#map').size() > 0
           $(document).height() - $('#map').offset().top + 15
+
+
+  # action index, search
+  $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
+    if data.status == 'ok'
+      $(this).attr('href', data.href)
+        .data('method', data.method)
+        .attr('data-original-title', data.title)
+        .removeClass('btn-default btn-danger').addClass(data.class)
+  )
 
   $('.form_date').on('blur', () ->
     submitAdvancedSearchForm() if checkFormDateInput()
@@ -51,6 +51,21 @@ $ ->
   ).on('slideStop', () ->
     submitAdvancedSearchForm() if checkFormDateInput()
   )
+
+  $('.view-type[role="button"]').on('click', (e)->
+    e.preventDefault()
+    $view_input = $('input.view-type')
+    original_view = $view_input.val()
+    view = $(this).data('view')
+
+    if original_view != view
+      $view_input.val(view)
+      submitAdvancedSearchForm() if checkFormDateInput()
+
+      $('.view-type[role="button"]').not(this).removeClass('active')
+      $(this).addClass('active')
+  )
+
 
 @checkFormDateInput = () ->
   started_at = $('#started_at').val()

@@ -1,5 +1,4 @@
 - render_item_index_breadcrumbs(@breadcrumbs_object)
 
 = render partial: 'items/advanced_search' if params[:action] == 'search'
-= render partial: 'items/type'
 = render partial: 'items/index', locals: { items: @items }

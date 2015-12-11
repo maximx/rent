@@ -1,4 +1,5 @@
 form#advanced-search-form.form-horizontal
+  = hidden_field_tag :view, params[:view], class: 'view-type clone', id: nil
   = hidden_field_tag :price_min, render_price_min, class: 'price_min price clone', id: nil
   = hidden_field_tag :price_max, render_price_max, class: 'price_max price clone', id: nil
 
@@ -23,8 +24,10 @@ form#advanced-search-form.form-horizontal
         .col-sm-offset-1.col-sm-2.control-label
           = label_tag 'price_range', t('helpers.items.search.price_range')
         .col-sm-6
-          = text_field_tag :price_range, nil,
+          = text_field_tag :price_range,
+                           nil,
                            class: 'slider',
+                           name: nil,
                            data: { 'slider-orientation': 'horizontal', 'slider-selection': 'after', 'slider-step': 5,
                                    'slider-min': Item::PRICE_MIN, 'slider-max': Item::PRICE_MAX, 'slider-id': 'price_slider',
                                    'slider-value': [ render_price_min, render_price_max ] }
@@ -38,3 +41,5 @@ form#advanced-search-form.form-horizontal
           .pull-right
             span $
             span.price_max = render_price_max
+
+    = render partial: 'items/type'
