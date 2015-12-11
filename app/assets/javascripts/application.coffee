@@ -30,6 +30,10 @@
 #= require_tree .
 
 $ ->
+  $(window).on 'popstate', (e)->
+    if state = e.originalEvent.state
+      window.location.href = state.url
+
   # stop bubble javascript
   $('.stop-bubble').click (e)->
     if e.stopPropagation

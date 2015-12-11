@@ -124,13 +124,20 @@ $ ->
   setPriceRange('slideStop')
   cloneFilterInputs()
   removeInputName()
-  params = $('#search-form').serialize()
+
   url = $('#search-form').attr('action')
+  params = $('#search-form').serialize()
+
   $.get(url, params, (html)->
     $('#item-container').remove()
     $('#advanced-search-form').after(html)
     wookmark_item()
   )
+
+  if history.pushState
+    url +=  '?' + params
+    state = { url: url }
+    window.history.pushState(state, $('title').text(), url)
 
 
 #load item selection on items/form
