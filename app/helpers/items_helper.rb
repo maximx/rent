@@ -1,4 +1,13 @@
 module ItemsHelper
+  #users/items 與 items/search 共用
+  def render_items_search_path
+    if users_controller? and params[:account].present?
+      items_user_path(params[:account])
+    else
+      search_items_path
+    end
+  end
+
   def render_collect_item_link(item)
     if can? :collect, item
       link_to render_icon('bookmark'),

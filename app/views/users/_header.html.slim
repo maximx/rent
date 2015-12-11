@@ -16,6 +16,7 @@ header.site-header.user
 
       #user-navigation.collapse.navbar-collapse
         = user_navbar_list user
+        = render partial: 'common/search', locals: { user: user }
 
 section
   = render partial: 'pictures/carousel', locals: { pictures: user.covers }

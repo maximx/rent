@@ -65,10 +65,22 @@ class UsersController < ApplicationController
   end
 
   def items
-    @items = @user.items.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+    @items = @user.items
+                  .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                  .opening
+                  .record_not_overlaps(params[:started_at], params[:ended_at])
+                  .price_range(params[:price_min], params[:price_max])
+                  .search_by(params[:query])
+                  .city_at(params[:city])
     sort_and_paginate_items
     find_users_reviews_count
     meta_pagination_links @items
+
+    if request.xhr?
+      render partial: 'items/index', locals: { items: @items }
+    else
+      render :items
+    end
   end
 
   def follow

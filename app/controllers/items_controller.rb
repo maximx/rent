@@ -107,9 +107,9 @@ class ItemsController < ApplicationController
                  .price_range(params[:price_min], params[:price_max])
                  .search_by(params[:query])
                  .city_at(params[:city])
-    @items = @items.where(user_id: params[:user_id]) if params[:user_id].present?
     sort_and_paginate_items
     find_users_reviews_count
+    meta_pagination_links @items
 
     if request.xhr?
       render partial: 'items/index', locals: { items: @items }
