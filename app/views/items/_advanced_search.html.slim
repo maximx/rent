@@ -1,5 +1,6 @@
 form#advanced-search-form.form-horizontal
   = hidden_field_tag :view, params[:view], class: 'view-type clone', id: nil
+  = hidden_field_tag :sort, params[:sort], class: 'filter-sort clone', id: nil
   = hidden_field_tag :price_min, render_price_min, class: 'price_min price clone', id: nil
   = hidden_field_tag :price_max, render_price_max, class: 'price_max price clone', id: nil
 

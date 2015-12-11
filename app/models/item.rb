@@ -93,6 +93,10 @@ class Item < ActiveRecord::Base
     self.overlaps_types.to_h.values
   end
 
+  def self.sort_list
+    [ 'recent', 'cheap', 'expensive' ]
+  end
+
   def meta_keywords
     I18n.t('rent.keywords') + category.name.split("、") + [subcategory.name] + name.split(" ").join("、").split("、")
   end

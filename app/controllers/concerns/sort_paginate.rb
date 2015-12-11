@@ -1,13 +1,16 @@
 module SortPaginate
   private
-
-    def sort_params
-      ( ['price'].include? params[:sort] ) ? params[:sort] : 'items.created_at'
+    def get_sort_param
+      ( Item.sort_list.include? params[:sort] ) ? params[:sort] : 'recent'
     end
 
     def sort_and_paginate_items
-      @items = @items.order(sort_params)
-      @items = @items.reverse_order unless params[:order] == 'asc'
+      if get_sort_param == 'recent'
+        @items = @items.order('created_at')
+      else
+        @items = @items.order('price')
+      end
+      @items = @items.reverse_order unless get_sort_param == 'cheap'
       @items = @items.page(params[:page])
     end
 end

@@ -2,12 +2,10 @@
   .btn-group.btn-group-sm role="group"
     = render_items_view_links
 
-    - if false
-      .btn-group.btn-group-sm role="group"
-        button.btn.btn-default.dropdown-toggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          = render_sort_text
-          span.caret
-        ul.dropdown-menu.dropdown-menu-right
-          /TODO: 最高評價 li = link_to('最高評價', '')
-          - items_sort_order_list.each do |key, val|
-            li = link_to key, val
+    .btn-group.btn-group-sm role="group"
+      button.btn.btn-default.dropdown-toggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        = render_sort_text
+        span.caret
+      ul.dropdown-menu.dropdown-menu-right
+        - items_sort_order_list.each do |key, data_options|
+          li = link_to key, '#', data: data_options, class: 'filter-sort'

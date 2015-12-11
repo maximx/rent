@@ -20,6 +20,10 @@ zh-TW:
         started_at: '起租日期'
         ended_at: '迄租日期'
         price_range: '價格範圍'
+        sort:
+          recent: '最新物品'
+          expensive: '最高價格'
+          cheap: '最低價格'
       see_calendar: '查看日曆'
       destroy_confirm: '確定要刪除%{name}嗎？'
       open_confirm: '確定要上架%{name}嗎？'
