@@ -81,6 +81,8 @@ $ ->
 
   $(subcategory_selects).on('change', ()->
     if $(this).data('controller') == 'items' and $(this).data('action') == 'search'
+      #複製 hidden input 到 navbar 的 search form
+      $('input.filter-subcategory').val( $(this).val() )
       submitAdvancedSearchForm()
     else
       load_item_selections($(this))

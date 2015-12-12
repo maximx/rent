@@ -56,9 +56,20 @@ class Item < ActiveRecord::Base
   scope :price_greater_than, -> (min) { where('price >= ?', min) if min.present? and min != PRICE_MIN }
   scope :price_less_than, -> (max) { where('price <= ?', max) if max.present? and max != PRICE_MAX }
 
-  scope :has_selections, ->(selections_ids) do
-    if selections_ids.present?
-      joins(:selections).where(items_selections: { selection_id: selections_ids }).uniq
+  scope :has_selections, ->(selection_ids) do
+    if selection_ids.present?
+      items = joins(:items_selections)
+      vector_groups_selections = Selection.where(id: selection_ids).group_by(&:vector)
+
+      intersection = []
+      vector_groups_selections.each_with_index {|(vector, selections), index|
+        if index == 0
+          intersection = items.where(items_selections: { selection_id: selections })
+        else
+          intersection &= items.where(items_selections: { selection_id: selections })
+        end
+      }
+      items.where(id: intersection).uniq
     end
   end
 
