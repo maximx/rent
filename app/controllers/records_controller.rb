@@ -83,7 +83,11 @@ class RecordsController < ApplicationController
     end
 
     def record_state_log_params
-      params.require(:record_state_log).permit(:info, attachments: [])
+      if params.has_key? :record_state_log
+        params.require(:record_state_log).permit(:info, attachments: [])
+      else
+        { }
+      end
     end
 
     def validates_borrower_info
