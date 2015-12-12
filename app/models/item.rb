@@ -18,6 +18,7 @@ class Item < ActiveRecord::Base
 
   has_many :records, -> { order(started_at: :desc) }, class_name: 'Record', foreign_key: 'item_id'
   has_many :borrowers, through: :records, source: :user
+  has_many :reviews, through: :records, source: :reviews
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
   has_many :collectors, through: :collect_relationships, source: :user
@@ -38,18 +39,46 @@ class Item < ActiveRecord::Base
   after_validation :geocode
   before_save :set_category_and_price, :set_city
 
+  scope :search_and_sort, ->(params) do
+    includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+      .opening.record_not_overlaps(params[:started_at], params[:ended_at])
+      .price_range(params[:price_min], params[:price_max])
+      .search_by(params[:query])
+      .city_at(params[:city])
+      .has_selections(params[:selections])
+      .the_sort(params[:sort])
+      .page(params[:page])
+  end
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
   scope :city_at, -> (city_id) { where(city_id: city_id) if city_id.present? }
 
   scope :price_range, -> (min, max) { price_greater_than(min).price_less_than(max) }
-  scope :price_greater_than, -> (min) { where('price >= ?', min) if min.present? && min != PRICE_MIN }
-  scope :price_less_than, -> (max) { where('price <= ?', max) if max.present? && max != PRICE_MAX }
+  scope :price_greater_than, -> (min) { where('price >= ?', min) if min.present? and min != PRICE_MIN }
+  scope :price_less_than, -> (max) { where('price <= ?', max) if max.present? and max != PRICE_MAX }
+
+  scope :has_selections, ->(selections_ids) do
+    if selections_ids.present?
+      joins(:selections).where(items_selections: { selection_id: selections_ids }).uniq
+    end
+  end
 
   scope :record_overlaps, ->(started_at, ended_at) do
     where(id: Record.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
   end
   scope :record_not_overlaps, ->(started_at, ended_at) do
-    where.not(id: record_overlaps(started_at, ended_at))
+    where.not(id: record_overlaps(started_at, ended_at)) if started_at.present? and ended_at.present?
+  end
+
+  scope :the_sort, ->(sort_param) do
+    sort_param = (Item.sort_list.include? sort_param) ? sort_param : 'recent'
+    case sort_param
+    when 'recent'
+      order('items.created_at').reverse_order
+    when 'cheap'
+      order('price')
+    when 'expensive'
+      order('price').reverse_order
+    end
   end
 
   scope :cover_pictures_urls, -> { all.map{ |i| i.cover_picture.image.url } }
@@ -113,10 +142,6 @@ class Item < ActiveRecord::Base
     pictures.map { |p| p.image.url }.uniq
   end
 
-  def reviews
-    Review.where(record_id: records)
-  end
-
   def booked_dates
     dates = records.actived
                    .where('ended_at > ?', Time.now)
@@ -176,9 +201,5 @@ class Item < ActiveRecord::Base
 
   def self.basic_search_str
     "concat(items.name, items.description) like ?"
-  end
-
-  def self.cloudinary_url(public_id)
-    Cloudinary::Utils.cloudinary_url(public_id)
   end
 end

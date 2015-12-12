@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   layout 'user'
 
   include UsersReviewsCount
-  include SortPaginate
 
   before_action :login_required, only: [ :edit, :update, :follow, :unfollow ]
   load_and_authorize_resource id_param: :account, find_by: :account
@@ -65,14 +64,7 @@ class UsersController < ApplicationController
   end
 
   def items
-    @items = @user.items
-                  .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
-                  .opening
-                  .record_not_overlaps(params[:started_at], params[:ended_at])
-                  .price_range(params[:price_min], params[:price_max])
-                  .search_by(params[:query])
-                  .city_at(params[:city])
-    sort_and_paginate_items
+    @items = @user.items.search_and_sort(params)
     find_users_reviews_count
     meta_pagination_links @items
 

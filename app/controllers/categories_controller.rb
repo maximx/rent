@@ -1,19 +1,20 @@
 class CategoriesController < ApplicationController
   include UsersReviewsCount
-  include SortPaginate
 
   def show
     @category = Category.find(params[:id])
     @breadcrumbs_object = @category
-    @items = @category.items.opening.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
-    sort_and_paginate_items
+    @items = @category.items
+                      .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                      .opening
+                      .the_sort(params[:sort])
+                      .page(params[:page])
     find_users_reviews_count
     set_category_meta_tags
     render 'items/index'
   end
 
   private
-
     def set_category_meta_tags
       meta_pagination_links @items
 

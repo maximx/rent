@@ -1,6 +1,5 @@
 class Dashboard::ItemsController < ApplicationController
   include UsersReviewsCount
-  include SortPaginate
 
   before_action :login_required
   load_and_authorize_resource :item, through: :current_user, only: [ :index, :records ]
@@ -25,8 +24,10 @@ class Dashboard::ItemsController < ApplicationController
   end
 
   def wish
-    @items = current_user.collections.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
-    sort_and_paginate_items
+    @items = current_user.collections
+                         .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                         .the_sort(params[:sort])
+                         .page(params[:page])
     find_users_reviews_count
     render 'items/index'
   end

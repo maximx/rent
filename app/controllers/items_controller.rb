@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   include UsersReviewsCount
-  include SortPaginate
 
   before_action :login_required, except: [ :index, :show, :search ]
   before_action :validates_profile, only: [ :new, :create ]
@@ -9,8 +8,10 @@ class ItemsController < ApplicationController
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
 
   def index
-    @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}]).opening
-    sort_and_paginate_items
+    @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                 .opening
+                 .the_sort(params[:sort])
+                 .page(params[:page])
     find_users_reviews_count
     meta_pagination_links @items
   end
@@ -100,13 +101,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
-                 .opening
-                 .record_not_overlaps(params[:started_at], params[:ended_at])
-                 .price_range(params[:price_min], params[:price_max])
-                 .search_by(params[:query])
-                 .city_at(params[:city])
-    sort_and_paginate_items
+    @items = Item.search_and_sort(params)
     find_users_reviews_count
     meta_pagination_links @items
 

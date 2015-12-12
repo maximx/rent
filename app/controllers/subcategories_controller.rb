@@ -1,19 +1,20 @@
 class SubcategoriesController < ApplicationController
   include UsersReviewsCount
-  include SortPaginate
 
   def show
     @subcategory = Subcategory.find(params[:id])
     @breadcrumbs_object = @subcategory
-    @items = @subcategory.items.opening.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
-    sort_and_paginate_items
+    @items = @subcategory.items
+                         .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                         .opening
+                         .the_sort(params[:sort])
+                         .page(params[:page])
     find_users_reviews_count
     set_subcategory_meta_tags
     render 'items/index'
   end
 
   private
-
     def set_subcategory_meta_tags
       meta_pagination_links @items
 
