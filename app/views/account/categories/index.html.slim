@@ -1,7 +1,7 @@
 .categories-list
   - @categories.each do |category|
     .panel.panel-default
-      .panel-heading: h4 = category.name
+      .panel-heading: strong = category.name
 
       ul.list-group
         - category.subcategories.each do |subcategory|

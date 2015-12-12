@@ -1,7 +1,7 @@
 .subcategories-list
   - @subcategories.each do |subcategory|
     .panel.panel-default
-      .panel-heading: h4 = subcategory.name
+      .panel-heading: strong = subcategory.name
 
       ul.list-group
         - subcategory.vectors.each do |vector|

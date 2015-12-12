@@ -9,12 +9,16 @@ module Dashboard::ItemsHelper
     render_link_li class: 'nav navbar-nav' do |li|
       li << [ render_icon_with_text('th-large', t('controller.name.dashboard/items')),
               dashboard_items_path, parent: true ]
-      li << [ render_icon_with_text('record', t('controller.name.dashboard/records')),
-              dashboard_records_path, parent: true ]
+      if can? :create, Vector
+        li << [ render_icon_with_text('paperclip', t('controller.name.account/vectors')),
+                account_categories_path, parent: true ]
+      end
       if can? :read, Customer
         li << [ render_icon_with_text('user', t('controller.name.dashboard/customers')),
                 dashboard_customers_path, parent: true ]
       end
+      li << [ render_icon_with_text('record', t('controller.name.dashboard/records')),
+              dashboard_records_path, parent: true ]
     end
   end
 
@@ -47,6 +51,9 @@ module Dashboard::ItemsHelper
   end
 
   def dashboard_related_controller?
-    params[:controller].start_with?('dashboard') && params[:action] != 'wish'
+    (
+      controller_path.start_with?('dashboard') or
+      ['account/categories', 'account/subcategories'].include?(controller_path)
+    ) and action_name != 'wish'
   end
 end

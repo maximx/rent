@@ -7,6 +7,7 @@ zh-TW:
       dashboard/items: '出租物管理'
       dashboard/records: '承租紀錄'
       dashboard/customers: '客戶管理'
+      account/vectors: '物品分類屬性'
       settings: '設定'
     action:
       create:
