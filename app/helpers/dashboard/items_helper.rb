@@ -10,7 +10,7 @@ module Dashboard::ItemsHelper
       li << [ render_icon_with_text('th-large', t('controller.name.dashboard/items')),
               dashboard_items_path, parent: true ]
       if can? :create, Vector
-        li << [ render_icon_with_text('paperclip', t('controller.name.account/vectors')),
+        li << [ render_icon_with_text('paperclip', t('controller.name.account/categories')),
                 account_categories_path, parent: true ]
       end
       if can? :read, Customer

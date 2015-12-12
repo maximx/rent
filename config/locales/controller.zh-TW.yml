@@ -7,7 +7,7 @@ zh-TW:
       dashboard/items: '出租物管理'
       dashboard/records: '承租紀錄'
       dashboard/customers: '客戶管理'
-      account/vectors: '物品分類屬性'
+      account/categories: '物品分類屬性'
       settings: '設定'
     action:
       create:
@@ -73,6 +73,12 @@ zh-TW:
         fail: '驗證碼錯誤，請再確認一次。'
       save:
         success: '個人偏好儲存成功。'
+    account/categories:
+      action:
+        index: '分類屬性'
+    account/subcategories:
+      action:
+        index: '屬性選項'
     dashboard/customers:
       destroy:
         success: '客戶資料刪除成功。'

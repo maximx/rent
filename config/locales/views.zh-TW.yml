@@ -41,6 +41,8 @@ zh-TW:
         description: '您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：'
     account/categories:
       add_vector: '增加屬性'
+    account/subcategories:
+      add_selection: '增加選項'
     tours:
       previous: '&lsaquo; 前一個'
       next: '後一個 &rsaquo;'

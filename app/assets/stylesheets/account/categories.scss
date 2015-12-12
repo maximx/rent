@@ -1,3 +1,5 @@
+@import "mixins/variables";
+
 .categories-list, .subcategories-list {
   input.tag-list-input {
     width: 150px;
@@ -9,4 +11,7 @@
 .label.tag-label {
   margin-right: 5px;
   padding: 5px 0 5px 10px;
+  .badge {
+    background-color: $brand-warning;
+  }
 }

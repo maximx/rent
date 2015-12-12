@@ -1,23 +1,27 @@
-.subcategories-list
-  - @subcategories.each do |subcategory|
-    .panel.panel-default
-      .panel-heading: strong = subcategory.name
+= render_account_vector_selection_navtabs
+/p = link_to t('helpers.account/categories.add_vector'), account_categories_path, class: 'btn btn-info'
 
-      ul.list-group
-        - subcategory.vectors.each do |vector|
-          /TODO: vectors 只選出 user
-          - if can? :update, vector
-            li.list-group-item
-              strong = vector.name
-              .help-block.tag-list data-vector="#{vector.id}"
-                - vector.selections.each do |selection|
-                  = render_destroy_selection_link selection
-              = simple_form_for vector.selections.build,
-                                url: account_vector_selections_path(vector),
-                                wrapper: :default, remote: true do |f|
-                = f.simple_fields_for :tag, Tag.new do |t|
-                  = render_icon('tags', class: 'text-muted')
-                  = t.input :name, label: false,
-                                   wrapper: false,
-                                   input_html: { placeholder: t('helpers.account/categories.add_vector'),
-                                                 class: 'tag-list-input' }
+.tab-content
+  .subcategories-list
+    - @subcategories.each do |subcategory|
+      .panel.panel-default
+        .panel-heading: strong = subcategory.name
+
+        ul.list-group
+          - subcategory.vectors.each do |vector|
+            /TODO: vectors 只選出 user
+            - if can? :update, vector
+              li.list-group-item
+                strong = vector.name
+                .help-block.tag-list data-vector="#{vector.id}"
+                  - vector.selections.each do |selection|
+                    = render_destroy_selection_link selection
+                = simple_form_for vector.selections.build,
+                                  url: account_vector_selections_path(vector),
+                                  wrapper: :default, remote: true do |f|
+                  = f.simple_fields_for :tag, Tag.new do |t|
+                    = render_icon('tags', class: 'text-muted')
+                    = t.input :name, label: false,
+                                     wrapper: false,
+                                     input_html: { placeholder: t('helpers.account/subcategories.add_selection'),
+                                                   class: 'tag-list-input' }
