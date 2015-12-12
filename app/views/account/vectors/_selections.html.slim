@@ -1,0 +1,14 @@
+= simple_form_for :item do |f|
+  /only get form-group item-selection
+  #selections-list-container
+    - vectors.each do |vector|
+      - if vector.selections.present?
+        /items/search 和 item/create 的 input name 不同
+        = f.input :selection,
+                  as: :check_boxes,
+                  collection: vector.selections,
+                  label: vector.name,
+                  required: false,
+                  checked: selections,
+                  item_wrapper_class: 'checkbox-inline',
+                  input_html: { name: input_name, class: 'clone' }

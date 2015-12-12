@@ -29,7 +29,7 @@ class Ability
 
   protected
     def read_only
-      can [ :read, :reviews, :lender_reviews, :borrower_reviews, :items ], User
+      can [ :read, :reviews, :lender_reviews, :borrower_reviews, :items, :vectors ], User
       can [ :read, :create, :search, :calendar, :records ], Item
       can :index, Record
     end
