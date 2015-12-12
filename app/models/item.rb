@@ -45,12 +45,14 @@ class Item < ActiveRecord::Base
       .price_range(params[:price_min], params[:price_max])
       .search_by(params[:query])
       .city_at(params[:city])
+      .subcategory_is(params[:subcategory_id])
       .has_selections(params[:selections])
       .the_sort(params[:sort])
       .page(params[:page])
   end
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
   scope :city_at, -> (city_id) { where(city_id: city_id) if city_id.present? }
+  scope :subcategory_is, -> (subcategory_id) { where(subcategory_id: subcategory_id) if subcategory_id.present? }
 
   scope :price_range, -> (min, max) { price_greater_than(min).price_less_than(max) }
   scope :price_greater_than, -> (min) { where('price >= ?', min) if min.present? and min != PRICE_MIN }
