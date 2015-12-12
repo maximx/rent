@@ -6,7 +6,7 @@ class Selection < ActiveRecord::Base
   belongs_to :tag
   accepts_nested_attributes_for :tag
 
-  has_many :items_selections
+  has_many :items_selections, dependent: :destroy
   has_many :items, through: :items_selections
 
   before_validation :set_tag_id
