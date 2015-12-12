@@ -1,17 +1,18 @@
 - page_name = t('controller.users.action.show', name: @user.profile.logo_name)
 = render layout: 'users/header', locals: { user: @user, maps: @maps, page_name: page_name } do
-  = render partial: 'users/info', locals: { user: @user, profile: @profile }
-  = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
+  .row
+    = render partial: 'users/info', locals: { user: @user, profile: @profile }
+    = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }
 
-  - if @profile.facebook.present?
-    .col-md-4
-      .fb-page data-href="#{@profile.facebook}" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"
-        .fb-xfbml-parse-ignore
-          blockquote cite="#{@profile.facebook}"
-            = link_to @profile.name, @profile.facebook
+    - if @profile.facebook.present?
+      .col-md-4
+        .fb-page data-href="#{@profile.facebook}" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"
+          .fb-xfbml-parse-ignore
+            blockquote cite="#{@profile.facebook}"
+              = link_to @profile.name, @profile.facebook
 
-  - if @profile.description.present?
-    .col-md-12.description
-        .panel.panel-default
-          .panel-heading: strong 說明
-          .panel-body = raw @profile.description
+    - if @profile.description.present?
+      .col-md-12.description
+          .panel.panel-default
+            .panel-heading: strong 說明
+            .panel-body = raw @profile.description
