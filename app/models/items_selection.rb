@@ -1,5 +1,5 @@
 class ItemsSelection < ActiveRecord::Base
-  validates_presence_of :item_id, :vector_id, :selection_id
+  validates_presence_of :vector_id, :selection_id
   validates_uniqueness_of :vector_id, scope: :item_id
 
   belongs_to :item
@@ -10,8 +10,7 @@ class ItemsSelection < ActiveRecord::Base
 
   private
     def set_vector_id
-      if self.new_record?
-        self.vector_id = self.selection.vector.id
-      end
+      new_selection = Selection.find selection_id
+      self.vector_id = new_selection.vector_id
     end
 end
