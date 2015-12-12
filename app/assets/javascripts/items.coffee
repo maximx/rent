@@ -166,12 +166,14 @@ $ ->
     $hide_container = $('#selections-hide').html('')
 
     if url = $target.find('option:selected').data('href')
+      param = ''
       if item_id = $('form.edit_item').data('item')
         # items/edit 找出 item 已選擇的 selections
         param = $.param {item_id: item_id}
-      else
+      else if location.search != ''
         # search 要傳出所有參數
-        param = location.search + '&' + param unless location.search == ''
+        param = location.search
+        param = param.substr(1) if param.charAt(0) == '?'
 
       $.get(url, param, (html)->
         $hide_container.html(html)

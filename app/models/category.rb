@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
       subcategories = category.subcategories.map do |subcategory|
         href_url = if is_users
                      # 找 user 的自定 tag
-                     url_helpers.vectors_user_path(user_account, subcategory_id: subcategory.id)
+                     url_helpers.user_subcategory_vectors_path(user_account, subcategory)
                    elsif is_items_search
                      ''
                    else

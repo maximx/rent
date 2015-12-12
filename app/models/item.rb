@@ -45,7 +45,7 @@ class Item < ActiveRecord::Base
       .price_range(params[:price_min], params[:price_max])
       .search_by(params[:query])
       .city_at(params[:city])
-      .subcategory_is(params[:subcategory_id])
+      .subcategory_is(params[:subcategory])
       .has_selections(params[:selections])
       .the_sort(params[:sort])
       .page(params[:page])

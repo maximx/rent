@@ -39,10 +39,13 @@ Rails.application.routes.draw do
 
   resources :users, param: :account, only: [ :show, :edit, :update ] do
     member do
-      get :reviews, :lender_reviews, :borrower_reviews, :items, :vectors
+      get :reviews, :lender_reviews, :borrower_reviews, :items
       put :follow
       patch :avatar
       delete :unfollow
+    end
+    resources :subcategories, only: [ ] do
+      resources :vectors, only: [ :index ]
     end
   end
 

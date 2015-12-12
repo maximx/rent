@@ -75,19 +75,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def vectors
-    if request.xhr? and params[:subcategory_id].present?
-      @vectors = Subcategory.find(params[:subcategory_id])
-                            .vectors
-                            .where(user: @user)
-                            .includes(:tag, [selections: :tag])
-      @input_name = 'selections[]'
-      @selections = params[:selections] if params[:selections].present?
-      render partial: 'account/vectors/selections',
-             locals: { vectors: @vectors, selections: @selections, input_name: @input_name }
-    end
-  end
-
   def follow
     current_user.follow! @user
     redirect_to :back
