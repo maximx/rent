@@ -13,10 +13,10 @@ form#advanced-search-form.form-horizontal
       .form-group
         .col-sm-offset-3.col-sm-9
           = select_tag '',
-                       grouped_options_for_select(Category.grouped_select, selected: params[:subcategory_id]),
+                       grouped_options_for_select(Category.grouped_select(controller_name, action_name, params[:account]),
+                                                  selected: params[:subcategory_id]),
                        class: 'form-control filter-subcategory',
-                       include_blank: t('helpers.items.search.subcategory_blank'),
-                       data: { controller: params[:controller], action: params[:action] }
+                       include_blank: t('helpers.items.search.subcategory_blank')
       /from #selections-hide
       #selections-container
 

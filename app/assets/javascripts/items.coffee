@@ -80,12 +80,11 @@ $ ->
   )
 
   $(subcategory_selects).on('change', ()->
-    if $(this).data('controller') == 'items' and $(this).data('action') == 'search'
-      #複製 hidden input 到 navbar 的 search form
-      $('input.filter-subcategory').val( $(this).val() )
+    load_item_selections($(this))
+
+    # 為 search 才submit，只有items/new, edit 有id
+    unless $(this).attr('id') == 'item_subcategory_id'
       submitAdvancedSearchForm()
-    else
-      load_item_selections($(this))
   )
 
   $(document).on('change', '#advanced-search-form .item_selection :checkbox', ()->
@@ -125,14 +124,18 @@ $ ->
 
 
 @cloneFilterInputs = () ->
-  $clone_inputs = $('#advanced-search-form :input.clone').not(':checkbox').clone()
+  $advanced_form = $('#advanced-search-form')
   $append_target = $('#search-hidden-inputs-container')
+
+  subcategory_id = $advanced_form.find('select.filter-subcategory').val()
+  $advanced_form.find('.filter-subcategory.clone').val(subcategory_id)
+
+  $clone_inputs = $advanced_form.find(':input.clone').not(':checkbox').clone()
   $append_target.html($clone_inputs)
   $append_target.find(':input').removeAttr('id').attr('type', 'hidden')
 
-  $checkbox_inputs = $('#advanced-search-form :checked.clone').clone()
+  $checkbox_inputs = $advanced_form.find(':checked.clone').clone()
   $append_target.append($checkbox_inputs)
-
 
 @submitAdvancedSearchForm = () ->
   if checkFormDateInput()
@@ -159,43 +162,22 @@ $ ->
 @load_item_selections = (target)->
   $target = $(target)
   if $target.size() > 0
-    # 只有 items/search  與 users/items
-    # 有屬性 data controller data action
-    controller = $target.data('controller')
-    action = $target.data('action')
-    url = $target.find('option:selected').data('href')
-    item_id = $('form.edit_item').data('item')
-    $container = $('#selections-container')
-    $hide_container = $('#selections-hide')
+    $container = $('#selections-container').html('')
+    $hide_container = $('#selections-hide').html('')
 
-    $container.html('')
-    $hide_container.html('')
-
-    param = $.param { source: 'users' }
-
-    #非 items/search 都要有使用者自定選項
-    if url and !(controller == 'items' and action == 'search')
-      item_id = $('form.edit_item').data('item')
-      # items/new items/edit 沒 data controller data action
-      if controller and action
-        # search 類的要傳出所有參數 複製 hidden input 到 navbar 的 search form
-        $('input.filter-subcategory').val( $target.val() )
-        param = location.search + '&' + param unless location.search == ''
-      else if item_id
+    if url = $target.find('option:selected').data('href')
+      if item_id = $('form.edit_item').data('item')
         # items/edit 找出 item 已選擇的 selections
-        param = $.param({item_id: item_id})
+        param = $.param {item_id: item_id}
       else
-        param = {} #items/new
+        # search 要傳出所有參數
+        param = location.search + '&' + param unless location.search == ''
 
       $.get(url, param, (html)->
         $hide_container.html(html)
         html = $hide_container.find('#selections-list-container').html()
         $container.html(html)
         $hide_container.html('')
-
-        # items/new items/edit 不用submit form
-        if controller and action
-          submitAdvancedSearchForm()
       )
 
 @wookmark_item = ()->
