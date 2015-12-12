@@ -159,31 +159,33 @@ $ ->
 @load_item_selections = (target)->
   $target = $(target)
   if $target.size() > 0
-    param = $.param { source: 'users' }
-    url = $target.find('option:selected').data('href')
-
     # 只有 items/search  與 users/items
     # 有屬性 data controller data action
     controller = $target.data('controller')
     action = $target.data('action')
+    url = $target.find('option:selected').data('href')
+    item_id = $('form.edit_item').data('item')
+    $container = $('#selections-container')
+    $hide_container = $('#selections-hide')
+
+    $container.html('')
+    $hide_container.html('')
+
+    param = $.param { source: 'users' }
 
     #非 items/search 都要有使用者自定選項
     if url and !(controller == 'items' and action == 'search')
-      $container = $('#selections-container')
-      $hide_container = $('#selections-hide')
-      $container.html('')
-      $hide_container.html('')
-
-      #為 search 類的要傳出所有參數
+      item_id = $('form.edit_item').data('item')
+      # items/new items/edit 沒 data controller data action
       if controller and action
-        #複製 hidden input 到 navbar 的 search form
+        # search 類的要傳出所有參數 複製 hidden input 到 navbar 的 search form
         $('input.filter-subcategory').val( $target.val() )
         param = location.search + '&' + param unless location.search == ''
+      else if item_id
+        # items/edit 找出 item 已選擇的 selections
+        param = $.param({item_id: item_id})
       else
-        # items/new items/edit 沒 data controller data action
-        # 找出 item 已選擇的 selections
-        item_id = $('form.edit_item').data('item')
-        param = $.param({item_id: item_id}) if item_id
+        param = {} #items/new
 
       $.get(url, param, (html)->
         $hide_container.html(html)
