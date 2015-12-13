@@ -37,7 +37,9 @@
     }
   }
 
-  .item-list {
+  ul.item-list {
+    padding-left: 0;
+
     > .item-list-cell {
       padding: 10px 0;
       border-top: 1px solid $gray-85;

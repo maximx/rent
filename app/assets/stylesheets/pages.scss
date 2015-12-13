@@ -5,7 +5,11 @@
     background: none;
     border: none;
     .icon-bar { background-color: $body-bg; }
-    .navbar-header > .navbar-brand { padding-top: 5px; }
+    .navbar-header > .navbar-brand {
+      padding-top: 5px;
+
+      &.brand-title > ul.nav > li > a { color: $body-bg; }
+    }
   }
 
   #user-navigation {
