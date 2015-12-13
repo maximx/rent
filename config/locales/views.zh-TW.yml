@@ -44,6 +44,9 @@ zh-TW:
       add_vector: '增加屬性'
     account/subcategories:
       add_selection: '增加選項'
+    account/records:
+      no_records: '沒租過'
+      go_rent: '來去租'
     tours:
       previous: '&lsaquo; 前一個'
       next: '後一個 &rsaquo;'

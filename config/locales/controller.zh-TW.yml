@@ -5,21 +5,21 @@ zh-TW:
       users: '個人頁面'
       dashboard: '管理'
       dashboard/items: '出租物管理'
-      dashboard/records: '承租紀錄'
+      account/records: '承租紀錄'
       account/customers: '客戶管理'
       account/categories: '物品分類屬性'
       settings: '設定'
     action:
-      create:
-        fail: '儲存失敗，請檢查紅字錯誤欄位。'
       new: '新增'
       edit: '修改'
       destroy: '刪除'
       show: '查閱'
       create:
         success: '%{name}新增成功。'
+        fail: '儲存失敗，請檢查紅字錯誤欄位。'
       update:
         success: '%{name}修改成功。'
+      calendar: '行事曆'
     pages:
       action:
         about: '關於我們'
@@ -80,6 +80,10 @@ zh-TW:
     account/subcategories:
       action:
         index: '屬性選項'
+    account/records:
+      action:
+        index: '承租紀錄列表'
+        new: '新增承租紀錄'
     account/customers:
       action:
         index: '客戶列表'

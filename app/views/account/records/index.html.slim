@@ -1,13 +1,13 @@
-= render_dashboard_records_index_calendar
+= render_account_records_index_calendar
 
 .tab-content
   table.table.table-hover
     thead
-      th 承租物
-      th 評價
-      th 租金
-      th 期間
-      th 狀態
+      th = t('simple_form.labels.record.item')
+      th = t('simple_form.labels.record.review')
+      th = t('simple_form.labels.record.price')
+      th = t('simple_form.labels.record.period')
+      th = t('simple_form.labels.record.aasm_state')
       th
     tbody
       - @records.each do |record|
@@ -28,5 +28,5 @@
   = render partial: 'common/pagination', locals: { objects: @records }
 
   = render_default_content(@records) do
-    | 沒租過
-    mark = link_to('來去租', items_path, class: "text-danger")
+    | #{t('helpers.account/records.no_records')}
+    mark = link_to(t('helpers.account/records.go_rent'), search_items_path, class: "text-danger")

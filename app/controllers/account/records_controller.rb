@@ -1,4 +1,4 @@
-class Dashboard::RecordsController < ApplicationController
+class Account::RecordsController < ApplicationController
   before_action :login_required
   load_and_authorize_resource :item, through: :current_user, only: [ :new, :create ]
 
@@ -38,7 +38,7 @@ class Dashboard::RecordsController < ApplicationController
   end
 
   def calendar
-    @event_sources_path = calendar_dashboard_records_path(format: :json)
+    @event_sources_path = calendar_account_records_path(format: :json)
     records_json = current_user.borrow_records
                                .includes(:borrower, :item)
                                .overlaps(params[:start], params[:end])

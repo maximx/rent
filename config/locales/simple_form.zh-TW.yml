@@ -48,6 +48,11 @@ zh-TW:
         ended_at: '迄租日期'
         deliver_id: '運送方式'
         borrower: '承租客戶'
+        item: '承租物'
+        price: '租金'
+        aasm_state: '租金'
+        period: '期間'
+        review: '評價'
       review:
         content: '評語'
       message:

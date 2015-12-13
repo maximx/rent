@@ -6,6 +6,7 @@ zh-TW:
       profile: "個人資料"
       customer: "客戶"
       vector: "屬性"
+      review: '評價'
     attributes:
       record:
         aasm_state:
