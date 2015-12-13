@@ -6,7 +6,7 @@
     .col-md-4
       - if items_controller?
         .hidden-lg.hidden-md.new-record data-spy="affix" data-offset-top="500"
-          = link_to '預約承租', new_item_record_path(item, record), class: 'btn btn-danger btn-lg btn-block'
+          = link_to t('controller.records.action.new'), new_item_record_path(item, record), class: 'btn btn-danger btn-lg btn-block'
 
         #rent.panel.panel-default.hidden-sm.hidden-xs data-spy="affix"
           .panel-heading.clearfix
@@ -43,12 +43,12 @@
         dt 押金
         dd = item.currency_deposit
 
-        dt 描述
-        dd = raw item.description
-
         - item.selections.each do |selection|
           dt = selection.vector.name
           dd = selection.name
+
+        dt 描述
+        dd = raw item.description
 
         dd = render_item_calendar_link(item)
         dd = render partial: 'messages/new', locals: { item: item } if cannot?(:update, item)
