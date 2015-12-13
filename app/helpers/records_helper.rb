@@ -140,6 +140,6 @@ module RecordsHelper
   end
 
   def records_controller?
-    params[:controller] == 'records'
+    controller_path == 'records'
   end
 end

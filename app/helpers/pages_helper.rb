@@ -9,10 +9,10 @@ module PagesHelper
   end
 
   def pages_index_action?
-    params[:controller] == 'pages' and params[:action] == 'index'
+    controller_path == 'pages' and action_name == 'index'
   end
 
   def pages_controller?
-    params[:controller] == 'pages'
+    controller_path == 'pages'
   end
 end

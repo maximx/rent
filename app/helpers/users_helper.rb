@@ -30,6 +30,6 @@ module UsersHelper
   end
 
   def users_controller?
-    params[:controller] == 'users'
+    controller_path == 'users'
   end
 end

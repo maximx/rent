@@ -82,7 +82,7 @@ module ItemsHelper
   end
 
   def render_item_index_breadcrumbs(obj = {})
-    case params[:controller]
+    case controller_path
     when "categories"
       breadcrumb :category, obj
     when "subcategories"
@@ -124,7 +124,7 @@ module ItemsHelper
   end
 
   def item_action_display?
-    !["review"].include?(params[:action])
+    !["review"].include? action_name
   end
 
   def uncollect_link_display?(item)
@@ -132,11 +132,11 @@ module ItemsHelper
   end
 
   def items_controller?
-    params[:controller] == 'items'
+    controller_path == 'items'
   end
 
   def items_related_controller?
-    ['items', 'categories', 'subcategories', 'records'].include?(params[:controller])
+    ['items', 'categories', 'subcategories', 'records'].include? controller_path
   end
 
   def render_sort_span
