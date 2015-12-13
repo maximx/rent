@@ -1,0 +1,5 @@
+- breadcrumb :new_account_customer
+
+h2.col-xs-offset-4.col-sm-offset-3 = t('controller.account/customers.action.new')
+
+= render partial: 'form', locals: { customer: @customer, profile: @profile }

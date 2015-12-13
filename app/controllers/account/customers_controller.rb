@@ -1,4 +1,4 @@
-class Dashboard::CustomersController < ApplicationController
+class Account::CustomersController < ApplicationController
   before_action :login_required
   load_and_authorize_resource through: :current_user, except: [ :index ]
   before_action :load_profile, only: [ :show, :edit, :update ]
@@ -18,10 +18,10 @@ class Dashboard::CustomersController < ApplicationController
 
   def create
     if @customer.save
-      redirect_to dashboard_customer_path @customer
+      redirect_to account_customer_path @customer
     else
       flash[:alert] = t('controller.action.create.fail')
-      render 'dashboard/customers/new'
+      render 'account/customers/new'
     end
   end
 
@@ -30,10 +30,11 @@ class Dashboard::CustomersController < ApplicationController
 
   def update
     if @customer.update customer_params
-      redirect_to dashboard_customer_path @customer
+      redirect_to account_customer_path(@customer),
+                  notice: t('controller.action.update.success', name: @customer.account)
     else
       flash[:alert] = t('controller.action.create.fail')
-      render 'dashboard/customers/edit'
+      render 'account/customers/edit'
     end
   end
 

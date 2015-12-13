@@ -6,7 +6,7 @@ zh-TW:
       dashboard: '管理'
       dashboard/items: '出租物管理'
       dashboard/records: '承租紀錄'
-      dashboard/customers: '客戶管理'
+      account/customers: '客戶管理'
       account/categories: '物品分類屬性'
       settings: '設定'
     action:
@@ -15,6 +15,11 @@ zh-TW:
       new: '新增'
       edit: '修改'
       destroy: '刪除'
+      show: '查閱'
+      create:
+        success: '%{name}新增成功。'
+      update:
+        success: '%{name}修改成功。'
     pages:
       action:
         about: '關於我們'
@@ -35,10 +40,6 @@ zh-TW:
         close: '下架'
         collect: '收藏'
         uncollect: '取消收藏'
-      create:
-        success: '%{name}新增成功。'
-      update:
-        success: '%{name}修改成功。'
       open:
         success: '已成功上架%{name}。'
       close:
@@ -79,6 +80,8 @@ zh-TW:
     account/subcategories:
       action:
         index: '屬性選項'
-    dashboard/customers:
-      destroy:
-        success: '客戶資料刪除成功。'
+    account/customers:
+      action:
+        index: '客戶列表'
+        new: '新增客戶'
+        edit: '修改%{name}'

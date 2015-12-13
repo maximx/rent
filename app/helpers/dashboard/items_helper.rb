@@ -14,8 +14,8 @@ module Dashboard::ItemsHelper
                 account_categories_path, parent: true ]
       end
       if can? :read, Customer
-        li << [ render_icon_with_text('user', t('controller.name.dashboard/customers')),
-                dashboard_customers_path, parent: true ]
+        li << [ render_icon_with_text('user', t('controller.name.account/customers')),
+                account_customers_path, parent: true ]
       end
       li << [ render_icon_with_text('record', t('controller.name.dashboard/records')),
               dashboard_records_path, parent: true ]

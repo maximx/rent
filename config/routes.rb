@@ -80,11 +80,11 @@ Rails.application.routes.draw do
     resources :vectors, only: [ ] do
       resources :selections, only: [ :create, :destroy ]
     end
+
+    resources :customers, except: [ :destroy ]
   end
 
   namespace :dashboard do
-    resources :customers, except: [ :destroy ]
-
     resources :items, only: [ :index, :show ] do
       resources :records, only: [ :new, :create ]
       get :records, on: :member

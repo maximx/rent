@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
 
     if pictures and @item.save
       pictures.each { |picture| @item.pictures.create image: picture }
-      redirect_to item_path(@item), notice: t('controller.items.create.success', name: @item.name)
+      redirect_to item_path(@item), notice: t('controller.action.create.success', name: @item.name)
     else
       flash[:alert] = t('controller.action.create.fail')
       render :new
@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
     pictures = params[:item][:pictures]
     if @item.update( item_params.except(:pictures) )
       pictures.each { |picture| @item.pictures.create image: picture } if pictures
-      redirect_to item_path(@item), notice: t('controller.items.update.success', name: @item.name) unless remotipart_submitted?
+      redirect_to item_path(@item), notice: t('controller.action.update.success', name: @item.name) unless remotipart_submitted?
     else
       unless remotipart_submitted?
         flash[:alert] = t('controller.action.create.fail')

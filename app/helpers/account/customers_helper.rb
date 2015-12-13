@@ -1,15 +1,15 @@
-module Dashboard::CustomersHelper
+module Account::CustomersHelper
   def render_show_borrower_link(borrower)
     link_to render_icon('zoom-in'),
             borrower_path(borrower),
-            class: 'btn btn-default', title: '查閱', data: { toggle: 'tooltip' }
+            class: 'btn btn-default', title: t('controller.action.show'), data: { toggle: 'tooltip' }
   end
 
   def render_edit_customer_link(borrower)
     if borrower.is_customer?
       link_to render_icon('edit', class: 'text-success'),
-              edit_dashboard_customer_path(borrower),
-              class: 'btn btn-default', title: '修改', data: { toggle: 'tooltip' }
+              edit_account_customer_path(borrower),
+              class: 'btn btn-default', title: t('controller.action.edit'), data: { toggle: 'tooltip' }
     end
   end
 
@@ -22,6 +22,6 @@ module Dashboard::CustomersHelper
   end
 
   def borrower_path borrower
-    borrower.is_customer? ? dashboard_customer_path(borrower) : user_path(borrower)
+    borrower.is_customer? ? account_customer_path(borrower) : user_path(borrower)
   end
 end

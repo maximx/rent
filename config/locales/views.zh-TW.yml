@@ -10,6 +10,7 @@ zh-TW:
       cancel: '取消'
     common:
       destroy_confirm: '確定要刪除嗎？'
+      keyword: '關鍵字'
     users:
       confirmed_attribute: '已驗證'
     items:
