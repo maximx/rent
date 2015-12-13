@@ -25,7 +25,7 @@ module UsersHelper
       li << [ t('controller.users.action.show', name: user.profile.logo_name), user_path(user) ]
       li << [ t('controller.users.action.reviews'), reviews_user_path(user) ]
       li << [ t('controller.users.action.items'), items_user_path(user) ]
-      li << [ content_tag(:strong, t('rent.site_name'), class: 'text-danger'), search_items_path ]
+      li << [ content_tag(:strong, t('rent.site_name'), class: 'text-danger'), items_path ]
     end
   end
 

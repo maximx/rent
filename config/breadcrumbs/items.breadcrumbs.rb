@@ -1,5 +1,5 @@
 crumb :root do
-  link '出租物', items_path
+  link t('controller.items.action.index'), items_path
 end
 
 crumb :category do |category|
@@ -13,7 +13,7 @@ crumb :subcategory do |subcategory|
 end
 
 crumb :new_item do
-  link "新增出租物", new_item_path
+  link t('controller.items.action.new'), new_item_path
   parent :root
 end
 
@@ -23,6 +23,6 @@ crumb :item do |item|
 end
 
 crumb :item_edit do |item|
-  link "修改", edit_item_path(item)
+  link t('controller.action.edit'), edit_item_path(item)
   parent :item, item
 end

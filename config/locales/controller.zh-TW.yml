@@ -1,6 +1,7 @@
 zh-TW:
   controller:
     name:
+      items: &items '出租物'
       tours: '導覽'
       users: '個人頁面'
       records: &records '承租紀錄'
@@ -34,9 +35,11 @@ zh-TW:
         reviews: '評價'
         show: '關於%{name}'
         edit: '編輯%{name}'
-        items: '出租物'
+        items: *items
     items:
       action:
+        index: *items
+        new: '新增出租物'
         open: '上架'
         close: '下架'
         collect: '收藏'
@@ -84,7 +87,7 @@ zh-TW:
         index: '屬性選項'
     account/items:
       action:
-        index: '出租物列表'
+        index: *items
         records: '出租紀錄'
         records_breadcrumbs: '%{name} 的出租紀錄'
     account/records:
