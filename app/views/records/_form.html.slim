@@ -1,5 +1,5 @@
 = simple_form_for [item, record], render_records_form_options(item) do |f|
-  - if dashboard_related_controller?
+  - if account_manage_controller?
     .form-group
       .col-xs-4.col-sm-3.control-label
         label 承租物
@@ -9,7 +9,7 @@
   = render_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
 
   /是為了 records/new 與 items/show 的 form 美觀
-  - if dashboard_related_controller?
+  - if account_manage_controller?
     = f.association :borrower, collection: current_user.customers, label_method: :account
   - else
     div class=(full_form? ? '' : 'col-sm-12')

@@ -1,10 +1,10 @@
 crumb :new_record do |item|
-  link "預約承租", new_item_record_path(item)
+  link t('controller.records.action.new'), new_item_record_path(item)
   parent :records, item
 end
 
 crumb :records do |item|
-  link "承租紀錄", item_records_path(item)
+  link t('controller.name.records'), item_records_path(item)
   parent :item, item
 end
 

@@ -3,12 +3,13 @@ zh-TW:
     name:
       tours: '導覽'
       users: '個人頁面'
-      dashboard: '管理'
-      dashboard/items: '出租物管理'
-      account/records: '承租紀錄'
+      records: &records '承租紀錄'
+      account/manage: '管理'
+      account/items: '出租物管理'
+      account/records: *records
       account/customers: '客戶管理'
       account/categories: '物品分類屬性'
-      settings: '設定'
+      account/settings: '設定'
     action:
       new: '新增'
       edit: '修改'
@@ -49,6 +50,7 @@ zh-TW:
         fail: '%{name}有出租紀錄無法刪除。'
     records:
       action:
+        new: '預約承租'
         download: '下載契約'
         show: '查閱'
         withdrawing: '取消預訂'
@@ -80,6 +82,11 @@ zh-TW:
     account/subcategories:
       action:
         index: '屬性選項'
+    account/items:
+      action:
+        index: '出租物列表'
+        records: '出租紀錄'
+        records_breadcrumbs: '%{name} 的出租紀錄'
     account/records:
       action:
         index: '承租紀錄列表'

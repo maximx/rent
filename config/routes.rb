@@ -65,7 +65,6 @@ Rails.application.routes.draw do
   end
   resources :messages, only: [ :create ]
 
-  # TODO issue 122
   namespace :account do
     resource :settings, only: [ :show, :update ] do
       get :preferences, :phone_confirmation
@@ -81,18 +80,16 @@ Rails.application.routes.draw do
       resources :selections, only: [ :create, :destroy ]
     end
 
-    resources :records, only: [ :index ] do
-      get :calendar, on: :collection
-    end
-
-    resources :customers, except: [ :destroy ]
-  end
-
-  namespace :dashboard do
     resources :items, only: [ :index, :show ] do
       resources :records, only: [ :new, :create ]
       get :records, on: :member
       get :wish, :calendar, on: :collection
     end
+
+    resources :records, only: [ :index ] do
+      get :calendar, on: :collection
+    end
+
+    resources :customers, except: [ :destroy ]
   end
 end

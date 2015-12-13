@@ -1,14 +1,16 @@
-module Dashboard::ItemsHelper
+module Account::ItemsHelper
   def render_item_records_link(item)
     link_to render_icon('list-alt', class: 'text-primary'),
-            dashboard_item_records_path(item),
-            class: 'btn btn-default rent-records-list', title: '出租紀錄', data: { toggle: 'tooltip' }
+            account_item_records_path(item),
+            class: 'btn btn-default rent-records-list',
+            title: t('controller.account/items.action.records'),
+            data: { toggle: 'tooltip' }
   end
 
-  def dashboard_navbar_list
+  def account_manage_navbar_list
     render_link_li class: 'nav navbar-nav' do |li|
-      li << [ render_icon_with_text('th-large', t('controller.name.dashboard/items')),
-              dashboard_items_path, parent: true ]
+      li << [ render_icon_with_text('th-large', t('controller.name.account/items')),
+              account_items_path, parent: true ]
       if can? :create, Vector
         li << [ render_icon_with_text('paperclip', t('controller.name.account/categories')),
                 account_categories_path, parent: true ]
@@ -22,10 +24,10 @@ module Dashboard::ItemsHelper
     end
   end
 
-  def render_dashboard_items_index_calendar
+  def render_account_items_index_calendar
     render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
-      li << [ render_icon_with_text('list-alt', '出租物列表'), dashboard_items_path ]
-      li << [ render_icon_with_text('calendar', '行事曆'), calendar_dashboard_items_path ]
+      li << [ render_icon_with_text('list-alt', t('controller.account/items.action.index')), account_items_path ]
+      li << [ render_icon_with_text('calendar', t('controller.action.calendar')), calendar_account_items_path ]
     end
   end
 
@@ -50,10 +52,16 @@ module Dashboard::ItemsHelper
     end
   end
 
-  def dashboard_related_controller?
-    (
-      controller_path.start_with?('dashboard') or
-      ['account/categories', 'account/subcategories'].include?(controller_path)
-    ) and action_name != 'wish'
+  def account_manage_controller?
+    account_manage_list = [
+      'account/items',
+      'account/records',
+      'account/customers',
+      'account/categories',
+      'account/subcategories',
+      'account/vectors',
+      'account/selections'
+    ]
+    account_manage_list.include?(controller_path) and action_name != 'wish'
   end
 end

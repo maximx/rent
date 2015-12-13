@@ -1,0 +1,28 @@
+= form_tag account_items_path, method: :get, id: 'search-form', class: 'navbar-form' do
+  .row
+    .col-md-12.input-other
+        .form-group
+          = select_tag :overlaps, options_for_select(Item.overlaps_types, params[:overlaps]), class: 'form-control'
+
+        .form-group
+          = text_field_tag :started_at,
+                           params[:started_at],
+                           class: 'form-control form_date',
+                           placeholder: t('helpers.items.search.started_at')
+
+        .form-group
+          = text_field_tag :ended_at,
+                           params[:ended_at],
+                           class: 'form-control form_date',
+                           placeholder: t('helpers.items.search.ended_at')
+
+  .form-group
+    .input-group
+      = text_field_tag :query,
+                       params[:query],
+                       class: 'form-control keyword',
+                       placeholder: t('helpers.common.keyword')
+
+      span.input-group-btn
+        button.btn.btn-default type="submit"
+          = render_icon("search")

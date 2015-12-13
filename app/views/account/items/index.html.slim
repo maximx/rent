@@ -1,19 +1,19 @@
-- breadcrumb :dashboard_items
+- breadcrumb :account_items
 
-= render_dashboard_items_index_calendar
+= render_account_items_index_calendar
 .tab-content
-  = render partial: 'dashboard/items/search'
+  = render partial: 'account/items/search'
 
   .container
     table.table.table-borded.table-hover
       thead
         tr
-          th 名稱
-          th 價格
-          th 預訂中
-          th 成功出租
-          th 退租
-          th 出租中
+          th = t('simple_form.labels.item.name')
+          th = t('simple_form.labels.item.price')
+          th = t('helpers.account/items.booking')
+          th = t('helpers.account/items.returned')
+          th = t('helpers.account/items.withdrawed')
+          th = t('helpers.account/items.renting')
           th #
       tbody
         - @items.each do |item|
@@ -29,5 +29,5 @@
     = render partial: 'common/pagination', locals: { objects: @items }
 
   = render_default_content(@items) do
-    | 沒有出租物！馬上
-    mark = link_to("新增", new_item_path, class: "text-danger")
+    | #{t('helpers.account/items.no_items')}
+    mark = link_to(t('controller.action.new'), new_item_path, class: "text-danger")

@@ -1,5 +1,5 @@
 module Account::SettingsHelper
-  def settings_navbar_list
+  def account_settings_navbar_list
     render_link_li class: 'nav navbar-nav' do |li|
       li << [ render_icon_with_text('lock', t('controller.account/settings.action.show')),
               account_settings_path ]
@@ -9,6 +9,6 @@ module Account::SettingsHelper
   end
 
   def account_settings_controller?
-     params[:controller] == 'account/settings'
+     controller_path == 'account/settings'
   end
 end

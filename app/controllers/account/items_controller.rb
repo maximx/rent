@@ -1,4 +1,4 @@
-class Dashboard::ItemsController < ApplicationController
+class Account::ItemsController < ApplicationController
   include UsersReviewsCount
 
   before_action :login_required
@@ -33,7 +33,7 @@ class Dashboard::ItemsController < ApplicationController
   end
 
   def calendar
-    @event_sources_path = calendar_dashboard_items_path(format: :json)
+    @event_sources_path = calendar_account_items_path(format: :json)
     records_json = current_user.lend_records
                                .includes(:borrower, :item)
                                .overlaps(params[:start], params[:end])

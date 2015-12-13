@@ -57,17 +57,17 @@ class ItemsController < ApplicationController
 
   def open
     @item.open!
-    redirect_to dashboard_items_path, notice: t('controller.items.open.success', name: @item.name)
+    redirect_to account_items_path, notice: t('controller.items.open.success', name: @item.name)
   end
 
   def close
     @item.close!
-    redirect_to dashboard_items_path, notice: t('controller.items.close.success', name: @item.name)
+    redirect_to account_items_path, notice: t('controller.items.close.success', name: @item.name)
   end
 
   def destroy
     @item.destroy
-    redirect_to dashboard_items_path, notice: t('controller.items.destroy.success', name: @item.name)
+    redirect_to account_items_path, notice: t('controller.items.destroy.success', name: @item.name)
   end
 
   def collect

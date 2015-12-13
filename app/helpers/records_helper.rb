@@ -115,7 +115,7 @@ module RecordsHelper
   def render_records_form_options(item)
     options = {}
     options[:wrapper] = 'default' unless full_form?
-    options[:url] = dashboard_item_records_path(item) if dashboard_related_controller?
+    options[:url] = account_item_records_path(item) if account_manage_controller?
     options
   end
 
