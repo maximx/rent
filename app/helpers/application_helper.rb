@@ -103,10 +103,6 @@ module ApplicationHelper
     ' input-lg' if current_page? root_path
   end
 
-  def edit_action?
-    action_name == 'edit'
-  end
-
   private
     def alert_notice_tag(type, msg)
       content_tag(:div, notice_content_with_close(msg),
