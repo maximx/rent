@@ -94,7 +94,10 @@ class Account::SettingsController < ApplicationController
     end
 
     def profile_preferences_params
-      params.require(:profile).permit(:bank_code, :bank_account)
+      params.require(:profile).permit(
+        :send_mail, :borrower_info_provide,
+        :bank_code, :bank_account
+      )
     end
 
     def load_user
