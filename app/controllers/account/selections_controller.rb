@@ -4,6 +4,7 @@ class Account::SelectionsController < ApplicationController
   load_and_authorize_resource through: :vector
 
   def create
+    @selection.user = current_user
     @selection.save
   end
 
