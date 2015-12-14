@@ -16,11 +16,12 @@ class Record < ActiveRecord::Base
 
   self.per_page = 10
 
-  before_save :set_item_attributes, :set_ended_at
+  before_validation :set_ended_at
+  before_save :set_item_attributes
   after_save :save_booking_state_log, :send_payment_message
 
   scope :overlaps, ->(started_at, ended_at) do
-    where("(TIMESTAMPDIFF(MINUTE, started_at, ?) * TIMESTAMPDIFF(MINUTE, ?, ended_at)) >= 0", ended_at, started_at)
+    where("(TIMESTAMPDIFF(SECOND, started_at, ?) * TIMESTAMPDIFF(SECOND, ?, ended_at)) >= 0", ended_at, started_at)
       .actived
   end
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
@@ -61,15 +62,16 @@ class Record < ActiveRecord::Base
   end
 
   def start_end_date
-    if booking? && ended_at && started_at
-      if ended_at < started_at || started_at < Time.now
+    if booking? and ended_at and started_at
+      if ended_at < started_at or started_at < Time.now
         errors[:started_at] << I18n.t('activerecord.errors.models.record.attributes.started_at.bad_started_at')
       end
 
-      if (ended_at - started_at) < item.minimum_period.days
+      # 在 set_ended_at 時減去 1 秒 會不滿 1 日
+      if (ended_at - started_at + 1.second) < item.minimum_period.days
         errors[:ended_at] << I18n.t(
           'activerecord.errors.models.record.attributes.started_at.bad_period',
-          period: "#{item.minimum_period} #{item.period}"
+          period: "#{item.minimum_period} #{item.period_without_per}"
         )
       end
     end
@@ -169,30 +171,22 @@ class Record < ActiveRecord::Base
     borrower.email.present?
   end
 
-  protected
-    def set_item_attributes
-      self.item_price = item.price
-      self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
-      self.item_deposit = item.deposit
-      self.deliver_fee = (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
-
-      self.price = rent_days * item_price
-    end
-
-    #為整點 則減去一秒 避免 overlap
-    def set_ended_at
-      self.ended_at -= 1.second if self.ended_at.strftime('%H%M%S') == '000000'
-    end
-
-    def save_booking_state_log
-      create_record_state_log(borrower) if record_state_logs.empty?
-    end
-
-    def send_payment_message
-      RecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
-    end
-
   private
+    #只有日期 ended_at + 1.day，為整點減去一秒避免 overlap
+    def set_ended_at
+      self.ended_at += (1.day - 1.second) if self.new_record?
+    end
+
+    def set_item_attributes
+      if self.new_record?
+        self.item_price = item.price
+        self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
+        self.item_deposit = item.deposit
+        self.deliver_fee = (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
+
+        self.price = rent_days * item_price
+      end
+    end
 
     def create_record_state_log(borrower, log_params = {})
       log_params[:aasm_state] = (record_state_logs.empty?) ? aasm.current_state : aasm.to_state
@@ -206,24 +200,11 @@ class Record < ActiveRecord::Base
       end
     end
 
-    def initial_state_date_json
-      initial_state = self.class.aasm.initial_state
-
-      {
-        id: initial_state,
-        title: I18n.t("activerecord.attributes.record.aasm_state.#{initial_state}"),
-        start: created_at,
-        end: created_at + 1.minute,
-        color: state_color(initial_state)
-      }
+    def save_booking_state_log
+      create_record_state_log(borrower) if record_state_logs.empty?
     end
 
-    def state_color(state)
-      colors = {
-        booking: :blue, renting: :green,
-        remitted: :brown, delivering: :yellow,
-        withdrawed: :gray, returned: :red
-      }
-      colors[state.to_sym]
+    def send_payment_message
+      RecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
     end
 end
