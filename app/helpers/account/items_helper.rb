@@ -1,7 +1,7 @@
 module Account::ItemsHelper
   def render_item_records_link(item)
     link_to render_icon('list-alt', class: 'text-primary'),
-            account_item_records_path(item),
+            account_item_path(item),
             class: 'btn btn-default rent-records-list',
             title: t('controller.account/items.action.records'),
             data: { toggle: 'tooltip' }

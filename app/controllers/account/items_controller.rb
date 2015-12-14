@@ -2,7 +2,7 @@ class Account::ItemsController < ApplicationController
   include UsersReviewsCount
 
   before_action :login_required
-  load_and_authorize_resource :item, through: :current_user, only: [ :index, :records ]
+  load_and_authorize_resource :item, through: :current_user, only: [ :index, :show ]
 
   def index
     @items = @items.includes(:records)
@@ -13,7 +13,7 @@ class Account::ItemsController < ApplicationController
     @records_count.default = 0
   end
 
-  def records
+  def show
     @event_sources_path = calendar_item_path(@item, format: :json)
     @records = @item.records.includes(:borrower, :deliver, :item).rencent.page(params[:page])
     @record_state_log = unless @records.empty?
