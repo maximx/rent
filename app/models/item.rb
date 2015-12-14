@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
 
   self.per_page = 20
   PRICE_MIN = 0
-  PRICE_MAX = 500
+  PRICE_MAX = 2000
 
   validates_presence_of :name, :price, :minimum_period, :subcategory_id, :deliver_ids, :aasm_state, :lender
   validates_presence_of :address, if: :delivers_include_face?
