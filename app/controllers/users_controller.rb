@@ -104,7 +104,7 @@ class UsersController < ApplicationController
 
     def set_user_meta_tags
       set_meta_tags(
-        title: @user.account,
+        title: @user.profile.logo_name,
         canonical: user_url(@user),
         description: @user.meta_description,
         og: {

@@ -17,7 +17,7 @@ class Profile < ActiveRecord::Base
   after_update :send_confirmation_instructions, if: :phone_changed?
 
   def logo_name
-    name || user.account
+    name.present? ? name : user.account
   end
 
   def bank_info_present?

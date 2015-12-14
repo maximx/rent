@@ -11,7 +11,7 @@ class Ability
     resources_reviews user
     resources_attachments user
 
-    if user.has_role? :company
+    if user.is_company?
       can [ :read, :create ], Customer
       can :update, Customer, user: user
 
