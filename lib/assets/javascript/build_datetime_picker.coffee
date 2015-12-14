@@ -30,7 +30,7 @@
 @rentRecordPickerChange = ()->
   $start_picker_obj = $('#record_started_at')
   $end_picker_obj = $('#record_ended_at')
-  minimum_period = $('#minimun_period').val()
+  minimum_period = $('#minimun_period').val() - 1 #租一天，起租與迄租相同
 
   $start_picker_obj.on('dp.change', (e)->
     if e.date
