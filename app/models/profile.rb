@@ -3,6 +3,7 @@ class Profile < ActiveRecord::Base
   validates :bank_code, length: { is: 3 }, inclusion: Bank.all.map(&:code), allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?
   validates :phone, uniqueness: true, allow_blank: true
+  validates :facebook, absence: true, unless: 'user.is_company?'
 
   belongs_to :user, polymorphic: true
   belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'

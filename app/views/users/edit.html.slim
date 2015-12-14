@@ -17,7 +17,9 @@
       = f.input :address, input_html: { class: 'address_geocomplete' }
       = f.input :phone
       = f.input :line
-      = f.input :facebook
+
+      = f.input :facebook if @user.is_company?
+
       = f.input :bank_code, input_html: { maxlength: 3, minlength: 3 }
       = f.input :bank_account
 
