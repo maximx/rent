@@ -3,23 +3,26 @@
 /*show*/
 .site-header.user nav.navbar { margin: 0; }
 
-.user-container {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  min-height: $site-content-height;
+section {
+  min-height: $site-content-height - 100px;
 
-  .page-header { margin-top: 0; }
-  .description { margin-top: 15px; }
+  .user-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
 
-  ul.user-info {
-    padding-left: 0;
+    .page-header { margin-top: 0; }
+    .description { margin-top: 15px; }
 
-     > li {
-      margin-bottom: 15px;
+    ul.user-info {
+      padding-left: 0;
 
-      span {
-        margin-right: 5px;
-        &.glyphicon.text { margin-right: 10px; }
+       > li {
+        margin-bottom: 15px;
+
+        span {
+          margin-right: 5px;
+          &.glyphicon.text { margin-right: 10px; }
+        }
       }
     }
   }
