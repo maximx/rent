@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   before_action :set_user_meta_tags
 
   def show
-    set_maps_marker @profile
+    set_maps_marker @profile if @profile.address.present?
   end
 
   def edit

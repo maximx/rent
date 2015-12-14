@@ -6,6 +6,7 @@
 .user-container {
   padding-top: 20px;
   padding-bottom: 20px;
+  min-height: $site-content-height;
 
   .page-header { margin-top: 0; }
   .description { margin-top: 15px; }

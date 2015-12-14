@@ -35,7 +35,7 @@ section
           = render_unfollow_link user
     = yield
 
-  - if defined? maps
+  - if defined?(maps) and maps.present?
     #map
     javascript:
       $(document).ready(function() {
