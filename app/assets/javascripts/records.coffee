@@ -34,11 +34,13 @@ $(document).ready ->
 
 @update_rent_days_price = ()->
   if $('.item-price-days').size() > 0
-    started_date = new Date( $('#record_started_at').val() )
-    ended_date = new Date( $('#record_ended_at').val() )
+    started_date = moment( $('#record_started_at').val() )
+    ended_date = moment( $('#record_ended_at').val() )
 
-    diff = Math.abs(ended_date - started_date)
-    days = Math.ceil( diff / (24 * 60 * 60 * 1000))
+    # ref: http://stackoverflow.com/questions/25150570/get-hours-difference-between-two-dates-in-moment-js
+    # 相減要加一天
+    diff = moment.duration( ended_date.diff(started_date) ).add(1, 'd')
+    days = Math.ceil(diff.asDays())
     days = 0 if isNaN(days)
 
     total_fee = days * $('#item_price').val()
