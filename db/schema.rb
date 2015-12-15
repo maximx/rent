@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213054944) do
+ActiveRecord::Schema.define(version: 20151215020053) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -141,14 +141,14 @@ ActiveRecord::Schema.define(version: 20151213054944) do
     t.integer  "sender_id",            limit: 4
     t.string   "sender_type",          limit: 255
     t.integer  "conversation_id",      limit: 4
-    t.boolean  "draft",                limit: 1,     default: false
+    t.boolean  "draft",                              default: false
     t.string   "notification_code",    limit: 255
     t.integer  "notified_object_id",   limit: 4
     t.string   "notified_object_type", limit: 255
     t.string   "attachment",           limit: 255
     t.datetime "updated_at",                                         null: false
     t.datetime "created_at",                                         null: false
-    t.boolean  "global",               limit: 1,     default: false
+    t.boolean  "global",                             default: false
     t.datetime "expires"
   end
 
@@ -161,9 +161,9 @@ ActiveRecord::Schema.define(version: 20151213054944) do
     t.integer  "receiver_id",     limit: 4
     t.string   "receiver_type",   limit: 255
     t.integer  "notification_id", limit: 4,                   null: false
-    t.boolean  "is_read",         limit: 1,   default: false
-    t.boolean  "trashed",         limit: 1,   default: false
-    t.boolean  "deleted",         limit: 1,   default: false
+    t.boolean  "is_read",                     default: false
+    t.boolean  "trashed",                     default: false
+    t.boolean  "deleted",                     default: false
     t.string   "mailbox_type",    limit: 25
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
@@ -190,8 +190,9 @@ ActiveRecord::Schema.define(version: 20151213054944) do
     t.string   "user_type",             limit: 255
     t.string   "line",                  limit: 255
     t.string   "facebook",              limit: 255
-    t.boolean  "send_mail",             limit: 1,     default: true
-    t.boolean  "borrower_info_provide", limit: 1,     default: false
+    t.boolean  "send_mail",                           default: true
+    t.boolean  "borrower_info_provide",               default: false
+    t.string   "tel_phone",             limit: 255
   end
 
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree
