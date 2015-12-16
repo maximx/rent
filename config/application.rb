@@ -27,5 +27,6 @@ module Rent
     config.i18n.default_locale = :"zh-TW"
 
     config.time_zone = 'Taipei'
+    config.x.fog = Rails.application.config_for(:fog)
   end
 end
