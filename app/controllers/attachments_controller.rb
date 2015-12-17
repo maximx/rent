@@ -3,19 +3,29 @@ class AttachmentsController < ApplicationController
   load_and_authorize_resource
 
   def destroy
-    if request.xhr? and @attachment.destroy
+    if @attachment.destroy
       result = { result: 'ok' }
+
+      flash[:notice] =  t('controller.attachments.destroy.success',
+                          name: @attachment.original_filename)
     else
       result = { result: 'false' }
+
+      flash[:alert] =  t('controller.attachments.destroy.fail',
+                          name: @attachment.original_filename)
     end
 
     respond_to do |format|
-      format.json { render json: result }
+      format.json { render json: result if request.xhr? }
+      format.html { redirect_to :back }
     end
   end
 
   def download
     data = open @attachment.file_url
-    send_data data.read, type: data.content_type, x_sendfile: true, filename: @attachment.original_filename
+    send_data data.read,
+              type: @attachment.content_type,
+              x_sendfile: true,
+              filename: @attachment.original_filename
   end
 end

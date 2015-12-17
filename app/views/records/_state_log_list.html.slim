@@ -4,10 +4,11 @@
   - record.record_state_logs.each do |log|
     - if log.id
       .progress-bar.progress-bar-success.text-danger role="progressbar" style="width: #{width}%" data-toggle="tooltip" title="#{render_state_log_title(log)}"
-        - if log.attachments.present?
+        - if log.renting?
           = link_to render_icon_with_text('download-alt', t("activerecord.attributes.record.aasm_state.#{log.aasm_state}")),
-                    download_attachment_path(log.attachment.id),
-                    target: '_blank'
+                    '#',
+                    data: { toggle: 'popover', placement: 'bottom',
+                            content: "#{render partial: 'attachments/list', locals: { attachments: log.attachments } }"}
         - else
           = t("activerecord.attributes.record.aasm_state.#{log.aasm_state}")
 

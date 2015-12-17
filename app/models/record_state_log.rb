@@ -14,4 +14,8 @@ class RecordStateLog < ActiveRecord::Base
   def remitted?
     aasm_state.to_s == 'remitted'
   end
+
+  def renting?
+    aasm_state.to_s == 'renting'
+  end
 end

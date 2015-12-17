@@ -68,6 +68,10 @@ zh-TW:
     reviews:
       action:
         new: '評價'
+    attachments:
+      destroy:
+        success: '已成功刪除%{name}。'
+        fail: '%{name}刪除失敗。'
     account/settings:
       action:
         phone_confirmation: '手機驗證'

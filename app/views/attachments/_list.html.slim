@@ -1,0 +1,12 @@
+table.table
+  thead
+    - attachments.each do |attachment|
+      tr
+        td = link_to attachment.original_filename, download_attachment_path(attachment), target: '_blank'
+        td
+          - if can? :destroy, attachment
+            = link_to t('controller.action.destroy'),
+                      attachment_path(attachment),
+                      class: 'btn btn-danger',
+                      data: { confirm: t('helpers.common.destroy_confirm'),
+                              method: :delete }
