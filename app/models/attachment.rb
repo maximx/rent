@@ -17,7 +17,7 @@ class Attachment < ActiveRecord::Base
 
   def editable_by?(user)
     user and (
-      ( attachable.is_a? RecordStateLog and attachable.borrower == user ) or
+      ( attachable.is_a? RecordStateLog and attachable.borrower == user and attachable.record.renting? ) or
       ( attachable.is_a? User and attachable == user ) or
       ( attachable.is_a? Item and attachable.lender == user and attachable.pictures.size > 1 )
     )
