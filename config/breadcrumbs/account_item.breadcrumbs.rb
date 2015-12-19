@@ -4,7 +4,7 @@ end
 
 crumb :account_item_records do |item|
   link t('controller.account/items.action.records_breadcrumbs', name: render_item_name(item)),
-       account_item_records_path(item)
+       account_item_path(item)
   parent :account_items
 end
 
