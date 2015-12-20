@@ -8,6 +8,7 @@ class Record < ActiveRecord::Base
   belongs_to :borrower, polymorphic: true
   belongs_to :item
   belongs_to :deliver, required: true
+  has_one :lender, through: :item
 
   has_many :reviews
   has_many :judgers, through: :reviews
@@ -130,10 +131,6 @@ class Record < ActiveRecord::Base
 
   def delivery_needed?
     deliver.name != '面交自取'
-  end
-
-  def lender
-    self.item.lender
   end
 
   def total_price

@@ -7,6 +7,8 @@ class RecordStateLog < ActiveRecord::Base
 
   has_many :attachments, as: :attachable, dependent: :destroy
 
+  after_save :send_remitted_message
+
   def attachment
     attachments.first
   end
@@ -18,4 +20,9 @@ class RecordStateLog < ActiveRecord::Base
   def renting?
     aasm_state.to_s == 'renting'
   end
+
+  private
+    def send_remitted_message
+      RecordStateLogMailer.send_remitted_message(self).deliver if remitted?
+    end
 end

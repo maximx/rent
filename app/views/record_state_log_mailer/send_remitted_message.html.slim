@@ -1,0 +1,7 @@
+h4 #{@lender_name} 您好：
+
+p 物品#{link_to(@item.name, item_url(@item))} #{link_to(@record.started_at.to_s(:date_only), item_record_url(@item, @record))}的承租交易已收到款項，
+
+p #{@borrower_name}的匯款帳號末五碼為∶#{@account_5}
+
+p 詳細資訊請#{link_to('至此', item_record_url(@item, @record))}查看。
