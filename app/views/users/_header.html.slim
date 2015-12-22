@@ -33,6 +33,8 @@ section
           br/
           = render_follow_link user
           = render_unfollow_link user
+          - if can?(:update, user) and action_name == 'show'
+            = link_to(render_icon_with_text('edit', t('helpers.submit.edit')), edit_user_path(user), class: 'text-success')
     = yield
 
   - if defined?(maps) and maps.present?
