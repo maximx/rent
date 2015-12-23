@@ -23,6 +23,8 @@ zh-TW:
     errors:
       models:
         item:
+          import:
+            fail: '第%{i}筆：%{message}'
           attributes:
             name:
               blank: '名稱為必填'

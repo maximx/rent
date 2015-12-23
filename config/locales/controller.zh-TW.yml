@@ -96,6 +96,7 @@ zh-TW:
         index: *items
         records: '出租紀錄'
         records_breadcrumbs: '%{name} 的出租紀錄'
+        importer: '匯入'
     account/records:
       action:
         index: '承租紀錄列表'

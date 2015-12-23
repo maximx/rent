@@ -42,6 +42,7 @@ zh-TW:
         delivers: '運送方式'
         deliver_fee: '運送費用'
         pictures: '圖片'
+        file: '匯入'
       record:
         started_at: '起租日期'
         ended_at: '迄租日期'

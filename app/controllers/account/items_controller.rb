@@ -3,6 +3,7 @@ class Account::ItemsController < ApplicationController
 
   before_action :login_required
   load_and_authorize_resource :item, through: :current_user, only: [ :index, :show ]
+  before_action :load_categories_grouped_select, only: [ :importer, :import ]
 
   def index
     @items = @items.includes(:records)
@@ -45,23 +46,25 @@ class Account::ItemsController < ApplicationController
   end
 
   def importer
-    @categories_grouped_select = Category.grouped_select
-    @delivers = Deliver.all
+    @item = Item.new
+    @item.set_address current_user
+    @error_messages = []
   end
 
   def import
-    #TODO:validate impoters all present
-    if importer_params.present? and importer_params[:file].present?
-      Item.import(current_user, importer_params)
-      redirect_to account_items_path
+    @item = current_user.items.build importer_params
+
+    if @item.valid_attributes?(importer_params.keys) and importer_params[:file].present?
+      @error_messages = Item.import(current_user, importer_params)
+      @error_messages.empty? ? redirect_to(account_items_path) : render(:importer)
     else
-      redirect_to importer_account_items_path
+      render :importer
     end
   end
 
   private
     def importer_params
-      params.require(:importer)
+      params.require(:item)
             .permit(:subcategory_id, :deliver_fee, :address, :file, deliver_ids: [])
             .symbolize_keys
     end
@@ -72,5 +75,9 @@ class Account::ItemsController < ApplicationController
       else
         Item.overlaps_types.first.second
       end
+    end
+
+    def load_categories_grouped_select
+      @categories_grouped_select = Category.grouped_select
     end
 end

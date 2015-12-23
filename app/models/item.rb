@@ -2,6 +2,8 @@ class Item < ActiveRecord::Base
   include AASM
   include CurrencyPrice
 
+  attr_accessor :file # item import file
+
   self.per_page = 20
   PRICE_MIN = 0
   PRICE_MAX = 2000
@@ -109,20 +111,30 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def valid_attributes?(attrs = {})
+    valid?
+    attrs.each {|attr| return false if errors.has_key? attr.to_sym }
+    true
+  end
+
   def self.import(user, importer_params)
     subcategory = Subcategory.find importer_params[:subcategory_id]
 
     sheet = open_sheet importer_params.delete(:file)
+
+    # create vector
     vector_names = sheet.row(1).drop(excel_item_columns.size)
     vectors = []
     vector_names.each do |name|
       vectors << Vector.find_or_create_by_name(subcategory_id: subcategory.id, user_id: user.id, name: name)
     end
 
+    errors = []
     (2..sheet.last_row).each do |i|
       item_attributes = sheet.row(i).take(excel_item_columns.size)
       item_selection = sheet.row(i).drop(excel_item_columns.size)
 
+      # create selection
       selections = []
       vector_selections = Hash[ [vectors, item_selection].transpose ]
       vector_selections.each do |vector, name|
@@ -139,9 +151,15 @@ class Item < ActiveRecord::Base
 
       item = user.items.build item_params
       item.selections << selections
-      item.save!
-      item.close!
+      if item.valid?
+        item.save!
+        item.close!
+      else
+        message = item.errors.messages.values.join(',')
+        errors << I18n.t('activerecord.errors.models.item.import.fail', i: i, message: message)
+      end
     end
+    errors
   end
 
   def set_address(user)
@@ -248,7 +266,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.basic_search_str
-    "concat(items.name, items.description) like ?"
+    "concat(items.name, ifnull(items.description, '')) like ?"
   end
 
   private

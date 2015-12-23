@@ -24,10 +24,11 @@ module Account::ItemsHelper
     end
   end
 
-  def render_account_items_index_calendar
+  def render_account_items_tablist
     render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
       li << [ render_icon_with_text('list-alt', t('controller.account/items.action.index')), account_items_path ]
       li << [ render_icon_with_text('calendar', t('controller.action.calendar')), calendar_account_items_path ]
+      li << [ render_icon_with_text('import', t('controller.account/items.action.importer')), importer_account_items_path ]
     end
   end
 
