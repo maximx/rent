@@ -63,6 +63,7 @@ gem 'whenever'
 gem 'cloudinary'
 gem 'carrierwave'
 gem 'fog'
+gem 'roo'
 
 # models
 gem 'aasm'
