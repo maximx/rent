@@ -47,6 +47,7 @@ zh-TW:
         uncollect: '取消收藏'
       open:
         success: '已成功上架%{name}。'
+        fail: '請完成%{name}資料。'
       close:
         success: '已成功下架%{name}。'
       destroy:

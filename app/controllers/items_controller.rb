@@ -56,8 +56,12 @@ class ItemsController < ApplicationController
   end
 
   def open
-    @item.open!
-    redirect_to account_items_path, notice: t('controller.items.open.success', name: @item.name)
+    if @item.valid? and @item.pictures.present?
+      @item.open!
+      redirect_to account_items_path, notice: t('controller.items.open.success', name: @item.name)
+    else
+      redirect_to edit_item_path(@item), alert: t('controller.items.open.fail', name: @item.name)
+    end
   end
 
   def close

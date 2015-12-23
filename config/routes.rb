@@ -84,6 +84,7 @@ Rails.application.routes.draw do
       resources :records, only: [ :new, :create ]
       collection do
         get :wish, :calendar, :importer
+        post :import
       end
     end
 

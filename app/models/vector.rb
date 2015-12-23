@@ -12,6 +12,18 @@ class Vector < ActiveRecord::Base
 
   before_validation :set_tag_id
 
+  def self.find_or_create_by_name(params = {})
+    name = params.delete(:name)
+    params[:tags] = { name: name }
+    vectors = joins(:tag).where(params)
+    if vectors.present?
+      vectors.first
+    else
+      params[:tag_attributes] = params.delete(:tags)
+      create!(params)
+    end
+  end
+
   def name
     tag.name
   end

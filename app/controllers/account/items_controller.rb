@@ -45,9 +45,27 @@ class Account::ItemsController < ApplicationController
   end
 
   def importer
+    @categories_grouped_select = Category.grouped_select
+    @delivers = Deliver.all
+  end
+
+  def import
+    #TODO:validate impoters all present
+    if importer_params.present? and importer_params[:file].present?
+      Item.import(current_user, importer_params)
+      redirect_to account_items_path
+    else
+      redirect_to importer_account_items_path
+    end
   end
 
   private
+    def importer_params
+      params.require(:importer)
+            .permit(:subcategory_id, :deliver_fee, :address, :file, deliver_ids: [])
+            .symbolize_keys
+    end
+
     def overlap_method
       if Item.overlaps_values.include?(params[:overlaps])
         params[:overlaps]

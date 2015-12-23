@@ -109,6 +109,41 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def self.import(user, importer_params)
+    subcategory = Subcategory.find importer_params[:subcategory_id]
+
+    sheet = open_sheet importer_params.delete(:file)
+    vector_names = sheet.row(1).drop(excel_item_columns.size)
+    vectors = []
+    vector_names.each do |name|
+      vectors << Vector.find_or_create_by_name(subcategory_id: subcategory.id, user_id: user.id, name: name)
+    end
+
+    (2..sheet.last_row).each do |i|
+      item_attributes = sheet.row(i).take(excel_item_columns.size)
+      item_selection = sheet.row(i).drop(excel_item_columns.size)
+
+      selections = []
+      vector_selections = Hash[ [vectors, item_selection].transpose ]
+      vector_selections.each do |vector, name|
+        if name.present?
+          selections << Selection.find_or_create_by_name(user_id: user.id, vector_id: vector.id, name: name)
+        end
+      end
+
+      row = Hash[ [excel_item_columns, item_attributes].transpose ].symbolize_keys
+      item_params = importer_params.merge(row)
+
+      item_params[:deposit] ||= 0
+      item_params[:minimum_period] ||= 1
+
+      item = user.items.build item_params
+      item.selections << selections
+      item.save!
+      item.close!
+    end
+  end
+
   def set_address(user)
     self.address = user.profile.address
   end
@@ -215,4 +250,15 @@ class Item < ActiveRecord::Base
   def self.basic_search_str
     "concat(items.name, items.description) like ?"
   end
+
+  private
+    def self.open_sheet(file)
+      case File.extname(file.original_filename)
+      when '.csv' then Roo::CSV.new(file.path)
+      end
+    end
+
+    def self.excel_item_columns
+      %w(product_id name price minimum_period deposit)
+    end
 end
