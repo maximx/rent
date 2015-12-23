@@ -27,7 +27,7 @@ subcategory_list = [
   [],
   [ "相機", "鏡頭", "燈", "其他週邊" ],
   [ "禮服", "Cosplay", "其他服飾" ],
-  [ "行李箱", "嬰兒推車", "行動上網", "其他" ]
+  [ "行李箱", "嬰兒推車", "行動上網", "其他旅行用品" ]
 ]
 subcategory_list.each_with_index do |sub_list, category_id|
   sub_list.each_with_index do |sub_name, serial|
