@@ -12,7 +12,23 @@ class Selection < ActiveRecord::Base
 
   before_validation :set_tag_id
 
-  def self.find_or_create_by_name(params = {})
+  def self.find_or_create_by_names(options = {})
+    params = options.clone
+    list = []
+    if names = params.delete(:names)
+      names.each do |name|
+        name.strip! unless name.nil?
+        if name.present?
+          params[:name] = name
+          list << Selection.find_or_create_by_name(params)
+        end
+      end
+    end
+    list
+  end
+
+  def self.find_or_create_by_name(options = {})
+    params = options.clone
     name = params.delete(:name)
     params[:tags] = { name: name }
     selections = joins(:tag).where(params)

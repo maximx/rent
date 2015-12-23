@@ -8,8 +8,8 @@
     table.table.table-borded.table-hover
       thead
         tr
-          th = t('simple_form.labels.item.product_id')
           th = t('simple_form.labels.item.name')
+          th = t('simple_form.labels.item.product_id')
           th = t('simple_form.labels.item.price')
           th = t('helpers.account/items.booking')
           th = t('helpers.account/items.returned')
@@ -19,8 +19,8 @@
       tbody
         - @items.each do |item|
           tr
-            td = item.product_id
             td = link_to(render_item_name(item), item_path(item))
+            td = item.product_id
             td = item.price_period
             td = @records_count[[item.id,"booking"]]
             td = @records_count[[item.id,"returned"]]

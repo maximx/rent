@@ -118,42 +118,34 @@ class Item < ActiveRecord::Base
   end
 
   def self.import(user, importer_params)
-    subcategory = Subcategory.find importer_params[:subcategory_id]
-
-    sheet = open_sheet importer_params.delete(:file)
-
-    # create vector
+    sheet = open_sheet( importer_params.delete(:file) )
     vector_names = sheet.row(1).drop(excel_item_columns.size)
-    vectors = []
-    vector_names.each do |name|
-      vectors << Vector.find_or_create_by_name(subcategory_id: subcategory.id, user_id: user.id, name: name)
-    end
-
+    vector_selections = sheet_vector_selections(sheet,
+                                                subcategory_id: importer_params[:subcategory_id],
+                                                user_id: user.id)
     errors = []
     (2..sheet.last_row).each do |i|
       item_attributes = sheet.row(i).take(excel_item_columns.size)
-      item_selection = sheet.row(i).drop(excel_item_columns.size)
+      selection_name = sheet.row(i).drop(excel_item_columns.size)
 
-      # create selection
-      selections = []
-      vector_selections = Hash[ [vectors, item_selection].transpose ]
-      vector_selections.each do |vector, name|
-        if name.present?
-          selections << Selection.find_or_create_by_name(user_id: user.id, vector_id: vector.id, name: name)
-        end
+      # item selections
+      selection_ids = []
+      vector_selection_names = Hash[ [vector_names, selection_name].transpose ]
+      vector_selection_names.each do |v_name, s_name|
+        s_name.strip! unless s_name.nil?
+        selection_ids << vector_selections[v_name][s_name] if s_name.present?
       end
 
       row = Hash[ [excel_item_columns, item_attributes].transpose ].symbolize_keys
       item_params = importer_params.merge(row)
-
+      item_params[:selection_ids] = selection_ids
       item_params[:deposit] ||= 0
       item_params[:minimum_period] ||= 1
 
       item = user.items.build item_params
-      item.selections << selections
       if item.valid?
+        item.close
         item.save!
-        item.close!
       else
         message = item.errors.messages.values.join(',')
         errors << I18n.t('activerecord.errors.models.item.import.fail', i: i, message: message)
@@ -270,13 +262,31 @@ class Item < ActiveRecord::Base
   end
 
   private
+    def self.excel_item_columns
+      %w(product_id name price minimum_period deposit)
+    end
+
     def self.open_sheet(file)
       case File.extname(file.original_filename)
       when '.csv' then Roo::CSV.new(file.path)
       end
     end
 
-    def self.excel_item_columns
-      %w(product_id name price minimum_period deposit)
+    # get all sheet vector, selection
+    def self.sheet_vector_selections(sheet, params = {})
+      vector_selections = {}
+      ((excel_item_columns.size + 1)..sheet.last_column).each do |i|
+        vector_name = sheet.column(i).first
+        selection_names = sheet.column(i).drop(1).uniq
+
+        vector = Vector.find_or_create_by_name(subcategory_id: params[:subcategory_id],
+                                               user_id: params[:user_id],
+                                               name: vector_name)
+        selections = Selection.find_or_create_by_names(vector_id: vector.id,
+                                                       user_id: params[:user_id],
+                                                       names: selection_names)
+        selections.each {|s| vector_selections[vector_name] = Hash[ s.name, s.id ] }
+      end
+      vector_selections
     end
 end

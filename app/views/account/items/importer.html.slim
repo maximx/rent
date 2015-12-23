@@ -24,3 +24,5 @@
     table.table
       - @error_messages.each do |message|
         tr: td = message
+
+  = render partial: 'account/settings/bank_info_form', locals: { item: @item, profile: current_user.profile }
