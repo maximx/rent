@@ -82,7 +82,9 @@ Rails.application.routes.draw do
 
     resources :items, only: [ :index, :show ] do
       resources :records, only: [ :new, :create ]
-      get :wish, :calendar, on: :collection
+      collection do
+        get :wish, :calendar, :importer
+      end
     end
 
     resources :records, only: [ :index ] do

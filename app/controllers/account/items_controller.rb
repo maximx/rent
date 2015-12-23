@@ -44,6 +44,9 @@ class Account::ItemsController < ApplicationController
     end
   end
 
+  def importer
+  end
+
   private
     def overlap_method
       if Item.overlaps_values.include?(params[:overlaps])
