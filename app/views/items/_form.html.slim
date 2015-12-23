@@ -8,6 +8,7 @@
 / data-item 是給 item selections 用的，見 item.coffee
 = simple_form_for item, html: { data: { item: item.id } } do |f|
   = f.input :pictures, as: :file_select, input_html: { multiple: true } if item.new_record?
+  = f.input :product_id
   = f.input :name
   = f.input :subcategory_id, as: :grouped_select,
                              collection: categories_grouped_select,
