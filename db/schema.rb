@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215020053) do
+ActiveRecord::Schema.define(version: 20151223024853) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -107,7 +107,10 @@ ActiveRecord::Schema.define(version: 20151215020053) do
     t.integer  "city_id",        limit: 4
     t.float    "deliver_fee",    limit: 24,    default: 0.0
     t.string   "aasm_state",     limit: 255
+    t.string   "product_id",     limit: 255
   end
+
+  add_index "items", ["user_id", "product_id"], name: "index_items_on_user_id_and_product_id", using: :btree
 
   create_table "items_selections", force: :cascade do |t|
     t.integer  "item_id",      limit: 4
