@@ -3,6 +3,7 @@ class Account::ItemsController < ApplicationController
 
   before_action :login_required
   load_and_authorize_resource :item, through: :current_user, only: [ :index, :show ]
+  before_action :validates_profile, only: [ :importer ]
   before_action :load_categories_grouped_select, only: [ :importer, :import ]
 
   def index
@@ -47,12 +48,14 @@ class Account::ItemsController < ApplicationController
   end
 
   def importer
+    authorize! :importer, Item
     @item = Item.new
     @item.set_address current_user
     @error_messages = []
   end
 
   def import
+    authorize! :import, Item
     @item = current_user.items.build importer_params
 
     if @item.valid_attributes?(importer_params.keys) and importer_params[:file].present?
@@ -80,5 +83,13 @@ class Account::ItemsController < ApplicationController
 
     def load_categories_grouped_select
       @categories_grouped_select = Category.grouped_select
+    end
+
+    def validates_profile
+      errors = current_user.profile.validates_basic_info
+      unless errors.empty?
+        redirect_to edit_user_path(current_user, redirect_url: importer_account_items_path),
+                    alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
+      end
     end
 end

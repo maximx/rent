@@ -12,6 +12,8 @@ class Ability
     resources_attachments user
 
     if user.is_company?
+      can [ :importer, :import ], Item
+
       can [ :read, :create ], Customer
       can :update, Customer, user: user
 
