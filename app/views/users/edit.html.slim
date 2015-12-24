@@ -30,4 +30,4 @@
                               input_wrapper_html: { class: 'col-sm-9' }
       .form-group
         .col-sm-offset-3.col-md-offset-2.col-sm-9.col-md-10
-          = f.button :submit
+          = f.button :submit, data: { disable_with: t('helpers.submit.wait') }
