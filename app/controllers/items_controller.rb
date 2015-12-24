@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   include UsersReviewsCount
 
-  before_action :login_required, except: [ :index, :show, :search ]
+  before_action :login_required, except: [ :index, :show, :search, :calendar ]
   before_action :validates_profile, only: [ :new, :create ]
   load_and_authorize_resource except: [ :index, :search ]
   before_action :load_categories_grouped_select, only: [ :new, :create, :edit, :update ]
