@@ -7,13 +7,11 @@ class Account::ItemsController < ApplicationController
   before_action :load_categories_grouped_select, only: [ :importer, :import ]
 
   def index
-    @items = @items.includes(:records)
+    @items = @items.includes(:records, :lender)
                    .send(overlap_method, params[:started_at], params[:ended_at])
                    .search_by(params[:query])
                    .the_sort(params[:sort])
                    .page(params[:page])
-    @records_count = @items.joins(:records).group(:item_id, 'records.aasm_state').count
-    @records_count.default = 0
   end
 
   def show

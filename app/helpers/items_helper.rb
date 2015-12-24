@@ -36,7 +36,10 @@ module ItemsHelper
     if can? :update, item
       link_to render_icon('edit', class: 'text-success'),
               edit_item_path(item),
-              class: 'btn btn-default', title: t('controller.action.edit'), data: { toggle: 'tooltip' }
+              target: '_blank',
+              class: 'btn btn-default',
+              title: t('controller.action.edit'),
+              data: { toggle: 'tooltip' }
     end
   end
 
