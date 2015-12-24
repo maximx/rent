@@ -1,0 +1,30 @@
+.col-sm-offset-3.col-sm-9
+  p
+    span.label.label-danger 重要:
+    |(
+    button.btn-link data-toggle="modal" data-target="#import_tooltip_modal" = t('helpers.account/items.import.tooltip')
+    |)
+
+#import_tooltip_modal.modal.fade tabindex="-1" role="dialog" aria-labelledby="import_tooltip_modal"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title = t('helpers.account/items.import.tooltip')
+
+      .modal-body
+        ol
+          li
+            = link_to(t('helpers.account/items.import.example'), t('helpers.account/items.import.example_link'), target: '_blank')
+            span = "(Version. 2015.12.24)"
+          li
+            code = t('helpers.account/items.import.excel_fix')
+            = t('helpers.account/items.import.fix_description')
+          li
+            = t('helpers.account/items.import.keep_list')
+            code = t('helpers.account/items.import.excel_keep')
+
+      .modal-footer
+        = t('helpers.account/items.import.has_problem')
+        = link_to(t('helpers.account/items.import.contact_me'), "mailto:maxim7667@outlook.com")

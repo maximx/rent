@@ -48,6 +48,16 @@ zh-TW:
       returned: '完成出租'
       withdrawed: '退租'
       renting: '出租中'
+      import:
+        tooltip: '匯入檔案格式說明'
+        example: '匯入檔案範例'
+        example_link: "https://docs.google.com/spreadsheets/d/17rsL8PR7SKu7GVxjZJCH8hZb4gLcovXudq9uBeVtoVI"
+        excel_fix: '編號、名稱、租金、最短租期、押金'
+        fix_description: '為必需物品欄位，且名稱不可變，顏色、尺寸、等級等其餘欄位將視作自訂屬性，會自動新增。'
+        keep_list: '保留欄位名'
+        excel_keep: '編號、名稱、租金、最短租期、押金、分類、運送方式、運送費用、物品所在地'
+        has_problem: '若您還有其他問題，歡迎'
+        contact_me: '來信聯絡'
     account/records:
       no_records: '沒租過'
       go_rent: '來去租'
