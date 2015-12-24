@@ -119,24 +119,28 @@ class Item < ActiveRecord::Base
 
   def self.import(user, importer_params)
     sheet = open_sheet( importer_params.delete(:file) )
-    vector_names = sheet.row(1).drop(excel_item_columns.size)
+    header = sheet_header(sheet.row(1))
     vector_selections = sheet_vector_selections(sheet,
+                                                vector_columns: header[:vector][:columns],
                                                 subcategory_id: importer_params[:subcategory_id],
                                                 user_id: user.id)
     errors = []
     (2..sheet.last_row).each do |i|
-      item_attributes = sheet.row(i).take(excel_item_columns.size)
-      selection_name = sheet.row(i).drop(excel_item_columns.size)
+      sheet_row = sheet.row(i)
+      item_attributes = []
+      selection_name = []
+      header[:item][:columns].each {|i| item_attributes << sheet_row[i - 1] }
+      header[:vector][:columns].each {|i| selection_name << sheet_row[i - 1] }
 
       # item selections
       selection_ids = []
-      vector_selection_names = Hash[ [vector_names, selection_name].transpose ]
+      vector_selection_names = Hash[ [header[:vector][:name], selection_name].transpose ]
       vector_selection_names.each do |v_name, s_name|
         s_name.strip! unless s_name.nil?
         selection_ids << vector_selections[v_name][s_name] if s_name.present?
       end
 
-      row = Hash[ [excel_item_columns, item_attributes].transpose ].symbolize_keys
+      row = Hash[ [header[:item][:name], item_attributes].transpose ].symbolize_keys
       item_params = importer_params.merge(row)
       item_params[:selection_ids] = selection_ids
       item_params[:deposit] ||= 0
@@ -262,21 +266,21 @@ class Item < ActiveRecord::Base
   end
 
   private
-    def self.excel_item_columns
-      %w(product_id name price minimum_period deposit)
-    end
-
     def self.open_sheet(file)
-      case File.extname(file.original_filename)
-      when '.csv' then Roo::CSV.new(file.path)
+      ext_list = ['.csv', '.xls', '.xlsx']
+      if ext_list.include?(File.extname(file.original_filename))
+        Roo::Spreadsheet.open(file.path)
+      else
+        raise "Unknown file type: #{file.original_filename}"
       end
     end
 
     # get all sheet vector, selection
     def self.sheet_vector_selections(sheet, params = {})
       vector_selections = {}
-      ((excel_item_columns.size + 1)..sheet.last_column).each do |i|
+      params[:vector_columns].each do |i|
         vector_name = sheet.column(i).first
+        vector_selections[vector_name] = {}
         selection_names = sheet.column(i).drop(1).uniq
 
         vector = Vector.find_or_create_by_name(subcategory_id: params[:subcategory_id],
@@ -285,8 +289,31 @@ class Item < ActiveRecord::Base
         selections = Selection.find_or_create_by_names(vector_id: vector.id,
                                                        user_id: params[:user_id],
                                                        names: selection_names)
-        selections.each {|s| vector_selections[vector_name] = Hash[ s.name, s.id ] }
+        selections.each {|s| vector_selections[vector_name][s.name] = s.id }
       end
       vector_selections
+    end
+
+    def self.sheet_header(row)
+      column_names = []
+      column_indexs = []
+      vector_names = []
+      vector_indexs = []
+      item_label = I18n.t('simple_form.labels.item')
+
+      row.each_with_index do |v, i|
+        item_column = item_label.key(v)
+        if item_column.present?
+          row[i] = item_column
+          column_indexs << (i + 1)
+          column_names << item_column
+        else
+          vector_indexs << (i + 1)
+          vector_names << v
+        end
+      end
+
+      { item: { name: column_names, columns: column_indexs },
+        vector: { name: vector_names, columns: vector_indexs } }
     end
 end
