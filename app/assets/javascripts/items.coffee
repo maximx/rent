@@ -32,7 +32,7 @@ $ ->
 
 
   # action index, search
-  $('.item-bookmark').on('ajax:success', (e, data, status, xhr) ->
+  $(document).on('ajax:success', '.item-bookmark', (e, data, status, xhr) ->
     if data.status == 'ok'
       $(this).attr('href', data.href)
         .data('method', data.method)
@@ -150,6 +150,7 @@ $ ->
       $('#item-container').remove()
       $('#advanced-search-form').after(html)
       wookmark_item()
+      init_tooltip()
     )
 
     if history.pushState

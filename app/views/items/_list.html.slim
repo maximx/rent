@@ -33,7 +33,7 @@ ul.item-list
 
         .item-list-avatar
           = link_to render_avatar_thumb(item.lender), user_path(item.lender),
-                    class: "img-circle img-thumbnail", title: item.lender.account,
+                    class: "img-circle img-thumbnail", title: item.lender.logo_name,
                     data: { toggle: "tooltip", placement: "left" }
         .item-list-review
           = render_user_reviews(item.lender, @users_reviews_count)

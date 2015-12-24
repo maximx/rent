@@ -42,14 +42,8 @@ $ ->
       e.cancelBubble = true
 
   # bootstrap tooltip, popover
-  $('[data-toggle="tooltip"]').tooltip
-    container: 'body'
-    html: true
-
-  $('[data-toggle="popover"]').popover
-    html: true
-  .click (e)->
-    e.preventDefault()
+  init_tooltip()
+  init_popover()
 
   #price range slider
   $('.slider').slider()

@@ -127,8 +127,11 @@ class User < ActiveRecord::Base
     self.is_a? Customer
   end
 
-  private
+  def logo_name
+    profile.logo_name
+  end
 
+  private
     def init_profile
       self.build_profile.save(validate: false) unless profile
     end

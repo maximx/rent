@@ -9,7 +9,7 @@
         .pull-right = item.city.name if item.city.present?
 
     .item-info-short
-      = link_to(item.lender.account, user_path(item.lender))
+      = link_to(item.lender.logo_name, user_path(item.lender))
       div = render_user_reviews(item.lender, @users_reviews_count)
     = render_collect_item_link item
     = render_uncollect_item_link item
