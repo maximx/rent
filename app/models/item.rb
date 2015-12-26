@@ -163,9 +163,7 @@ class Item < ActiveRecord::Base
   end
 
   def profile_bank_info_presented
-    unless lender.profile.bank_info_present?
-      errors.add(:delivers, '請先填寫匯款資訊')
-    end
+    errors.add(:deliver_ids, '請先填寫匯款資訊') unless lender.profile.bank_info_present?
   end
 
   def period_without_per
