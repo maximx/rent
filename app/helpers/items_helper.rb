@@ -130,10 +130,6 @@ module ItemsHelper
     !["review"].include? action_name
   end
 
-  def uncollect_link_display?(item)
-    user_signed_in? && item.collected_by?(current_user) && item_action_display?
-  end
-
   def items_controller?
     controller_path == 'items'
   end

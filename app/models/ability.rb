@@ -48,10 +48,10 @@ class Ability
     def resources_items(user)
       can :update, Item, lender: user
       can :collect, Item do |item|
-        !user.collected?(item)
+        !item.collected_by? user
       end
       can :uncollect, Item do |item|
-        user.collected?(item)
+        item.collected_by? user
       end
       can :open, Item, lender: user, closed?: true
       can :close, Item, lender: user, opening?: true
