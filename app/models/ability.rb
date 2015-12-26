@@ -56,7 +56,7 @@ class Ability
       can :open, Item, lender: user, closed?: true
       can :close, Item, lender: user, opening?: true
       can :destroy, Item do |item|
-        item.lender == user and item.records.empty?
+        item.user_id == user.id and item.records.empty?
       end
     end
 
