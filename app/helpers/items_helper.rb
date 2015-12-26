@@ -114,7 +114,7 @@ module ItemsHelper
     view
   end
 
-  def render_item_name(item, length = 20)
+  def render_item_name(item, length = 19)
     truncate item.name, length: length
   end
 

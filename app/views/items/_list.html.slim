@@ -1,7 +1,7 @@
 ul.item-list
   - items.each do |item|
 
-    li.item-list-cell.clearfix
+    li.item-list-cell title="#{item.name}"
       .item-list-img
         = link_to item_path(item) do
           figure = render_picture_cover_list item.cover_picture
