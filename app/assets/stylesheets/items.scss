@@ -1,7 +1,10 @@
 @import "mixins/variables";
 
 /*index*/
-.item-view { margin: 10px 0; }
+.item-view {
+  @include clearfix();
+  margin: 10px 0;
+}
 
 #item-container {
   position: relative;

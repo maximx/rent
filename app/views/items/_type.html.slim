@@ -1,5 +1,5 @@
-.item-view.col-xs-offset-6.col-xs-6.col-sm-offset-7.col-sm-5
-  .btn-group.btn-group-sm role="group"
+.item-view.col-xs-12.col-sm-9
+  .btn-group.btn-group-sm.pull-right role="group"
     = render_items_view_links
 
     .btn-group.btn-group-sm role="group"
@@ -9,3 +9,4 @@
       ul.dropdown-menu.dropdown-menu-right
         - items_sort_order_list.each do |key, data_options|
           li = link_to key, '#', data: data_options, class: 'filter-sort', role: 'button'
+.col-sm-3
