@@ -90,7 +90,7 @@ class UsersController < ApplicationController
     def profile_params
       params.require(:profile).permit(
         :name, :address, :phone, :facebook, :line,
-        :description, :bank_code, :bank_account
+        :tel_phone, :description, :bank_code, :bank_account
       )
     end
 

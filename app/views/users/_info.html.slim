@@ -8,6 +8,10 @@ div class="#{profile.facebook.present? ? 'col-md-4' : 'col-md-8'}"
       li
         = render_icon_with_text 'map-marker', label_tag("#{t('simple_form.labels.profile.address')}：")
         span = profile.address
+    - if profile.tel_phone.present?
+      li
+        = render_icon_with_text 'phone-alt', label_tag("#{t('simple_form.labels.profile.tel_phone')}：")
+        span = profile.tel_phone
     - if profile.phone.present?
       li
         = render_icon_with_text 'phone', label_tag("#{t('simple_form.labels.profile.phone')}：")
