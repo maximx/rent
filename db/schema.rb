@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223024853) do
+ActiveRecord::Schema.define(version: 20151227003701) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -265,6 +265,18 @@ ActiveRecord::Schema.define(version: 20151223024853) do
   end
 
   add_index "selections", ["vector_id", "tag_id"], name: "index_selections_on_vector_id_and_tag_id", unique: true, using: :btree
+
+  create_table "shopping_cart_items", force: :cascade do |t|
+    t.integer "shopping_cart_id", limit: 4
+    t.integer "item_id",          limit: 4
+    t.float   "price",            limit: 24
+    t.float   "deliver_fee",      limit: 24
+  end
+
+  add_index "shopping_cart_items", ["shopping_cart_id", "item_id"], name: "index_shopping_cart_items_on_shopping_cart_id_and_item_id", using: :btree
+
+  create_table "shopping_carts", force: :cascade do |t|
+  end
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        limit: 255
