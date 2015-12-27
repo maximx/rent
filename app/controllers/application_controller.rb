@@ -74,4 +74,10 @@ class ApplicationController < ActionController::Base
     msg.each { |key, val| flash[key] = val }
     redirect_to url
   end
+
+  def load_shopping_cart
+    shopping_cart_id = session[:shopping_cart_id]
+    @shopping_cart = shopping_cart_id.present? ? ShoppingCart.find(shopping_cart_id) : ShoppingCart.create
+    session[:shopping_cart_id] = shopping_cart_id
+  end
 end

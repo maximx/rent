@@ -1,0 +1,5 @@
+= simple_form_for @shopping_cart, url: 'path/to/action' do |f|
+  - @shopping_cart.shopping_cart_items.each do |shopping_cart_item|
+    - item = shopping_cart_item.item
+    = f.simple_fields_for :items, item do |i|
+      = i.input :delivers, as: :select, collection: item.delivers

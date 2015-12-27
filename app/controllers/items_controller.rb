@@ -105,13 +105,13 @@ class ItemsController < ApplicationController
     end
   end
 
-  # post shopping_carts/items/:item_id/add
+  # post items/:id/add
   def add
     @shopping_cart.add @item
     redirect_to :back
   end
 
-  # delete shopping_carts/items/:item_id/remove
+  # delete items/:id/remove
   def remove
     @shopping_cart.remove @item
     redirect_to :back
@@ -183,11 +183,5 @@ class ItemsController < ApplicationController
         redirect_to edit_user_path(current_user, redirect_url: new_item_path),
                     alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
       end
-    end
-
-    def load_shopping_cart
-      shopping_cart_id = session[:shopping_cart_id]
-      @shopping_cart = shopping_cart_id.present? ? ShoppingCart.find(shopping_cart_id) : ShoppingCart.create
-      session[:shopping_cart_id] = shopping_cart_id
     end
 end

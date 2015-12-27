@@ -1,6 +1,7 @@
 class ShoppingCart < ActiveRecord::Base
   has_many :shopping_cart_items
   has_many :items, through: :shopping_cart_items
+  accepts_nested_attributes_for :items
 
   def add(item)
     unless item_for(item)

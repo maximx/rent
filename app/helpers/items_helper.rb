@@ -70,15 +70,15 @@ module ItemsHelper
     end
   end
 
-  def render_add_shopping_carts_item_link(item)
+  def render_add_item_link(item)
     link_to '加車',
-            add_shopping_carts_item_path(item),
+            add_item_path(item),
             class: 'btn btn-default', method: :post
   end
 
-  def render_remove_shopping_carts_item_link(item)
+  def render_remove_item_link(item)
     link_to '移車',
-            remove_shopping_carts_item_path(item),
+            remove_item_path(item),
             class: 'btn btn-default', method: :delete
   end
 

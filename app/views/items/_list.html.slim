@@ -4,7 +4,7 @@ ul.item-list
     li.item-list-cell title="#{item.name}"
       .item-list-img
         = link_to item_path(item) do
-          figure = render_picture_cover_list item.cover_picture
+          figure = render_picture_cover_for_list item.cover_picture
 
       .item-list-info
         h4.item-list-name = link_to(render_item_name(item), item_path(item))
@@ -30,8 +30,8 @@ ul.item-list
         div
           = render_collect_item_link item
           = render_uncollect_item_link item
-          = render_add_shopping_carts_item_link item
-          = render_remove_shopping_carts_item_link item
+          = render_add_item_link item
+          = render_remove_item_link item
 
         .item-list-avatar
           = link_to render_avatar_thumb(item.lender), user_path(item.lender),

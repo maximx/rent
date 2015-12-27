@@ -36,7 +36,7 @@ module AttachmentsHelper
     image_tag picture.image_url(:cover), options
   end
 
-  def render_picture_cover_list(picture, options = {})
+  def render_picture_cover_for_list(picture, options = {})
     size_options = { width: 180, height: 130 }
     options = size_options.merge(options)
     image_tag picture.image_url(:cover), options
