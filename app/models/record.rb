@@ -7,7 +7,7 @@ class Record < ActiveRecord::Base
 
   belongs_to :borrower, polymorphic: true
   belongs_to :item
-  belongs_to :deliver, required: true
+  belongs_to :deliver
   has_one :lender, through: :item
 
   has_many :reviews
@@ -171,7 +171,7 @@ class Record < ActiveRecord::Base
   private
     #只有日期 ended_at + 1.day，為整點減去一秒避免 overlap
     def set_ended_at
-      self.ended_at += (1.day - 1.second) if self.new_record?
+      self.ended_at += (1.day - 1.second) if self.new_record? and ended_at.present?
     end
 
     def set_item_attributes

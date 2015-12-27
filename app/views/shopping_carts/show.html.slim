@@ -1,5 +1,15 @@
-= simple_form_for @shopping_cart, url: 'path/to/action' do |f|
-  - @shopping_cart.shopping_cart_items.each do |shopping_cart_item|
-    - item = shopping_cart_item.item
+= simple_form_for @shopping_cart, url: shopping_carts_path do |f|
+  = f.input :started_at, as: :date_time_picker
+  = f.input :ended_at, as: :date_time_picker
+
+  - @items.each do |item|
     = f.simple_fields_for :items, item do |i|
-      = i.input :delivers, as: :select, collection: item.delivers
+      = i.simple_fields_for :records, item.records.build do |r|
+        = r.input :deliver_id, as: :select, collection: item.delivers
+
+  = f.button :submit
+
+javascript:
+  $(document).ready(function(){
+    buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD');
+  });
