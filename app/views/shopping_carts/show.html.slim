@@ -2,14 +2,14 @@
   = f.input :started_at, as: :date_time_picker
   = f.input :ended_at, as: :date_time_picker
 
-  - @items.each do |item|
-    = f.simple_fields_for :items, item do |i|
-      = i.simple_fields_for :records, item.records.build do |r|
-        = r.input :deliver_id, as: :select, collection: item.delivers
+  - @shopping_cart_items.each_with_index do |shopping_cart_item, index|
+    = f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
+      = cart_item.input :deliver_id, as: :select, collection: shopping_cart_item.item.delivers
+  code = @shopping_cart.errors.get(:shopping_cart_items)
 
   = f.button :submit
 
 javascript:
   $(document).ready(function(){
-    buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD');
+    buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD', #{raw @disabled_dates});
   });

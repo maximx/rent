@@ -1,18 +1,18 @@
 class ShoppingCartsController < ApplicationController
   before_action :login_required, only: [:update]
   before_action :load_shopping_cart
+  before_action :load_disabled_dates
 
   def show
-    @items = @shopping_cart.items.includes(:delivers)
+    @shopping_cart_items = @shopping_cart.shopping_cart_items.includes(:deliver, item: :delivers)
   end
 
   def update
-    #TODO: model shopping_cart attributes setting error
-    #@shopping_cart.attributes = shopping_cart_params
+    @shopping_cart.attributes = shopping_cart_params
     if @shopping_cart.valid?
       redirect_to shopping_carts_path
     else
-      @items = @shopping_cart.items.includes(:delivers)
+      @shopping_cart_items = @shopping_cart.shopping_cart_items
       render :show
     end
   end
@@ -21,7 +21,11 @@ class ShoppingCartsController < ApplicationController
     def shopping_cart_params
       params.require(:shopping_cart).permit(
         :started_at, :ended_at,
-        items_attributes: [:id, records_attributes: :deliver_id]
+        shopping_cart_items_attributes: [:id, :deliver_id]
       ).deep_symbolize_keys
+    end
+
+    def load_disabled_dates
+      @disabled_dates = @shopping_cart.booked_dates
     end
 end

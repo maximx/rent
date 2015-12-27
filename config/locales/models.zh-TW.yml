@@ -112,3 +112,16 @@ zh-TW:
           attributes:
             content:
               blank: '評語為必填'
+        shopping_cart:
+          attributes:
+            started_at:
+              blank: '起租日期為必填'
+            ended_at:
+              blank: '迄租日期為必填'
+            shopping_cart_items:
+              record:
+                overlaped: '第%{index}筆的%{msg}'
+        shopping_cart_item:
+          attributes:
+            deliver_id:
+              blank: '運送方式為必填'

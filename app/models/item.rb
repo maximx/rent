@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   include AASM
   include CurrencyPrice
+  include BookedDates
 
   attr_accessor :file # item import file
 
@@ -43,7 +44,8 @@ class Item < ActiveRecord::Base
 
   scope :search_and_sort, ->(params) do
     includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
-      .opening.record_not_overlaps(params[:started_at], params[:ended_at])
+      .opening
+      .record_not_overlaps(params[:started_at], params[:ended_at])
       .price_range(params[:price_min], params[:price_max])
       .search_by(params[:query])
       .city_at(params[:city])
@@ -200,14 +202,6 @@ class Item < ActiveRecord::Base
 
   def pictures_urls
     pictures.map { |p| p.image.url }.uniq
-  end
-
-  def booked_dates
-    dates = records.actived
-                   .where('ended_at > ?', Time.now)
-                   .collect { |record| (record.started_at.to_date .. (record.ended_at).to_date).map(&:to_s) }
-    dates << Time.now.yesterday.to_date.to_s
-    dates.flatten
   end
 
   def selections_checked
