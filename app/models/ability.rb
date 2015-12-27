@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    read_only
+    everyone_can
     resources_users user
     resources_items user
     resources_records user
@@ -29,9 +29,9 @@ class Ability
   end
 
   protected
-    def read_only
+    def everyone_can
       can [ :read, :reviews, :lender_reviews, :borrower_reviews, :items ], User
-      can [ :read, :create, :search, :calendar, :records ], Item
+      can [ :read, :create, :search, :calendar, :records, :add, :remove ], Item
       can :index, Record
     end
 

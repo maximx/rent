@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show, :search, :calendar ]
   before_action :validates_profile, only: [ :new, :create ]
+  before_action :load_shopping_cart, only: [ :add, :remove ]
   load_and_authorize_resource except: [ :index, :search ]
   before_action :load_categories_grouped_select, only: [ :new, :create, :edit, :update ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
@@ -104,6 +105,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  # post shopping_carts/items/:item_id/add
+  def add
+    @shopping_cart.add @item
+    redirect_to :back
+  end
+
+  # delete shopping_carts/items/:item_id/remove
+  def remove
+    @shopping_cart.remove @item
+    redirect_to :back
+  end
+
   def search
     @items = Item.search_and_sort(params)
     find_users_reviews_count
@@ -170,5 +183,11 @@ class ItemsController < ApplicationController
         redirect_to edit_user_path(current_user, redirect_url: new_item_path),
                     alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
       end
+    end
+
+    def load_shopping_cart
+      shopping_cart_id = session[:shopping_cart_id]
+      @shopping_cart = shopping_cart_id.present? ? ShoppingCart.find(shopping_cart_id) : ShoppingCart.create
+      session[:shopping_cart_id] = shopping_cart_id
     end
 end

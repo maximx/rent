@@ -17,6 +17,15 @@ Rails.application.routes.draw do
   resources :categories, only: [ :show ]
   resources :subcategories, only: [ :show ]
 
+  resource :shopping_carts, only: [ :show ] do
+    resources :items, only: [] do
+      member do
+        post :add
+        delete :remove
+      end
+    end
+  end
+
   resources :items do
     resources :records, except: [ :edit, :update, :destroy ] do
       resources :reviews, only: [ :new, :create ]
