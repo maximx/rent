@@ -176,10 +176,10 @@ class Record < ActiveRecord::Base
 
     def set_item_attributes
       if self.new_record?
-        self.item_price = item.price
+        self.item_price ||= item.price
         self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
         self.item_deposit = item.deposit
-        self.deliver_fee = (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
+        self.deliver_fee ||= (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
 
         self.price = rent_days * item_price
       end

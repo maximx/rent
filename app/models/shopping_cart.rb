@@ -36,18 +36,25 @@ class ShoppingCart < ActiveRecord::Base
     shopping_cart_items.clear
   end
 
+  def create_order
+    records = []
+    shopping_cart_items.each do |shopping_cart_item|
+      record_params = shopping_cart_item_record_params(shopping_cart_item)
+      record = shopping_cart_item.item.records.create!(record_params)
+      records << record
+    end
+    order = user.orders.create
+    order.records << records
+    clear
+  end
+
   private
     def shopping_cart_items_valid?
-      shopping_cart_items.each_with_index do |cart_item, index|
-        record_params = {
-          started_at: started_at,
-          ended_at: ended_at,
-          borrower: User.first,
-          deliver_id: cart_item.deliver_id
-        }
-        cart_item.valid?
+      shopping_cart_items.each_with_index do |shopping_cart_item, index|
+        shopping_cart_item.valid?
+        record_params = shopping_cart_item_record_params(shopping_cart_item)
+        record = shopping_cart_item.item.records.build(record_params)
 
-        record = cart_item.item.records.build(record_params)
         unless record.valid?
           errors.add(:shopping_cart_items,
                      :'record.overlaped',
@@ -56,5 +63,16 @@ class ShoppingCart < ActiveRecord::Base
           )
         end
       end
+    end
+
+    def shopping_cart_item_record_params(shopping_cart_item)
+      {
+        started_at: started_at,
+        ended_at: ended_at,
+        borrower: user,
+        item_price: shopping_cart_item.price,
+        deliver_id: shopping_cart_item.deliver_id,
+        deliver_fee: shopping_cart_item.deliver_fee
+      }
     end
 end
