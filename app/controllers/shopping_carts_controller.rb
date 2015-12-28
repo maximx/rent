@@ -8,8 +8,8 @@ class ShoppingCartsController < ApplicationController
   end
 
   def update
-    @shopping_cart.attributes = shopping_cart_params
-    if @shopping_cart.valid?
+    @shopping_cart.user = current_user
+    if @shopping_cart.update(shopping_cart_params)
       redirect_to shopping_carts_path
     else
       @shopping_cart_items = @shopping_cart.shopping_cart_items

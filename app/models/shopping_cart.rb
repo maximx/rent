@@ -6,6 +6,7 @@ class ShoppingCart < ActiveRecord::Base
   validates_presence_of :started_at, :ended_at, unless: :new_record?
   validate :shopping_cart_items_valid?
 
+  belongs_to :user, polymorphic: true
   has_many :shopping_cart_items
   has_many :items, through: :shopping_cart_items
   has_many :records, through: :items

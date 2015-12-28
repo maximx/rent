@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228020547) do
+ActiveRecord::Schema.define(version: 20151228022525) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -295,7 +295,11 @@ ActiveRecord::Schema.define(version: 20151228020547) do
   add_index "shopping_cart_items", ["shopping_cart_id", "item_id"], name: "index_shopping_cart_items_on_shopping_cart_id_and_item_id", using: :btree
 
   create_table "shopping_carts", force: :cascade do |t|
+    t.integer "user_id",   limit: 4
+    t.string  "user_type", limit: 255
   end
+
+  add_index "shopping_carts", ["user_type", "user_id"], name: "index_shopping_carts_on_user_type_and_user_id", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name",        limit: 255
