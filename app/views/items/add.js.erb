@@ -1,0 +1,10 @@
+$('.glyphicon.glyphicon-shopping-cart')
+  .addClass('text-success')
+  .fadeOut(500).fadeIn(500)
+  .fadeOut(500).fadeIn(500, function(){
+    var $this = $(this)
+    setTimeout(
+      function(){
+        $this.removeClass('text-success')
+      }, 2500);
+  });

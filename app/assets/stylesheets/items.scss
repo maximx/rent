@@ -19,14 +19,14 @@
     border-width: 1px;
     border-style: solid;
 
-    .item-bookmark {
+    .item-operation {
       display: none;
       position: absolute;
       bottom: 5px;
       right: 10px;
     }
 
-    &:hover .item-bookmark { display: block; }
+    &:hover .item-operation { display: block; }
 
     .item-info-short {
       border-top: solid 1px $gray-lighter;

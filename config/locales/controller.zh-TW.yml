@@ -5,6 +5,7 @@ zh-TW:
       tours: '導覽'
       users: '個人頁面'
       records: &records '承租紀錄'
+      shopping_carts: '待租'
       account/manage: '管理'
       account/items: '出租物管理'
       account/records: *records
@@ -45,6 +46,8 @@ zh-TW:
         close: '下架'
         collect: '收藏'
         uncollect: '取消收藏'
+        add: '加入待租清單'
+        remove: '移出待租清單'
       open:
         success: '已成功上架%{name}。'
         fail: '請完成%{name}資料。'

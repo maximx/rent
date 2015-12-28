@@ -107,5 +107,7 @@ $ ->
     tinymce.remove()
 
   $(document).ajaxError (e, xhr, settings) ->
-    if xhr.status == 401 && confirm(xhr.responseJSON.error)
+    msg = xhr.responseText
+    msg = xhr.responseJSON.error if xhr.hasOwnProperty('responseJSON')
+    if xhr.status == 401 and confirm(msg)
       window.location = "/users/sign_in"

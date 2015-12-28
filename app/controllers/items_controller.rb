@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   include UsersReviewsCount
 
-  before_action :login_required, except: [ :index, :show, :search, :calendar ]
+  before_action :login_required, except: [ :index, :show, :search, :calendar, :add, :remove ]
   before_action :validates_profile, only: [ :new, :create ]
   before_action :load_shopping_cart, only: [ :add, :remove ]
   load_and_authorize_resource except: [ :index, :search ]
@@ -108,7 +108,6 @@ class ItemsController < ApplicationController
   # post items/:id/add
   def add
     @shopping_cart.add @item
-    redirect_to :back
   end
 
   # delete items/:id/remove

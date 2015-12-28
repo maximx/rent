@@ -1,5 +1,5 @@
 class ShoppingCartsController < ApplicationController
-  before_action :login_required, only: [:update]
+  before_action :login_required
   before_action :load_shopping_cart
   before_action :load_disabled_dates
 
