@@ -1,13 +1,7 @@
 $(document).ready ->
   # record form
-  $('#record_deliver_id').change () ->
-    if is_face_to_face()
-      $('#item_deliver_fee').addClass('hide')
-    else
-      $('#item_deliver_fee').removeClass('hide')
-
+  $('.item_deliver').change () ->
     update_rent_days_price()
-
 
   # record state log
   $('.record_operates a.record_form_modal').click () ->
@@ -33,7 +27,8 @@ $(document).ready ->
     return false
 
 @update_rent_days_price = ()->
-  if $('.item-price-days').size() > 0
+  $order_container = $('.item_record_order')
+  if $order_container.size() > 0
     started_date = moment( $('#record_started_at').val() )
     ended_date = moment( $('#record_ended_at').val() )
 
@@ -41,19 +36,21 @@ $(document).ready ->
     # 相減要加一天
     diff = moment.duration( ended_date.diff(started_date) ).add(1, 'd')
     days = Math.ceil(diff.asDays())
-    days = 0 if isNaN(days)
 
-    total_fee = days * $('#item_price').val()
-    if $('#record_deliver_id').val() and !is_face_to_face()
-      total_fee += Number( $('#item_deliver_fee').data('deliver-fee') )
+    if isNaN(days) or !$('#record_started_at').val() or !$('#record_ended_at').val()
+      days = 0
 
-    $('#rent_days').text(days + ' 天')
-    $('#total_price').text('$ ' + total_fee + ' 元')
+    total = 0
+    $order_container.find('.item_record').each ()->
+      rent_price = days * $(this).find('.item_price').val()
+      deliver_fee = Number( $(this).find('.item_deliver option:selected').data('deliver_fee') )
+      deliver_fee = 0 if isNaN(deliver_fee)
+      subtotal = rent_price + deliver_fee
+      total += subtotal
+
+      $(this).find('.item_deliver_fee').text('$' + deliver_fee)
+      $(this).find('.item_subtotal').text('$' + subtotal)
 
 
-@is_face_to_face = ()->
-  # `a ==b`
-  # ref: http://stackoverflow.com/questions/7032398/does-coffeescript-allow-javascript-style-equality-semantics
-
-  # deliver_id = 2 為面交自取
-  `$('#record_deliver_id').val() == 2`
+    $('#rent_days').text(days + '天')
+    $('#total_price').text('$' + total)

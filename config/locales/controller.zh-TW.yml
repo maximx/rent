@@ -76,6 +76,9 @@ zh-TW:
       destroy:
         success: '已成功刪除%{name}。'
         fail: '%{name}刪除失敗。'
+    shopping_carts:
+      action:
+        show: '待租清單'
     account/settings:
       action:
         phone_confirmation: '手機驗證'

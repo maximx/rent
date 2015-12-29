@@ -164,6 +164,10 @@ class Item < ActiveRecord::Base
     self.address = user.profile.address
   end
 
+  def select_delivers
+    delivers.map{|d| [d.name, d.id, {'data-deliver_fee': d.remit_needed? ? deliver_fee : 0}]}
+  end
+
   def profile_bank_info_presented
     errors.add(:deliver_ids, '請先填寫匯款資訊') unless lender.profile.bank_info_present?
   end

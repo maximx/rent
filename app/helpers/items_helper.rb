@@ -78,7 +78,7 @@ module ItemsHelper
   end
 
   def render_remove_item_link(item)
-    link_to t('controller.action.destroy'), remove_item_path(item), class: 'btn btn-danger', method: :delete
+    link_to t('controller.action.destroy'), remove_item_path(item), class: 'btn btn-danger btn-sm', method: :delete
   end
 
   def render_operate_item_on_index(item)

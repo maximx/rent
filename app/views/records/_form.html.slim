@@ -1,42 +1,43 @@
-= simple_form_for [item, record], render_records_form_options(item) do |f|
-  - if account_manage_controller?
-    .form-group
-      .col-xs-4.col-sm-3.control-label
-        label 承租物
-      .col-xs-6.col-sm-6 = render_disabled_input item.name
+.item_record_order
+  = simple_form_for [item, record], render_records_form_options(item) do |f|
+    .item_record
+      = hidden_field_tag :minimun_period, item.minimum_period
 
-  = render_records_input_wrapper(f.input :started_at, as: :date_time_picker)
-  = render_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
+      - if account_manage_controller?
+        .form-group
+          .col-xs-4.col-sm-3.control-label
+            label 承租物
+          .col-xs-6.col-sm-6 = render_disabled_input item.name
 
-  /是為了 records/new 與 items/show 的 form 美觀
-  - if account_manage_controller?
-    = f.association :borrower, collection: current_user.customers, label_method: :account
-  - else
-    div class=(full_form? ? '' : 'col-sm-12')
-      = f.input :deliver_id, as: :select, collection: item.delivers, input_html: { class: 'form-control' }
+      = render_records_input_wrapper(f.input :started_at, as: :date_time_picker)
+      = render_records_input_wrapper(f.input :ended_at, as: :date_time_picker)
 
-  .form-group
-    div class=(full_form? ? 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9' : 'col-sm-12 text-center')
-      .item-price-days
-        | 承租天數：
-        span#rent_days
+      /是為了 records/new 與 items/show 的 form 美觀
+      - if account_manage_controller?
+        = f.association :borrower, collection: current_user.customers, label_method: :account
+      - else
+        div class=(full_form? ? '' : 'col-sm-12')
+          = f.input :deliver_id, as: :select, collection: item.select_delivers, input_html: { class: 'form-control item_deliver' }
 
-        span#item_deliver_fee.hide data-deliver-fee="#{item.deliver_fee}" ，運送費用：$ #{item.deliver_fee.to_i} 元
+      .form-group
+        div class=(full_form? ? 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9' : 'col-sm-12 text-center')
+          = hidden_field_tag :item_price, item.price, class: 'item_price'
+          div
+            = t('helpers.records.form.rent_days')
+            span#rent_days
+            = t('helpers.records.form.item_deliver_fee')
+            span.item_deliver_fee
+            = t('helpers.records.form.total_price')
+            span#total_price
+          = f.button :submit
 
-        | ，總金額：
-        span#total_price
+  javascript:
+    $(document).ready(function(){
+      update_rent_days_price();
+      buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD', #{raw disabled_dates});
+      rentRecordPickerChange();
+    });
 
-      = f.button :submit
-
-= hidden_field_tag :minimun_period, item.minimum_period
-= hidden_field_tag :item_price, item.price
 
 - if full_form?
   = render partial: 'records/calendar', locals: { event_sources_path: event_sources_path }
-
-javascript:
-  $(document).ready(function(){
-    update_rent_days_price();
-    buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD', #{raw disabled_dates});
-    rentRecordPickerChange();
-  });

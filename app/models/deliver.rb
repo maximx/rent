@@ -5,4 +5,8 @@ class Deliver < ActiveRecord::Base
   def self.face_to_face
     where(name: '面交自取').first
   end
+
+  def remit_needed?
+    !(name == '面交自取')
+  end
 end

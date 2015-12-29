@@ -1,4 +1,6 @@
 class ShoppingCartItem < ActiveRecord::Base
+  include CurrencyPrice
+
   belongs_to :shopping_cart
   belongs_to :item
   belongs_to :deliver

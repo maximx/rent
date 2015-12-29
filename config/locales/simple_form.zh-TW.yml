@@ -40,7 +40,7 @@ zh-TW:
         address: '物品所在地'
         description: '介紹'
         delivers: '運送方式'
-        deliver_fee: '運送費用'
+        deliver_fee: '運費'
         pictures: '圖片'
         file: '匯入'
         product_id: '編號'

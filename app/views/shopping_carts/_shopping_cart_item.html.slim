@@ -1,0 +1,20 @@
+- item = shopping_cart_item.item
+
+li.item_record.col-md-12
+  .col-md-5
+    = hidden_field_tag :item_price, item.price, class: 'item_price'
+    = link_to item.name, item_path(item)
+  .col-md-1
+    = shopping_cart_item.currency_price
+  .col-md-3
+    = f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
+      = cart_item.input :deliver_id,
+                        as: :select,
+                        collection: item.select_delivers,
+                        label: false,
+                        wrapper: :default,
+                        input_html:{class: 'item_deliver form-control'},
+                        include_blank: t('helpers.select.deliver_blank')
+  .col-md-1.item_deliver_fee
+  .col-md-1.item_subtotal
+  .col-md-1 = render_remove_item_link(item)
