@@ -33,7 +33,7 @@ class ShoppingCart < ActiveRecord::Base
   end
 
   def clear
-    shopping_cart_items.clear
+    shopping_cart_items.delete_all
   end
 
   def create_order

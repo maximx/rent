@@ -15,12 +15,12 @@ zh-TW:
       keyword: '關鍵字'
     select:
       deliver_blank: '選擇運送方式'
+      subcategory_blank: '選擇分類'
+      city_blank: '選擇地點'
     users:
       confirmed_attribute: '已驗證'
     items:
       search:
-        subcategory_blank: '選擇分類'
-        city_blank: '選擇地點'
         keyword: '要找什麼物品呢？'
         rent_date: '租借日期'
         started_at: '起租日期'

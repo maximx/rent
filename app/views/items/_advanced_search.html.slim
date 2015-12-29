@@ -16,7 +16,7 @@ form#advanced-search-form.form-horizontal
                        grouped_options_for_select(Category.grouped_select(controller_name, action_name, params[:account]),
                                                   selected: params[:subcategory]),
                        class: 'form-control filter-subcategory',
-                       include_blank: t('helpers.items.search.subcategory_blank')
+                       include_blank: t('helpers.select.subcategory_blank')
       /from #selections-hide
       #selections-container
 
