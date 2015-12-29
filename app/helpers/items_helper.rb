@@ -70,20 +70,9 @@ module ItemsHelper
     end
   end
 
-  def render_add_item_link(item)
-    link_to render_icon('plus', class: 'text-danger'),
-            add_item_path(item),
-            class: 'btn btn-default', method: :post, remote: true,
-            title: t('controller.items.action.add'), data: {toggle: 'tooltip'}
-  end
-
-  def render_remove_item_link(item)
-    link_to t('controller.action.destroy'), remove_item_path(item), class: 'btn btn-danger btn-sm', method: :delete
-  end
-
   def render_operate_item_on_index(item)
     raw [
-      render_add_item_link(item),
+      render_add_shopping_carts_item_link(item),
       render_collect_item_link(item),
       render_uncollect_item_link(item)
     ].join

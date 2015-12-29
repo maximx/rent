@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   resources :categories, only: [ :show ]
   resources :subcategories, only: [ :show ]
-  resource :shopping_carts, only: [ :show, :update ]
 
   resources :items do
     resources :records, except: [ :edit, :update, :destroy ] do
@@ -35,8 +34,16 @@ Rails.application.routes.draw do
       post :collect
       delete :uncollect
       patch :open, :close
-      post :add
-      delete :remove
+    end
+  end
+
+  resource :shopping_carts, only: [ :show, :update ]
+  namespace :shopping_carts do
+    resources :items, only:[] do
+      member do
+        post :add
+        delete :remove
+      end
     end
   end
 

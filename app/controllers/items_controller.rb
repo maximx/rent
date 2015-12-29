@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
 
   before_action :login_required, except: [ :index, :show, :search, :calendar, :add, :remove ]
   before_action :validates_profile, only: [ :new, :create ]
-  before_action :load_shopping_cart, only: [ :add, :remove ]
   load_and_authorize_resource except: [ :index, :search ]
   before_action :load_categories_grouped_select, only: [ :new, :create, :edit, :update ]
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
@@ -103,17 +102,6 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.json { render json: result }
     end
-  end
-
-  # post items/:id/add
-  def add
-    @shopping_cart.add @item
-  end
-
-  # delete items/:id/remove
-  def remove
-    @shopping_cart.remove @item
-    redirect_to :back
   end
 
   def search
