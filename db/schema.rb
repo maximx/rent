@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228022525) do
+ActiveRecord::Schema.define(version: 20151229093151) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -189,6 +189,9 @@ ActiveRecord::Schema.define(version: 20151228022525) do
     t.string   "user_type",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.float    "price",      limit: 24
   end
 
   add_index "orders", ["user_type", "user_id"], name: "index_orders_on_user_type_and_user_id", using: :btree
