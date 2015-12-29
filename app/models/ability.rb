@@ -10,6 +10,7 @@ class Ability
     resources_records user
     resources_reviews user
     resources_attachments user
+    resources_orders user
 
     if user.is_company?
       can [ :importer, :import ], Item
@@ -96,5 +97,9 @@ class Ability
       can :download, Attachment do |attachment|
         attachment.viewable_by? user
       end
+    end
+
+    def resources_orders(user)
+      can :read, Order, user: user
     end
 end

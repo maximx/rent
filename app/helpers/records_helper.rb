@@ -127,11 +127,11 @@ module RecordsHelper
     full_form? ? html : content_tag(:div, html, options)
   end
 
-  def render_datetime_period(obj, type = :db)
+  def render_datetime_period(obj, type = :tw)
     "#{render_datetime(obj.started_at, type)} ~ #{render_datetime(obj.ended_at, type)}"
   end
 
-  def render_datetime(datetime, type = :db)
+  def render_datetime(datetime, type = :tw)
     datetime.to_s(type)
   end
 

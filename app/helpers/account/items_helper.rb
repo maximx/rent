@@ -19,8 +19,8 @@ module Account::ItemsHelper
         li << [ render_icon_with_text('user', t('controller.name.account/customers')),
                 account_customers_path, parent: true ]
       end
-      li << [ render_icon_with_text('record', t('controller.name.account/records')),
-              account_records_path, parent: true ]
+      li << [ render_icon_with_text('record', t('controller.name.account/orders')),
+              account_orders_path, parent: true ]
     end
   end
 
@@ -58,6 +58,7 @@ module Account::ItemsHelper
   def account_manage_controller?
     account_manage_list = [
       'account/items',
+      'account/orders',
       'account/records',
       'account/customers',
       'account/categories',
