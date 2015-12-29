@@ -17,8 +17,8 @@
           .panel-body
             = render partial: 'records/form', locals: { item: item, record: record, disabled_dates: disabled_dates }
             .text-right
-              = render_collect_item_link item
-              = render_uncollect_item_link item
+              .btn-group
+                = render_operate_item_on_index item
 
 .item-show-container
   .row

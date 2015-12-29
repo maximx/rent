@@ -1,15 +1,33 @@
-= simple_form_for @shopping_cart, url: shopping_carts_path do |f|
-  = f.input :started_at, as: :date_time_picker
-  = f.input :ended_at, as: :date_time_picker
+= render_default_content(@shopping_cart.items) do
+  | #{t('helpers.shopping_carts.empty')}
+  mark = link_to(t('helpers.account/records.go_rent'), search_items_path, class: 'text-danger')
 
-  - @shopping_cart_items.each_with_index do |shopping_cart_item, index|
-    = f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
-      = cart_item.input :deliver_id, as: :select, collection: shopping_cart_item.item.delivers
-  code = @shopping_cart.errors.get(:shopping_cart_items)
+- unless @shopping_cart.empty?
+  = simple_form_for @shopping_cart, url: shopping_carts_path do |f|
+    = f.input :started_at, as: :date_time_picker, input_html: {id: 'started_at'}
+    = f.input :ended_at, as: :date_time_picker, input_html: {id: 'ended_at'}
 
-  = f.button :submit
+    ol
+      - @shopping_cart_items.each do |shopping_cart_item|
+        li.col-sm-12
+          - item = shopping_cart_item.item
+          .col-md-6
+            = link_to item.name, item_path(item)
+          .col-md-1
+            = shopping_cart_item.price
+          .col-md-4
+            = f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
+              = cart_item.input :deliver_id, as: :select, collection: item.delivers, label: false, include_blank: '選擇運送方式'
+          .col-md-1
+            = render_remove_item_link(item)
+    code = @shopping_cart.errors.get(:shopping_cart_items)
 
-javascript:
-  $(document).ready(function(){
-    buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD', #{raw @disabled_dates});
-  });
+    .col-sm-12
+      .col-sm-9
+        .text-right = f.button :submit
+      .col-sm-3
+
+  javascript:
+    $(document).ready(function(){
+      buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD', #{raw @disabled_dates});
+    });

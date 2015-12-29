@@ -39,6 +39,9 @@ zh-TW:
       ask_for_review_send: '邀請評價通知已寄送。'
     messages:
       message_to: '發送訊息給'
+    shopping_carts:
+      empty: '無欲租物品，現在就'
+      go_rent: &go_rent '來去租'
     account/settings:
       phone_confirmation:
         description: '您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：'
@@ -60,7 +63,7 @@ zh-TW:
         contact_me: '來信聯絡'
     account/records:
       no_records: '沒租過'
-      go_rent: '來去租'
+      go_rent: *go_rent
     account/categories:
       add_vector: '增加屬性'
     account/subcategories:
