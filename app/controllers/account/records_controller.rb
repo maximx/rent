@@ -3,8 +3,8 @@ class Account::RecordsController < ApplicationController
   load_and_authorize_resource :item, through: :current_user, only: [ :new, :create ]
 
   def index
-    @records = current_user.borrow_records
-                           .includes(:borrower, :deliver, [ item: [ lender: [profile: :avatar] ] ])
+    @records = current_user.records
+                           .includes(:borrower, :deliver, [item: [lender: [profile: :avatar]]])
                            .recent
                            .page(params[:page])
     @record_state_log = unless @records.empty?
@@ -44,7 +44,7 @@ class Account::RecordsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        records_json = current_user.borrow_orders
+        records_json = current_user.orders
                                    .includes(borrower: :profile)
                                    .overlaps(params[:start], params[:end])
                                    .to_json

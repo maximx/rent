@@ -22,7 +22,6 @@ ul.nav.navbar-nav.navbar-right
         li = link_to render_icon_with_text('log-out', t('devise.views.sign_out')), destroy_user_session_path, method: :delete
 
   - else
-    li.logged = render_shopping_cart_link
     li = link_to t('controller.name.tours'), tours_path, class: 'signup'
     li = link_to t('devise.views.sign_up'), new_user_registration_path, class: 'signup'
     li.active = link_to t('devise.views.sign_in'), new_user_session_path, class: 'login'

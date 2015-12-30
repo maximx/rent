@@ -8,20 +8,18 @@ class User < ActiveRecord::Base
   has_one :profile, as: :user
   has_many :requirements
   has_many :customers
-  has_many :borrow_orders, as: :borrower, class_name: 'Order'
 
   has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :following_relationships, source: :followed
   has_many :followers, through: :following_relationships, source: :follower
 
   has_many :items
-  has_many :records, through: :items
+  has_many :records, as: :borrower
+  has_many :lend_records, through: :items, class_name: 'Record', source: :records
+  has_many :borrowers, through: :lend_records, source: :borrower, source_type: 'User'
 
-  has_many :orders, through: :records
-  alias_method :lend_orders, :orders
-
-  has_many :borrow_records, class_name: 'Record', as: :borrower
-  alias_method :lend_records, :records
+  has_many :orders, as: :borrower
+  has_many :lend_orders, through: :lend_records, class_name: 'Order', source: :order
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
   has_many :collections, through: :collect_relationships, source: :item
