@@ -1,4 +1,6 @@
 module BookedDates
+  extend ActiveSupport::Concern
+
   def booked_dates
     dates = records.actived
                    .where('ended_at > ?', Time.now)

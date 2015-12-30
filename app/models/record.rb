@@ -1,6 +1,7 @@
 class Record < ActiveRecord::Base
   include AASM
   include CurrencyPrice
+  include ScopeOverlaps
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
   validate :start_end_date, :not_overlap
@@ -22,10 +23,6 @@ class Record < ActiveRecord::Base
   before_save :set_item_attributes
   after_save :save_booking_state_log, :send_payment_message
 
-  scope :overlaps, ->(started_at, ended_at) do
-    where("(TIMESTAMPDIFF(SECOND, started_at, ?) * TIMESTAMPDIFF(SECOND, ?, ended_at)) >= 0", ended_at, started_at)
-      .actived
-  end
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
   scope :recent, -> { order(:created_at).reverse_order }
 

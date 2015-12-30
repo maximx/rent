@@ -1,13 +1,11 @@
 class Order < ActiveRecord::Base
   include CurrencyPrice
+  include ScopeOverlaps
 
   belongs_to :borrower, polymorphic: true
   has_many :records
 
   scope :recent, -> { order(:created_at).reverse_order }
-  scope :overlaps, ->(started_at, ended_at) do
-    where("(TIMESTAMPDIFF(SECOND, orders.started_at, ?) * TIMESTAMPDIFF(SECOND, ?, orders.ended_at)) >= 0", ended_at, started_at)
-  end
 
   def as_json(options={})
     {

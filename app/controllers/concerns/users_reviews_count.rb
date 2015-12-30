@@ -1,4 +1,6 @@
 module UsersReviewsCount
+  extend ActiveSupport::Concern
+
   private
     def find_users_reviews_count
       @users_reviews_count = Review.lender
