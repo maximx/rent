@@ -10,7 +10,7 @@ class ShoppingCartsController < ApplicationController
   def update
     @shopping_cart.user = current_user
     if @shopping_cart.update(shopping_cart_params)
-      order = @shopping_cart.create_order
+      order = @shopping_cart.checkout
       redirect_to account_order_path(order)
     else
       @shopping_cart_items = @shopping_cart.shopping_cart_items

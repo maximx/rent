@@ -134,6 +134,10 @@ class Record < ActiveRecord::Base
     deliver.name != '面交自取'
   end
 
+  def emailable?
+    borrower.email.present?
+  end
+
   def total_price
     price + item_deposit + deliver_fee
   end
@@ -165,8 +169,13 @@ class Record < ActiveRecord::Base
     ].join(' ')
   end
 
-  def emailable?
-    borrower.email.present?
+  def ended_date
+    ended_at.to_date
+  end
+
+  def update_order
+    order = borrower.orders.create(started_at: started_at, ended_at: ended_date, price: price)
+    update(order: order)
   end
 
   private

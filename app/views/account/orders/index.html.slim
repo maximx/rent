@@ -17,3 +17,5 @@
           td = order.currency_price
           td = render_datetime(order.created_at, :tw)
           td = link_to t('controller.action.show'), account_order_path(order), class: 'btn btn-primary'
+
+  = render partial: 'common/pagination', locals: {objects: @orders}

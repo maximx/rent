@@ -32,10 +32,11 @@ class RecordsController < ApplicationController
     @record.borrower = current_user
 
     if @record.save
+      @record.update_order
       @record.lender.notify @record.notify_booking_subject, item_record_url(@item, @record)
       redirect_to item_record_path(@item, @record)
     else
-      @record.ended_at = @record.ended_at.to_date
+      @record.ended_at = @record.ended_date
       flash[:alert] = t('controller.action.create.fail')
       render :new
     end

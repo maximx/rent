@@ -36,7 +36,7 @@ class ShoppingCart < ActiveRecord::Base
     shopping_cart_items.delete_all
   end
 
-  def create_order
+  def checkout
     records = []
     total_price = 0
     order = user.orders.build(started_at: started_at, ended_at: ended_at)
