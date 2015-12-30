@@ -91,7 +91,6 @@ class Record < ActiveRecord::Base
     item.records.where.not(id: id || -1).overlaps(started_at, ended_at)
   end
 
-  #gmaps4rails
   def as_json(options={})
     {
       id: id,

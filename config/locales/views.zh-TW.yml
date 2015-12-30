@@ -43,6 +43,9 @@ zh-TW:
       returning_confirm: '確認已歸還出租物嗎？'
       ask_for_review_confirm: '將寄出信件邀請對方評價，確認要繼續嗎？'
       ask_for_review_send: '邀請評價通知已寄送。'
+    orders:
+      json:
+        title: '%{name}的訂單#%{id}，總金額 %{price}'
     messages:
       message_to: '發送訊息給'
     shopping_carts:

@@ -20,8 +20,7 @@ class Item < ActiveRecord::Base
   belongs_to :city
 
   has_many :records, -> { order(started_at: :desc) }, class_name: 'Record', foreign_key: 'item_id'
-  has_many :borrowers, through: :records, source: :user
-  has_many :reviews, through: :records, source: :reviews
+  has_many :reviews, through: :records
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
   has_many :collectors, through: :collect_relationships, source: :user

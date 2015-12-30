@@ -40,13 +40,16 @@ class Account::RecordsController < ApplicationController
 
   def calendar
     @event_sources_path = calendar_account_records_path(format: :json)
-    records_json = current_user.borrow_records
-                               .includes(:borrower, :item)
-                               .overlaps(params[:start], params[:end])
-                               .to_json
+
     respond_to do |format|
       format.html
-      format.json { render json: records_json }
+      format.json {
+        records_json = current_user.borrow_orders
+                                   .includes(borrower: :profile)
+                                   .overlaps(params[:start], params[:end])
+                                   .to_json
+        render json: records_json
+      }
     end
   end
 

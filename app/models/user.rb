@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_one :profile, as: :user
   has_many :requirements
   has_many :customers
-  has_many :orders, as: :borrower
+  has_many :borrow_orders, as: :borrower, class_name: 'Order'
 
   has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :following_relationships, source: :followed
@@ -16,7 +16,9 @@ class User < ActiveRecord::Base
 
   has_many :items
   has_many :records, through: :items
-  has_many :borrowers, through: :records, source_type: 'User'
+
+  has_many :orders, through: :records
+  alias_method :lend_orders, :orders
 
   has_many :borrow_records, class_name: 'Record', as: :borrower
   alias_method :lend_records, :records
