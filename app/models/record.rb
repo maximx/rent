@@ -27,7 +27,7 @@ class Record < ActiveRecord::Base
       .actived
   end
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
-  scope :rencent, -> { order(:created_at).reverse_order }
+  scope :recent, -> { order(:created_at).reverse_order }
 
   aasm no_direct_assignment: true do
     state :booking, initial: true

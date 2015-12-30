@@ -5,7 +5,8 @@ class Account::RecordsController < ApplicationController
   def index
     @records = current_user.borrow_records
                            .includes(:borrower, :deliver, [ item: [ lender: [profile: :avatar] ] ])
-                           .rencent.page(params[:page])
+                           .recent
+                           .page(params[:page])
     @record_state_log = unless @records.empty?
                           @records.first.record_state_logs.build
                         else

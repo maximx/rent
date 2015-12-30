@@ -6,7 +6,7 @@ class RecordsController < ApplicationController
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
 
   def index
-    @records = @item.records.includes(:borrower).rencent.reverse_order.page(params[:page])
+    @records = @item.records.includes(:borrower).recent.reverse_order.page(params[:page])
   end
 
   def show

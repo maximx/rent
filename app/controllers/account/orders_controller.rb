@@ -9,7 +9,7 @@ class Account::OrdersController < ApplicationController
   def show
     @records = @order.records
                      .includes(:borrower, :deliver, [ item: [ lender: [profile: :avatar] ] ])
-                     .rencent
+                     .recent
                      .page(params[:page])
     @record_state_log = unless @records.empty?
                           @records.first.record_state_logs.build
