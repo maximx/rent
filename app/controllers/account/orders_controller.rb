@@ -1,6 +1,6 @@
 class Account::OrdersController < ApplicationController
   before_action :login_required
-  load_and_authorize_resource
+  load_and_authorize_resource :order, through: :current_user
 
   def index
   end

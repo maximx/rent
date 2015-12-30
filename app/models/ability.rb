@@ -103,6 +103,6 @@ class Ability
     end
 
     def resources_orders(user)
-      can :read, Order, user: user
+      can :read, Order, borrower: user
     end
 end

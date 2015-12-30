@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230010746) do
+ActiveRecord::Schema.define(version: 20151230075008) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -176,16 +176,16 @@ ActiveRecord::Schema.define(version: 20151230010746) do
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "user_type",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "borrower_id",   limit: 4
+    t.string   "borrower_type", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.float    "price",      limit: 24
+    t.float    "price",         limit: 24
   end
 
-  add_index "orders", ["user_type", "user_id"], name: "index_orders_on_user_type_and_user_id", using: :btree
+  add_index "orders", ["borrower_type", "borrower_id"], name: "index_orders_on_borrower_type_and_borrower_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",               limit: 4
