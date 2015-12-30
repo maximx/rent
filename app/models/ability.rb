@@ -31,8 +31,8 @@ class Ability
 
   protected
     def everyone_can
-      can [ :read, :reviews, :lender_reviews, :borrower_reviews, :items ], User
-      can [ :read, :create, :search, :calendar, :records, :add, :remove ], Item
+      can [:read, :reviews, :lender_reviews, :borrower_reviews, :items], User
+      can [:read, :create, :search, :calendar, :records, :remove], Item
       can :index, Record
     end
 
@@ -58,6 +58,9 @@ class Ability
       can :close, Item, lender: user, opening?: true
       can :destroy, Item do |item|
         item.user_id == user.id and item.records.empty?
+      end
+      can [:add], Item do |item|
+        item.user_id != user.id
       end
     end
 

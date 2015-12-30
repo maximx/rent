@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229093151) do
+ActiveRecord::Schema.define(version: 20151230010746) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -175,15 +175,6 @@ ActiveRecord::Schema.define(version: 20151229093151) do
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
 
-  create_table "order_records", force: :cascade do |t|
-    t.integer  "order_id",   limit: 4
-    t.integer  "record_id",  limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "order_records", ["order_id"], name: "index_order_records_on_order_id", using: :btree
-
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.string   "user_type",  limit: 255
@@ -249,9 +240,11 @@ ActiveRecord::Schema.define(version: 20151229093151) do
     t.integer  "deliver_id",    limit: 4,   null: false
     t.float    "deliver_fee",   limit: 24
     t.string   "borrower_type", limit: 255
+    t.integer  "order_id",      limit: 4
   end
 
   add_index "records", ["borrower_id", "borrower_type"], name: "index_records_on_borrower_id_and_borrower_type", using: :btree
+  add_index "records", ["order_id"], name: "index_records_on_order_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "record_id",  limit: 4

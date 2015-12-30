@@ -1,6 +1,7 @@
 class ShoppingCarts::ItemsController < ApplicationController
+  before_action :login_required
   before_action :load_shopping_cart
-  load_and_authorize_resource except: [ :index, :search ]
+  load_and_authorize_resource
 
   # post items/:id/add
   def add

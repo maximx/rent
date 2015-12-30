@@ -8,6 +8,7 @@ class Record < ActiveRecord::Base
   belongs_to :borrower, polymorphic: true
   belongs_to :item
   belongs_to :deliver
+  belongs_to :order
   has_one :lender, through: :item
 
   has_many :reviews

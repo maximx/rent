@@ -39,15 +39,19 @@ class ShoppingCart < ActiveRecord::Base
   def create_order
     records = []
     total_price = 0
+    order = user.orders.build(started_at: started_at, ended_at: ended_at)
+
     shopping_cart_items.each do |shopping_cart_item|
       record_params = shopping_cart_item_record_params(shopping_cart_item)
       record = shopping_cart_item.item.records.create!(record_params)
       total_price += record.price
       records << record
     end
-    order = user.orders.create(started_at: started_at, ended_at: ended_at, price: total_price)
-    order.records << records
     clear
+
+    order.price = total_price
+    order.records << records
+    order.save
     order
   end
 
