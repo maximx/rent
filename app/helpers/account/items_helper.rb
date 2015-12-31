@@ -20,7 +20,7 @@ module Account::ItemsHelper
                 account_customers_path, parent: true ]
       end
       li << [ render_icon_with_text('record', t('controller.name.account/orders')),
-              account_orders_path, parent: true ]
+              account_records_path, parent: true ]
     end
   end
 
