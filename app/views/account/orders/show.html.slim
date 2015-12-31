@@ -1,0 +1,19 @@
+table.table
+  thead
+    tr
+      td 承租者
+      td = link_to(@order.borrower.logo_name, borrower_path(@order.borrower))
+  tbody
+    tr
+      td 起租日期
+      td = render_datetime(@order.started_at, :date_only)
+    tr
+      td 迄租日期
+      td = render_datetime(@order.ended_at, :date_only)
+    - @records.each_with_index do |record, index|
+      tr
+        td = "出租物" if index == 0
+        td = link_to("##{index +1}", account_item_path(record.item))
+    tr
+      td
+      td = link_to('詳細', account_order_path(@order))

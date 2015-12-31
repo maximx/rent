@@ -21,6 +21,6 @@ class Account::OrdersController < ApplicationController
                         else
                           RecordStateLog.new
                         end
-    render 'account/records/index'
+    request.xhr? ? :show : render('account/records/index')
   end
 end

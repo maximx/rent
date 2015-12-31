@@ -2,11 +2,11 @@ table.table
   thead
     tr
       td 出租者
-      td = link_to(@record.lender.account, user_path(@record.lender))
+      td = link_to(@record.lender.logo_name, user_path(@record.lender))
   tbody
     tr
       td 承租者
-      td = link_to(@record.borrower.account, borrower_path(@record.borrower))
+      td = link_to(@record.borrower.logo_name, borrower_path(@record.borrower))
     tr
       td 起租日期
       td = render_datetime(@record.started_at, :date_only)

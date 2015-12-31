@@ -15,7 +15,7 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        ( request.xhr? ) ? render('records/show_popover', layout: false) : :show
+        request.xhr? ? render('records/show_popover') : :show
       end
       format.pdf do
         pdf = RecordPdf.new(@item, @record)

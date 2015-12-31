@@ -1,7 +1,7 @@
 class Record < ActiveRecord::Base
   include AASM
   include CurrencyPrice
-  include ScopeOverlaps
+  include DatetimeOverlaps
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
   validate :start_end_date, :not_overlap
@@ -19,7 +19,6 @@ class Record < ActiveRecord::Base
 
   self.per_page = 10
 
-  before_validation :set_ended_at
   before_save :set_item_attributes
   after_save :save_booking_state_log, :send_payment_message
 
@@ -165,21 +164,12 @@ class Record < ActiveRecord::Base
     ].join(' ')
   end
 
-  def ended_date
-    ended_at.to_date
-  end
-
   def update_order
     order = borrower.orders.create(started_at: started_at, ended_at: ended_date, price: price)
     update(order: order)
   end
 
   private
-    #只有日期 ended_at + 1.day，為整點減去一秒避免 overlap
-    def set_ended_at
-      self.ended_at += (1.day - 1.second) if self.new_record? and ended_at.present?
-    end
-
     def set_item_attributes
       if self.new_record?
         self.item_price ||= item.price

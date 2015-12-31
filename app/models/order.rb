@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   include CurrencyPrice
-  include ScopeOverlaps
+  include DatetimeOverlaps
 
   belongs_to :borrower, polymorphic: true
   has_many :records
