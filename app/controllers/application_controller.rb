@@ -11,7 +11,11 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_url = request.referer.present? ? :back : items_path
-    redirect_to redirect_url, alert: t('common.no_privilege') unless request.xhr?
+    unless request.xhr?
+      redirect_to redirect_url, alert: t('common.no_privilege')
+    else
+      render text: t('common.no_privilege')
+    end
   end
 
   protected

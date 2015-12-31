@@ -79,10 +79,14 @@ class Item < ActiveRecord::Base
   end
 
   scope :record_overlaps, ->(started_at, ended_at) do
-    where(id: Record.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
+    if started_at.present? and ended_at.present?
+      where(id: Record.select(:id, :item_id).overlaps(started_at, ended_at).pluck(:item_id))
+    end
   end
   scope :record_not_overlaps, ->(started_at, ended_at) do
-    where.not(id: record_overlaps(started_at, ended_at)) if started_at.present? and ended_at.present?
+    if started_at.present? and ended_at.present?
+      where.not(id: record_overlaps(started_at, ended_at))
+    end
   end
 
   scope :the_sort, ->(sort_param) do
