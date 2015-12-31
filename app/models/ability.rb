@@ -103,6 +103,9 @@ class Ability
     end
 
     def resources_orders(user)
-      can :read, Order, borrower: user
+      can :index, Order, borrower: user
+      can :show, Order do |order|
+        order.borrower?(user) or order.lenders.include?(user)
+      end
     end
 end
