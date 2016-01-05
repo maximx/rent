@@ -1,5 +1,5 @@
 <%- if remotipart_submitted? %>
   var html = "<%= escape_javascript(render(partial: "pictures/carousel", locals: { pictures: @item.pictures })) %>";
   $('#picture-carousel').remove();
-  $('#site-content').prepend( html );
+  $('#picture_modal .modal-body').html(html);
 <% end %>

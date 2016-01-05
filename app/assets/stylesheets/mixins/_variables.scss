@@ -22,3 +22,12 @@ $one-px-solid: 1px solid;
 /*tours*/
 $tours-figure-margin: 30px 0;
 $tours-img-width: 70%;
+
+
+@mixin test($height) {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: $body-bg;
+  background-position: 50% 50%;
+  height: $height;
+}

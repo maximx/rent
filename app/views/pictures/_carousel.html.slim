@@ -6,7 +6,8 @@
 
     .carousel-inner.img-thumbnail role="listbox"
       - pictures.each_with_index do |picture, index|
-        div class="item#{ " active" if index == 0 }" style="background-image: url(#{picture.image.url});"
+        div class="item#{ " active" if index == 0 }"
+          = image_tag picture.image.url
           = destroy_attachment_link picture
 
     a.left.carousel-control href="#picture-carousel" role="button" data-slide="prev"

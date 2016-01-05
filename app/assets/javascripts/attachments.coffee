@@ -25,3 +25,7 @@ $ ->
 
   $('form.ajax_image').on 'change', '.picture :file', () ->
     $(this).closest('form').submit()
+
+  $('.cover-image').click(()->
+    $('#picture_modal').modal()
+  )

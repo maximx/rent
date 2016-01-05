@@ -1,0 +1,9 @@
+- if pictures.present?
+  .cover-image-container
+    .cover-image style="background-image: url(#{cover.image.url});"
+
+  #picture_modal.modal.fade tabindex="-1" role="dialog"
+    .modal-dialog role="document"
+      .modal-content
+        .modal-body
+          = render partial: 'pictures/carousel', locals: {pictures: pictures}

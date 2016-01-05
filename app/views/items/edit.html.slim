@@ -1,7 +1,7 @@
 - breadcrumb :item_edit, @item
 
 - content_for :full_top do
-  = render partial: 'pictures/carousel', locals: { pictures: @item.pictures }
+  = render partial: 'attachments/cover', locals: {cover: @item.cover_picture, pictures: @item.pictures}
 
 .page-header: h1 = render_item_name @item
 .row
