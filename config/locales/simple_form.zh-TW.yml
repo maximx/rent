@@ -44,6 +44,7 @@ zh-TW:
         pictures: '圖片'
         file: '匯入'
         product_id: '編號'
+        aasm_state: &aasm_state '狀態'
       record:
         started_at: &started_at '起租日期'
         ended_at: &ended_at '迄租日期'
@@ -51,7 +52,7 @@ zh-TW:
         borrower: '承租客戶'
         item: '承租物'
         price: '租金'
-        aasm_state: '狀態'
+        aasm_state: *aasm_state
         period: '期間'
         review: '評價'
       review:

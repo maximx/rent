@@ -16,6 +16,10 @@ zh-TW:
             renting: '出租中'
             withdrawed: '已取消'
             returned: '已歸還'
+      item:
+        aasm_state:
+            opening: '上架'
+            closed: '下架'
       review/rate:
           bad: '負評'
           good: '好評'
