@@ -6,6 +6,9 @@ $ ->
 
       if size == 1
         $carousel.remove()
+        $('.cover-image-container').remove()
+        $('#picture_modal').modal('hide')
+        setTimeout(remove_picture_modal, 500)
       else
         $pic_item = $(this).closest('.item')
         index = $pic_item.index()
@@ -26,6 +29,8 @@ $ ->
   $('form.ajax_image').on 'change', '.picture :file', () ->
     $(this).closest('form').submit()
 
-  $('.cover-image').click(()->
+  $(document).on 'click', '.cover-image', ()->
     $('#picture_modal').modal()
-  )
+
+@remove_picture_modal = ()->
+  $('#picture_modal').remove()

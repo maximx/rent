@@ -6,13 +6,15 @@ class AttachmentsController < ApplicationController
     if @attachment.destroy
       result = { result: 'ok' }
 
-      flash[:notice] =  t('controller.attachments.destroy.success',
-                          name: @attachment.original_filename)
+      unless request.xhr?
+        flash[:notice] =  t('controller.attachments.destroy.success', name: @attachment.original_filename)
+      end
     else
       result = { result: 'false' }
 
-      flash[:alert] =  t('controller.attachments.destroy.fail',
-                          name: @attachment.original_filename)
+      unless request.xhr?
+        flash[:alert] =  t('controller.attachments.destroy.fail', name: @attachment.original_filename)
+      end
     end
 
     respond_to do |format|
