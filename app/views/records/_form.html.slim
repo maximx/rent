@@ -25,7 +25,7 @@
           = hidden_field_tag :item_price, item.price, class: 'item_price'
 
           .col-sm-12
-            = t('helpers.records.form.free_days', days: record.free_days)
+            code = t('helpers.records.form.free_days', days: record.free_days)
             = t('helpers.records.form.rent_days')
             span#rent_days
           .col-sm-12

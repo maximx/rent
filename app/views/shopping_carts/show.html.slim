@@ -12,11 +12,11 @@ h1.text-center = t('controller.shopping_carts.action.show')
 
       ul.shopping_cart
         li.col-md-12
-          .col-md-5 = t('simple_form.labels.item.name')
-          .col-md-1 = t('simple_form.labels.item.price')
-          .col-md-3 = t('simple_form.labels.item.delivers')
-          .col-md-1 = t('simple_form.labels.item.deliver_fee')
-          .col-md-1 = t('helpers.shopping_carts.subtotal_price')
+          .col-md-5: strong = t('simple_form.labels.item.name')
+          .col-md-1: strong = t('simple_form.labels.item.price')
+          .col-md-3: strong = t('simple_form.labels.item.delivers')
+          .col-md-1: strong = t('simple_form.labels.item.deliver_fee')
+          .col-md-1: strong = t('helpers.shopping_carts.subtotal_price')
           .col-md-1
 
         = render partial: 'shopping_carts/shopping_cart_item', collection: @shopping_cart_items, locals:{f: f}

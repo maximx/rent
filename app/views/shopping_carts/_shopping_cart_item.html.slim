@@ -2,8 +2,10 @@
 
 li.item_record.col-md-12
   .col-md-5
-    = hidden_field_tag :item_price, item.price, class: 'item_price'
-    = link_to item.name, item_path(item)
+    = hidden_field_tag :item_price, shopping_cart_item.price, class: 'item_price', id: nil
+    = hidden_field_tag :free_days, shopping_cart_item.free_days, class: 'free_days', id: nil
+    div = link_to item.name, item_path(item)
+    .label.label-default = "免租金天數：#{shopping_cart_item.free_days}天"
   .col-md-1
     = shopping_cart_item.currency_price
   .col-md-3

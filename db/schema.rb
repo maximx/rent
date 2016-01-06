@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106084055) do
+ActiveRecord::Schema.define(version: 20160106090257) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 20160106084055) do
     t.float   "price",            limit: 24
     t.float   "deliver_fee",      limit: 24
     t.integer "deliver_id",       limit: 4
+    t.integer "free_days",        limit: 4,  default: 0
   end
 
   add_index "shopping_cart_items", ["shopping_cart_id", "item_id"], name: "index_shopping_cart_items_on_shopping_cart_id_and_item_id", using: :btree

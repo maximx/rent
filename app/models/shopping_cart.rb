@@ -14,7 +14,12 @@ class ShoppingCart < ActiveRecord::Base
 
   def add(item)
     unless item_for(item)
-      shopping_cart_items.create(item_id: item.id, price: item.price, deliver_fee: item.deliver_fee)
+      shopping_cart_items.create(
+        item_id: item.id,
+        price: item.price,
+        deliver_fee: item.deliver_fee,
+        free_days: item.lender.profile.free_days
+      )
     end
   end
 
