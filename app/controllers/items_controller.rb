@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @selections = @item.selections.includes(:tag, [vector: :tag])
     set_maps_marker @item
     @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
   end
