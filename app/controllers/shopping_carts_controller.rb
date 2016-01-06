@@ -11,6 +11,13 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart.user = current_user
     if @shopping_cart.update(shopping_cart_params)
       order = @shopping_cart.checkout
+      order.records.group_by(&:lender).each do |lender, records|
+        lender.notify t('controller.shopping_carts.update.notify_lender',
+                        name: current_user.logo_name,
+                        period: view_context.render_datetime_period(order),
+                        count: records.count),
+                      account_order_url(order)
+      end
       redirect_to account_order_path(order)
     else
       @shopping_cart_items = @shopping_cart.shopping_cart_items

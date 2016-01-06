@@ -19,8 +19,8 @@ class Record < ActiveRecord::Base
 
   self.per_page = 10
 
-  before_save :set_item_attributes
-  after_save :save_booking_state_log, :send_payment_message
+  before_create :set_item_attributes
+  after_create :save_booking_state_log, :send_payment_message
 
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
   scope :recent, -> { order(:created_at).reverse_order }

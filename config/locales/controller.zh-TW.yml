@@ -80,6 +80,8 @@ zh-TW:
     shopping_carts:
       action:
         show: '待租清單'
+      update:
+        notify_lender: '%{name}在%{period}預訂%{count}項物品'
     account/settings:
       action:
         phone_confirmation: '手機驗證'
