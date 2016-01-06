@@ -9,3 +9,6 @@
       'insertfile | alignleft aligncenter alignright | table | link unlink | emoticons image'
     ]
     table_styles: 'table'
+    valid_styles: {
+      '*': 'text-align,color,font-size,font-weight,font-style,text-decoration,background-color,background-size,background-repeat,line-height'
+    }
