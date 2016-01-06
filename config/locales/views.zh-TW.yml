@@ -17,6 +17,10 @@ zh-TW:
       deliver_blank: '選擇運送方式'
       subcategory_blank: '選擇分類'
       city_blank: '選擇地點'
+    input:
+      direction:
+        day: '日'
+        dollar: '元'
     users:
       confirmed_attribute: '已驗證'
     items:

@@ -16,11 +16,11 @@
   /from #selections-hide
   #selections-container
 
-  = f.input :price, as: :numeric_addon, direction: "元 / #{item.period}", input_html: { min: 0 }
+  = f.input :price, as: :numeric_addon, direction: "#{t('helpers.input.direction.dollar')} / #{item.period}", input_html: { min: 0 }
   = f.input :minimum_period, as: :numeric_addon, direction: item.period_without_per, input_html: { min: 1 }
-  = f.input :deposit, as: :numeric_addon, direction: '元', hint: '會退還', input_html: { min: 0 }
+  = f.input :deposit, as: :numeric_addon, direction: t('helpers.input.direction.dollar'), hint: '會退還', input_html: { min: 0 }
   = f.association :delivers, as: :check_boxes
-  = f.input :deliver_fee, as: :numeric_addon, direction: '元', input_html: { min: 0 }
+  = f.input :deliver_fee, as: :numeric_addon, direction: t('helpers.input.direction.dollar'), input_html: { min: 0 }
 
   = f.input :address do
     = f.input_field :address, class: 'form-control address_geocomplete'
