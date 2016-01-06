@@ -40,8 +40,9 @@ zh-TW:
       close_confirm: '確定要下架%{name}嗎？'
     records:
       form:
-        rent_days: '承租天數：'
-        item_deliver_fee: '，運送費用：'
+        free_days: '免租金天數：%{days}天'
+        rent_days: '，承租天數：'
+        item_deliver_fee: '運送費用：'
         total_price: '，總金額：'
       withdrawing_confirm: '確定要取消預約%{name}嗎？'
       returning_confirm: '確認已歸還出租物嗎？'

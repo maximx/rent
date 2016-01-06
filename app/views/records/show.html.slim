@@ -53,7 +53,7 @@ table.table
       td colspan="2" #{render_datetime_period(@record, :tw)} （#{@record.rent_days} 天）
     tr
       td 租金
-      td colspan="2" #{@record.currency_item_price}（租金）* #{@record.rent_days}（天） = #{@record.currency_price}（總金額）
+      td colspan="2" #{@record.currency_item_price}（租金）* (#{@record.rent_days} - #{@record.free_days})（天） = #{@record.currency_price}（總金額）
     tr
       td 押金
       td colspan="2" #{@record.currency_item_deposit}

@@ -19,6 +19,7 @@ class Record < ActiveRecord::Base
 
   self.per_page = 10
 
+  after_initialize :set_free_days
   before_create :set_item_attributes
   after_create :save_booking_state_log, :send_payment_message
 
@@ -170,6 +171,10 @@ class Record < ActiveRecord::Base
   end
 
   private
+    def set_free_days
+      self.free_days = lender.profile.free_days
+    end
+
     def set_item_attributes
       if self.new_record?
         self.item_price ||= item.price
@@ -177,7 +182,8 @@ class Record < ActiveRecord::Base
         self.item_deposit = item.deposit
         self.deliver_fee ||= (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
 
-        self.price = rent_days * item_price
+        valid_rent_days = (rent_days > free_days) ? (rent_days - free_days) : 0
+        self.price = valid_rent_days * item_price
       end
     end
 

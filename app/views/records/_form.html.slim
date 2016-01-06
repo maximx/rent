@@ -20,16 +20,22 @@
           = f.input :deliver_id, as: :select, collection: item.select_delivers, input_html: { class: 'form-control item_deliver' }
 
       .form-group
-        div class=(full_form? ? 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9' : 'col-sm-12 text-center')
+        div class=(full_form? ? 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9' : 'col-sm-12')
+          = f.input :free_days, as: :hidden, input_html: {class: 'free_days'}
           = hidden_field_tag :item_price, item.price, class: 'item_price'
-          div
+
+          .col-sm-12
+            = t('helpers.records.form.free_days', days: record.free_days)
             = t('helpers.records.form.rent_days')
             span#rent_days
+          .col-sm-12
             = t('helpers.records.form.item_deliver_fee')
             span.item_deliver_fee
             = t('helpers.records.form.total_price')
             span#total_price
-          = f.button :submit
+
+          .col-sm-12
+            = f.button :submit
 
   javascript:
     $(document).ready(function(){
