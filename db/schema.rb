@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106015305) do
+ActiveRecord::Schema.define(version: 20160106073439) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 20160106015305) do
     t.boolean  "send_mail",                           default: true
     t.boolean  "borrower_info_provide",               default: false
     t.string   "tel_phone",             limit: 255
+    t.integer  "free_days",             limit: 4,     default: 0
   end
 
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree

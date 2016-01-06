@@ -96,7 +96,7 @@ class Account::SettingsController < ApplicationController
     def profile_preferences_params
       params.require(:profile).permit(
         :send_mail, :borrower_info_provide,
-        :bank_code, :bank_account
+        :bank_code, :bank_account, :free_days
       )
     end
 

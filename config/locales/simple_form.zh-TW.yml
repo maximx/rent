@@ -31,6 +31,7 @@ zh-TW:
         line: 'Line'
         send_mail: '承租時接收Email通知'
         borrower_info_provide: '承租者需提供詳細資料'
+        free_days: '免租金天數'
       item:
         name: '名稱'
         subcategory_id: '分類'
