@@ -1,8 +1,8 @@
-- breadcrumb :account_items
+- breadcrumb :lender_items
 
-= render_account_items_tablist
+= render_lender_items_tablist
 .tab-content
-  = render partial: 'account/items/search'
+  = render partial: 'lender/items/search'
 
   .container
     table.table.table-borded.table-hover
@@ -25,5 +25,5 @@
     = render partial: 'common/pagination', locals: { objects: @items }
 
   = render_default_content(@items) do
-    | #{t('helpers.account/items.no_items')}
+    | #{t('helpers.lender/items.no_items')}
     mark = link_to(t('controller.action.new'), new_item_path, class: "text-danger")

@@ -13,7 +13,7 @@ table.table
     - @records.each_with_index do |record, index|
       tr
         td = "出租物" if index == 0
-        td = link_to("##{index +1}", account_item_path(record.item))
+        td = link_to("##{index +1}", lender_item_path(record.item))
     tr
       td
       td = link_to('詳細', account_order_path(@order))

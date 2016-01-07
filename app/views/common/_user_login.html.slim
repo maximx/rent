@@ -12,8 +12,8 @@ ul.nav.navbar-nav.navbar-right
 
         li.dropdown-header = t('activerecord.models.item')
         li = link_to render_icon_with_text('plus', t('controller.action.new')), new_item_path
-        li = link_to render_icon_with_text('heart', t('controller.items.action.collect')), wish_account_items_path
-        li = link_to render_icon_with_text('cog', t('controller.name.account/manage')), account_items_path
+        li = link_to render_icon_with_text('heart', t('controller.items.action.collect')), wish_lender_items_path
+        li = link_to render_icon_with_text('cog', t('controller.name.account/manage')), lender_items_path
         li.divider role="separator"
 
         li = link_to render_icon_with_text('lock', t('controller.name.account/settings')), account_settings_path

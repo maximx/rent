@@ -1,9 +1,9 @@
-= render_account_items_tablist
+= render_lender_items_tablist
 
 .tab-content
-  = render partial: 'account/items/import_tooltip'
+  = render partial: 'lender/items/import_tooltip'
 
-  = simple_form_for @item, url: import_account_items_path do |f|
+  = simple_form_for @item, url: import_lender_items_path do |f|
     = f.input :subcategory_id, as: :grouped_select,
                                collection: @categories_grouped_select,
                                group_method: :last

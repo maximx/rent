@@ -62,7 +62,7 @@ zh-TW:
     account/settings:
       phone_confirmation:
         description: '您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：'
-    account/items:
+    lender/items:
       no_items: '沒有出租物！馬上'
       booking: '預訂中'
       returned: '完成出租'

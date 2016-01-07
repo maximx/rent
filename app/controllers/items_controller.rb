@@ -59,7 +59,7 @@ class ItemsController < ApplicationController
   def open
     if @item.valid? and @item.pictures.present?
       @item.open!
-      redirect_to account_items_path, notice: t('controller.items.open.success', name: @item.name)
+      redirect_to lender_items_path, notice: t('controller.items.open.success', name: @item.name)
     else
       redirect_to edit_item_path(@item), alert: t('controller.items.open.fail', name: @item.name)
     end
@@ -67,12 +67,12 @@ class ItemsController < ApplicationController
 
   def close
     @item.close!
-    redirect_to account_items_path, notice: t('controller.items.close.success', name: @item.name)
+    redirect_to lender_items_path, notice: t('controller.items.close.success', name: @item.name)
   end
 
   def destroy
     @item.destroy
-    redirect_to account_items_path, notice: t('controller.items.destroy.success', name: @item.name)
+    redirect_to lender_items_path, notice: t('controller.items.destroy.success', name: @item.name)
   end
 
   def collect
