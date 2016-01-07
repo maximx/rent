@@ -49,23 +49,26 @@ module ApplicationHelper
     list.each_with_index do |li, index|
       link_options = (li[2] && li[2][:link_html]) ? li[2][:link_html] : {}
       li_options = (li[2] && li[2][:li_html]) ? li[2][:li_html] : {}
-      no_anchor_path = li[1].gsub(/#.*/, '')
+
+      link_url = li[1]
+      no_anchor_path = link_url.gsub(/#.*/, '')
 
       if li[2] and li[2][:parent]
-        active_class = (request.fullpath.include? no_anchor_path) ? 'active' : ''
+        active_class = add_active_class?(no_anchor_path, li[2]) ? 'active' : ''
       else
-        active_class = (current_page? no_anchor_path) ? 'active' : ''
+        active_class = current_page?(no_anchor_path) ? 'active' : ''
       end
+      link_url = li[2][:redirect_to] if li[2] and li[2].has_key?(:redirect_to) #/lender /borrower
 
       li_css_class = []
       li_css_class << li_options[:class] if li_options[:class]
       li_css_class << active_class
       li_options[:class] = li_css_class.join(" ")
 
-      li_link << content_tag(:li, link_to(li[0], li[1], link_options), li_options)
+      li_link << content_tag(:li, link_to(li[0], link_url, link_options), li_options)
     end
 
-    content_tag(:ul, li_link.join.to_s.html_safe, options)
+    content_tag(:ul, raw(li_link.join), options)
   end
 
   def render_icon_with_text(icon, text, options = {})
@@ -121,5 +124,10 @@ module ApplicationHelper
 
     def span_close
       content_tag(:span, raw("&times;"), aria: { hidden: true })
+    end
+
+    def add_active_class?(url, options={})
+      exclusion = [options[:exclusion]].flatten
+      request.fullpath.include?(url) and !exclusion.include?(request.fullpath)
     end
 end
