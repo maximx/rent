@@ -103,9 +103,11 @@ Rails.application.routes.draw do
       resources :records, only: [:new, :create]
 
       collection do
-        get :wish, :calendar, :importer
+        get :wish, :importer
         post :import
       end
     end
+
+    resource :calendar, only: [:show]
   end
 end

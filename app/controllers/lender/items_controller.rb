@@ -2,9 +2,9 @@ class Lender::ItemsController < ApplicationController
   include UsersReviewsCount
 
   before_action :login_required
-  load_and_authorize_resource :item, through: :current_user, only: [ :index, :show ]
-  before_action :validates_profile, only: [ :importer ]
-  before_action :load_categories_grouped_select, only: [ :importer, :import ]
+  load_and_authorize_resource :item, through: :current_user, only: [:index, :show]
+  before_action :validates_profile, only: [:importer]
+  before_action :load_categories_grouped_select, only: [:importer, :import]
 
   def index
     @items = @items.includes(:records, :lender)
@@ -31,22 +31,6 @@ class Lender::ItemsController < ApplicationController
                          .page(params[:page])
     find_users_reviews_count
     render 'items/index'
-  end
-
-  def calendar
-    @event_sources_path = calendar_lender_items_path(format: :json)
-
-    respond_to do |format|
-      format.html
-      format.json {
-        records_json = current_user.lend_orders
-                                   .includes(borrower: :profile)
-                                   .overlaps(params[:start], params[:end])
-                                   .uniq
-                                   .to_json
-        render json: records_json
-      }
-    end
   end
 
   def importer
