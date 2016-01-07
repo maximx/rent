@@ -16,7 +16,3 @@ table.table.table-hover
 
 = render partial: 'records/state_log_modal', locals: {record_state_log: record_state_log}
 = render partial: 'common/pagination', locals: {objects: records}
-
-= render_default_content(records) do
-  | #{t('helpers.account/records.no_records')}
-  mark = link_to(t('helpers.account/records.go_rent'), search_items_path, class: 'text-danger')

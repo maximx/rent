@@ -17,4 +17,19 @@ class Borrower::OrdersController < ApplicationController
                           RecordStateLog.new
                         end
   end
+
+  def calendar
+    @event_sources_path = calendar_borrower_orders_path(format: :json)
+
+    respond_to do |format|
+      format.html
+      format.json {
+        records_json = current_user.orders
+                                   .includes(borrower: :profile)
+                                   .overlaps(params[:start], params[:end])
+                                   .to_json
+        render json: records_json
+      }
+    end
+  end
 end

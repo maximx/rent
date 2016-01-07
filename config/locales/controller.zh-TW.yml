@@ -10,7 +10,6 @@ zh-TW:
       lender: '出租'
       borrower: '承租'
       lender/items: '出租物管理'
-      account/records: *records
       account/customers: '客戶管理'
       account/categories: '物品分類屬性'
       account/settings: '設定'
@@ -116,7 +115,7 @@ zh-TW:
         new: '新增承租紀錄'
     lender/orders:
       action:
-        index: '訂單'
+        index: &orders_index '訂單'
     borrower/orders:
       action:
-        index: '訂單'
+        index: *orders_index

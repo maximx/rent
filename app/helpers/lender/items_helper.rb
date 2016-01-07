@@ -19,8 +19,8 @@ module Lender::ItemsHelper
   def render_lender_tablist
     render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
       li << [ render_icon_with_text('list-alt', t('controller.lender/items.action.index')), lender_items_path ]
-      li << [ render_icon_with_text('list', t('controller.lender/orders.action.index')), lender_orders_path, parent: true ]
-      li << [ render_icon_with_text('calendar', t('controller.action.calendar')), lender_calendar_path ]
+      li << [ render_icon_with_text('list', t('controller.lender/orders.action.index')), lender_orders_path ]
+      li << [ render_icon_with_text('calendar', t('controller.action.calendar')), calendar_lender_orders_path ]
       if can? :importer, Item
         li << [ render_icon_with_text('import', t('controller.lender/items.action.importer')), importer_lender_items_path ]
       end
@@ -63,8 +63,6 @@ module Lender::ItemsHelper
       'lender/calendars',
       'lender/orders',
       'borrower/orders',
-      'account/orders',
-      'account/records',
       'account/customers',
       'account/categories',
       'account/subcategories',

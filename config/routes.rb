@@ -90,10 +90,6 @@ Rails.application.routes.draw do
       resources :selections, only: [:create, :destroy]
     end
 
-    resources :records, only: [:index] do
-      get :calendar, on: :collection
-    end
-
     resources :customers, except: [:destroy]
   end
 
@@ -105,12 +101,15 @@ Rails.application.routes.draw do
         post :import
       end
     end
-    resources :orders, only: [:index, :show]
 
-    resource :calendar, only: [:show]
+    resources :orders, only: [:index, :show] do
+      get :calendar, on: :collection
+    end
   end
 
   namespace :borrower do
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show] do
+      get :calendar, on: :collection
+    end
   end
 end

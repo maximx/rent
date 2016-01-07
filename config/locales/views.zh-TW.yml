@@ -78,9 +78,6 @@ zh-TW:
         excel_keep: '編號、名稱、租金、最短租期、押金、分類、運送方式、運送費用、物品所在地'
         has_problem: '若您還有其他問題，歡迎'
         contact_me: '來信聯絡'
-    account/records:
-      no_records: '沒租過'
-      go_rent: *go_rent
     account/categories:
       add_vector: '增加屬性'
     account/subcategories:

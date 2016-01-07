@@ -34,6 +34,7 @@ class Ability
       can [:read, :reviews, :lender_reviews, :borrower_reviews, :items], User
       can [:read, :create, :search, :calendar, :remove], Item
       can :index, Record
+      can :calendar, Order
     end
 
     def resources_users(user)
