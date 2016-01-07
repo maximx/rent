@@ -16,9 +16,9 @@ class ShoppingCartsController < ApplicationController
                         name: current_user.logo_name,
                         period: view_context.render_datetime_period(order),
                         count: records.count),
-                      account_order_url(order)
+                      lender_order_url(order)
       end
-      redirect_to account_order_path(order)
+      redirect_to borrower_order_path(order)
     else
       @shopping_cart_items = @shopping_cart.shopping_cart_items
       render :show

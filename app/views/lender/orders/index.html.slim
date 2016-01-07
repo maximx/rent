@@ -1,21 +1,4 @@
 = render_lender_tablist
 
 .tab-content
-  table.table.table-hover
-    thead
-      tr
-        td #
-        td 承租期間
-        td 總金額
-        td 下訂於
-        td
-    tbody
-      - @orders.each_with_index do |order, index|
-        tr
-          td = index + 1
-          td = render_datetime_period(order, :date_only)
-          td = "$#{@orders_price[order.id]}"
-          td = render_datetime(order.created_at, :tw)
-          td = link_to t('controller.action.show'), lender_order_path(order), class: 'btn btn-primary'
-
-  = render partial: 'common/pagination', locals: {objects: @orders}
+  = render partial: 'lender/orders/index', locals: {orders: @orders, orders_price: @orders_price, role: 'lender'}

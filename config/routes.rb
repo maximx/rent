@@ -90,7 +90,6 @@ Rails.application.routes.draw do
       resources :selections, only: [:create, :destroy]
     end
 
-    resources :orders, only: [:index, :show]
     resources :records, only: [:index] do
       get :calendar, on: :collection
     end
@@ -109,5 +108,9 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
 
     resource :calendar, only: [:show]
+  end
+
+  namespace :borrower do
+    resources :orders, only: [:index, :show]
   end
 end

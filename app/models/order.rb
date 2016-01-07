@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
   end
 
   def json_url
-    Rails.application.routes.url_helpers.account_order_path(id)
+    Rails.application.routes.url_helpers.borrower_order_path(id)
   end
 
   def records_of(lender)

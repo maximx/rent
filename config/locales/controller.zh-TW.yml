@@ -8,9 +8,8 @@ zh-TW:
       shopping_carts: '待租'
       account/manage: '管理'
       lender: '出租'
+      borrower: '承租'
       lender/items: '出租物管理'
-      lender/orders: '訂單'
-      account/orders: '承租訂單'
       account/records: *records
       account/customers: '客戶管理'
       account/categories: '物品分類屬性'
@@ -102,6 +101,11 @@ zh-TW:
     account/subcategories:
       action:
         index: '屬性選項'
+    account/customers:
+      action:
+        index: '客戶列表'
+        new: '新增客戶'
+        edit: '修改%{name}'
     lender/items:
       action:
         index: *items
@@ -110,14 +114,9 @@ zh-TW:
     lender/records:
       action:
         new: '新增承租紀錄'
-    account/orders:
+    lender/orders:
       action:
-        index: '訂單紀錄'
-    account/records:
+        index: '訂單'
+    borrower/orders:
       action:
-        index: '承租紀錄列表'
-    account/customers:
-      action:
-        index: '客戶列表'
-        new: '新增客戶'
-        edit: '修改%{name}'
+        index: '訂單'
