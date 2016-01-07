@@ -1,0 +1,23 @@
+table.table
+  - if @role == 'lender'
+    thead
+      tr
+        td 承租者
+        td = link_to(@order.borrower.logo_name, borrower_path(@order.borrower))
+  tbody
+    tr
+      td = t('simple_form.labels.order.started_at')
+      td = render_datetime(@order.started_at, :date_only)
+    tr
+      td = t('simple_form.labels.order.ended_at')
+      td = render_datetime(@order.ended_at, :date_only)
+    tr
+      td = t('simple_form.labels.order.created_at')
+      td = render_datetime(@order.created_at)
+    - @records.each_with_index do |record, index|
+      tr
+        td = link_to "##{index + 1}", item_record_path(record.item, record)
+        td = record.currency_price
+    tr
+      td
+      td = link_to t('helpers.common.more_detail'), @detail_url

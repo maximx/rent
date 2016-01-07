@@ -8,14 +8,20 @@ class Borrower::OrdersController < ApplicationController
 
   def show
     @records = @order.records
-    @records = @records.includes(:borrower, :deliver, [item: [lender: [profile: :avatar]]])
-                       .recent
-                       .page(params[:page])
-    @record_state_log = unless @records.empty?
-                          @records.first.record_state_logs.build
-                        else
-                          RecordStateLog.new
-                        end
+    unless request.xhr?
+      @records = @records.includes(:borrower, :deliver, [item: [lender: [profile: :avatar]]])
+                         .recent
+                         .page(params[:page])
+      @record_state_log = unless @records.empty?
+                            @records.first.record_state_logs.build
+                          else
+                            RecordStateLog.new
+                          end
+    else
+      @records = @records.includes(:item)
+      @detail_url = borrower_order_path(@order)
+      render 'lender/orders/show_xhr'
+    end
   end
 
   def calendar

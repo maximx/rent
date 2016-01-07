@@ -12,14 +12,21 @@ class Lender::OrdersController < ApplicationController
 
   def show
     @records = @order.records_of(current_user)
-    @records = @records.includes(:borrower, :deliver, [item: [lender: [profile: :avatar]]])
-                       .recent
-                       .page(params[:page])
-    @record_state_log = unless @records.empty?
-                          @records.first.record_state_logs.build
-                        else
-                          RecordStateLog.new
-                        end
+
+    unless request.xhr?
+      @records = @records.includes(:borrower, :deliver, [item: [lender: [profile: :avatar]]])
+                         .recent
+                         .page(params[:page])
+      @record_state_log = unless @records.empty?
+                            @records.first.record_state_logs.build
+                          else
+                            RecordStateLog.new
+                          end
+    else
+      @order.price = @records.sum(:price)
+      @detail_url = lender_order_path(@order)
+      render :show_xhr
+    end
   end
 
   def calendar

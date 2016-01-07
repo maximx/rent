@@ -13,6 +13,7 @@ zh-TW:
     common:
       destroy_confirm: '確定要刪除嗎？'
       keyword: '關鍵字'
+      more_detail: '詳細'
     select:
       deliver_blank: '選擇運送方式'
       subcategory_blank: '選擇分類'
@@ -57,7 +58,7 @@ zh-TW:
       empty: '無待租物品，現在就'
       go_rent: &go_rent '來去租'
       rent_days: '承租天數'
-      total_price: '總金額'
+      total_price: &total_price '總金額'
       subtotal_price: '小計'
     account/settings:
       phone_confirmation:
@@ -78,6 +79,8 @@ zh-TW:
         excel_keep: '編號、名稱、租金、最短租期、押金、分類、運送方式、運送費用、物品所在地'
         has_problem: '若您還有其他問題，歡迎'
         contact_me: '來信聯絡'
+    lender/orders:
+      total_price: *total_price
     account/categories:
       add_vector: '增加屬性'
     account/subcategories:

@@ -66,3 +66,7 @@ zh-TW:
       shopping_cart:
         started_at: *started_at
         ended_at: *ended_at
+      order:
+        started_at: *started_at
+        ended_at: *ended_at
+        created_at: '下訂時間'
