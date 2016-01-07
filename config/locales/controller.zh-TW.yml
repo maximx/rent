@@ -103,16 +103,17 @@ zh-TW:
     lender/items:
       action:
         index: *items
-        records: '出租紀錄'
-        records_breadcrumbs: '%{name} 的出租紀錄'
+        show: '出租紀錄'
         importer: '匯入'
+    lender/records:
+      action:
+        new: '新增承租紀錄'
     account/orders:
       action:
         index: '訂單紀錄'
     account/records:
       action:
         index: '承租紀錄列表'
-        new: '新增承租紀錄'
     account/customers:
       action:
         index: '客戶列表'

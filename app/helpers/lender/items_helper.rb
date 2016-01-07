@@ -1,12 +1,4 @@
 module Lender::ItemsHelper
-  def render_item_records_link(item)
-    link_to render_icon('list-alt', class: 'text-primary'),
-            lender_item_path(item),
-            class: 'btn btn-default rent-records-list',
-            title: t('controller.lender/items.action.records'),
-            data: { toggle: 'tooltip' }
-  end
-
   def account_manage_navbar_list
     render_link_li class: 'nav navbar-nav' do |li|
       li << [ render_icon_with_text('th-large', t('controller.name.lender/items')),
@@ -34,6 +26,14 @@ module Lender::ItemsHelper
     end
   end
 
+  def render_item_records_link(item)
+    link_to render_icon('list-alt', class: 'text-primary'),
+            lender_item_path(item),
+            class: 'btn btn-default rent-records-list',
+            title: t('controller.lender/items.action.show'),
+            data: { toggle: 'tooltip' }
+  end
+
   def render_operate_item_links(item)
     links = raw [
       render_new_item_record_path(item),
@@ -58,6 +58,7 @@ module Lender::ItemsHelper
   def account_manage_controller?
     account_manage_list = [
       'lender/items',
+      'lender/records',
       'account/orders',
       'account/records',
       'account/customers',

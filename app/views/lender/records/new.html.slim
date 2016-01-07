@@ -1,5 +1,5 @@
-- breadcrumb :new_record, @item
+= render_lender_items_tablist
 
-div
+.tab-content
   = render partial: 'records/form', locals: { item: @item, event_sources_path: @event_sources_path,
                                               record: @record, disabled_dates: @disabled_dates }

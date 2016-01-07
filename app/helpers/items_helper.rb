@@ -28,7 +28,7 @@ module ItemsHelper
 
   def render_item_calendar_link(item)
     url = can?(:update, item) ?
-            account_item_records_path(item, anchor: 'calendar') : new_item_record_path(item, anchor: 'calendar')
+            lender_item_path(item, anchor: 'calendar') : new_item_record_path(item, anchor: 'calendar')
     link_to t('helpers.items.see_calendar'), url, class: 'btn btn-info'
   end
 

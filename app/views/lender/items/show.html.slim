@@ -1,10 +1,11 @@
-- breadcrumb :account_item_records, @item
+= render_lender_items_tablist
 
-h3.item-title
-  = link_to item_path(@item) do
-    small = render_icon 'link', class: 'text-muted'
-    = @item.name
+.tab-content
+  h3.item-title
+    = link_to item_path(@item) do
+      small = render_icon 'link', class: 'text-muted'
+      = @item.name
 
-= render partial: 'records/record_list', locals: { records: @records }
-= render partial: 'records/state_log_modal', locals: { record_state_log: @record_state_log }
-= render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }
+  = render partial: 'records/record_list', locals: { records: @records }
+  = render partial: 'records/state_log_modal', locals: { record_state_log: @record_state_log }
+  = render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }

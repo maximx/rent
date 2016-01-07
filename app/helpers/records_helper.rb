@@ -115,7 +115,7 @@ module RecordsHelper
   def render_records_form_options(item)
     options = {}
     options[:wrapper] = 'default' unless full_form?
-    options[:url] = account_item_records_path(item) if account_manage_controller?
+    options[:url] = lender_item_records_path(item) if account_manage_controller?
     options
   end
 

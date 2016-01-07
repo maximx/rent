@@ -32,7 +32,7 @@ class Ability
   protected
     def everyone_can
       can [:read, :reviews, :lender_reviews, :borrower_reviews, :items], User
-      can [:read, :create, :search, :calendar, :records, :remove], Item
+      can [:read, :create, :search, :calendar, :remove], Item
       can :index, Record
     end
 
