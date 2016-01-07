@@ -1,4 +1,4 @@
-class Account::ItemsController < ApplicationController
+class Lender::ItemsController < ApplicationController
   include UsersReviewsCount
 
   before_action :login_required
@@ -34,7 +34,7 @@ class Account::ItemsController < ApplicationController
   end
 
   def calendar
-    @event_sources_path = calendar_account_items_path(format: :json)
+    @event_sources_path = calendar_lender_items_path(format: :json)
 
     respond_to do |format|
       format.html
@@ -62,7 +62,7 @@ class Account::ItemsController < ApplicationController
 
     if @item.valid_attributes?(importer_params.keys) and importer_params[:file].present?
       @error_messages = Item.import(current_user, importer_params)
-      @error_messages.empty? ? redirect_to(account_items_path) : render(:importer)
+      @error_messages.empty? ? redirect_to(lender_items_path) : render(:importer)
     else
       render :importer
     end
@@ -90,7 +90,7 @@ class Account::ItemsController < ApplicationController
     def validates_profile
       errors = current_user.profile.validates_basic_info
       unless errors.empty?
-        redirect_to edit_user_path(current_user, redirect_url: importer_account_items_path),
+        redirect_to edit_user_path(current_user, redirect_url: importer_lender_items_path),
                     alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
       end
     end

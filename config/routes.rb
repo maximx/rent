@@ -90,12 +90,8 @@ Rails.application.routes.draw do
       resources :selections, only: [:create, :destroy]
     end
 
-    resources :items, only: [:index, :show] do
+    resources :items, only: [] do
       resources :records, only: [:new, :create]
-      collection do
-        get :wish, :calendar, :importer
-        post :import
-      end
     end
 
     resources :orders, only: [:index, :show]
@@ -104,5 +100,14 @@ Rails.application.routes.draw do
     end
 
     resources :customers, except: [:destroy]
+  end
+
+  namespace :lender do
+    resources :items, only: [:index, :show] do
+      collection do
+        get :wish, :calendar, :importer
+        post :import
+      end
+    end
   end
 end
