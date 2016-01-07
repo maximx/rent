@@ -27,7 +27,7 @@ class Borrower::OrdersController < ApplicationController
         records_json = current_user.orders
                                    .includes(borrower: :profile)
                                    .overlaps(params[:start], params[:end])
-                                   .to_json
+                                   .to_json(role: 'borrower')
         render json: records_json
       }
     end

@@ -32,7 +32,7 @@ class Lender::OrdersController < ApplicationController
                                    .includes(borrower: :profile)
                                    .overlaps(params[:start], params[:end])
                                    .uniq
-                                   .to_json
+                                   .to_json(role: 'lender')
         render json: records_json
       }
     end

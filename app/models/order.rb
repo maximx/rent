@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
       title: json_title,
       start: started_at,
       end: ended_at,
-      url: json_url
+      url: json_url(options)
     }
   end
 
@@ -22,8 +22,8 @@ class Order < ActiveRecord::Base
     I18n.t('helpers.orders.json.title', name: borrower.logo_name, id: id, price: currency_price)
   end
 
-  def json_url
-    Rails.application.routes.url_helpers.borrower_order_path(id)
+  def json_url(options={})
+    Rails.application.routes.url_helpers.send("#{options[:role]}_order_path", id)
   end
 
   def records_of(lender)
