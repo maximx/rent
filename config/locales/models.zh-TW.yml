@@ -86,6 +86,7 @@ zh-TW:
               blank: '運送方式為必填'
             borrower:
               blank: '請選擇客戶'
+              not_customer: '非您的客戶'
         record_state_log:
           attributes:
             info:

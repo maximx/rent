@@ -1,13 +1,16 @@
 class Customer < ActiveRecord::Base
   belongs_to :user
-  has_many :records, as: :borrower
 
   has_one :profile, as: :user
   accepts_nested_attributes_for :profile
 
+  has_many :records, as: :borrower
+  has_many :orders, as: :borrower
+
   def account
     profile.name
   end
+  alias_method :logo_name, :account
 
   def self.search_types
     [

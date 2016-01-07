@@ -1,10 +1,8 @@
 table.table
-  - if @role == 'lender'
-    thead
-      tr
-        td 承租者
-        td = link_to(@order.borrower.logo_name, borrower_path(@order.borrower))
-  tbody
+  thead
+    tr
+      td 承租者
+      td = link_to(@order.borrower.logo_name, borrower_path(@order.borrower))
     tr
       td = t('simple_form.labels.order.started_at')
       td = render_datetime(@order.started_at, :date_only)
@@ -16,8 +14,10 @@ table.table
       td = render_datetime(@order.created_at)
     - @records.each_with_index do |record, index|
       tr
-        td = link_to "##{index + 1}", item_record_path(record.item, record)
-        td = record.currency_price
+        td #{index + 1}.
+        td
+          = link_to "#{t('activerecord.models.item')} ", item_record_path(record.item, record), target: '_blank'
+          = record.currency_price
     tr
       td
       td = link_to t('helpers.common.more_detail'), @detail_url

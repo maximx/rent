@@ -4,7 +4,7 @@ class Record < ActiveRecord::Base
   include DatetimeOverlaps
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
-  validate :start_end_date, :not_overlap
+  validate :start_end_date, :not_overlap, :borrower_lender_customers
 
   belongs_to :borrower, polymorphic: true
   belongs_to :item
@@ -78,6 +78,12 @@ class Record < ActiveRecord::Base
 
   def not_overlap
     errors[:ended_at] << I18n.t('activerecord.errors.models.record.attributes.ended_at.overlap') if overlaps? && booking?
+  end
+
+  def borrower_lender_customers
+    if borrower_type == 'Customer' and !lender.customers.pluck(:id).include?(borrower_id)
+      errors.add :borrower, :not_customer
+    end
   end
 
   def overlaps?

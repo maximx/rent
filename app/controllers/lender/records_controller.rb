@@ -12,13 +12,13 @@ class Lender::RecordsController < ApplicationController
     @record = @item.records.build record_params
 
     @record.deliver = Deliver.face_to_face
-    #TODO: customers 放到 model validate
-    customer = current_user.customers.find @record.borrower_id
-    @record.borrower = customer
+    @record.borrower_type = 'Customer'
 
     if @record.save
+      @record.update_order
       redirect_to item_record_path(@item, @record)
     else
+      @disabled_dates = @item.booked_dates
       flash[:alert] = t('controller.action.create.fail')
       render 'records/new'
     end
