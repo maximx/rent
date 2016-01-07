@@ -101,12 +101,12 @@ Rails.application.routes.draw do
   namespace :lender do
     resources :items, only: [:index, :show] do
       resources :records, only: [:new, :create]
-
       collection do
         get :wish, :importer
         post :import
       end
     end
+    resources :orders, only: [:index, :show]
 
     resource :calendar, only: [:show]
   end

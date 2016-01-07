@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :borrowers, through: :lend_records, source: :borrower, source_type: 'User'
 
   has_many :orders, as: :borrower
-  has_many :lend_orders, through: :lend_records, class_name: 'Order', source: :order
+  has_many :lend_orders, ->{uniq}, through: :lend_records, class_name: 'Order', source: :order
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "user_id"
   has_many :collections, through: :collect_relationships, source: :item

@@ -1,0 +1,2 @@
+module Lender::OrdersHelper
+end

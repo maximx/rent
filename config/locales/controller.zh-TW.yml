@@ -7,7 +7,9 @@ zh-TW:
       records: &records '承租紀錄'
       shopping_carts: '待租'
       account/manage: '管理'
+      lender: '出租'
       lender/items: '出租物管理'
+      lender/orders: '訂單'
       account/orders: '承租訂單'
       account/records: *records
       account/customers: '客戶管理'

@@ -1,7 +1,7 @@
 module Lender::ItemsHelper
   def account_manage_navbar_list
     render_link_li class: 'nav navbar-nav' do |li|
-      li << [ render_icon_with_text('th-large', t('controller.name.lender/items')),
+      li << [ render_icon_with_text('th-large', t('controller.name.lender')),
               lender_items_path, parent: true ]
       if can? :create, Vector
         li << [ render_icon_with_text('paperclip', t('controller.name.account/categories')),
@@ -19,6 +19,7 @@ module Lender::ItemsHelper
   def render_lender_tablist
     render_link_li class: 'nav nav-tabs', role: 'tablist' do |li|
       li << [ render_icon_with_text('list-alt', t('controller.lender/items.action.index')), lender_items_path ]
+      li << [ render_icon_with_text('list', t('controller.name.lender/orders')), lender_orders_path, parent: true ]
       li << [ render_icon_with_text('calendar', t('controller.action.calendar')), lender_calendar_path ]
       if can? :importer, Item
         li << [ render_icon_with_text('import', t('controller.lender/items.action.importer')), importer_lender_items_path ]
@@ -60,6 +61,7 @@ module Lender::ItemsHelper
       'lender/items',
       'lender/records',
       'lender/calendars',
+      'lender/orders',
       'account/orders',
       'account/records',
       'account/customers',
