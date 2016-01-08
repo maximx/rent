@@ -68,6 +68,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
     def is_picture? uploaded_file
       return false unless model.attachable.present?
-      model.attachable.is_a? Item
+      model.attachable.is_a?(Item) or model.attachable.is_a?(User)
     end
 end
