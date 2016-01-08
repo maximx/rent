@@ -11,25 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106090257) do
+ActiveRecord::Schema.define(version: 20160108084238) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
-    t.string   "attachable_type",   limit: 255
-    t.string   "file",              limit: 255
+    t.string   "attachable_type",   limit: 191
+    t.string   "file",              limit: 191
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.string   "image",             limit: 255
+    t.string   "image",             limit: 191
     t.integer  "file_size",         limit: 8
-    t.string   "content_type",      limit: 255
-    t.string   "original_filename", limit: 255
+    t.string   "content_type",      limit: 191
+    t.string   "original_filename", limit: 191
   end
 
   add_index "attachments", ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "banks", force: :cascade do |t|
-    t.string   "code",       limit: 255
-    t.string   "name",       limit: 255
+    t.string   "code",       limit: 191
+    t.string   "name",       limit: 191
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -37,27 +37,27 @@ ActiveRecord::Schema.define(version: 20160106090257) do
   add_index "banks", ["code"], name: "index_banks_on_code", unique: true, using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",       limit: 191
     t.integer  "serial",     limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   create_table "cities", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",       limit: 191
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string   "email",      limit: 255
+    t.string   "email",      limit: 191
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id",    limit: 4
   end
 
   create_table "delivers", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",       limit: 191
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -90,10 +90,10 @@ ActiveRecord::Schema.define(version: 20160106090257) do
   add_index "item_delivers", ["item_id", "deliver_id"], name: "index_item_delivers_on_item_id_and_deliver_id", unique: true, using: :btree
 
   create_table "items", force: :cascade do |t|
-    t.string   "name",           limit: 255
+    t.string   "name",           limit: 191
     t.float    "price",          limit: 24
     t.integer  "period",         limit: 4,     default: 0
-    t.string   "address",        limit: 255
+    t.string   "address",        limit: 191
     t.float    "deposit",        limit: 24,    default: 0.0
     t.text     "description",    limit: 65535
     t.datetime "created_at",                                 null: false
@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 20160106090257) do
     t.integer  "minimum_period", limit: 4,     default: 1
     t.integer  "city_id",        limit: 4
     t.float    "deliver_fee",    limit: 24,    default: 0.0
-    t.string   "aasm_state",     limit: 255
-    t.string   "product_id",     limit: 255
+    t.string   "aasm_state",     limit: 191
+    t.string   "product_id",     limit: 191
   end
 
   add_index "items", ["user_id", "product_id"], name: "index_items_on_user_id_and_product_id", using: :btree
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20160106090257) do
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id",   limit: 4
-    t.string  "unsubscriber_type", limit: 255
+    t.string  "unsubscriber_type", limit: 191
     t.integer "conversation_id",   limit: 4
   end
 
@@ -132,23 +132,23 @@ ActiveRecord::Schema.define(version: 20160106090257) do
   add_index "mailboxer_conversation_opt_outs", ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type", using: :btree
 
   create_table "mailboxer_conversations", force: :cascade do |t|
-    t.string   "subject",    limit: 255, default: ""
+    t.string   "subject",    limit: 191, default: ""
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
   create_table "mailboxer_notifications", force: :cascade do |t|
-    t.string   "type",                 limit: 255
+    t.string   "type",                 limit: 191
     t.text     "body",                 limit: 65535
-    t.string   "subject",              limit: 255,   default: ""
+    t.string   "subject",              limit: 191,   default: ""
     t.integer  "sender_id",            limit: 4
-    t.string   "sender_type",          limit: 255
+    t.string   "sender_type",          limit: 191
     t.integer  "conversation_id",      limit: 4
     t.boolean  "draft",                              default: false
-    t.string   "notification_code",    limit: 255
+    t.string   "notification_code",    limit: 191
     t.integer  "notified_object_id",   limit: 4
-    t.string   "notified_object_type", limit: 255
-    t.string   "attachment",           limit: 255
+    t.string   "notified_object_type", limit: 191
+    t.string   "attachment",           limit: 191
     t.datetime "updated_at",                                         null: false
     t.datetime "created_at",                                         null: false
     t.boolean  "global",                             default: false
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 20160106090257) do
 
   create_table "mailboxer_receipts", force: :cascade do |t|
     t.integer  "receiver_id",     limit: 4
-    t.string   "receiver_type",   limit: 255
+    t.string   "receiver_type",   limit: 191
     t.integer  "notification_id", limit: 4,                   null: false
     t.boolean  "is_read",                     default: false
     t.boolean  "trashed",                     default: false
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20160106090257) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "borrower_id",   limit: 4
-    t.string   "borrower_type", limit: 255
+    t.string   "borrower_type", limit: 191
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.datetime "started_at"
@@ -189,25 +189,25 @@ ActiveRecord::Schema.define(version: 20160106090257) do
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",               limit: 4
-    t.string   "name",                  limit: 255
-    t.string   "address",               limit: 255
-    t.string   "phone",                 limit: 255
+    t.string   "name",                  limit: 191
+    t.string   "address",               limit: 191
+    t.string   "phone",                 limit: 191
     t.text     "description",           limit: 65535
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
-    t.string   "bank_code",             limit: 255
-    t.string   "bank_account",          limit: 255
-    t.string   "confirmation_token",    limit: 255
+    t.string   "bank_code",             limit: 191
+    t.string   "bank_account",          limit: 191
+    t.string   "confirmation_token",    limit: 191
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.float    "latitude",              limit: 24
     t.float    "longitude",             limit: 24
-    t.string   "user_type",             limit: 255
-    t.string   "line",                  limit: 255
-    t.string   "facebook",              limit: 255
+    t.string   "user_type",             limit: 191
+    t.string   "line",                  limit: 191
+    t.string   "facebook",              limit: 191
     t.boolean  "send_mail",                           default: true
     t.boolean  "borrower_info_provide",               default: false
-    t.string   "tel_phone",             limit: 255
+    t.string   "tel_phone",             limit: 191
     t.integer  "free_days",             limit: 4,     default: 0
   end
 
@@ -216,12 +216,12 @@ ActiveRecord::Schema.define(version: 20160106090257) do
 
   create_table "record_state_logs", force: :cascade do |t|
     t.integer  "record_id",     limit: 4
-    t.string   "aasm_state",    limit: 255
+    t.string   "aasm_state",    limit: 191
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.string   "info",          limit: 255
+    t.string   "info",          limit: 191
     t.integer  "borrower_id",   limit: 4
-    t.string   "borrower_type", limit: 255
+    t.string   "borrower_type", limit: 191
   end
 
   add_index "record_state_logs", ["borrower_id", "borrower_type"], name: "index_record_state_logs_on_borrower_id_and_borrower_type", using: :btree
@@ -233,14 +233,14 @@ ActiveRecord::Schema.define(version: 20160106090257) do
     t.datetime "ended_at"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
-    t.string   "aasm_state",    limit: 255
+    t.string   "aasm_state",    limit: 191
     t.float    "price",         limit: 24
     t.float    "item_price",    limit: 24
     t.integer  "rent_days",     limit: 4
     t.float    "item_deposit",  limit: 24
     t.integer  "deliver_id",    limit: 4,               null: false
     t.float    "deliver_fee",   limit: 24
-    t.string   "borrower_type", limit: 255
+    t.string   "borrower_type", limit: 191
     t.integer  "order_id",      limit: 4
     t.integer  "free_days",     limit: 4,   default: 0
   end
@@ -262,9 +262,9 @@ ActiveRecord::Schema.define(version: 20160106090257) do
   add_index "reviews", ["record_id", "judger_id", "user_id"], name: "index_reviews_on_record_id_and_judger_id_and_user_id", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",          limit: 255
+    t.string   "name",          limit: 191
     t.integer  "resource_id",   limit: 4
-    t.string   "resource_type", limit: 255
+    t.string   "resource_type", limit: 191
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -289,19 +289,20 @@ ActiveRecord::Schema.define(version: 20160106090257) do
     t.float   "deliver_fee",      limit: 24
     t.integer "deliver_id",       limit: 4
     t.integer "free_days",        limit: 4,  default: 0
+    t.float   "deposit",          limit: 24, default: 0.0
   end
 
   add_index "shopping_cart_items", ["shopping_cart_id", "item_id"], name: "index_shopping_cart_items_on_shopping_cart_id_and_item_id", using: :btree
 
   create_table "shopping_carts", force: :cascade do |t|
     t.integer "user_id",   limit: 4
-    t.string  "user_type", limit: 255
+    t.string  "user_type", limit: 191
   end
 
   add_index "shopping_carts", ["user_type", "user_id"], name: "index_shopping_carts_on_user_type_and_user_id", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name",        limit: 191
     t.integer  "category_id", limit: 4
     t.integer  "serial",      limit: 4
     t.datetime "created_at",              null: false
@@ -309,7 +310,7 @@ ActiveRecord::Schema.define(version: 20160106090257) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",       limit: 191
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -317,23 +318,23 @@ ActiveRecord::Schema.define(version: 20160106090257) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  limit: 191, default: "", null: false
+    t.string   "encrypted_password",     limit: 191, default: "", null: false
+    t.string   "reset_password_token",   limit: 191
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip",     limit: 191
+    t.string   "last_sign_in_ip",        limit: 191
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "confirmation_token",     limit: 255
+    t.string   "confirmation_token",     limit: 191
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",      limit: 255
-    t.string   "account",                limit: 255
+    t.string   "unconfirmed_email",      limit: 191
+    t.string   "account",                limit: 191
   end
 
   add_index "users", ["account"], name: "index_users_on_account", unique: true, using: :btree

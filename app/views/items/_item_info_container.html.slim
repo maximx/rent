@@ -41,7 +41,7 @@
           = item.period_without_per
 
         dt 押金
-        dd = item.currency_deposit
+        dd: .label.label-warning = item.currency_deposit
 
         - selections.each do |selection|
           dt = selection.vector.name

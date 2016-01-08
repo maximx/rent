@@ -42,6 +42,7 @@ zh-TW:
     records:
       form:
         free_days: '免租金天數：%{days}天'
+        item_deposit: '押金：%{price}'
         rent_days: '，承租天數：'
         item_deliver_fee: '運送費用：'
         total_price: '，總金額：'

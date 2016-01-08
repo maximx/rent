@@ -25,6 +25,7 @@ h3.col-md-offset-3 = t('controller.records.action.new')
         div class=(full_form? ? 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9' : 'col-sm-12')
           = f.input :free_days, as: :hidden, input_html: {class: 'free_days'}
           = hidden_field_tag :item_price, item.price, class: 'item_price'
+          = hidden_field_tag :item_deposit, item.deposit, class: 'item_deposit'
 
           .col-sm-12
             code = t('helpers.records.form.free_days', days: record.free_days)

@@ -1,11 +1,14 @@
 - item = shopping_cart_item.item
 
 li.item_record.col-md-12
+  = hidden_field_tag :item_price, shopping_cart_item.price, class: 'item_price', id: nil
+  = hidden_field_tag :free_days, shopping_cart_item.free_days, class: 'free_days', id: nil
+  = hidden_field_tag :item_deposit, shopping_cart_item.deposit, class: 'item_deposit', id: nil
+
   .col-md-5
-    = hidden_field_tag :item_price, shopping_cart_item.price, class: 'item_price', id: nil
-    = hidden_field_tag :free_days, shopping_cart_item.free_days, class: 'free_days', id: nil
     div = link_to item.name, item_path(item)
-    .label.label-default = "免租金天數：#{shopping_cart_item.free_days}天"
+    .label.label-default = t('helpers.records.form.free_days', days: shopping_cart_item.free_days)
+    .label.label-warning = t('helpers.records.form.item_deposit', price: shopping_cart_item.currency_deposit)
   .col-md-1
     = shopping_cart_item.currency_price
   .col-md-3

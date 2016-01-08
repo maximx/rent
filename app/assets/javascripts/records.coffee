@@ -43,17 +43,19 @@ $(document).ready ->
     total = 0
     $order_container.find('.item_record').each ()->
       free_days = Number( $(this).find('.free_days').val() )
+      item_deposit = Number( $(this).find('.item_deposit').val() )
       deliver_fee = Number( $(this).find('.item_deliver option:selected').data('deliver_fee') )
-      valid_days = if (days > free_days) then (days - free_days) else 0
 
+      deliver_fee = 0 if isNaN(deliver_fee) or days < 1
+      item_deposit = 0 if isNaN(item_deposit) or days < 1
+
+      valid_days = if (days > free_days) then (days - free_days) else 0
       rent_price = valid_days * $(this).find('.item_price').val()
-      deliver_fee = 0 if isNaN(deliver_fee)
-      subtotal = rent_price + deliver_fee
+      subtotal = rent_price + deliver_fee + item_deposit
       total += subtotal
 
       $(this).find('.item_deliver_fee').text('$' + deliver_fee)
       $(this).find('.item_subtotal').text('$' + subtotal)
-
 
     $('#rent_days').text(days + '天')
     $('#total_price').text('$' + total)

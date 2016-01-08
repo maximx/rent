@@ -5,4 +5,6 @@ ul.shopping_cart > li {
   padding-top: 10px;
   padding-bottom: 10px;
   &:last-child, &:first-child {border: none;}
+
+  .label {margin-right: 5px;}
 }

@@ -2,7 +2,7 @@ h1.text-center = t('controller.shopping_carts.action.show')
 
 = render_default_content(@shopping_cart.items) do
   | #{t('helpers.shopping_carts.empty')}
-  mark = link_to(t('helpers.account/records.go_rent'), search_items_path, class: 'text-danger')
+  mark = link_to(t('helpers.shopping_carts.go_rent'), search_items_path, class: 'text-danger')
 
 - unless @shopping_cart.empty?
   .item_record_order
