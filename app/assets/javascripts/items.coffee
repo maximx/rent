@@ -184,6 +184,6 @@ $ ->
       )
 
 @wookmark_item = ()->
-  $('.item-grid').closest('#item-container').wookmark
+  $('.item-grid').closest('#item-list-container').wookmark
     autoResize: true
     offset: 15
