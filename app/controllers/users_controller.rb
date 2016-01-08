@@ -20,11 +20,11 @@ class UsersController < ApplicationController
   def update
     if @profile.update(profile_params)
       if @profile.phone.present? and !@profile.phone_confirmed?
-        redirect_with_message phone_confirmation_account_settings_path(redirect_url: params[:redirect_url]),
-                              notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
+        redirect_to phone_confirmation_account_settings_path(redirect_url: params[:redirect_url]),
+                    notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
       else
         redirect_url = params[:redirect_url] || user_path(@user)
-        redirect_with_message redirect_url, notice: '個人資料修改成功。'
+        redirect_to redirect_url, notice: '個人資料修改成功。'
       end
     else
       flash[:alert] = t('controller.action.create.fail')

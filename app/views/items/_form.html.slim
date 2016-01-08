@@ -6,7 +6,9 @@
 #selections-hide.hide
 
 / data-item 是給 item selections 用的，見 item.coffee
-= simple_form_for item, html: { data: { item: item.id } } do |f|
+= simple_form_for item, html: {data: {item: item.id}} do |f|
+  = hidden_field_tag :redirect_url, params[:redirect_url]
+
   = f.input :pictures, as: :file_select, input_html: { multiple: true } if item.new_record?
   = f.input :product_id
   = f.input :name
@@ -32,6 +34,6 @@
 
   .form-group
     .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
-      = f.button :submit, data: { disable_with: t('helpers.submit.wait') }
+      = f.button :submit, data: {disable_with: t('helpers.submit.wait')}
 
 = render partial: 'account/settings/bank_info_form', locals: { item: item, profile: current_user.profile }

@@ -47,7 +47,10 @@ class ItemsController < ApplicationController
     pictures = params[:item][:pictures]
     if @item.update( item_params.except(:pictures) )
       pictures.each { |picture| @item.pictures.create image: picture } if pictures
-      redirect_to item_path(@item), notice: t('controller.action.update.success', name: @item.name) unless remotipart_submitted?
+      unless remotipart_submitted?
+        redirect_url = params[:redirect_url] || item_path(@item)
+        redirect_to redirect_url, notice: t('controller.action.update.success', name: @item.name)
+      end
     else
       unless remotipart_submitted?
         flash[:alert] = t('controller.action.create.fail')
@@ -61,7 +64,8 @@ class ItemsController < ApplicationController
       @item.open!
       redirect_to lender_items_path, notice: t('controller.items.open.success', name: @item.name)
     else
-      redirect_to edit_item_path(@item), alert: t('controller.items.open.fail', name: @item.name)
+      redirect_to edit_item_path(@item, redirect_url: lender_items_path),
+                  alert: t('controller.items.open.fail', name: @item.name)
     end
   end
 

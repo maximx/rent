@@ -11,14 +11,16 @@
           th = t('simple_form.labels.item.product_id')
           th = t('simple_form.labels.item.price')
           th = t('simple_form.labels.item.aasm_state')
-          th #
+          th
       tbody
         - @items.each do |item|
-          tr
+          tr class="#{item.closed? ? 'active' : ''}"
             td = link_to(render_item_name(item), item_path(item))
             td = item.product_id
             td = item.price_period
-            td = item.aasm.human_state
+            td
+              div class="label label-#{item.closed? ? 'default' : 'success'}"
+                = item.aasm.human_state
             td = render_operate_item_links item
 
     = render partial: 'common/pagination', locals: { objects: @items }
