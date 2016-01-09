@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108084238) do
+ActiveRecord::Schema.define(version: 20160109033758) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20160108084238) do
   create_table "items", force: :cascade do |t|
     t.string   "name",           limit: 191
     t.float    "price",          limit: 24
-    t.integer  "period",         limit: 4,     default: 0
+    t.integer  "period",         limit: 4,     default: 1
     t.string   "address",        limit: 191
     t.float    "deposit",        limit: 24,    default: 0.0
     t.text     "description",    limit: 65535
