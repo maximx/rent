@@ -1,5 +1,7 @@
 = render_lender_tablist
 
+h3.col-md-offset-3 = t('controller.records.action.new')
+
 .tab-content
   = render partial: 'records/form', locals: { item: @item, event_sources_path: @event_sources_path,
                                               record: @record, disabled_dates: @disabled_dates }
