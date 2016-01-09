@@ -26,9 +26,10 @@
           = hidden_field_tag :item_deposit, item.deposit, class: 'item_deposit'
 
           .col-sm-12
-            code = t('helpers.records.form.free_days', days: record.free_days)
             = t('helpers.records.form.rent_days')
             span#rent_days
+            - if item.per_day?
+              code = t('helpers.records.form.free_days', days: record.free_days)
           .col-sm-12
             = t('helpers.records.form.item_deliver_fee')
             span.item_deliver_fee

@@ -9,4 +9,8 @@ class ShoppingCartItem < ActiveRecord::Base
 
   # changed with record.item_period, item.period
   enum period: { per_time: 0, per_day: 1 }
+
+  def price_period
+    "#{currency_price}/#{period_i18n}"
+  end
 end

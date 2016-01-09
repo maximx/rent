@@ -7,11 +7,12 @@ li.item_record.col-md-12
 
   .col-md-5
     div = link_to item.name, item_path(item)
-    .label.label-default = t('helpers.records.form.free_days', days: shopping_cart_item.free_days)
     .label.label-warning = t('helpers.records.form.item_deposit', price: shopping_cart_item.currency_deposit)
-  .col-md-1
-    = shopping_cart_item.currency_price
-  .col-md-3
+    - if shopping_cart_item.per_day?
+      .label.label-default = t('helpers.records.form.free_days', days: shopping_cart_item.free_days)
+  .col-md-2
+    = shopping_cart_item.price_period
+  .col-md-2
     = f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
       = cart_item.input :deliver_id,
                         as: :select,
