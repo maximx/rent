@@ -68,6 +68,7 @@ gem 'roo'
 # models
 gem 'aasm'
 gem 'mailboxer'
+gem 'enum_help'
 
 # image
 gem 'rmagick'

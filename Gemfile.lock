@@ -96,6 +96,7 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
+    enum_help (0.0.14)
     erubis (2.7.0)
     excon (0.45.4)
     execjs (2.6.0)
@@ -392,6 +393,7 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.1.0)
   devise
+  enum_help
   ffaker
   fog
   fullcalendar-rails
