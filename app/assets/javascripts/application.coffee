@@ -32,7 +32,11 @@
 $ ->
   $(window).on 'popstate', (e)->
     if state = e.originalEvent.state
-      window.location.href = state.url
+      # items/search and users/items 有 ajax
+      items_search_reg = /\/items\/search/
+      items_user_reg = /\/users\/\D+\/items/
+      if items_search_reg.test(state.url) or items_user_reg.test(state.url)
+        window.location.href = state.url
 
   # stop bubble javascript
   $('.stop-bubble').click (e)->
