@@ -14,6 +14,7 @@ user = User.new(
   confirmed_at: Time.now
 )
 user.save
+user.add_role :company
 
 
 # init category

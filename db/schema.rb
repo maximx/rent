@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109033758) do
+ActiveRecord::Schema.define(version: 20160109095645) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -231,18 +231,19 @@ ActiveRecord::Schema.define(version: 20160109033758) do
     t.integer  "borrower_id",   limit: 4
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "aasm_state",    limit: 191
     t.float    "price",         limit: 24
     t.float    "item_price",    limit: 24
     t.integer  "rent_days",     limit: 4
     t.float    "item_deposit",  limit: 24
-    t.integer  "deliver_id",    limit: 4,               null: false
+    t.integer  "deliver_id",    limit: 4,   null: false
     t.float    "deliver_fee",   limit: 24
     t.string   "borrower_type", limit: 191
     t.integer  "order_id",      limit: 4
-    t.integer  "free_days",     limit: 4,   default: 0
+    t.integer  "free_days",     limit: 4
+    t.integer  "item_period",   limit: 4
   end
 
   add_index "records", ["borrower_id", "borrower_type"], name: "index_records_on_borrower_id_and_borrower_type", using: :btree
@@ -290,6 +291,7 @@ ActiveRecord::Schema.define(version: 20160109033758) do
     t.integer "deliver_id",       limit: 4
     t.integer "free_days",        limit: 4,  default: 0
     t.float   "deposit",          limit: 24, default: 0.0
+    t.integer "period",           limit: 4,  default: 1
   end
 
   add_index "shopping_cart_items", ["shopping_cart_id", "item_id"], name: "index_shopping_cart_items_on_shopping_cart_id_and_item_id", using: :btree
