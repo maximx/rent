@@ -29,25 +29,23 @@
             = render_avatar_thumb item.lender
             = ' ' + item.lender.logo_name
 
-        dt 出租物地址
+        dt = t('simple_form.labels.item.address')
         dd = item.address
 
-        dt 租金
+        dt = t('simple_form.labels.item.price')
         dd = item.price_period
 
-        dt 最短租期
-        dd
-          = item.minimum_period
-          = item.period_without_per
+        dt = t('simple_form.labels.item.minimum_period')
+        dd = t('helpers.items.show.minimum_period', days: item.minimum_period)
 
-        dt 押金
+        dt = t('simple_form.labels.item.deposit')
         dd: .label.label-warning = item.currency_deposit
 
         - selections.each do |selection|
           dt = selection.vector.name
           dd = selection.name
 
-        dt 描述
+        dt = t('simple_form.labels.item.description')
         dd = raw item.description
 
         dd = render_item_calendar_link(item)

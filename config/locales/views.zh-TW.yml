@@ -25,6 +25,8 @@ zh-TW:
     users:
       confirmed_attribute: '已驗證'
     items:
+      show:
+        minimum_period: '%{days}日'
       search:
         keyword: '要找什麼物品呢？'
         rent_date: '租借日期'
