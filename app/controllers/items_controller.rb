@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
     if @item.update( item_params.except(:pictures) )
       pictures.each { |picture| @item.pictures.create image: picture } if pictures
       unless remotipart_submitted?
-        redirect_url = params[:redirect_url] || item_path(@item)
+        redirect_url = params[:redirect_url].present? ? params[:redirect_url] : item_path(@item)
         redirect_to redirect_url, notice: t('controller.action.update.success', name: @item.name)
       end
     else
@@ -134,10 +134,10 @@ class ItemsController < ApplicationController
   private
     def item_params
       params.require(:item).permit(
-        :name, :price, :minimum_period, :address,
+        :product_id, :name, :price, :period, :minimum_period, :address,
         :deposit, :description, :subcategory_id,
-        :deliver_fee, deliver_ids: [ ],
-        selection_ids: [ ]
+        :deliver_fee, deliver_ids: [],
+        selection_ids: []
       )
     end
 
