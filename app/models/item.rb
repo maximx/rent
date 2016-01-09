@@ -34,6 +34,7 @@ class Item < ActiveRecord::Base
   has_many :selections, through: :items_selections
   accepts_nested_attributes_for :selections
 
+  # changed with record.item_period, shopping_cart_item.period
   enum period: { per_time: 0, per_day: 1 }
 
   geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }

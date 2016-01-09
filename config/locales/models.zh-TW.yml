@@ -2,8 +2,16 @@ zh-TW:
   enums:
     item:
       period:
-        per_time: '每次'
-        per_day: '每日'
+        per_time: &per_time '每次'
+        per_day: &per_day '每日'
+    record:
+      item_period:
+        per_time: *per_time
+        per_day: *per_day
+    shopping_cart_item:
+      period:
+        per_time: *per_time
+        per_day: *per_day
   activerecord:
     models:
       item: "出租物"

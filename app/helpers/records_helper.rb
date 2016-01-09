@@ -98,8 +98,9 @@ module RecordsHelper
   end
 
   def render_record_price_equation(record)
-    record_period = "per_day"
-    t("helpers.records.show.#{record_period}_price",
+    return record.currency_item_price if record.per_time?
+
+    t("helpers.records.show.per_day_price",
        item_price: @record.currency_item_price,
        rent_days: @record.rent_days,
        free_days: @record.free_days,

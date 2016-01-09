@@ -3,6 +3,8 @@ class Record < ActiveRecord::Base
   include CurrencyPrice
   include DatetimeOverlaps
 
+  self.per_page = 10
+
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
   validates :deliver_id, inclusion: { in: ->(obj){ obj.item.delivers.pluck(:id) } }
   validate :start_end_date, :not_overlap, :borrower_lender_customers
@@ -18,7 +20,8 @@ class Record < ActiveRecord::Base
 
   has_many :record_state_logs, class_name: 'RecordStateLog', foreign_key: 'record_id', dependent: :destroy
 
-  self.per_page = 10
+  # changed with item.period, shopping_cart_item.period
+  enum item_period: { per_time: 0, per_day: 1 }
 
   after_initialize :set_free_days, if: :new_record?
   before_create :set_item_attributes, if: :new_record?
@@ -179,19 +182,20 @@ class Record < ActiveRecord::Base
 
   private
     def set_free_days
-      self.free_days = lender.profile.free_days
+      self.free_days ||= lender.profile.free_days
     end
 
     def set_item_attributes
       self.item_price ||= item.price
-      self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
-      self.item_deposit = item.deposit
+      self.item_period ||= item.period
+      self.item_deposit ||= item.deposit
       self.deliver_fee ||= (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
+      self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
       self.price = valid_rent_days * item_price
     end
 
     def valid_rent_days
-      if item.per_time? #每次
+      if per_time? #每次
         1
       elsif rent_days > free_days #正常的承租天數
         rent_days - free_days
