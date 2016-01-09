@@ -19,8 +19,8 @@ class Record < ActiveRecord::Base
 
   self.per_page = 10
 
-  after_initialize :set_free_days
-  before_create :set_item_attributes
+  after_initialize :set_free_days, if: :new_record?
+  before_create :set_item_attributes, if: :new_record?
   after_create :save_booking_state_log, :send_payment_message
 
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
@@ -178,18 +178,24 @@ class Record < ActiveRecord::Base
 
   private
     def set_free_days
-      self.free_days = lender.profile.free_days if self.new_record?
+      self.free_days = lender.profile.free_days
     end
 
     def set_item_attributes
-      if self.new_record?
-        self.item_price ||= item.price
-        self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
-        self.item_deposit = item.deposit
-        self.deliver_fee ||= (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
+      self.item_price ||= item.price
+      self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
+      self.item_deposit = item.deposit
+      self.deliver_fee ||= (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
+      self.price = valid_rent_days * item_price
+    end
 
-        valid_rent_days = (rent_days > free_days) ? (rent_days - free_days) : 0
-        self.price = valid_rent_days * item_price
+    def valid_rent_days
+      if item.per_time? #每次
+        1
+      elsif rent_days > free_days #正常的承租天數
+        rent_days - free_days
+      else
+        0 #有問題的，算零天
       end
     end
 
