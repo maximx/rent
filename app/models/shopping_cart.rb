@@ -85,7 +85,9 @@ class ShoppingCart < ActiveRecord::Base
         borrower: user,
         item_price: shopping_cart_item.price,
         deliver_id: shopping_cart_item.deliver_id,
-        deliver_fee: shopping_cart_item.deliver_fee
+        deliver_fee: shopping_cart_item.deliver_fee,
+        item_deposit: shopping_cart_item.deposit,
+        free_days: shopping_cart_item.free_days
       }
     end
 end

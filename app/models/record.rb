@@ -4,6 +4,7 @@ class Record < ActiveRecord::Base
   include DatetimeOverlaps
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
+  validates :deliver_id, inclusion: { in: ->(obj){ obj.item.delivers.pluck(:id) } }
   validate :start_end_date, :not_overlap, :borrower_lender_customers
 
   belongs_to :borrower, polymorphic: true
