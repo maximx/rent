@@ -36,7 +36,7 @@ zh-TW:
         name: '名稱'
         subcategory_id: '分類'
         price: '租金'
-        period: '租期'
+        period: '承租區間'
         minimum_period: '最短租期'
         deposit: '押金'
         address: '物品所在地'

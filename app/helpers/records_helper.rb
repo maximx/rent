@@ -97,6 +97,16 @@ module RecordsHelper
     content_tag :div, links, class: 'btn-group record_operates'
   end
 
+  def render_record_price_equation(record)
+    record_period = "per_day"
+    t("helpers.records.show.#{record_period}_price",
+       item_price: @record.currency_item_price,
+       rent_days: @record.rent_days,
+       free_days: @record.free_days,
+       price: @record.currency_price
+     )
+  end
+
   def info_label
     {
       remitted: '帳號末五碼',
