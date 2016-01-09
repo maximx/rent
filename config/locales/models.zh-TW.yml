@@ -1,4 +1,9 @@
 zh-TW:
+  enums:
+    item:
+      period:
+        per_time: '每次'
+        per_day: '每日'
   activerecord:
     models:
       item: "出租物"

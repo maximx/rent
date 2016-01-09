@@ -34,7 +34,7 @@ class Item < ActiveRecord::Base
   has_many :selections, through: :items_selections
   accepts_nested_attributes_for :selections
 
-  enum period: [ :每日, :每月, :每年 ]
+  enum period: { per_time: 0, per_day: 1 }
 
   geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
@@ -176,11 +176,11 @@ class Item < ActiveRecord::Base
   end
 
   def period_without_per
-    period.slice(1)
+    period_i18n.slice(1)
   end
 
   def price_period
-    "#{currency_price}/#{period}"
+    "#{currency_price}/#{period_i18n}"
   end
 
   def self.overlaps_types

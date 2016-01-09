@@ -12,7 +12,7 @@
           .panel-heading.clearfix
             .hidden-sm.hidden-xs
               .price #{item.currency_price} 元
-              .period = item.period
+              .period = item.period_i18n
 
           .panel-body
             = render partial: 'records/form', locals: { item: item, record: record, disabled_dates: disabled_dates }
