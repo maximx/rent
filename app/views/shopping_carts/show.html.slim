@@ -22,12 +22,16 @@ h1.text-center = t('controller.shopping_carts.action.show')
         = render partial: 'shopping_carts/shopping_cart_item', collection: @shopping_cart_items, locals:{f: f}
 
         li.col-md-12
-          .col-md-offset-3.col-md-2.text-right = t('helpers.shopping_carts.rent_days')
+          .col-md-offset-4.col-md-2.text-right = t('helpers.shopping_carts.rent_days')
           #rent_days.col-md-1
-          .col-md-offset-3.col-md-1 = t('helpers.shopping_carts.total_price')
-          #total_price.col-md-2
+          .col-md-offset-1.col-md-2.text-right = t('helpers.shopping_carts.total_price')
+          #total_price.col-md-1
         li.col-sm-12
-          .col-sm-offset-10.col-sm-2 = f.button :submit, t('helpers.submit.submit'), class: 'btn btn-success btn-sm'
+          .col-sm-offset-10.col-sm-2
+            = f.button :submit,
+                       t('helpers.submit.submit'),
+                       class: 'btn btn-success btn-sm',
+                       data: {disable_with: t('helpers.submit.wait')}
 
       - if @shopping_cart.errors.present?
         .text-center
