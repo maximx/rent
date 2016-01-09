@@ -45,11 +45,13 @@ $(document).ready ->
       free_days = Number( $(this).find('.free_days').val() )
       item_deposit = Number( $(this).find('.item_deposit').val() )
       deliver_fee = Number( $(this).find('.item_deliver option:selected').data('deliver_fee') )
+      item_period = $(this).find('.item_period').val()
 
       deliver_fee = 0 if isNaN(deliver_fee) or days < 1
       item_deposit = 0 if isNaN(item_deposit) or days < 1
 
       valid_days = if (days > free_days) then (days - free_days) else 0
+      valid_days = 1 if item_period == 'per_time' and days > 0
       rent_price = valid_days * $(this).find('.item_price').val()
       subtotal = rent_price + deliver_fee + item_deposit
       total += subtotal

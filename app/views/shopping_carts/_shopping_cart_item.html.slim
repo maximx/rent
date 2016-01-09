@@ -4,6 +4,7 @@ li.item_record.col-md-12
   = hidden_field_tag :item_price, shopping_cart_item.price, class: 'item_price', id: nil
   = hidden_field_tag :free_days, shopping_cart_item.free_days, class: 'free_days', id: nil
   = hidden_field_tag :item_deposit, shopping_cart_item.deposit, class: 'item_deposit', id: nil
+  = hidden_field_tag :item_period, shopping_cart_item.period, class: 'item_period', id: nil
 
   .col-md-5
     div = link_to item.name, item_path(item)

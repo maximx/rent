@@ -24,6 +24,7 @@
           = f.input :free_days, as: :hidden, input_html: {class: 'free_days'}
           = hidden_field_tag :item_price, item.price, class: 'item_price'
           = hidden_field_tag :item_deposit, item.deposit, class: 'item_deposit'
+          = hidden_field_tag :item_period, item.period, class: 'item_period'
 
           .col-sm-12
             = t('helpers.records.form.rent_days')
