@@ -3,8 +3,8 @@
     = render_navigation
     = yield :full_top
     .container
+      = raw breadcrumbs style: :bootstrap, autoroot: false
       = render_notice(notice)
       = render_alert(alert)
-      = raw breadcrumbs style: :bootstrap, autoroot: false
       = yield
     = yield :full_bottom
