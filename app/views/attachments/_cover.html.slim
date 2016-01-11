@@ -1,4 +1,4 @@
 - if cover.present?
   .cover-image-container
-    = link_to cover.image.url, target: '_blank' do
-      .cover-image style="background-image: url(#{cover.image.cover.url});"
+    .cover-image style="background-image: url(#{cover.image.cover.url});"
+      = image_tag cover.image.url, class: 'hide original-image'

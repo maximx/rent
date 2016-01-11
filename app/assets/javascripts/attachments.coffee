@@ -29,5 +29,8 @@ $ ->
   $('form.ajax_image').on 'change', '.picture :file', () ->
     $(this).closest('form').submit()
 
+  $('.cover-image .original-image').load ()->
+    $(this).closest('.cover-image').css('background-image', 'url(' + $(this).attr('src') + ')')
+
 @remove_picture_modal = ()->
   $('#picture_modal').remove()
