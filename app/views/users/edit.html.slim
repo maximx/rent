@@ -1,12 +1,16 @@
 = render layout: 'users/header', locals: { user: @user, maps: @maps } do
   .col-md-8
-    = simple_form_for @profile, url: avatar_user_path(@user),
-                                remote: true, html: { method: :patch, class: 'form-horizontal ajax_image' } do |f|
-      = f.input :avatar, as: :file_with_image, input_html: { class: 'avatar' }
+    = simple_form_for @profile,
+                      url: avatar_user_path(@user),
+                      remote: true,
+                      html: {method: :patch, class: 'form-horizontal ajax_image'} do |f|
+      = f.input :avatar, as: :file_with_image, input_html: {class: 'avatar'}
 
-    = simple_form_for @user, url: upload_account_settings_path,
-                             remote: true, html: { method: :post, class: 'form-horizontal ajax_image' } do |f|
-      = f.input :covers, as: :file_with_image, input_html: { multiple: true }
+    = simple_form_for @user,
+                      url: upload_account_settings_path,
+                      remote: true,
+                      html: {method: :post, class: 'form-horizontal ajax_image'} do |f|
+      = f.input :cover, as: :file_with_image
 
   .hidden-xs.hidden-sm
     = render partial: 'users/total_reviews', locals: { total_reviews: @total_reviews }

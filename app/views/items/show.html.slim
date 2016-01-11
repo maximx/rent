@@ -1,7 +1,7 @@
 - breadcrumb :item, @item
 
 - content_for :full_top do
-  = render partial: 'attachments/cover', locals: {cover: @item.cover_picture, pictures: @item.pictures}
+  = render partial: 'attachments/cover', locals: {cover: @item.lender.cover}
 
 - content_for :full_bottom do
   #map

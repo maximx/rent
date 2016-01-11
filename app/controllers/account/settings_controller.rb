@@ -27,9 +27,11 @@ class Account::SettingsController < ApplicationController
   end
 
   def upload
-    if remotipart_submitted? and params[:user][:covers]
-      params[:user][:covers].each do |cover|
-        @user.covers.create image: cover
+    if remotipart_submitted?
+      if @user.cover.present?
+        @user.cover.update image: params[:user][:cover]
+      else
+        cover = @user.create_cover image: params[:user][:cover]
       end
     end
   end

@@ -38,7 +38,7 @@
   border: 1px solid $gray-85;
 
   .cover-image {
-    @include background_cover($carousel-height);
+    @include background_cover($carousel-height, contain);
   }
 }
 
