@@ -6,7 +6,7 @@
   height: 200px;
 
   .item {
-    @include test(100%);
+    @include background_cover(100%);
 
     .carousel-caption {
       right: 0;
@@ -38,7 +38,7 @@
   border: 1px solid $gray-85;
 
   .cover-image {
-    @include test($carousel-height);
+    @include background_cover($carousel-height);
   }
 }
 

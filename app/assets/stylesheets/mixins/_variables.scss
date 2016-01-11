@@ -24,7 +24,7 @@ $tours-figure-margin: 30px 0;
 $tours-img-width: 70%;
 
 
-@mixin test($height) {
+@mixin background_cover($height) {
   background-size: cover;
   background-repeat: no-repeat;
   background-color: $body-bg;
