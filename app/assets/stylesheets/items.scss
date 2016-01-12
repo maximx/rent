@@ -105,11 +105,20 @@
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid $gray-85;
+}
 
-  #item-picture-container {
-    position: relative;
-    margin-top: 15px;
-    .item-picture-list {width: 252px;}
+/*item.pictures on items/show and edit*/
+#item-picture-container {
+  position: relative;
+
+  > .item-picture {
+    width: 252px;
+
+    .remove-picture {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
 }
 

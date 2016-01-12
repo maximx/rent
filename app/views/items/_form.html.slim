@@ -1,6 +1,4 @@
-- unless item.new_record?
-  = simple_form_for item, remote: true, html: { class: 'form-horizontal ajax_image' } do |f|
-    = f.input :pictures, as: :file_with_image, input_html: { multiple: true }
+= render partial: 'items/picture_form', locals: {item: item}
 
 /put item selection here to avoid form append
 #selections-hide.hide

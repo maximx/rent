@@ -194,6 +194,6 @@ $ ->
     autoResize: true
     offset: 15
 
-  $('.item-picture-list').closest('#item-picture-container').wookmark
+  $('.item-picture').closest('#item-picture-container').wookmark
     autoResize: true
-    offset: 5
+    offset: 15

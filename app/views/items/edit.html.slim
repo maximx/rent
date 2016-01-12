@@ -4,5 +4,4 @@
   = render partial: 'attachments/cover', locals: {cover: @item.lender.cover}
 
 .page-header: h1 = render_item_name @item
-.row
-  = render partial: 'form', locals: { item: @item, categories_grouped_select: @categories_grouped_select }
+= render partial: 'form', locals: { item: @item, categories_grouped_select: @categories_grouped_select }

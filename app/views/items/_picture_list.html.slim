@@ -1,0 +1,6 @@
+#item-picture-container
+  - item.pictures.each do |picture|
+    .item-picture
+      = link_to picture.image.url, target: '_blank' do
+        = image_tag picture.image.url(:grid), class: 'img-thumbnail'
+        = destroy_attachment_link picture
