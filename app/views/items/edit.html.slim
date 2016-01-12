@@ -5,3 +5,8 @@
 
 .page-header: h1 = render_item_name @item
 = render partial: 'form', locals: { item: @item, categories_grouped_select: @categories_grouped_select }
+
+javascript:
+  $(document).ready(function(){
+    wookmark_item();
+  });

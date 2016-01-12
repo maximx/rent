@@ -7,7 +7,7 @@ class FileWithImageInput < SimpleForm::Inputs::Base
       template.content_tag :div, class: 'item', style: "background-image: url(#{file_url})" do
         template.content_tag :figure do
           template.concat @builder.file_field(attribute_name, merged_input_options)
-          template.concat "<figcaption class='carousel-caption edit_image'>#{I18n.t('helpers.submit.edit')}</figcaption>".html_safe
+          template.concat "<figcaption class='carousel-caption edit_image'>#{I18n.t('helpers.submit.upload')}</figcaption>".html_safe
         end
       end
     end
