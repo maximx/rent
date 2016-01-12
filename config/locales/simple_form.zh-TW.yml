@@ -17,7 +17,7 @@ zh-TW:
         remember_me: '記住我'
         current_password: '原密碼'
         agreement: '已閱讀並接受%{terms_link}'
-        covers: '封面圖'
+        cover: '封面圖'
       profile:
         name: '名字'
         address: '地址'

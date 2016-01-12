@@ -1,10 +1,4 @@
 <%- if remotipart_submitted? %>
-  if($('.cover-image-container').size() > 0) {
-    var html = "<%= escape_javascript(render(partial: "pictures/carousel", locals: { pictures: @item.pictures })) %>";
-    $('#picture-carousel').remove();
-    $('#picture_modal .modal-body').html(html);
-  } else {
-    var html = "<%= escape_javascript(render(partial: 'attachments/cover', locals: {cover: @item.cover_picture, pictures: @item.pictures})) %>";
-    $('#site-content').prepend(html);
-  }
+  var html = "<%= escape_javascript(render(partial: 'items/picture_list', locals: {item: @item})) %>";
+  update_item_picturs_container(html);
 <% end %>

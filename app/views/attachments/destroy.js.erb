@@ -1,0 +1,4 @@
+<% if request.xhr? and @attachment.attachable.is_a?(Item) %>
+  var html = "<%= escape_javascript(render(partial: 'items/picture_list', locals: {item: @attachment.attachable})) %>";
+  update_item_picturs_container(html);
+<% end %>

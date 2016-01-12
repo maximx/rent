@@ -1,8 +1,8 @@
 module AttachmentsHelper
   def destroy_attachment_link(attachment)
-    if attachment.editable_by?(current_user) and ['edit', 'update', 'upload'].include?(action_name)
+    if attachment.editable_by?(current_user) and ['edit', 'update', 'destroy'].include?(action_name)
       link_to raw('&times;'),
-              attachment_path(attachment, format: :json),
+              attachment_path(attachment),
               class: 'close remove-picture btn',
               data: {confirm: t('helpers.common.destroy_confirm')},
               method: :delete,

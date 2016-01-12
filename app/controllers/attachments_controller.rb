@@ -18,7 +18,7 @@ class AttachmentsController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { render json: result if request.xhr? }
+      format.js
       format.html { redirect_to :back }
     end
   end
