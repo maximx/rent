@@ -1,4 +1,5 @@
-@import "mixins/variables";
+@import "mixins";
+@import "bootstrap/mixins/clearfix";
 
 /*index*/
 .item-view {
@@ -10,7 +11,7 @@
   position: relative;
 
   .item-grid {
-    width: 252px;
+    width: $item-grid-width + 2px;
     margin-right: 10px;
     margin-bottom: 5px;
     background-color: $body-bg;
@@ -18,6 +19,8 @@
     border-color: #BBBBBB;
     border-width: 1px;
     border-style: solid;
+
+    img {width: $item-grid-width;}
 
     .item-operation {
       display: none;
@@ -58,6 +61,12 @@
       .item-list-info, .item-list-img {
         margin-right: 15px;
         float: left;
+
+        .item-picture {
+          @include background_cover(180px, contain);
+          width: 250px;
+          background-repeat: no-repeat;
+        }
       }
       .item-list-avatar { margin: 10px 0; }
     }
@@ -112,7 +121,7 @@
   position: relative;
 
   > .item-picture {
-    width: 252px;
+    width: $item-grid-width;
 
     .remove-picture {
       position: absolute;

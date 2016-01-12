@@ -1,7 +1,8 @@
 @import "mixins/variables";
+@import "bootstrap/mixins/clearfix";
 
 .tours-header {
-  @include clearfix;
+  @include clearfix();
   margin-top: 0;
   padding-bottom: 20px;
   border-bottom: $one-px-solid $gray-85;

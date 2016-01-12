@@ -1,0 +1,6 @@
+@mixin background_cover($height, $background-size: cover) {
+  background-size: $background-size;
+  background-color: $body-bg;
+  background-position: 50% 50%;
+  height: $height;
+};

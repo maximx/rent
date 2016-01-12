@@ -1,7 +1,7 @@
 - items.each do |item|
   article.item-grid title="#{item.name}"
     = link_to item_path(item), class: "item-link" do
-      div = render_picture_cover item.cover_picture
+      = image_tag item.cover_picture.image.url(:grid)
 
       .item-info-short.clearfix
         header.item-title = render_item_name(item)

@@ -4,7 +4,7 @@ ul.item-list
     li.item-list-cell title="#{item.name}"
       .item-list-img
         = link_to item_path(item) do
-          figure = render_picture_cover_for_list item.cover_picture
+          .item-picture style="background-image: url(#{item.cover_picture.image.url(:grid)});"
 
       .item-list-info
         h4.item-list-name = link_to(render_item_name(item), item_path(item))

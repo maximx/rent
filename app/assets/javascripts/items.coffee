@@ -195,13 +195,14 @@ $ ->
   wookmark_item()
 
 @wookmark_item = ()->
-  $('.item-grid').closest('#item-list-container').wookmark
-    autoResize: true
-    offset: 15
+  $('#item-list-container').find('img').load ()->
+    $('.item-grid').closest('#item-list-container').wookmark
+      autoResize: true
+      offset: 15
+
   $('#item-picture-container').wookmark
     autoResize: true
     offset: 15
-
   $('#item-picture-container').find('img').load ()->
     $('#item-picture-container').wookmark
       autoResize: true
