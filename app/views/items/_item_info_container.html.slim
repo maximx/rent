@@ -45,8 +45,15 @@
           dt = selection.vector.name
           dd = selection.name
 
-        dt = t('simple_form.labels.item.description')
-        dd = raw item.description
+        - if item.description.present?
+          dt = t('simple_form.labels.item.description')
+          dd = raw item.description
 
         dd = render_item_calendar_link(item)
-        dd = render partial: 'messages/new', locals: { item: item } if cannot?(:update, item)
+        dd = render partial: 'messages/new', locals: {item: item} if cannot?(:update, item)
+
+      #item-picture-container
+        - item.pictures.each do |picture|
+          .item-picture-list
+            = link_to picture.image.url, target: '_blank' do
+              = image_tag picture.image.url(:cover), class: 'img-thumbnail'

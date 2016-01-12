@@ -193,3 +193,7 @@ $ ->
   $('.item-grid').closest('#item-list-container').wookmark
     autoResize: true
     offset: 15
+
+  $('.item-picture-list').closest('#item-picture-container').wookmark
+    autoResize: true
+    offset: 5

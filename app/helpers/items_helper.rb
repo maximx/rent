@@ -29,7 +29,7 @@ module ItemsHelper
   def render_item_calendar_link(item)
     url = can?(:update, item) ?
             lender_item_path(item, anchor: 'calendar') : new_item_record_path(item, anchor: 'calendar')
-    link_to t('helpers.items.see_calendar'), url, class: 'btn btn-info'
+    link_to t('helpers.items.see_calendar'), url, class: 'btn btn-default btn-sm'
   end
 
   def render_edit_item_link(item)
