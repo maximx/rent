@@ -24,6 +24,13 @@ module AttachmentsHelper
     image_tag avatar_url_of(user, :thumb), options
   end
 
+  def render_avatar_thumb_md(user, options = {})
+    size_options = {width: 100, height: 100}
+    size_options.reverse_merge! avatar_default_options
+    options = size_options.merge(options)
+    image_tag avatar_url_of(user, :thumb), options
+  end
+
   def render_avatar_logo(user, options = {})
     size_options = { width: 50, height: 50 }
     options = size_options.merge(options)

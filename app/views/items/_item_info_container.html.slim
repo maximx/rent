@@ -1,7 +1,14 @@
 .item-header
   .row
     .col-md-8
-      h3.item-title = item.name
+      .row
+        .col-md-2.text-center
+          = link_to render_avatar_thumb_md(item.lender), user_path(item.lender)
+        .col-md-10
+          h3.item-title = item.name
+      .row
+        .col-md-2.text-center.hidden-sm.hidden-xs
+          = link_to item.lender.logo_name, user_path(item.lender), class: 'text-muted'
 
     .col-md-4
       - if items_controller?
@@ -24,22 +31,18 @@
   .row
     .col-md-8
       dl.dl-horizontal
-        dd
-          = link_to user_path(item.lender) do
-            = render_avatar_thumb item.lender
-            = ' ' + item.lender.logo_name
-
-        dt = t('simple_form.labels.item.address')
-        dd = item.address
-
         dt = t('simple_form.labels.item.price')
-        dd = item.price_period
+        dd: mark: u = item.price_period
+
+        dt = t('simple_form.labels.item.deposit')
+        dd: mark: u = item.currency_deposit
 
         dt = t('simple_form.labels.item.minimum_period')
         dd = t('helpers.items.show.minimum_period', days: item.minimum_period)
 
-        dt = t('simple_form.labels.item.deposit')
-        dd: .label.label-warning = item.currency_deposit
+        dt = t('simple_form.labels.item.address')
+        dd = item.address
+
 
         - selections.each do |selection|
           dt = selection.vector.name
@@ -52,4 +55,6 @@
         dd = render_item_calendar_link(item)
         dd = render partial: 'messages/new', locals: {item: item} if cannot?(:update, item)
 
+  .row
+    .col-md-8
       = render partial: 'items/picture_list', locals: {item: item}

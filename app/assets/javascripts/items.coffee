@@ -1,13 +1,17 @@
 $ ->
+  init_tinymce('#item_description')
+  wookmark_item()
+  affix_record_form()
+
+  $(window).resize ()->
+    affix_record_form()
   #ref:http://stackoverflow.com/questions/17029399/clicking-back-in-the-browser-disables-my-javascript-code-if-im-using-turbolin
   $(document).on('page:restore', () ->
     init_tinymce('#item_description') # form
     wookmark_item() # index
   )
-  init_tinymce('#item_description')
-  wookmark_item()
 
-  #form
+  # items/form
   subcategory_selects = '#item_subcategory_id, select.filter-subcategory'
   load_item_selections($(subcategory_selects))
 
@@ -28,16 +32,8 @@ $ ->
     text = $(this).find('option:selected').text()
     $('.item_period_text').text(text)
 
-  #show
-  $('#rent[data-spy="affix"]').affix
-    offset:
-      top: 490
-      bottom: () ->
-        if $('#map').size() > 0
-          $(document).height() - $('#map').offset().top + 15
 
-
-  # action index, search
+  # items/index, search
   $(document).on('ajax:success', '.item-bookmark', (e, data, status, xhr) ->
     if data.status == 'ok'
       $(this).attr('href', data.href)
@@ -202,8 +198,20 @@ $ ->
 
   $('#item-picture-container').wookmark
     autoResize: true
-    offset: 15
+    offset: 10
   $('#item-picture-container').find('img').load ()->
     $('#item-picture-container').wookmark
       autoResize: true
-      offset: 15
+      offset: 10
+
+@affix_record_form = ()->
+  $record_form = $('#rent[data-spy="affix"]')
+  if $record_form.size() > 0
+    top = $record_form.offset().top - $record_form.find('.panel-heading').height()
+
+    $record_form.affix
+      offset:
+        top: top
+        bottom: () ->
+          if $('#map').size() > 0
+            $(document).height() - $('#map').offset().top + 15

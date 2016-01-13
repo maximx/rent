@@ -82,7 +82,7 @@
   #rent {
     border-radius: 0;
     position: absolute;
-    margin-top: 20px;
+    margin-top: -112px;
     width: 350px;
     z-index: 10;
 
@@ -98,7 +98,7 @@
     }
 
     &.affix {
-      top: 25px;
+      top: 160px;
       position: fixed;
     }
   }

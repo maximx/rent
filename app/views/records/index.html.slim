@@ -1,6 +1,7 @@
 - breadcrumb :records, @item
 
-h2 = render_item_name(@item)
+= render partial: 'items/picture_list', locals: {item: @item}
 
+h2 = render_item_name(@item)
 = render partial: 'records/record_list', locals: { records: @records }
 = render partial: 'records/calendar', locals: { event_sources_path: @event_sources_path }
