@@ -16,7 +16,7 @@ module DatetimeOverlaps
   end
 
   def ended_date
-    ended_at.to_date
+    ended_at.present? ? ended_at.to_date : ended_at
   end
 
   private
