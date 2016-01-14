@@ -90,7 +90,14 @@ Rails.application.routes.draw do
       resources :selections, only: [:create, :destroy]
     end
 
-    resources :customers, except: [:destroy]
+    resources :customers, except: [:destroy] do
+      resources :items, only: [:index] do
+        member do
+          post :add
+          delete :remove
+        end
+      end
+    end
   end
 
   namespace :lender do

@@ -1,0 +1,12 @@
+table.table
+  thead
+    tr
+      th 品名
+      th 編號
+      th
+  tbody
+    - @items.each do |item|
+      tr
+        td = item.name
+        td = item.product_id
+        td = link_to render_icon('plus'), add_account_customer_item_path(@customer, item), method: :post

@@ -7,6 +7,8 @@ class Customer < ActiveRecord::Base
   has_many :records, as: :borrower
   has_many :orders, as: :borrower
 
+  has_one :shopping_cart, as: :user
+
   def account
     profile.name
   end
