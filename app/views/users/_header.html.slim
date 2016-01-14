@@ -19,7 +19,7 @@ header.site-header.user
         = render partial: 'common/search', locals: { user: user } if action_name == 'items'
 
 section
-  = render partial: 'attachments/cover', locals: {cover: user.cover}
+  = render partial: 'attachments/cover', locals: {cover: user.cover} unless action_name == 'items'
 
   = render_notice(notice)
   = render_alert(alert)
