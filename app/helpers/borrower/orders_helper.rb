@@ -7,4 +7,8 @@ module Borrower::OrdersHelper
       li << [render_icon_with_text('calendar', t('controller.action.calendar')), calendar_borrower_orders_path]
     end
   end
+
+  def render_show_borrower_order_link(order)
+    render_show_common_order_link borrower_order_path(order)
+  end
 end

@@ -13,6 +13,6 @@ table.table.table-hover
         td = render_datetime_period(order, :date_only)
         td = ('lender' == role) ? "$#{orders_price[order.id]}" : order.currency_price
         td = render_datetime(order.created_at, :tw)
-        td = link_to t('controller.action.show'), send("#{role}_order_path", order), class: 'btn btn-primary'
+        td = render_show_order_link(order, role)
 
 = render partial: 'common/pagination', locals: {objects: orders}
