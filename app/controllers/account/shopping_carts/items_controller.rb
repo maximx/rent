@@ -7,11 +7,10 @@ class Account::ShoppingCarts::ItemsController < ApplicationController
 
   def add
     @shopping_cart.add @item
-    redirect_to account_customer_items_path(@customer)
   end
 
   def remove
     @shopping_cart.remove @item
-    redirect_to account_customer_items_path(@customer)
+    redirect_to :back
   end
 end

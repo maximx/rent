@@ -1,3 +1,6 @@
+- breadcrumb :account_customer_shopping_carts, @customer
+
+/customer 用來判斷為 account/shopping_cart or shopping_carts
 = render partial: 'shopping_carts/form',
          locals: {shopping_cart: @shopping_cart, shopping_cart_items: @shopping_cart_items,
-                  disabled_dates: @disabled_dates, form_url: account_customer_shopping_carts_path(@customer)}
+                  disabled_dates: @disabled_dates, customer: @customer}

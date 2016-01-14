@@ -6,7 +6,7 @@ h1.text-center = t('controller.shopping_carts.action.show')
 
 - unless shopping_cart.empty?
   .item_record_order
-    = simple_form_for shopping_cart, url: form_url do |f|
+    = simple_form_for shopping_cart, url: render_shopping_cart_form_url(customer) do |f|
       = f.input :started_at, as: :date_time_picker, input_html: {id: 'record_started_at'}
       = f.input :ended_at, as: :date_time_picker, input_html: {id: 'record_ended_at'}
 
@@ -19,7 +19,9 @@ h1.text-center = t('controller.shopping_carts.action.show')
           .col-md-1: strong = t('helpers.shopping_carts.subtotal_price')
           .col-md-1
 
-        = render partial: 'shopping_carts/shopping_cart_item', collection: shopping_cart_items, locals:{f: f}
+        = render partial: 'shopping_carts/shopping_cart_item',
+                 collection: shopping_cart_items,
+                 locals:{f: f, customer: customer}
 
         li.col-md-12
           .col-md-offset-4.col-md-2.text-right = t('helpers.shopping_carts.rent_days')

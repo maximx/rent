@@ -16,3 +16,13 @@ crumb :edit_account_customer do |customer|
   link t('controller.action.edit'), edit_account_customer_path(customer)
   parent :account_customer, customer
 end
+
+crumb :account_customer_items do |customer|
+  link '承租', account_customer_items_path(customer)
+  parent :account_customer, customer
+end
+
+crumb :account_customer_shopping_carts do |customer|
+  link '結帳', account_customer_shopping_carts_path(customer)
+  parent :account_customer_items, customer
+end

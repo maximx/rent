@@ -1,3 +1,4 @@
+/customer 用來判斷為 account/shopping_cart or shopping_carts
 = render partial: 'shopping_carts/form',
          locals: {shopping_cart: @shopping_cart, shopping_cart_items: @shopping_cart_items,
-                  disabled_dates: @disabled_dates, form_url: shopping_carts_path}
+                  disabled_dates: @disabled_dates, customer: nil}

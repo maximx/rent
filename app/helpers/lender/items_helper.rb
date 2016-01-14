@@ -74,6 +74,8 @@ module Lender::ItemsHelper
       'lender/orders',
       'borrower/orders',
       'account/customers',
+      'account/shopping_carts',
+      'account/items',
       'account/categories',
       'account/subcategories',
       'account/vectors',

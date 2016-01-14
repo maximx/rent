@@ -82,6 +82,6 @@ class ApplicationController < ActionController::Base
 
   def load_customer_shopping_cart
     @shopping_cart = @customer.shopping_cart
-    @shopping_cart = @customer.create_shopping_cart unless @shopping_cart.present?
+    @shopping_cart = @customer.create_shopping_cart unless @shopping_cart
   end
 end
