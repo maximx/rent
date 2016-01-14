@@ -1,6 +1,6 @@
 module RecordsHelper
   def render_download_record_link(record)
-    if can? :show, record
+    if can?(:show, record) and !record.withdrawed?
       link_to render_icon('download-alt', class: 'text-danger'),
               item_record_path(record.item, record, format: 'pdf'),
               target: '_blank', class: 'btn btn-default', data: { toggle: 'tooltip' },

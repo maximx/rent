@@ -7,9 +7,9 @@ table.table.table-hover
       td 下訂於
       td
   tbody
-    - orders.each_with_index do |order, index|
+    - orders.each do |order|
       tr
-        td = index + 1
+        td = order.id
         td = render_datetime_period(order, :date_only)
         td = ('lender' == role) ? "$#{orders_price[order.id]}" : order.currency_price
         td = render_datetime(order.created_at, :tw)

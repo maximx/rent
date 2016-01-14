@@ -1,4 +1,5 @@
 = render_lender_tablist
 
 .tab-content
+  h1 = "##{@order.id} #{@order.borrower.logo_name} #{render_datetime_period(@order, :date_only)}"
   = render partial: 'lender/records/index', locals: {records: @records, record_state_log: @record_state_log}

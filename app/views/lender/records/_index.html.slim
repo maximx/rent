@@ -2,7 +2,6 @@ table.table.table-hover
   thead
     th = t('simple_form.labels.record.item')
     th = t('simple_form.labels.record.price')
-    th = t('simple_form.labels.record.period')
     th = t('simple_form.labels.record.aasm_state')
     th
   tbody
@@ -10,7 +9,6 @@ table.table.table-hover
       tr
         td = link_to(record.item.name, item_path(record.item))
         td = record.currency_price
-        td = render_datetime_period(record, :date_only)
         td = record.aasm.human_state
         td = render_operate_record_links(record)
 

@@ -19,7 +19,7 @@ class Item < ActiveRecord::Base
   belongs_to :subcategory
   belongs_to :city
 
-  has_many :records, -> { order(started_at: :desc) }, class_name: 'Record', foreign_key: 'item_id'
+  has_many :records
   has_many :reviews, through: :records
 
   has_many :collect_relationships, class_name: "ItemCollection", foreign_key: "item_id", dependent: :destroy
