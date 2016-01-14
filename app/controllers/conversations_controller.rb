@@ -18,7 +18,7 @@ class ConversationsController < ApplicationController
 
   def reply
     current_user.reply_to_conversation(@conversation, params[:message][:body])
-    redirect_with_message conversation_path(@conversation), notice: '成功回覆訊息'
+    redirect_to conversation_path(@conversation), notice: '成功回覆訊息'
   end
 
   def mark_as_read
@@ -36,7 +36,7 @@ class ConversationsController < ApplicationController
 
   def destroy
     @conversation.move_to_trash(current_user)
-    redirect_with_message conversations_path, notice: '已成功刪除交談紀錄'
+    redirect_to conversations_path, notice: '已成功刪除交談紀錄'
   end
 
   private

@@ -1,0 +1,46 @@
+h1.text-center = t('controller.shopping_carts.action.show')
+
+= render_default_content(shopping_cart.items) do
+  | #{t('helpers.shopping_carts.empty')}
+  mark = link_to(t('helpers.shopping_carts.go_rent'), search_items_path, class: 'text-danger')
+
+- unless shopping_cart.empty?
+  .item_record_order
+    = simple_form_for shopping_cart, url: form_url do |f|
+      = f.input :started_at, as: :date_time_picker, input_html: {id: 'record_started_at'}
+      = f.input :ended_at, as: :date_time_picker, input_html: {id: 'record_ended_at'}
+
+      ul.shopping_cart
+        li.col-md-12
+          .col-md-5: strong = t('simple_form.labels.item.name')
+          .col-md-2: strong = t('simple_form.labels.item.price')
+          .col-md-2: strong = t('simple_form.labels.item.delivers')
+          .col-md-1: strong = t('simple_form.labels.item.deliver_fee')
+          .col-md-1: strong = t('helpers.shopping_carts.subtotal_price')
+          .col-md-1
+
+        = render partial: 'shopping_carts/shopping_cart_item', collection: shopping_cart_items, locals:{f: f}
+
+        li.col-md-12
+          .col-md-offset-4.col-md-2.text-right = t('helpers.shopping_carts.rent_days')
+          #rent_days.col-md-1
+          .col-md-offset-1.col-md-2.text-right = t('helpers.shopping_carts.total_price')
+          #total_price.col-md-1
+        li.col-sm-12
+          .col-sm-offset-10.col-sm-2
+            = f.button :submit,
+                       t('helpers.submit.submit'),
+                       class: 'btn btn-success btn-sm',
+                       data: {disable_with: t('helpers.submit.wait')}
+
+      - if shopping_cart.errors.present?
+        .text-center
+          - shopping_cart.errors.get(:shopping_cart_items).each do |msg|
+            p: code = msg
+
+  javascript:
+    $(document).ready(function(){
+      update_rent_days_price();
+      buildDateTimePicker($('.form_datetime'), 'YYYY-MM-DD', #{raw disabled_dates});
+      rentRecordPickerChange();
+    });

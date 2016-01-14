@@ -14,10 +14,4 @@ class Account::ShoppingCarts::ItemsController < ApplicationController
     @shopping_cart.remove @item
     redirect_to account_customer_items_path(@customer)
   end
-
-  private
-    def load_customer_shopping_cart
-      @shopping_cart = @customer.shopping_cart
-      @shopping_cart = @customer.create_shopping_cart unless @shopping_cart.present?
-    end
 end
