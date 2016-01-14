@@ -91,10 +91,15 @@ Rails.application.routes.draw do
     end
 
     resources :customers, except: [:destroy] do
-      resources :items, only: [:index] do
-        member do
-          post :add
-          delete :remove
+      resources :items, only: [:index]
+      resource :shopping_carts, only: [:show, :update]
+
+      scope module: :shopping_carts do
+        resources :items, only:[] do
+          member do
+            post :add
+            delete :remove
+          end
         end
       end
     end
