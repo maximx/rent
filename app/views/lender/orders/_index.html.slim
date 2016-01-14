@@ -2,6 +2,7 @@ table.table.table-hover
   thead
     tr
       td #
+      td 承租者
       td 承租期間
       td 總金額
       td 下訂於
@@ -10,6 +11,7 @@ table.table.table-hover
     - orders.each do |order|
       tr
         td = order.id
+        td = link_to order.borrower.logo_name, borrower_path(order.borrower)
         td = render_datetime_period(order, :date_only)
         td = ('lender' == role) ? "$#{orders_price[order.id]}" : order.currency_price
         td = render_datetime(order.created_at, :tw)

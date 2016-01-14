@@ -18,8 +18,8 @@ table.table
         = render_avatar_thumb @record.borrower
     tr
       td = t('simple_form.labels.user.account')
-      td = link_to(@item.lender.account, user_path(@item.lender))
-      td = link_to(@record.borrower.account, borrower_path(@record.borrower))
+      td = link_to(@item.lender.logo_name, user_path(@item.lender))
+      td = link_to(@record.borrower.logo_name, borrower_path(@record.borrower))
   tbody
     tr
       td = t('simple_form.labels.profile.name')
