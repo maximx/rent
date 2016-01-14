@@ -13,8 +13,16 @@ module ShoppingCarts::ItemsHelper
     remove_url = (customer) ?
       remove_account_customer_item_path(customer, item) : remove_shopping_carts_item_path(item)
 
-    link_to t('controller.action.destroy'),
+    link_to render_icon('trash'),
             remove_url,
-            class: 'btn btn-danger btn-sm', method: :delete
+            class: 'btn btn-default', method: :delete
+  end
+
+  def render_operate_shopping_carts_item_links(item, customer = nil)
+    links = raw [
+      render_add_shopping_carts_item_link(item, customer),
+      render_remove_shopping_carts_item_link(item, customer)
+    ].join
+    content_tag :div, links, class: 'btn-group'
   end
 end

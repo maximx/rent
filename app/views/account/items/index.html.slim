@@ -5,12 +5,20 @@
 table.table
   thead
     tr
-      th 編號
-      th 品名
+      th = t('simple_form.labels.item.product_id')
+      th = t('simple_form.labels.item.name')
       th
   tbody
     - @items.each do |item|
       tr class="#{@shopping_cart_items.include?(item.id) ? 'info' : ''}" data-item-id="#{item.id}"
         td = item.product_id
-        td = item.name
-        td = render_add_shopping_carts_item_link(item, @customer)
+        td = link_to item.name, lender_item_path(item), target: '_blank'
+        td = render_operate_shopping_carts_item_links(item, @customer)
+    tr
+      td
+      td
+      td
+        = link_to render_icon('shopping-cart'),
+                  account_customer_shopping_carts_path(@customer),
+                  class: 'btn btn-primary btn-lg', data: {toggle: 'tooltip'},
+                  title: t('controller.account/shopping_carts.action.show')

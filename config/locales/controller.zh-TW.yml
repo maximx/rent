@@ -105,6 +105,12 @@ zh-TW:
         index: '客戶列表'
         new: '新增客戶'
         edit: '修改%{name}'
+    account/items:
+      action:
+        index: '承租物品'
+    account/shopping_carts:
+      action:
+        show: '待租清單'
     lender/items:
       action:
         index: *items

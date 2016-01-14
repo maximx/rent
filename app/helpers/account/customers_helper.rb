@@ -1,8 +1,10 @@
 module Account::CustomersHelper
   def render_show_borrower_link(borrower)
-    link_to render_icon('zoom-in'),
-            borrower_path(borrower),
-            class: 'btn btn-default', title: t('controller.action.show'), data: { toggle: 'tooltip' }
+    unless current_page?(account_customer_path(borrower))
+      link_to render_icon('zoom-in'),
+              borrower_path(borrower),
+              class: 'btn btn-default', title: t('controller.action.show'), data: { toggle: 'tooltip' }
+    end
   end
 
   def render_edit_customer_link(borrower)
@@ -17,7 +19,7 @@ module Account::CustomersHelper
     if borrower.is_customer?
       link_to render_icon('list', class: 'text-info'),
               account_customer_items_path(borrower),
-              class: 'btn btn-default', title: '承租', data: {toggle: 'tooltip'}
+              class: 'btn btn-default', title: t('controller.account/items.action.index'), data: {toggle: 'tooltip'}
     end
   end
 
