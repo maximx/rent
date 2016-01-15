@@ -190,6 +190,10 @@ class Record < ActiveRecord::Base
     update(order: order)
   end
 
+  def sibling_records(lender)
+    order.records_of(lender).where.not(id: id)
+  end
+
   private
     def set_free_days
       self.free_days ||= lender.profile.free_days
