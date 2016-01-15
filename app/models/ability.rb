@@ -106,7 +106,7 @@ class Ability
     def resources_orders(user)
       can :index, Order, borrower: user
       can :show, Order do |order|
-        order.borrower?(user) or order.lenders.include?(user)
+        order.borrower == user or order.lenders.pluck(:id).include?(user.id)
       end
     end
 end

@@ -127,7 +127,7 @@ class Record < ActiveRecord::Base
   def editable_by?(user)
     user and booking? and (
       borrower == user or
-      ( lender == user and borrower.is_customer? )
+      (lender == user and borrower.is_customer?)
     )
   end
 

@@ -29,8 +29,4 @@ class Order < ActiveRecord::Base
   def records_of(lender)
     records.joins(:lender).where(items: {user_id: lender.id})
   end
-
-  def borrower?(user)
-    borrower == user
-  end
 end
