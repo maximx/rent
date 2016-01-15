@@ -2,18 +2,18 @@ table.table
   thead
     tr
       th 承租人
-      th 起租日期
-      th 歸還日期
+      th = t('simple_form.labels.record.started_at')
+      th = t('simple_form.labels.record.ended_at')
       - unless records_controller?
-        th 總天數
-        th 租金
+        th = t('simple_form.labels.record.rent_days')
+        th = t('simple_form.labels.record.price')
       th 狀態
       - unless records_controller?
         th #
   tbody
     - records.each do |record|
       tr
-        td = link_to(record.borrower.account, borrower_path(record.borrower))
+        td = render_record_borrower_link(record)
         td = render_datetime(record.started_at)
         td = render_datetime(record.ended_at)
         - unless records_controller?
@@ -25,4 +25,4 @@ table.table
 
 = render partial: 'common/pagination', locals: { objects: records }
 
-= render_default_content(@records, '無承租紀錄')
+= render_default_content(records, '無承租紀錄')

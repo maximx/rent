@@ -57,6 +57,7 @@ zh-TW:
         aasm_state: *aasm_state
         period: '期間'
         review: '評價'
+        rent_days: '總天數'
       review:
         content: '評語'
       message:

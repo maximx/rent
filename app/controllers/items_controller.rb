@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   include UsersReviewsCount
 
-  before_action :login_required, except: [ :index, :show, :search, :calendar, :add, :remove ]
+  before_action :login_required, except: [:index, :show, :search, :calendar]
   before_action :validates_profile, only: [ :new, :create ]
   load_and_authorize_resource except: [ :index, :search ]
   before_action :load_categories_grouped_select, only: [ :new, :create, :edit, :update ]
@@ -123,11 +123,13 @@ class ItemsController < ApplicationController
 
   def calendar
     @event_sources_path = calendar_item_path(@item, format: :json)
-    records_json = @item.records.actived.includes(:borrower)
-      .overlaps(params[:start], params[:end]).to_json
-
+    records_json = @item.records
+                        .includes(borrower: :profile)
+                        .actived
+                        .overlaps(params[:start], params[:end])
+                        .to_json(user: current_user)
     respond_to do |format|
-      format.json { render json: records_json}
+      format.json {render json: records_json}
     end
   end
 

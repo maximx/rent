@@ -101,11 +101,21 @@ class Record < ActiveRecord::Base
   def as_json(options={})
     {
       id: id,
-      title: "#{borrower.account} - #{ApplicationController.helpers.render_item_name(item, 15)}",
+      title: json_title(options[:user]),
       start: started_at,
       end: ended_at,
       url: Rails.application.routes.url_helpers.item_record_path(item, id)
     }
+  end
+
+  def json_title(user)
+    ability = Ability.new(user)
+    borrower_name = borrower.logo_name
+    borrower_name = controller_helpers.mask(borrower_name) if ability.cannot?(:show, self)
+    I18n.t('activerecord.methods.item.json_title',
+           name: borrower_name,
+           days: rent_days,
+           datetime: controller_helpers.render_datetime(created_at))
   end
 
   #可查閱
@@ -222,5 +232,9 @@ class Record < ActiveRecord::Base
 
     def send_payment_message
       RecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
+    end
+
+    def controller_helpers
+      ApplicationController.helpers
     end
 end

@@ -20,6 +20,9 @@ zh-TW:
       customer: "客戶"
       vector: "屬性"
       review: '評價'
+    methods:
+      item:
+        json_title: '%{name} - 承租 %{days}天 - %{datetime}'
     attributes:
       record:
         aasm_state:

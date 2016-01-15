@@ -1,4 +1,12 @@
 module RecordsHelper
+  def render_record_borrower_link(record)
+    if can? :show, record
+      link_to record.borrower.logo_name, borrower_path(record.borrower)
+    else
+      mask record.borrower.logo_name
+    end
+  end
+
   def render_download_record_link(record)
     if can?(:show, record) and !record.withdrawed?
       link_to render_icon('download-alt', class: 'text-danger'),

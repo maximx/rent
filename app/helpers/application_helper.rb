@@ -106,6 +106,12 @@ module ApplicationHelper
     ' input-lg' if current_page? root_path
   end
 
+  def mask(str)
+    mask_str = str.slice(0)
+    str[1..-1].size.times.each {mask_str += '*'}
+    mask_str
+  end
+
   private
     def alert_notice_tag(type, msg)
       content_tag(:div, notice_content_with_close(msg),
