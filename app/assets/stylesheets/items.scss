@@ -136,6 +136,10 @@
   width: 100%;
   margin-top: 10px;
 }
+@media screen and (min-width: $screen-sm) {
+  #map {height: $map-height-sm;}
+}
+
 
 /*search*/
 .price_shower {
