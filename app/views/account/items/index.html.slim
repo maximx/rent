@@ -22,3 +22,5 @@ table.table
                   account_customer_shopping_carts_path(@customer),
                   class: 'btn btn-primary btn-lg', data: {toggle: 'tooltip'},
                   title: t('controller.account/shopping_carts.action.show')
+
+= render partial: 'common/pagination', locals: { objects: @items }

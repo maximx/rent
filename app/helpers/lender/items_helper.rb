@@ -8,7 +8,7 @@ module Lender::ItemsHelper
               '/borrower',
               redirect_to: borrower_orders_path, parent: true]
 
-      if can? :read, Customer
+      if can? :index, Customer
         li << [render_icon_with_text('user', t('controller.name.account/customers')),
                 account_customers_path, parent: true]
       end
