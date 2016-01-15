@@ -15,8 +15,8 @@ class Ability
     if user.is_company?
       can [ :importer, :import ], Item
 
-      can [ :read, :create ], Customer
-      can :update, Customer, user: user
+      can [:index, :create], Customer
+      can [:show,:update], Customer, user_id: user.id
 
       can :read, Category
       can :read, Subcategory
