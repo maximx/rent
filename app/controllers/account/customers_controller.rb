@@ -4,7 +4,7 @@ class Account::CustomersController < ApplicationController
   before_action :load_profile, only: [ :show, :edit, :update ]
 
   def index
-    authorize! :read, Customer
+    authorize! :index, Customer
     @consumers = current_user.consumers(search_params)
                              .paginate(page: params[:page], per_page: 10)
   end
