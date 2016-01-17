@@ -25,7 +25,7 @@ class Record < ActiveRecord::Base
 
   after_initialize :set_free_days, if: :new_record?
   before_create :set_item_attributes, if: :new_record?
-  after_create :save_booking_state_log, :send_payment_message
+  after_create :save_booking_state_log
 
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
   scope :recent, -> { order(:created_at).reverse_order }
@@ -150,10 +150,6 @@ class Record < ActiveRecord::Base
     deliver.name != '面交自取'
   end
 
-  def emailable?
-    borrower.email.present?
-  end
-
   def total_price
     price + item_deposit + deliver_fee
   end
@@ -232,10 +228,6 @@ class Record < ActiveRecord::Base
 
     def save_booking_state_log
       create_record_state_log(borrower) if record_state_logs.empty?
-    end
-
-    def send_payment_message
-      RecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
     end
 
     def controller_helpers
