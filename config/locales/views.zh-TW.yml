@@ -70,7 +70,7 @@ zh-TW:
       go_rent: &go_rent '來去租'
       rent_days: '承租天數'
       total_price: *total_price
-      subtotal_price: '小計'
+      subtotal_price: &subtotal_price '小計'
     account/settings:
       phone_confirmation:
         description: '您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：'
@@ -92,6 +92,7 @@ zh-TW:
         contact_me: '來信聯絡'
     lender/orders:
       total_price: *total_price
+      subtotal_price: *subtotal_price
     account/categories:
       add_vector: '增加屬性'
     account/subcategories:

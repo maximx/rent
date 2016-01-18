@@ -120,7 +120,7 @@ class Record < ActiveRecord::Base
 
   #可查閱
   def viewable_by?(user)
-    user && [lender, borrower].include?(user)
+    user and [lender, borrower].include?(user)
   end
 
   #可修改
@@ -186,7 +186,7 @@ class Record < ActiveRecord::Base
     update(order: order)
   end
 
-  def sibling_records(lender)
+  def sibling_records
     order.records_of(lender).where.not(id: id)
   end
 
