@@ -10,12 +10,15 @@ class RecordsController < ApplicationController
   end
 
   def show
-    @record_state_logs = @record.record_state_logs
-    @record_state_log = @record_state_logs.build
-
     respond_to do |format|
       format.html do
-        request.xhr? ? render('records/show_popover') : :show
+        if request.xhr?
+          render('records/show_popover')
+        else
+          @sibling_records = @record.sibling_records
+          @record_state_logs = @record.record_state_logs
+          @record_state_log = @record_state_logs.build
+        end
       end
       format.pdf do
         pdf = RecordPdf.new(@item, @record)
@@ -50,6 +53,10 @@ class RecordsController < ApplicationController
 
   def remitting
     if @record.remit!(current_user, record_state_log_params)
+      if params[:batch]
+        @record.sibling_records.each {|record| record.remit!(current_user, record_state_log_params) if record.may_remit?}
+        redirect_to borrower_order_path(@record.order) and return
+      end
       redirect_to item_record_path(@item, @record)
     else
       @record_state_logs = @record.record_state_logs
@@ -61,21 +68,33 @@ class RecordsController < ApplicationController
 
   def delivering
     @record.delivery!(current_user, record_state_log_params)
+    if params[:batch]
+      @record.sibling_records.each {|record| record.delivery!(current_user, record_state_log_params) if record.may_delivery?}
+    end
     redirect_to :back
   end
 
   def renting
     @record.rent!(current_user, record_state_log_params)
+    if params[:batch]
+      @record.sibling_records.each {|record| record.rent!(current_user, record_state_log_params) if record.may_rent?}
+    end
     redirect_to :back
   end
 
   def returning
     @record.return! current_user
+    if params[:batch]
+      @record.sibling_records.each {|record| record.return!(current_user, record_state_log_params) if record.may_return?}
+    end
     redirect_to :back
   end
 
   def withdrawing
     @record.withdraw! current_user
+    if params[:batch]
+      @record.sibling_records.each {|record| record.withdraw!(current_user, record_state_log_params)}
+    end
     redirect_to :back
   end
 

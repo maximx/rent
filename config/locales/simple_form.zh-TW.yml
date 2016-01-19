@@ -54,6 +54,8 @@ zh-TW:
         borrower: '承租客戶'
         item: '承租物'
         price: '租金'
+        item_deposit: '押金'
+        deliver_fee: '運費'
         aasm_state: *aasm_state
         period: '期間'
         review: '評價'

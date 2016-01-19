@@ -16,47 +16,47 @@ module RecordsHelper
     end
   end
 
-  def render_remitting_record_link(record)
+  def render_remitting_record_link(record, batch=false)
     if can? :remitting, record
       link_to render_icon('usd', class: 'text-success'),
-              remitting_item_record_path(record.item, record),
+              remitting_item_record_path(record.item, record, batch: batch),
               method: :put, class: 'btn btn-default record_form_modal', title: t('controller.records.action.remitting'),
               data: { toggle: 'tooltip', label: info_label[:remitted], required: 'required' }
     end
   end
 
-  def render_delivering_record_link(record)
+  def render_delivering_record_link(record, batch=false)
     if can? :delivering, record
       link_to render_icon('globe', class: 'text-primary'),
-              delivering_item_record_path(record.item, record),
+              delivering_item_record_path(record.item, record, batch: batch),
               method: :put, class: 'btn btn-default record_form_modal', title: t('controller.records.action.delivering'),
               data: { toggle: 'tooltip', label: info_label[:delivering] }
     end
   end
 
-  def render_renting_record_link(record)
+  def render_renting_record_link(record, batch=false)
     if can? :renting, record
       link_to render_icon('ok', class: 'text-primary'),
-              renting_item_record_path(record.item, record),
+              renting_item_record_path(record.item, record, batch: batch),
               method: :put, class: 'btn btn-default record_form_modal', title: t('controller.records.action.renting'),
               data: { toggle: 'tooltip', type: 'file', label: info_label[:renting] }
     end
   end
 
-  def render_returning_record_link(record)
+  def render_returning_record_link(record, batch=false)
     if can? :returning, record
       link_to render_icon('home', class: 'text-warning'),
-              returning_item_record_path(record.item, record),
+              returning_item_record_path(record.item, record, batch: batch),
               method: :put,
               class: 'btn btn-default', title: t('controller.records.action.returning'),
               data: { toggle: 'tooltip', confirm: t('helpers.records.returning_confirm') }
     end
   end
 
-  def render_withdrawing_record_link(record)
+  def render_withdrawing_record_link(record, batch=false)
     if can? :withdrawing, record
       link_to render_icon('remove', class: 'text-danger'),
-              withdrawing_item_record_path(record.item, record),
+              withdrawing_item_record_path(record.item, record, batch: batch),
               method: :delete, class: 'btn btn-default', title: t('controller.records.action.withdrawing'),
               data: { toggle: 'tooltip', confirm: t('helpers.records.withdrawing_confirm', name: record.item.name) }
     end
@@ -89,19 +89,18 @@ module RecordsHelper
     end
   end
 
-  def render_operate_record_links(record)
+  def render_operate_record_links(record, batch=false)
     links = raw [
-      render_withdrawing_record_link(record),
-      render_remitting_record_link(record),
-      render_delivering_record_link(record),
-      render_renting_record_link(record),
-      render_returning_record_link(record),
-      render_ask_for_review_record_link(record),
-      render_review_record_link(record),
+      render_withdrawing_record_link(record, batch),
+      render_remitting_record_link(record, batch),
+      render_delivering_record_link(record, batch),
+      render_renting_record_link(record, batch),
+      render_returning_record_link(record, batch),
+      #render_ask_for_review_record_link(record),
+      #render_review_record_link(record),
       render_show_record_link(record),
       render_download_record_link(record)
     ].join
-
     content_tag :div, links, class: 'btn-group record_operates'
   end
 

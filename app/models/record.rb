@@ -25,7 +25,7 @@ class Record < ActiveRecord::Base
 
   after_initialize :set_free_days, if: :new_record?
   before_create :set_item_attributes, if: :new_record?
-  after_create :save_booking_state_log, :send_payment_message
+  after_create :save_booking_state_log
 
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
   scope :recent, -> { order(:created_at).reverse_order }
@@ -120,14 +120,14 @@ class Record < ActiveRecord::Base
 
   #可查閱
   def viewable_by?(user)
-    user && [lender, borrower].include?(user)
+    user and [lender, borrower].include?(user)
   end
 
   #可修改
   def editable_by?(user)
     user and booking? and (
       borrower == user or
-      ( lender == user and borrower.is_customer? )
+      (lender == user and borrower.is_customer?)
     )
   end
 
@@ -148,10 +148,6 @@ class Record < ActiveRecord::Base
 
   def delivery_needed?
     deliver.name != '面交自取'
-  end
-
-  def emailable?
-    borrower.email.present?
   end
 
   def total_price
@@ -188,6 +184,10 @@ class Record < ActiveRecord::Base
   def update_order
     order = borrower.orders.create(started_at: started_at, ended_at: ended_date, price: price)
     update(order: order)
+  end
+
+  def sibling_records
+    order.records_of(lender).where.not(id: id)
   end
 
   private
@@ -228,10 +228,6 @@ class Record < ActiveRecord::Base
 
     def save_booking_state_log
       create_record_state_log(borrower) if record_state_logs.empty?
-    end
-
-    def send_payment_message
-      RecordMailer.send_payment_message(self).deliver if remit_needed? and booking? and emailable?
     end
 
     def controller_helpers

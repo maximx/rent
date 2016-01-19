@@ -1,16 +1,8 @@
-table.table.table-hover
-  thead
-    th = t('simple_form.labels.record.item')
-    th = t('simple_form.labels.record.price')
-    th = t('simple_form.labels.record.aasm_state')
-    th
-  tbody
-    - records.each do |record|
-      tr
-        td = link_to(record.item.name, item_path(record.item))
-        td = record.currency_price
-        td = record.aasm.human_state
-        td = render_operate_record_links(record)
-
-= render partial: 'records/state_log_modal', locals: {record_state_log: record_state_log}
-= render partial: 'common/pagination', locals: {objects: records}
+- lender_records.each do |lender, records|
+  .panel.panel-default
+    .panel-heading.clearfix
+      .pull-left = lender.logo_name
+      .pull-right
+        = render_operate_record_links(records.first, true)
+        = render partial: 'records/state_log_modal', locals: {record_state_log: record_state_log}
+    = render partial: 'lender/records/table', locals: {records: records}

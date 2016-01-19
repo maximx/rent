@@ -14,9 +14,7 @@ class Lender::OrdersController < ApplicationController
     @records = @order.records_of(current_user)
 
     unless request.xhr?
-      @records = @records.includes(:borrower, :deliver, [item: [lender: [profile: :avatar]]])
-                         .recent
-                         .page(params[:page])
+      @lender_records = @records.includes(:borrower, :deliver, :item).recent.group_by(&:lender)
       @record_state_log = unless @records.empty?
                             @records.first.record_state_logs.build
                           else

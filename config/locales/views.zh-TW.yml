@@ -56,6 +56,7 @@ zh-TW:
         payment: '應付金額'
         per_day_price: '%{item_price}（租金）* (%{rent_days} - %{free_days})（天）= %{price}（總金額）'
         total_price: &total_price '總金額'
+        related_records: '訂單#%{order_id} %{name}的其他物品'
       withdrawing_confirm: '確定要取消預約%{name}嗎？'
       returning_confirm: '確認已歸還出租物嗎？'
       ask_for_review_confirm: '將寄出信件邀請對方評價，確認要繼續嗎？'
@@ -70,7 +71,7 @@ zh-TW:
       go_rent: &go_rent '來去租'
       rent_days: '承租天數'
       total_price: *total_price
-      subtotal_price: '小計'
+      subtotal_price: &subtotal_price '小計'
     account/settings:
       phone_confirmation:
         description: '您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：'
@@ -92,6 +93,7 @@ zh-TW:
         contact_me: '來信聯絡'
     lender/orders:
       total_price: *total_price
+      subtotal_price: *subtotal_price
     account/categories:
       add_vector: '增加屬性'
     account/subcategories:
