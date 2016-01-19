@@ -56,6 +56,7 @@ zh-TW:
         payment: '應付金額'
         per_day_price: '%{item_price}（租金）* (%{rent_days} - %{free_days})（天）= %{price}（總金額）'
         total_price: &total_price '總金額'
+        related_records: '訂單#%{order_id} %{name}的其他物品'
       withdrawing_confirm: '確定要取消預約%{name}嗎？'
       returning_confirm: '確認已歸還出租物嗎？'
       ask_for_review_confirm: '將寄出信件邀請對方評價，確認要繼續嗎？'

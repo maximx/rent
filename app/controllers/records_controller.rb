@@ -15,6 +15,7 @@ class RecordsController < ApplicationController
         if request.xhr?
           render('records/show_popover')
         else
+          @sibling_records = @record.sibling_records
           @record_state_logs = @record.record_state_logs
           @record_state_log = @record_state_logs.build
         end

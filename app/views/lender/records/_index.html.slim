@@ -2,27 +2,7 @@
   .panel.panel-default
     .panel-heading.clearfix
       .pull-left = lender.logo_name
-      .pull-right = render_operate_record_links(records.first, true)
-
-    table.table.table-hover
-      thead
-        th = t('simple_form.labels.record.item')
-        th = t('simple_form.labels.record.aasm_state')
-        th = t('simple_form.labels.record.price')
-        th = t('simple_form.labels.record.item_deposit')
-        th = t('simple_form.labels.record.deliver_fee')
-        th = t('helpers.lender/orders.subtotal_price')
-      tbody
-        - records.each do |record|
-          tr
-            td = link_to "##{record.id} #{record.item.name}", item_record_path(record.item, record)
-            td = record.aasm.human_state
-            td = record.currency_price
-            td = record.currency_item_deposit
-            td = record.currency_deliver_fee
-            td = record.currency_total_price
-        tr
-          td.text-right colspan="5" = t('helpers.lender/orders.total_price')
-          td = render_records_currency_total_price records
-
-    = render partial: 'records/state_log_modal', locals: {record_state_log: record_state_log}
+      .pull-right
+        = render_operate_record_links(records.first, true)
+        = render partial: 'records/state_log_modal', locals: {record_state_log: record_state_log}
+    = render partial: 'lender/records/table', locals: {records: records}

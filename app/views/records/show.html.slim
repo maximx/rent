@@ -1,7 +1,6 @@
 - breadcrumb :record, @item, @record
 
 = render partial: 'records/state_log_list', locals: {record: @record, record_state_logs: @record_state_logs}
-
 .text-right = render_show_order_link @record.order, icon: 'dashboard'
 
 table.table
@@ -61,3 +60,8 @@ table.table
     tr
       td = t('helpers.records.show.payment')
       td colspan="2" #{@record.currency_price} + #{@record.currency_deliver_fee} + #{@record.currency_item_deposit} = #{@record.currency_total_price} 元
+
+.panel.panel-primary
+  .panel-heading
+    = t('helpers.records.show.related_records', order_id: @record.order_id, name: @item.lender.logo_name)
+  = render partial: 'lender/records/table', locals: {records: @sibling_records}
