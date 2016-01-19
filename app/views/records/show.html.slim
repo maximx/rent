@@ -1,10 +1,8 @@
 - breadcrumb :record, @item, @record
 
-= render partial: 'records/state_log_list',
-         locals: { record: @record, record_state_logs: @record_state_logs }
+= render partial: 'records/state_log_list', locals: {record: @record, record_state_logs: @record_state_logs}
 
-.text-right = render_operate_record_links(@record)
-= render partial: 'records/state_log_modal', locals: { record_state_log: @record_state_log }
+.text-right = render_show_order_link @record.order, icon: 'dashboard'
 
 table.table
   thead

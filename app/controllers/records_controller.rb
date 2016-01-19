@@ -10,12 +10,14 @@ class RecordsController < ApplicationController
   end
 
   def show
-    @record_state_logs = @record.record_state_logs
-    @record_state_log = @record_state_logs.build
-
     respond_to do |format|
       format.html do
-        request.xhr? ? render('records/show_popover') : :show
+        if request.xhr?
+          render('records/show_popover')
+        else
+          @record_state_logs = @record.record_state_logs
+          @record_state_log = @record_state_logs.build
+        end
       end
       format.pdf do
         pdf = RecordPdf.new(@item, @record)
