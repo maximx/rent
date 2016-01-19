@@ -1,6 +1,6 @@
 - breadcrumb :review_record, @item, @record
 
-= render partial: "items/item_info_container", locals: { item: @item }
+= render partial: "items/item_info_container", locals: {item: @item, selections: @selections}
 
 - rates_radio = Review.rates_radio_collections
 = simple_form_for [ @item, @record, @review ] do |f|

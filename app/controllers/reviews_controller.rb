@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource :review, through: :record
 
   def new
+    @selections = @item.selections.includes(:tag, [vector: :tag])
   end
 
   def create
