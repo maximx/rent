@@ -96,8 +96,8 @@ module RecordsHelper
       render_delivering_record_link(record, batch),
       render_renting_record_link(record, batch),
       render_returning_record_link(record, batch),
-      render_ask_for_review_record_link(record),
-      render_review_record_link(record),
+      #render_ask_for_review_record_link(record),
+      #render_review_record_link(record),
       render_show_record_link(record),
       render_download_record_link(record)
     ].join
