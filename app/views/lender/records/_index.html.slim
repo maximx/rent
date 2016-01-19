@@ -1,6 +1,8 @@
 - lender_records.each do |lender, records|
   .panel.panel-default
-    .panel-heading.clearfix = lender.logo_name
+    .panel-heading.clearfix
+      .pull-left = lender.logo_name
+      .pull-right = render_operate_record_links(records.first, true)
 
     table.table.table-hover
       thead
