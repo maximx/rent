@@ -31,11 +31,12 @@ table.table
         td = t('helpers.records.show.remit_account')
         td = "#{@item.lender.profile.bank_code} #{@item.lender.profile.bank_account}"
         td
-    - unless @record.borrower.is_customer?
-      tr
-        td = t('simple_form.labels.record.review')
-        td = @record.review_of_judger(@item.lender).human_rate
-        td = @record.review_of_judger(@record.borrower).human_rate
+    /- unless @record.borrower.is_customer?
+      /TODO: 重寫 review後再開
+      /tr
+        /td = t('simple_form.labels.record.review')
+        /td = @record.review_of_judger(@item.lender).human_rate
+        /td = @record.review_of_judger(@record.borrower).human_rate
     tr
       td = t('helpers.records.show.borrow_item')
       td colspan="2" = link_to(@item.name, item_path(@item))

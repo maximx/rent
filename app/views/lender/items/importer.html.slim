@@ -7,7 +7,6 @@
     = f.input :subcategory_id, as: :grouped_select,
                                collection: @categories_grouped_select,
                                group_method: :last
-    = f.association :delivers, as: :check_boxes
     = f.input :deliver_fee, as: :numeric_addon, direction: '元', input_html: { min: 0 }
     = f.input :address do
       = f.input_field :address, class: 'form-control address_geocomplete', id: 'item_address'
