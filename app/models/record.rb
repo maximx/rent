@@ -6,8 +6,8 @@ class Record < ActiveRecord::Base
   self.per_page = 10
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
-  validates :deliver_id, inclusion: { in: ->(obj){ obj.item.delivers.pluck(:id) } }
-  validate :start_end_date, :not_overlap, :borrower_lender_customers
+  validates :deliver_id, inclusion: { in: ->(obj){ obj.lender.delivers.pluck(:id) } }
+  validate :start_end_date, :not_overlap, :borrower_lender_customers, :borrower_address_present
 
   belongs_to :borrower, polymorphic: true
   belongs_to :item
@@ -87,6 +87,12 @@ class Record < ActiveRecord::Base
   def borrower_lender_customers
     if borrower_type == 'Customer' and !lender.customers.pluck(:id).include?(borrower_id)
       errors.add :borrower, :not_customer
+    end
+  end
+
+  def borrower_address_present
+    if deliver_id and borrower and Deliver.find(deliver_id).address_needed? and borrower.profile.address.blank?
+      errors.add :deliver_id, :address_blank
     end
   end
 
@@ -199,7 +205,7 @@ class Record < ActiveRecord::Base
       self.item_price ||= item.price
       self.item_period ||= item.period
       self.item_deposit ||= item.deposit
-      self.deliver_fee ||= (deliver == Deliver.face_to_face) ? 0 : item.deliver_fee
+      self.deliver_fee ||= deliver.delivery_needed? ? item.deliver_fee : 0
       self.rent_days = ((ended_at - started_at).to_f / (24 * 60 * 60)).ceil
       self.price = valid_rent_days * item_price
     end

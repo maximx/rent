@@ -10,8 +10,6 @@ class Lender::RecordsController < ApplicationController
 
   def create
     @record = @item.records.build record_params
-
-    @record.deliver = Deliver.face_to_face
     @record.borrower_type = 'Customer'
 
     if @record.save
@@ -26,6 +24,6 @@ class Lender::RecordsController < ApplicationController
 
   private
     def record_params
-      params.require(:record).permit(:borrower_id, :started_at, :ended_at)
+      params.require(:record).permit(:borrower_id, :started_at, :ended_at, :deliver_id)
     end
 end
