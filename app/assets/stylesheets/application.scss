@@ -33,7 +33,23 @@ ul {
 
 a:hover { text-decoration: none; }
 p.description { font-size: 15px; }
-span.glyphicon.text { margin-right: 5px; }
+
+span.glyphicon {
+  &.glyphicon-refresh.refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+  }
+  &.text { margin-right: 5px; }
+}
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
 
 .tab-content {
   padding-top: 10px;

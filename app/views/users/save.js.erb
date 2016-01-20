@@ -1,0 +1,6 @@
+<% if request.xhr? and  @success %>
+  var $icon = $('#profile_send_mail').closest('.form-group').find('.hint .glyphicon');
+  setTimeout(function(){
+    $icon.removeClass('glyphicon-refresh').addClass('glyphicon-ok');
+  }, 500);
+<% end %>

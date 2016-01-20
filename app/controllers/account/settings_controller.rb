@@ -39,30 +39,6 @@ class Account::SettingsController < ApplicationController
     end
   end
 
-  def save
-    respond_to do |format|
-      if request.xhr?
-        format.json {
-          if @profile.update(profile_bank_params)
-            result = { status: 'ok' }
-          else
-            result = { status: 'error' }
-          end
-          render json: result
-        }
-      end
-
-      format.html {
-        if @profile.update_columns(profile_preferences_params)
-          redirect_to preferences_account_settings_path,
-                      notice: t('controller.account/settings.save.success')
-        else
-          redirect_to preferences_account_settings_path, alert: t('common.error')
-        end
-      }
-    end
-  end
-
   # accoutn settings, need password
   def update
     prev_unconfirmed_email = @user.unconfirmed_email
@@ -89,14 +65,6 @@ class Account::SettingsController < ApplicationController
         :email, :account, :password,
         :password_confirmation, :current_password
       )
-    end
-
-    def profile_bank_params
-      params.require(:profile).permit(:bank_code, :bank_account)
-    end
-
-    def profile_preferences_params
-      params.require(:profile).permit(:send_mail)
     end
 
     def load_user

@@ -38,7 +38,7 @@ class Ability
     end
 
     def resources_users(user)
-      can [ :update, :avatar ], User, id: user.id
+      can [:update, :avatar, :save], User, id: user.id
       can :follow, User do |instance_user|
         instance_user != user and !user.following?(instance_user)
       end

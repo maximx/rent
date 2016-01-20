@@ -18,18 +18,30 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @profile.update(profile_params)
-      if @profile.phone.present? and !@profile.phone_confirmed?
-        redirect_to phone_confirmation_account_settings_path(redirect_url: params[:redirect_url]),
-                    notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
-      else
-        redirect_url = params[:redirect_url] || user_path(@user)
-        redirect_to redirect_url, notice: '個人資料修改成功。'
-      end
-    else
-      flash[:alert] = t('controller.action.create.fail')
-      render :edit
+    respond_to do |format|
+      format.json {
+        status = @profile.update(profile_params) ? 'ok' : 'error' if request.xhr?
+        render json: {status: status}
+      }
+      format.html {
+        if @profile.update(profile_params)
+          if @profile.phone.present? and !@profile.phone_confirmed?
+            redirect_to phone_confirmation_account_settings_path(redirect_url: params[:redirect_url]),
+                        notice: '手機驗證碼已發送，請輸入所收到之驗證碼。'
+          else
+            redirect_url = params[:redirect_url] || user_path(@user)
+            redirect_to redirect_url, notice: '個人資料修改成功。'
+          end
+        else
+          flash[:alert] = t('controller.action.create.fail')
+          render :edit
+        end
+      }
     end
+  end
+
+  def save
+    @success = @profile.update_columns(profile_preferences_params)
   end
 
   def avatar
@@ -86,12 +98,15 @@ class UsersController < ApplicationController
   end
 
   private
-
     def profile_params
       params.require(:profile).permit(
         :name, :address, :phone, :facebook, :line,
         :tel_phone, :description, :bank_code, :bank_account
       )
+    end
+
+    def profile_preferences_params
+      params.require(:profile).permit(:send_mail)
     end
 
     def find_total_reviews

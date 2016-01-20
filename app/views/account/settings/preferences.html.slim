@@ -1,11 +1,12 @@
-h2.col-xs-offset-4.col-sm-offset-3 = t('controller.account/settings.action.preferences')
+.panel.panel-default
+  .panel-heading
+    .panel-title = t('controller.account/settings.action.preferences')
 
-= simple_form_for @profile, url: save_account_settings_path, html: { method: :patch } do |f|
-  .form-group
-    = f.input :send_mail,
-              as: :boolean,
-              wrapper: :default,
-              wrapper_html: { class: 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 checkbox' }
-  .form-group
-    .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
-      = f.button :submit, t('helpers.submit.save')
+  .panel-body
+    = simple_form_for @profile, url: save_user_path(@user), remote: true, html: {method: :patch} do |f|
+      .form-group
+        = f.input :send_mail,
+                  as: :boolean,
+                  hint: render_icon('refresh', class: 'text-success refresh-animate hide'),
+                  wrapper: :default,
+                  wrapper_html: {class: 'col-xs-offset-2 col-xs-10 col-sm-offset-1 col-sm-10 checkbox'}

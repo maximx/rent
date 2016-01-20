@@ -51,7 +51,7 @@ Rails.application.routes.draw do
     member do
       get :reviews, :lender_reviews, :borrower_reviews, :items
       put :follow
-      patch :avatar
+      patch :avatar, :save
       delete :unfollow
     end
     resources :subcategories, only: [] do
@@ -79,7 +79,6 @@ Rails.application.routes.draw do
     resource :settings, only: [:show, :update] do
       get :preferences, :phone_confirmation, :lender
       post :phone_confirmed, :upload
-      patch :save
     end
 
     resources :categories, only: [:index]
