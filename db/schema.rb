@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120012005) do
+ActiveRecord::Schema.define(version: 20160120012628) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -57,9 +57,11 @@ ActiveRecord::Schema.define(version: 20160120012005) do
   end
 
   create_table "delivers", force: :cascade do |t|
-    t.string   "name",       limit: 191
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",            limit: 191
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "remit_needed",                default: false
+    t.boolean  "delivery_needed",             default: false
   end
 
   create_table "follows", force: :cascade do |t|
