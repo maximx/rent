@@ -32,7 +32,10 @@ class User < ActiveRecord::Base
   has_many :vectors
   has_many :subcategories, through: :vectors
 
-  after_save :init_profile
+  has_many :user_deliver
+  has_many :delivers, through: :user_deliver
+
+  after_create :init_profile, :init_delivers
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -133,6 +136,10 @@ class User < ActiveRecord::Base
 
   private
     def init_profile
-      self.build_profile.save(validate: false) unless profile
+      self.build_profile.save(validate: false)
+    end
+
+    def init_delivers
+      delivers << Deliver.where(id: [1, 2])
     end
 end
