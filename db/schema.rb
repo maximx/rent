@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120012628) do
+ActiveRecord::Schema.define(version: 20160120025406) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -81,15 +81,6 @@ ActiveRecord::Schema.define(version: 20160120012628) do
   end
 
   add_index "item_collections", ["user_id", "item_id"], name: "index_item_collections_on_user_id_and_item_id", unique: true, using: :btree
-
-  create_table "item_delivers", force: :cascade do |t|
-    t.integer  "item_id",    limit: 4
-    t.integer  "deliver_id", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "item_delivers", ["item_id", "deliver_id"], name: "index_item_delivers_on_item_id_and_deliver_id", unique: true, using: :btree
 
   create_table "items", force: :cascade do |t|
     t.string   "name",           limit: 191

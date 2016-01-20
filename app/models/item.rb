@@ -9,8 +9,7 @@ class Item < ActiveRecord::Base
   PRICE_MIN = 0
   PRICE_MAX = 2000
 
-  validates_presence_of :name, :price, :period, :minimum_period, :subcategory_id, :deliver_ids, :aasm_state, :lender
-  validates_presence_of :address, if: :delivers_include_face?
+  validates_presence_of :name, :price, :period, :minimum_period, :subcategory_id, :aasm_state, :lender
   validates_numericality_of :deliver_fee, equal_to: 0, unless: :delivers_include_non_face?
   validate :profile_bank_info_presented, if: :delivers_include_non_face?
 
@@ -26,9 +25,6 @@ class Item < ActiveRecord::Base
   has_many :collectors, through: :collect_relationships, source: :user
 
   has_many :pictures, class_name: 'Attachment', as: :attachable, dependent: :destroy
-
-  has_many :item_deliver, dependent: :destroy
-  has_many :delivers, through: :item_deliver
 
   has_many :items_selections, dependent: :destroy
   has_many :selections, through: :items_selections
@@ -173,7 +169,7 @@ class Item < ActiveRecord::Base
   end
 
   def profile_bank_info_presented
-    errors.add(:deliver_ids, '請先填寫匯款資訊') unless lender.profile.bank_info_present?
+    errors.add(:deliver_fee, :bank_info_blank) unless lender.profile.bank_info_present?
   end
 
   def period_without_per
@@ -216,12 +212,8 @@ class Item < ActiveRecord::Base
     selections.select(:id).map { |s| s.id }
   end
 
-  def delivers_include_face?
-    delivers.include?( Deliver.face_to_face )
-  end
-
   def delivers_include_non_face?
-    delivers.include?( Deliver.where.not(name: '面交自取').first )
+    lender.delivers_include_non_face?
   end
 
   def collected_by? user

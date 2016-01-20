@@ -134,6 +134,14 @@ class User < ActiveRecord::Base
     profile.logo_name
   end
 
+  def delivers_include_face?
+    delivers.exists?(delivery_needed: false)
+  end
+
+  def delivers_include_non_face?
+    delivers.exists?(delivery_needed: true)
+  end
+
   private
     def init_profile
       self.build_profile.save(validate: false)

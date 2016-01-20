@@ -54,10 +54,9 @@ zh-TW:
               blank: '每日租金為必填'
             minimum_period:
               blank: '最短租期為必填'
-            deliver_ids:
-              blank: '運送方式為必填'
             deliver_fee:
               equal_to: '面交自取理應不用運費'
+              bank_info_blank: '請先填寫匯款資訊'
             city_id:
               blank: '請選擇縣市'
             address:

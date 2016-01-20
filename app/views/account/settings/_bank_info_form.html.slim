@@ -1,4 +1,4 @@
-- if item.delivers_include_non_face? and !profile.bank_info_present?
+- if current_user.delivers_include_non_face? and !profile.bank_info_present?
   #bank_info_modal.modal.fade tabindex="-1" role="dialog" aria-labelledby="fill_bank_info_modal"
     .modal-dialog role="document"
       .modal-content
