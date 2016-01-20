@@ -7,6 +7,10 @@ class Deliver < ActiveRecord::Base
   end
 
   def remit_needed?
-    !(name == '面交自取')
+    remit_needed
+  end
+
+  def delivery_needed?
+    delivery_needed
   end
 end
