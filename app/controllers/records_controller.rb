@@ -112,7 +112,7 @@ class RecordsController < ApplicationController
     end
 
     def validates_borrower_info
-      if @item.lender.profile.borrower_info_provide
+      if @item.lender.borrower_info_provide
         errors = current_user.profile.validates_detail_info
         unless errors.empty?
           redirect_to edit_user_path(current_user, redirect_url: new_item_record_path(@item)),

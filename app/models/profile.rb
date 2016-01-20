@@ -31,7 +31,7 @@ class Profile < ActiveRecord::Base
 
   def validates_basic_info
     errors = []
-    [ 'name', 'address' ].each do |attr|
+    ['name', 'address'].each do |attr|
       errors << I18n.t("simple_form.labels.profile.#{attr}") if self.send(attr).blank?
     end
     errors
@@ -39,7 +39,7 @@ class Profile < ActiveRecord::Base
 
   def validates_detail_info
     errors = validates_basic_info
-    [ 'phone'].each do |attr|
+    ['phone'].each do |attr|
       errors << I18n.t("simple_form.labels.profile.#{attr}") unless phone_confirmed?
     end
     errors

@@ -94,7 +94,7 @@ zh-TW:
         success: '手機驗證成功。'
         fail: '驗證碼錯誤，請再確認一次。'
       save:
-        success: '個人偏好儲存成功。'
+        success: '出租設定儲存成功。'
     account/categories:
       action:
         index: '分類屬性'

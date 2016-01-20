@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     resource :settings, only: [:show, :update] do
       get :preferences, :phone_confirmation, :lender
       post :phone_confirmed, :upload
+      patch :save
     end
 
     resources :categories, only: [:index]

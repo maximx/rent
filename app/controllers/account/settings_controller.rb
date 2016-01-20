@@ -59,12 +59,25 @@ class Account::SettingsController < ApplicationController
     end
   end
 
+  def save
+    if @user.update(user_lender_params)
+      redirect_to lender_account_settings_path, notice: t('controller.account/settings.save.success')
+    else
+      flash[:alert] = t('common.error')
+      render :lender
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(
         :email, :account, :password,
         :password_confirmation, :current_password
       )
+    end
+
+    def user_lender_params
+      params.require(:user).permit(:free_days, :borrower_info_provide, deliver_ids: [])
     end
 
     def load_user
