@@ -8,6 +8,9 @@ class Account::SettingsController < ApplicationController
   def preferences
   end
 
+  def lender
+  end
+
   def phone_confirmation
     if @profile.phone_confirmed?
       redirect_url = params[:redirect_url] || user_path(@user)
@@ -40,7 +43,7 @@ class Account::SettingsController < ApplicationController
     respond_to do |format|
       if request.xhr?
         format.json {
-          if @profile.update(profile_params)
+          if @profile.update(profile_bank_params)
             result = { status: 'ok' }
           else
             result = { status: 'error' }
@@ -88,18 +91,12 @@ class Account::SettingsController < ApplicationController
       )
     end
 
-    def profile_params
-      params.require(:profile).permit(
-        :send_mail, :borrower_info_provide,
-        :bank_code, :bank_account
-      )
+    def profile_bank_params
+      params.require(:profile).permit(:bank_code, :bank_account)
     end
 
     def profile_preferences_params
-      params.require(:profile).permit(
-        :send_mail, :borrower_info_provide,
-        :bank_code, :bank_account, :free_days
-      )
+      params.require(:profile).permit(:send_mail)
     end
 
     def load_user

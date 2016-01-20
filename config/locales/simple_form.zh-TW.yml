@@ -18,6 +18,9 @@ zh-TW:
         current_password: '原密碼'
         agreement: '已閱讀並接受%{terms_link}'
         cover: '封面圖'
+        borrower_info_provide: '承租者需提供詳細資料'
+        free_days: '免租金天數'
+        delivers: '運送方式'
       profile:
         name: '名字'
         address: '地址'
@@ -30,8 +33,6 @@ zh-TW:
         facebook: 'Facebook'
         line: 'Line'
         send_mail: '承租時接收Email通知'
-        borrower_info_provide: '承租者需提供詳細資料'
-        free_days: '免租金天數'
       item:
         name: '名稱'
         subcategory_id: '分類'
@@ -41,7 +42,6 @@ zh-TW:
         deposit: '押金'
         address: '物品所在地'
         description: '介紹'
-        delivers: '運送方式'
         deliver_fee: '運費'
         pictures: '圖片'
         file: '匯入'

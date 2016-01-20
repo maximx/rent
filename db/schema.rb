@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120025406) do
+ActiveRecord::Schema.define(version: 20160120065658) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -181,27 +181,25 @@ ActiveRecord::Schema.define(version: 20160120025406) do
   add_index "orders", ["borrower_type", "borrower_id"], name: "index_orders_on_borrower_type_and_borrower_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.integer  "user_id",               limit: 4
-    t.string   "name",                  limit: 191
-    t.string   "address",               limit: 191
-    t.string   "phone",                 limit: 191
-    t.text     "description",           limit: 65535
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
-    t.string   "bank_code",             limit: 191
-    t.string   "bank_account",          limit: 191
-    t.string   "confirmation_token",    limit: 191
+    t.integer  "user_id",              limit: 4
+    t.string   "name",                 limit: 191
+    t.string   "address",              limit: 191
+    t.string   "phone",                limit: 191
+    t.text     "description",          limit: 65535
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "bank_code",            limit: 191
+    t.string   "bank_account",         limit: 191
+    t.string   "confirmation_token",   limit: 191
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.float    "latitude",              limit: 24
-    t.float    "longitude",             limit: 24
-    t.string   "user_type",             limit: 191
-    t.string   "line",                  limit: 191
-    t.string   "facebook",              limit: 191
-    t.boolean  "send_mail",                           default: true
-    t.boolean  "borrower_info_provide",               default: false
-    t.string   "tel_phone",             limit: 191
-    t.integer  "free_days",             limit: 4,     default: 0
+    t.float    "latitude",             limit: 24
+    t.float    "longitude",            limit: 24
+    t.string   "user_type",            limit: 191
+    t.string   "line",                 limit: 191
+    t.string   "facebook",             limit: 191
+    t.boolean  "send_mail",                          default: true
+    t.string   "tel_phone",            limit: 191
   end
 
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree
@@ -318,12 +316,12 @@ ActiveRecord::Schema.define(version: 20160120025406) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 191, default: "", null: false
-    t.string   "encrypted_password",     limit: 191, default: "", null: false
+    t.string   "email",                  limit: 191, default: "",    null: false
+    t.string   "encrypted_password",     limit: 191, default: "",    null: false
     t.string   "reset_password_token",   limit: 191
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 191
@@ -335,6 +333,8 @@ ActiveRecord::Schema.define(version: 20160120025406) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email",      limit: 191
     t.string   "account",                limit: 191
+    t.boolean  "borrower_info_provide",              default: false
+    t.integer  "free_days",              limit: 4,   default: 0
   end
 
   add_index "users", ["account"], name: "index_users_on_account", unique: true, using: :btree

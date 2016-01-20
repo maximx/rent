@@ -87,6 +87,7 @@ zh-TW:
         phone_confirmation: '手機驗證'
         show: '帳號設定'
         preferences: '偏好設定'
+        lender: '出租設定'
       phone_confirmation:
         confirmed: '手機已驗證。'
       phone_confirmed:

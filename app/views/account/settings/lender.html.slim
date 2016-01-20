@@ -1,0 +1,17 @@
+.panel.panel-default
+  .panel-heading
+    h2.panel-title = t('controller.account/settings.action.lender')
+
+  .panel-body
+    /= simple_form_for @user do |f|
+      /= f.input :free_days, as: :numeric_addon, direction: t('helpers.input.direction.day')
+      /= f.association :delivers, as: :check_boxes
+
+      /.form-group
+        /= f.input :borrower_info_provide,
+                  /as: :boolean,
+                  /wrapper: :default,
+                  /wrapper_html: { class: 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 checkbox' }
+      /.form-group
+        /.col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
+          /= f.button :submit, t('helpers.submit.save')

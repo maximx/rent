@@ -192,7 +192,7 @@ class Record < ActiveRecord::Base
 
   private
     def set_free_days
-      self.free_days ||= lender.profile.free_days
+      self.free_days ||= lender.free_days
     end
 
     def set_item_attributes

@@ -18,7 +18,7 @@ class ShoppingCart < ActiveRecord::Base
         item_id: item.id,
         price: item.price,
         deliver_fee: item.deliver_fee,
-        free_days: item.lender.profile.free_days,
+        free_days: item.lender.free_days,
         deposit: item.deposit,
         period: item.period
       )

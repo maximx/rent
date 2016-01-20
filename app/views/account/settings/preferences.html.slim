@@ -7,13 +7,5 @@ h2.col-xs-offset-4.col-sm-offset-3 = t('controller.account/settings.action.prefe
               wrapper: :default,
               wrapper_html: { class: 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 checkbox' }
   .form-group
-    = f.input :borrower_info_provide,
-              as: :boolean,
-              wrapper: :default,
-              wrapper_html: { class: 'col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-9 checkbox' }
-
-  = f.input :free_days, as: :numeric_addon, direction: t('helpers.input.direction.day')
-
-  .form-group
     .col-xs-offset-4.col-xs-8.col-sm-offset-3.col-sm-9
       = f.button :submit, t('helpers.submit.save')
