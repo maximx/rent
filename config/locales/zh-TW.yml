@@ -26,3 +26,6 @@ zh-TW:
     message_mailer:
       subject_new: "訊息：%{subject}"
       subject_reply: "回覆：%{subject}"
+  order_mailer:
+    send_payment_message:
+      subject: '訂單#%{order_id} %{name}的匯款資訊'

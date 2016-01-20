@@ -12,10 +12,7 @@ class ShoppingCartsController < ApplicationController
     if @shopping_cart.update(shopping_cart_params)
       order = @shopping_cart.checkout
       order.records.group_by(&:lender).each do |lender, records|
-        sum = 0
-        records.map{|record| sum+=record.total_price if record.may_remit?}
-        #TODO: body用render view, title用i18n
-        lender.send_message current_user, "$#{sum}元", "#{lender.logo_name}的匯款資訊" if sum > 0
+        OrderMailer.send_payment_message(order, lender.profile, records).deliver_now
 
         lender.notify t('controller.shopping_carts.update.notify_lender',
                         name: current_user.logo_name,

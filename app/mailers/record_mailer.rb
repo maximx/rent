@@ -8,12 +8,4 @@ class RecordMailer < ApplicationMailer
 
     mail to: record.borrower.email, subject: "承租物#{record.item.name}即將到期"
   end
-
-  def send_payment_message(record)
-    @borrower_name = record.borrower.profile.name
-    @record = record
-    @lender = record.item.lender
-
-    mail to: record.borrower.email, subject: "#{I18n.t('rent.site_name')}-承租物#{record.item.name}匯款通知"
-  end
 end

@@ -7,7 +7,7 @@ class RecordStateLog < ActiveRecord::Base
 
   has_many :attachments, as: :attachable, dependent: :destroy
 
-  after_save :send_remitted_message
+  after_save :send_remitted_message, if: :remitted?
 
   def attachment
     attachments.first
@@ -23,6 +23,6 @@ class RecordStateLog < ActiveRecord::Base
 
   private
     def send_remitted_message
-      RecordStateLogMailer.send_remitted_message(self).deliver if remitted?
+      RecordStateLogMailer.send_remitted_message(self).deliver_now
     end
 end
