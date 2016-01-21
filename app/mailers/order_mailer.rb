@@ -13,7 +13,9 @@ class OrderMailer < ApplicationMailer
     @sum = 0
     records.map{|record| @sum += record.total_price if record.may_remit?}
 
-    mail to: order.borrower.email,
-         subject: t('order_mailer.send_payment_message.subject', order_id: order.id, name: profile.logo_name)
+    if @sum > 0
+      mail to: order.borrower.email,
+           subject: t('order_mailer.send_payment_message.subject', order_id: order.id, name: profile.logo_name)
+    end
   end
 end

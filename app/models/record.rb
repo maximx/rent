@@ -149,11 +149,11 @@ class Record < ActiveRecord::Base
 
   # 物品為郵件寄送，且有金額需結算
   def remit_needed?
-    total_price > 0 and delivery_needed?
+    total_price > 0 and deliver.remit_needed?
   end
 
   def delivery_needed?
-    deliver.name != '面交自取'
+    deliver.delivery_needed?
   end
 
   def total_price
