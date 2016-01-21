@@ -19,7 +19,7 @@
       div class=(full_form? ? '' : 'col-sm-12')
         = f.input :deliver_id, as: :select, collection: item.select_delivers, input_html: { class: 'form-control item_deliver' }
 
-      div class=(full_form? ? '' : 'col-sm-12')
+      div class=(full_form? ? 'send_period_container' : 'send_period_container col-sm-12')
         = f.input :send_period, as: :radio_buttons, item_wrapper_class: "inline"
 
       .form-group

@@ -1,6 +1,10 @@
 $(document).ready ->
+  #init
+  toggle_send_period($('.item_deliver'))
+
   # record form
   $('.item_deliver').change () ->
+    toggle_send_period($(this))
     update_rent_days_price()
 
   # record state log
@@ -61,3 +65,12 @@ $(document).ready ->
 
     $('#rent_days').text(days + '天')
     $('#total_price').text('$' + total)
+
+@toggle_send_period = (target)->
+  $target = $(target)
+  $target.each ()->
+    $send_period = $(this).closest('.item_record').find('.send_period_container')
+    if $(this).val() == "3"
+      $send_period.show()
+    else
+      $send_period.hide()

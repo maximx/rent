@@ -7,6 +7,8 @@ class ShoppingCartItem < ActiveRecord::Base
   belongs_to :item
   belongs_to :deliver
 
+  has_one :lender, through: :item
+
   # changed with record.item_period, item.period
   enum period: { per_time: 0, per_day: 1 }
 

@@ -71,6 +71,12 @@ zh-TW:
       shopping_cart:
         started_at: *started_at
         ended_at: *ended_at
+      shopping_cart_item:
+        name: '名稱'
+        price: '租金'
+        deliver_id: '運送方式'
+        deliver_fee: '運費'
+        deposit: '押金'
       order:
         started_at: *started_at
         ended_at: *ended_at
