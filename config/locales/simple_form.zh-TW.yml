@@ -60,6 +60,7 @@ zh-TW:
         period: '期間'
         review: '評價'
         rent_days: '總天數'
+        send_period: '送達時段'
       review:
         content: '評語'
       message:

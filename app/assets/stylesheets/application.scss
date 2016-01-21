@@ -189,7 +189,6 @@ nav.navbar.navbar-sub {
 
   .input-group {
     margin-top: 0;
-
     &.addon { width: 250px; }
   }
 
@@ -224,7 +223,12 @@ nav.navbar.navbar-sub {
     &.inline {
       margin-right: 10px;
       margin-bottom: 10px;
-      float: left;
+      display: inline;
+
+      > label {
+        margin-top: 5px;
+        input[type="radio"].form-control {height: 20px;}
+      }
     }
   }
 }
