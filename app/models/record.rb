@@ -21,7 +21,8 @@ class Record < ActiveRecord::Base
   has_many :record_state_logs, class_name: 'RecordStateLog', foreign_key: 'record_id', dependent: :destroy
 
   # changed with item.period, shopping_cart_item.period
-  enum item_period: { per_time: 0, per_day: 1 }
+  enum item_period: {per_time: 0, per_day: 1}
+  enum send_period: {morning: 0, afternoon: 1, evening: 2}
 
   after_initialize :set_free_days, if: :new_record?
   before_create :set_item_attributes, if: :new_record?
