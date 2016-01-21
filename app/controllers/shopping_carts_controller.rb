@@ -4,7 +4,9 @@ class ShoppingCartsController < ApplicationController
   before_action :load_disabled_dates
 
   def show
-    @shopping_cart_items = @shopping_cart.shopping_cart_items.includes(:deliver, item: :delivers)
+    @lender_shopping_cart_items = @shopping_cart.shopping_cart_items
+                                                .includes(:deliver, item: :delivers)
+                                                .group_by(&:lender)
   end
 
   def update

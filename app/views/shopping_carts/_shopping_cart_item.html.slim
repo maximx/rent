@@ -1,27 +1,18 @@
 - item = shopping_cart_item.item
 
-li.item_record.col-md-12
+li.item_record.col-xs-12
   = hidden_field_tag :item_price, shopping_cart_item.price, class: 'item_price', id: nil
   = hidden_field_tag :free_days, shopping_cart_item.free_days, class: 'free_days', id: nil
   = hidden_field_tag :item_deposit, shopping_cart_item.deposit, class: 'item_deposit', id: nil
   = hidden_field_tag :item_period, shopping_cart_item.period, class: 'item_period', id: nil
 
-  .col-md-5
+  .col-xs-6
     div = link_to item.name, item_path(item)
-    .label.label-warning = t('helpers.records.form.item_deposit', price: shopping_cart_item.currency_deposit)
     - if shopping_cart_item.per_day?
       .label.label-default = t('helpers.records.form.free_days', days: shopping_cart_item.free_days)
-  .col-md-2
-    = shopping_cart_item.price_period
-  .col-md-2
-    = f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
-      = cart_item.input :deliver_id,
-                        as: :select,
-                        collection: item.select_delivers,
-                        label: false,
-                        wrapper: :default,
-                        input_html:{class: 'item_deliver form-control'},
-                        include_blank: t('helpers.select.deliver_blank')
-  .col-md-1.item_deliver_fee
-  .col-md-1.item_subtotal
-  .col-md-1 = render_remove_shopping_carts_item_link(item, customer)
+
+  .col-xs-2.text-center = shopping_cart_item.price_period
+  .col-xs-1 = shopping_cart_item.currency_deposit
+  .col-xs-1.item_deliver_fee
+  .col-xs-1.item_subtotal
+  .col-xs-1 = render_remove_shopping_carts_item_link(item, customer)

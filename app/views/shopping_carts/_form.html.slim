@@ -12,25 +12,36 @@ h1.text-center = t('controller.shopping_carts.action.show')
       = f.input :ended_at, as: :date_time_picker, input_html: {id: 'record_ended_at'}
 
       ul.shopping_cart
-        li.col-md-12
-          .col-md-5: strong = t('simple_form.labels.shopping_cart_item.name')
-          .col-md-2: strong = t('simple_form.labels.shopping_cart_item.price')
-          .col-md-2: strong = t('simple_form.labels.shopping_cart_item.deliver_id')
-          .col-md-1: strong = t('simple_form.labels.shopping_cart_item.deliver_fee')
-          .col-md-1: strong = t('helpers.shopping_carts.subtotal_price')
-          .col-md-1
+        - @lender_shopping_cart_items.each do |lender, shopping_cart_items|
+          li.col-xs-12
+            strong = lender.logo_name
+            /= f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
+              /= cart_item.input :deliver_id,
+                                /as: :select,
+                                /collection: item.select_delivers,
+                                /label: false,
+                                /wrapper: :default,
+                                /input_html:{class: 'item_deliver form-control'},
+                                /include_blank: t('helpers.select.deliver_blank')
+          li.col-xs-12
+            .col-xs-6: strong = t('simple_form.labels.shopping_cart_item.name')
+            .col-xs-2.text-center: strong = t('simple_form.labels.shopping_cart_item.price')
+            .col-xs-1: strong = t('simple_form.labels.shopping_cart_item.deposit')
+            .col-xs-1: strong = t('simple_form.labels.shopping_cart_item.deliver_fee')
+            .col-xs-1: strong = t('helpers.shopping_carts.subtotal_price')
+            .col-xs-1
 
-        = render partial: 'shopping_carts/shopping_cart_item',
-                 collection: shopping_cart_items,
-                 locals:{f: f, customer: customer}
+          = render partial: 'shopping_carts/shopping_cart_item',
+                   collection: shopping_cart_items,
+                   locals:{f: f, customer: customer}
 
-        li.col-md-12
-          .col-md-offset-4.col-md-2.text-right = t('helpers.shopping_carts.rent_days')
-          #rent_days.col-md-1
-          .col-md-offset-1.col-md-2.text-right = t('helpers.shopping_carts.total_price')
-          #total_price.col-md-1
-        li.col-sm-12
-          .col-sm-offset-10.col-sm-2
+        li.col-xs-12
+          .col-xs-offset-4.col-xs-2.text-right = t('helpers.shopping_carts.rent_days')
+          #rent_days.col-xs-1
+          .col-xs-offset-1.col-xs-2.text-right = t('helpers.shopping_carts.total_price')
+          #total_price.col-xs-1
+        li.col-xs-12
+          .col-xs-offset-10.col-xs-2
             = f.button :submit,
                        t('helpers.submit.submit'),
                        class: 'btn btn-success btn-sm',
