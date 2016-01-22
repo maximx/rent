@@ -157,3 +157,5 @@ zh-TW:
           attributes:
             deliver_id:
               blank: '運送方式為必填'
+            send_period:
+              blank: '請選擇送達時段'

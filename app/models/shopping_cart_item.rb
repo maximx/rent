@@ -2,6 +2,7 @@ class ShoppingCartItem < ActiveRecord::Base
   include CurrencyPrice
 
   validates_presence_of :deliver_id, on: :update
+  validates_presence_of :send_period, if: ->(obj){obj.deliver and obj.deliver.send_home?}, on: :update
 
   belongs_to :shopping_cart
   belongs_to :item

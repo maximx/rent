@@ -12,7 +12,7 @@ $ ->
 
   $('.item_record_order form.edit_shopping_cart').submit ()->
     update_lender_item_deliver($(this).find('.lender_deliver'))
-    update_lender_item_send_period($('.lender_send_period'))
+    update_lender_item_send_period($(this).find('.lender_send_period:checked'))
 
 @update_lender_item_deliver = (lender_deliver)->
   $(lender_deliver).each ()->
@@ -27,8 +27,7 @@ $ ->
       $(this).find('.send_period').val([send_period])
 
 @toggle_lender_send_period = (target)->
-  $target = $(target)
-  $target.each ()->
+  $(target).each ()->
     $send_period = $(this).closest('.lender').find('.send_period_container')
     if $(this).find('option:selected').data('send_home') == true
       $send_period.show()
