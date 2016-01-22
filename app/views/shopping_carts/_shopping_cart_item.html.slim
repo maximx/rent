@@ -12,6 +12,16 @@ tr.item_record
       .label.label-default = t('helpers.records.form.free_days', days: shopping_cart_item.free_days)
   td = shopping_cart_item.price_period
   td = shopping_cart_item.currency_deposit
-  td.item_deliver_fee
+  td
+    span.item_deliver_fee
+    .hide
+      = f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
+        = cart_item.input :deliver_id,
+                           as: :select,
+                           collection: cart_item.object.item.select_delivers,
+                           label: false,
+                           wrapper: :default,
+                           input_html:{class: 'item_deliver form-control'},
+                           include_blank: t('helpers.select.deliver_blank')
   td.item_subtotal
   td = render_remove_shopping_carts_item_link(item, customer)
