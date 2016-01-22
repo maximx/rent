@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
   end
 
   def json_title
-    I18n.t('helpers.orders.json.title', name: borrower.logo_name, id: id, price: currency_price)
+    I18n.t('helpers.orders.json.title', name: borrower.logo_name, id: id, price: currency_total_price)
   end
 
   def json_url(options={})
@@ -28,5 +28,9 @@ class Order < ActiveRecord::Base
 
   def records_of(lender)
     records.joins(:lender).where(items: {user_id: lender.id})
+  end
+
+  def total_price
+    deposit + deliver_fee + price
   end
 end

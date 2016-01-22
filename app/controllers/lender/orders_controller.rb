@@ -4,10 +4,10 @@ class Lender::OrdersController < ApplicationController
 
   def index
     @orders = current_user.lend_orders.recent.page(params[:page])
-    @orders_price = current_user.lend_records
-                                .where(order_id: @orders.pluck(:order_id))
-                                .group(:order_id)
-                                .sum(:price)
+    @orders_total_price = current_user.lend_records
+                                      .where(order_id: @orders.pluck(:order_id))
+                                      .group(:order_id)
+                                      .sum('records.price + records.item_deposit + records.deliver_fee')
   end
 
   def show

@@ -82,3 +82,6 @@ zh-TW:
         started_at: *started_at
         ended_at: *ended_at
         created_at: '下訂時間'
+        price: '租金'
+        deliver_fee: '運費'
+        deposit: '押金'

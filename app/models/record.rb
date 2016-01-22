@@ -190,7 +190,13 @@ class Record < ActiveRecord::Base
   end
 
   def update_order
-    order = borrower.orders.create(started_at: started_at, ended_at: ended_date, price: price)
+    order = borrower.orders.create(
+      started_at: started_at,
+      ended_at: ended_date,
+      deposit: item_deposit,
+      deliver_fee: deliver_fee,
+      price: price
+    )
     update(order: order)
   end
 

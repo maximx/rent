@@ -4,7 +4,7 @@ table.table.table-hover
       td #
       td 承租者
       td 承租期間
-      td 總金額
+      td = t('helpers.orders.total_price')
       td 下訂於
       td
   tbody
@@ -13,7 +13,7 @@ table.table.table-hover
         td = order.id
         td = link_to order.borrower.logo_name, borrower_path(order.borrower)
         td = render_datetime_period(order, :date_only)
-        td = (current_user == order.borrower) ?  order.currency_price : "$#{orders_price[order.id]}"
+        td = (current_user == order.borrower) ?  order.currency_total_price : "$#{orders_total_price[order.id]}"
         td = render_datetime(order.created_at, :tw)
         td = render_show_order_link(order)
 
