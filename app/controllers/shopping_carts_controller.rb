@@ -5,7 +5,7 @@ class ShoppingCartsController < ApplicationController
 
   def show
     @lender_shopping_cart_items = @shopping_cart.shopping_cart_items
-                                                .includes(:deliver, item: :delivers)
+                                                .includes(:deliver, :lender, item: :delivers)
                                                 .group_by(&:lender)
   end
 
@@ -24,9 +24,7 @@ class ShoppingCartsController < ApplicationController
       end
       redirect_to borrower_order_path(order)
     else
-      @lender_shopping_cart_items = @shopping_cart.shopping_cart_items
-                                                  .includes(:deliver, item: :delivers)
-                                                  .group_by(&:lender)
+      @lender_shopping_cart_items = @shopping_cart.shopping_cart_items.group_by(&:lender)
       render :show
     end
   end
