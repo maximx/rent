@@ -24,7 +24,9 @@ class ShoppingCartsController < ApplicationController
       end
       redirect_to borrower_order_path(order)
     else
-      @shopping_cart_items = @shopping_cart.shopping_cart_items
+      @lender_shopping_cart_items = @shopping_cart.shopping_cart_items
+                                                  .includes(:deliver, item: :delivers)
+                                                  .group_by(&:lender)
       render :show
     end
   end

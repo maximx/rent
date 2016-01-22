@@ -11,46 +11,50 @@ h1.text-center = t('controller.shopping_carts.action.show')
       = f.input :started_at, as: :date_time_picker, input_html: {id: 'record_started_at'}
       = f.input :ended_at, as: :date_time_picker, input_html: {id: 'record_ended_at'}
 
-      ul.shopping_cart
+      .shopping_cart
+        - if shopping_cart.errors.present?
+          .text-center
+            - shopping_cart.errors.get(:shopping_cart_items).each do |msg|
+              p: code = msg
+
         - @lender_shopping_cart_items.each do |lender, shopping_cart_items|
-          li.col-xs-12
-            strong = lender.logo_name
-            /= f.simple_fields_for :shopping_cart_items, shopping_cart_item do |cart_item|
-              /= cart_item.input :deliver_id,
-                                /as: :select,
-                                /collection: item.select_delivers,
-                                /label: false,
-                                /wrapper: :default,
-                                /input_html:{class: 'item_deliver form-control'},
-                                /include_blank: t('helpers.select.deliver_blank')
-          li.col-xs-12
-            .col-xs-6: strong = t('simple_form.labels.shopping_cart_item.name')
-            .col-xs-2.text-center: strong = t('simple_form.labels.shopping_cart_item.price')
-            .col-xs-1: strong = t('simple_form.labels.shopping_cart_item.deposit')
-            .col-xs-1: strong = t('simple_form.labels.shopping_cart_item.deliver_fee')
-            .col-xs-1: strong = t('helpers.shopping_carts.subtotal_price')
+          .panel.panel-primary.lender
+            .panel-heading.clearfix
+              .panel-title.pull-left = lender.logo_name
+              .pull-right
+                = f.simple_fields_for :shopping_cart_items, shopping_cart_items.first do |cart_item|
+                  = cart_item.input :deliver_id,
+                                     as: :select,
+                                     collection: cart_item.object.item.select_delivers,
+                                     label: false,
+                                     wrapper: :default,
+                                     input_html:{class: 'item_deliver form-control'},
+                                     include_blank: t('helpers.select.deliver_blank')
+            table.table.table-condensed
+              thead
+                tr
+                  th.col-xs-6 = t('simple_form.labels.shopping_cart_item.name')
+                  th.col-xs-2 = t('simple_form.labels.shopping_cart_item.price')
+                  th.col-xs-1 = t('simple_form.labels.shopping_cart_item.deposit')
+                  th.col-xs-1 = t('simple_form.labels.shopping_cart_item.deliver_fee')
+                  th.col-xs-1 = t('helpers.shopping_carts.subtotal_price')
+                  th.col-xs-1
+              tbody
+                = render partial: 'shopping_carts/shopping_cart_item',
+                         collection: shopping_cart_items,
+                         locals:{f: f, customer: customer}
+
+        .row
+          .col-xs-12
+            .col-xs-offset-4.col-xs-2.text-right = t('helpers.shopping_carts.rent_days')
+            #rent_days.col-xs-1
+            .col-xs-offset-1.col-xs-2.text-right = t('helpers.shopping_carts.total_price')
+            #total_price.col-xs-1
             .col-xs-1
-
-          = render partial: 'shopping_carts/shopping_cart_item',
-                   collection: shopping_cart_items,
-                   locals:{f: f, customer: customer}
-
-        li.col-xs-12
-          .col-xs-offset-4.col-xs-2.text-right = t('helpers.shopping_carts.rent_days')
-          #rent_days.col-xs-1
-          .col-xs-offset-1.col-xs-2.text-right = t('helpers.shopping_carts.total_price')
-          #total_price.col-xs-1
-        li.col-xs-12
-          .col-xs-offset-10.col-xs-2
-            = f.button :submit,
-                       t('helpers.submit.submit'),
-                       class: 'btn btn-success btn-sm',
-                       data: {disable_with: t('helpers.submit.wait')}
-
-      - if shopping_cart.errors.present?
-        .text-center
-          - shopping_cart.errors.get(:shopping_cart_items).each do |msg|
-            p: code = msg
+              = f.button :submit,
+                         t('helpers.submit.submit'),
+                         class: 'btn btn-success btn-sm',
+                         data: {disable_with: t('helpers.submit.wait')}
 
   javascript:
     $(document).ready(function(){
