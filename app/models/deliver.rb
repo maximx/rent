@@ -13,4 +13,8 @@ class Deliver < ActiveRecord::Base
   def address_needed?
     address_needed
   end
+
+  def send_home?
+    address_needed? and !remit_needed?
+  end
 end

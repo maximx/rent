@@ -70,7 +70,7 @@ $(document).ready ->
   $target = $(target)
   $target.each ()->
     $send_period = $(this).closest('.item_record').find('.send_period_container')
-    if $(this).val() == "3"
+    if $(this).find('option:selected').data('send_home') == true
       $send_period.show()
     else
       $send_period.hide()

@@ -167,7 +167,7 @@ class Item < ActiveRecord::Base
   end
 
   def select_delivers
-    delivers.map{|d| [d.name, d.id, {'data-deliver_fee': (d.remit_needed? ? deliver_fee : 0), 'data-delivery_needed': d.delivery_needed}]}
+    delivers.map{|d| [d.name, d.id, {'data-deliver_fee': (d.remit_needed? ? deliver_fee : 0), 'data-send_home': d.send_home?}]}
   end
 
   def profile_bank_info_presented

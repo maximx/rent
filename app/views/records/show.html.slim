@@ -31,8 +31,8 @@ table.table
         td = t('helpers.records.show.remit_account')
         td = "#{@item.lender.profile.bank_code} #{@item.lender.profile.bank_account}"
         td
+    /TODO: 重寫 review後再開
     /- unless @record.borrower.is_customer?
-      /TODO: 重寫 review後再開
       /tr
         /td = t('simple_form.labels.record.review')
         /td = @record.review_of_judger(@item.lender).human_rate
@@ -43,9 +43,14 @@ table.table
     tr
       td = t('simple_form.labels.record.aasm_state')
       td colspan="2" = @record.aasm.human_state
+    /TODO: record.address deliver address should store
     tr
       td = t('simple_form.labels.record.deliver_id')
-      td colspan="2" = "#{@record.deliver.name}（#{t('simple_form.labels.item.address')}：#{@item.address}）"
+      td colspan="2" = @record.deliver.name
+    - if @record.deliver.send_home?
+      tr
+        td = t('simple_form.labels.record.send_period')
+        td colspan="2" = @record.send_period_i18n
     tr
       td = t('simple_form.labels.item.deliver_fee')
       td colspan="2" #{@record.currency_deliver_fee}

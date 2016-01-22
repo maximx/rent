@@ -6,7 +6,7 @@ class Record < ActiveRecord::Base
   self.per_page = 10
 
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
-  validates_presence_of :send_period, if: ->(obj){ obj.deliver_id == 3 }
+  validates_presence_of :send_period, if: ->(obj){ obj.deliver.send_home? }
   validates :deliver_id, inclusion: { in: ->(obj){ obj.lender.delivers.pluck(:id) } }
   validate :start_end_date, :not_overlap, :borrower_lender_customers, :borrower_address_present
 
