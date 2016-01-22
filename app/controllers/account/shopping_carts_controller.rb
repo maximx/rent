@@ -5,7 +5,9 @@ class Account::ShoppingCartsController < ApplicationController
   before_action :load_disabled_dates
 
   def show
-    @shopping_cart_items = @shopping_cart.shopping_cart_items.includes(:deliver, item: :delivers)
+    @lender_shopping_cart_items = @shopping_cart.shopping_cart_items
+                                                .includes(:deliver, :lender, item: :delivers)
+                                                .group_by(&:lender)
   end
 
   def update
@@ -13,7 +15,7 @@ class Account::ShoppingCartsController < ApplicationController
       order = @shopping_cart.checkout
       redirect_to lender_order_path(order)
     else
-      @shopping_cart_items = @shopping_cart.shopping_cart_items.includes(:deliver, item: :delivers)
+      @lender_shopping_cart_items = @shopping_cart.shopping_cart_items.group_by(&:lender)
       render :show
     end
   end
@@ -22,7 +24,7 @@ class Account::ShoppingCartsController < ApplicationController
     def shopping_cart_params
       params.require(:shopping_cart).permit(
         :started_at, :ended_at,
-        shopping_cart_items_attributes: [:id, :deliver_id]
+        shopping_cart_items_attributes: [:id, :deliver_id, :send_period]
       ).deep_symbolize_keys
     end
 

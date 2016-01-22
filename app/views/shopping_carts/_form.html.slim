@@ -19,18 +19,8 @@ h1.text-center = t('controller.shopping_carts.action.show')
 
         - @lender_shopping_cart_items.each do |lender, shopping_cart_items|
           .panel.panel-primary.lender
-            .panel-heading.clearfix
-              .panel-title.pull-left = lender.logo_name
-              .pull-right
-                = f.simple_fields_for :shopping_cart_items, shopping_cart_items.first do |cart_item|
-                  = cart_item.input :deliver_id,
-                                     as: :select,
-                                     collection: cart_item.object.item.select_delivers,
-                                     label: false,
-                                     wrapper: :default,
-                                     input_html:{class: 'lender_deliver form-control'},
-                                     include_blank: t('helpers.select.deliver_blank')
-
+            .panel-heading
+              .panel-title = lender.logo_name
             table.table.table-condensed
               thead
                 tr
@@ -44,6 +34,20 @@ h1.text-center = t('controller.shopping_carts.action.show')
                 = render partial: 'shopping_carts/shopping_cart_item',
                          collection: shopping_cart_items,
                          locals:{f: f, customer: customer}
+            .panel-footer
+              = f.simple_fields_for :shopping_cart_items, shopping_cart_items.first do |cart_item|
+                = cart_item.input :deliver_id,
+                                  as: :select,
+                                  collection: cart_item.object.item.select_delivers,
+                                  input_html:{class: 'lender_deliver form-control'},
+                                  include_blank: t('helpers.select.deliver_blank'),
+                                  label: t('simple_form.labels.shopping_cart_item.deliver_id')
+                .send_period_container
+                  = cart_item.input :send_period,
+                                    as: :radio_buttons,
+                                    item_wrapper_class: 'inline',
+                                    input_html: {class: 'lender_send_period'},
+                                    label: t('simple_form.labels.shopping_cart_item.send_period')
 
         .row
           .col-xs-12

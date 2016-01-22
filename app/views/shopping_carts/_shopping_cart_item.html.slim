@@ -23,5 +23,6 @@ tr.item_record
                            wrapper: :default,
                            input_html:{class: 'item_deliver form-control'},
                            include_blank: t('helpers.select.deliver_blank')
+        = cart_item.input :send_period, as: :radio_buttons, input_html: {class: 'send_period'}
   td.item_subtotal
   td = render_remove_shopping_carts_item_link(item, customer)

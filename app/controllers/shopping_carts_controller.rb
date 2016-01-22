@@ -33,7 +33,7 @@ class ShoppingCartsController < ApplicationController
     def shopping_cart_params
       params.require(:shopping_cart).permit(
         :started_at, :ended_at,
-        shopping_cart_items_attributes: [:id, :deliver_id]
+        shopping_cart_items_attributes: [:id, :deliver_id, :send_period]
       ).deep_symbolize_keys
     end
 
