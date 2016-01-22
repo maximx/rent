@@ -77,6 +77,7 @@ zh-TW:
         deliver_id: '運送方式'
         deliver_fee: '運費'
         deposit: '押金'
+        send_period: '送達時間'
       order:
         started_at: *started_at
         ended_at: *ended_at

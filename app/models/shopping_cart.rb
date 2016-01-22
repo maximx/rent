@@ -89,7 +89,8 @@ class ShoppingCart < ActiveRecord::Base
         deliver_fee: shopping_cart_item.deliver_fee,
         item_deposit: shopping_cart_item.deposit,
         free_days: shopping_cart_item.free_days,
-        item_period: shopping_cart_item.period
+        item_period: shopping_cart_item.period,
+        send_period: shopping_cart_item.send_period
       }
     end
 end

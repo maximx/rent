@@ -9,13 +9,17 @@ zh-TW:
         per_time: *per_time
         per_day: *per_day
       send_period:
-        morning: '10時→13時'
-        afternoon: '12時→17時'
-        evening: '17時→20時'
+        morning: &morning '10時→13時'
+        afternoon: &afternoon '12時→17時'
+        evening: &evening '17時→20時'
     shopping_cart_item:
       period:
         per_time: *per_time
         per_day: *per_day
+      send_period:
+        morning: *morning
+        afternoon: *afternoon
+        evening: *evening
   activerecord:
     models:
       item: "出租物"
