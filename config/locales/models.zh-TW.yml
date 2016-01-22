@@ -63,12 +63,12 @@ zh-TW:
             minimum_period:
               blank: '最短租期為必填'
             deliver_fee:
-              equal_to: '面交自取理應不用運費'
+              equal_to: '理應不用運費'
               bank_info_blank: '請先填寫匯款資訊'
             city_id:
               blank: '請選擇縣市'
             address:
-              blank: '面交自取時請填寫物品所在地'
+              blank: '請提供物品所在地'
             pictures:
               blank: '至少上傳一張圖片'
         profile:

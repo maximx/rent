@@ -31,7 +31,7 @@ city_list.each { |city_name| City.create(name: city_name) }
 
 delivers = Deliver.create([
   {name: '宅配/快遞', remit_needed: true, delivery_needed: true},
-  {name: '面交自取'},
+  {name: '面交自取', address_needed: false},
   {name: '送貨到府(限臺南)'}
 ])
 

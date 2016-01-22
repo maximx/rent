@@ -1,6 +1,7 @@
 class ShoppingCartsController < ApplicationController
   before_action :login_required
   before_action :load_shopping_cart
+  before_action :validates_borrower_info
   before_action :load_disabled_dates
 
   def show
@@ -39,5 +40,19 @@ class ShoppingCartsController < ApplicationController
 
     def load_disabled_dates
       @disabled_dates = @shopping_cart.booked_dates
+    end
+
+    def validates_borrower_info
+      @shopping_cart.items.each do |item|
+        if item.lender.borrower_info_provide
+          errors = current_user.profile.validates_detail_info
+          unless errors.empty?
+            redirect_to(
+              edit_user_path(current_user, redirect_url: shopping_carts_path),
+              alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
+            ) and return
+          end
+        end
+      end
     end
 end
