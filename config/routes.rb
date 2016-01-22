@@ -77,7 +77,7 @@ Rails.application.routes.draw do
 
   namespace :account do
     resource :settings, only: [:show, :update] do
-      get :preferences, :phone_confirmation, :lender
+      get :preferences, :phone_confirmation, :lender, :become
       post :phone_confirmed, :upload
       patch :save
     end

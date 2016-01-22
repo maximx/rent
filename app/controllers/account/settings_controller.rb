@@ -68,6 +68,12 @@ class Account::SettingsController < ApplicationController
     end
   end
 
+  def become
+    return unless current_user.id == 1
+    sign_in(:user, User.find(params[:id]), {:bypass => true})
+    redirect_to root_url
+  end
+
   private
     def user_params
       params.require(:user).permit(
