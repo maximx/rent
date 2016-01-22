@@ -100,7 +100,7 @@ class RecordsController < ApplicationController
 
   private
     def record_params
-      params.require(:record).permit(:deliver_id, :started_at, :ended_at)
+      params.require(:record).permit(:deliver_id, :started_at, :ended_at, :send_period)
     end
 
     def record_state_log_params

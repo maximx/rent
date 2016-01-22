@@ -24,6 +24,6 @@ class Lender::RecordsController < ApplicationController
 
   private
     def record_params
-      params.require(:record).permit(:borrower_id, :started_at, :ended_at, :deliver_id)
+      params.require(:record).permit(:borrower_id, :started_at, :ended_at, :deliver_id, :send_period)
     end
 end

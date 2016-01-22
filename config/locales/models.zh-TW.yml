@@ -108,6 +108,8 @@ zh-TW:
             borrower:
               blank: '請選擇客戶'
               not_customer: '非您的客戶'
+            send_period:
+              blank: '請選擇送達時段'
         record_state_log:
           attributes:
             info:
