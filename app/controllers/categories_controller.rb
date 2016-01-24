@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @breadcrumbs_object = @category
     @items = @category.items
-                      .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                      .includes(:pictures, :collectors, lender: [{ profile: :avatar}])
                       .opening
                       .the_sort(params[:sort])
                       .page(params[:page])

@@ -26,7 +26,7 @@ class Lender::ItemsController < ApplicationController
 
   def wish
     @items = current_user.collections
-                         .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                         .includes(:pictures, :collectors, lender: [{ profile: :avatar}])
                          .the_sort(params[:sort])
                          .page(params[:page])
     find_users_reviews_count

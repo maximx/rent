@@ -40,10 +40,6 @@
         dt = t('simple_form.labels.item.minimum_period')
         dd = t('helpers.items.show.minimum_period', days: item.minimum_period)
 
-        dt = t('simple_form.labels.item.address')
-        dd = item.address
-
-
         - selections.each do |selection|
           dt = selection.vector.name
           dd = selection.name

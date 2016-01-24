@@ -65,18 +65,12 @@ zh-TW:
             deliver_fee:
               equal_to: '理應不用運費'
               bank_info_blank: '請先填寫匯款資訊'
-            city_id:
-              blank: '請選擇縣市'
-            address:
-              blank: '請提供物品所在地'
             pictures:
               blank: '至少上傳一張圖片'
         profile:
           attributes:
             name:
               blank: '姓名為必填'
-            city_id:
-              blank: '請選擇縣市'
             address:
               blank: '地址為必填'
             bank_code:

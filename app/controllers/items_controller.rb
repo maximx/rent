@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
 
   def index
-    @items = Item.includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+    @items = Item.includes(:pictures, :collectors, lender: [{ profile: :avatar}])
                  .opening
                  .the_sort(params[:sort])
                  .page(params[:page])
@@ -18,7 +18,6 @@ class ItemsController < ApplicationController
 
   def show
     @selections = @item.selections.includes(:tag, [vector: :tag])
-    set_maps_marker @item
     @reviews = @item.reviews.where(user_id: @item.lender).page(params[:page])
   end
 

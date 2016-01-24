@@ -1,12 +1,6 @@
 = form_tag render_items_search_path, method: :get, id: 'search-form', class: 'navbar-form' do
   .form-group
     .input-group
-      span.input-group-btn
-        = select_tag :city,
-                     options_for_select(City.options_collection, params[:city]),
-                     include_blank: t('helpers.select.city_blank'),
-                     class: "form-control#{render_root_input_lg}"
-
       = text_field_tag :query,
                        params[:query],
                        placeholder: t('helpers.items.search.keyword'),

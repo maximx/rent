@@ -5,7 +5,7 @@ class SubcategoriesController < ApplicationController
     @subcategory = Subcategory.find(params[:id])
     @breadcrumbs_object = @subcategory
     @items = @subcategory.items
-                         .includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+                         .includes(:pictures, :collectors, lender: [{ profile: :avatar}])
                          .opening
                          .the_sort(params[:sort])
                          .page(params[:page])
