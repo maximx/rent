@@ -16,7 +16,6 @@ class Item < ActiveRecord::Base
   belongs_to :lender, class_name: "User", foreign_key: "user_id"
   belongs_to :category
   belongs_to :subcategory
-  belongs_to :city
 
   has_many :records
   has_many :reviews, through: :records
@@ -35,25 +34,21 @@ class Item < ActiveRecord::Base
   # changed with record.item_period, shopping_cart_item.period
   enum period: { per_time: 0, per_day: 1 }
 
-  geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
-
   after_validation :geocode
-  before_save :set_category_and_price, :set_city
+  before_save :set_category_and_price
 
   scope :search_and_sort, ->(params) do
-    includes(:pictures, :city, :collectors, lender: [{ profile: :avatar}])
+    includes(:pictures, :collectors, lender: [{ profile: :avatar}])
       .opening
       .record_not_overlaps(params[:started_at], params[:ended_at])
       .price_range(params[:price_min], params[:price_max])
       .search_by(params[:query])
-      .city_at(params[:city])
       .subcategory_is(params[:subcategory])
       .has_selections(params[:selections])
       .the_sort(params[:sort])
       .page(params[:page])
   end
   scope :search_by, -> (query) { where(search_criteria(query)) if query.present? }
-  scope :city_at, -> (city_id) { where(city_id: city_id) if city_id.present? }
   scope :subcategory_is, -> (subcategory_id) { where(subcategory_id: subcategory_id) if subcategory_id.present? }
 
   scope :price_range, -> (min, max) { price_greater_than(min).price_less_than(max) }
@@ -162,10 +157,6 @@ class Item < ActiveRecord::Base
     errors
   end
 
-  def set_address(user)
-    self.address = user.profile.address
-  end
-
   def select_delivers
     delivers.map{|d| [d.name, d.id, {'data-deliver_fee': (d.remit_needed? ? deliver_fee : 0), 'data-send_home': d.send_home?}]}
   end
@@ -228,19 +219,6 @@ class Item < ActiveRecord::Base
     self.price ||= 0
     self.deposit ||= 0
     self.category_id = Subcategory.find(subcategory_id).category_id
-  end
-
-  def set_city
-    if geo_address = Geocoder.address([latitude, longitude], language: 'zh-TW')
-      city_name, level = geo_address.match(/(\D{2}(市|縣))/i).captures
-    elsif m = address.match(/(\D{2}(市|縣))/i)
-      city_name, level = m.captures
-    end
-
-    if city_name
-      cities = City.where(name: city_name.sub('台', '臺'))
-      self.city = cities.first
-    end
   end
 
   def self.search_criteria(query)
