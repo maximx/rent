@@ -36,7 +36,6 @@ class Lender::ItemsController < ApplicationController
   def importer
     authorize! :importer, Item
     @item = Item.new
-    @item.set_address current_user
     @error_messages = []
   end
 
@@ -55,7 +54,7 @@ class Lender::ItemsController < ApplicationController
   private
     def importer_params
       params.require(:item)
-            .permit(:subcategory_id, :deliver_fee, :address, :file, deliver_ids: [])
+            .permit(:subcategory_id, :deliver_fee, :file, deliver_ids: [])
             .symbolize_keys
     end
 

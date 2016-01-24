@@ -104,7 +104,7 @@ class RecordPdf < Prawn::Document
 
   def ninth_code
     text "第九條：管轄法院"
-    text_with_space "雙方如因本合約涉訟，以 #{@item.address} 之地方法院為訴訟第一審管轄法院。"
+    text_with_space "雙方如因本合約涉訟，以 #{@lender_profile.address} 之地方法院為訴訟第一審管轄法院。"
     next_line
   end
 

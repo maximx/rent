@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item.set_address current_user
     @item.pictures.build
   end
 
@@ -135,7 +134,7 @@ class ItemsController < ApplicationController
   private
     def item_params
       params.require(:item).permit(
-        :product_id, :name, :price, :period, :minimum_period, :address,
+        :product_id, :name, :price, :period, :minimum_period,
         :deposit, :description, :subcategory_id,
         :deliver_fee, deliver_ids: [],
         selection_ids: []

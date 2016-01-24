@@ -40,7 +40,6 @@ zh-TW:
         period: '承租區間'
         minimum_period: '最短租期'
         deposit: '押金'
-        address: '物品所在地'
         description: '介紹'
         deliver_fee: '運費'
         pictures: '圖片'

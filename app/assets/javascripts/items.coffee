@@ -15,14 +15,6 @@ $ ->
   subcategory_selects = '#item_subcategory_id, select.filter-subcategory'
   load_item_selections($(subcategory_selects))
 
-  #同聯絡住址
-  $('#use_profile_address').on 'change', () ->
-    if $(this).prop('checked')
-      $('#item_address').val( $(this).val() )
-
-  $('#item_deliver_ids_2').on 'change', () ->
-    $('#item_address').prop('required', true) if $(this).prop('checked')
-
   #同屬item_selection只能選一個
   $(document).on('change', '.edit_item .item_selection :checkbox, .new_item .item_selection :checkbox', ()->
     $(this).closest('.form-group').find(':input').not(this).prop('checked', false)
