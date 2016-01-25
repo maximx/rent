@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   before_action :login_required, except: [ :index ]
   load_and_authorize_resource :item
   load_and_authorize_resource :record, through: :item, except: [ :index ]
-  before_action :validates_borrower_info, only: [ :new, :create ]
+  before_action :validates_borrower_info, only: [:new, :create]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
 
   def index
@@ -112,7 +112,7 @@ class RecordsController < ApplicationController
     end
 
     def validates_borrower_info
-      if @item.lender.borrower_info_provide
+      if @record.borrower_info_needed?
         errors = current_user.profile.validates_detail_info
         unless errors.empty?
           redirect_to edit_user_path(current_user, redirect_url: new_item_record_path(@item)),

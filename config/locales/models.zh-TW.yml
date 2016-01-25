@@ -102,7 +102,7 @@ zh-TW:
             deliver_id:
               blank: '運送方式為必填'
               inclusion: '運送方式不存在'
-              address_blank: '請先填寫個人住址'
+              detail_info_blank: '請提供聯絡資料'
             borrower:
               blank: '請選擇客戶'
               not_customer: '非您的客戶'

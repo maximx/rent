@@ -25,6 +25,10 @@ class Profile < ActiveRecord::Base
     bank_code.present? and bank_account.present?
   end
 
+  def detail_info_present?
+    validates_detail_info.empty?
+  end
+
   def phone_confirmed?
     !!confirmed_at
   end

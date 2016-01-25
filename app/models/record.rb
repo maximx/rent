@@ -8,7 +8,7 @@ class Record < ActiveRecord::Base
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
   validates_presence_of :send_period, if: ->(obj){ obj.deliver.present? and obj.deliver.send_home? }
   validates :deliver_id, inclusion: { in: ->(obj){ obj.lender.delivers.pluck(:id) } }
-  validate :start_end_date, :not_overlap, :borrower_lender_customers, :borrower_address_present
+  validate :start_end_date, :not_overlap, :borrower_lender_customers, :borrower_info_present
 
   belongs_to :borrower, polymorphic: true
   belongs_to :item
@@ -28,7 +28,7 @@ class Record < ActiveRecord::Base
   geocoded_by :address
 
   after_initialize :set_free_days, if: :new_record?
-  after_validation :set_address, if: :new_record?
+  after_validation :set_address, if: ->(obj){ obj.deliver and obj.new_record? }
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   before_create :set_item_attributes, if: :new_record?
   after_create :save_booking_state_log
@@ -96,9 +96,9 @@ class Record < ActiveRecord::Base
     end
   end
 
-  def borrower_address_present
-    if deliver_id and borrower and Deliver.find(deliver_id).address_needed? and borrower.profile.address.blank?
-      errors.add :deliver_id, :address_blank
+  def borrower_info_present
+    if borrower_info_needed? and !borrower.profile.detail_info_present?
+      errors.add :deliver_id, :detail_info_blank
     end
   end
 
@@ -151,6 +151,10 @@ class Record < ActiveRecord::Base
   def review_of_judger(user)
     rv = reviews.where(judger_id: user.id).first
     rv ||= user.reviews.build
+  end
+
+  def borrower_info_needed?
+    lender.borrower_info_provide or (deliver and deliver.address_needed?)
   end
 
   # 物品為郵件寄送，且有金額需結算
