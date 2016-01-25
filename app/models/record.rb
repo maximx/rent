@@ -25,7 +25,11 @@ class Record < ActiveRecord::Base
   enum item_period: {per_time: 0, per_day: 1}
   enum send_period: {morning: 0, afternoon: 1, evening: 2}
 
+  geocoded_by :address
+
   after_initialize :set_free_days, if: :new_record?
+  after_validation :set_address, if: :new_record?
+  after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   before_create :set_item_attributes, if: :new_record?
   after_create :save_booking_state_log
 
@@ -207,6 +211,10 @@ class Record < ActiveRecord::Base
   private
     def set_free_days
       self.free_days ||= lender.free_days
+    end
+
+    def set_address
+      self.address = deliver.address_needed? ? borrower.profile.address : lender.profile.address
     end
 
     def set_item_attributes

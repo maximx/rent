@@ -14,4 +14,16 @@ namespace :once do
     deliver = Deliver.find 2
     deliver.update address_needed: false
   end
+
+  task :recreate_record_address => :environment do
+    records = Record.all
+    records.each do |record|
+      record.address = if record.deliver.address_needed?
+                         record.borrower.profile.address
+                       else
+                         record.lender.profile.address
+                       end
+      record.save
+    end
+  end
 end

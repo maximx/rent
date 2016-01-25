@@ -34,7 +34,6 @@ class Item < ActiveRecord::Base
   # changed with record.item_period, shopping_cart_item.period
   enum period: { per_time: 0, per_day: 1 }
 
-  after_validation :geocode
   before_save :set_category_and_price
 
   scope :search_and_sort, ->(params) do

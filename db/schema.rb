@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124071315) do
+ActiveRecord::Schema.define(version: 20160125021132) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -235,6 +235,9 @@ ActiveRecord::Schema.define(version: 20160124071315) do
     t.integer  "free_days",     limit: 4
     t.integer  "item_period",   limit: 4
     t.integer  "send_period",   limit: 4
+    t.string   "address",       limit: 191
+    t.float    "latitude",      limit: 24
+    t.float    "longitude",     limit: 24
   end
 
   add_index "records", ["borrower_id", "borrower_type"], name: "index_records_on_borrower_id_and_borrower_type", using: :btree
