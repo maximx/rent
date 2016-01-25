@@ -145,6 +145,13 @@ module RecordsHelper
     full_form? ? html : content_tag(:div, html, options)
   end
 
+  def render_records_currency_total_price(records)
+    total_price = 0
+    records.map {|record| total_price += record.total_price unless record.withdrawed?}
+    total_price = total_price.to_i if total_price.to_i == total_price
+    "$#{total_price}"
+  end
+
   def render_datetime_period(obj, type = :tw)
     "#{render_datetime(obj.started_at, type)} ~ #{render_datetime(obj.ended_at, type)}"
   end

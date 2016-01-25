@@ -47,7 +47,6 @@ module Lender::ItemsHelper
 
   def render_operate_item_links(item)
     links = raw [
-      render_new_item_record_path(item),
       render_lender_item_link(item),
       render_edit_item_link(item),
       render_open_item_link(item),
@@ -69,7 +68,6 @@ module Lender::ItemsHelper
   def account_manage_controller?
     account_manage_list = [
       'lender/items',
-      'lender/records',
       'lender/calendars',
       'lender/orders',
       'borrower/orders',
