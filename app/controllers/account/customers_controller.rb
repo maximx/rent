@@ -30,7 +30,8 @@ class Account::CustomersController < ApplicationController
 
   def update
     if @customer.update customer_params
-      redirect_to account_customer_path(@customer),
+      redirect_url = params[:redirect_url].present? ? params[:redirect_url] : account_customer_path(@customer)
+      redirect_to redirect_url,
                   notice: t('controller.action.update.success', name: @customer.account)
     else
       flash[:alert] = t('controller.action.create.fail')

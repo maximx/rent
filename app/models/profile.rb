@@ -11,11 +11,12 @@ class Profile < ActiveRecord::Base
   has_one :avatar, class_name: 'Attachment', as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :avatar
 
-  geocoded_by :address, if: ->(obj){ obj.address.present? and obj.address_changed? }
+  geocoded_by :address
 
-  after_validation :geocode
+  after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   before_update :generate_confirmation_token, if: :phone_changed?
-  after_update :send_confirmation_instructions, if: :phone_changed?
+  before_update :set_phone_confirmed, if: ->(obj){ obj.phone.present? and obj.user.is_a?(Customer) }
+  after_update :send_confirmation_instructions, if: ->(obj){ obj.phone.present? and phone_changed? and obj.user.is_a?(User) }
 
   def logo_name
     name.present? ? name : user.account
@@ -49,11 +50,15 @@ class Profile < ActiveRecord::Base
     errors
   end
 
-  def phone_confirmed
+  def set_phone_confirmed
     self.confirmation_token = nil
     self.confirmation_sent_at = nil
     self.confirmed_at = Time.now
-    self.save
+  end
+
+  def phone_confirmed
+    set_phone_confirmed
+    save
   end
 
   private

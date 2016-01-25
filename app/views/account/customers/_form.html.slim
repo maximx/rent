@@ -2,6 +2,7 @@
   = f.input :email
 
   = f.simple_fields_for :profile, profile do |p|
+    = hidden_field_tag :redirect_url, params[:redirect_url]
     = p.input :id, as: :hidden
     = p.input :name
     = p.input :phone
