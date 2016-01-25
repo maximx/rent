@@ -1,3 +1,10 @@
+- content_for :full_bottom
+  #map
+  javascript:
+    $(document).ready(function() {
+      buildGoogleMap( #{raw @maps.to_json} );
+    });
+
 - breadcrumb :record, @item, @record
 
 = render partial: 'records/state_log_list', locals: {record: @record, record_state_logs: @record_state_logs}
@@ -46,7 +53,9 @@ table.table
     /TODO: record.address deliver address should store
     tr
       td = t('simple_form.labels.record.deliver_id')
-      td colspan="2" = @record.deliver.name
+      td colspan="2"
+        = @record.deliver.name
+        = render_record_deliver_address @record
     - if @record.deliver.send_home?
       tr
         td = t('simple_form.labels.record.send_period')
@@ -71,4 +80,4 @@ table.table
   .panel.panel-primary
     .panel-heading
       = t('helpers.records.show.related_records', order_id: @record.order_id, name: @item.lender.logo_name)
-    = render partial: 'lender/records/table', locals: {records: @sibling_records}
+    = render partial: 'lender/orders/records_table', locals: {records: @sibling_records}

@@ -29,8 +29,9 @@ zh-TW:
       vector: "屬性"
       review: '評價'
     methods:
-      item:
+      record:
         json_title: '%{name} - 承租 %{days}天 - %{datetime}'
+        name: '訂單#%{order_id} %{name}'
     attributes:
       record:
         aasm_state:

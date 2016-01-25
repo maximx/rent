@@ -110,6 +110,12 @@ class Record < ActiveRecord::Base
     item.records.where.not(id: id || -1).overlaps(started_at, ended_at)
   end
 
+  def name
+    I18n.t('activerecord.methods.record.name',
+           order_id: order_id,
+           name: lender.logo_name)
+  end
+
   def as_json(options={})
     {
       id: id,
@@ -124,7 +130,7 @@ class Record < ActiveRecord::Base
     ability = Ability.new(user)
     borrower_name = borrower.logo_name
     borrower_name = controller_helpers.mask(borrower_name) if ability.cannot?(:show, self)
-    I18n.t('activerecord.methods.item.json_title',
+    I18n.t('activerecord.methods.record.json_title',
            name: borrower_name,
            days: rent_days,
            datetime: controller_helpers.render_datetime(created_at))

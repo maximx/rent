@@ -115,6 +115,11 @@ module RecordsHelper
      )
   end
 
+  def render_record_deliver_address(record)
+    address_msg = record.deliver.address_needed? ? :deliver_address : :lender_address
+    t("helpers.records.show.#{address_msg}", address: record.address)
+  end
+
   def info_label
     {
       remitted: '帳號末五碼',
