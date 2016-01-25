@@ -25,6 +25,7 @@ class ShoppingCartsController < ApplicationController
       end
       redirect_to borrower_order_path(order)
     else
+      validates_borrower_info { return }
       @lender_shopping_cart_items = @shopping_cart.shopping_cart_items.group_by(&:lender)
       render :show
     end
@@ -43,16 +44,22 @@ class ShoppingCartsController < ApplicationController
     end
 
     def validates_borrower_info
-      @shopping_cart.items.each do |item|
-        if item.lender.borrower_info_provide
-          errors = current_user.profile.validates_detail_info
-          unless errors.empty?
-            redirect_to(
-              edit_user_path(current_user, redirect_url: shopping_carts_path),
-              alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
-            ) and return
-          end
+      if borrower_info_needed?
+        errors = current_user.profile.validates_detail_info
+        unless errors.empty?
+          redirect_to(
+            edit_user_path(current_user, redirect_url: shopping_carts_path),
+            alert: t('activerecord.errors.models.profile.attributes.info.blank', attrs: errors.join('、'))
+          ) and yield
         end
       end
+    end
+
+    def borrower_info_needed?
+      return true if @shopping_cart.lender_request_borrower_info_needed?
+      @shopping_cart.shopping_cart_items.each do |shopping_cart_item|
+        return true if shopping_cart_item.deliver.present? and shopping_cart_item.deliver.address_needed?
+      end
+      return false
     end
 end

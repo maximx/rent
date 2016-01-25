@@ -7,10 +7,13 @@ class ShoppingCart < ActiveRecord::Base
   validate :shopping_cart_items_valid?
 
   belongs_to :user, polymorphic: true
+
   has_many :shopping_cart_items
+  accepts_nested_attributes_for :shopping_cart_items
+
   has_many :items, through: :shopping_cart_items
   has_many :records, through: :items
-  accepts_nested_attributes_for :shopping_cart_items
+  has_many :lenders, ->{uniq}, through: :items
 
   def add(item)
     unless item_for(item)
@@ -68,6 +71,11 @@ class ShoppingCart < ActiveRecord::Base
     order.records << records
     order.save
     order
+  end
+
+  def lender_request_borrower_info_needed?
+    lenders.each {|lender| return true if lender.borrower_info_provide}
+    return false
   end
 
   private
