@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125021132) do
+ActiveRecord::Schema.define(version: 20160126024222) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -339,10 +339,13 @@ ActiveRecord::Schema.define(version: 20160125021132) do
     t.string   "account",                limit: 191
     t.boolean  "borrower_info_provide",              default: false
     t.integer  "free_days",              limit: 4,   default: 0
+    t.string   "provider",               limit: 191
+    t.string   "uid",                    limit: 191
   end
 
   add_index "users", ["account"], name: "index_users_on_account", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
