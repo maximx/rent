@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/privacy", to: "pages#privacy"
   get "/contact", to: "pages#contact"
 
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
   resources :tours, only: [:index] do
     collection do

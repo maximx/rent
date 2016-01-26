@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :account, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[\w]*\z/ }
   validates :agreement, acceptance: true
 
-  has_one :profile, as: :user
+  has_one :profile, as: :user, dependent: :destroy
   has_many :requirements
   has_many :customers
 
@@ -39,7 +39,8 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, authentication_keys: [:login]
+         :confirmable, :omniauthable,
+         omniauth_providers: [:facebook], authentication_keys: [:login]
 
   acts_as_messageable
 
@@ -50,6 +51,27 @@ class User < ActiveRecord::Base
     else
       where(conditions.to_h).first
     end
+  end
+
+  def self.from_omniauth(auth)
+    omniauth_user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      auth_email = auth.info.email
+      auth_account = if auth_email.present?
+                       at_index = auth_email.index('@')
+                       dot_index = auth_email.index('.')
+                       "#{auth_email[0..(at_index - 1)]}_#{auth_email[(at_index + 1)..(dot_index - 1)]}"
+                     else
+                       "user#{rand(99999)}"
+                     end
+      user.email = auth_email
+      user.password = Devise.friendly_token[0,20]
+      user.account = auth_account
+      user.confirmed_at = Time.now
+    end
+    if omniauth_user.profile and omniauth_user.profile.avatar.blank? and auth.info.image.present?
+      omniauth_user.profile.create_avatar(remote_image_url: auth.info.image)
+    end
+    omniauth_user
   end
 
   def to_param
