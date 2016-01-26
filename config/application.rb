@@ -28,5 +28,6 @@ module Rent
 
     config.time_zone = 'Taipei'
     config.x.fog = Rails.application.config_for(:fog)
+    config.x.facebook = Rails.application.config_for(:facebook)
   end
 end
