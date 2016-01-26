@@ -234,9 +234,10 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   FACEBOOK_CONFIG = Rails.configuration.x.facebook
-  GOOGLE_CONFIG = Rails.configuration.x.google
   config.omniauth :facebook, FACEBOOK_CONFIG['FACEBOOK_KEY'], FACEBOOK_CONFIG['FACEBOOK_SECRET'],
-                  scope: 'email', secure_image_url: true
+                  secure_image_url: true, scope: 'email', info_fields: 'email,name'
+
+  GOOGLE_CONFIG = Rails.configuration.x.google
   config.omniauth :google_oauth2, GOOGLE_CONFIG['GOOGLE_CLIENT_ID'], GOOGLE_CONFIG['GOOGLE_SECRET'],
                   client_options: {ssl: {verify: !Rails.env.development?}}
 
