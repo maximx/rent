@@ -1,6 +1,6 @@
 .panel.panel-default
   .panel-heading
-    h2.panel-title = t('controller.account/settings.action.lender')
+    .panel-title = t('controller.account/settings.action.lender')
 
   .panel-body
     = simple_form_for @user, url: save_account_settings_path, method: :patch do |f|

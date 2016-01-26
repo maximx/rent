@@ -78,6 +78,9 @@ zh-TW:
       total_price: *total_price
       subtotal_price: &subtotal_price '小計'
     account/settings:
+      show:
+        update_account: '帳號變更'
+        update_password: '密碼變更'
       phone_confirmation:
         description: '您的手機將於數分鐘內收到一封訊息，請輸入所收到之驗證碼：'
     lender/items:

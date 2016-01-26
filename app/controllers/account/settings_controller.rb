@@ -42,8 +42,13 @@ class Account::SettingsController < ApplicationController
   # accoutn settings, need password
   def update
     prev_unconfirmed_email = @user.unconfirmed_email
+    success_updated = if @user.provider.present?
+                        @user.update_without_password(user_params)
+                      else
+                        @user.update_with_password(user_params)
+                      end
 
-    if @user.update_with_password(user_params)
+    if success_updated
       flash_key = if update_needs_confirmation?(@user, prev_unconfirmed_email)
                     :update_needs_confirmation
                   else
