@@ -51,6 +51,8 @@ end
 
 # authentication
 gem 'devise'
+gem 'omniauth-facebook'
+
 # authorization
 gem 'cancancan'
 gem 'rolify'

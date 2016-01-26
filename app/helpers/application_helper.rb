@@ -7,7 +7,7 @@ module ApplicationHelper
       og: {
         site_name: t('rent.site_name'),
         type: 'website',
-        image: asset_url('logo'),
+        image: asset_url('logo.png'),
         url: request.original_url,
         title: "#{t('rent.sub_title')} - #{t('rent.site_name')}",
         description: t('rent.description').join
