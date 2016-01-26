@@ -76,6 +76,27 @@ span.glyphicon {
 /*messages-modal*/
 .btn.btn-messages-modal { margin: 10px 0; }
 
+/*users/sign_in*/
+.btn {
+  &.omniauth-login {
+    margin-bottom: $omniauth-margin-bottom;
+    color: $body-bg;
+    background-position: $omniauth-background-position;
+    background-size: $omniauth-background-size;
+    background-repeat: no-repeat;
+    padding-left: $omniauth-padding-left;
+
+    &.facebook {
+      background-color: $facebook-login;
+      background-image: image-url('login-facebook.png');
+    }
+    &.google_oauth2 {
+      background-color: $google-login;
+      background-image: image-url('login-google.png');
+    }
+  }
+}
+
 //header
 nav.navbar { margin-bottom: 10px; }
 nav.navbar.navbar-sub {
