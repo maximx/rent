@@ -9,7 +9,13 @@ set :stage, %w(staging production)
 set :deploy_to, "/home/apps/#{fetch(:application)}"
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log')
-set :linked_files, fetch(:linked_files, []).push('config/database.yml').push('config/fog.yml')
+
+linked_files = fetch(:linked_files, [])
+linked_files << 'config/database.yml'
+linked_files << 'config/fog.yml'
+linked_files << 'config/facebook.yml'
+linked_files << 'config/google.yml'
+set :linked_files, linked_files
 
 set :pty, true
 

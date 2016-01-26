@@ -239,7 +239,7 @@ Devise.setup do |config|
 
   GOOGLE_CONFIG = Rails.configuration.x.google
   config.omniauth :google_oauth2, GOOGLE_CONFIG['GOOGLE_CLIENT_ID'], GOOGLE_CONFIG['GOOGLE_SECRET'],
-                  client_options: {ssl: {verify: !Rails.env.development?}}
+                  client_options: {ssl: {verify: !Rails.env.development?}}, skip_jwt: true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
