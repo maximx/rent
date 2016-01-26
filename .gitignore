@@ -15,6 +15,7 @@
 /config/database.yml
 /config/fog.yml
 /config/facebook.yml
+/config/google.yml
 /public/uploads/*
 
 .DS_Store

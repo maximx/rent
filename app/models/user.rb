@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable,
-         omniauth_providers: [:facebook], authentication_keys: [:login]
+         omniauth_providers: [:facebook, :google_oauth2], authentication_keys: [:login]
 
   acts_as_messageable
 

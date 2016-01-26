@@ -52,6 +52,7 @@ end
 # authentication
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 # authorization
 gem 'cancancan'
