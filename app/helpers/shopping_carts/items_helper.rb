@@ -15,7 +15,8 @@ module ShoppingCarts::ItemsHelper
 
     link_to render_icon('trash'),
             remove_url,
-            class: 'btn btn-default', method: :delete
+            class: 'btn btn-default', method: :delete,
+            title: t('controller.items.action.remove'), data: {toggle: 'tooltip'}
   end
 
   def render_operate_shopping_carts_item_links(item, customer = nil)

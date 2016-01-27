@@ -17,7 +17,7 @@ module Account::CustomersHelper
 
   def render_account_customer_items_path(borrower)
     if borrower.is_customer?
-      link_to render_icon('list', class: 'text-info'),
+      link_to render_icon('shopping-cart', class: 'text-info'),
               account_customer_items_path(borrower),
               class: 'btn btn-default', title: t('controller.account/items.action.index'), data: {toggle: 'tooltip'}
     end
