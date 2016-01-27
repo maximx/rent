@@ -1,6 +1,4 @@
 class ItemsController < ApplicationController
-  include UsersReviewsCount
-
   before_action :login_required, except: [:index, :show, :search, :calendar]
   before_action :validates_profile, only: [:new, :create]
   load_and_authorize_resource except: [:index, :search]
@@ -25,14 +23,10 @@ class ItemsController < ApplicationController
   def new
     @item.pictures.build
 
-    set_meta_tags(
-      title: "#{t('controller.action.new')}#{t('controller.name.items')}",
-      canonical: new_item_url,
-      og: {
-        title: "#{t('controller.action.new')}#{t('controller.name.items')}",
-        url: new_item_url
-      }
-    )
+    title = "#{t('controller.action.new')}#{t('controller.name.items')}"
+    set_meta_tags title: title,
+                  canonical: new_item_url,
+                  og: {title: title, url: new_item_url}
   end
 
   def create
@@ -151,18 +145,15 @@ class ItemsController < ApplicationController
     end
 
     def set_item_meta_tags
-      set_meta_tags(
-        title: @item.name,
-        keywords: @item.meta_keywords,
-        description: @item.meta_description,
-        canonical: item_url(@item),
-        og: {
-          title: @item.name,
-          description: @item.meta_description,
-          url: item_url(@item),
-          image: @item.pictures_urls
-        }
-      )
+      set_meta_tags title: @item.name,
+                    keywords: @item.meta_keywords,
+                    description: @item.meta_description,
+                    canonical: item_url(@item),
+                    og: {
+                      title: @item.name,
+                      description: @item.meta_description,
+                      url: item_url(@item), image: @item.pictures_urls
+                    }
     end
 
     def set_edit_item_meta_tags
@@ -172,15 +163,10 @@ class ItemsController < ApplicationController
 
     def set_search_item_meta_tags
       title = t('controller.action.index', query: (params[:query].blank? ? t('activerecord.models.item') : params[:query]))
+      set_meta_tags title: title,
+                    canonical: items_url,
+                    og: { title: title, url: items_url }
       meta_pagination_links @items
-      set_meta_tags(
-        title: title,
-        canonical: items_url,
-        og: {
-          title: title,
-          url: items_url
-        }
-      )
     end
 
     def find_item_disabled_dates
