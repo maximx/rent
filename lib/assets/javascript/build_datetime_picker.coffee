@@ -3,7 +3,7 @@
 
   options = {
     format: format,
-    locale: 'zh-TW',
+    locale: 'zh-tw',
     useCurrent: false #ref: https://eonasdan.github.io/bootstrap-datetimepicker/#linked-pickers
   }
 
