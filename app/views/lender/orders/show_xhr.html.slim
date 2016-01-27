@@ -12,12 +12,11 @@ table.table
     tr
       td = t('simple_form.labels.order.created_at')
       td = render_datetime(@order.created_at)
-    - @records.each_with_index do |record, index|
+    - @records.each do |record|
       tr
-        td #{index + 1}.
-        td
-          = link_to "#{t('activerecord.models.item')} ", item_record_path(record.item, record), target: '_blank'
-          = record.currency_price
+        td = link_to "#{t('activerecord.models.item')} ##{record.item_id}", item_record_path(record.item, record),
+                     target: '_blank', class: 'text-muted'
+        td = record.currency_total_price
     tr
       td
       td = link_to t('helpers.common.more_detail'), @detail_url
