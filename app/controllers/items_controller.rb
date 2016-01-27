@@ -2,18 +2,19 @@ class ItemsController < ApplicationController
   include UsersReviewsCount
 
   before_action :login_required, except: [:index, :show, :search, :calendar]
-  before_action :validates_profile, only: [ :new, :create ]
-  load_and_authorize_resource except: [ :index, :search ]
-  before_action :load_categories_grouped_select, only: [ :new, :create, :edit, :update ]
-  before_action :set_item_meta_tags, :build_record, :find_item_disabled_dates, only: [ :show ]
+  before_action :validates_profile, only: [:new, :create]
+  load_and_authorize_resource except: [:index, :search]
+  before_action :load_categories_grouped_select, only: [:new, :create, :edit, :update]
+  before_action :set_item_meta_tags, only: [:show, :edit, :update]
+  before_action :set_edit_item_meta_tags, only: [:edit, :update]
+  before_action :build_record, :find_item_disabled_dates, only: [:show]
 
   def index
     @items = Item.includes(:pictures, :collectors, lender: [{ profile: :avatar}])
                  .opening
                  .the_sort(params[:sort])
                  .page(params[:page])
-    find_users_reviews_count
-    meta_pagination_links @items
+    set_search_item_meta_tags
   end
 
   def show
@@ -23,6 +24,15 @@ class ItemsController < ApplicationController
 
   def new
     @item.pictures.build
+
+    set_meta_tags(
+      title: "#{t('controller.action.new')}#{t('controller.name.items')}",
+      canonical: new_item_url,
+      og: {
+        title: "#{t('controller.action.new')}#{t('controller.name.items')}",
+        url: new_item_url
+      }
+    )
   end
 
   def create
@@ -109,12 +119,11 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.search_and_sort(params)
-    find_users_reviews_count
-    meta_pagination_links @items
 
     if request.xhr?
       render partial: 'items/index', locals: { items: @items }
     else
+      set_search_item_meta_tags
       render :index
     end
   end
@@ -127,7 +136,7 @@ class ItemsController < ApplicationController
                         .overlaps(params[:start], params[:end])
                         .to_json(user: current_user)
     respond_to do |format|
-      format.json {render json: records_json}
+      format.json {render json: records_json} if request.xhr?
     end
   end
 
@@ -152,6 +161,24 @@ class ItemsController < ApplicationController
           description: @item.meta_description,
           url: item_url(@item),
           image: @item.pictures_urls
+        }
+      )
+    end
+
+    def set_edit_item_meta_tags
+      title = "#{t('controller.action.edit')}#{@item.name}"
+      set_meta_tags title: title, og: {title: title}
+    end
+
+    def set_search_item_meta_tags
+      title = t('controller.action.index', query: (params[:query].blank? ? t('activerecord.models.item') : params[:query]))
+      meta_pagination_links @items
+      set_meta_tags(
+        title: title,
+        canonical: items_url,
+        og: {
+          title: title,
+          url: items_url
         }
       )
     end
