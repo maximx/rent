@@ -18,7 +18,7 @@ class ToursController < ApplicationController
 
   private
     def set_title
-      @title = "#{t('controller.name.tours')} - #{t("helpers.tours.#{action_name}")}"
+      @title = "#{t('controller.name.tours')} - #{t("controller.tours.action.#{action_name}")}"
     end
 
     def set_pages_meta_tags

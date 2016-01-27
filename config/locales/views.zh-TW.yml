@@ -106,11 +106,6 @@ zh-TW:
     tours:
       previous: '&lsaquo; 前一個'
       next: '後一個 &rsaquo;'
-      index: '個人頁面'
-      state: '出租狀態'
-      calendar: '行事曆'
-      contract: '租賃契約'
-      dashboard: '後臺管理'
       notes:
         upload: '客製封面圖像'
         facebook: 'Facebook連結'

@@ -26,6 +26,13 @@ zh-TW:
       update:
         success: '%{name}修改成功。'
       calendar: '行事曆'
+    tours:
+      action:
+        index: '個人頁面'
+        state: '出租狀態'
+        calendar: '行事曆'
+        contract: '租賃契約'
+        dashboard: '後臺管理'
     pages:
       action:
         about: '關於我們'
