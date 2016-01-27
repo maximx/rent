@@ -1,10 +1,7 @@
-- breadcrumb :item, @item
-
 - content_for :full_top do
   = render partial: 'attachments/cover', locals: {cover: @item.lender.cover}
 
-- content_for :full_bottom do
-  #map
+- breadcrumb :item, @item
 
 section
   = render partial: 'items/item_info_container',
@@ -19,8 +16,3 @@ section
     = form_for @item, url: new_item_record_path(@item), method: :get, html: { id: 'new_record_form' } do
       = hidden_field_tag :record_started_at
       = hidden_field_tag :record_ended_at
-
-  javascript:
-    $(document).ready(function() {
-      buildGoogleMap( #{raw @maps.to_json} );
-    });
