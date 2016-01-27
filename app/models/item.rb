@@ -213,30 +213,29 @@ class Item < ActiveRecord::Base
   end
 
   protected
+    def self.search_criteria(query)
+      search_arr(query).push( keywords(query) ).flatten
+    end
 
-  def set_category_and_price
-    self.price ||= 0
-    self.deposit ||= 0
-    self.category_id = Subcategory.find(subcategory_id).category_id
-  end
+    def self.keywords(query)
+      query.split.collect { |keyword| ["%#{keyword}%", keyword] }
+    end
 
-  def self.search_criteria(query)
-    search_arr(query).push( keywords(query) ).flatten
-  end
+    def self.search_arr(query)
+      [ Array.new( keywords(query).size, basic_search_str ).join(" and ") ]
+    end
 
-  def self.keywords(query)
-    query.split.collect { |keyword| "%#{keyword}%" }
-  end
-
-  def self.search_arr(query)
-    [ Array.new( keywords(query).size, basic_search_str ).join(" and ") ]
-  end
-
-  def self.basic_search_str
-    "concat(items.name, ifnull(items.description, '')) like ?"
-  end
+    def self.basic_search_str
+      "(concat(items.name, ifnull(items.description, '')) like ? or items.product_id = ?)"
+    end
 
   private
+    def set_category_and_price
+      self.price ||= 0
+      self.deposit ||= 0
+      self.category_id = Subcategory.find(subcategory_id).category_id
+    end
+
     def self.open_sheet(file)
       ext_list = ['.csv', '.xls', '.xlsx']
       if ext_list.include?(File.extname(file.original_filename))
