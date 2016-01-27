@@ -6,7 +6,6 @@ zh-TW:
       submit: '送出'
       save: '儲存'
       edit: '編輯'
-      send: '傳送訊息'
       cancel: '取消'
       import: '匯入'
       upload: '上傳'
@@ -69,8 +68,6 @@ zh-TW:
       total_price: *total_price
       json:
         title: '%{name}的訂單#%{id}，總金額 %{price}'
-    messages:
-      message_to: '發送訊息給'
     shopping_carts:
       empty: '無待租物品，現在就'
       go_rent: &go_rent '來去租'

@@ -63,17 +63,9 @@ Rails.application.routes.draw do
     get :download, on: :member
   end
 
-  resources :conversations, only: [:index, :show, :destroy] do
-    get :unread, on: :collection
-    member do
-      put :mark_as_read
-      post :reply
-    end
-  end
   resources :notifications, only: [:index, :show] do
     put :mark_as_read, on: :member
   end
-  resources :messages, only: [:create]
 
   namespace :account do
     resource :settings, only: [:show, :update] do

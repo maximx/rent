@@ -22,8 +22,8 @@ module ApplicationHelper
       render partial: 'common/navigation', locals: { list: account_settings_navbar_list }
     elsif account_manage_controller?
       render partial: 'common/navigation', locals: { list: account_manage_navbar_list }
-    elsif ["notifications", "conversations"].include? controller_path
-      render partial: 'common/navigation', locals: { list: conversations_navbar_list }
+    elsif ["notifications"].include? controller_path
+      render partial: 'common/navigation', locals: { list: notifications_navbar_list }
     elsif pages_controller? and !pages_index_action?
       render partial: 'common/navigation', locals: { list: pages_navbar_list }
     end

@@ -5,7 +5,7 @@ ul.list-group
         .col-sm-11
           = link_to notification_path(notification), class: 'clearfix' do
             div
-              span.subject.text-muted = render_conversation_subject(notification)
+              span.subject.text-muted = render_notification_subject(notification)
               .pull-right.text-muted = render_datetime(notification.updated_at)
         .col-sm-1
           .pull-right

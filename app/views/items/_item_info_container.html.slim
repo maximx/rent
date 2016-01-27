@@ -49,7 +49,6 @@
           dd = raw item.description
 
         dd = render_item_calendar_link(item)
-        dd = render partial: 'messages/new', locals: {item: item} if cannot?(:update, item)
 
   .row
     .col-md-8
