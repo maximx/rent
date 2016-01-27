@@ -1,7 +1,7 @@
 = render_lender_tablist
 
 .tab-content
-  = render partial: 'lender/items/search'
+  = render partial: 'lender/items/search', locals: {search_form_path: lender_items_path}
 
   .container
     table.table.table-borded.table-hover

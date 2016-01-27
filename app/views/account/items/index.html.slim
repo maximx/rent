@@ -1,6 +1,6 @@
 - breadcrumb :account_customer_items, @customer
 
-/TODO:search form
+= render partial: 'lender/items/search', locals: {search_form_path: account_customer_items_path(@customer)}
 
 table.table
   thead
