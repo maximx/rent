@@ -183,10 +183,12 @@ $ ->
   wookmark_item()
 
 @wookmark_item = ()->
-  $('#item-list-container').find('img').load ()->
+  $('#item-list-container').find('img').load(()->
     $('.item-grid').closest('#item-list-container').wookmark
       autoResize: true
       offset: 15
+  ).each ()->
+    $(this).trigger('load') if this.complete
 
   $('#item-picture-container').wookmark
     autoResize: true

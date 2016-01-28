@@ -29,7 +29,7 @@ loadFacebookSDK = ->
 
 initializeFacebookSDK = ->
   FB.init
-    appId  : '433105066893080'
+    appId  : '<%= Rails.configuration.x.facebook["FACEBOOK_KEY"] %>'
     status : true
     cookie : true
     xfbml  : true
