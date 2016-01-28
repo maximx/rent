@@ -136,6 +136,7 @@ zh-TW:
       action:
         index: *items
         show: '出租紀錄'
+        wish: '收藏'
         importer: '匯入'
         import: '匯入'
     lender/records:
