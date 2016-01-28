@@ -1,12 +1,12 @@
 class Lender::ItemsController < ApplicationController
-  include UsersReviewsCount
-
   before_action :login_required
   load_and_authorize_resource :item, through: :current_user, only: [:index, :show]
   before_action :validates_profile, only: [:importer]
   before_action :load_categories_grouped_select, only: [:importer, :import]
+  before_action :set_title_meta_tag, except: [:show]
 
   def index
+    set_title_meta_tag
     @items = @items.includes(:records, :lender)
                    .send(overlap_method, params[:started_at], params[:ended_at])
                    .search_by(params[:query])
@@ -15,6 +15,8 @@ class Lender::ItemsController < ApplicationController
   end
 
   def show
+    set_title_meta_tag prefix: @item.name
+
     @event_sources_path = calendar_item_path(@item, format: :json)
     @records = @item.records.includes(:borrower, :deliver, :item).recent.page(params[:page])
     @record_state_log = unless @records.empty?
@@ -29,7 +31,6 @@ class Lender::ItemsController < ApplicationController
                          .includes(:pictures, :collectors, lender: [{ profile: :avatar}])
                          .the_sort(params[:sort])
                          .page(params[:page])
-    find_users_reviews_count
     render 'items/index'
   end
 

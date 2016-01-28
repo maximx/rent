@@ -133,12 +133,15 @@ zh-TW:
         index: *items
         show: '出租紀錄'
         importer: '匯入'
+        import: '匯入'
     lender/records:
       action:
         new: '新增承租紀錄'
     lender/orders:
       action:
         index: &orders_index '訂單'
+        show: *orders_index
+        calendar: *calendar
     borrower/orders:
       action:
         index: *orders_index
