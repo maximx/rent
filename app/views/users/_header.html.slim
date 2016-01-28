@@ -28,7 +28,8 @@ section
     - unless action_name == 'items'
       .page-header.clearfix
         h1.pull-left
-          = t("controller.users.action.#{action_name}", name: user.profile.logo_name)
+          = t("controller.users.action.#{action_name}")
+          = user.logo_name
         .pull-right
           br/
           = render_follow_link user

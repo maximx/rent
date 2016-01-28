@@ -1,16 +1,22 @@
 class UsersController < ApplicationController
   layout 'user'
 
-  include UsersReviewsCount
-
   before_action :login_required, only: [ :edit, :update, :follow, :unfollow ]
   load_and_authorize_resource id_param: :account, find_by: :account
   before_action :find_profile
-  before_action :find_total_reviews, only: [ :show, :edit, :update ]
-  before_action :set_user_meta_tags
+  before_action ->{ set_title_meta_tag suffix: @user.logo_name }
 
   def show
     set_maps_marker @profile if @profile.address.present?
+
+    set_meta_tags canonical: user_url(@user),
+                  description: @user.meta_description,
+                  og: {
+                    description: @user.meta_description,
+                    type: 'profile',
+                    url: user_url(@user),
+                    image: @user.avatar_url
+                  }
   end
 
   def edit
@@ -77,12 +83,19 @@ class UsersController < ApplicationController
 
   def items
     @items = @user.items.search_and_sort(params)
-    find_users_reviews_count
-    meta_pagination_links @items
 
     if request.xhr?
       render partial: 'items/index', locals: { items: @items }
     else
+      meta_pagination_links @items
+      set_meta_tags canonical: items_user_url(@user),
+                    description: @user.meta_description,
+                    og: {
+                      description: @user.meta_description,
+                      type: 'profile',
+                      url: items_user_url(@user),
+                      image: @user.avatar_url
+                    }
       render :items
     end
   end
@@ -109,26 +122,7 @@ class UsersController < ApplicationController
       params.require(:profile).permit(:send_mail)
     end
 
-    def find_total_reviews
-      @total_reviews = @user.reviews.group(:rate).count
-    end
-
     def find_profile
       @profile = @user.profile
-    end
-
-    def set_user_meta_tags
-      set_meta_tags(
-        title: @user.profile.logo_name,
-        canonical: user_url(@user),
-        description: @user.meta_description,
-        og: {
-          title: @user.account + "的個人資料 - " + t('rent.site_name'),
-          description: @user.meta_description,
-          type: 'profile',
-          url: user_url(@user),
-          image: @user.avatar_url
-        }
-      )
     end
 end

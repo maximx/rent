@@ -21,8 +21,7 @@ module UsersHelper
 
   def user_navbar_list(user)
     render_link_li class: 'nav navbar-nav navbar-right' do |li|
-      li << [ t('controller.users.action.show', name: user.profile.logo_name), user_path(user) ]
-      li << [ t('controller.users.action.reviews'), reviews_user_path(user) ]
+      li << [ t('controller.users.action.show'), user_path(user) ]
       li << [ t('controller.users.action.items'), items_user_path(user) ]
       li << [ content_tag(:strong, t('rent.site_name'), class: 'text-danger'), items_path ]
     end
