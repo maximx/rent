@@ -71,6 +71,7 @@ zh-TW:
         fail: '%{name}有出租紀錄無法刪除。'
     records:
       action:
+        index: '承租紀錄'
         new: '預約承租'
         download: '下載契約'
         show: '查閱'

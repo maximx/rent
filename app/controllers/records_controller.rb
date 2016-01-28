@@ -5,6 +5,11 @@ class RecordsController < ApplicationController
   before_action :validates_borrower_info, only: [:new, :create]
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
 
+  before_action ->{ set_title_meta_tag suffix: @item.name }, only: [:index, :new, :create]
+  before_action only: [:show, :remitting] do
+    set_title_meta_tag suffix: "#{t('controller.records.action.index')}##{@record.id}"
+  end
+
   def index
     @records = @item.records.includes(:borrower).recent.reverse_order.page(params[:page])
   end

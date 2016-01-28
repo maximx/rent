@@ -9,7 +9,7 @@ crumb :records do |item|
 end
 
 crumb :record do |item, record|
-  link record.started_at.to_s(:date_only), item_record_path(item, record)
+  link "##{record.id}", item_record_path(item, record)
   parent :records, item
 end
 
