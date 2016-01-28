@@ -25,12 +25,12 @@ zh-TW:
         fail: '儲存失敗，請檢查紅字錯誤欄位。'
       update:
         success: '%{name}修改成功。'
-      calendar: '行事曆'
+      calendar: &calendar '行事曆'
     tours:
       action:
         index: '個人頁面'
         state: '出租狀態'
-        calendar: '行事曆'
+        calendar: *calendar
         contract: '租賃契約'
         dashboard: '後臺管理'
     pages:
@@ -142,3 +142,5 @@ zh-TW:
     borrower/orders:
       action:
         index: *orders_index
+        show: *orders_index
+        calendar: *calendar

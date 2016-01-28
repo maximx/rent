@@ -1,6 +1,4 @@
 class SubcategoriesController < ApplicationController
-  include UsersReviewsCount
-
   def show
     @subcategory = Subcategory.find(params[:id])
     @breadcrumbs_object = @subcategory
@@ -9,7 +7,6 @@ class SubcategoriesController < ApplicationController
                          .opening
                          .the_sort(params[:sort])
                          .page(params[:page])
-    find_users_reviews_count
     set_subcategory_meta_tags
     render 'items/index'
   end

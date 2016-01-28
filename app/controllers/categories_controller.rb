@@ -1,6 +1,4 @@
 class CategoriesController < ApplicationController
-  include UsersReviewsCount
-
   def show
     @category = Category.find(params[:id])
     @breadcrumbs_object = @category
@@ -9,7 +7,6 @@ class CategoriesController < ApplicationController
                       .opening
                       .the_sort(params[:sort])
                       .page(params[:page])
-    find_users_reviews_count
     set_category_meta_tags
     render 'items/index'
   end

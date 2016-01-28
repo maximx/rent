@@ -1,6 +1,8 @@
 class Borrower::OrdersController < ApplicationController
   before_action :login_required
   load_and_authorize_resource through: :current_user
+  before_action ->{ set_title_meta_tag namespace: true }, except: [:show]
+  before_action ->{ set_title_meta_tag namespace: true, suffix: "##{@order.id}" }, only: [:show]
 
   def index
     @orders = @orders.recent.page(params[:page])
