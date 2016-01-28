@@ -50,7 +50,11 @@ zh-TW:
     items:
       action:
         index: *items
+        search: '搜尋'
+        edit: '編輯'
+        update: '編輯'
         new: '新增出租物'
+        create: '新增出租物'
         open: '上架'
         close: '下架'
         collect: '收藏'

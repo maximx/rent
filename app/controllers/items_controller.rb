@@ -3,9 +3,11 @@ class ItemsController < ApplicationController
   before_action :validates_profile, only: [:new, :create]
   load_and_authorize_resource except: [:index, :search]
   before_action :load_categories_grouped_select, only: [:new, :create, :edit, :update]
-  before_action :set_item_meta_tags, only: [:show, :edit, :update]
-  before_action :set_edit_item_meta_tags, only: [:edit, :update]
   before_action :build_record, :find_item_disabled_dates, only: [:show]
+
+  before_action :set_title_meta_tag, only: [:new, :create, :index]
+  before_action :set_item_meta_tags, only: [:show, :edit, :update]
+  before_action ->{ set_title_meta_tag suffix: @item.name}, only: [:edit, :update]
 
   def index
     @items = Item.includes(:pictures, :collectors, lender: [{ profile: :avatar}])
@@ -22,11 +24,6 @@ class ItemsController < ApplicationController
 
   def new
     @item.pictures.build
-
-    title = "#{t('controller.action.new')}#{t('controller.name.items')}"
-    set_meta_tags title: title,
-                  canonical: new_item_url,
-                  og: {title: title, url: new_item_url}
   end
 
   def create
@@ -156,17 +153,10 @@ class ItemsController < ApplicationController
                     }
     end
 
-    def set_edit_item_meta_tags
-      title = "#{t('controller.action.edit')}#{@item.name}"
-      set_meta_tags title: title, og: {title: title}
-    end
-
     def set_search_item_meta_tags
-      title = t('controller.action.index', query: (params[:query].blank? ? t('activerecord.models.item') : params[:query]))
-      set_meta_tags title: title,
-                    canonical: items_url,
-                    og: { title: title, url: items_url }
       meta_pagination_links @items
+      set_title_meta_tag suffix: params[:query]
+      set_meta_tags canonical: url_for(params), og: {url: url_for(params)}
     end
 
     def find_item_disabled_dates
