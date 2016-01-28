@@ -12,21 +12,22 @@ class Ability
     resources_attachments user
     resources_orders user
 
-    if user.is_company?
-      can [ :importer, :import ], Item
+    #TODO: add company ability
+    #if user.is_company?
+    can [ :importer, :import ], Item
 
-      can [:index, :create], Customer
-      can [:show,:update], Customer, user_id: user.id
+    can [:index, :create], Customer
+    can [:show,:update], Customer, user_id: user.id
 
-      can :read, Category
-      can :read, Subcategory
+    can :read, Category
+    can :read, Subcategory
 
-      can [ :read, :create ], Vector
-      can [ :update, :destroy ], Vector, user_id: user.id
+    can [ :read, :create ], Vector
+    can [ :update, :destroy ], Vector, user_id: user.id
 
-      can [ :read, :create ], Selection
-      can [ :update, :destroy ], Selection, user_id: user.id
-    end
+    can [ :read, :create ], Selection
+    can [ :update, :destroy ], Selection, user_id: user.id
+    #end
   end
 
   protected
