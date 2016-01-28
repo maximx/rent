@@ -1,6 +1,7 @@
 class Account::SettingsController < ApplicationController
   before_action :login_required, :load_user
   before_action :load_profile, except: [ :update ]
+  before_action :set_title_meta_tag
 
   def show
   end

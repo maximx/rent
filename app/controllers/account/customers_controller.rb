@@ -1,7 +1,8 @@
 class Account::CustomersController < ApplicationController
   before_action :login_required
   load_and_authorize_resource through: :current_user, except: [ :index ]
-  before_action :load_profile, only: [ :show, :edit, :update ]
+  before_action :set_title_meta_tag, only: [:index, :new, :create]
+  before_action :load_profile, -> { set_title_meta_tag suffix: @customer.logo_name }, only: [ :show, :edit, :update ]
 
   def index
     authorize! :index, Customer

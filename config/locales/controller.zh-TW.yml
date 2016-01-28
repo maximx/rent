@@ -114,13 +114,16 @@ zh-TW:
       action:
         index: '客戶列表'
         new: '新增客戶'
-        edit: '修改%{name}'
+        create: '新增客戶'
+        edit: '修改'
+        show: '查閱'
     account/items:
       action:
         index: '承租物品'
     account/shopping_carts:
       action:
         show: '待租清單'
+        update: '確認結帳'
     lender/items:
       action:
         index: *items
