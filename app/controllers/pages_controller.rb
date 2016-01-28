@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
-  layout 'user', only: [ :index ]
+  layout 'user', only: [:index]
 
-  before_action :set_title, :set_pages_meta_tags, except: [ :index ]
+  before_action :set_title, :set_title_meta_tag, except: [:index]
 
   def index
   end
@@ -19,17 +19,8 @@ class PagesController < ApplicationController
     @admin = User.find 1
   end
 
-
   private
-
     def set_title
       @title = t("controller.pages.action.#{action_name}")
-    end
-
-    def set_pages_meta_tags
-      set_meta_tags(
-        title: @title,
-        og: { title: @title }
-      )
     end
 end

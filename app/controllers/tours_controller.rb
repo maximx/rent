@@ -1,5 +1,5 @@
 class ToursController < ApplicationController
-  before_action :set_title, :set_pages_meta_tags
+  before_action :set_title_meta_tag
 
   def index
   end
@@ -17,12 +17,7 @@ class ToursController < ApplicationController
   end
 
   private
-    def set_title
-      @title = "#{t('controller.name.tours')} - #{t("controller.tours.action.#{action_name}")}"
-    end
-
-    def set_pages_meta_tags
-      set_meta_tags title: @title,
-                    og: { title: @title }
+    def common_title(options={})
+      "#{t('controller.name.tours')}#{t("controller.tours.action.#{action_name}")}"
     end
 end

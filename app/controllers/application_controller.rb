@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   include CanCan::ControllerAdditions
+  include SetCommonMetaTag
 
   layout proc { false if request.xhr? }
 
@@ -52,26 +53,6 @@ class ApplicationController < ActionController::Base
     end
 
     @maps.delete_if { |marker| marker[:lat].nil? || marker[:lng].nil? }
-  end
-
-  def meta_pagination_links(collection)
-    meta_prev_page_link(collection)
-    meta_next_page_link(collection)
-  end
-
-  def meta_prev_page_link(collection)
-    if collection.previous_page
-      url_params = params.merge(page: collection.previous_page, only_path: false)
-      url_params.delete(:page) if collection.previous_page == 1
-      set_meta_tags prev: url_for(url_params)
-    end
-  end
-
-  def meta_next_page_link(collection)
-    if collection.next_page
-      url_params = params.merge(page: collection.next_page, only_path: false)
-      set_meta_tags next: url_for(url_params)
-    end
   end
 
   def load_shopping_cart
