@@ -2,6 +2,7 @@ class NotificationsController < ApplicationController
   before_action :login_required
   before_action :find_mailbox
   before_action :find_notification, only: [ :show, :mark_as_read ]
+  before_action :set_title_meta_tag
 
   def index
     @notifications = @mailbox.notifications
@@ -26,7 +27,6 @@ class NotificationsController < ApplicationController
   end
 
   private
-
     def find_mailbox
       @mailbox = current_user.mailbox
     end

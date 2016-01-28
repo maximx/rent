@@ -3,6 +3,7 @@ class ShoppingCartsController < ApplicationController
   before_action :load_shopping_cart
   before_action :validates_borrower_info
   before_action :load_disabled_dates
+  before_action :set_title_meta_tag
 
   def show
     @lender_shopping_cart_items = @shopping_cart.shopping_cart_items
