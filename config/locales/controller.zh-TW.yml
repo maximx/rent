@@ -28,11 +28,12 @@ zh-TW:
       calendar: &calendar '行事曆'
     tours:
       action:
-        index: '個人頁面'
+        index: '出租管理'
         state: '出租狀態'
         calendar: *calendar
         contract: '租賃契約'
-        dashboard: '後臺管理'
+        import: '物品匯入'
+        customer: '客戶維護'
     pages:
       action:
         about: '關於我們'

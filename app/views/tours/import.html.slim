@@ -1,0 +1,13 @@
+header.tours-header
+  = render_tours_prev_link calendar_tours_path
+  = render_tours_next_link state_tours_path
+  = render_tours_title
+
+main.tours-container
+  figure.tours-figure
+    = image_tag 'tours_import.png', class: 'tours-img'
+    ul.tours-notes
+      li.tours-import.tours-left
+        span = t('helpers.tours.import.note_description')
+      li.tours-new-item.tours-right
+        span = t('helpers.tours.import.note_new_item')

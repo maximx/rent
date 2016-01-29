@@ -106,13 +106,20 @@ zh-TW:
     tours:
       previous: '&lsaquo; 前一個'
       next: '後一個 &rsaquo;'
-      notes:
-        upload: '客製封面圖像'
-        facebook: 'Facebook連結'
-        calendar: '行事曆規劃管理'
-        record-info: '完整詳細承租資訊'
-        record-state: '交易狀態一目暸然'
-        download-contract: '根據雙方資訊產生契約'
-        contract: '簡易PDF格式承租契約'
-        dashboard-search: '出租空檔、承租日期查詢'
-        dashboard-records: '物品出租次數展示'
+      index:
+        note_search: '出租空檔、承租日期查詢'
+      calendar:
+        note_description: '行事曆規劃管理'
+        note_order: '顯示訂單資訊'
+      import:
+        note_description: '多筆資料匯入'
+        note_new_item: '新增一項出租物'
+      state:
+        note_record_info: '完整詳細承租資訊'
+        note_record_state: '交易狀態一目暸然'
+      contract:
+        note_download: '根據雙方資訊產生契約'
+        note_description: '簡易PDF格式承租契約'
+      customer:
+        note_index: '客戶列表與搜尋'
+        note_show: '客戶詳細資料'

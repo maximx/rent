@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :tours, only: [:index] do
     collection do
-      get :state, :calendar, :contract, :dashboard
+      get :calendar, :import, :state, :contract, :customer
     end
   end
 

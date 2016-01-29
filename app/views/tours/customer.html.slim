@@ -1,0 +1,13 @@
+header.tours-header
+  = render_tours_prev_link contract_tours_path
+  = render_tours_next_link render_tours_last_next_path
+  = render_tours_title
+
+main.tours-container
+  figure.tours-figure
+    = image_tag 'tours_customer.png', class: 'tours-img'
+    ul.tours-notes
+      li.tours-customer.tours-left
+        span = t('helpers.tours.customer.note_index')
+      li.tours-customer-show.tours-right
+        span = t('helpers.tours.customer.note_show')

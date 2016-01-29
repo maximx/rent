@@ -45,15 +45,13 @@
       &:before { right: 100%; }
     }
 
-    &.tours-upload { top: 30%; }
-    &.tours-facebook {
-      bottom: 35%;
-      &:before { width: 55%; }
-    }
-
     &.tours-calendar {
       top: 50%;
       &:before { width: 60%; }
+    }
+    &.tours-calendar-order {
+      top: 15%;
+      &:before { width: 260%; }
     }
 
     &.tours-record-info {
@@ -71,13 +69,27 @@
       &:before { width: 70%; }
     }
 
-    &.tours-dashboard-search {
+    &.tours-index-search {
       top: 27%;
       &:before { width: 70%; }
     }
-    &.tours-dashboard-records {
-      top: 38%;
-      &:before { width: 180%; }
+
+    &.tours-import {
+      bottom: 20%;
+      &:before {width: 180%;}
+    }
+    &.tours-new-item {
+      top: 25%;
+      &:before {width: 300%;}
+    }
+
+    &.tours-customer {
+      top: 25%;
+      &:before {width: 70%;}
+    }
+    &.tours-customer-show {
+      bottom: 15%;
+      &:before {width: 300%;}
     }
   }
 }

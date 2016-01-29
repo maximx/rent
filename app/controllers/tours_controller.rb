@@ -7,13 +7,16 @@ class ToursController < ApplicationController
   def calendar
   end
 
+  def import
+  end
+
   def state
   end
 
   def contract
   end
 
-  def dashboard
+  def customer
   end
 
   private
