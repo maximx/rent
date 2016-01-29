@@ -19,9 +19,7 @@
       = f.input :phone
       = f.input :tel_phone
       = f.input :line
-
-      = f.input :facebook if @user.is_company?
-
+      = f.input :facebook
       = f.input :bank_code, input_html: { maxlength: 3, minlength: 3 }
       = f.input :bank_account
       = f.input :description, hint_wrapper: false,

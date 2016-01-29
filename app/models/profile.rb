@@ -3,7 +3,6 @@ class Profile < ActiveRecord::Base
   validates :bank_code, length: { is: 3 }, inclusion: Bank.all.map(&:code), allow_blank: true
   validates_presence_of :bank_account, if: :bank_code?
   validates :phone, uniqueness: true, allow_blank: true
-  validates :facebook, absence: true, unless: :user_is_company?
 
   belongs_to :user, polymorphic: true
   belongs_to :bank, class_name: 'Bank', foreign_key: 'bank_code'
@@ -83,9 +82,5 @@ class Profile < ActiveRecord::Base
       uri = URI.parse(sms_url + query.to_query)
       request = Net::HTTP::Get.new uri.to_s
       response = Net::HTTP.start(uri.host, uri.port) { |http| http.request(request) }
-    end
-
-    def user_is_company?
-      user.is_a?(User) and user.is_company?
     end
 end
