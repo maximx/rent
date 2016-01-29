@@ -16,7 +16,7 @@ class PagesController < ApplicationController
   end
 
   def contact
-    @admin = User.find 1
+    @service_email = "service@guangho.tw"
   end
 
   private
