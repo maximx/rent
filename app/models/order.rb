@@ -18,7 +18,10 @@ class Order < ActiveRecord::Base
   end
 
   def json_title
-    I18n.t('helpers.orders.json.title', name: borrower.logo_name, id: id, price: currency_total_price)
+    I18n.t('helpers.orders.json.title',
+           name: borrower.logo_name,
+           id: id,
+           price: ApplicationController.helpers.render_currency_money(total_price))
   end
 
   def json_url(options={})
