@@ -27,8 +27,13 @@ class RecordsController < ApplicationController
         end
       end
       format.pdf do
-        pdf = RecordPdf.new(@item, @record)
-        send_data pdf.render, RecordPdf.pdf_config(@item.id, @record.id)
+        pdf = RecordPdf.new(@record)
+        send_data pdf.render,
+                  filename: t('helpers.records.show.pdf.file_name',
+                              name: @record.lender.logo_name,
+                              order_id: @record.order_id),
+                  type: 'application/pdf;charset=utf-8',
+                  disposition: :inline
       end
     end
   end

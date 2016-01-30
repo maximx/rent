@@ -1,7 +1,7 @@
 module CurrencyPrice
   extend ActiveSupport::Concern
 
-  ['price', 'deposit', 'total_price', 'deliver_fee'].each do |attr|
+  ['price', 'deposit', 'total_price', 'deliver_fee', 'total_net_price'].each do |attr|
     define_method("currency_#{attr}") do
       value = send(attr)
       (value == value.to_i) ?  "$#{value.to_i}" : "$#{value}"

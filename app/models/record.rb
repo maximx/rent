@@ -172,8 +172,12 @@ class Record < ActiveRecord::Base
     deliver.delivery_needed?
   end
 
+  def total_net_price
+    price + item_deposit
+  end
+
   def total_price
-    price + item_deposit + deliver_fee
+    total_net_price + deliver_fee
   end
 
   def next_states
@@ -214,8 +218,12 @@ class Record < ActiveRecord::Base
     update(order: order)
   end
 
+  def lender_order_records
+    order.records_of(lender)
+  end
+
   def sibling_records
-    order.records_of(lender).where.not(id: id)
+    lender_order_records.where.not(id: id)
   end
 
   private
