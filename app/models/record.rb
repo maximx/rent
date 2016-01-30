@@ -1,6 +1,5 @@
 class Record < ActiveRecord::Base
   include AASM
-  include CurrencyPrice
   include DatetimeOverlaps
 
   self.per_page = 10

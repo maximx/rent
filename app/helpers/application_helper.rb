@@ -107,6 +107,11 @@ module ApplicationHelper
     ' input-lg' if current_page? root_path
   end
 
+  def render_currency_money(number)
+    number = (number == number.to_i) ? number.to_i : number
+    "$#{number}"
+  end
+
   def mask(str)
     mask_str = str.slice(0)
     str[1..-1].size.times.each {mask_str += '*'}

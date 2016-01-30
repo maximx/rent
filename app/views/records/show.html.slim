@@ -62,7 +62,7 @@ table.table
         td colspan="2" = @record.send_period_i18n
     tr
       td = t('simple_form.labels.item.deliver_fee')
-      td colspan="2" #{@record.currency_deliver_fee}
+      td colspan="2" = render_currency_money @record.deliver_fee
     tr
       td = t('helpers.records.show.rent_period')
       td colspan="2" #{render_datetime_period(@record, :tw)} （#{@record.rent_days} 天）
@@ -71,10 +71,11 @@ table.table
       td colspan="2" = render_record_price_equation(@record)
     tr
       td = t('simple_form.labels.item.deposit')
-      td colspan="2" #{@record.currency_item_deposit}
+      td colspan="2" = render_currency_money @record.item_deposit
     tr
       td = t('helpers.records.show.payment')
-      td colspan="2" #{@record.currency_price} + #{@record.currency_deliver_fee} + #{@record.currency_item_deposit} = #{@record.currency_total_price} 元
+      td colspan="2"
+        = render_record_total_price_equation @record
 
 - if @sibling_records.present?
   .panel.panel-primary

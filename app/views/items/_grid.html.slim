@@ -5,7 +5,7 @@
 
       .item-info-short
         header.item-title = render_item_name(item)
-        = item.price_period
+        = render_item_obj_price_period item
 
     .item-info-short
       = link_to(item.lender.logo_name, user_path(item.lender))

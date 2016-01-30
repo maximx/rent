@@ -16,7 +16,7 @@ table.table
       tr
         td = link_to "#{t('activerecord.models.item')} ##{record.item_id}", item_record_path(record.item, record),
                      target: '_blank', class: 'text-muted'
-        td = record.currency_total_price
+        td = render_currency_money record.total_price
     tr
       td
       td = link_to t('helpers.common.more_detail'), @detail_url

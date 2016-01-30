@@ -56,6 +56,7 @@ zh-TW:
         rent_period: '租期'
         payment: '應付金額'
         per_day_price: '%{item_price}（租金）* (%{rent_days} - %{free_days})（天）= %{price}（總金額）'
+        total_price_equation: '%{price} + %{deliver_fee} + %{deposit} = %{total_price} 元'
         total_price: &total_price '總金額'
         related_records: '訂單#%{order_id} %{name}的其他物品'
         deliver_address: '【寄送地址：%{address}】'

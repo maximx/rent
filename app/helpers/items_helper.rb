@@ -1,4 +1,8 @@
 module ItemsHelper
+  def render_item_obj_price_period(item_obj)
+    "#{render_currency_money(item_obj.price)}/#{item_obj.period_i18n}"
+  end
+
   #users/items 與 items/search 共用
   def render_items_search_path
     if users_controller? and params[:account].present?

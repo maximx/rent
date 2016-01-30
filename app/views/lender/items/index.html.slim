@@ -17,7 +17,7 @@
           tr class="#{item.closed? ? 'active' : ''}"
             td = link_to(render_item_name(item), item_path(item))
             td = item.product_id
-            td = item.price_period
+            td = render_item_obj_price_period item
             td
               div class="label label-#{item.closed? ? 'default' : 'success'}"
                 = item.aasm.human_state

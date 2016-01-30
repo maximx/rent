@@ -18,7 +18,7 @@
         #rent.panel.panel-default.hidden-sm.hidden-xs data-spy="affix"
           .panel-heading.clearfix
             .hidden-sm.hidden-xs
-              .price #{item.currency_price} 元
+              .price #{render_currency_money item.price} 元
               .period = item.period_i18n
 
           .panel-body
@@ -32,10 +32,10 @@
     .col-md-8
       dl.dl-horizontal
         dt = t('simple_form.labels.item.price')
-        dd: mark: u = item.price_period
+        dd: mark: u = render_item_obj_price_period item
 
         dt = t('simple_form.labels.item.deposit')
-        dd: mark: u = item.currency_deposit
+        dd: mark: u = render_currency_money item.deposit
 
         dt = t('simple_form.labels.item.minimum_period')
         dd = t('helpers.items.show.minimum_period', days: item.minimum_period)

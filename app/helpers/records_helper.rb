@@ -105,13 +105,22 @@ module RecordsHelper
   end
 
   def render_record_price_equation(record)
-    return record.currency_item_price if record.per_time?
+    return render_currency_money(record.item_price) if record.per_time?
 
     t("helpers.records.show.per_day_price",
-       item_price: @record.currency_item_price,
-       rent_days: @record.rent_days,
-       free_days: @record.free_days,
-       price: @record.currency_price
+       item_price: render_currency_money(record.item_price),
+       rent_days: record.rent_days,
+       free_days: record.free_days,
+       price: render_currency_money(record.price)
+     )
+  end
+
+  def render_record_total_price_equation(record)
+    t("helpers.records.show.total_price_equation",
+       price: render_currency_money(record.price),
+       deliver_fee: render_currency_money(record.deliver_fee),
+       deposit: render_currency_money(record.item_deposit),
+       total_price: render_currency_money(record.total_price)
      )
   end
 
@@ -154,7 +163,7 @@ module RecordsHelper
     total_price = 0
     records.map {|record| total_price += record.total_price unless record.withdrawed?}
     total_price = total_price.to_i if total_price.to_i == total_price
-    "$#{total_price}"
+    render_currency_money total_price
   end
 
   def render_datetime_period(obj, type = :tw)

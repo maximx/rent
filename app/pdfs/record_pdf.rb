@@ -169,17 +169,16 @@ class RecordPdf < Prawn::Document
         content << [
           item.product_id,
           item.name,
-          "#{record.currency_item_price}/#{record.item_period_i18n}",
-          record.currency_price,
-          record.currency_item_deposit,
-          record.currency_total_net_price
+          "#{render_currency_money(record.item_price)}/#{record.item_period_i18n}",
+          render_currency_money(record.price),
+          render_currency_money(record.item_deposit),
+          render_currency_money(record.total_net_price)
         ]
       end
-      content << ['', '', '', '', '總計', currency_money(total_price)]
+      content << ['', '', '', '', '總計', render_currency_money(total_price)]
     end
 
-    def currency_money(number)
-      number = (number == number.to_i) ? number.to_i : number
-      "$#{number}"
+    def render_currency_money(number)
+      ApplicationController.helpers.render_currency_money(number)
     end
 end

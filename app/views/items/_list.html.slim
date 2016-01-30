@@ -11,7 +11,7 @@ ul.item-list
         div
           = t("simple_form.labels.item.price")
           | ∶
-          = item.price_period
+          = render_item_obj_price_period item
         div
           = t("simple_form.labels.item.minimum_period")
           | ∶
@@ -20,7 +20,7 @@ ul.item-list
         div
           = t("simple_form.labels.item.deposit")
           | ∶
-          = item.currency_deposit
+          = render_currency_money item.deposit
 
       .item-list-user.text-right
         .btn-group

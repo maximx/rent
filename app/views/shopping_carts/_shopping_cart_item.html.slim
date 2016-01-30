@@ -10,8 +10,8 @@ tr.item_record
     div = link_to item.name, item_path(item)
     - if shopping_cart_item.per_day?
       .label.label-default = t('helpers.records.form.free_days', days: shopping_cart_item.free_days)
-  td = shopping_cart_item.price_period
-  td = shopping_cart_item.currency_deposit
+  td = render_item_obj_price_period shopping_cart_item
+  td = render_currency_money shopping_cart_item.deposit
   td
     span.item_deliver_fee
     .hide

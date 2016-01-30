@@ -18,7 +18,7 @@ table.table
         td = render_datetime(record.ended_at)
         - unless records_controller?
           td = record.rent_days
-          td = record.currency_price
+          td = render_currency_money record.price
         td = record.aasm.human_state
         - unless records_controller?
           td = render_operate_record_links(record)

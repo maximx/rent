@@ -1,6 +1,5 @@
 class Item < ActiveRecord::Base
   include AASM
-  include CurrencyPrice
   include BookedDates
 
   attr_accessor :file # item import file
@@ -168,10 +167,6 @@ class Item < ActiveRecord::Base
     period_i18n.slice(1)
   end
 
-  def price_period
-    "#{currency_price}/#{period_i18n}"
-  end
-
   def self.overlaps_types
     [["尚未出租", "record_not_overlaps"], ["已出租", "record_overlaps"]]
   end
@@ -189,7 +184,8 @@ class Item < ActiveRecord::Base
   end
 
   def meta_description
-    "租金∶#{price_period}。#{ApplicationController.helpers.strip_tags(description)}"
+    "租金∶#{ApplicationController.helpers.render_item_obj_price_period(self)}。"\
+      "#{ApplicationController.helpers.strip_tags(description)}"
   end
 
   def cover_picture

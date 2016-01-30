@@ -1,5 +1,4 @@
 class Order < ActiveRecord::Base
-  include CurrencyPrice
   include DatetimeOverlaps
 
   belongs_to :borrower, polymorphic: true
