@@ -26,4 +26,20 @@ namespace :once do
       record.save
     end
   end
+
+  task :create_order_lender => :environment do
+    Record.all.each do |record|
+      order_lender = OrderLender.where(order_id: record.order_id, lender_id: record.lender.id)
+                                .first_or_create do |order_lender|
+        order_lender.attributes = {
+          order_id: record.order_id,
+          lender_id: record.lender.id,
+          aasm_state: record.aasm_state,
+          deliver_id: record.deliver_id
+        }
+        order_lender.save
+      end
+      record.update(order_lender: order_lender)
+    end
+  end
 end

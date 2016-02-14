@@ -13,16 +13,17 @@ class Record < ActiveRecord::Base
   belongs_to :item
   belongs_to :deliver
   belongs_to :order
+  belongs_to :order_lender
   has_one :lender, through: :item
 
   has_many :reviews
   has_many :judgers, through: :reviews
 
-  has_many :record_state_logs, class_name: 'RecordStateLog', foreign_key: 'record_id', dependent: :destroy
+  has_many :record_state_logs, dependent: :destroy
 
   # changed with item.period, shopping_cart_item.period
-  enum item_period: {per_time: 0, per_day: 1}
-  enum send_period: {morning: 0, afternoon: 1, evening: 2}
+  enum item_period: { per_time: 0, per_day: 1 }
+  enum send_period: { morning: 0, afternoon: 1, evening: 2 }
 
   geocoded_by :address
 
