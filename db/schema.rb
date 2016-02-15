@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214021406) do
+ActiveRecord::Schema.define(version: 20160215031119) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -166,12 +166,15 @@ ActiveRecord::Schema.define(version: 20160214021406) do
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
 
   create_table "order_lenders", force: :cascade do |t|
-    t.integer  "order_id",   limit: 4
-    t.integer  "lender_id",  limit: 4
-    t.string   "aasm_state", limit: 191
-    t.integer  "deliver_id", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "order_id",    limit: 4
+    t.integer  "lender_id",   limit: 4
+    t.string   "aasm_state",  limit: 191
+    t.integer  "deliver_id",  limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.float    "price",       limit: 24
+    t.float    "deposit",     limit: 24
+    t.float    "deliver_fee", limit: 24
   end
 
   add_index "order_lenders", ["order_id", "lender_id"], name: "index_order_lenders_on_order_id_and_lender_id", unique: true, using: :btree

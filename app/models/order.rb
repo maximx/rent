@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :borrower, polymorphic: true
   has_many :records
+  has_many :order_lenders
   has_many :lenders, ->{uniq}, through: :records
 
   scope :recent, -> { order(:created_at).reverse_order }

@@ -46,30 +46,45 @@ class ShoppingCart < ActiveRecord::Base
     shopping_cart_items.delete_all
   end
 
+  def shopping_cart_lender_items
+    shopping_cart_items.group_by(&:lender)
+  end
+
   def checkout
-    records = []
-    order_price = 0
-    order_deposit = 0
-    order_deliver_fee = 0
-    order = user.orders.build(started_at: started_at, ended_at: ended_at)
+    order_price, order_deposit, order_deliver_fee = 0, 0, 0
 
-    shopping_cart_items.each do |shopping_cart_item|
-      record_params = shopping_cart_item_record_params(shopping_cart_item)
-      record = shopping_cart_item.item.records.create!(record_params)
+    order = user.orders.create(started_at: started_at, ended_at: ended_at)
+    shopping_cart_lender_items.each do |lender, shopping_cart_items|
+      lender_price, lender_deposit, lender_deliver_fee = 0, 0, 0
 
-      records << record
-      order_price += record.price
-      order_deposit += record.item_deposit
-      order_deliver_fee += record.deliver_fee if record.delivery_needed?
+      order_lender = order.order_lenders.create!(lender: lender, deliver: shopping_cart_items.first.deliver)
+      shopping_cart_items.each do |shopping_cart_item|
+        record_params = shopping_cart_item_record_params(shopping_cart_item)
+        record = shopping_cart_item.item.records.build(record_params)
+        record.attributes = { order: order, order_lender: order_lender }
+        record.save
+
+        lender_price       += record.price
+        lender_deposit     += record.item_deposit
+        lender_deliver_fee += record.deliver_fee if record.delivery_needed?
+      end
+
+      order_lender.update(
+        price:       lender_price,
+        deposit:     lender_deposit,
+        deliver_fee: lender_deliver_fee
+      )
+      order_price       += lender_price
+      order_deposit     += lender_deposit
+      order_deliver_fee += lender_deliver_fee
     end
-
     clear
-    order.price = order_price
-    order.deposit = order_deposit
-    order.deliver_fee = order_deliver_fee
 
-    order.records << records
-    order.save
+    order.update(
+      price:       order_price,
+      deposit:     order_deposit,
+      deliver_fee: order_deliver_fee
+    )
     order
   end
 
