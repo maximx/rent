@@ -5,4 +5,6 @@ class OrderLender < ActiveRecord::Base
   belongs_to :order
   belongs_to :lender, class_name: 'User'
   belongs_to :deliver
+
+  has_many :records
 end

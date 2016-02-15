@@ -28,18 +28,30 @@ namespace :once do
   end
 
   task :create_order_lender => :environment do
-    Record.all.each do |record|
-      order_lender = OrderLender.where(order_id: record.order_id, lender_id: record.lender.id)
-                                .first_or_create do |order_lender|
-        order_lender.attributes = {
-          order_id: record.order_id,
-          lender_id: record.lender.id,
+    Order.all.each do |order|
+      order.records.group_by(&:lender).each do |lender, records|
+        record = records.first
+        lender_price, lender_deposit, lender_deliver_fee = 0, 0, 0
+
+        order_lender = order.order_lenders.create(
+          lender:     lender,
           aasm_state: record.aasm_state,
           deliver_id: record.deliver_id
-        }
-        order_lender.save
+        )
+
+        records.each do |record|
+          record.update(order_lender: order_lender)
+          lender_price       += record.price
+          lender_deposit     += record.item_deposit
+          lender_deliver_fee += record.deliver_fee
+        end
+
+        order_lender.update(
+          price:       lender_price,
+          deposit:     lender_deposit,
+          deliver_fee: lender_deliver_fee
+        )
       end
-      record.update(order_lender: order_lender)
     end
   end
 end
