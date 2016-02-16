@@ -73,21 +73,20 @@ class Record < ActiveRecord::Base
   def start_end_date
     if booking? and ended_at and started_at
       if ended_at < started_at or started_at < Time.now
-        errors[:started_at] << I18n.t('activerecord.errors.models.record.attributes.started_at.bad_started_at')
+        errors.add :started_at, :bad_started_at
       end
 
       # 在 set_ended_at 時減去 1 秒 會不滿 1 日
       if (ended_at - started_at + 1.second) < item.minimum_period.days
-        errors[:ended_at] << I18n.t(
-          'activerecord.errors.models.record.attributes.started_at.bad_period',
-          period: "#{item.minimum_period} #{item.period_without_per}"
-        )
+        errors.add :started_at,
+                   :bad_period,
+                   period: "#{item.minimum_period} #{item.period_without_per}"
       end
     end
   end
 
   def not_overlap
-    errors[:ended_at] << I18n.t('activerecord.errors.models.record.attributes.ended_at.overlap') if overlaps? && booking?
+    errors.add :ended_at, :overlap if overlaps? && booking?
   end
 
   def borrower_lender_customers
