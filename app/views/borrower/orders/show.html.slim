@@ -2,4 +2,4 @@
 
 .tab-content
   h1 = "##{@order.id} #{render_datetime_period(@order, :date_only)}"
-  = render partial: 'lender/orders/records_index', locals: {lender_records: @lender_records, record_state_log: @record_state_log}
+  = render partial: 'lender/order_lenders/order_lender', collection: @order_lenders

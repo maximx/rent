@@ -9,15 +9,10 @@ class Borrower::OrdersController < ApplicationController
   end
 
   def show
-    @records = @order.records.includes(:item)
     unless request.xhr?
-      @lender_records = @records.includes(:borrower, :lender, :deliver).recent.group_by(&:lender)
-      @record_state_log = unless @records.empty?
-                            @records.first.record_state_logs.build
-                          else
-                            RecordStateLog.new
-                          end
+      @order_lenders = @order.order_lenders.includes(lender: :profile, records: :item)
     else
+      @records = @order.records.includes(:item)
       @detail_url = borrower_order_path(@order)
       render 'lender/orders/show_xhr'
     end
