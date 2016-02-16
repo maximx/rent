@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: "pages#index"
 
-  get "/about", to: "pages#about"
-  get "/terms", to: "pages#terms"
+  get "/about",   to: "pages#about"
+  get "/terms",   to: "pages#terms"
   get "/privacy", to: "pages#privacy"
   get "/contact", to: "pages#contact"
 
@@ -18,22 +18,14 @@ Rails.application.routes.draw do
   resources :subcategories, only: [:show]
 
   resources :items do
-    resources :records, except: [:edit, :update, :destroy] do
-      #resources :reviews, only: [:new, :create]
-
-      member do
-        put :remitting, :delivering, :renting, :returning
-        #post :ask_for_review
-        delete :withdrawing
-      end
-    end
+    resources :records, except: [:edit, :update, :destroy]
 
     get :search, on: :collection
     member do
-      get :calendar
-      post :collect
+      get    :calendar
+      post   :collect
       delete :uncollect
-      patch :open, :close
+      patch  :open, :close
     end
   end
 
@@ -41,7 +33,7 @@ Rails.application.routes.draw do
   namespace :shopping_carts do
     resources :items, only:[] do
       member do
-        post :add
+        post   :add
         delete :remove
       end
     end
@@ -49,11 +41,12 @@ Rails.application.routes.draw do
 
   resources :users, param: :account, only: [:show, :edit, :update] do
     member do
-      get :reviews, :lender_reviews, :borrower_reviews, :items
-      put :follow
-      patch :avatar, :save
+      get    :reviews, :lender_reviews, :borrower_reviews, :items
+      put    :follow
+      patch  :avatar, :save
       delete :unfollow
     end
+
     resources :subcategories, only: [] do
       resources :vectors, only: [:index]
     end
@@ -69,8 +62,8 @@ Rails.application.routes.draw do
 
   namespace :account do
     resource :settings, only: [:show, :update] do
-      get :preferences, :phone_confirmation, :lender, :become
-      post :phone_confirmed, :upload
+      get   :preferences, :phone_confirmation, :lender, :become
+      post  :phone_confirmed, :upload
       patch :save
     end
 
@@ -89,7 +82,7 @@ Rails.application.routes.draw do
       scope module: :shopping_carts do
         resources :items, only:[] do
           member do
-            post :add
+            post   :add
             delete :remove
           end
         end
@@ -100,18 +93,27 @@ Rails.application.routes.draw do
   namespace :lender do
     resources :items, only: [:index, :show] do
       collection do
-        get :wish, :importer
+        get  :wish, :importer
         post :import
       end
     end
 
     resources :orders, only: [:index, :show] do
+      resources :order_lenders, only: [] do
+        put :delivering, :renting, :returning
+      end
+
       get :calendar, on: :collection
     end
   end
 
   namespace :borrower do
     resources :orders, only: [:index, :show] do
+      resources :order_lenders, only: [] do
+        put    :remitting
+        delete :withdrawing
+      end
+
       get :calendar, on: :collection
     end
   end
