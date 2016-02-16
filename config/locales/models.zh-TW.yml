@@ -33,6 +33,14 @@ zh-TW:
         json_title: '%{name} - 承租 %{days}天 - %{datetime}'
         name: '訂單#%{order_id} %{name}'
     attributes:
+      order_lender:
+        aasm_state:
+            booking: '預訂'
+            remitted: '完成匯款'
+            delivering: '寄送中'
+            renting: '出租中'
+            withdrawed: '已取消'
+            returned: '已歸還'
       record:
         aasm_state:
             booking: '預訂'

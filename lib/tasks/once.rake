@@ -54,4 +54,20 @@ namespace :once do
       end
     end
   end
+
+  task :create_order_lender_log => :environment do
+    OrderLender.all.each do |order_lender|
+      record = order_lender.records.first
+
+      record.record_state_logs.order(:created_at).each do |record_log|
+        order_lender_log = order_lender.order_lender_logs.create(
+          user:       record_log.borrower,
+          aasm_state: record_log.aasm_state,
+          info:       record_log.info,
+          created_at: record_log.created_at,
+          updated_at: record_log.updated_at
+        )
+      end
+    end
+  end
 end

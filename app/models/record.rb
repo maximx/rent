@@ -162,13 +162,12 @@ class Record < ActiveRecord::Base
     lender.borrower_info_provide or (deliver and deliver.address_needed?)
   end
 
-  # 物品為郵件寄送，且有金額需結算
   def remit_needed?
-    total_price > 0 and deliver.remit_needed?
+    total_price > 0 and order_lender.remit_needed?
   end
 
   def delivery_needed?
-    deliver.delivery_needed?
+    order_lender.delivery_needed?
   end
 
   def total_net_price
@@ -177,10 +176,6 @@ class Record < ActiveRecord::Base
 
   def total_price
     total_net_price + deliver_fee
-  end
-
-  def next_states
-    aasm.states(permitted: true).map(&:name)
   end
 
   def all_permitted_states
