@@ -129,14 +129,6 @@ module RecordsHelper
     t("helpers.records.show.#{address_msg}", address: record.address)
   end
 
-  def info_label
-    {
-      remitted: '帳號末五碼',
-      delivering: '寄送編號',
-      renting: '承租契約'
-    }
-  end
-
   def render_state_log_title(log)
     titles = [ log.borrower.account ]
     titles << "#{info_label[log.aasm_state.to_sym]} #{log.info}" unless log.info.blank?
