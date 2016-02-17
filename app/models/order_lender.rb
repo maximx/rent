@@ -13,13 +13,15 @@ class OrderLender < ActiveRecord::Base
 
   delegate :borrower, to: :order
 
+  after_create :create_booking_log
+
   aasm no_direct_assignment: true do
-    state :booking,   initial: true
-    state :remitted
-    state :delivering
-    state :renting
-    state :withdrawed
-    state :returned
+    state :booking,    initial: true
+    state :remitted,   before_enter: :create_log
+    state :delivering, before_enter: :create_log
+    state :renting,    before_enter: :create_log
+    state :withdrawed, before_enter: :create_log
+    state :returned,   before_enter: :create_log
 
     event :remit, guards: [ :remit_needed? ] do
       transitions from: :booking, to: :remitted
@@ -84,4 +86,21 @@ class OrderLender < ActiveRecord::Base
   def pending_states
     all_permitted_states - order_lender_logs.map { |log| log.id and log.aasm_state.to_sym }
   end
+
+  private
+    def create_log(actor, log_params = {})
+      log_params[:aasm_state] = (order_lender_logs.empty?) ? aasm.current_state : aasm.to_state
+      log_params[:user]       = actor
+      attachments             = log_params.delete :attachments
+
+      log = order_lender_logs.build(log_params)
+
+      if log.save and attachments
+        attachments.each { |attachment| log.attachments.create(file: attachment) }
+      end
+    end
+
+    def save_booking_state_log
+      create_log(borrower) if order_lender_logs.empty?
+    end
 end

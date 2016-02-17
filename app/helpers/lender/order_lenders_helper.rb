@@ -4,9 +4,9 @@ module Lender::OrderLendersHelper
       link_to render_icon('globe', class: 'text-primary'),
               delivering_lender_order_order_lender_path(order_lender.order, order_lender),
               method: :put,
-              class: 'btn btn-default',
+              class: 'btn btn-default log_form_modal',
               title: t('controller.lender/order_lenders.action.delivering'),
-              data: { toggle: 'tooltip' }
+              data: { toggle: 'tooltip', label: info_label[:delivering] }
     end
   end
 

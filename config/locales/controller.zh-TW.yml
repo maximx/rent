@@ -162,3 +162,5 @@ zh-TW:
       action:
         remitting: '已匯款'
         withdrawing: '取消預訂'
+      remitting:
+        fail: '請檢查匯款帳號資訊'
