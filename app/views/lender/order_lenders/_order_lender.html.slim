@@ -2,6 +2,6 @@
   .panel-heading.clearfix
     .pull-left = order_lender.lender.logo_name
     .pull-right
-      /= render_operate_record_links(records.first, true)
+      = render_operate_order_lender_links order_lender
       /= render partial: 'records/state_log_modal', locals: {record_state_log: record_state_log}
   = render partial: 'lender/orders/records_table', locals: { records: order_lender.records }

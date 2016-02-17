@@ -100,7 +100,9 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show] do
       resources :order_lenders, only: [] do
-        put :delivering, :renting, :returning
+        member do
+          put :delivering, :renting, :returning
+        end
       end
 
       get :calendar, on: :collection
@@ -110,8 +112,10 @@ Rails.application.routes.draw do
   namespace :borrower do
     resources :orders, only: [:index, :show] do
       resources :order_lenders, only: [] do
-        put    :remitting
-        delete :withdrawing
+        member do
+          put    :remitting
+          delete :withdrawing
+        end
       end
 
       get :calendar, on: :collection

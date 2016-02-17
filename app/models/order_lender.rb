@@ -11,8 +11,10 @@ class OrderLender < ActiveRecord::Base
   has_many :records
   has_many :order_lender_logs, dependent: :destroy
 
+  delegate :borrower, to: :order
+
   aasm no_direct_assignment: true do
-    state :booking, initial: true
+    state :booking,   initial: true
     state :remitted
     state :delivering
     state :renting
@@ -24,15 +26,15 @@ class OrderLender < ActiveRecord::Base
     end
 
     event :delivery, guards: [ :delivery_needed? ] do
-      transitions from: :booking, to: :delivering, unless: :remit_needed?
+      transitions from: :booking,  to: :delivering, unless: :remit_needed?
       transitions from: :remitted, to: :delivering, guards: :remit_needed?
     end
 
     event :rent do
       # 已預訂，免付款, 自取
-      transitions from: :booking, to: :renting, unless: [ :remit_needed?, :delivery_needed? ]
+      transitions from: :booking,    to: :renting, unless: [ :remit_needed?, :delivery_needed? ]
       # 已付款，自取
-      transitions from: :remitted, to: :renting, unless: [ :delivery_needed? ]
+      transitions from: :remitted,   to: :renting, unless: [ :delivery_needed? ]
       transitions from: :delivering, to: :renting #TODO: whenver task
     end
 
@@ -43,6 +45,19 @@ class OrderLender < ActiveRecord::Base
     event :return do
       transitions from: :renting, to: :returned
     end
+  end
+
+  #可查閱
+  def viewable_by?(user)
+    user and [lender, borrower].include?(user)
+  end
+
+  #可修改
+  def editable_by?(user)
+    user and booking? and (
+      borrower == user or
+      (lender == user and borrower.is_customer?)
+    )
   end
 
   def remit_needed?

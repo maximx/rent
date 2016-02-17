@@ -63,8 +63,6 @@ zh-TW:
         lender_address: '【店址：%{address}】'
         pdf:
           file_name: '%{name}_訂單#%{order_id}.pdf'
-      withdrawing_confirm: '確定要取消預約%{name}嗎？'
-      returning_confirm: '確認已歸還出租物嗎？'
       ask_for_review_confirm: '將寄出信件邀請對方評價，確認要繼續嗎？'
       ask_for_review_send: '邀請評價通知已寄送。'
     orders:
@@ -102,6 +100,10 @@ zh-TW:
     lender/orders:
       total_price: *total_price
       subtotal_price: *subtotal_price
+    lender/order_lenders:
+      returning_confirm: '確認已歸還出租物嗎？'
+    borrower/order_lenders:
+      withdrawing_confirm: '確定要取消預約嗎？'
     account/categories:
       add_vector: '增加屬性'
     account/subcategories:
