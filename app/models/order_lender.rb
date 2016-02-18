@@ -8,10 +8,12 @@ class OrderLender < ActiveRecord::Base
   belongs_to :lender, class_name: 'User'
   belongs_to :deliver
 
-  has_many :records
+  has_many :records,           dependent: :destroy
   has_many :order_lender_logs, dependent: :destroy
 
-  delegate :borrower, to: :order
+  delegate :borrower,         to: :order
+  delegate :remit_needed?,    to: :deliver
+  delegate :delivery_needed?, to: :deliver
 
   after_create :log_booking_state
 
@@ -63,14 +65,6 @@ class OrderLender < ActiveRecord::Base
       borrower == user or
       (lender == user and borrower.is_customer?)
     )
-  end
-
-  def remit_needed?
-    total_price > 0 and deliver.remit_needed?
-  end
-
-  def delivery_needed?
-    deliver.delivery_needed?
   end
 
   def total_price

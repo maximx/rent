@@ -22,8 +22,8 @@ class Record < ActiveRecord::Base
 
   has_many :record_state_logs, dependent: :destroy
 
-  delegate :delivery_needed?, to: :order_lender
-  delegate :remit_needed?, to: :order_lender
+  delegate :delivery_needed?, to: :deliver
+  delegate :remit_needed?,    to: :deliver
 
   # changed with item.period, shopping_cart_item.period
   enum item_period: { per_time: 0, per_day: 1 }
@@ -179,7 +179,14 @@ class Record < ActiveRecord::Base
       deliver_fee: deliver_fee,
       price: price
     )
-    update(order: order)
+    order_lender = order.order_lenders.create(
+      lender: lender,
+      deliver_id: deliver_id,
+      price: price,
+      deposit: item_deposit,
+      deliver_fee: deliver_fee
+    )
+    update(order: order, order_lender: order_lender)
   end
 
   def lender_order_records
