@@ -15,7 +15,7 @@ class Record < ActiveRecord::Base
   belongs_to :order
   belongs_to :order_lender
 
-  has_one    :lender, through: :item
+  has_one  :lender, through: :item
 
   has_many :reviews
   has_many :judgers, through: :reviews
