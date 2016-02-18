@@ -15,25 +15,12 @@ class RecordsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        if request.xhr?
-          render('records/show_popover')
-        else
-          @sibling_records = @record.sibling_records
-          @order_lender = @record.order_lender
-          set_maps_marker(@record)
-        end
-      end
-      format.pdf do
-        pdf = RecordPdf.new(@record)
-        send_data pdf.render,
-                  filename: t('helpers.records.show.pdf.file_name',
-                              name: @record.lender.logo_name,
-                              order_id: @record.order_id),
-                  type: 'application/pdf;charset=utf-8',
-                  disposition: :inline
-      end
+    if request.xhr?
+      render('records/show_popover')
+    else
+      @sibling_records = @record.sibling_records
+      @order_lender = @record.order_lender
+      set_maps_marker(@record)
     end
   end
 

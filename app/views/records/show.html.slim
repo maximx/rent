@@ -7,7 +7,7 @@
 
 - breadcrumb :record, @item, @record
 
-= render partial: 'lender/order_lenders/log_state_list', locals: { order_lender: @order_lender }
+= render partial: 'order_lenders/log_state_list', locals: { order_lender: @order_lender }
 .text-right = render_show_order_link @record.order, icon: 'dashboard'
 
 table.table

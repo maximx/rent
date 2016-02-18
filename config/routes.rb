@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :order, only: [] do
+    resources :order_lenders, only: [:show]
+  end
+
   resource :shopping_carts, only: [:show, :update]
   namespace :shopping_carts do
     resources :items, only:[] do

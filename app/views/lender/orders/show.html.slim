@@ -2,5 +2,5 @@
 
 .tab-content
   h1 = "##{@order.id} #{@order.borrower.logo_name} #{render_datetime_period(@order, :date_only)}"
-  = render partial: 'lender/order_lenders/order_lender', collection: @order_lenders
-  = render partial: 'lender/order_lenders/log_modal', locals: { order_lender_log: @order_lender_log }
+  = render partial: 'order_lenders/order_lender', collection: @order_lenders
+  = render partial: 'order_lenders/log_modal', locals: { order_lender_log: @order_lender_log }

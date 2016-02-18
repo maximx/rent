@@ -21,7 +21,7 @@ table.table
           td = render_currency_money record.price
         td = record.aasm.human_state
         - unless records_controller?
-          td = render_operate_record_links(record)
+          td = render_operate_order_lender_links(record.order_lender)
 
 = render partial: 'common/pagination', locals: { objects: records }
 

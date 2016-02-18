@@ -38,7 +38,8 @@ module Lender::OrderLendersHelper
       render_withdrawing_order_lender_link(order_lender),
       render_delivering_order_lender_link(order_lender),
       render_renting_order_lender_link(order_lender),
-      render_returning_order_lender_link(order_lender)
+      render_returning_order_lender_link(order_lender),
+      render_download_order_lender_link(order_lender)
     ].join
     content_tag :div, links, class: 'btn-group btn-group-sm order_lender_operates'
   end

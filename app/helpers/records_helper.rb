@@ -7,15 +7,6 @@ module RecordsHelper
     end
   end
 
-  def render_download_record_link(record)
-    if can?(:show, record) and !record.withdrawed?
-      link_to render_icon('download-alt', class: 'text-danger'),
-              item_record_path(record.item, record, format: 'pdf'),
-              target: '_blank', class: 'btn btn-default', data: { toggle: 'tooltip' },
-              title: t('controller.records.action.download')
-    end
-  end
-
   def render_show_record_link(record)
     if can?(:show, record) and !current_page?(item_record_path(record.item, record))
       link_to render_icon('zoom-in'),
@@ -41,16 +32,6 @@ module RecordsHelper
               title: t('controller.records.action.ask_for_review'),
               data: { toggle: 'tooltip', confirm: t('helpers.records.ask_for_review_confirm') }
     end
-  end
-
-  def render_operate_record_links(record, batch=false)
-    links = raw [
-      #render_ask_for_review_record_link(record),
-      #render_review_record_link(record),
-      render_show_record_link(record),
-      render_download_record_link(record)
-    ].join
-    content_tag :div, links, class: 'btn-group record_operates'
   end
 
   def render_record_price_equation(record)

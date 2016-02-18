@@ -189,12 +189,8 @@ class Record < ActiveRecord::Base
     update(order: order, order_lender: order_lender)
   end
 
-  def lender_order_records
-    order.records_of(lender)
-  end
-
   def sibling_records
-    lender_order_records.where.not(id: id)
+    order_lender.records.where.not(id: id)
   end
 
   private

@@ -74,9 +74,11 @@ zh-TW:
       action:
         index: '承租紀錄'
         new: '預約承租'
-        download: '下載契約'
         show: '查閱'
         ask_for_review: '邀請評價'
+    order_lenders:
+      action:
+        download: '下載契約'
     reviews:
       action:
         new: '評價'
