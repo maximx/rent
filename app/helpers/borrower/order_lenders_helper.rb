@@ -6,7 +6,7 @@ module Borrower::OrderLendersHelper
               method: :put,
               class: 'btn btn-default log_form_modal',
               title: t('controller.borrower/order_lenders.action.remitting'),
-              data: { toggle: 'tooltip', label: info_label[:remitted], required: 'required' }
+              data: { toggle: 'tooltip', label: log_info_label[:remitted], required: 'required' }
     end
   end
 

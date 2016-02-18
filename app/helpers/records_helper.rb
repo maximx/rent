@@ -78,13 +78,6 @@ module RecordsHelper
     t("helpers.records.show.#{address_msg}", address: record.address)
   end
 
-  def render_state_log_title(log)
-    titles = [ log.borrower.account ]
-    titles << "#{info_label[log.aasm_state.to_sym]} #{log.info}" unless log.info.blank?
-    titles << render_datetime(log.created_at, :tw)
-    titles.join(tag(:br))
-  end
-
   def render_records_form_options(item)
     options = {}
     options[:wrapper] = 'default' unless full_form?

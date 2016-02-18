@@ -21,8 +21,7 @@ class RecordsController < ApplicationController
           render('records/show_popover')
         else
           @sibling_records = @record.sibling_records
-          @record_state_logs = @record.record_state_logs
-          @record_state_log = @record_state_logs.build
+          @order_lender = @record.order_lender
           set_maps_marker(@record)
         end
       end
