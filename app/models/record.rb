@@ -148,19 +148,6 @@ class Record < ActiveRecord::Base
     total_net_price + deliver_fee
   end
 
-  def all_permitted_states
-    states = aasm.states.map(&:name)
-    states.delete_if { |state| state == :withdrawed } unless aasm.current_state == :withdrawed
-    states.delete(:remitted) unless remit_needed?
-    states.delete(:delivering) unless delivery_needed?
-    states.delete_if { |state| ![:withdrawed, :booking].include? state } if aasm.current_state == :withdrawed
-    states
-  end
-
-  def pending_states
-    all_permitted_states - record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
-  end
-
   def notify_booking_subject
     [
       borrower.account,
