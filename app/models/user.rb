@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   has_many :user_deliver
   has_many :delivers, through: :user_deliver
 
+  delegate :logo_name, to: :profile
+
   after_create :init_profile, :init_delivers
 
   devise :database_authenticatable, :registerable,
@@ -150,10 +152,6 @@ class User < ActiveRecord::Base
 
   def is_customer?
     self.is_a? Customer
-  end
-
-  def logo_name
-    profile.logo_name
   end
 
   def delivers_include_face?

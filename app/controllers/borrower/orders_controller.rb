@@ -5,7 +5,7 @@ class Borrower::OrdersController < ApplicationController
   before_action ->{ set_title_meta_tag namespace: true, suffix: "##{@order.id}" }, only: [:show]
 
   def index
-    @orders = @orders.recent.page(params[:page])
+    @orders = @orders.includes(borrower: :profile).recent.page(params[:page])
   end
 
   def show

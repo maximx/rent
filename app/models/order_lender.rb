@@ -11,7 +11,7 @@ class OrderLender < ActiveRecord::Base
   has_many :records,           dependent: :destroy
   has_many :order_lender_logs, dependent: :destroy
 
-  delegate :borrower,         to: :order
+  delegate :borrower, to: :order
 
   after_create :log_booking_state
 
