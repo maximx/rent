@@ -117,7 +117,7 @@ zh-TW:
               not_customer: '非您的客戶'
             send_period:
               blank: '請選擇送達時段'
-        record_state_log:
+        order_lender_log:
           attributes:
             info:
               blank: '匯款帳號為必填'

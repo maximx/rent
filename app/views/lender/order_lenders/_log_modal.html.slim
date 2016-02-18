@@ -1,7 +1,7 @@
 #log_modal.modal.fade tabindex="-1" role="dialog" aria-labelledby="order_lender_operate_modal"
   .modal-dialog role="document"
     .modal-content
-      = simple_form_for OrderLenderLog.new, url: '', method: :put, html: { id: 'order_lender_log_form' } do |f|
+      = simple_form_for order_lender_log, url: '', method: :put, html: { id: 'order_lender_log_form' } do |f|
         .modal-header
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;

@@ -17,6 +17,7 @@ class Lender::OrdersController < ApplicationController
 
     unless request.xhr?
       @order_lenders = @order_lenders.includes(lender: :profile, records: :item)
+      @order_lender_log = @order_lenders.first.order_lender_logs.build
     else
       @records = @order_lenders.first.records
       @detail_url = lender_order_path(@order)

@@ -11,6 +11,7 @@ class Borrower::OrdersController < ApplicationController
   def show
     unless request.xhr?
       @order_lenders = @order.order_lenders.includes(lender: :profile, records: :item)
+      @order_lender_log = @order_lenders.first.order_lender_logs.build
     else
       @records = @order.records.includes(:item)
       @detail_url = borrower_order_path(@order)
