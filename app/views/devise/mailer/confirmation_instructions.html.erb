@@ -1,6 +1,6 @@
-Hi, <%= @email %>∶
-<p>Welcome to <%= Rails.application.class.parent.name %>!</p>
+您好, <%= @email %>∶
+<p>歡迎加入<%= t('rent.site_name') %>！</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>點擊下面連結，即可認證您的Email帳號：</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to '確認Email帳號', confirmation_url(@resource, confirmation_token: @token) %></p>
