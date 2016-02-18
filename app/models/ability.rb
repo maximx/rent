@@ -75,15 +75,6 @@ class Ability
       can :create, Record do |record|
         record.lender != user and record.item.opening?
       end
-      can :withdrawing, Record do |record|
-        record.editable_by?(user)
-      end
-      can :remitting, Record do |record|
-        record.editable_by?(user) and record.may_remit?
-      end
-      can :delivering, Record, lender: user, may_delivery?: true
-      can :renting, Record, lender: user, may_rent?: true
-      can :returning, Record, lender: user, may_return?: true
       can :ask_for_review, Record do |record|
         record.viewable_by?(user) and record.returned? and
           record.judgers.include?(user) and record.reviews.size == 1

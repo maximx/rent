@@ -13,30 +13,33 @@ class OrderLender < ActiveRecord::Base
 
   delegate :borrower, to: :order
 
-  after_create :create_booking_log
+  after_create :log_booking_state
 
   aasm no_direct_assignment: true do
     state :booking,    initial: true
-    state :remitted,   before_enter: :create_log
-    state :delivering, before_enter: :create_log
-    state :renting,    before_enter: :create_log
-    state :withdrawed, before_enter: :create_log
-    state :returned,   before_enter: :create_log
+    state :remitted
+    state :delivering
+    state :renting
+    state :withdrawed
+    state :returned
 
-    event :remit, guards: [ :remit_needed? ] do
+    after_all_transitions :log_state_change
+    after_all_events      :update_records_state
+
+    event :remit, guards: [:remit_needed?] do
       transitions from: :booking, to: :remitted
     end
 
-    event :delivery, guards: [ :delivery_needed? ] do
+    event :delivery, guards: [:delivery_needed?] do
       transitions from: :booking,  to: :delivering, unless: :remit_needed?
       transitions from: :remitted, to: :delivering, guards: :remit_needed?
     end
 
     event :rent do
       # 已預訂，免付款, 自取
-      transitions from: :booking,    to: :renting, unless: [ :remit_needed?, :delivery_needed? ]
+      transitions from: :booking,    to: :renting, unless: [:remit_needed?, :delivery_needed?]
       # 已付款，自取
-      transitions from: :remitted,   to: :renting, unless: [ :delivery_needed? ]
+      transitions from: :remitted,   to: :renting, unless: [:delivery_needed?]
       transitions from: :delivering, to: :renting #TODO: whenver task
     end
 
@@ -88,7 +91,7 @@ class OrderLender < ActiveRecord::Base
   end
 
   private
-    def create_log(actor, log_params = {})
+    def log_state_change(actor, log_params = {})
       log_params[:aasm_state] = (order_lender_logs.empty?) ? aasm.current_state : aasm.to_state
       log_params[:user]       = actor
       attachments             = log_params.delete :attachments
@@ -100,7 +103,11 @@ class OrderLender < ActiveRecord::Base
       end
     end
 
-    def save_booking_state_log
-      create_log(borrower) if order_lender_logs.empty?
+    def log_booking_state
+      log_state_change(borrower) if order_lender_logs.empty?
+    end
+
+    def update_records_state
+      records.update_all aasm_state: aasm.current_state
     end
 end
