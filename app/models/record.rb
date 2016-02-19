@@ -7,7 +7,9 @@ class Record < ActiveRecord::Base
   validates_presence_of :item_id, :borrower, :started_at, :ended_at, :aasm_state, :deliver_id
   validates_presence_of :send_period, if: ->(obj){ obj.deliver.present? and obj.deliver.send_home? }
   validates :deliver_id, inclusion: { in: ->(obj){ obj.lender.delivers.pluck(:id) } }
-  validate :start_end_date, :not_overlap, :borrower_lender_customers, :borrower_info_present
+  validate  :start_end_date, if: :new_record?
+  validate  :not_overlap, :borrower_lender_customers, :borrower_info_present
+
 
   belongs_to :borrower, polymorphic: true
   belongs_to :item
@@ -19,8 +21,6 @@ class Record < ActiveRecord::Base
 
   has_many :reviews
   has_many :judgers, through: :reviews
-
-  has_many :record_state_logs, dependent: :destroy
 
   delegate :delivery_needed?, to: :deliver
   delegate :remit_needed?,    to: :deliver

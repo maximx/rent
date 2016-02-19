@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216022632) do
+ActiveRecord::Schema.define(version: 20160219025032) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id",     limit: 4
@@ -229,18 +229,6 @@ ActiveRecord::Schema.define(version: 20160216022632) do
 
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree
   add_index "profiles", ["user_id", "user_type"], name: "index_profiles_on_user_id_and_user_type", using: :btree
-
-  create_table "record_state_logs", force: :cascade do |t|
-    t.integer  "record_id",     limit: 4
-    t.string   "aasm_state",    limit: 191
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "info",          limit: 191
-    t.integer  "borrower_id",   limit: 4
-    t.string   "borrower_type", limit: 191
-  end
-
-  add_index "record_state_logs", ["borrower_id", "borrower_type"], name: "index_record_state_logs_on_borrower_id_and_borrower_type", using: :btree
 
   create_table "records", force: :cascade do |t|
     t.integer  "item_id",         limit: 4
