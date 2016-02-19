@@ -13,17 +13,13 @@ class Lender::OrdersController < ApplicationController
   end
 
   def show
-    @records = @order.records_of(current_user)
+    @order_lenders = @order.order_lenders.where(lender: current_user)
 
     unless request.xhr?
-      @lender_records = @records.includes(:borrower, :deliver, :item).recent.group_by(&:lender)
-      @record_state_log = unless @records.empty?
-                            @records.first.record_state_logs.build
-                          else
-                            RecordStateLog.new
-                          end
+      @order_lenders = @order_lenders.includes(lender: :profile, records: :item)
+      @order_lender_log = @order_lenders.first.order_lender_logs.build
     else
-      @order.price = @records.sum(:price)
+      @records = @order_lenders.first.records
       @detail_url = lender_order_path(@order)
       render :show_xhr
     end

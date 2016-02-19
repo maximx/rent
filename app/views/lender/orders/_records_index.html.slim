@@ -1,8 +1,0 @@
-- lender_records.each do |lender, records|
-  .panel.panel-default
-    .panel-heading.clearfix
-      .pull-left = lender.logo_name
-      .pull-right
-        = render_operate_record_links(records.first, true)
-        = render partial: 'records/state_log_modal', locals: {record_state_log: record_state_log}
-    = render partial: 'lender/orders/records_table', locals: {records: records}

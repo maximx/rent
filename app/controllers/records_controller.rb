@@ -6,7 +6,7 @@ class RecordsController < ApplicationController
   before_action :set_calendar_event_sources_path, :find_disabled_dates, only: [ :index, :new, :create ]
 
   before_action ->{ set_title_meta_tag suffix: @item.name }, only: [:index, :new, :create]
-  before_action only: [:show, :remitting] do
+  before_action only: [:show] do
     set_title_meta_tag suffix: "#{t('controller.records.action.index')}##{@record.id}"
   end
 
@@ -15,26 +15,12 @@ class RecordsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        if request.xhr?
-          render('records/show_popover')
-        else
-          @sibling_records = @record.sibling_records
-          @record_state_logs = @record.record_state_logs
-          @record_state_log = @record_state_logs.build
-          set_maps_marker(@record)
-        end
-      end
-      format.pdf do
-        pdf = RecordPdf.new(@record)
-        send_data pdf.render,
-                  filename: t('helpers.records.show.pdf.file_name',
-                              name: @record.lender.logo_name,
-                              order_id: @record.order_id),
-                  type: 'application/pdf;charset=utf-8',
-                  disposition: :inline
-      end
+    if request.xhr?
+      render('records/show_popover')
+    else
+      @sibling_records = @record.sibling_records
+      @order_lender = @record.order_lender
+      set_maps_marker(@record)
     end
   end
 
@@ -62,64 +48,9 @@ class RecordsController < ApplicationController
     redirect_to :back, notice: t('helpers.records.ask_for_review_send')
   end
 
-  def remitting
-    if @record.remit!(current_user, record_state_log_params)
-      if params[:batch]
-        @record.sibling_records.each {|record| record.remit!(current_user, record_state_log_params) if record.may_remit?}
-        redirect_to borrower_order_path(@record.order) and return
-      end
-      redirect_to item_record_path(@item, @record)
-    else
-      @record_state_logs = @record.record_state_logs
-      @record_state_log = @record_state_logs.last
-      flash[:alert] = t('controller.records.remitting.fail')
-      render :show
-    end
-  end
-
-  def delivering
-    @record.delivery!(current_user, record_state_log_params)
-    if params[:batch]
-      @record.sibling_records.each {|record| record.delivery!(current_user, record_state_log_params) if record.may_delivery?}
-    end
-    redirect_to :back
-  end
-
-  def renting
-    @record.rent!(current_user, record_state_log_params)
-    if params[:batch]
-      @record.sibling_records.each {|record| record.rent!(current_user, record_state_log_params) if record.may_rent?}
-    end
-    redirect_to :back
-  end
-
-  def returning
-    @record.return! current_user
-    if params[:batch]
-      @record.sibling_records.each {|record| record.return!(current_user, record_state_log_params) if record.may_return?}
-    end
-    redirect_to :back
-  end
-
-  def withdrawing
-    @record.withdraw! current_user
-    if params[:batch]
-      @record.sibling_records.each {|record| record.withdraw!(current_user, record_state_log_params)}
-    end
-    redirect_to :back
-  end
-
   private
     def record_params
       params.require(:record).permit(:deliver_id, :started_at, :ended_at, :send_period)
-    end
-
-    def record_state_log_params
-      if params.has_key? :record_state_log
-        params.require(:record_state_log).permit(:info, attachments: [])
-      else
-        { }
-      end
     end
 
     def validates_borrower_info

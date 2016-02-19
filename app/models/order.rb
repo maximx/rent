@@ -2,8 +2,9 @@ class Order < ActiveRecord::Base
   include DatetimeOverlaps
 
   belongs_to :borrower, polymorphic: true
-  has_many :records
-  has_many :order_lenders
+
+  has_many :records,       dependent: :destroy
+  has_many :order_lenders, dependent: :destroy
   has_many :lenders, ->{uniq}, through: :records
 
   scope :recent, -> { order(:created_at).reverse_order }

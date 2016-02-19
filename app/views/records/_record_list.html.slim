@@ -7,7 +7,7 @@ table.table
       - unless records_controller?
         th = t('simple_form.labels.record.rent_days')
         th = t('simple_form.labels.record.price')
-      th 狀態
+      th = t('simple_form.labels.record.aasm_state')
       - unless records_controller?
         th #
   tbody
@@ -21,7 +21,7 @@ table.table
           td = render_currency_money record.price
         td = record.aasm.human_state
         - unless records_controller?
-          td = render_operate_record_links(record)
+          td = render_show_order_link record.order, icon: 'dashboard'
 
 = render partial: 'common/pagination', locals: { objects: records }
 

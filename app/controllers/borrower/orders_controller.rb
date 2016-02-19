@@ -5,19 +5,15 @@ class Borrower::OrdersController < ApplicationController
   before_action ->{ set_title_meta_tag namespace: true, suffix: "##{@order.id}" }, only: [:show]
 
   def index
-    @orders = @orders.recent.page(params[:page])
+    @orders = @orders.includes(borrower: :profile).recent.page(params[:page])
   end
 
   def show
-    @records = @order.records.includes(:item)
     unless request.xhr?
-      @lender_records = @records.includes(:borrower, :lender, :deliver).recent.group_by(&:lender)
-      @record_state_log = unless @records.empty?
-                            @records.first.record_state_logs.build
-                          else
-                            RecordStateLog.new
-                          end
+      @order_lenders = @order.order_lenders.includes(lender: :profile, records: :item)
+      @order_lender_log = @order_lenders.first.order_lender_logs.build
     else
+      @records = @order.records.includes(:item)
       @detail_url = borrower_order_path(@order)
       render 'lender/orders/show_xhr'
     end

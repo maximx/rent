@@ -1,9 +1,14 @@
-- width = 100 / record.all_permitted_states.size
+- width = 100 / order_lender.all_permitted_states.size
 
 .progress
-  - record.record_state_logs.each do |log|
-    - if log.id
-      .progress-bar.progress-bar-success.text-danger role="progressbar" style="width: #{width}%" data-toggle="tooltip" title="#{render_state_log_title(log)}"
+  - order_lender.order_lender_logs.each do |log|
+    - if log.persisted?
+      .progress-bar.progress-bar-success [
+        role="progressbar"
+        style="width: #{width}%"
+        data-toggle="tooltip"
+        title="#{render_log_state_title(log)}"
+      ]
         - if log.renting?
           = link_to render_icon_with_text('download-alt', t("activerecord.attributes.record.aasm_state.#{log.aasm_state}")),
                     '#',
@@ -12,6 +17,6 @@
         - else
           = t("activerecord.attributes.record.aasm_state.#{log.aasm_state}")
 
-  - record.pending_states.each do |state|
+  - order_lender.pending_states.each do |state|
     .progress-bar.progress-bar-muted role="progressbar" style="width: #{width}%"
       = t("activerecord.attributes.record.aasm_state.#{state}")

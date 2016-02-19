@@ -11,6 +11,7 @@ class Ability
     resources_reviews user
     resources_attachments user
     resources_orders user
+    resources_order_lenders user
 
     #TODO: add company ability
     #if user.is_company?
@@ -74,15 +75,6 @@ class Ability
       can :create, Record do |record|
         record.lender != user and record.item.opening?
       end
-      can :withdrawing, Record do |record|
-        record.editable_by?(user)
-      end
-      can :remitting, Record do |record|
-        record.editable_by?(user) and record.may_remit?
-      end
-      can :delivering, Record, lender: user, may_delivery?: true
-      can :renting, Record, lender: user, may_rent?: true
-      can :returning, Record, lender: user, may_return?: true
       can :ask_for_review, Record do |record|
         record.viewable_by?(user) and record.returned? and
           record.judgers.include?(user) and record.reviews.size == 1
@@ -110,5 +102,22 @@ class Ability
       can :show, Order do |order|
         order.borrower == user or order.lenders.pluck(:id).include?(user.id)
       end
+    end
+
+    def resources_order_lenders(user)
+      can :show, OrderLender do |order_lender|
+        order_lender.viewable_by? user
+      end
+
+      can :remitting, OrderLender do |order_lender|
+        order_lender.editable_by?(user) and order_lender.may_remit?
+      end
+      can :withdrawing, OrderLender do |order_lender|
+        order_lender.editable_by?(user) and order_lender.may_withdraw?
+      end
+
+      can :delivering, OrderLender, lender: user, may_delivery?: true
+      can :renting,    OrderLender, lender: user, may_rent?:     true
+      can :returning,  OrderLender, lender: user, may_return?:   true
     end
 end

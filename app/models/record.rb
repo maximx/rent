@@ -14,12 +14,16 @@ class Record < ActiveRecord::Base
   belongs_to :deliver
   belongs_to :order
   belongs_to :order_lender
-  has_one :lender, through: :item
+
+  has_one  :lender, through: :item
 
   has_many :reviews
   has_many :judgers, through: :reviews
 
   has_many :record_state_logs, dependent: :destroy
+
+  delegate :delivery_needed?, to: :deliver
+  delegate :remit_needed?,    to: :deliver
 
   # changed with item.period, shopping_cart_item.period
   enum item_period: { per_time: 0, per_day: 1 }
@@ -27,47 +31,21 @@ class Record < ActiveRecord::Base
 
   geocoded_by :address
 
-  after_initialize :set_free_days, if: :new_record?
-  after_validation :set_address, if: ->(obj){ obj.deliver and obj.new_record? }
-  after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
-  before_create :set_item_attributes, if: :new_record?
-  after_create :save_booking_state_log
+  after_initialize :set_free_days,       if: :new_record?
+  after_validation :set_address,         if: ->(obj){ obj.deliver and obj.new_record? }
+  after_validation :geocode,             if: ->(obj){ obj.address.present? and obj.address_changed? }
+  before_create    :set_item_attributes, if: :new_record?
 
   scope :actived, -> { where.not(aasm_state: "withdrawed") }
-  scope :recent, -> { order(:created_at).reverse_order }
+  scope :recent,  -> { order(:created_at).reverse_order }
 
-  aasm no_direct_assignment: true do
+  aasm do
     state :booking, initial: true
-    state :remitted, before_enter: :create_record_state_log
-    state :delivering, before_enter: :create_record_state_log
-    state :renting, before_enter: :create_record_state_log
-    state :withdrawed, before_enter: :create_record_state_log
-    state :returned, before_enter: :create_record_state_log
-
-    event :remit, guards: [ :remit_needed? ] do
-      transitions from: :booking, to: :remitted
-    end
-
-    event :delivery, guards: [ :delivery_needed? ] do
-      transitions from: :booking, to: :delivering, unless: :remit_needed?
-      transitions from: :remitted, to: :delivering, guards: :remit_needed?
-    end
-
-    event :rent do
-      # 已預訂，免付款, 自取
-      transitions from: :booking, to: :renting, unless: [ :remit_needed?, :delivery_needed? ]
-      # 已付款，自取
-      transitions from: :remitted, to: :renting, unless: [ :delivery_needed? ]
-      transitions from: :delivering, to: :renting #TODO: whenver task
-    end
-
-    event :withdraw do
-      transitions from: :booking, to: :withdrawed
-    end
-
-    event :return do
-      transitions from: :renting, to: :returned
-    end
+    state :remitted
+    state :delivering
+    state :renting
+    state :withdrawed
+    state :returned
   end
 
   def start_end_date
@@ -162,38 +140,12 @@ class Record < ActiveRecord::Base
     lender.borrower_info_provide or (deliver and deliver.address_needed?)
   end
 
-  # 物品為郵件寄送，且有金額需結算
-  def remit_needed?
-    total_price > 0 and deliver.remit_needed?
-  end
-
-  def delivery_needed?
-    deliver.delivery_needed?
-  end
-
   def total_net_price
     price + item_deposit
   end
 
   def total_price
     total_net_price + deliver_fee
-  end
-
-  def next_states
-    aasm.states(permitted: true).map(&:name)
-  end
-
-  def all_permitted_states
-    states = aasm.states.map(&:name)
-    states.delete_if { |state| state == :withdrawed } unless aasm.current_state == :withdrawed
-    states.delete(:remitted) unless remit_needed?
-    states.delete(:delivering) unless delivery_needed?
-    states.delete_if { |state| ![:withdrawed, :booking].include? state } if aasm.current_state == :withdrawed
-    states
-  end
-
-  def pending_states
-    all_permitted_states - record_state_logs.map { |log| log.id && log.aasm_state.to_sym }
   end
 
   def notify_booking_subject
@@ -214,15 +166,18 @@ class Record < ActiveRecord::Base
       deliver_fee: deliver_fee,
       price: price
     )
-    update(order: order)
-  end
-
-  def lender_order_records
-    order.records_of(lender)
+    order_lender = order.order_lenders.create(
+      lender: lender,
+      deliver_id: deliver_id,
+      price: price,
+      deposit: item_deposit,
+      deliver_fee: deliver_fee
+    )
+    update(order: order, order_lender: order_lender)
   end
 
   def sibling_records
-    lender_order_records.where.not(id: id)
+    order_lender.records.where.not(id: id)
   end
 
   private
@@ -251,22 +206,6 @@ class Record < ActiveRecord::Base
       else
         0 #有問題的，算零天
       end
-    end
-
-    def create_record_state_log(borrower, log_params = {})
-      log_params[:aasm_state] = (record_state_logs.empty?) ? aasm.current_state : aasm.to_state
-      attachments = log_params.delete :attachments
-
-      log = record_state_logs.build(log_params)
-      log.borrower = borrower
-
-      if log.save and attachments
-        attachments.each { |attachment| log.attachments.create file: attachment }
-      end
-    end
-
-    def save_booking_state_log
-      create_record_state_log(borrower) if record_state_logs.empty?
     end
 
     def controller_helpers

@@ -1,0 +1,15 @@
+h4 您好：
+
+p 您已預約承租#{@lender_profile.logo_name}的#{@count}項物品，
+
+p 請您在繳費期限以前完成轉帳付款，並通知出租者：
+
+table
+  tr
+    td 轉帳銀行代號：#{@lender_profile.bank_code}
+  tr
+    td 轉帳帳號：#{@lender_profile.bank_account}
+  tr
+    td 金額：$#{@total_price}
+
+p 詳細資訊請#{link_to('至此', borrower_order_url(@order))}查看。

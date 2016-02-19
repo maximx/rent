@@ -15,14 +15,17 @@ class ShoppingCartsController < ApplicationController
     @shopping_cart.user = current_user
     if @shopping_cart.update(shopping_cart_params)
       order = @shopping_cart.checkout
-      order.records.group_by(&:lender).each do |lender, records|
-        OrderMailer.send_payment_message(order, lender.profile, records).deliver_now
 
-        lender.notify t('controller.shopping_carts.update.notify_lender',
-                        name: current_user.logo_name,
-                        period: view_context.render_datetime_period(order),
-                        count: records.count),
-                      lender_order_url(order)
+      order.order_lenders.includes(:lender, :records).each do |order_lender|
+        OrderLenderMailer.send_payment_message(order_lender).deliver_now
+
+        order_lender.lender.notify(
+          t('controller.shopping_carts.update.notify_lender',
+            name:   current_user.logo_name,
+            period: view_context.render_datetime_period(order),
+            count:  order_lender.records.count),
+          lender_order_url(order)
+        )
       end
       redirect_to borrower_order_path(order)
     else

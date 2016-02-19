@@ -19,11 +19,6 @@ class Lender::ItemsController < ApplicationController
 
     @event_sources_path = calendar_item_path(@item, format: :json)
     @records = @item.records.includes(:borrower, :deliver, :item).recent.page(params[:page])
-    @record_state_log = unless @records.empty?
-                          @records.first.record_state_logs.build
-                        else
-                          RecordStateLog.new
-                        end
   end
 
   def wish

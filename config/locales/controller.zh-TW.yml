@@ -74,16 +74,11 @@ zh-TW:
       action:
         index: '承租紀錄'
         new: '預約承租'
-        download: '下載契約'
         show: '查閱'
-        withdrawing: '取消預訂'
-        remitting: '已匯款'
-        delivering: '已寄送'
-        renting: '確認出租'
-        returning: '確認歸還'
         ask_for_review: '邀請評價'
-      remitting:
-        fail: '請檢查匯款帳號資訊'
+    order_lenders:
+      action:
+        download: '下載契約'
     reviews:
       action:
         new: '評價'
@@ -148,8 +143,19 @@ zh-TW:
         index: &orders_index '訂單'
         show: *orders_index
         calendar: *calendar
+    lender/order_lenders:
+      action:
+        delivering: '已寄送'
+        renting: '確認出租'
+        returning: '確認歸還'
     borrower/orders:
       action:
         index: *orders_index
         show: *orders_index
         calendar: *calendar
+    borrower/order_lenders:
+      action:
+        remitting: '已匯款'
+        withdrawing: '取消預訂'
+      remitting:
+        fail: '請檢查匯款帳號資訊'
